@@ -145,7 +145,16 @@ input[type=range]{width:100%;accent-color:var(--aqua)}
 /* ---------- Jeu ---------- */
 .game{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;gap:14px;
   padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.topbar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:10px 14px;border-radius:24px}
+/* En-tête : volet de boutons tout en haut, puis logo + date en dessous */
+.topbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px 16px;padding:8px 14px 10px;border-radius:24px}
+.topbar .ctrls{grid-row:1;grid-column:1/-1;justify-self:stretch;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;min-width:0;
+  padding:0 2px 8px;border-bottom:1px solid rgba(255,255,255,.8);scrollbar-width:none}
+.topbar .ctrls::-webkit-scrollbar{display:none}
+.topbar .ctrls>*{flex:none}
+.topbar .brand{grid-row:2;grid-column:1;justify-self:start}
+.topbar .clock{grid-row:2;grid-column:2}
+.ctrl-sep{width:1px;align-self:stretch;margin:4px 2px;background:rgba(0,90,200,.18)}
+.restartb{margin-left:auto}
 .topbar .logo{font-size:38px;text-align:left;filter:drop-shadow(0 2px 0 rgba(0,70,170,.5))}
 .clock{justify-self:center;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
 .lcd{position:relative;overflow:hidden;min-width:300px;padding:7px 26px;border-radius:999px;text-align:center;border:1px solid var(--lcd-edge);
@@ -396,7 +405,7 @@ body.no-deco .bubble{display:none}
 .tree-scroll{flex:1;min-height:0;overflow:auto;cursor:grab;border-top:1px solid rgba(255,255,255,.8);
   background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.5),rgba(255,255,255,0) 70%)}
 .tree-scroll.grabbing{cursor:grabbing}
-.tree-sizer{position:relative;margin:0 auto}
+.tree-sizer{position:relative}
 .tree-canvas{position:absolute;left:0;top:0;transform-origin:0 0}
 .tree-canvas>svg{position:absolute;inset:0;overflow:visible;pointer-events:none}
 .ln-wire-under{fill:none;stroke:rgba(0,90,200,.28);stroke-width:6;stroke-linejoin:round;stroke-linecap:round}
@@ -507,7 +516,18 @@ body.no-deco .bubble{display:none}
   -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 .modal{width:min(640px,100%);max-height:calc(100% - 8px);overflow:auto;padding:22px;outline:none;animation:pop .32s cubic-bezier(.2,1.4,.4,1)}
 @keyframes pop{from{transform:scale(.86);opacity:0}to{transform:none;opacity:1}}
-.x{position:absolute;top:12px;right:12px}
+/* La croix reste en haut de la fenêtre quand on fait défiler */
+.modal>.x{position:sticky;top:0;float:right;z-index:6;width:46px;min-height:46px;margin:-8px -8px 4px 10px;
+  box-shadow:0 4px 12px rgba(0,60,150,.3),inset 0 1px 0 #fff}
+.couple-acts{grid-template-columns:1fr 1fr}
+.couple-acts .full{grid-column:1/-1}
+.relocate summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;min-height:28px}
+.relocate summary::-webkit-details-marker{display:none}
+.relocate summary::before{content:'▸';font-size:13px;color:var(--aqua-deep)}
+.relocate[open] summary::before{content:'▾'}
+.relocate[open] summary{margin-bottom:8px}
+.relocate[open]{display:flex;flex-direction:column;gap:6px}
+.ver{margin:6px 0 0;text-align:center;font:700 10.5px var(--font-display);letter-spacing:.05em;color:var(--ink-faint)}
 .m-head{display:flex;flex-direction:column;gap:4px;margin-bottom:16px;padding-right:44px}
 .m-head h2{margin:0;font:800 26px/1.15 var(--font-display);text-wrap:balance}
 .m-head p{margin:2px 0 0;color:var(--ink-soft)}
@@ -568,20 +588,17 @@ body.no-deco .bubble{display:none}
 .spark{position:fixed;z-index:70;pointer-events:none;border-radius:50%}
 
 /* ---------- Téléphone : en-tête compact (logo + date sur une ligne, commandes qui défilent) ---------- */
+@media (max-width:1100px){ .topbar{grid-template-columns:auto minmax(0,1fr)} .topbar .clock{grid-column:2;justify-self:stretch} .lcd{min-width:0;width:100%} .clock-sub{max-width:none} }
 @media (max-width:700px){
-  .topbar{grid-template-columns:auto minmax(0,1fr) !important;gap:8px;padding:8px 10px;border-radius:20px}
-  .topbar .brand{grid-row:1;grid-column:1}
+  .topbar{gap:8px;padding:6px 10px 8px;border-radius:20px}
   .topbar .brand.small .emblem{width:34px}
-  .clock{grid-row:1 !important;grid-column:2 !important;gap:4px}
+  .clock{gap:4px}
   .lcd{padding:5px 12px}
   .lcd span{font-size:17px}
   .decade{font-size:11px}
-  .ctrls{grid-column:1/-1;justify-self:stretch;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:2px 2px 4px;scrollbar-width:none}
-  .ctrls::-webkit-scrollbar{display:none}
-  .ctrls>*{flex:none}
+  .topbar .ctrls{padding-bottom:6px}
 }
 @media (max-width:520px){ .topbar .brand.small .logo{display:none} }
-@media (max-width:1100px){ .topbar{grid-template-columns:auto minmax(0,1fr);gap:10px} .ctrls{min-width:0} .clock{grid-column:1/-1;grid-row:2;justify-self:stretch} .lcd{min-width:0;width:100%} .clock-sub{max-width:none} }
 /* ---------- Téléphone : un écran à la fois, barre de navigation en bas ---------- */
 .mnav{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;gap:4px;border-radius:22px 22px 0 0;
   padding:6px max(10px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
@@ -610,7 +627,19 @@ body.no-deco .bubble{display:none}
   .pills button{min-height:38px}
   .gel{min-height:42px}
   .overlay{padding:8px}
-  .modal{padding:18px}
+  .modal{padding:16px}
+  .modal .who{gap:12px;margin-bottom:10px;padding-right:0}
+  .modal .who .orb.xl{width:56px;height:56px}
+  .modal .who h2{font-size:20px}
+  .modal .who p{font-size:12.5px}
+  .modal .facts{gap:6px;margin-bottom:10px}
+  .modal .facts div{padding:7px 9px}
+  .modal .facts dd{font-size:14px}
+  .modal .sect{margin:10px 0 6px}
+  .modal .note{font-size:11.5px}
+  .modal .ulist{font-size:12.5px}
+  .couple-acts{gap:8px}
+  .couple-acts .gel{min-height:40px;font-size:14px;padding:8px 10px}
   .achpop{top:38%}
 }
 @media (max-width:520px){
@@ -706,6 +735,7 @@ body.no-deco .bubble{display:none}
         <button type="submit" class="gel lime big"><span id="fStartBtn"></span></button>
       </div>
       <p class="hint" data-t="setup_hint"></p>
+      <p class="ver" id="verSetup"></p>
     </form>
   </div>
 </section>
@@ -719,10 +749,9 @@ body.no-deco .bubble{display:none}
       <div class="clock-sub"><div class="yearbar"><i id="yearFill"></i></div><span id="rate" class="rate"></span></div>
       <div class="era"><div class="decade" id="decade"></div><div class="warb" id="warb" hidden></div></div>
     </div>
-    <div class="ctrls">
-      <button class="gel round gold" data-act="achs" data-ta="ach_title" data-tt="ach_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg></button>
-      <button class="gel ghost autob" id="btnAuto" data-act="auto"></button>
-      <button class="gel round" id="btnPause" data-act="pause"></button>
+    <div class="ctrls" role="toolbar">
+      <button class="gel round ghost" data-act="settings" data-ta="settings" data-tt="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.4.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6L2 13.7v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg></button>
+      <button class="gel round ghost" data-act="custom" data-ta="custom" data-tt="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
       <div class="pills" role="group" id="speeds">
         <button data-act="speed" data-v="0.25">×0,25</button>
         <button data-act="speed" data-v="0.5">×0,5</button>
@@ -730,9 +759,11 @@ body.no-deco .bubble{display:none}
         <button data-act="speed" data-v="2">×2</button>
         <button data-act="speed" data-v="4">×4</button>
       </div>
-      <button class="gel round ghost" data-act="settings" data-ta="settings" data-tt="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.4.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6L2 13.7v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg></button>
-      <button class="gel round ghost" data-act="custom" data-ta="custom" data-tt="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
-      <button class="gel ghost" data-act="restart"><span data-t="restart"></span></button>
+      <button class="gel round" id="btnPause" data-act="pause"></button>
+      <span class="ctrl-sep" aria-hidden="true"></span>
+      <button class="gel ghost autob" id="btnAuto" data-act="auto"></button>
+      <button class="gel round gold" data-act="achs" data-ta="ach_title" data-tt="ach_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg></button>
+      <button class="gel ghost restartb" data-act="restart"><span data-t="restart"></span></button>
     </div>
   </header>
   <main class="board">
@@ -780,6 +811,7 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const APP_VERSION = '0.1.0a';
 const SAVE_KEY = 'lignee.save.v2', LANG_KEY = 'lignee.lang', MUTE_KEY = 'lignee.muted';
 const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }, del(k){ try{ localStorage.removeItem(k); }catch(e){} } };
 const loadJSON = k => { try{ return JSON.parse(store.get(k)) || {}; }catch(e){ return {}; } };
@@ -2404,28 +2436,31 @@ function renderTree(){
   $('#treeStats').textContent = t('stats', all.length, living().length, gens);
 }
 function centerOn(id, smooth){
-  const p = layout[id], sc = $('#treeScroll'), sz = $('#treeSizer'); if(!p) return;
-  sc.scrollTo({left: sz.offsetLeft + (p.x + NW/2)*zoom - sc.clientWidth/2, top: sz.offsetTop + (p.y + NH/2)*zoom - sc.clientHeight/2.4, behavior: smooth && !reduced ? 'smooth' : 'auto'});
+  const p = layout[id], sc = $('#treeScroll'); if(!p) return;
+  sc.scrollTo({left: padX + (p.x + NW/2)*zoom - sc.clientWidth/2, top: padY + (p.y + NH/2)*zoom - sc.clientHeight/2.4, behavior: smooth && !reduced ? 'smooth' : 'auto'});
 }
-/* Zoom de l'arbre : boutons, Ctrl + molette (ou pincement sur pavé tactile), touches + et − */
-let zoom = 1, treeW = 0, treeH = 0;
+/* Zoom de l'arbre : boutons, Ctrl + molette, pincement, touches + et −.
+   Une grande marge invisible entoure l'arbre : on peut le déplacer librement, sans bord qui bloque. */
+let zoom = 1, treeW = 0, treeH = 0, padX = 0, padY = 0;
 function applyZoom(){
-  $('#treeCanvas').style.transform = `scale(${zoom})`;
-  const sz = $('#treeSizer'); sz.style.width = treeW*zoom + 'px'; sz.style.height = treeH*zoom + 'px';
+  const sc = $('#treeScroll'), sz = $('#treeSizer'), cv = $('#treeCanvas');
+  padX = Math.round(Math.max(240, sc.clientWidth * .75)); padY = Math.round(Math.max(200, sc.clientHeight * .7));
+  cv.style.transform = `scale(${zoom})`; cv.style.left = padX + 'px'; cv.style.top = padY + 'px';
+  sz.style.width = (treeW*zoom + padX*2) + 'px'; sz.style.height = (treeH*zoom + padY*2) + 'px';
   $('#zoomPct').textContent = Math.round(zoom*100) + '%';
 }
 function setZoom(z, cx, cy){
-  const sc = $('#treeScroll'), sz = $('#treeSizer');
+  const sc = $('#treeScroll');
   z = Math.max(.06, Math.min(1.75, z));
   if(cx == null){ cx = sc.clientWidth/2; cy = sc.clientHeight/2; }
-  const px = (sc.scrollLeft + cx - sz.offsetLeft)/zoom, py = (sc.scrollTop + cy - sz.offsetTop)/zoom;
+  const px = (sc.scrollLeft + cx - padX)/zoom, py = (sc.scrollTop + cy - padY)/zoom;
   zoom = z; applyZoom();
-  sc.scrollLeft = px*zoom + sz.offsetLeft - cx; sc.scrollTop = py*zoom + sz.offsetTop - cy;
+  sc.scrollLeft = px*zoom + padX - cx; sc.scrollTop = py*zoom + padY - cy;
 }
 function fitZoom(){
   const sc = $('#treeScroll');
   setZoom(Math.min(1, (sc.clientWidth - 16)/treeW, (sc.clientHeight - 16)/treeH));
-  sc.scrollTo({left:0, top:0});
+  sc.scrollTo({left: padX + treeW*zoom/2 - sc.clientWidth/2, top: padY - 8});
 }
 
 /* ================= Rendu : panneau latéral ================= */
@@ -2797,14 +2832,14 @@ function openFiche(id){
     let note = t(hetero ? 'note_baby' : 'note_adopt'), dis = false;
     if(u.preg){ dis = true; note = u.preg.adopt ? t('note_adopting', fmtMonth(u.preg.due)) : t('note_pregnant', mother.first, fmtMonth(u.preg.due)); }
     else if(mother && !fertile(mother, today())){ dis = true; note = t('menopause', mother.first); }
-    actions = `<div class="eyebrow sect">${t('our_couple')}</div><div class="acts">
+    actions = `<div class="eyebrow sect">${t('our_couple')}</div><div class="acts couple-acts">
       <div class="act"><button class="gel lime wide" data-act="baby" data-id="${p.id}" ${dis?'disabled':''}><span>${t(hetero?'make_baby':'adopt')}</span></button><p class="note">${esc(note)}</p></div>
       <div class="act"><button class="gel gold wide" data-act="marry" data-id="${p.id}" ${u.married?'disabled':''}><span>${t(u.married?'married_already':'marry')}</span></button><p class="note">${esc(u.married ? t('married_on', fmt(u.marriedAt)) : t('may_refuse', p.first))}</p></div>
-      <div class="act"><button class="gel pink wide" data-act="leave" data-id="${p.id}"><span>${esc(t('leave', p.first))}</span></button><p class="note">${t(u.married?'note_divorce':'note_single')}</p></div>
-      <div class="act relocate"><span class="lab">${t('relocate_title')}</span>
+      <div class="act full"><button class="gel pink wide" data-act="leave" data-id="${p.id}"><span>${esc(t('leave', p.first))}</span></button><p class="note">${t(u.married?'note_divorce':'note_single')}</p></div>
+      <details class="act relocate full"><summary class="lab">${t('relocate_title')}</summary>
         <div class="reloc-row"><select class="inp" id="relocSel" aria-label="${t('relocate_title')}">${allCities().filter(c => c !== me.city).map(c => `<option>${esc(c)}</option>`).join('')}</select>
           <input class="inp" id="relocNew" maxlength="28" autocomplete="off" placeholder="${esc(t('relocate_custom'))}" aria-label="${esc(t('relocate_custom'))}"></div>
-        <button class="gel wide" data-act="relocate"><span>${t('relocate_btn')}</span></button><p class="note">${esc(t('relocate_note', me.city))}</p></div>
+        <button class="gel wide" data-act="relocate"><span>${t('relocate_btn')}</span></button><p class="note">${esc(t('relocate_note', me.city))}</p></details>
     </div>`;
   } else if(isMe){
     actions = `<div class="acts" style="margin-top:14px"><button class="gel pink wide" data-act="soulmate" ${a<R.legal||u?'disabled':''}><span>${t('find')}</span></button></div>`;
@@ -2934,6 +2969,7 @@ function openSettings(re){
     ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}
     ${sw('data-set','map',SET.map,t('set_map'),t('set_map_hint'))}
     <div class="setrow"><span><b>${t('set_reset_ach')}</b><small>${t('set_reset_ach_hint')}</small></span><button class="gel ghost" data-act="resetach"><span>${t('reset')}</span></button></div>
+    <p class="ver">Cyngenetic v${APP_VERSION}</p>
   </div>`, {sound: !re});
 }
 const SLIDERS = [['boys',0,100,1,'%'],['twins',0,20,.1,'%'],['triplets',0,10,.1,'%'],['quads',0,5,.1,'%'],['illness',0,300,5,'%'],
@@ -3223,6 +3259,7 @@ function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); wind
   }
   $$('.brand-slot').forEach((el,i) => { el.innerHTML = emblem('emb' + i); });
   $$('#mnav [data-icon]').forEach(b => b.insertAdjacentHTML('afterbegin', icon(b.dataset.icon)));   // icônes de la barre du bas
+  $('#verSetup').textContent = 'Cyngenetic v' + APP_VERSION;
   applySettings();
   applyStatic();
   $('#fFirst').value = 'Maryline'; $('#fLast').value = 'Prunier';
