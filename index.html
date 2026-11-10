@@ -528,6 +528,13 @@ body.no-deco .bubble{display:none}
 .relocate[open] summary{margin-bottom:8px}
 .relocate[open]{display:flex;flex-direction:column;gap:6px}
 .ver{margin:6px 0 0;text-align:center;font:700 10.5px var(--font-display);letter-spacing:.05em;color:var(--ink-faint)}
+.verlink{display:block;width:100%;border:0;background:none;padding:4px;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.verlink:hover{color:var(--aqua-deep)}
+.pn{padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.6);border:1px solid #fff}
+.pn+.pn{margin-top:10px}
+.pn h3{margin:0 0 6px;font:800 17px var(--font-display);color:var(--aqua-deep)}
+.pn h3 small{font-weight:700;font-size:12px;color:var(--ink-faint)}
+.pn ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.45}
 .m-head{display:flex;flex-direction:column;gap:4px;margin-bottom:16px;padding-right:44px}
 .m-head h2{margin:0;font:800 26px/1.15 var(--font-display);text-wrap:balance}
 .m-head p{margin:2px 0 0;color:var(--ink-soft)}
@@ -735,7 +742,7 @@ body.no-deco .bubble{display:none}
         <button type="submit" class="gel lime big"><span id="fStartBtn"></span></button>
       </div>
       <p class="hint" data-t="setup_hint"></p>
-      <p class="ver" id="verSetup"></p>
+      <button type="button" class="ver verlink" id="verSetup" data-act="patchnotes"></button>
     </form>
   </div>
 </section>
@@ -812,6 +819,22 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const APP_VERSION = '0.1.0a';
+/* Notes de mise à jour (la plus récente en premier) */
+const PATCHNOTES = [
+  {v:'0.1.0a', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
+   fr:['Première version numérotée de Cyngenetic : le jeu s\'installe comme une application sur téléphone et fonctionne hors ligne.',
+       'Nouveau volet de boutons tout en haut : Paramètres, Personnalisation et vitesse du temps en premier, puis pause, mode Auto, Succès et Recommencer.',
+       'L\'arbre généalogique n\'a plus de bords : on peut le déplacer librement dans toutes les directions.',
+       'Fiche du couple plus compacte : « Faire un enfant » et « Se marier » côte à côte, « Déménager » repliable. Elle tient entière sur un écran de téléphone.',
+       'La croix de fermeture reste visible en haut des fenêtres quand on fait défiler.',
+       'Numéro de version affiché sous l\'écran de départ et dans les Paramètres, et ajout de ces notes de mise à jour.'],
+   en:['First numbered version of Cyngenetic: the game installs as a phone app and works offline.',
+       'New button bar at the very top: Settings, Customization and game speed first, then pause, Auto mode, Achievements and Restart.',
+       'The family tree no longer has edges: you can pan it freely in every direction.',
+       'More compact couple sheet: "Have a baby" and "Get married" side by side, "Move" folds away. It fits on a phone screen.',
+       'The close button stays visible at the top of windows while scrolling.',
+       'Version number shown under the start screen and in Settings, plus these patch notes.']}
+];
 const SAVE_KEY = 'lignee.save.v2', LANG_KEY = 'lignee.lang', MUTE_KEY = 'lignee.muted';
 const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }, del(k){ try{ localStorage.removeItem(k); }catch(e){} } };
 const loadJSON = k => { try{ return JSON.parse(store.get(k)) || {}; }catch(e){ return {}; } };
@@ -1488,6 +1511,7 @@ fr:{
   ach_count:(n,m)=>`${n} / ${m} débloqués`, tier_bronze:'Bronze', tier_silver:'Argent', tier_gold:'Or', tier_platinum:'Platine', tier_special:'Spécial',
   log_ach:id=>`Succès débloqué : ${achTitle(id)} !`, log_gold:()=>'Catégorie de succès complète : le thème Or est débloqué dans les Paramètres !',
   log_night:()=>'Une première victime… Le thème Nuit est débloqué dans les Paramètres.',
+  pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal',
   f_interests:"Centres d'intérêt", log_interest:(p,id)=>`${nm(p)} se découvre une passion : ${intName(id, P(p))}.`,
   skin_locked_night:'Le thème Nuit se débloque quand un criminel fait sa première victime.',
@@ -1628,6 +1652,7 @@ en:{
   ach_count:(n,m)=>`${n} / ${m} unlocked`, tier_bronze:'Bronze', tier_silver:'Silver', tier_gold:'Gold', tier_platinum:'Platinum', tier_special:'Special',
   log_ach:id=>`Achievement unlocked: ${achTitle(id)}!`, log_gold:()=>'Achievement category complete: the Gold theme is now available in Settings!',
   log_night:()=>'A first victim… The Night theme is now available in Settings.',
+  pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal',
   f_interests:'Interests', log_interest:(p,id)=>`${nm(p)} discovers a new passion: ${intName(id, P(p))}.`,
   skin_locked_night:'The Night theme unlocks when a criminal claims their first victim.',
@@ -1742,6 +1767,10 @@ function nextAch(){
   const colors = {bronze:['#e7a35c','#ffffff','#8a4b14'], silver:['#e9eef3','#ffffff','#8a96a3'], gold:['#ffe066','#ffffff','#ffb300'], platinum:['#dff9ff','#ffffff','#5fb8d6','#c3a2ff'], special:['#c3a2ff','#ffffff','#5a2ee0']}[tier];
   burst(colors, 34);
   setTimeout(() => { el.classList.add('out'); setTimeout(() => { el.hidden = true; nextAch(); }, 420); }, 3000);
+}
+function openPatchnotes(){
+  openModal(`<div class="m-head"><div class="eyebrow">Cyngenetic v${APP_VERSION}</div><h2>${t('pn_title')}</h2></div>
+    ${PATCHNOTES.map(n => `<section class="pn"><h3>v${esc(n.v)} <small>${esc(n.date[LANG])}</small></h3><ul>${n[LANG].map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}`);
 }
 function openAchievements(){
   const n = ACHS.filter(a => ACH[a[0]]).length;
@@ -2969,6 +2998,7 @@ function openSettings(re){
     ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}
     ${sw('data-set','map',SET.map,t('set_map'),t('set_map_hint'))}
     <div class="setrow"><span><b>${t('set_reset_ach')}</b><small>${t('set_reset_ach_hint')}</small></span><button class="gel ghost" data-act="resetach"><span>${t('reset')}</span></button></div>
+    <div class="setrow"><span><b>${t('pn_title')}</b><small>${t('pn_hint', APP_VERSION)}</small></span><button class="gel ghost" data-act="patchnotes"><span>${t('pn_open')}</span></button></div>
     <p class="ver">Cyngenetic v${APP_VERSION}</p>
   </div>`, {sound: !re});
 }
@@ -3048,6 +3078,7 @@ const ACT = {
   },
   famauto(d, b){ S.familyAuto = !!b.checked; dirty = true; save(); },
   achs(){ openAchievements(); },
+  patchnotes(){ openPatchnotes(); },
   anyage(){ S.seekAge = null; cands = genCands(); sfx.pop(); openSoulmate(true); },
   relocate(){
     const me = active(), custom = ($('#relocNew').value || '').trim().replace(/\s+/g, ' ');
@@ -3135,6 +3166,7 @@ function applyStatic(){
   $$('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
   $$('[data-ta]').forEach(el => el.setAttribute('aria-label', t(el.dataset.ta)));
   $$('[data-tt]').forEach(el => el.setAttribute('title', t(el.dataset.tt)));
+  $('#verSetup').textContent = 'Cyngenetic v' + APP_VERSION + ' · ' + t('pn_title');
   $$('[data-act="lang"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === LANG)));
   const sel = fMonth.value; fMonth.innerHTML = ''; t('months').forEach((m,i) => fMonth.add(new Option(m, i))); fMonth.value = sel;
   [...fDay.options].forEach((o,i) => { o.text = (LANG==='fr' && i===0) ? '1er' : String(i+1); });
@@ -3259,7 +3291,13 @@ function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); wind
   }
   $$('.brand-slot').forEach((el,i) => { el.innerHTML = emblem('emb' + i); });
   $$('#mnav [data-icon]').forEach(b => b.insertAdjacentHTML('afterbegin', icon(b.dataset.icon)));   // icônes de la barre du bas
-  $('#verSetup').textContent = 'Cyngenetic v' + APP_VERSION;
+  // nouvelle version : les notes s'ouvrent une fois pour les joueurs qui avaient déjà joué
+  const SEEN_KEY = 'lignee.seenVersion', seen = store.get(SEEN_KEY);
+  if(seen !== APP_VERSION){
+    const returning = seen || store.get(SAVE_KEY) || store.get(SET_KEY) || store.get(ACH_KEY);
+    store.set(SEEN_KEY, APP_VERSION);
+    if(returning) setTimeout(() => { if(!modalOpen) openPatchnotes(); }, 700);
+  }
   applySettings();
   applyStatic();
   $('#fFirst').value = 'Maryline'; $('#fLast').value = 'Prunier';
