@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.0c — 11 novembre 2026
+
+- Nouvelle option **Numéros de dynastie** dans les Paramètres (désactivée par défaut) : un enfant qui porte exactement le même nom qu'un parent ou un grand-parent reçoit un chiffre romain (Jean, Jean II, Jean III…).
+- Avec cette option, la fenêtre de naissance propose aussi de perpétuer un prénom de famille, et les familles qui vivent leur vie toute seule reprennent parfois le prénom d'un ancêtre.
+- Nouveau thème **Obsidienne** dans les Paramètres : très sombre, noir avec un peu de rouge et de blanc.
+- Au mariage, l'épouse prend le nom de famille de son mari. Son nom de jeune fille reste visible en touchant sa bulle. La lignée garde le nom de son fondateur.
+
 ## v0.1.0b — 11 novembre 2026
 
 - 4 nouveaux succès dans « Autres » :

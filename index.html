@@ -288,8 +288,55 @@ body.no-deco .bubble{display:none}
 .setrow>span{min-width:0;flex:1 1 200px}
 .rowhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .rowhead output{font:800 14px var(--font-display);color:var(--aqua-deep);font-variant-numeric:tabular-nums}
-.skins{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.skins{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
 .skin.sk-night i{background:radial-gradient(circle at 75% 30%,#f4f8ff 0 8%,rgba(255,255,255,0) 10%),linear-gradient(180deg,#050c2e,#13286b 50%,#2d4fa8 72%,#0f4a4a)}
+.skin.sk-dark i{background:radial-gradient(circle at 70% 35%,rgba(255,40,55,.75) 0 12%,rgba(255,40,55,0) 40%),linear-gradient(180deg,#000,#120305 60%,#2a060a)}
+/* Thème Obsidienne : très sombre, noir avec un peu de rouge et de blanc */
+:root[data-skin="dark"]{color-scheme:dark;--sky-top:#000;--sky-mid:#070708;--sky-low:#120406;--sky-haze:#1c0609;
+  --ink:#f3f3f5;--ink-soft:#b8b8c0;--ink-faint:#80808a;--aqua:#ff2a3a;--aqua-deep:#ff4d5a;
+  --glass-hi:rgba(30,30,34,.9);--glass-lo:rgba(10,10,12,.86);--glass-edge:rgba(255,255,255,.14);
+  --g1:#ff7a83;--g2:#d4101f;--g3:#8a000f;--gedge:#4a0008;
+  --lcd-a:#2c2c31;--lcd-b:#0e0e10;--lcd-c:#000;--lcd-d:#1c1c20;--lcd-edge:#000;--lcd-glow:rgba(255,50,65,.9);
+  --hill-a1:#3a0b10;--hill-a2:#1a0507;--hill-a3:#050102;--hill-b1:#24070a;--hill-b2:#000;--shadow:0 14px 34px rgba(0,0,0,.65)}
+:root[data-skin="dark"] .glass{background:linear-gradient(180deg,rgba(34,34,38,.92) 0%,rgba(18,18,21,.9) 50%,rgba(10,10,12,.88) 100%);
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -10px 24px rgba(255,30,50,.06)}
+:root[data-skin="dark"] .sky-sun{background:radial-gradient(circle,rgba(255,40,55,.32) 0 10%,rgba(255,40,55,.1) 30%,rgba(0,0,0,0) 60%)}
+:root[data-skin="dark"] .flare{display:none}
+:root[data-skin="dark"] .swoosh,:root[data-skin="dark"] .bubble{opacity:.12}
+:root[data-skin="dark"] .logo{background:linear-gradient(180deg,#ffffff 0%,#e6e6ea 46%,#ff4d5a 52%,#9a0010 100%);-webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 3px 0 rgba(0,0,0,.8)) drop-shadow(0 0 14px rgba(255,40,55,.35))}
+:root[data-skin="dark"] .logo span{background:linear-gradient(180deg,#ffffff 0%,#ffffff 46%,#c8c8ce 52%,#7a7a82 100%);-webkit-background-clip:text;background-clip:text}
+:root[data-skin="dark"] .gel.ghost{--c1:#46464d;--c2:#2a2a30;--c3:#18181c;--edge:#55555e;--txt:#f3f3f5;--ts:rgba(0,0,0,.6)}
+:root[data-skin="dark"] .gel.lime{--c1:#ff8a92;--c2:#e0182a;--c3:#9a0012;--edge:#5a000a;--ts:rgba(60,0,8,.6)}
+:root[data-skin="dark"] .gel.pink{--c1:#c2404c;--c2:#8a0f1c;--c3:#4f0009;--edge:#320006;--ts:rgba(0,0,0,.6)}
+:root[data-skin="dark"] .gel.gold{--c1:#ffffff;--c2:#dcdce0;--c3:#9a9aa3;--edge:#6a6a72;--txt:#111114;--ts:rgba(255,255,255,.7)}
+:root[data-skin="dark"] .pills{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
+:root[data-skin="dark"] .inp{background:#131316;border-color:#3a3a42;color:var(--ink);box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}
+:root[data-skin="dark"] .segs .seg{background:linear-gradient(180deg,#26262b,#18181c);border-color:#3a3a42;color:var(--ink-soft)}
+:root[data-skin="dark"] .agebox,:root[data-skin="dark"] .seekage,:root[data-skin="dark"] .relocate,:root[data-skin="dark"] .pn,
+:root[data-skin="dark"] .facts div:not(.red):not(.goldf):not(.condf):not(.intf):not(.skf):not(.crf){background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+:root[data-skin="dark"] .node:not(.star):not(.ill):not(.crim){background:linear-gradient(180deg,#26262b 0%,#18181c 55%,#101013 100%);border-color:rgba(255,255,255,.14);
+  box-shadow:0 7px 16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1)}
+:root[data-skin="dark"] .n-band{background:rgba(255,40,60,.16);color:#ff8088}
+:root[data-skin="dark"] .node.active{box-shadow:0 0 0 3px #fff,0 0 24px 6px rgba(255,40,55,.55),0 7px 16px rgba(0,0,0,.6);animation:darkglow 2.4s ease-in-out infinite}
+@keyframes darkglow{50%{box-shadow:0 0 0 3px #fff,0 0 34px 10px rgba(255,40,55,.4),0 7px 16px rgba(0,0,0,.6)}}
+:root[data-skin="dark"] .lcd{box-shadow:0 6px 16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -6px 14px rgba(255,30,50,.3)}
+:root[data-skin="dark"] .rib.you{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a);border-color:#5a000a}
+:root[data-skin="dark"] .ln-wire{stroke:#e8e8ec}
+:root[data-skin="dark"] .ln-wire-under{stroke:rgba(255,30,50,.35)}
+:root[data-skin="dark"] .pcard,:root[data-skin="dark"] .cand,:root[data-skin="dark"] .heir,:root[data-skin="dark"] .chip,:root[data-skin="dark"] .ach,
+:root[data-skin="dark"] .skin,:root[data-skin="dark"] .decade{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14);color:var(--ink)}
+:root[data-skin="dark"] .pcard em,:root[data-skin="dark"] .decade b{color:#ff6b75}
+:root[data-skin="dark"] .yearbar{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+:root[data-skin="dark"] .yearbar i{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a)}
+:root[data-skin="dark"] .switch .sw{background:linear-gradient(180deg,#18181c,#26262b);border-color:#44444c}
+:root[data-skin="dark"] .switch input:checked+.sw{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a);border-color:#5a000a}
+:root[data-skin="dark"] .overlay{background:rgba(0,0,0,.6)}
+:root[data-skin="dark"] .setrow{border-bottom-color:rgba(255,255,255,.08)}
+:root[data-skin="dark"] .francemap text{stroke:#000}
+:root[data-skin="dark"] .tree-scroll{background:radial-gradient(ellipse at 50% 0%,rgba(255,40,55,.08),rgba(0,0,0,0) 70%)}
+:root[data-skin="dark"] .ctrl-sep{background:rgba(255,255,255,.15)}
+:root[data-skin="dark"] .topbar .ctrls{border-bottom-color:rgba(255,255,255,.1)}
 @media (max-width:640px){ .skins{grid-template-columns:repeat(3,minmax(0,1fr))} }
 .skin{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:16px;border:2px solid #fff;background:rgba(255,255,255,.7);cursor:pointer;font:700 12.5px var(--font-display);color:var(--ink)}
 .skin i{width:100%;height:34px;border-radius:12px;box-shadow:inset 0 2px 6px rgba(255,255,255,.7)}
@@ -582,6 +629,10 @@ body.no-deco .bubble{display:none}
 .names{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .names .gel{min-height:54px;font-size:18px}
 .custom{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.regnal{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.who .maiden{margin:2px 0 0;font:700 13px var(--font-display);color:var(--magenta-deep)}
+.regnal-row{display:flex;gap:8px;flex-wrap:wrap}
+.regnal-row .gel{flex:1 1 140px;min-height:44px}
 .custom .inp{flex:1 1 180px}
 .starnote{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:10px 14px;border-radius:16px;font:700 14px var(--font-display);color:var(--gold-ink);
   background:linear-gradient(180deg,#fffbe0,#ffe27a);border:1px solid #ffe48a;box-shadow:0 0 18px rgba(255,200,0,.45)}
@@ -824,9 +875,18 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.0b';
+const APP_VERSION = '0.1.0c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.0c', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
+   fr:['Nouvelle option « Numéros de dynastie » dans les Paramètres (désactivée par défaut) : un enfant qui porte exactement le même nom qu\'un parent ou un grand-parent reçoit un chiffre romain (Jean, Jean II, Jean III…).',
+       'Avec cette option, la fenêtre de naissance propose aussi de perpétuer un prénom de famille, et les familles qui vivent leur vie toute seule reprennent parfois le prénom d\'un ancêtre.',
+       'Nouveau thème « Obsidienne » dans les Paramètres : très sombre, noir avec un peu de rouge et de blanc.',
+       'Au mariage, l\'épouse prend le nom de famille de son mari. Son nom de jeune fille reste visible en touchant sa bulle. La lignée garde le nom de son fondateur.'],
+   en:['New "Dynasty numbers" option in Settings (off by default): a child with exactly the same name as a parent or grandparent gets a Roman numeral (Jean, Jean II, Jean III…).',
+       'With this option, the birth window also offers to carry on a family name, and self-running families sometimes reuse an ancestor\'s name.',
+       'New "Obsidian" theme in Settings: very dark, black with a touch of red and white.',
+       'When they marry, wives take their husband\'s last name. Their maiden name stays visible when you tap them. The family line keeps its founder\'s name.']},
   {v:'0.1.0b', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
    fr:['4 nouveaux succès dans « Autres » : Jeunes grands-parents (grand-parent à 40 ans ou moins), Fossé des générations (fratrie avec 50 ans d\'écart, demi-frères et sœurs compris), Cadeau de Noël (naître un 25 décembre) et Jamais trop tard (devenir parent après 90 ans).',
        'Le bouton Succès a déménagé : dans la barre du bas, à côté de « Moi », sur téléphone, et juste après Personnalisation sur ordinateur.',
@@ -853,7 +913,7 @@ const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return n
 const loadJSON = k => { try{ return JSON.parse(store.get(k)) || {}; }catch(e){ return {}; } };
 /* Paramètres (confort) et règles de jeu (personnalisation), gardés dans le navigateur */
 const SET_KEY = 'lignee.settings.v1', RULES_KEY = 'lignee.rules.v1';
-const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false};
+const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false, regnal:false};
 const RULES_DEF = {evoNames:true, ach:true, sameSex:true, legal:18, oldAge:true, diseases:true,
   boys:50, twins:1.2, triplets:.9, quads:.5, illness:100, conds:4, inherit:13, star:2.5, crim:2, addict:8.8};
 let SET = Object.assign({}, SET_DEF, loadJSON(SET_KEY));
@@ -1498,7 +1558,7 @@ fr:{
   fam_auto_inauto:'Inclus dans le mode auto.', dropout:p=>g(p,'Déscolarisé','Déscolarisée'),
   set_music:'Musique', set_music_hint:"Musique douce en boucle, qui devient tendue tant qu'un criminel est en vie.",
   set_map:'Carte de France', set_map_hint:'Ajoute une vue « Carte » où chaque point montre une ville habitée par la famille.',
-  skin_night:'Nuit', view_tree:'Arbre', view_map:'Carte',
+  skin_night:'Nuit', skin_dark:'Obsidienne', view_tree:'Arbre', view_map:'Carte',
   map_legend:(c,n)=>`${n} membre${n>1?'s':''} en vie dans ${c} ville${c>1?'s':''}`, map_dot:(city,n)=>`${city} : ${n} personne${n>1?'s':''}`,
   seek_age:'Âge souhaité', any_age:'Peu importe', around:a=>`environ ${a}`,
   relocate_title:'Déménager', relocate_custom:'Ou une autre ville…', relocate_btn:'Déménager ensemble',
@@ -1524,6 +1584,9 @@ fr:{
   ach_count:(n,m)=>`${n} / ${m} débloqués`, tier_bronze:'Bronze', tier_silver:'Argent', tier_gold:'Or', tier_platinum:'Platine', tier_special:'Spécial',
   log_ach:id=>`Succès débloqué : ${achTitle(id)} !`, log_gold:()=>'Catégorie de succès complète : le thème Or est débloqué dans les Paramètres !',
   log_night:()=>'Une première victime… Le thème Nuit est débloqué dans les Paramètres.',
+  maiden_line:n=>`Nom de jeune fille : ${n}`,
+  set_regnal:'Numéros de dynastie', set_regnal_hint:"Un enfant qui porte exactement le même nom qu'un parent ou un grand-parent reçoit un chiffre romain : Jean, Jean II, Jean III…",
+  regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès',
   f_interests:"Centres d'intérêt", log_interest:(p,id)=>`${nm(p)} se découvre une passion : ${intName(id, P(p))}.`,
@@ -1639,7 +1702,7 @@ en:{
   fam_auto_inauto:'Already included in auto mode.', dropout:()=>'Out of school',
   set_music:'Music', set_music_hint:'Soft looping music that turns tense while a criminal is alive.',
   set_map:'Map of France', set_map_hint:'Adds a "Map" view where each dot shows a town the family lives in.',
-  skin_night:'Night', view_tree:'Tree', view_map:'Map',
+  skin_night:'Night', skin_dark:'Obsidian', view_tree:'Tree', view_map:'Map',
   map_legend:(c,n)=>`${n} living member${n>1?'s':''} in ${c} town${c>1?'s':''}`, map_dot:(city,n)=>`${city}: ${n} ${n>1?'people':'person'}`,
   seek_age:'Preferred age', any_age:'Any age', around:a=>`around ${a}`,
   relocate_title:'Move', relocate_custom:'Or another town…', relocate_btn:'Move together',
@@ -1665,6 +1728,9 @@ en:{
   ach_count:(n,m)=>`${n} / ${m} unlocked`, tier_bronze:'Bronze', tier_silver:'Silver', tier_gold:'Gold', tier_platinum:'Platinum', tier_special:'Special',
   log_ach:id=>`Achievement unlocked: ${achTitle(id)}!`, log_gold:()=>'Achievement category complete: the Gold theme is now available in Settings!',
   log_night:()=>'A first victim… The Night theme is now available in Settings.',
+  maiden_line:n=>`Maiden name: ${n}`,
+  set_regnal:'Dynasty numbers', set_regnal_hint:'A child with exactly the same name as a parent or grandparent gets a Roman numeral: Jean, Jean II, Jean III…',
+  regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards',
   f_interests:'Interests', log_interest:(p,id)=>`${nm(p)} discovers a new passion: ${intName(id, P(p))}.`,
@@ -1758,7 +1824,7 @@ const medal = (id, cls='') => `<span class="medal t-${ACHV[id][2]} ${cls}">${ico
 function unlock(id){
   if(!R.ach || ACH[id] || !ACHV[id]) return;
   const hadGold = goldUnlocked();
-  ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? P(S.founderId).last : ''};
+  ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? familyName(P(S.founderId)) : ''};
   if(!hadGold && goldUnlocked()) setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k:'gold', a:[]}); sfx.fame(); }, 3600);
   store.set(ACH_KEY, JSON.stringify(ACH));
   if(S) log('ach','ach',[id], undefined, false);
@@ -2168,7 +2234,7 @@ function autoDay(day){
     const pl = u.plan;
     if(pl.marryAt != null && !u.married && day >= pl.marryAt){
       pl.marryAt = null;
-      if(Math.random() < .95){ u.married = true; u.marriedAt = day; log('wed','wed',[a.id, b.id], day, mine); if(mine) sfx.wedding(); }
+      if(Math.random() < .95){ u.married = true; u.marriedAt = day; takeHusbandName(u); log('wed','wed',[a.id, b.id], day, mine); if(mine) sfx.wedding(); }
       else log('sad','refuse',[b.id, a.id], day, mine);
     }
     if(pl.leaveAt != null && day >= pl.leaveAt){ endUnion(u, day, mine); continue; }
@@ -2189,8 +2255,40 @@ function autoHeir(){
   render(); centerOn(S.activeId, true); save();
 }
 function nameFor(c){
+  if(SET.regnal && Math.random() < .15){                 // dynasties : parfois, on reprend le prénom d'un parent ou grand-parent
+    const fam = familyNames(c); if(fam.length) return pick(fam);
+  }
   const sibs = new Set(Object.values(S.people).filter(x => x.parents && x.parents[0]===c.parents[0] && x.first).map(x => x.first).concat(c.parents.map(i => P(i).first)));
   return wpick(namePool(yearOf(c.birth), c.sex), sibs);
+}
+/* ================= Numéros de dynastie : Jean, Jean II, Jean III… ================= */
+function roman(n){
+  let s = '';
+  for(const [v, r] of [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]) while(n >= v){ s += r; n -= v; }
+  return s;
+}
+const baseFirst = p => p.base || p.first;
+function ancestorsOf(c){                                // tous les ascendants en ligne directe (parents, grands-parents…)
+  const out = [], seen = new Set(), stack = [...(c.parents || [])];
+  while(stack.length){
+    const id = stack.pop(); if(seen.has(id)) continue; seen.add(id);
+    const a = P(id); if(!a) continue;
+    out.push(a); (a.parents || []).forEach(i => stack.push(i));
+  }
+  return out;
+}
+function regnalNum(c, base){                            // numéro que prendrait l'enfant s'il s'appelait « base »
+  let best = 0;
+  for(const a of ancestorsOf(c)) if(baseFirst(a) === base && a.last === c.last) best = Math.max(best, a.num || 1);
+  return best ? best + 1 : 0;
+}
+function regnalize(c){
+  if(!SET.regnal || !c.first) return;
+  const n = regnalNum(c, c.first);
+  if(n){ c.base = c.first; c.num = n; c.first = c.first + ' ' + roman(n); }
+}
+function familyNames(c){                                // prénoms des ascendants du même sexe qui portent le même nom de famille
+  return [...new Set(ancestorsOf(c).filter(a => a.sex === c.sex && a.last === c.last && a.first).map(baseFirst))];
 }
 function becomeStar(p, day){
   const j = pickStarJob(yearOf(day));
@@ -2221,6 +2319,15 @@ function checkParentAch(par){
   if(boys >= 5 && girls === 0) unlock('boys5');
   if(girls >= 5 && boys === 0) unlock('girls5');
 }
+/* Au mariage, l'épouse prend le nom de son mari ; son nom de jeune fille reste dans sa fiche */
+function takeHusbandName(u){
+  const a = P(u.a), b = P(u.b); if(!a || !b || a.sex === b.sex) return;
+  const wife = a.sex === 'F' ? a : b, husband = a.sex === 'M' ? a : b;
+  if(wife.last === husband.last) return;
+  if(!wife.maiden) wife.maiden = wife.last;
+  wife.last = husband.last;
+}
+const familyName = f => f.maiden || f.last;           // la lignée garde le nom de naissance de son fondateur
 function checkBirthAch(c){                          // succès liés à une naissance
   const x = toDate(c.birth);
   if(x.getUTCMonth() === 11 && x.getUTCDate() === 25) unlock('xmas');
@@ -2282,7 +2389,7 @@ function birthChild(u, day){
   const mine = u.a === S.activeId;
   if(S.auto || (S.familyAuto && !mine)){            // mode auto / famille autonome : les prénoms sont choisis tout seuls
     if(n > 1){ log('birth','multi',[A.id, B.id, n], day); sfx.multi(); burst(['#8cff1a','#ffffff','#3fd0ff','#ff6cc0','#ffe14d'], 60); }
-    ids.forEach(id => { const c = P(id); c.first = nameFor(c); log('birth', c.adopted ? 'adopt' : 'birth', [c.id], day, n > 1 ? false : undefined); });
+    ids.forEach(id => { const c = P(id); c.first = nameFor(c); regnalize(c); log('birth', c.adopted ? 'adopt' : 'birth', [c.id], day, n > 1 ? false : undefined); });
     if(n > 1){                                      // grande annonce au centre, avec les bébés qui sautillent
       const kids = ids.map(P);
       achQueue.push({html: `<span class="multi">${kids.map(k => orb(k)).join('')}</span><div><div class="eyebrow">${fmt(day)} · ${esc(city)}</div>
@@ -2490,7 +2597,7 @@ function renderTree(){
   cv.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}`;
   layout = pos; treeW = W; treeH = H; applyZoom();
   const f = P(S.founderId), all = Object.values(S.people), gens = Math.max(...all.filter(p => p.blood).map(genOf));
-  $('#treeTitle').textContent = t('family', f.last);
+  $('#treeTitle').textContent = t('family', familyName(f));
   $('#treeStats').textContent = t('stats', all.length, living().length, gens);
 }
 function centerOn(id, smooth){
@@ -2598,6 +2705,7 @@ function setMobileTab(v){
   mtab = v; document.body.dataset.mtab = v;
   $$('#mnav button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
   if(v === 'tree' || v === 'map') setView(v);
+  if(v === 'tree' && S) requestAnimationFrame(() => { renderTree(); centerOn(S.activeId, false); });   // l'arbre réapparaît centré sur vous
   if(v === 'journal' && S) seenLog = S.log.length;
   updateBadge();
 }
@@ -2856,6 +2964,8 @@ function openNaming(id){
     ${c.star ? `<p class="starnote">★ ${t('star_baby')}</p>` : ''}
     ${c.conds && c.conds.length ? `<p class="condnote">${condBadges(c)}${esc(t('cond_birth', condList(c)))}</p>` : ''}
     <div class="names">${sugg.map(n => `<button class="gel ${c.sex==='F'?'pink':''}" data-act="name" data-n="${esc(n)}"><span>${esc(n)}</span></button>`).join('')}</div>
+    ${SET.regnal && familyNames(c).length ? `<div class="regnal"><span class="lab">${t('regnal_pick')}</span><div class="regnal-row">${familyNames(c).slice(0,3).map(n =>
+      `<button class="gel gold" data-act="name" data-n="${esc(n)}"><span>${esc(n)} ${roman(regnalNum(c, n) || 2)}</span></button>`).join('')}</div></div>` : ''}
     <form class="custom" id="nameForm"><input class="inp" id="nameOther" maxlength="20" placeholder="${esc(t('name_other'))}" autocomplete="off" aria-label="${esc(t('name_other'))}">
       <button class="gel lime" type="submit"><span>${t('validate')}</span></button></form>`, {locked:true, sound:false});
   $('#nameForm').addEventListener('submit', e => { e.preventDefault(); const v = $('#nameOther').value.trim().replace(/\s+/g,' '); if(v){ sfx.click(); giveName(cap(v)); } else $('#nameOther').focus(); });
@@ -2863,6 +2973,7 @@ function openNaming(id){
 function giveName(n){
   const c = namingId != null && P(namingId); if(!c) return;
   c.first = n.slice(0,20);
+  regnalize(c);
   S.nameQueue = S.nameQueue.filter(x => x !== c.id);
   log('birth', c.adopted ? 'adopt' : 'birth', [c.id], c.birth);
   closeModal(true); render(); save();
@@ -2910,7 +3021,7 @@ function openFiche(id){
   const fame = p.star ? `<div class="goldf span2"><dt>${t('f_fame')}</dt><dd>★ ${p.star.famous ? t('fame_now') : t('fame_future')}</dd></div>`
     : p.starKid ? `<div class="skf span2"><dt>${t('f_starkid')}</dt><dd>★ ${t('starkid_val')}</dd></div>` : '';
   const crime = p.crim ? `<div class="crf span2"><dt>${t('f_crime')}</dt><dd>☠ ${esc(!p.crim.declared ? t('crime_future', p) : p.crim.fate === 'prison' ? t('crime_fate_prison', p) : t('crime_now', p))}</dd></div>` : '';
-  openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2>${esc(nm(p))}</h2><p>${sub}</p></div></div>
+  openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2>${esc(nm(p))}</h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
     <dl class="facts">
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true)}
@@ -2958,14 +3069,14 @@ function statsBlock(){
 function gameOver(d){
   S.over = true; save();
   const f = P(S.founderId);
-  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(t('over_title', f.last))}</h2>
+  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(t('over_title', familyName(f)))}</h2>
       <p>${esc(t('over_txt', d, f, S.startYear))}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 function open2100(){
   const f = P(S.founderId);
   sfx.fame(); burst(['#ffd000','#ffffff','#3fd0ff','#ff2f9c'], 40);
-  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${t('end_title')}</h2><p>${esc(t('end_txt', f.last, yearOf(S.t)-S.startYear))}</p></div>${statsBlock()}
+  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${t('end_title')}</h2><p>${esc(t('end_txt', familyName(f), yearOf(S.t)-S.startYear))}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="keep"><span>${t('keep_playing')}</span></button><button class="gel ghost big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 
@@ -3000,7 +3111,7 @@ function arm(b, label){
 }
 
 /* ================= Paramètres & personnalisation ================= */
-const SKINS = ['aqua','orange','vapor','night','gold'];
+const SKINS = ['aqua','orange','vapor','night','dark','gold'];
 const skinLocked = s => (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night);
 function applySettings(){
   document.documentElement.dataset.skin = skinLocked(SET.skin) ? 'aqua' : SET.skin;
@@ -3026,6 +3137,7 @@ function openSettings(re){
     ${sw('data-set','toasts',SET.toasts,t('set_toasts'),t('set_toasts_hint'))}
     ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}
     ${sw('data-set','map',SET.map,t('set_map'),t('set_map_hint'))}
+    ${sw('data-set','regnal',SET.regnal,t('set_regnal'),t('set_regnal_hint'))}
     <div class="setrow"><span><b>${t('set_reset_ach')}</b><small>${t('set_reset_ach_hint')}</small></span><button class="gel ghost" data-act="resetach"><span>${t('reset')}</span></button></div>
     <div class="setrow"><span><b>${t('pn_title')}</b><small>${t('pn_hint', APP_VERSION)}</small></span><button class="gel ghost" data-act="patchnotes"><span>${t('pn_open')}</span></button></div>
     <p class="ver">Cyngenetic v${APP_VERSION}</p>
@@ -3126,7 +3238,7 @@ const ACT = {
   marry(d){
     const me = active(), u = currentUnion(me.id), p = P(+d.id); if(!u || u.married) return;
     if(Math.random() < .05){ log('sad','refuse',[p.id, me.id]); sfx.refuse(); }                     // 5 % de refus
-    else { u.married = true; u.marriedAt = today(); log('wed','wed',[me.id, p.id]); sfx.wedding(); burst(['#ffcc00','#ffffff','#ff8a00','#ff2f9c']); }
+    else { u.married = true; u.marriedAt = today(); takeHusbandName(u); log('wed','wed',[me.id, p.id]); sfx.wedding(); burst(['#ffcc00','#ffffff','#ff8a00','#ff2f9c']); }
     dirty = true; save(); openFiche(p.id);
   },
   incarnate(d){
@@ -3278,7 +3390,7 @@ function showSetup(){
   const box = $('#resumeBox');
   if(saved && saved.v===2 && !saved.over && saved.people && saved.people[saved.activeId]){
     const a = saved.people[saved.activeId], f = saved.people[saved.founderId];
-    box.innerHTML = `<p>${t('resume_txt', esc(f.last), fmt(saved.t), esc(a.first+' '+a.last))}</p><button class="gel lime" data-act="resume"><span>${t('resume')}</span></button>`;
+    box.innerHTML = `<p>${t('resume_txt', esc(f.maiden || f.last), fmt(saved.t), esc(a.first+' '+a.last))}</p><button class="gel lime" data-act="resume"><span>${t('resume')}</span></button>`;
     box.hidden = false;
   } else box.hidden = true;
 }
