@@ -2,6 +2,11 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.2b — 11 novembre 2026
+
+- Tout le monde reçoit maintenant un atout dès la naissance (un seul, non cumulable). Dans une partie déjà commencée, chaque personne reçoit le sien en reprenant la partie.
+- Écran de départ : « Au hasard » remplace « Aucun » dans le choix de l'atout.
+
 ## v0.1.2a — 11 novembre 2026
 
 - Nouveaux atouts : un seul par personne, reçu à la naissance et visible en touchant sa bulle. Intelligence, Charisme, Sociabilité, Courage, Créativité, Égoïsme, Chance, Santé, Fertilité, Espérance de vie et Ambitieux, chacun avec son effet.

@@ -905,9 +905,14 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.2a';
+const APP_VERSION = '0.1.2b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.2b', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
+   fr:['Tout le monde reçoit maintenant un atout dès la naissance (un seul, non cumulable). Dans une partie déjà commencée, chaque personne reçoit le sien en reprenant la partie.',
+       'Écran de départ : « Au hasard » remplace « Aucun » dans le choix de l\'atout.'],
+   en:['Everyone now gets a gift at birth (just one, they don\'t stack). In a game already under way, everyone receives theirs when you resume.',
+       'Start screen: "Random" replaces "None" in the gift choice.']},
   {v:'0.1.2a', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
    fr:['Nouveaux atouts : un seul par personne, reçu à la naissance et visible en touchant sa bulle. Intelligence, Charisme, Sociabilité, Courage, Créativité, Égoïsme, Chance, Santé, Fertilité, Espérance de vie et Ambitieux, chacun avec son effet.',
        'Écran de départ : on peut choisir l\'atout de son personnage, et commencer en criminel ou en star (les succès sont alors désactivés pour la partie).',
@@ -1247,7 +1252,7 @@ const CONDS = [
  ['insomnie','Insomniaque','Insomniaque','Insomniac','moon'],['narcolepsie','Narcoleptique','Narcoleptique','Narcoleptic','moon'],
  ['anxchron','Anxiété chronique','Anxiété chronique','Chronic anxiety','brain']
 ];
-/* Atouts (0.1.2a) : un seul par personne, reçu à la naissance (12 %), visible seulement dans la fiche.
+/* Atouts (0.1.2a) : un seul par personne, reçu à la naissance par tout le monde, visible seulement dans la fiche.
    [id, fr masc., fr fém., en, icône, effet fr, effet en] */
 const ATOUTS = [
  ['intel','Intelligence','Intelligence','Intelligence','bulb',"Ne meurt jamais d'un accident domestique ou de la route.",'Never dies in a household or road accident.'],
@@ -1715,7 +1720,7 @@ fr:{
   log_unemployed:p=>`${nm(p)} perd son emploi.`, log_back_to_work:(p,j)=>`${nm(p)} retrouve du travail : ${lc(jobName(j,P(p)))}.`,
   log_retired:p=>`${nm(p)} prend sa retraite.`, log_uni:(p,f)=>`${nm(p)} entre à l'université (${lc(fieldName(f))}).`,
   log_president:p=>`${nm(p)} est ${g(P(p),'élu Président','élue Présidente')} de la République !`, pres_rib:p=>`★ ${g(p,'Président','Présidente')}`,
-  f_atout:'Atout', lab_atout:'Atout de départ', lab_destiny:'Destin', atout_none:'Aucun', dest_none:'Normal', dest_crim:'Criminel', dest_star:'Star',
+  f_atout:'Atout', lab_atout:'Atout de départ', lab_destiny:'Destin', atout_none:'Au hasard', dest_none:'Normal', dest_crim:'Criminel', dest_star:'Star',
   dest_note:'Les succès seront désactivés pour cette partie.',
   log_star:(p,j)=>`${nm(p)} devient une star ! ${g(P(p),'Adulé','Adulée')} dans tout le pays comme ${lc(jobName(j,P(p)))}.`,
   log_incarnate:p=>`Vous incarnez désormais ${nm(p)}.`, log_heir:(p,o)=>`${nm(p)} reprend le flambeau après la disparition de ${fn(o)}.`,
@@ -1863,7 +1868,7 @@ en:{
   log_unemployed:p=>`${nm(p)} loses ${g(P(p),'his','her')} job.`, log_back_to_work:(p,j)=>`${nm(p)} finds work again as ${art(lc(jobName(j,P(p))))}.`,
   log_retired:p=>`${nm(p)} retires.`, log_uni:(p,f)=>`${nm(p)} starts university (${lc(fieldName(f))}).`,
   log_president:p=>`${nm(p)} is elected President of the Republic!`, pres_rib:()=>'★ President',
-  f_atout:'Gift', lab_atout:'Starting gift', lab_destiny:'Destiny', atout_none:'None', dest_none:'Normal', dest_crim:'Criminal', dest_star:'Star',
+  f_atout:'Gift', lab_atout:'Starting gift', lab_destiny:'Destiny', atout_none:'Random', dest_none:'Normal', dest_crim:'Criminal', dest_star:'Star',
   dest_note:'Achievements will be off for this game.',
   log_star:(p,j)=>`${nm(p)} becomes a star! Adored all over the country as ${art(lc(jobName(j,P(p))))}.`,
   log_incarnate:p=>`You are now playing ${nm(p)}.`, log_heir:(p,o)=>`${nm(p)} carries on the family after ${fn(o)}'s passing.`,
@@ -2206,7 +2211,7 @@ function genOf(p){
   return p.parents ? 1 + genOf(P(p.parents[0])) : 1;
 }
 function traits(){ return {retireAge:rnd(60,66), firstJobAge:rnd(18,30), uniP:rnd(5,15)/100, moveP:rnd(5,25)/100, menoAge:rnd(44,55),
-  atout: Math.random() < .12 ? pick(ATOUTS)[0] : null}; }
+  atout: pick(ATOUTS)[0]}; }          // 0.1.2b : tout le monde reçoit un atout à la naissance
 const fertile = (m, day) => ageAt(m, day) < (m.menoAge || 50);          // ménopause entre 44 et 55 ans
 function addPerson(o){
   const p = Object.assign({id:S.nextId++, death:null, deathAt:null, onset:null, ill:null, cause:null, parents:null, blood:false, lastAge:0,
@@ -3659,7 +3664,7 @@ $('#setupForm').addEventListener('submit', e => {
   const p = addPerson({first: cap(first), last: cap(last), sex:fSex(), birth:fromYMD(y,m,d), blood:true, city, birthCity:city});
   p.lastAge = ageAt(p, day);
   p.conds = rollConds([]);
-  p.atout = $('#fAtout').value || null;                                   // atout choisi (ou aucun)
+  p.atout = $('#fAtout').value || pick(ATOUTS)[0];                         // atout choisi (ou au hasard)
   const dest = $('#fDestiny').value, adult = Math.max(day, p.birth + Math.round(18*365.25));
   if(dest === 'crim') p.crim = {day: adult, declared:false, fate:null};   // commencer en criminel…
   if(dest === 'star') p.star = {day: adult, famous:false};                // … ou en star
@@ -3688,6 +3693,7 @@ function showSetup(){
 function enterGame(){
   $('#setup').hidden = true; $('#game').hidden = false;
   S.nameQueue = S.nameQueue || [];
+  Object.values(S.people).forEach(p => { if(!p.atout) p.atout = pick(ATOUTS)[0]; });   // anciennes parties : chacun reçoit son atout
   if(modalOpen) closeModal(true);
   dirty = true; lastYear = null; lastDecade = null;
   $('#mapView').innerHTML = ''; dotEls = new Map();
