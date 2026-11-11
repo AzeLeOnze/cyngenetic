@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.2d — 12 novembre 2026
+
+- Sur ordinateur, la molette de la souris zoome directement dans l'arbre (Maj + molette pour faire défiler).
+- Renommer : dans la fiche de n'importe qui, un petit crayon à côté du nom permet de changer son prénom.
+- 16 nouveaux centres d'intérêt : cuisinier amateur, pêcheur à la ligne, randonneur, gameur, collectionneur de timbres, cinéphile, ornithologue amateur, chasseur d'orages ; du futur (après 2060) : touriste spatial, dresseur de robots, sportif en apesanteur, explorateur de rêves partagés ; du passé (avant 1850) : fauconnier, duelliste, joueur de jeu de paume, alchimiste amateur.
+
 ## v0.1.2c — 11 novembre 2026
 
 - Sur téléphone, les boutons de zoom et « Recentrer » disparaissent : on zoome en pinçant l'arbre, qui gagne de la place.

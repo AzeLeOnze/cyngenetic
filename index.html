@@ -612,6 +612,12 @@ body.no-deco .bubble{display:none}
 .m-head p{margin:2px 0 0;color:var(--ink-soft)}
 .who{display:flex;gap:16px;align-items:center;margin-bottom:16px;padding-right:44px}
 .who h2{margin:0;font:800 24px/1.1 var(--font-display);text-wrap:balance}
+.who h2 .pen{display:inline-grid;place-items:center;width:28px;height:28px;margin-left:8px;padding:0;vertical-align:3px;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:linear-gradient(180deg,#fff,#e4f3ff);box-shadow:0 2px 6px rgba(20,70,140,.18);color:var(--ink-soft,#3a5a80);cursor:pointer;transition:transform .15s}
+.who h2 .pen:hover{transform:scale(1.12)}
+.who h2 .pen svg{width:14px;height:14px;fill:currentColor}
+.who .rename{display:flex;gap:6px;align-items:center}
+.who .rename .inp{flex:1;min-width:0;font-size:16px}
+.who .rename .gel{flex:none;min-height:38px}
 .who p{margin:4px 0 0;color:var(--ink-soft)}
 .seekrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .seekrow .pills button{padding:0 14px}
@@ -906,9 +912,16 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.2c';
+const APP_VERSION = '0.1.2d';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.2d', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Sur ordinateur, la molette de la souris zoome directement dans l\'arbre (Maj + molette pour faire défiler).',
+       'Renommer : dans la fiche de n\'importe qui, un petit crayon à côté du nom permet de changer son prénom.',
+       '16 nouveaux centres d\'intérêt : cuisinier amateur, pêcheur à la ligne, randonneur, gameur, collectionneur de timbres, cinéphile, ornithologue amateur, chasseur d\'orages ; du futur (après 2060) : touriste spatial, dresseur de robots, sportif en apesanteur, explorateur de rêves partagés ; du passé (avant 1850) : fauconnier, duelliste, joueur de jeu de paume, alchimiste amateur.'],
+   en:['On computer, the mouse wheel now zooms the tree directly (Shift + wheel to scroll).',
+       'Rename: in anyone\'s card, a small pencil next to the name lets you change their first name.',
+       '16 new interests: home cook, angler, hiker, gamer, stamp collector, film buff, birdwatcher, storm chaser; from the future (after 2060): space tourist, robot trainer, zero-g athlete, shared-dream explorer; from the past (before 1850): falconer, duellist, real tennis player, amateur alchemist.']},
   {v:'0.1.2c', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
    fr:['Sur téléphone, les boutons de zoom et « Recentrer » disparaissent : on zoome en pinçant l\'arbre, qui gagne de la place.',
        'Sur téléphone, une seule notification s\'affiche à la fois, pour que l\'arbre reste lisible.',
@@ -1328,7 +1341,15 @@ const INTERESTS = [
  ['streamer','Streameur','Streameuse','Streamer','Streamer','phone',2012,9999],['metavers','Explorateur de métavers','Exploratrice de métavers','Metaverse explorer','Metaverse explorer','computer',2030,9999],
  ['holo',"Fan d'hologrammes","Fan d'hologrammes",'Hologram fan','Hologram fan','sparkle',2060,9999],
  ['golf','Golfeur','Golfeuse','Golfer','Golfer','flag',1860,9999,true],['informatique',"Passionné d'informatique","Passionnée d'informatique",'Computer buff','Computer buff','computer',1975,9999],
- ['crypto','Cryptomonnaiste','Cryptomonnaiste','Crypto enthusiast','Crypto enthusiast','chip',2009,9999]
+ ['crypto','Cryptomonnaiste','Cryptomonnaiste','Crypto enthusiast','Crypto enthusiast','chip',2009,9999],
+ ['cuisine','Cuisinier amateur','Cuisinière amateure','Home cook','Home cook','cup',1500,9999],['peche','Pêcheur à la ligne','Pêcheuse à la ligne','Angler','Angler','wave',1500,9999],
+ ['randonnee','Randonneur','Randonneuse','Hiker','Hiker','leaf',1850,9999,true],['gamer','Gameur','Gameuse','Gamer','Gamer','gamepad',1980,9999],
+ ['timbres','Collectionneur de timbres','Collectionneuse de timbres','Stamp collector','Stamp collector','book',1850,9999],['cinephile','Cinéphile','Cinéphile','Film buff','Film buff','film',1900,9999],
+ ['ornitho','Ornithologue amateur','Ornithologue amateure','Birdwatcher','Birdwatcher','dove',1700,9999],['orages',"Chasseur d'orages","Chasseuse d'orages",'Storm chaser','Storm chaser','bolt',1950,9999],
+ ['spatial','Touriste spatial','Touriste spatiale','Space tourist','Space tourist','rocket',2060,9999],['robots','Dresseur de robots','Dresseuse de robots','Robot trainer','Robot trainer','robot',2060,9999],
+ ['zerog','Sportif en apesanteur','Sportive en apesanteur','Zero-g athlete','Zero-g athlete','planet',2060,9999,true],['reves','Explorateur de rêves partagés','Exploratrice de rêves partagés','Shared-dream explorer','Shared-dream explorer','brain',2060,9999],
+ ['faucon','Fauconnier','Fauconnière','Falconer','Falconer','dove',1500,1849],['duel','Duelliste','Duelliste','Duellist','Duellist','sword',1500,1849],
+ ['paume','Joueur de jeu de paume','Joueuse de jeu de paume','Real tennis player','Real tennis player','trophy',1500,1849,true],['alchimie','Alchimiste amateur','Alchimiste amateure','Amateur alchemist','Amateur alchemist','atom',1500,1849]
 ];
 const byId = list => Object.fromEntries(list.map(r => [r[0], r]));
 const INT = byId(INTERESTS);
@@ -1512,6 +1533,7 @@ function pickDisease(p, day){
 
 /* Icônes (SVG 24×24) */
 const ICONS = {
+  pencil:'<path d="M4 17.2V20h2.8L17.6 9.2l-2.8-2.8zM19.7 7.1a1 1 0 0 0 0-1.4l-1.4-1.4a1 1 0 0 0-1.4 0l-1.1 1.1 2.8 2.8z"/>',
   shirt:'<path d="M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',
   computer:'<path fill-rule="evenodd" d="M3 4h18v12H3zm2 2v8h14V6zM9 18h6l1 2H8z"/>',
   music:'<path d="M9 3v11.3A3.5 3.5 0 1 0 11 17V8h7V3z"/>',
@@ -1711,7 +1733,7 @@ fr:{
   keep_playing:'Continuer à jouer',
   birth_title:c=>g(c,"C'est un garçon !","C'est une fille !"), adopt_title:c=>g(c,'Un petit garçon arrive !','Une petite fille arrive !'),
   birth_txt:(a,b,d,c)=>`${a} et ${b} accueillent leur enfant le ${d} à ${c}. Choisissez son prénom :`,
-  name_other:'Autre prénom…', validate:'Valider', star_baby:'Une étoile brille au-dessus du berceau : cet enfant deviendra une star.',
+  name_other:'Autre prénom…', validate:'Valider', rename:f=>`Renommer ${f || ''}`.trim(), star_baby:'Une étoile brille au-dessus du berceau : cet enfant deviendra une star.',
   baby:'Nourrisson', child:'Enfant', mat:['Petite section','Moyenne section','Grande section'], prim:['CP','CE1','CE2','CM1','CM2'], col:['6e','5e','4e','3e'],
   lyc:['Seconde','Première','Terminale'], capy:['1re année','2e année','Diplômé'], cours_sup:'Cours supérieur', certif:"Certificat d'études",
   old_lyc:['4e','3e','Seconde','Première','Terminale'], lycee:'Lycée', petite_ecole:'Petite école', betes:'Garde les bêtes',
@@ -1743,7 +1765,7 @@ fr:{
   log_incarnate:p=>`Vous incarnez désormais ${nm(p)}.`, log_heir:(p,o)=>`${nm(p)} reprend le flambeau après la disparition de ${fn(o)}.`,
   auto:'Auto', auto_title:'Mode auto : la famille se rencontre, se marie et a des enfants toute seule',
   log_auto_on:()=>'Mode auto activé : la famille vit sa vie toute seule.', log_auto_off:()=>'Mode auto désactivé : vous reprenez la main.',
-  zoom_in:'Zoomer', zoom_out:'Dézoomer', zoom_fit:"Vue d'ensemble (Ctrl + molette pour zoomer)",
+  zoom_in:'Zoomer', zoom_out:'Dézoomer', zoom_fit:"Vue d'ensemble (molette pour zoomer)",
   menopause:n=>`${n} est ménopausée : plus d'enfant possible.`,
   multi_title:(n,allF)=> n===2 ? (allF?'Des jumelles !':'Des jumeaux !') : n===3 ? (allF?'Des triplées !':'Des triplés !') : (allF?'Des quadruplées !':'Des quadruplés !'),
   multi_txt:(i,n,c)=>`Bébé ${i} sur ${n} : ${g(c,"c'est un garçon","c'est une fille")}. Choisissez son prénom :`,
@@ -1861,7 +1883,7 @@ en:{
   keep_playing:'Keep playing',
   birth_title:c=>g(c,"It's a boy!","It's a girl!"), adopt_title:c=>g(c,'A little boy is coming home!','A little girl is coming home!'),
   birth_txt:(a,b,d,c)=>`${a} and ${b} welcome their child on ${d} in ${c}. Choose a name:`,
-  name_other:'Another name…', validate:'Confirm', star_baby:'A star shines over the cradle: this child will become a star.',
+  name_other:'Another name…', validate:'Confirm', rename:f=>`Rename ${f || ''}`.trim(), star_baby:'A star shines over the cradle: this child will become a star.',
   baby:'Baby', child:'Child', mat:['Preschool','Pre-K','Kindergarten'], prim:['Grade 1','Grade 2','Grade 3','Grade 4','Grade 5'], col:['Grade 6','Grade 7','Grade 8','Grade 9'],
   lyc:['Grade 10','Grade 11','Grade 12'], capy:['Year 1','Year 2','Graduated'], cours_sup:'Upper primary', certif:'Primary certificate',
   old_lyc:['Grade 8','Grade 9','Grade 10','Grade 11','Grade 12'], lycee:'Lycée', petite_ecole:'Village school', betes:'Tends the animals',
@@ -1891,7 +1913,7 @@ en:{
   log_incarnate:p=>`You are now playing ${nm(p)}.`, log_heir:(p,o)=>`${nm(p)} carries on the family after ${fn(o)}'s passing.`,
   auto:'Auto', auto_title:'Auto mode: the family meets, marries and has children on its own',
   log_auto_on:()=>'Auto mode on: the family lives its life on its own.', log_auto_off:()=>'Auto mode off: you are back in control.',
-  zoom_in:'Zoom in', zoom_out:'Zoom out', zoom_fit:'Overview (Ctrl + scroll to zoom)',
+  zoom_in:'Zoom in', zoom_out:'Zoom out', zoom_fit:'Overview (scroll to zoom)',
   menopause:n=>`${n} has gone through menopause: no more children.`,
   multi_title:n=> n===2 ? 'Twins!' : n===3 ? 'Triplets!' : 'Quadruplets!',
   multi_txt:(i,n,c)=>`Baby ${i} of ${n}: ${g(c,"it's a boy","it's a girl")}. Choose a name:`,
@@ -3306,7 +3328,7 @@ function openFiche(id){
   const fame = p.star ? `<div class="goldf span2"><dt>${t('f_fame')}</dt><dd>★ ${p.star.famous ? t('fame_now') : t('fame_future')}</dd></div>`
     : p.starKid ? `<div class="skf span2"><dt>${t('f_starkid')}</dt><dd>★ ${t('starkid_val')}</dd></div>` : '';
   const crime = p.crim ? `<div class="crf span2"><dt>${t('f_crime')}</dt><dd>☠ ${esc(!p.crim.declared ? t('crime_future', p) : p.crim.fate === 'prison' ? t('crime_fate_prison', p) : t('crime_now', p))}</dd></div>` : '';
-  openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2>${esc(nm(p))}</h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
+  openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2>${esc(nm(p))}<button class="pen" data-act="rename" data-id="${p.id}" aria-label="${esc(t('rename', p.first))}" title="${esc(t('rename', p.first))}">${icon('pencil')}</button></h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
     <dl class="facts">
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true)}
@@ -3519,6 +3541,18 @@ const ACT = {
   achs(){ openAchievements(); },
   patchnotes(){ openPatchnotes(); },
   anyage(){ S.seekAge = null; cands = genCands(); sfx.pop(); openSoulmate(true); },
+  rename(d){                                         // renommer n'importe qui (prénom)
+    const p = P(+d.id), h = $('#modal .who h2'); if(!p || !h) return;
+    h.innerHTML = `<form class="rename" id="renameForm"><input class="inp" id="renameInp" maxlength="20" autocomplete="off" value="${esc(p.first || '')}" aria-label="${esc(t('rename', p.first))}">
+      <button class="gel lime" type="submit"><span>${t('validate')}</span></button></form>`;
+    const inp = $('#renameInp'); inp.focus(); inp.select();
+    inp.addEventListener('keydown', e => { if(e.key === 'Escape'){ e.preventDefault(); e.stopPropagation(); openFiche(p.id); } });
+    $('#renameForm').addEventListener('submit', e => {
+      e.preventDefault(); const v = inp.value.trim().replace(/\s+/g, ' ');
+      if(!v){ inp.focus(); return; }
+      p.first = cap(v).slice(0, 20); sfx.sparkle(); dirty = true; save(); render(); openFiche(p.id);
+    });
+  },
   relocate(){
     const me = active(), custom = ($('#relocNew').value || '').trim().replace(/\s+/g, ' ');
     const city = custom ? cap(custom) : $('#relocSel').value;
@@ -3589,11 +3623,11 @@ document.addEventListener('keydown', e => {
     setZoom(pinch.z * d / pinch.d, (a.clientX+b.clientX)/2 - r.left, (a.clientY+b.clientY)/2 - r.top);
   }, {passive:false});
   sc.addEventListener('touchend', e => { if(e.touches.length < 2) pinch = null; });
-  sc.addEventListener('wheel', e => {
-    if(!e.ctrlKey && !e.metaKey) return;
+  sc.addEventListener('wheel', e => {                // molette : zoom (Maj + molette : défilement normal)
+    if(e.shiftKey && !e.ctrlKey && !e.metaKey) return;
     e.preventDefault();
-    const r = sc.getBoundingClientRect();
-    setZoom(zoom * Math.exp(-e.deltaY * .0018), e.clientX - r.left, e.clientY - r.top);
+    const r = sc.getBoundingClientRect(), dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1);
+    setZoom(zoom * Math.exp(-Math.max(-150, Math.min(150, dy)) * .0018), e.clientX - r.left, e.clientY - r.top);
   }, {passive:false});
   const end = () => { drag = null; sc.classList.remove('grabbing'); };
   sc.addEventListener('pointerup', end); sc.addEventListener('pointercancel', end);
