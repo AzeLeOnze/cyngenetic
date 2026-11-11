@@ -2,6 +2,19 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.2a — 11 novembre 2026
+
+- Nouveaux atouts : un seul par personne, reçu à la naissance et visible en touchant sa bulle. Intelligence, Charisme, Sociabilité, Courage, Créativité, Égoïsme, Chance, Santé, Fertilité, Espérance de vie et Ambitieux, chacun avec son effet.
+- Écran de départ : on peut choisir l'atout de son personnage, et commencer en criminel ou en star (les succès sont alors désactivés pour la partie).
+- Politique : maire, député, sénateur, ministre, Premier ministre et Président de la République, avec une bulle bleu-blanc-rouge qui brille. Devenir Président(e) est rare et déclenche une grande annonce.
+- Mort de vieillesse : deux fois plus fréquente avant 1900, deux fois moins après 2000.
+- Thème Obsidienne : les criminels s'appellent des vampires (seulement le nom, rien ne change dans le jeu).
+- Succès Stars : toutes les exigences sont doublées (2, 4, 8 puis 12 stars).
+- Un enfant de star a maintenant 12 % de chances de devenir star à son tour (au lieu de 25 %). Les YouTubeurs ont 7 % de chances de devenir célèbres, les speedrunners 5 %.
+- Les changements de métier sont 20 % moins fréquents.
+- Prison : le ruban et la bulle « Vous » passent devant les barreaux et restent lisibles.
+- 45 nouveaux métiers (dont artiste numérique, inventeur, speedrunner, trader crypto, game designer, YouTubeur, détective privé, joaillier…), 3 nouveaux centres d'intérêt (golf, informatique, cryptomonnaie), 11 nouvelles particularités (HPI, TSA, cyclothymie, insomnie…) et 43 nouveaux noms de famille.
+
 ## v0.1.1a — 11 novembre 2026
 
 - Le reflet brillant des bulles de star et de criminel va maintenant jusqu'au bout, même quand l'arbre bouge.

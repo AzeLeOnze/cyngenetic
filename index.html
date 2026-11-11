@@ -315,7 +315,7 @@ body.no-deco .bubble{display:none}
 :root[data-skin="dark"] .segs .seg{background:linear-gradient(180deg,#26262b,#18181c);border-color:#3a3a42;color:var(--ink-soft)}
 :root[data-skin="dark"] .agebox,:root[data-skin="dark"] .seekage,:root[data-skin="dark"] .relocate,:root[data-skin="dark"] .pn,
 :root[data-skin="dark"] .facts div:not(.red):not(.goldf):not(.condf):not(.intf):not(.skf):not(.crf){background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
-:root[data-skin="dark"] .node:not(.star):not(.ill):not(.crim){background:linear-gradient(180deg,#26262b 0%,#18181c 55%,#101013 100%);border-color:rgba(255,255,255,.14);
+:root[data-skin="dark"] .node:not(.star):not(.ill):not(.crim):not(.pol){background:linear-gradient(180deg,#26262b 0%,#18181c 55%,#101013 100%);border-color:rgba(255,255,255,.14);
   box-shadow:0 7px 16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1)}
 :root[data-skin="dark"] .n-band{background:rgba(255,40,60,.16);color:#ff8088}
 :root[data-skin="dark"] .node.active{box-shadow:0 0 0 3px #fff,0 0 24px 6px rgba(255,40,55,.55),0 7px 16px rgba(0,0,0,.6);animation:darkglow 2.4s ease-in-out var(--t,0s) infinite}
@@ -357,7 +357,27 @@ body.no-deco .bubble{display:none}
 .node .bars{position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;z-index:4;
   background:repeating-linear-gradient(90deg,rgba(0,0,0,0) 0 15px,#3a3d44 15px,#c9ced8 17px,#5b606b 19px,rgba(0,0,0,0) 20px 34px);
   box-shadow:inset 0 0 0 3px #4a4e57,inset 0 10px 0 -6px #8d929c,inset 0 -10px 0 -6px #8d929c}
-.node.jailed{filter:saturate(.55) brightness(.85)}
+.node.jailed .n-top,.node.jailed .n-life,.node.jailed .n-city,.node.jailed .n-band{opacity:.7}
+.rib.cr.jail{color:#fff;background:linear-gradient(180deg,#7d828d,#3a3d44);border:1px solid #c9ced8;text-shadow:0 1px 1px #000}
+/* Politique : bulle bleu-blanc-rouge avec un reflet ; le ou la Président(e) brille davantage */
+.node.pol,.node.partner.pol{border-color:#fff;background:linear-gradient(160deg,#eef3ff 0%,#dbe6ff 38%,#ffffff 58%,#ffe1e5 100%);
+  box-shadow:0 0 0 2px #2b4fd8,0 0 0 4px #fff,0 0 0 6px #e8203a,0 8px 18px rgba(0,40,140,.25)}
+.node.pol::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(70,110,255,.35) 44%,rgba(255,255,255,.95) 48%,rgba(255,40,60,.35) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%;animation:shine 3.4s linear var(--t,0s) infinite}
+.node.pol .nt b,.node.pol .nt span,.node.pol .n-life,.node.pol .n-city{color:#13246b}
+.node.pol .n-band{background:linear-gradient(90deg,#2b4fd8,#5574ff 50%,#e8203a);color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.4)}
+.node.pres{animation:pres 2.6s ease-in-out var(--t,0s) infinite}
+@keyframes pres{0%,100%{box-shadow:0 0 0 2px #1f3fbf,0 0 0 4px #fff,0 0 0 6px #e8203a,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(0,40,140,.3)}
+  50%{box-shadow:0 0 0 2px #1f3fbf,0 0 0 4px #fff,0 0 0 6px #e8203a,0 0 40px 14px rgba(80,120,255,.55),0 8px 18px rgba(0,40,140,.3)}}
+.rib.pr{right:8px;color:#fff;background:linear-gradient(180deg,#5574ff,#1f3fbf);border:1px solid #fff;box-shadow:inset 0 -3px 0 #e8203a,0 0 10px rgba(255,205,0,.7)}
+.facts .atf{background:linear-gradient(180deg,#fffaf0,#ffeec4);border-color:#ffd98a;color:#7a4a00}
+.facts .atf dd{display:flex;gap:8px;align-items:flex-start;color:#7a4a00}
+.facts .atf dd svg{flex:none;width:20px;height:20px;fill:#e08a00;margin-top:1px}
+.facts .atf small{display:block;font-weight:600;opacity:.85}
+:root[data-skin="dark"] .facts .atf{background:rgba(255,190,60,.12);border-color:rgba(255,190,60,.35)}
+:root[data-skin="dark"] .facts .atf dd{color:#ffd28a}
+.setnote{margin:2px 2px 0;font-size:12.5px;opacity:.85;min-height:1em}
+@media (max-width:520px){ .cands.six{grid-template-columns:1fr 1fr} }
 .node.crim .n-band{background:linear-gradient(180deg,#4a0008,#1a0003);color:#ff6b78;border:1px solid #7a0012}
 .flames{position:absolute;width:196px;height:80px;pointer-events:none;
   background:radial-gradient(ellipse 13% 85% at 12% 100%,#ffb000 0,#ff3b1f 35%,rgba(255,0,0,0) 75%),radial-gradient(ellipse 15% 100% at 33% 100%,#ff7a00 0,#d4001e 45%,rgba(0,0,0,0) 78%),
@@ -485,7 +505,7 @@ body.no-deco .bubble{display:none}
 .n-city span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .n-band{margin-top:auto;padding:3px 8px;border-radius:99px;font:700 11.5px/1.3 var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   background:rgba(0,150,255,.13);color:var(--aqua-deep)}
-.rib{position:absolute;top:-11px;padding:2px 8px;border-radius:99px;font:800 9.5px/1.4 var(--font-display);font-style:normal;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;z-index:2}
+.rib{position:absolute;top:-11px;padding:2px 8px;border-radius:99px;font:800 9.5px/1.4 var(--font-display);font-style:normal;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;z-index:6}
 .rib.you{left:8px;color:#fff;background:linear-gradient(180deg,#eaff9c,#78e400 50%,#3aa600 51%,#78e400);border:1px solid #2b8700;text-shadow:0 1px 1px rgba(20,70,0,.5)}
 .rib.st{right:8px;color:var(--gold-ink);background:linear-gradient(180deg,#fffbe0,#ffd84a 50%,#ffb300 51%,#ffe066);border:1px solid #d99a00}
 .badge{position:absolute;right:-6px;bottom:-6px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1px solid #fff;
@@ -795,6 +815,11 @@ body.no-deco .bubble{display:none}
         <div class="line"><span class="lab" id="fAgeLab"></span><b id="fAge"></b></div>
         <input id="fAgeRange" type="range" min="0" max="100" value="22" data-ta="choose_age">
       </div>
+      <div class="row2">
+        <label class="field"><span class="lab" data-t="lab_atout"></span><select id="fAtout" class="inp"></select></label>
+        <label class="field"><span class="lab" data-t="lab_destiny"></span><select id="fDestiny" class="inp"></select></label>
+      </div>
+      <p id="fAtoutNote" class="setnote"></p>
       <label class="switch"><input type="checkbox" id="fFam"><span class="sw"></span>
         <span><b data-t="fam_auto"></b><small data-t="fam_auto_hint"></small></span></label>
       <p id="fErr" class="err" hidden></p>
@@ -880,9 +905,30 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.1a';
+const APP_VERSION = '0.1.2a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.2a', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
+   fr:['Nouveaux atouts : un seul par personne, reçu à la naissance et visible en touchant sa bulle. Intelligence, Charisme, Sociabilité, Courage, Créativité, Égoïsme, Chance, Santé, Fertilité, Espérance de vie et Ambitieux, chacun avec son effet.',
+       'Écran de départ : on peut choisir l\'atout de son personnage, et commencer en criminel ou en star (les succès sont alors désactivés pour la partie).',
+       'Politique : maire, député, sénateur, ministre, Premier ministre et Président de la République, avec une bulle bleu-blanc-rouge qui brille. Devenir Président(e) est rare et déclenche une grande annonce.',
+       'Mort de vieillesse : deux fois plus fréquente avant 1900, deux fois moins après 2000.',
+       'Thème Obsidienne : les criminels s\'appellent des vampires (seulement le nom, rien ne change dans le jeu).',
+       'Succès Stars : toutes les exigences sont doublées (2, 4, 8 puis 12 stars).',
+       'Un enfant de star a maintenant 12 % de chances de devenir star à son tour (au lieu de 25 %). Les YouTubeurs ont 7 % de chances de devenir célèbres, les speedrunners 5 %.',
+       'Les changements de métier sont 20 % moins fréquents.',
+       'Prison : le ruban et la bulle « Vous » passent devant les barreaux et restent lisibles.',
+       '45 nouveaux métiers (dont artiste numérique, inventeur, speedrunner, trader crypto, game designer, YouTubeur, détective privé, joaillier…), 3 nouveaux centres d\'intérêt (golf, informatique, cryptomonnaie), 11 nouvelles particularités (HPI, TSA, cyclothymie, insomnie…) et 43 nouveaux noms de famille.'],
+   en:['New gifts: one per person, given at birth and shown when you tap someone. Intelligence, Charisma, Sociability, Courage, Creativity, Selfishness, Luck, Health, Fertility, Longevity and Ambition, each with its own effect.',
+       'Start screen: choose your character\'s gift, and start as a criminal or a star (achievements are then off for that game).',
+       'Politics: mayor, MP, senator, minister, Prime Minister and President of the Republic, with a shiny blue-white-red bubble. Becoming President is rare and gets a big announcement.',
+       'Death from old age: twice as common before 1900, half as common after 2000.',
+       'Obsidian theme: criminals are called vampires (just the name, gameplay is unchanged).',
+       'Star achievements: every requirement is doubled (2, 4, 8 then 12 stars).',
+       'A star kid now has a 12% chance of becoming a star too (instead of 25%). YouTubers have a 7% chance of becoming famous, speedrunners 5%.',
+       'Job changes are 20% less frequent.',
+       'Prison: the ribbon and the "You" tag now sit in front of the bars and stay readable.',
+       '45 new jobs (including digital artist, inventor, speedrunner, crypto trader, game designer, YouTuber, private detective, fine jeweller…), 3 new interests (golf, computers, crypto), 11 new traits (gifted, ASD, cyclothymia, insomnia…) and 43 new surnames.']},
   {v:'0.1.1a', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
    fr:['Le reflet brillant des bulles de star et de criminel va maintenant jusqu\'au bout, même quand l\'arbre bouge.',
        'Criminels : ils peuvent aussi s\'en prendre à leur conjoint et à leurs propres enfants. 40 % se font arrêter dans les 10 ans : leur bulle reste derrière les barreaux jusqu\'à leur mort, sans âme sœur ni enfant. Les autres disparaissent ou se suicident au bout de 10 ans.',
@@ -1061,7 +1107,10 @@ const SURNAMES_RARE = ['Kerdoncuff','Le Guennec','Abgrall','Quéméneur','Salaü
 const SURNAMES_MODERN = ['Kowalski','Nowak','Wisniewski','Marchetti','Bellini','Rinaldi','Da Silva','Ferreira','Pereira','Benali','Haddad','Mansouri','Nguyen','Tran','Diallo','Traoré','Yilmaz','Sanchez','Moreno','Petrossian','Lévy','Cohen','Rossi','Gonçalves','Bouzid','Kaya','Le Van','Mendy','Ndiaye','Ivanov'];
 const SURNAMES_PLAIN = ['Martin','Bernard','Dubois','Durand','Moreau','Lefebvre','Fournier','Girard','Bonnet','Dupont','Lambert','Fontaine','Rousseau','Mercier','Guérin','Chevalier','Perrin','Gauthier','Roux','Clément'];
 const SN_PRE = ['','','','','Le ','De ','Du ','La '], SN_A = ['Ker','Bel','Mont','Roche','Val','Chab','Gour','Lan','Puy','Ver','Esc','Tour','Mal','Bour','Quin','Cas','Fon','Gras','Mar','Pey','Cler','Haut','Brou','Vill','Sauv','Corb','Lusc','Maub'], SN_B = ['ard','illon','eau','ennec','agne','ois','iac','elle','ier','ot','andre','ouze','erie','ain','ac','ignac','oux','ergue','aval','ebœuf','fort','mont','ville','ade','ière','enot'];
+// noms ajoutés en 0.1.2a
+const SURNAMES_ADDED = ['Le Meunier','Dubois','Renard','Duval','Thomas','Sapin','Papain','Grevsel','Lebon','Petit','Conseig','Dupuy','Dupont','Lalem','Mondragon','Aubin','Jubin','Moraclet','Kerval','Holland','Berry','Douglas','Webb','Spencer','Marty','Baron','Chevalier','Blanc','Muller','Fleury','Gillet','Pichon','Maréchal','Laporte','Meuron','Jacob','Le Goff','Le Roux','Hervé','Rey','Lecomte','Sanguilliot','Touret'];
 function pickSurname(y){
+  if(Math.random() < .18) return pick(SURNAMES_ADDED);
   const r = Math.random();
   if(r < .42) return pick(SURNAMES_RARE);
   if(r < .72){ const pre = pick(SN_PRE), s = pick(SN_A) + pick(SN_B); return pre ? pre + s : s; }
@@ -1101,8 +1150,8 @@ const JOBS = [
  ['coiffeur','Coiffeur','Coiffeuse','Hairdresser','Hairdresser',1900,2100],['banquier','Employé de banque','Employée de banque','Bank clerk','Bank clerk',1900,2039],
  ['policier','Policier','Policière','Police officer','Police officer',1900,2100],['electricien','Électricien','Électricienne','Electrician','Electrician',1920,2100],
  ['secretaire','Secrétaire','Secrétaire','Secretary','Secretary',1930,2039],['standardiste','Standardiste','Standardiste','Switchboard operator','Switchboard operator',1930,1989],
- ['chauffeurbus','Conducteur de bus','Conductrice de bus','Bus driver','Bus driver',1930,2049],['agriculteur','Agriculteur','Agricultrice','Farmer','Farmer',1950,2100],
- ['routier','Chauffeur routier','Chauffeuse routière','Truck driver','Truck driver',1950,2039],['aidesoignant','Aide-soignant','Aide-soignante','Care assistant','Care assistant',1960,2100],
+ ['chauffeurbus','Chauffeur de bus','Chauffeuse de bus','Bus driver','Bus driver',1930,2049],['agriculteur','Agriculteur','Agricultrice','Farmer','Farmer',1950,2100],
+ ['routier','Camionneur','Camionneuse','Truck driver','Truck driver',1950,2039],['aidesoignant','Aide-soignant','Aide-soignante','Care assistant','Care assistant',1960,2100],
  ['informaticien','Informaticien','Informaticienne','Programmer','Programmer',1970,2049],['graphiste','Graphiste','Graphiste','Graphic designer','Graphic designer',1980,2100],
  ['chefprojet','Chef de projet','Cheffe de projet','Project manager','Project manager',1990,2100],['developpeur','Développeur','Développeuse','Software developer','Software developer',2000,2069],
  ['eolien','Technicien éolien','Technicienne éolienne','Wind turbine technician','Wind turbine technician',2005,2100],['livreur','Livreur à vélo','Livreuse à vélo','Bike courier','Bike courier',2010,2059],
@@ -1139,7 +1188,33 @@ const JOBS = [
  ['mondes','Architecte de mondes virtuels','Architecte de mondes virtuels','Virtual world architect','Virtual world architect',2035,2100],['reparateur','Artisan réparateur','Artisane réparatrice','Repair artisan','Repair artisan',2035,2100],
  ['dronepilote','Pilote de drones','Pilote de drones','Drone pilot','Drone pilot',2040,2100],['vertical','Agriculteur vertical','Agricultrice verticale','Vertical farmer','Vertical farmer',2040,2100],
  ['genetique','Thérapeute génique','Thérapeute génique','Gene therapist','Gene therapist',2040,2100],['fusion','Ingénieur en fusion','Ingénieure en fusion','Fusion engineer','Fusion engineer',2060,2100],
- ['orbite','Recycleur orbital','Recycleuse orbitale','Orbital debris recycler','Orbital debris recycler',2060,2100],['guidespatial','Guide spatial','Guide spatiale','Space tour guide','Space tour guide',2070,2100]
+ ['orbite','Recycleur orbital','Recycleuse orbitale','Orbital debris recycler','Orbital debris recycler',2060,2100],['guidespatial','Guide spatial','Guide spatiale','Space tour guide','Space tour guide',2070,2100],
+ // 0.1.2a
+ ['artnum','Artiste numérique','Artiste numérique','Digital artist','Digital artist',1990,2100],['decorateur','Décorateur','Décoratrice','Decorator','Decorator',1700,2100],
+ ['tapissier','Tapissier','Tapissière','Upholsterer','Upholsterer',1500,2100],['inventeur','Inventeur','Inventrice','Inventor','Inventor',1700,2100],
+ ['speedrunner','Speedrunner','Speedrunneuse','Speedrunner','Speedrunner',2005,2100],['bucheron','Bûcheron','Bûcheronne','Lumberjack','Lumberjack',1500,2100],
+ ['investisseur','Investisseur','Investisseuse','Investor','Investor',1850,2100],['tradercrypto','Trader crypto','Trader crypto','Crypto trader','Crypto trader',2012,2100],
+ ['anim3d','Animateur 3D','Animatrice 3D','3D animator','3D animator',1995,2100],['anim2d','Animateur 2D','Animatrice 2D','2D animator','2D animator',1920,2100],
+ ['dessinateur','Dessinateur','Dessinatrice','Draughtsman','Draughtswoman',1500,2100],['illustrateur','Illustrateur','Illustratrice','Illustrator','Illustrator',1830,2100],
+ ['storyboarder','Storyboarder','Storyboardeuse','Storyboard artist','Storyboard artist',1930,2100],['eboueur','Éboueur','Éboueuse','Refuse collector','Refuse collector',1884,2100],
+ ['municipal','Employé municipal','Employée municipale','Council worker','Council worker',1850,2100],['neurologue','Neurologue','Neurologue','Neurologist','Neurologist',1880,2100],
+ ['geologue','Géologue','Géologue','Geologist','Geologist',1800,2100],['archeologue','Archéologue','Archéologue','Archaeologist','Archaeologist',1850,2100],
+ ['gamedesigner','Game designer','Game designer','Game designer','Game designer',1985,2100],['infographiste','Infographiste','Infographiste','Computer graphics artist','Computer graphics artist',1985,2100],
+ ['devjeu','Développeur de jeux vidéo','Développeuse de jeux vidéo','Video game developer','Video game developer',1980,2100],['programmeur','Programmeur','Programmeuse','Programmer','Programmer',1950,2100],
+ ['sculpteurj','Sculpteur','Sculptrice','Sculptor','Sculptor',1500,2100],['youtubeurj','YouTubeur','YouTubeuse','YouTuber','YouTuber',2006,2100],
+ ['doubleur','Doubleur','Doubleuse','Voice actor','Voice actress',1930,2100],['commercial','Commercial','Commerciale','Salesman','Saleswoman',1900,2100],
+ ['assureur','Assureur','Assureuse','Insurance agent','Insurance agent',1820,2100],['tailleurpierre','Tailleur de pierre','Tailleuse de pierre','Stonemason','Stonemason',1500,2100],
+ ['bijoutier','Bijoutier','Bijoutière','Jeweller','Jeweller',1500,2100],['soudeur','Soudeur','Soudeuse','Welder','Welder',1900,2100],
+ ['livreur2','Livreur','Livreuse','Delivery driver','Delivery driver',1900,2100],['taxi','Chauffeur de taxi','Chauffeuse de taxi','Taxi driver','Taxi driver',1905,2100],
+ ['surveillant',"Surveillant d'école","Surveillante d'école",'School supervisor','School supervisor',1890,2100],['cpe','CPE','CPE','School welfare officer','School welfare officer',1970,2100],
+ ['joaillier','Joaillier','Joaillière','Fine jeweller','Fine jeweller',1600,2100],['historien','Historien','Historienne','Historian','Historian',1700,2100],
+ ['detective','Détective privé','Détective privée','Private detective','Private detective',1833,2100],['botaniste','Botaniste','Botaniste','Botanist','Botanist',1700,2100],
+ ['charcutier','Charcutier','Charcutière','Pork butcher','Pork butcher',1500,2100],['archiviste','Archiviste','Archiviste','Archivist','Archivist',1790,2100],
+ // politique (rare, bulle bleu-blanc-rouge)
+ ['maire','Maire','Maire','Mayor','Mayor',1789,2100],['depute','Député','Députée','Member of Parliament','Member of Parliament',1789,2100],
+ ['senateur','Sénateur','Sénatrice','Senator','Senator',1799,2100],['ministre','Ministre','Ministre','Minister','Minister',1500,2100],
+ ['premierministre','Premier ministre','Première ministre','Prime Minister','Prime Minister',1815,2100],
+ ['president','Président de la République','Présidente de la République','President of the Republic','President of the Republic',1848,2100]
 ];
 const STARJOBS = [
  ['peintre','Peintre','Peintre','Painter','Painter',1500,2100],['ecrivain','Écrivain','Écrivaine','Writer','Writer',1500,2100],
@@ -1152,7 +1227,8 @@ const STARJOBS = [
  ['pilotef1','Pilote de Formule 1','Pilote de Formule 1','Formula 1 driver','Formula 1 driver',1950,2100],['astronaute','Astronaute','Astronaute','Astronaut','Astronaut',1965,2100],
  ['youtubeur','Youtubeur','Youtubeuse','YouTuber','YouTuber',2008,2060],['esport',"Champion d'e-sport","Championne d'e-sport",'Esports champion','Esports champion',2012,2100],
  ['holo',"Star de l'holovision","Star de l'holovision",'Holovision star','Holovision star',2060,2100],
- ['streamstar','Star du streaming','Star du streaming','Streaming star','Streaming star',2012,2100]
+ ['streamstar','Star du streaming','Star du streaming','Streaming star','Streaming star',2012,2100],
+ ['speedstar','Speedrunner de légende','Speedrunneuse de légende','Legendary speedrunner','Legendary speedrunner',2005,2100]
 ];
 // particularités (non mortelles) : [id, fr masc., fr fém., en, icône]
 const CONDS = [
@@ -1163,8 +1239,36 @@ const CONDS = [
  ['sourd','Sourd','Sourde','Deaf','ear'],['aveugle','Aveugle','Aveugle','Blind','eyeoff'],['muet','Muet','Muette','Mute','mute'],
  ['epilepsie','Épileptique','Épileptique','Epileptic','bolt'],['daltonien','Daltonien','Daltonienne','Colour-blind','palette'],
  ['trisomie','Trisomique','Trisomique','Down syndrome','heart'],['nanisme','Nanisme','Nanisme','Dwarfism','user'],
- ['gigantisme','Gigantisme','Gigantisme','Gigantism','user'],['begaiement','Bégaiement','Bégaiement','Stutter','mute']
+ ['gigantisme','Gigantisme','Gigantisme','Gigantism','user'],['begaiement','Bégaiement','Bégaiement','Stutter','mute'],
+ ['hpi','HPI','HPI','Gifted (high IQ)','bulb'],['monochrom','Monochromatisme','Monochromatisme','Monochromacy','eyeoff'],
+ ['deprchron','Dépression chronique','Dépression chronique','Chronic depression','brain'],['tsa','TSA','TSA','Autism spectrum disorder','puzzle'],
+ ['anxsoc','Anxiété sociale','Anxiété sociale','Social anxiety','brain'],['cyclothymie','Cyclothymie','Cyclothymie','Cyclothymia','brain'],
+ ['definte','Déficience intellectuelle','Déficience intellectuelle','Intellectual disability','brain'],['boulimie','Boulimique','Boulimique','Bulimic','cup'],
+ ['insomnie','Insomniaque','Insomniaque','Insomniac','moon'],['narcolepsie','Narcoleptique','Narcoleptique','Narcoleptic','moon'],
+ ['anxchron','Anxiété chronique','Anxiété chronique','Chronic anxiety','brain']
 ];
+/* Atouts (0.1.2a) : un seul par personne, reçu à la naissance (12 %), visible seulement dans la fiche.
+   [id, fr masc., fr fém., en, icône, effet fr, effet en] */
+const ATOUTS = [
+ ['intel','Intelligence','Intelligence','Intelligence','bulb',"Ne meurt jamais d'un accident domestique ou de la route.",'Never dies in a household or road accident.'],
+ ['charisme','Charisme','Charisme','Charisma','crown','Sa demande en mariage est toujours acceptée.','Their marriage proposal is always accepted.'],
+ ['social','Sociabilité','Sociabilité','Sociability','user',"6 propositions au lieu de 3 pour trouver l'âme sœur.",'6 matches instead of 3 when looking for a soulmate.'],
+ ['courage','Courage','Courage','Courage','helmet','Aucun criminel ne peut lui ôter la vie.','No criminal can take their life.'],
+ ['crea','Créativité','Créativité','Creativity','palette','Avec un métier artistique, devient forcément une star.','With an artistic job, always becomes a star.'],
+ ['ego','Égoïsme','Égoïsme','Selfishness','skull',"12 % de risque d'avoir un enfant futur criminel (au lieu de 2 %).",'12% risk of having a future-criminal child (instead of 2%).'],
+ ['chance','Chance','Chance','Luck','sparkle',"12 % de chances d'avoir un enfant future star (au lieu de 2,5 %).",'12% chance of having a future-star child (instead of 2.5%).'],
+ ['sante','Santé','Santé','Health','leaf','Ne tombe jamais malade avant 60 ans.','Never falls ill before 60.'],
+ ['fertile','Fertilité','Fertilité','Fertility','heart','Jumeaux, triplés et quadruplés 10 fois plus fréquents.','Twins, triplets and quadruplets 10 times more likely.'],
+ ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse.','10 times less likely to die of old age.'],
+ ['ambition','Ambitieux','Ambitieuse','Ambition','flag','Fera carrière en politique, avec 30 % de chances de devenir président.','Will go into politics, with a 30% chance of becoming President.']
+];
+const hasAtout = (p, id) => !!(p && p.atout === id);
+// métiers politiques, artistiques (pour l'atout Créativité) et sources de célébrité tardive
+const POLJOBS = {maire:50, depute:25, senateur:12, ministre:8, premierministre:2};
+const isPol = id => id in POLJOBS || id === 'president';
+const ARTJOBS = {artnum:'peintre', decorateur:null, tapissier:null, dessinateur:'peintre', illustrateur:'peintre', storyboarder:'acteur', anim3d:null, anim2d:null,
+  sculpteurj:'sculpteur', doubleur:'acteur', graphiste:null, infographiste:null, tatoueur:null, photographe:null, bijoutier:'hautecouture', joaillier:'hautecouture', gamedesigner:null};
+const FAME_SRC = [['int','streamer',.2,'streamstar'],['job','esportpro',.2,'esport'],['job','youtubeurj',.07,'youtubeur'],['job','speedrunner',.05,'speedstar']];
 // addictions (8,8 % à 18 ans) : [id, fr masc., fr fém., en, icône, risque de décès annuel en plus, depuis, « tombe dans … », « develops … »]
 const ADDICTIONS = [
  ['tabac','Tabagisme','Tabagisme','Smoking','cig',.02,1560,'le tabagisme','a smoking habit'],
@@ -1200,7 +1304,9 @@ const INTERESTS = [
  ['cheval','Cavalier','Cavalière','Horse rider','Horse rider','paw',1500,9999],['poesie','Poète','Poétesse','Poet','Poet','book',1500,9999],
  ['skate','Skateur','Skateuse','Skater','Skater','bolt',1975,9999],['cosplay','Cosplayeur','Cosplayeuse','Cosplayer','Cosplayer','sparkle',2005,9999],
  ['streamer','Streameur','Streameuse','Streamer','Streamer','phone',2012,9999],['metavers','Explorateur de métavers','Exploratrice de métavers','Metaverse explorer','Metaverse explorer','computer',2030,9999],
- ['holo',"Fan d'hologrammes","Fan d'hologrammes",'Hologram fan','Hologram fan','sparkle',2060,9999]
+ ['holo',"Fan d'hologrammes","Fan d'hologrammes",'Hologram fan','Hologram fan','sparkle',2060,9999],
+ ['golf','Golfeur','Golfeuse','Golfer','Golfer','flag',1860,9999,true],['informatique',"Passionné d'informatique","Passionnée d'informatique",'Computer buff','Computer buff','computer',1975,9999],
+ ['crypto','Cryptomonnaiste','Cryptomonnaiste','Crypto enthusiast','Crypto enthusiast','chip',2009,9999]
 ];
 const byId = list => Object.fromEntries(list.map(r => [r[0], r]));
 const INT = byId(INTERESTS);
@@ -1221,7 +1327,7 @@ function planInterests(p, day){              // 70 % des gens ont un centre d'in
   const a = rnd(8, 26);
   if(a <= A) gainInterest(p, day, true); else p.intAges.push(a);
 }
-const JOB = byId(JOBS), STARJOB = byId(STARJOBS), COND = byId(CONDS), ADD = byId(ADDICTIONS);
+const JOB = byId(JOBS), STARJOB = byId(STARJOBS), COND = byId(CONDS), ADD = byId(ADDICTIONS), ATOUT = byId(ATOUTS);
 function rollAddiction(p, day){
   const have = addictsOf(p);
   if(have.length >= 2 || Math.random() >= R.addict/100) return null;
@@ -1240,7 +1346,19 @@ function rollConds(parents){
   return out;
 }
 const inRange = (r,y) => y >= r[5] && y <= r[6];
-const pickJob = y => { y = dataYear(y); return pick(JOBS.filter(r => inRange(r,y)))[0]; };
+// métier au hasard ; la politique reste rare (2 %), sauf pour les ambitieux ; jamais Président d'emblée
+function pickPol(y){
+  const ok = Object.keys(POLJOBS).filter(id => inRange(JOB[id], y));
+  if(!ok.length) return null;
+  let r = Math.random() * ok.reduce((a,id) => a + POLJOBS[id], 0);
+  for(const id of ok){ r -= POLJOBS[id]; if(r <= 0) return id; }
+  return ok[0];
+}
+const pickJob = (y, p, noPol) => {
+  y = dataYear(y);
+  if(!noPol && (hasAtout(p,'ambition') || Math.random() < .02)){ const j = pickPol(y); if(j) return j; }
+  return pick(JOBS.filter(r => inRange(r,y) && !isPol(r[0])))[0];
+};
 const pickStarJob = y => { y = dataYear(y); return pick(STARJOBS.filter(r => inRange(r,y)))[0]; };
 // [id, fr, en, depuis, métier visé]
 const FIELDS = [['med','Médecine','Medicine',1500,'medecin'],['droit','Droit','Law',1500,'avocat'],['lettres','Lettres','Literature',1500,'professeur'],
@@ -1365,7 +1483,8 @@ const EVENTS = new Set(['mortcerebrale','embolie','domestique','charrette','rout
   'overdose_ecstasy','nanorobots','rage_jeux','cyn_fusion','arret_cafe','infarctus_tabac','infarctus_cannabis','avc','avc_tabac','avc_alcool','avc_cannabis']);
 function pickDisease(p, day){
   const y = dataYear(yearOf(day)), A = ageAt(p, day);
-  const ok = DISEASES.filter(d => y >= d[4] && y <= d[5] && !(d[9] && d[9].addict) && fits(d[9] || {}, p, A));
+  const safe = hasAtout(p,'intel') ? ['domestique','charrette','route','route2'] : [];      // atout Intelligence
+  const ok = DISEASES.filter(d => y >= d[4] && y <= d[5] && !(d[9] && d[9].addict) && !safe.includes(d[0]) && fits(d[9] || {}, p, A));
   return wPickRow(ok, 9) || DZ.pneumonie;
 }
 
@@ -1536,7 +1655,7 @@ fr:{
   journal:'Journal de famille',
   st_married:(p,q)=>`${g(p,'Marié','Mariée')} à ${q}`, st_dating:q=>`En couple avec ${q}`, st_widow:p=>g(p,'Veuf','Veuve'), st_single:'Célibataire',
   st_mourning:'Célibataire (en deuil)', st_divorced:p=>g(p,'Divorcé','Divorcée'),
-  meet:y=>`Rencontres · ${y}`, soul_title:"Trouver l'âme sœur", soul_intro:(n,a)=>`Trois célibataires des environs pour ${n}, ${a}.`, seeks:n=>`${n} cherche`,
+  meet:y=>`Rencontres · ${y}`, soul_title:"Trouver l'âme sœur", soul_intro:(n,a,k)=>`${k > 3 ? "Six" : "Trois"} célibataires des environs pour ${n}, ${a}.`, seeks:n=>`${n} cherche`,
   a_woman:'une femme', a_man:'un homme', choose:'Choisir', refresh:'Actualiser les propositions', lives_in:c=>`Vit à ${c}`,
   f_you:'Vous', gen_n:n=>`Génération ${n}`, spouse:p=>g(p,'Votre époux','Votre épouse'), partner:p=>g(p,'Votre compagnon','Votre compagne'), inlaw:p=>g(p,'Conjoint','Conjointe'),
   died_on:(p,d,c)=>`${g(p,'Décédé','Décédée')} le ${d}, ${c}`, cause_old:'de vieillesse', cause_dz:id=>dzOf(id),
@@ -1548,7 +1667,7 @@ fr:{
   note_baby:'5 % de risque de fausse couche. Naissance 9 mois plus tard.', note_adopt:"L'enfant arrive au foyer 9 mois plus tard.",
   note_adopting:m=>`Adoption en cours, arrivée prévue en ${m}.`, note_pregnant:(n,m)=>`${n} est enceinte, naissance prévue en ${m}.`,
   note_too_old:(n,a)=>`${n} a ${a} : trop âgée pour avoir un enfant.`,
-  marry:'Se marier', married_already:'Déjà mariés', married_on:d=>`Mariés le ${d}.`, may_refuse:n=>`${n} peut refuser (5 % de chances).`, marry_refused:'Demande refusée', refused_note:n=>`${n} a dit non : plus de mariage possible.`,
+  marry:'Se marier', married_already:'Déjà mariés', married_on:d=>`Mariés le ${d}.`, may_refuse:n=>`${n} peut refuser (5 % de chances).`, marry_refused:'Demande refusée', sure_yes:n=>`Grâce à votre charisme, ${n} dira oui.`, refused_note:n=>`${n} a dit non : plus de mariage possible.`,
   hint_prison:p=>`${g(p,'Enfermé','Enfermée')} jusqu'à la fin de ses jours : plus d'âme sœur ni d'enfant.`,
   leave:n=>`Quitter ${n}`, confirm_leave:n=>`Confirmer : quitter ${n}`, note_divorce:'Le mariage se terminera par un divorce.', note_single:'Vous redevenez célibataire.',
   incarnate:n=>`Incarner ${n}`, note_incarnate:'Vous jouerez désormais ce membre de la famille.',
@@ -1595,6 +1714,9 @@ fr:{
   log_job_change:(p,j)=>`${nm(p)} change de métier et devient ${lc(jobName(j,P(p)))}.`,
   log_unemployed:p=>`${nm(p)} perd son emploi.`, log_back_to_work:(p,j)=>`${nm(p)} retrouve du travail : ${lc(jobName(j,P(p)))}.`,
   log_retired:p=>`${nm(p)} prend sa retraite.`, log_uni:(p,f)=>`${nm(p)} entre à l'université (${lc(fieldName(f))}).`,
+  log_president:p=>`${nm(p)} est ${g(P(p),'élu Président','élue Présidente')} de la République !`, pres_rib:p=>`★ ${g(p,'Président','Présidente')}`,
+  f_atout:'Atout', lab_atout:'Atout de départ', lab_destiny:'Destin', atout_none:'Aucun', dest_none:'Normal', dest_crim:'Criminel', dest_star:'Star',
+  dest_note:'Les succès seront désactivés pour cette partie.',
   log_star:(p,j)=>`${nm(p)} devient une star ! ${g(P(p),'Adulé','Adulée')} dans tout le pays comme ${lc(jobName(j,P(p)))}.`,
   log_incarnate:p=>`Vous incarnez désormais ${nm(p)}.`, log_heir:(p,o)=>`${nm(p)} reprend le flambeau après la disparition de ${fn(o)}.`,
   auto:'Auto', auto_title:'Mode auto : la famille se rencontre, se marie et a des enfants toute seule',
@@ -1683,7 +1805,7 @@ en:{
   journal:'Family journal',
   st_married:(p,q)=>`Married to ${q}`, st_dating:q=>`Dating ${q}`, st_widow:p=>g(p,'Widower','Widow'), st_single:'Single',
   st_mourning:'Single (in mourning)', st_divorced:()=>'Divorced',
-  meet:y=>`Dating · ${y}`, soul_title:'Find a soulmate', soul_intro:(n,a)=>`Three local singles for ${n}, ${a}.`, seeks:n=>`${n} is looking for`,
+  meet:y=>`Dating · ${y}`, soul_title:'Find a soulmate', soul_intro:(n,a,k)=>`${k > 3 ? "Six" : "Three"} local singles for ${n}, ${a}.`, seeks:n=>`${n} is looking for`,
   a_woman:'a woman', a_man:'a man', choose:'Choose', refresh:'New suggestions', lives_in:c=>`Lives in ${c}`,
   f_you:'You', gen_n:n=>`Generation ${n}`, spouse:p=>g(p,'Your husband','Your wife'), partner:p=>g(p,'Your boyfriend','Your girlfriend'), inlaw:()=>'Spouse',
   died_on:(p,d,c)=>`Died ${d}, ${c}`, cause_old:'of old age', cause_dz:id=>`of ${dzOf(id)}`,
@@ -1695,7 +1817,7 @@ en:{
   note_baby:'5% risk of miscarriage. Birth 9 months later.', note_adopt:'The child arrives home 9 months later.',
   note_adopting:m=>`Adoption in progress, arrival expected ${m}.`, note_pregnant:(n,m)=>`${n} is pregnant, due ${m}.`,
   note_too_old:(n,a)=>`${n} is ${a}: too old to have a baby.`,
-  marry:'Get married', married_already:'Already married', married_on:d=>`Married on ${d}.`, may_refuse:n=>`${n} may say no (5% chance).`, marry_refused:'Proposal declined', refused_note:n=>`${n} said no: marriage is off the table.`,
+  marry:'Get married', married_already:'Already married', married_on:d=>`Married on ${d}.`, may_refuse:n=>`${n} may say no (5% chance).`, marry_refused:'Proposal declined', sure_yes:n=>`Thanks to your charisma, ${n} will say yes.`, refused_note:n=>`${n} said no: marriage is off the table.`,
   hint_prison:()=>`Locked up for life: no more soulmate or children.`,
   leave:n=>`Leave ${n}`, confirm_leave:n=>`Confirm: leave ${n}`, note_divorce:'The marriage will end in divorce.', note_single:'You will be single again.',
   incarnate:n=>`Play as ${n}`, note_incarnate:'You will play this family member from now on.',
@@ -1740,6 +1862,9 @@ en:{
   log_job_change:(p,j)=>`${nm(p)} changes careers and becomes ${art(lc(jobName(j,P(p))))}.`,
   log_unemployed:p=>`${nm(p)} loses ${g(P(p),'his','her')} job.`, log_back_to_work:(p,j)=>`${nm(p)} finds work again as ${art(lc(jobName(j,P(p))))}.`,
   log_retired:p=>`${nm(p)} retires.`, log_uni:(p,f)=>`${nm(p)} starts university (${lc(fieldName(f))}).`,
+  log_president:p=>`${nm(p)} is elected President of the Republic!`, pres_rib:()=>'★ President',
+  f_atout:'Gift', lab_atout:'Starting gift', lab_destiny:'Destiny', atout_none:'None', dest_none:'Normal', dest_crim:'Criminal', dest_star:'Star',
+  dest_note:'Achievements will be off for this game.',
   log_star:(p,j)=>`${nm(p)} becomes a star! Adored all over the country as ${art(lc(jobName(j,P(p))))}.`,
   log_incarnate:p=>`You are now playing ${nm(p)}.`, log_heir:(p,o)=>`${nm(p)} carries on the family after ${fn(o)}'s passing.`,
   auto:'Auto', auto_title:'Auto mode: the family meets, marries and has children on its own',
@@ -1822,6 +1947,8 @@ const nodeBadges = p => {
     .concat(interestsOf(p).filter(id => INT[id]).map(id => intBadge(id, p)));
   return items.length ? `<span class="cbadges">${items.slice(0, 4).join('')}</span>` : '';
 };
+const atoutName = (id, p) => { const r = ATOUT[id]; return LANG==='fr' ? (p && p.sex==='F' ? r[2] : r[1]) : r[3]; };
+const atoutTile = p => p.atout && ATOUT[p.atout] ? `<div class="span2 atf"><dt>${t('f_atout')}</dt><dd>${icon(ATOUT[p.atout][4])}<span><b>${esc(atoutName(p.atout, p))}</b><small>${esc(ATOUT[p.atout][LANG==='fr' ? 5 : 6])}</small></span></dd></div>` : '';
 const condTile = p => hasCond(p) ? `<div class="span2 condf"><dt>${t('f_cond')}</dt><dd>${condBadges(p)}${esc(condList(p))}</dd></div>` : '';
 
 /* ================= Succès ================= */
@@ -1835,10 +1962,10 @@ const ACHS = [
  ['kids9','kids','silver','Tribu','Une personne a 9 enfants','Tribe','One person has 9 children'],
  ['kids14','kids','gold','Clan','Une personne a 14 enfants','Clan','One person has 14 children'],
  ['kids22','kids','platinum','Dynastie','Une personne a 22 enfants','Dynasty','One person has 22 children'],
- ['star1','star','bronze','Sous les projecteurs','1 star dans une même partie','In the spotlight','1 star in a single game'],
- ['star2','star','silver','Deux étoiles','2 stars dans une même partie','Two stars','2 stars in a single game'],
- ['star4','star','gold','Constellation','4 stars dans une même partie','Constellation','4 stars in a single game'],
- ['star6','star','platinum','Voie lactée','6 stars dans une même partie','Milky Way','6 stars in a single game'],
+ ['star1','star','bronze','Sous les projecteurs','2 stars dans une même partie','In the spotlight','2 stars in a single game'],
+ ['star2','star','silver','Pluie d\'étoiles','4 stars dans une même partie','Shower of stars','4 stars in a single game'],
+ ['star4','star','gold','Constellation','8 stars dans une même partie','Constellation','8 stars in a single game'],
+ ['star6','star','platinum','Voie lactée','12 stars dans une même partie','Milky Way','12 stars in a single game'],
  ['conq3','conq','bronze',"Cœur d'artichaut",'Une personne a eu 3 conjoints','Fickle heart','One person has had 3 partners'],
  ['conq6','conq','silver','Charmeur','Une personne a eu 6 conjoints','Charmer','One person has had 6 partners'],
  ['conq10','conq','gold','Don Juan','Une personne a eu 10 conjoints','Casanova','One person has had 10 partners'],
@@ -1877,7 +2004,7 @@ const achTitle = id => LANG==='fr' ? ACHV[id][3] : ACHV[id][5];
 const achDesc = id => LANG==='fr' ? ACHV[id][4] : ACHV[id][6];
 const medal = (id, cls='') => `<span class="medal t-${ACHV[id][2]} ${cls}">${icon(ACH_CATS.find(c => c[0]===ACHV[id][1])[1])}</span>`;
 function unlock(id){
-  if(!R.ach || rulesTweaked() || ACH[id] || !ACHV[id]) return;
+  if(!R.ach || rulesTweaked() || (S && S.noAch) || ACH[id] || !ACHV[id]) return;
   const hadGold = goldUnlocked();
   ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? familyName(P(S.founderId)) : ''};
   if(!hadGold && goldUnlocked()) setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k:'gold', a:[]}); sfx.fame(); }, 3600);
@@ -1934,8 +2061,17 @@ const TX_NIGHT = {
     log_crim_prison:p=>`${nm(p)} is captured and locked in a cage.`,
     log_death_murder:(p,k,a)=>`${nm(p)} is devoured by ${nm(k)} at age ${a}.` }
 };
+/* Thème Obsidienne : les criminels deviennent des vampires (seulement les mots) */
+const isDark = () => document.documentElement.dataset.skin === 'dark';
+const TX_DARK = {
+  fr:{ crim_future:p=>`☠ ${g(p,'Futur vampire','Future vampire')}`, crim_now:()=>'☠ Vampire', crime_future:p=>g(p,'Futur vampire','Future vampire'),
+    crime_now:()=>'Vampire', crime_fate_prison:()=>'Vampire, en prison', dest_crim:'Vampire',
+    log_crim_declared:p=>`${nm(p)} devient ${g(P(p),'un vampire','une vampire')} ! Sa famille proche est en danger.` },
+  en:{ crim_future:()=>'☠ Future vampire', crim_now:()=>'☠ Vampire', crime_future:()=>'Future vampire', crime_now:()=>'Vampire', crime_fate_prison:()=>'Vampire, in prison', dest_crim:'Vampire',
+    log_crim_declared:p=>`${nm(p)} becomes a vampire! ${g(P(p),'His','Her')} close family is in danger.` }
+};
 function t(k, ...a){
-  const n = isNight() ? TX_NIGHT[LANG][k] : undefined;
+  const n = isNight() ? TX_NIGHT[LANG][k] : isDark() ? TX_DARK[LANG][k] : undefined;
   const v = n !== undefined ? n : TX[LANG][k] !== undefined ? TX[LANG][k] : TX.fr[k];
   return typeof v === 'function' ? v(...a) : v;
 }
@@ -2069,7 +2205,8 @@ function genOf(p){
   if(!p.blood){ const u = S.unions.find(u => u.b===p.id); return u ? genOf(P(u.a)) : 1; }
   return p.parents ? 1 + genOf(P(p.parents[0])) : 1;
 }
-function traits(){ return {retireAge:rnd(60,66), firstJobAge:rnd(18,30), uniP:rnd(5,15)/100, moveP:rnd(5,25)/100, menoAge:rnd(44,55)}; }
+function traits(){ return {retireAge:rnd(60,66), firstJobAge:rnd(18,30), uniP:rnd(5,15)/100, moveP:rnd(5,25)/100, menoAge:rnd(44,55),
+  atout: Math.random() < .12 ? pick(ATOUTS)[0] : null}; }
 const fertile = (m, day) => ageAt(m, day) < (m.menoAge || 50);          // ménopause entre 44 et 55 ans
 function addPerson(o){
   const p = Object.assign({id:S.nextId++, death:null, deathAt:null, onset:null, ill:null, cause:null, parents:null, blood:false, lastAge:0,
@@ -2097,7 +2234,7 @@ function setupWork(p, day){             // pour un adulte qui arrive dans la par
     if(A <= 22 && Math.random() < p.uniP){ p.work = {s:'uni', field:pickField(y)[0], until: day + rnd(1,3)*365}; return; }
     p.work = {s:'odd', until: day + (p.firstJobAge - A)*365 + rnd(0,200)}; return;
   }
-  p.work = {s:'job', job: pickJob(y)};
+  p.work = {s:'job', job: pickJob(y, p)};
 }
 /* Après le CM2 (11 ans, dès que l'école existe), 5 % des enfants sont déscolarisés jusqu'à leur premier travail */
 function dropout(p){
@@ -2110,24 +2247,24 @@ function onAdult(p, day){               // 18 ans
   if(p.work && p.work.s==='star') return;
   const y = yearOf(day);
   if(!dropout(p) && Math.random() < p.uniP){ const f = pickField(y)[0]; p.work = {s:'uni', field:f, until: day + rnd(3,7)*365}; log('work','uni',[p.id,f],day); return; }
-  if(p.firstJobAge <= 18){ const j = pickJob(y); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); return; }
+  if(p.firstJobAge <= 18){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); return; }
   p.work = {s:'odd', until: day + (p.firstJobAge-18)*365 + rnd(0,300)};
 }
 function workTick(p, day){
   const w = p.work; if(!w || !w.until || day < w.until) return;
   const y = yearOf(day);
   if(w.s==='uni'){
-    const f = FIELD[w.field], j = (f && JOB[f[4]] && inRange(JOB[f[4]], dataYear(y))) ? f[4] : pickJob(y);
+    const f = FIELD[w.field], j = (!hasAtout(p,'ambition') && f && JOB[f[4]] && inRange(JOB[f[4]], dataYear(y))) ? f[4] : pickJob(y, p);
     p.work = {s:'job', job:j}; log('work','graduate',[p.id,w.field,j],day);
-  } else if(w.s==='odd'){ const j = pickJob(y); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); }
-  else if(w.s==='unemp'){ const j = pickJob(y); p.work = {s:'job', job:j}; log('work','back_to_work',[p.id,j],day); }
+  } else if(w.s==='odd'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); }
+  else if(w.s==='unemp'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','back_to_work',[p.id,j],day); }
 }
 function workYear(p, A, day){
   const w = p.work; if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
   if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
-  if(w.s==='job'){
+  if(w.s==='job' && w.job !== 'president'){
     const r = Math.random();
-    if(r < .05){ const j = pickJob(yearOf(day)); if(j !== w.job){ p.work = {s:'job', job:j}; log('work','job_change',[p.id,j],day); } }
+    if(r < .04){ const j = pickJob(yearOf(day), p); if(j !== w.job){ p.work = {s:'job', job:j}; log('work','job_change',[p.id,j],day); } }   // 0.1.2a : changements de métier 20 % plus rares
     else if(r < .08 && !p.star){ p.work = {s:'unemp', until: day + rnd(60,730)}; log('work','unemployed',[p.id],day); }   // 2 ans de chômage maximum
   }
 }
@@ -2150,12 +2287,12 @@ function schoolLabel(p, A, y){
     if(A === 12) return t('certif');
     if(!p.school.k) p.school.k = Math.random() < .2 ? 'lycee' : 'appr';
     if(p.school.k === 'lycee') return `${t('lycee')} · ${t('old_lyc')[Math.min(4, A-13)]}`;
-    if(!p.school.job) p.school.job = pickJob(y);
+    if(!p.school.job) p.school.job = pickJob(y, null, true);
     return t('apprentice', p, jobName(p.school.job, p));
   }
   if(A < 7) return t('child');
   if(A < 12){ if(!p.school.k0) p.school.k0 = Math.random() < .4 ? 'ecole' : 'betes'; return t(p.school.k0==='ecole' ? 'petite_ecole' : 'betes'); }
-  if(!p.school.job) p.school.job = pickJob(y);
+  if(!p.school.job) p.school.job = pickJob(y, null, true);
   return t('apprentice', p, jobName(p.school.job, p));
 }
 function activity(p, skipIll){
@@ -2180,7 +2317,7 @@ function activity(p, skipIll){
 function scheduleYear(p, A, day){
   if(A >= (R.oldAge ? 121 : 150)){ die(p, day, {old:true}); return; }      // sans mort de vieillesse : maximum 150 ans
   if(p.ill || p.onset!=null || p.deathAt!=null) return;
-  const war = warAt(day), r = baseRisk(p, A) * (war ? 1.35 : 1);           // guerre : +35 % de mortalité
+  const war = warAt(day), r = baseRisk(p, A, day) * (war ? 1.35 : 1);           // guerre : +35 % de mortalité
   if(Math.random() < r){
     const when = day + rnd(1,360);
     if(war && Math.random() < .65){ p.deathAt = Math.min(when, war.b); p.warDeath = true; return; }   // surtout des morts de guerre
@@ -2191,8 +2328,11 @@ function scheduleYear(p, A, day){
     if(Math.random() < addRisk(id, A)){ p.onset = day + rnd(1,360); p.onsetAddict = id; return; }
   }
 }
-function baseRisk(p, A){
-  if(A > 80 && R.oldAge) return yearlyRisk(A, p);
+function baseRisk(p, A, day = S.t){
+  if(A > 80 && R.oldAge){                    // vieillesse : ×2 avant 1900, ×½ après 2000 ; atout Espérance de vie : ÷10
+    const y = yearOf(day), era = y < 1900 ? 2 : y < 2000 ? 1 : .5;
+    return Math.min(1, yearlyRisk(A, p) * era / (hasAtout(p,'longevite') ? 10 : 1));
+  }
   if(!R.diseases) return 0;
   return yearlyRisk(A > 80 ? 78 : A, p) * R.illness/100 * 1.15 * (sporty(p) ? .5 : 1);   // ×1,15 depuis la 0.1.1a   // curseur « maladies » ; sportifs : risque ÷ 2
 }
@@ -2203,6 +2343,7 @@ function contract(p, day){
   const own = aid ? DISEASES.filter(x => x[9] && x[9].addict === aid) : [];
   const d = own.length ? pick(own) : pickDisease(p, day);
   p.onsetAddict = false;
+  if(hasAtout(p,'sante') && ageAt(p, day) < 60 && !EVENTS.has(d[0])) return;     // atout Santé : jamais malade avant 60 ans
   p.ill = {dz:d[0], start:day, end: day + rnd(d[6], d[7]), cure: Math.random() < d[8]};
   log('ill','ill',[p.id, d[0]], day); sfx.ill();
 }
@@ -2289,7 +2430,7 @@ function autoDay(day){
     const pl = u.plan;
     if(pl.marryAt != null && !u.married && day >= pl.marryAt){
       pl.marryAt = null;
-      if(Math.random() < .95){ u.married = true; u.marriedAt = day; takeHusbandName(u); log('wed','wed',[a.id, b.id], day, mine); if(mine) sfx.wedding(); }
+      if(hasAtout(a,'charisme') || Math.random() < .95){ u.married = true; u.marriedAt = day; takeHusbandName(u); log('wed','wed',[a.id, b.id], day, mine); if(mine) sfx.wedding(); }
       else { u.noMarry = true; log('sad','refuse',[b.id, a.id], day, mine); }
     }
     if(pl.leaveAt != null && day >= pl.leaveAt){ endUnion(u, day, mine); continue; }
@@ -2345,12 +2486,41 @@ function regnalize(c){
 function familyNames(c){                                // prénoms des ascendants du même sexe qui portent le même nom de famille
   return [...new Set(ancestorsOf(c).filter(a => a.sex === c.sex && a.last === c.last && a.first).map(baseFirst))];
 }
+/* Streameurs 20 %, joueurs e-sport 20 %, YouTubeurs 7 %, speedrunners 5 % : un jour, la célébrité */
+function fameTick(p, day){
+  if(p.fameRoll && !p.fameRolls) p.fameRolls = {streamer:true, esportpro:true};
+  for(const [kind, id, ch, hint] of FAME_SRC){
+    const has = kind === 'int' ? interestsOf(p).includes(id) : (p.work && p.work.s === 'job' && p.work.job === id);
+    if(!has) continue;
+    p.fameRolls = p.fameRolls || {}; if(p.fameRolls[id]) continue;
+    p.fameRolls[id] = true;
+    if(Math.random() < ch){ p.fameJob = hint; p.fameAt = Math.max(day, p.birth + Math.round(18*365.25)) + rnd(0, 15*365); return; }
+  }
+}
+/* Politique : 3 % des élus (30 % des ambitieux) deviennent un jour Président(e) de la République, entre 40 et 62 ans */
+function polTick(p, day){
+  if(p.work && p.work.s === 'job' && isPol(p.work.job) && !p.presRoll){
+    p.presRoll = true;
+    if(Math.random() < (hasAtout(p,'ambition') ? .3 : .03)) p.presAt = Math.max(day + rnd(30, 365), p.birth + rnd(40, 62)*365);
+  }
+  if(p.presAt != null && day >= p.presAt){
+    p.presAt = null;
+    if(jailed(p) || (p.star && p.star.famous) || ageAt(p, day) >= 80) return;
+    const y = yearOf(day), j = y >= 1848 ? 'president' : y >= 1815 ? 'premierministre' : 'ministre';
+    p.work = {s:'job', job:j};
+    if(j === 'president'){
+      p.pres = {at:day};
+      log('star','president',[p.id], day, true); sfx.fame(); burst(['#1f3fbf','#ffffff','#e8203a','#5574ff','#ffd000'], 60);
+    } else log('work','job_change',[p.id, j], day);
+  }
+}
 function becomeStar(p, day, hint){
   const y = yearOf(day), h = hint && STARJOBS.find(r => r[0] === hint && y >= r[5] && y <= r[6]);
   const j = h ? h[0] : pickStarJob(y);
   p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j};
   log('star','star',[p.id, j], day); sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 40);
-  checkTiers('star', Object.values(S.people).filter(q => q.star && q.star.famous).length, [1,2,4,6]);
+  const ns = Object.values(S.people).filter(q => q.star && q.star.famous).length;            // 0.1.2a : exigences ×2
+  [[2,'star1'],[4,'star2'],[8,'star4'],[12,'star6']].forEach(([n, id]) => { if(ns >= n) unlock(id); });
 }
 /* Criminels : après 18 ans, ils se révèlent ; parents, frères et sœurs, conjoint et enfants ont 60 % de risque d'être assassinés dans les 10 ans.
    40 % finissent en prison dans ces 10 ans (jusqu'à leur mort) ; les autres disparaissent ou se suicident au bout de 10 ans. */
@@ -2358,7 +2528,7 @@ function declareCrim(p, day){
   p.crim.declared = true; p.crim.at = day;
   const mates = S.unions.filter(u => u.end == null && (u.a === p.id || u.b === p.id)).map(u => u.a === p.id ? u.b : u.a);
   const close = living().filter(q => q.id !== p.id && ((p.parents && p.parents.includes(q.id)) || (p.parents && q.parents && q.parents.some(i => p.parents.includes(i)))
-    || mates.includes(q.id) || (q.parents && q.parents.includes(p.id))));
+    || mates.includes(q.id) || (q.parents && q.parents.includes(p.id))) && !hasAtout(q,'courage'));
   close.forEach(q => { if(Math.random() < .6){ q.murderAt = day + rnd(30, 3650); q.murderBy = p.id; } });
   if(Math.random() < .4) p.crim.jailAt = day + rnd(30, 3600);
   log('crime','crim_declared',[p.id], day, true);
@@ -2438,7 +2608,8 @@ function birthChild(u, day){
   const city = (mother || A).city;
   let n = 1;
   if(!adopt){                                        // quadruplés 0,5 % · triplés 0,9 % · jumeaux 1,2 % (réglables)
-    const r = Math.random()*100, q = R.quads, tr = q + R.triplets, tw = tr + R.twins;
+    const k = [A,B].some(x => hasAtout(x,'fertile')) ? 10 : 1;          // atout Fertilité : ×10
+    const r = Math.random()*100, q = R.quads*k, tr = q + R.triplets*k, tw = tr + R.twins*k;
     n = r < q ? 4 : r < tr ? 3 : r < tw ? 2 : 1;
   }
   const ids = [];
@@ -2449,10 +2620,12 @@ function birthChild(u, day){
     c.conds = rollConds(adopt ? [] : [A, B]);
     planInterests(c, day);
     const fate = Math.random()*100;
-    if(fate < R.star) c.star = {day: day + rnd(16,40)*365 + rnd(0,364), famous:false};                             // 2,5 % : une future star
-    else if(fate < R.star + R.crim) c.crim = {day: day + rnd(18,60)*365 + rnd(0,364), declared:false, fate:null};  // 2 % : un futur criminel
+    const pStar = [A,B].some(x => hasAtout(x,'chance')) ? Math.max(12, R.star) : R.star;      // atout Chance
+    const pCrim = [A,B].some(x => hasAtout(x,'ego')) ? Math.max(12, R.crim) : R.crim;          // atout Égoïsme
+    if(fate < pStar) c.star = {day: day + rnd(16,40)*365 + rnd(0,364), famous:false};                             // 2,5 % : une future star
+    else if(fate < pStar + pCrim) c.crim = {day: day + rnd(18,60)*365 + rnd(0,364), declared:false, fate:null};  // 2 % : un futur criminel
     if([A,B].some(q => q.star && q.star.famous) && Math.random() < .9) c.starKid = true;     // 90 % : enfant de star
-    if(c.starKid && !c.star && !c.crim && Math.random() < .25) c.fameAt = day + rnd(18, 60)*365 + rnd(0, 364);   // 25 % : star à son tour
+    if(c.starKid && !c.star && !c.crim && Math.random() < .12) c.fameAt = day + rnd(18, 60)*365 + rnd(0, 364);   // 12 % : star à son tour
     scheduleYear(c, 0, day);
     ids.push(c.id);
   }
@@ -2511,13 +2684,11 @@ function processDay(day){
       const hint = p.fameJob; p.fameAt = null; p.fameJob = null;
       if(!p.star && !p.crim){ p.star = {day, famous:false}; becomeStar(p, day, hint); }
     }
-    if(!p.fameRoll && !p.star && !p.crim && (interestsOf(p).includes('streamer') || (p.work && p.work.job === 'esportpro'))){
-      p.fameRoll = true;                                     // 20 % de chances de percer un jour
-      if(Math.random() < .2){
-        p.fameJob = interestsOf(p).includes('streamer') ? 'streamstar' : 'esport';
-        p.fameAt = Math.max(day, p.birth + Math.round(18*365.25)) + rnd(0, 15*365);
-      }
+    if(!p.star && !p.crim && p.fameAt == null) fameTick(p, day);
+    if(hasAtout(p,'crea') && !p.star && !p.crim && p.work && p.work.s === 'job' && p.work.job in ARTJOBS){   // atout Créativité
+      p.star = {day, famous:false}; becomeStar(p, day, ARTJOBS[p.work.job]);
     }
+    polTick(p, day);
     workTick(p, day);
   }
   for(const u of S.unions){
@@ -2624,10 +2795,13 @@ function nodeHTML(p, x, y){
   if(p.crim){ cls.push('crim'); if(p.crim.declared){ cls.push('declared'); if(p.death==null && S.t - p.crim.at < 200) cls.push('fresh'); } }
   if(p.starKid && !p.star && !p.crim) cls.push('starkid');
   const jail = jailed(p); if(jail) cls.push('jailed');
+  const pol = !p.star && !p.crim && p.work && p.work.s === 'job' && isPol(p.work.job), pres = pol && p.work.job === 'president';
+  if(pol){ cls.push('pol'); if(pres) cls.push('pres'); }
   const A = age(p), by = yearOf(p.birth), gone = p.cause && p.cause.vanished;
   const years = p.death!=null ? `${by} – ${yearOf(p.death)}${gone ? ' ?' : ''}` : `${by} –`;
   const ageL = gone ? `${t('vanished_short', p)} · ${tA(A)}` : p.death!=null ? `✝ ${tA(A)}` : tA(A);
-  const rib = p.crim ? `<em class="rib cr">${jail ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p)}</em>`
+  const rib = p.crim ? `<em class="rib cr${jail ? ' jail' : ''}">${jail ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p)}</em>`
+    : pres ? `<em class="rib pr">${t('pres_rib', p)}</em>`
     : p.star ? `<em class="rib st">${p.star.famous ? t('star') : t('future_star')}</em>`
     : p.starKid ? `<em class="rib sk">${t('star_kid')}</em>` : '';
   const cu = S.unions.find(u => u.end==null && (u.a===p.id||u.b===p.id) && u.preg && !u.preg.adopt);
@@ -3009,7 +3183,7 @@ function genCandidate(me, sex, day){
   setupWork(c, day);
   return c;
 }
-const genCands = () => [genCandidate(), genCandidate(), genCandidate()];
+const genCands = () => Array.from({length: hasAtout(active(),'social') ? 6 : 3}, () => genCandidate());   // atout Sociabilité : 6
 
 function openSoulmate(rerender){
   const me = active();
@@ -3022,7 +3196,7 @@ function openSoulmate(rerender){
       <p class="cborn">${esc(t('born_in', c, fmt(c.birth), c.birthCity))}</p>
       <button class="gel pink" data-act="choose" data-i="${i}"><span>${t('choose')}</span></button></article>`).join('');
   openModal(`<div class="m-head"><div class="eyebrow">${t('meet', yearOf(S.t))} · ${esc(me.city)}</div><h2>${t('soul_title')}</h2>
-      <p>${esc(t('soul_intro', me.first, tA(age(me))))}</p></div>
+      <p>${esc(t('soul_intro', me.first, tA(age(me)), cands.length))}</p></div>
     <div class="seekrow"><span class="lab">${esc(t('seeks', me.first))}</span>
       <div class="pills" role="group">
         ${(R.sameSex ? ['F','M'] : [me.sex==='M' ? 'F' : 'M']).map(s => `<button data-act="seek" data-sex="${s}" aria-pressed="${S.seek===s}">${t(s==='F' ? 'a_woman' : 'a_man')}</button>`).join('')}</div></div>
@@ -3031,7 +3205,7 @@ function openSoulmate(rerender){
       <div class="seekage-row"><input type="range" id="seekAge" min="${R.legal}" max="115" value="${S.seekAge || Math.max(R.legal, age(me))}" aria-label="${t('seek_age')}">
         <button class="gel ghost" data-act="anyage" ${S.seekAge ? '' : 'disabled'}><span>${t('any_age')}</span></button></div>
     </div>
-    <div class="cands">${cards}</div>
+    <div class="cands ${cands.length > 3 ? 'six' : ''}">${cards}</div>
     <div class="m-actions"><button class="gel gold" data-act="refresh"><span>${t('refresh')}</span></button></div>`, {sound: !rerender});
 }
 
@@ -3092,7 +3266,7 @@ function openFiche(id){
     else if(mother && !fertile(mother, today())){ dis = true; note = t('menopause', mother.first); }
     actions = `<div class="eyebrow sect">${t('our_couple')}</div><div class="acts couple-acts">
       <div class="act"><button class="gel lime wide" data-act="baby" data-id="${p.id}" ${dis?'disabled':''}><span>${t(hetero?'make_baby':'adopt')}</span></button><p class="note">${esc(note)}</p></div>
-      <div class="act"><button class="gel gold wide" data-act="marry" data-id="${p.id}" ${u.married||u.noMarry?'disabled':''}><span>${t(u.married?'married_already':u.noMarry?'marry_refused':'marry')}</span></button><p class="note">${esc(u.married ? t('married_on', fmt(u.marriedAt)) : u.noMarry ? t('refused_note', p.first) : t('may_refuse', p.first))}</p></div>
+      <div class="act"><button class="gel gold wide" data-act="marry" data-id="${p.id}" ${u.married||u.noMarry?'disabled':''}><span>${t(u.married?'married_already':u.noMarry?'marry_refused':'marry')}</span></button><p class="note">${esc(u.married ? t('married_on', fmt(u.marriedAt)) : u.noMarry ? t('refused_note', p.first) : hasAtout(me,'charisme') ? t('sure_yes', p.first) : t('may_refuse', p.first))}</p></div>
       <div class="act full"><button class="gel pink wide" data-act="leave" data-id="${p.id}"><span>${esc(t('leave', p.first))}</span></button><p class="note">${t(u.married?'note_divorce':'note_single')}</p></div>
       <details class="act relocate full"><summary class="lab">${t('relocate_title')}</summary>
         <div class="reloc-row"><select class="inp" id="relocSel" aria-label="${t('relocate_title')}">${allCities().filter(c => c !== me.city).map(c => `<option>${esc(c)}</option>`).join('')}</select>
@@ -3115,7 +3289,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${condTile(p)}${intTile(p)}
+      ${condTile(p)}${intTile(p)}${atoutTile(p)}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>
@@ -3339,7 +3513,7 @@ const ACT = {
   zoom(d){ const v = +d.v; if(v === 0) fitZoom(); else setZoom(zoom * (v > 0 ? 1.25 : 0.8)); },
   marry(d){
     const me = active(), u = currentUnion(me.id), p = P(+d.id); if(!u || u.married || u.noMarry) return;
-    if(Math.random() < .05){ u.noMarry = true; log('sad','refuse',[p.id, me.id]); sfx.refuse(); }                     // 5 % de refus
+    if(!hasAtout(me,'charisme') && Math.random() < .05){ u.noMarry = true; log('sad','refuse',[p.id, me.id]); sfx.refuse(); }   // atout Charisme : toujours oui                     // 5 % de refus
     else { u.married = true; u.marriedAt = today(); takeHusbandName(u); log('wed','wed',[me.id, p.id]); sfx.wedding(); burst(['#ffcc00','#ffffff','#ff8a00','#ff2f9c']); }
     dirty = true; save(); openFiche(p.id);
   },
@@ -3413,8 +3587,18 @@ function applyStatic(){
   $$('[data-act="lang"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === LANG)));
   const sel = fMonth.value; fMonth.innerHTML = ''; t('months').forEach((m,i) => fMonth.add(new Option(m, i))); fMonth.value = sel;
   [...fDay.options].forEach((o,i) => { o.text = (LANG==='fr' && i===0) ? '1er' : String(i+1); });
+  const fa = $('#fAtout'), av = fa.value; fa.innerHTML = ''; fa.add(new Option(t('atout_none'), ''));
+  ATOUTS.forEach(r => fa.add(new Option(atoutName(r[0]), r[0]))); fa.value = av;
+  const fd = $('#fDestiny'), dv = fd.value || 'none'; fd.innerHTML = '';
+  [['none','dest_none'],['crim','dest_crim'],['star','dest_star']].forEach(([v,k]) => fd.add(new Option(t(k), v))); fd.value = dv;
+  setupNote();
   refreshAge();
 }
+function setupNote(){
+  const a = $('#fAtout').value, d = $('#fDestiny').value;
+  $('#fAtoutNote').textContent = [a && ATOUT[a] ? ATOUT[a][LANG==='fr' ? 5 : 6] : '', d && d !== 'none' ? t('dest_note') : ''].filter(Boolean).join(' ');
+}
+['#fAtout','#fDestiny'].forEach(id => $(id).addEventListener('change', setupNote));
 function setLang(l){
   LANG = l === 'en' ? 'en' : 'fr'; store.set(LANG_KEY, LANG);
   $('#mapView').innerHTML = ''; dotEls = new Map();                    // la carte se redessine dans la nouvelle langue
@@ -3475,6 +3659,11 @@ $('#setupForm').addEventListener('submit', e => {
   const p = addPerson({first: cap(first), last: cap(last), sex:fSex(), birth:fromYMD(y,m,d), blood:true, city, birthCity:city});
   p.lastAge = ageAt(p, day);
   p.conds = rollConds([]);
+  p.atout = $('#fAtout').value || null;                                   // atout choisi (ou aucun)
+  const dest = $('#fDestiny').value, adult = Math.max(day, p.birth + Math.round(18*365.25));
+  if(dest === 'crim') p.crim = {day: adult, declared:false, fate:null};   // commencer en criminel…
+  if(dest === 'star') p.star = {day: adult, famous:false};                // … ou en star
+  S.noAch = dest === 'crim' || dest === 'star';                          // succès coupés pour cette partie
   if(p.lastAge >= R.legal) rollAddictions(p, day);
   planInterests(p, day);
   setupWork(p, day);
