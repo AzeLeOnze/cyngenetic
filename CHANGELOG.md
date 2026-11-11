@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.2c — 11 novembre 2026
+
+- Sur téléphone, les boutons de zoom et « Recentrer » disparaissent : on zoome en pinçant l'arbre, qui gagne de la place.
+- Sur téléphone, une seule notification s'affiche à la fois, pour que l'arbre reste lisible.
+- Atout Espérance de vie corrigé : le risque de mourir de vieillesse n'est réduit qu'entre 80 et 105 ans. Après 105 ans, il redevient normal.
+- Les métiers politiques sont 1,4 fois moins fréquents.
+- 10 nouveaux métiers : pizzaiolo, artiste de rue, mendiant, agent secret, espion, prêtre, proviseur, moniteur d'auto-école, mathématicien et astro-mécano (à partir de 2050).
+
 ## v0.1.2b — 11 novembre 2026
 
 - Tout le monde reçoit maintenant un atout dès la naissance (un seul, non cumulable). Dans une partie déjà commencée, chaque personne reçoit le sien en reprenant la partie.

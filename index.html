@@ -711,7 +711,8 @@ body.no-deco .bubble{display:none}
   .tree-head{padding:10px 12px 8px;gap:8px}
   .tree-head h2{font-size:17px}
   .toasts{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 24px))}
-  .toasts .toast:nth-child(n+3){display:none}
+  .toasts .toast:nth-child(n+2){display:none}
+  .tree-head .zoomer,.tree-head [data-act="center"]{display:none!important}
   .pills button{min-height:38px}
   .gel{min-height:42px}
   .overlay{padding:8px}
@@ -905,9 +906,20 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.2b';
+const APP_VERSION = '0.1.2c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.2c', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
+   fr:['Sur téléphone, les boutons de zoom et « Recentrer » disparaissent : on zoome en pinçant l\'arbre, qui gagne de la place.',
+       'Sur téléphone, une seule notification s\'affiche à la fois, pour que l\'arbre reste lisible.',
+       'Atout Espérance de vie corrigé : le risque de mourir de vieillesse n\'est réduit qu\'entre 80 et 105 ans. Après 105 ans, il redevient normal.',
+       'Les métiers politiques sont 1,4 fois moins fréquents.',
+       '10 nouveaux métiers : pizzaiolo, artiste de rue, mendiant, agent secret, espion, prêtre, proviseur, moniteur d\'auto-école, mathématicien et astro-mécano (à partir de 2050).'],
+   en:['On phones, the zoom and "Recenter" buttons are gone: pinch the tree to zoom, and it gets more room.',
+       'On phones, only one notification shows at a time, so the tree stays readable.',
+       'Longevity gift fixed: it only lowers the risk of dying of old age between 80 and 105. After 105, the risk is back to normal.',
+       'Political jobs are 1.4 times less common.',
+       '10 new jobs: pizza maker, street performer, beggar, secret agent, spy, priest, head teacher, driving instructor, mathematician and space mechanic (from 2050).']},
   {v:'0.1.2b', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
    fr:['Tout le monde reçoit maintenant un atout dès la naissance (un seul, non cumulable). Dans une partie déjà commencée, chaque personne reçoit le sien en reprenant la partie.',
        'Écran de départ : « Au hasard » remplace « Aucun » dans le choix de l\'atout.'],
@@ -1219,7 +1231,12 @@ const JOBS = [
  ['maire','Maire','Maire','Mayor','Mayor',1789,2100],['depute','Député','Députée','Member of Parliament','Member of Parliament',1789,2100],
  ['senateur','Sénateur','Sénatrice','Senator','Senator',1799,2100],['ministre','Ministre','Ministre','Minister','Minister',1500,2100],
  ['premierministre','Premier ministre','Première ministre','Prime Minister','Prime Minister',1815,2100],
- ['president','Président de la République','Présidente de la République','President of the Republic','President of the Republic',1848,2100]
+ ['president','Président de la République','Présidente de la République','President of the Republic','President of the Republic',1848,2100],
+ ['pizzaiolo','Pizzaiolo','Pizzaiola','Pizza maker','Pizza maker',1950,2100],['artisterue','Artiste de rue','Artiste de rue','Street performer','Street performer',1500,2100],
+ ['mendiant','Mendiant','Mendiante','Beggar','Beggar',1500,2100],['agentsecret','Agent secret','Agente secrète','Secret agent','Secret agent',1871,2100],
+ ['espion','Espion','Espionne','Spy','Spy',1500,2100],['pretre','Prêtre','Prêtresse','Priest','Priestess',1500,2100],
+ ['astromeca','Astro-mécano','Astro-mécano','Space mechanic','Space mechanic',2050,2100],['proviseur','Proviseur','Proviseure','Head teacher','Head teacher',1802,2100],
+ ['moniteurae',"Moniteur d'auto-école","Monitrice d'auto-école",'Driving instructor','Driving instructor',1920,2100],['mathematicien','Mathématicien','Mathématicienne','Mathematician','Mathematician',1500,2100]
 ];
 const STARJOBS = [
  ['peintre','Peintre','Peintre','Painter','Painter',1500,2100],['ecrivain','Écrivain','Écrivaine','Writer','Writer',1500,2100],
@@ -1264,7 +1281,7 @@ const ATOUTS = [
  ['chance','Chance','Chance','Luck','sparkle',"12 % de chances d'avoir un enfant future star (au lieu de 2,5 %).",'12% chance of having a future-star child (instead of 2.5%).'],
  ['sante','Santé','Santé','Health','leaf','Ne tombe jamais malade avant 60 ans.','Never falls ill before 60.'],
  ['fertile','Fertilité','Fertilité','Fertility','heart','Jumeaux, triplés et quadruplés 10 fois plus fréquents.','Twins, triplets and quadruplets 10 times more likely.'],
- ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse.','10 times less likely to die of old age.'],
+ ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse entre 80 et 105 ans.','10 times less likely to die of old age between 80 and 105.'],
  ['ambition','Ambitieux','Ambitieuse','Ambition','flag','Fera carrière en politique, avec 30 % de chances de devenir président.','Will go into politics, with a 30% chance of becoming President.']
 ];
 const hasAtout = (p, id) => !!(p && p.atout === id);
@@ -1351,7 +1368,7 @@ function rollConds(parents){
   return out;
 }
 const inRange = (r,y) => y >= r[5] && y <= r[6];
-// métier au hasard ; la politique reste rare (2 %), sauf pour les ambitieux ; jamais Président d'emblée
+// métier au hasard ; la politique reste rare (≈1,4 %), sauf pour les ambitieux ; jamais Président d'emblée
 function pickPol(y){
   const ok = Object.keys(POLJOBS).filter(id => inRange(JOB[id], y));
   if(!ok.length) return null;
@@ -1361,7 +1378,7 @@ function pickPol(y){
 }
 const pickJob = (y, p, noPol) => {
   y = dataYear(y);
-  if(!noPol && (hasAtout(p,'ambition') || Math.random() < .02)){ const j = pickPol(y); if(j) return j; }
+  if(!noPol && (hasAtout(p,'ambition') || Math.random() < .02/1.4)){ const j = pickPol(y); if(j) return j; }
   return pick(JOBS.filter(r => inRange(r,y) && !isPol(r[0])))[0];
 };
 const pickStarJob = y => { y = dataYear(y); return pick(STARJOBS.filter(r => inRange(r,y)))[0]; };
@@ -2334,9 +2351,9 @@ function scheduleYear(p, A, day){
   }
 }
 function baseRisk(p, A, day = S.t){
-  if(A > 80 && R.oldAge){                    // vieillesse : ×2 avant 1900, ×½ après 2000 ; atout Espérance de vie : ÷10
+  if(A > 80 && R.oldAge){                    // vieillesse : ×2 avant 1900, ×½ après 2000 ; atout Espérance de vie : ÷10 de 80 à 105 ans
     const y = yearOf(day), era = y < 1900 ? 2 : y < 2000 ? 1 : .5;
-    return Math.min(1, yearlyRisk(A, p) * era / (hasAtout(p,'longevite') ? 10 : 1));
+    return Math.min(1, yearlyRisk(A, p) * era / (hasAtout(p,'longevite') && A < 105 ? 10 : 1));   // après 105 ans : risque normal
   }
   if(!R.diseases) return 0;
   return yearlyRisk(A > 80 ? 78 : A, p) * R.illness/100 * 1.15 * (sporty(p) ? .5 : 1);   // ×1,15 depuis la 0.1.1a   // curseur « maladies » ; sportifs : risque ÷ 2
