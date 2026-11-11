@@ -2,6 +2,16 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.0b — 11 novembre 2026
+
+- 4 nouveaux succès dans « Autres » :
+  - **Jeunes grands-parents** : devenir grand-parent à 40 ans ou moins ;
+  - **Fossé des générations** : avoir une fratrie avec 50 ans d'écart (demi-frères et sœurs compris) ;
+  - **Cadeau de Noël** : naître un 25 décembre ;
+  - **Jamais trop tard** : devenir parent après 90 ans.
+- Le bouton Succès a déménagé : dans la barre du bas, à côté de « Moi », sur téléphone, et juste après Personnalisation sur ordinateur.
+- Sur téléphone, la date et la décennie sont maintenant bien centrées.
+
 ## v0.1.0a — 11 novembre 2026
 
 Première version numérotée de Cyngenetic.

@@ -595,9 +595,13 @@ body.no-deco .bubble{display:none}
 .spark{position:fixed;z-index:70;pointer-events:none;border-radius:50%}
 
 /* ---------- Téléphone : en-tête compact (logo + date sur une ligne, commandes qui défilent) ---------- */
-@media (max-width:1100px){ .topbar{grid-template-columns:auto minmax(0,1fr)} .topbar .clock{grid-column:2;justify-self:stretch} .lcd{min-width:0;width:100%} .clock-sub{max-width:none} }
 @media (max-width:700px){
-  .topbar{gap:8px;padding:6px 10px 8px;border-radius:20px}
+  /* sur téléphone : la date et la décennie prennent toute la largeur, bien centrées (l'emblème est déjà l'icône de l'appli) */
+  .topbar{grid-template-columns:1fr;gap:8px;padding:6px 10px 8px;border-radius:20px}
+  .topbar .brand{display:none}
+  .topbar .clock{grid-column:1/-1;justify-self:stretch}
+  .lcd{min-width:0;width:100%}
+  .clock-sub{max-width:none}
   .topbar .brand.small .emblem{width:34px}
   .clock{gap:4px}
   .lcd{padding:5px 12px}
@@ -627,6 +631,7 @@ body.no-deco .bubble{display:none}
   body[data-mtab="me"] .side .journal{display:none}
   body[data-mtab="journal"] .side>section:not(.journal){display:none}
   .tree-head #viewSw{display:none}
+  .topbar .achb{display:none}
   .tree-head{padding:10px 12px 8px;gap:8px}
   .tree-head h2{font-size:17px}
   .toasts{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 24px))}
@@ -759,6 +764,7 @@ body.no-deco .bubble{display:none}
     <div class="ctrls" role="toolbar">
       <button class="gel round ghost" data-act="settings" data-ta="settings" data-tt="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.4.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6L2 13.7v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg></button>
       <button class="gel round ghost" data-act="custom" data-ta="custom" data-tt="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
+      <button class="gel round gold achb" data-act="achs" data-ta="ach_title" data-tt="ach_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg></button>
       <div class="pills" role="group" id="speeds">
         <button data-act="speed" data-v="0.25">×0,25</button>
         <button data-act="speed" data-v="0.5">×0,5</button>
@@ -769,7 +775,6 @@ body.no-deco .bubble{display:none}
       <button class="gel round" id="btnPause" data-act="pause"></button>
       <span class="ctrl-sep" aria-hidden="true"></span>
       <button class="gel ghost autob" id="btnAuto" data-act="auto"></button>
-      <button class="gel round gold" data-act="achs" data-ta="ach_title" data-tt="ach_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg></button>
       <button class="gel ghost restartb" data-act="restart"><span data-t="restart"></span></button>
     </div>
   </header>
@@ -798,6 +803,7 @@ body.no-deco .bubble{display:none}
     <button data-act="mtab" data-v="tree" data-icon="tree" aria-pressed="true"><span data-t="view_tree"></span></button>
     <button data-act="mtab" data-v="map" data-icon="pin" id="mnavMap" aria-pressed="false" hidden><span data-t="view_map"></span></button>
     <button data-act="mtab" data-v="me" data-icon="user" aria-pressed="false"><span data-t="m_me"></span></button>
+    <button class="mnav-ach" data-act="achs" data-icon="trophy" aria-pressed="false"><span data-t="m_ach"></span></button>
     <button data-act="mtab" data-v="journal" data-icon="book" aria-pressed="false"><span data-t="m_journal"></span><b class="mbadge" id="mBadge" hidden></b></button>
   </nav>
 </section>
@@ -818,9 +824,16 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.0a';
+const APP_VERSION = '0.1.0b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.0b', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
+   fr:['4 nouveaux succès dans « Autres » : Jeunes grands-parents (grand-parent à 40 ans ou moins), Fossé des générations (fratrie avec 50 ans d\'écart, demi-frères et sœurs compris), Cadeau de Noël (naître un 25 décembre) et Jamais trop tard (devenir parent après 90 ans).',
+       'Le bouton Succès a déménagé : dans la barre du bas, à côté de « Moi », sur téléphone, et juste après Personnalisation sur ordinateur.',
+       'Sur téléphone, la date et la décennie sont maintenant bien centrées.'],
+   en:['4 new achievements in "Others": Young grandparents (grandparent at 40 or younger), Generation gap (siblings 50 years apart, half-siblings included), Christmas present (born on December 25) and Never too late (parent after 90).',
+       'The Achievements button moved: in the bottom bar next to "Me" on phones, and right after Customization on computers.',
+       'On phones, the date and decade are now properly centered.']},
   {v:'0.1.0a', date:{fr:'11 novembre 2026', en:'November 11, 2026'},
    fr:['Première version numérotée de Cyngenetic : le jeu s\'installe comme une application sur téléphone et fonctionne hors ligne.',
        'Nouveau volet de boutons tout en haut : Paramètres, Personnalisation et vitesse du temps en premier, puis pause, mode Auto, Succès et Recommencer.',
@@ -1512,7 +1525,7 @@ fr:{
   log_ach:id=>`Succès débloqué : ${achTitle(id)} !`, log_gold:()=>'Catégorie de succès complète : le thème Or est débloqué dans les Paramètres !',
   log_night:()=>'Une première victime… Le thème Nuit est débloqué dans les Paramètres.',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
-  multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal',
+  multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès',
   f_interests:"Centres d'intérêt", log_interest:(p,id)=>`${nm(p)} se découvre une passion : ${intName(id, P(p))}.`,
   skin_locked_night:'Le thème Nuit se débloque quand un criminel fait sa première victime.',
   unknown_places:'Lieux inconnus', map_zoom_in:'Zoomer sur la carte', map_zoom_out:'Dézoomer la carte', map_zoom_reset:'Toute la France', log_addict:(p,a)=>`${nm(p)} tombe dans ${ADD[a][7]}.`,
@@ -1653,7 +1666,7 @@ en:{
   log_ach:id=>`Achievement unlocked: ${achTitle(id)}!`, log_gold:()=>'Achievement category complete: the Gold theme is now available in Settings!',
   log_night:()=>'A first victim… The Night theme is now available in Settings.',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
-  multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal',
+  multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards',
   f_interests:'Interests', log_interest:(p,id)=>`${nm(p)} discovers a new passion: ${intName(id, P(p))}.`,
   skin_locked_night:'The Night theme unlocks when a criminal claims their first victim.',
   unknown_places:'Unknown places', map_zoom_in:'Zoom in on the map', map_zoom_out:'Zoom out of the map', map_zoom_reset:'All of France', log_addict:(p,a)=>`${nm(p)} develops ${ADD[a][8]}.`,
@@ -1722,6 +1735,10 @@ const ACHS = [
  ['time500','time','gold','Demi-millénaire','500 ans de jeu dans une même partie','Half a millennium','500 years played in a single game'],
  ['time1000','time','platinum','Millénaire','1000 ans de jeu dans une même partie','Millennium','1,000 years played in a single game'],
  ['quads','other','special',"Quatre d'un coup",'Avoir des quadruplés','Four at once','Have quadruplets'],
+ ['grand40','other','special','Jeunes grands-parents','Devenir grand-parent à 40 ans ou moins','Young grandparents','Become a grandparent at 40 or younger'],
+ ['sib50','other','special','Fossé des générations',"Avoir une fratrie avec 50 ans d'écart (demi-frères et sœurs compris)",'Generation gap','Have siblings 50 years apart (half-siblings included)'],
+ ['xmas','other','special','Cadeau de Noël','Naître un 25 décembre','Christmas present','Be born on December 25'],
+ ['parent90','other','special','Jamais trop tard','Devenir parent après 90 ans','Never too late','Become a parent after 90'],
  ['maxage','other','special','Jusqu\'au bout',"Mourir à l'âge maximal (121 ans)",'All the way','Die at the maximum age (121)'],
  ['young','other','special','Trop tôt','Mourir avant 10 ans','Too soon','Die before age 10'],
  ['boys5','other','special','Que des garçons','Avoir 5 garçons et aucune fille','All boys','Have 5 sons and no daughters'],
@@ -2204,6 +2221,17 @@ function checkParentAch(par){
   if(boys >= 5 && girls === 0) unlock('boys5');
   if(girls >= 5 && boys === 0) unlock('girls5');
 }
+function checkBirthAch(c){                          // succès liés à une naissance
+  const x = toDate(c.birth);
+  if(x.getUTCMonth() === 11 && x.getUTCDate() === 25) unlock('xmas');
+  const par = c.parents.map(P);
+  par.forEach(p => {
+    if(ageAt(p, c.birth) >= 90) unlock('parent90');
+    (p.parents || []).map(P).forEach(gp => { if(gp && gp.death == null && ageAt(gp, c.birth) <= 40) unlock('grand40'); });
+  });
+  const sibs = Object.values(S.people).filter(s => s.id !== c.id && s.parents && s.parents.some(i => c.parents.includes(i)));
+  if(sibs.some(s => Math.abs(c.birth - s.birth) >= 50 * 365.25)) unlock('sib50');
+}
 const checkConq = pid => checkTiers('conq', S.unions.filter(x => x.a===pid).length, [3,6,10,15]);
 function move(p, day, target){
   const city = target || pick(CITIES.filter(c => c !== p.city));
@@ -2268,6 +2296,7 @@ function birthChild(u, day){
     S.nameQueue.push(...ids);
   }
   [A, B].forEach(checkParentAch);
+  ids.forEach(id => checkBirthAch(P(id)));
   if(n === 4) unlock('quads');
   if(n >= 2){ u.multiCount = (u.multiCount || 0) + 1; if(u.multiCount >= 2) unlock('twins2'); }
   dirty = true;
