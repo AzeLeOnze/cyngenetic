@@ -1144,9 +1144,16 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4h';
+const APP_VERSION = '0.1.4i';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4i', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Nouveaux succès : Arrière-grand-parent express (arrière-grand-parent à 58 ans ou moins, 52 avec l\'âge légal à 16 ans, 68 à 21 ans) et la Course des générations (arriver en 2100 avec une moyenne de 25, 22, 20 ou 19 ans par génération, proportionnelle à l\'âge légal).',
+       '20 nouvelles maladies bénignes : angine, sinusite, anémie, varicelle, otite, cystite, tendinite, gastrite, conjonctivite, urticaire ; plus longues (8 à 15 ans) : pré-diabète, polyarthrite, acouphènes, endométriose ; très longues (25 à 35 ans) : glaucome, excès de cholestérol ; du futur : allergie aux protéines synthétiques, fatigue de réalité virtuelle (2040), dysgravité et rejet d\'implant neuronal (2080).',
+       '4 nouvelles causes de mort : méningite, tétanos (jusqu\'en 1990), noyade, et la chute d\'astéroïde (0,1 % de chances par an qu\'elle frappe un membre de la famille), avec le succès « Touché par le ciel ».'],
+   en:['New achievements: Express great-grandparent (a great-grandparent at 58 or younger, 52 with a legal age of 16, 68 with 21) and the Generation race (reach 2100 averaging 25, 22, 20 or 19 years per generation, scaled to the legal age).',
+       '20 new mild illnesses: tonsillitis, sinusitis, anaemia, chickenpox, ear infection, cystitis, tendinitis, gastritis, conjunctivitis, hives; longer ones (8 to 15 years): prediabetes, rheumatoid arthritis, tinnitus, endometriosis; very long ones (25 to 35 years): glaucoma, high cholesterol; from the future: synthetic protein allergy, VR fatigue (2040), dysgravity and neural implant rejection (2080).',
+       '4 new causes of death: meningitis, tetanus (until 1990), drowning, and a falling asteroid (a 0.1% chance per year that it hits a family member), with the "Struck from the sky" achievement.']},
   {v:'0.1.4h', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Nouveaux prénoms : Erwan, Alexis, Anthony, Benjamin, Corentin, Anaïs et Mélissa dans les années 1990-2005 ; des prénoms bretons, corses et occitans après 1950 (Yann, Ronan, Nolwenn, Maïwenn, Lisandru, Saveria, Guilhem, Magali…) ; et des prénoms néo-bretons, néo-corses et néo-occitans après 2040 (Ewenn, Kaëlig, Lizenn, Orsu, Ghjuvan-Leo, Mirèlha…).',
        'Noms de famille : Neymar devient Neidega et Targuerien devient Tarney ; nouveaux noms Höll, Sanchez, Pollez, Droey, McGonagall, Loës et Bravat.',
@@ -1900,6 +1907,16 @@ const MILDS = [
  ['grippemars','Grippe martienne','Martian flu',2045,2100,60,300,{}],['holosyndrome','Syndrome holographique','Hologram syndrome',2060,2100,120,900,{}],
  ['arthrose','Arthrose','Osteoarthritis',1500,2100,5475,10950,{minA:45}],['hypertension','Hypertension','High blood pressure',1500,2100,5475,10950,{minA:35}],
  ['hypothyroidie','Hypothyroïdie','Hypothyroidism',1500,2100,5475,10950,{minA:20}],
+ ['angine','Angine à répétition','Recurrent tonsillitis',1500,2100,60,240,{}],['sinusite','Sinusite chronique','Chronic sinusitis',1500,2100,120,720,{}],
+ ['anemie','Anémie','Anaemia',1500,2100,90,540,{}],['varicelle','Varicelle','Chickenpox',1500,2100,60,120,{maxA:14}],
+ ['otite','Otite chronique','Chronic ear infection',1500,2100,60,360,{maxA:12}],['cystite','Cystite à répétition','Recurrent cystitis',1500,2100,60,300,{minA:15}],
+ ['tendinite','Tendinite','Tendinitis',1500,2100,60,300,{minA:15}],['gastrite','Gastrite','Gastritis',1500,2100,90,540,{minA:15}],
+ ['conjonctivite','Conjonctivite','Conjunctivitis',1500,2100,60,120,{}],['urticaire','Urticaire chronique','Chronic hives',1500,2100,90,600,{}],
+ ['prediabete','Pré-diabète','Prediabetes',1900,2100,2920,5475,{minA:35}],['polyarthrite','Polyarthrite','Rheumatoid arthritis',1500,2100,2920,5475,{minA:30}],
+ ['acouphenes','Acouphènes','Tinnitus',1500,2100,2920,5475,{minA:25}],['endometriose','Endométriose','Endometriosis',1500,2100,2920,5475,{minA:16,maxA:45,sex:'F'}],
+ ['glaucome','Glaucome','Glaucoma',1500,2100,9125,12775,{minA:40}],['cholesterol','Excès de cholestérol','High cholesterol',1900,2100,9125,12775,{minA:30}],
+ ['allergiesynth','Allergie aux protéines synthétiques','Synthetic protein allergy',2040,2100,90,700,{}],['fatiguevr','Fatigue de réalité virtuelle','VR fatigue',2040,2100,60,400,{minA:10}],
+ ['dysgravite','Dysgravité','Dysgravity',2080,2100,120,900,{}],['rejetimplant',"Rejet d'implant neuronal",'Neural implant rejection',2080,2100,90,600,{minA:16}],
  ['covid','Covid-19','Covid-19',2019,2024,120,540,{special:true}]
 ];
 const MILD = byId(MILDS);
@@ -2024,7 +2041,7 @@ function mildYear(p, A, day){                         // une fois par an : peut-
     p.covidRoll = true; if(Math.random() < .08) catchMild(p, 'covid', day);
   }
   if(Math.random() < .06/1.29 * R.illness/100){                // 0.1.3g : fréquence ÷ 1,29
-    const y = dataYear(yearOf(day)), ok = MILDS.filter(r => !r[7].special && y >= r[3] && y <= r[4] && (r[7].minA == null || A >= r[7].minA) && (r[7].maxA == null || A <= r[7].maxA));
+    const y = dataYear(yearOf(day)), ok = MILDS.filter(r => !r[7].special && y >= r[3] && y <= r[4] && (r[7].sex == null || p.sex === r[7].sex) && (r[7].minA == null || A >= r[7].minA) && (r[7].maxA == null || A <= r[7].maxA));
     if(ok.length) catchMild(p, pick(ok)[0], day);
   }
 }
@@ -2086,6 +2103,8 @@ const DISEASES = [
  ['hyperthermie',"Hyperthermie sévère due à l'ecstasy","d'une hyperthermie sévère due à l'ecstasy",'severe ecstasy-induced hyperthermia',1500,2100,1,5,.04,{addict:'ecstasy'}],
  ['mst','MST',"d'une MST",'an STD',1500,2100,90,1800,.06,{addict:'sexe'}],['ist','IST',"d'une IST",'an STI',1500,2100,60,1200,.07,{addict:'sexe'}],
  // nouvelles maladies (0.1.1a)
+ ['meningite','Méningite','de la méningite','meningitis',1500,2100,3,20,.3],['tetanos','Tétanos','du tétanos','tetanus',1500,1990,5,30,.2],
+ ['noyade','Noyade',"d'une noyade",'drowning',1500,2100,1,1,0,{minA:3}],['asteroide',"Chute d'astéroïde","d'une chute d'astéroïde",'a falling asteroid',1500,2100,1,1,0,{special:true}],
  ['disparu','Porté disparu','de sa disparition','disappearance',1500,2100,365,730,.2],   // 0.1.4a : 12 à 24 mois, 20 % retrouvés
  ['mortcerebrale','Mort cérébrale',"d'une mort cérébrale",'brain death',1500,2100,1,30,.01],
  ['necrose','Nécrose',"d'une nécrose",'necrosis',1500,2100,7,120,.06],
@@ -2137,12 +2156,12 @@ function pickWarCause(p, day){
 }
 const DZ = byId(DISEASES);
 // accidents et événements soudains : on en est « victime », on n'en est pas « atteint »
-const EVENTS = new Set(['spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
+const EVENTS = new Set(['noyade','asteroide','spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
   'overdose_ecstasy','nanorobots','rage_jeux','cyn_fusion','arret_cafe','infarctus_tabac','infarctus_cannabis','avc','avc_tabac','avc_alcool','avc_cannabis']);
 function pickDisease(p, day){
   const y = dataYear(yearOf(day)), A = ageAt(p, day);
   const safe = hasAtout(p,'intel') ? ['domestique','charrette','route','route2','spatial'] : [];      // atout Intelligence
-  const ok = DISEASES.filter(d => y >= d[4] && y <= d[5] && !(d[9] && d[9].addict) && !safe.includes(d[0]) && fits(d[9] || {}, p, A));
+  const ok = DISEASES.filter(d => y >= d[4] && y <= d[5] && !(d[9] && (d[9].addict || d[9].special)) && !safe.includes(d[0]) && fits(d[9] || {}, p, A));
   return wPickRow(ok, 9) || DZ.pneumonie;
 }
 
@@ -2794,6 +2813,12 @@ const ACHS = [
  ['r_grandheir','royal','silver','Le flambeau','Un petit-enfant du monarque reprend la couronne','Passing the torch','A grandchild of the monarch takes the crown'],
  ['r_nobleking','royal','gold','Du blason à la couronne','Un noble devient roi (ou reine)','From crest to crown','A noble becomes king (or queen)'],
  ['r_lateheir','royal','special','Miracle tardif',"Un roi sans héritier en retrouve un après ses 80 ans",'Late miracle','A king with no heir gets a new one after turning 80'],
+ ['ggp_fast','kids','gold','Arrière-grand-parent express',"Devenir arrière-grand-parent à 58 ans ou moins (52 ans si l'âge légal est à 16 ans, 68 à 21 ans)",'Express great-grandparent','Become a great-grandparent at 58 or younger (52 with a legal age of 16, 68 with 21)'],
+ ['gen25','time','bronze','Course des générations',"Arriver en 2100 avec une moyenne de 25 ans ou moins par génération (proportionnel à l'âge légal)",'Generation race','Reach 2100 averaging 25 years or less per generation (scaled to the legal age)'],
+ ['gen22','time','silver','Relais express',"Arriver en 2100 avec une moyenne de 22 ans ou moins par génération (proportionnel à l'âge légal)",'Express relay','Reach 2100 averaging 22 years or less per generation (scaled to the legal age)'],
+ ['gen20','time','gold','Sprint généalogique',"Arriver en 2100 avec une moyenne de 20 ans ou moins par génération (proportionnel à l'âge légal)",'Family-tree sprint','Reach 2100 averaging 20 years or less per generation (scaled to the legal age)'],
+ ['gen19','time','platinum','Record absolu',"Arriver en 2100 avec une moyenne de 19 ans ou moins par génération (proportionnel à l'âge légal)",'All-time record','Reach 2100 averaging 19 years or less per generation (scaled to the legal age)'],
+ ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
  ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
 ];
@@ -3449,6 +3474,17 @@ function onBirthday(p, A, day){
   if(A >= 18 && Math.random() < 1 - Math.pow(1 - p.moveP, .1)) move(p, day);
   scheduleYear(p, A, day);
 }
+function genRace(){                                  // « Course des générations » : moyenne d'années par génération en 2100
+  const yrs = 2100 - S.startYear; if(yrs < 100 || !living().some(p => p.blood)) return;
+  const g = Math.max(...Object.values(S.people).filter(p => p.blood).map(genOf)); if(g < 2) return;
+  const avg = yrs / (g - 1), k = R.legal / 18;       // seuils proportionnels à l'âge légal (18 ans = référence)
+  [[25,'gen25'],[22,'gen22'],[20,'gen20'],[19,'gen19']].forEach(([n, id]) => { if(avg <= n * k) unlock(id); });
+}
+function checkGreatGrand(c, day){                     // « Arrière-grand-parent express » : 58 ans pour un âge légal de 18 ans, proportionnel sinon
+  const lim = Math.round(58 * R.legal / 18);
+  const up = list => list.flatMap(p => (p && p.parents) ? p.parents.map(P) : []);
+  for(const g of up(up(up([c])))) if(g && g.death == null && ageAt(g, day) <= lim){ unlock('ggp_fast'); return; }
+}
 function birthChild(u, day){
   const A = P(u.a), B = P(u.b), adopt = u.preg.adopt;
   u.preg = null;
@@ -3501,7 +3537,7 @@ function birthChild(u, day){
     S.nameQueue.push(...ids);
   }
   [A, B].forEach(checkParentAch);
-  ids.forEach(id => checkBirthAch(P(id)));
+  ids.forEach(id => { checkBirthAch(P(id)); checkGreatGrand(P(id), day); });
   if(n === 4){ unlock('quads'); unlockSkin('kid'); }
   RH = undefined;
   if(!UNL.neon && genOf(P(ids[0])) >= 16) unlockSkin('neon');
@@ -3510,12 +3546,16 @@ function birthChild(u, day){
 }
 function processDay(day){
   while(S.worldIdx >= 0 && S.worldIdx < WORLD.length && WORLD[S.worldIdx].day <= day){ log('world','world',[S.worldIdx], WORLD[S.worldIdx].day); S.worldIdx++; }
-  if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100'); S.end2100 = 1; log('world','y2100',[],day); }
+  if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100'); genRace(); S.end2100 = 1; log('world','y2100',[],day); }
   const wi = warIndexAt(day), prevWar = S.warIdx ?? -1;
   if(wi !== prevWar){
     if(prevWar >= 0) log('world','war_end',[prevWar],day);
     if(wi >= 0){ log('world','war_start',[wi],day); sfx.war(); }
     S.warIdx = wi; lastDecade = null;
+  }
+  if(R.diseases && Math.random() < .001/365.25){             // chute d'astéroïde : 0,1 % de chances par an, sur un membre de la famille
+    const ok = living().filter(p => inFamily(p) && !immune(p, day));
+    if(ok.length){ const v = pick(ok); die(v, day, {dz:'asteroide'}); unlock('asteroid'); sfx.war(); burst(['#ff7a00','#ffd000','#5a3a2a','#ffffff'], 60); }
   }
   for(const p of living()){
     if(p.onset != null && day >= p.onset) contract(p, day);

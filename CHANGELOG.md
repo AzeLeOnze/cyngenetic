@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4i — 12 novembre 2026
+
+- Nouveaux succès : Arrière-grand-parent express (arrière-grand-parent à 58 ans ou moins, 52 avec l'âge légal à 16 ans, 68 à 21 ans) et la Course des générations (arriver en 2100 avec une moyenne de 25, 22, 20 ou 19 ans par génération, proportionnelle à l'âge légal).
+- 20 nouvelles maladies bénignes : angine, sinusite, anémie, varicelle, otite, cystite, tendinite, gastrite, conjonctivite, urticaire ; plus longues (8 à 15 ans) : pré-diabète, polyarthrite, acouphènes, endométriose ; très longues (25 à 35 ans) : glaucome, excès de cholestérol ; du futur : allergie aux protéines synthétiques, fatigue de réalité virtuelle (2040), dysgravité et rejet d'implant neuronal (2080).
+- 4 nouvelles causes de mort : méningite, tétanos (jusqu'en 1990), noyade, et la chute d'astéroïde (0,1 % de chances par an qu'elle frappe un membre de la famille), avec le succès « Touché par le ciel ».
+
 ## v0.1.4h — 12 novembre 2026
 
 - Nouveaux prénoms : Erwan, Alexis, Anthony, Benjamin, Corentin, Anaïs et Mélissa dans les années 1990-2005 ; des prénoms bretons, corses et occitans après 1950 (Yann, Ronan, Nolwenn, Maïwenn, Lisandru, Saveria, Guilhem, Magali…) ; et des prénoms néo-bretons, néo-corses et néo-occitans après 2040 (Ewenn, Kaëlig, Lizenn, Orsu, Ghjuvan-Leo, Mirèlha…).
