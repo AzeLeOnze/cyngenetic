@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3f — 12 novembre 2026
+
+- Maladies bénignes : 18 nouvelles maladies qui ne tuent pas (gale, goutte, asthme, zona, burn-out, rhume des foins…) selon les époques, et 4 du futur après 2030 (fièvre numérique, nanodermite, grippe martienne, syndrome holographique). Elles durent de quelques mois à quelques années, se cumulent, donnent une bulle rouge pâle et doublent le risque d'une maladie grave.
+- Covid-19 : entre décembre 2019 et décembre 2024, chaque personne en vie a 8 % de risque de l'attraper (maladie bénigne de 4 à 18 mois).
+- Boutique : nouvelle Potion de santé (185 Cyn), qui guérit toutes les maladies d'un membre de la famille au choix, même les graves.
+- Album : nouvelle catégorie Écoles & formations (maternelle, CP à CM2, collège, lycée, bacs et CAP, études supérieures, apprentis, déscolarisés…), avec son succès « Premier de la classe ».
+
 ## v0.1.3e — 12 novembre 2026
 
 - La carte de France remplit maintenant toute sa zone.

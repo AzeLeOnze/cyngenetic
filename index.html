@@ -126,6 +126,7 @@ button{font:inherit;color:inherit}
 .si-fertile{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff6cc0 55%,#cc0070)}
 .si-immune{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#8cff1a 55%,#2c9200)}
 .si-midlife{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#c3a2ff 55%,#5a2ee0)}
+.si-potion{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff7ad8 55%,#9e0077)}
 .si-decrim{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 55%,#0074dc)}
 .picklist{display:grid;gap:8px;max-height:min(60vh,520px);overflow:auto;padding:2px}
 .pickrow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;padding:10px 12px;border-radius:16px;border:1px solid #fff;background:rgba(255,255,255,.8);
@@ -668,6 +669,11 @@ body.no-deco .bubble{display:none}
 @keyframes sick{50%{box-shadow:0 0 0 2px var(--red),0 0 28px 8px rgba(255,40,50,.3),0 7px 16px rgba(150,0,20,.25)}}
 .node.ill .n-band{background:linear-gradient(180deg,#ff6b78,#d4001e);color:#fff;text-shadow:0 1px 1px rgba(90,0,10,.5)}
 .node.ill .nt span,.node.ill .n-city{color:#8a1020}
+/* Maladie bénigne : bulle rouge pâle, sans danger immédiat */
+.node.mild{border-color:#ffe6e6;background:linear-gradient(180deg,#fffafa 0%,#ffe4e4 55%,#ffcaca 100%);box-shadow:0 0 0 2px #ffa3aa,0 0 12px 2px rgba(255,90,100,.22),0 7px 16px rgba(150,0,20,.15)}
+.node.mild .n-band{background:linear-gradient(180deg,#ffb3ba,#ff7a87);color:#fff;text-shadow:0 1px 1px rgba(120,0,20,.35)}
+.facts .pinkf{background:linear-gradient(180deg,#fff7f7,#ffe6e6);border-color:#ffd3d3}
+.facts .pinkf dd{color:#b8323f}
 
 .orb{--o1:var(--male-1);--o2:var(--male-2);position:relative;flex:none;width:46px;height:46px;border-radius:50%;overflow:hidden;
   background:radial-gradient(circle at 36% 26%,#fff 0 6%,var(--o1) 42%,var(--o2) 100%);box-shadow:inset 0 -5px 9px rgba(0,0,0,.2),0 3px 7px rgba(0,40,120,.28)}
@@ -1050,9 +1056,18 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.3e';
+const APP_VERSION = '0.1.3f';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.3f', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Maladies bénignes : 18 nouvelles maladies qui ne tuent pas (gale, goutte, asthme, zona, burn-out, rhume des foins…) selon les époques, et 4 du futur après 2030 (fièvre numérique, nanodermite, grippe martienne, syndrome holographique). Elles durent de quelques mois à quelques années, se cumulent, donnent une bulle rouge pâle et doublent le risque d\'une maladie grave.',
+       'Covid-19 : entre décembre 2019 et décembre 2024, chaque personne en vie a 8 % de risque de l\'attraper (maladie bénigne de 4 à 18 mois).',
+       'Boutique : nouvelle Potion de santé (185 Cyn), qui guérit toutes les maladies d\'un membre de la famille au choix, même les graves.',
+       'Album : nouvelle catégorie Écoles & formations (maternelle, CP à CM2, collège, lycée, bacs et CAP, études supérieures, apprentis, déscolarisés…), avec son succès « Premier de la classe ».'],
+   en:['Mild illnesses: 18 new non-fatal illnesses (scabies, gout, asthma, shingles, burnout, hay fever…) depending on the era, plus 4 from the future after 2030 (digital fever, nanodermatitis, Martian flu, hologram syndrome). They last from a few months to a few years, stack up, show a pale red bubble and double the risk of a serious illness.',
+       'Covid-19: between December 2019 and December 2024, everyone alive has an 8% chance of catching it (a mild illness lasting 4 to 18 months).',
+       'Shop: new Health potion (185 Cyn) that cures every illness of a family member of your choice, even serious ones.',
+       'Album: new Schools & training section (nursery, primary, middle school, high school, bacs and CAPs, higher education, apprentices, out of school…), with its own "Top of the class" achievement.']},
   {v:'0.1.3e', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['La carte de France remplit maintenant toute sa zone.',
        'Accident de la route : de 1950 (quand les morts sur la route deviennent un vrai problème) à 2075, au lieu de 1900-1959. Nouvel accident spatial à partir de 2083 (l\'atout Intelligence en protège).',
@@ -1669,6 +1684,46 @@ const TRACKS = [['bacphilo','Bac philosophie','Bac · Philosophy',1960,1967,'bac
  ['capcoif','CAP Coiffure','CAP · Hairdressing',1960,2100,'cap'],['capmenu','CAP Menuiserie','CAP · Joinery',1960,2100,'cap'],
  ['bma','BMA Ébénisterie','BMA · Cabinetmaking',1990,2100,'cap'],['bep','BEP Comptabilité','BEP · Accounting',1966,2009,'cap']];
 const TRACK = byId(TRACKS);
+// maladies bénignes : [id, fr, en, de, à, durée min (jours), durée max, filtre] — elles ne tuent pas, mais doublent le risque de maladie grave
+const MILDS = [
+ ['gale','Gale','Scabies',1500,2100,60,200,{}],['goutte','Goutte','Gout',1500,2100,120,900,{minA:30}],
+ ['scorbut','Scorbut','Scurvy',1500,1850,60,300,{}],['rhumatisme','Rhumatismes','Rheumatism',1500,2100,180,1500,{minA:40}],
+ ['teigne','Teigne','Ringworm',1500,1950,60,300,{}],['bronchite','Bronchite chronique','Chronic bronchitis',1500,2100,90,720,{}],
+ ['zona','Zona','Shingles',1500,2100,60,240,{minA:30}],['eczema','Eczéma','Eczema',1500,2100,120,1100,{}],
+ ['psoriasis','Psoriasis','Psoriasis',1800,2100,180,1400,{}],['asthme','Asthme','Asthma',1500,2100,365,1800,{}],
+ ['migraine','Migraines chroniques','Chronic migraines',1500,2100,120,900,{minA:10}],['hepatitea','Hépatite A','Hepatitis A',1900,2100,60,180,{}],
+ ['mono','Mononucléose','Mononucleosis',1920,2100,60,240,{minA:12,maxA:30}],['dos','Mal de dos chronique','Chronic back pain',1500,2100,120,1100,{minA:25}],
+ ['rachitisme','Rachitisme','Rickets',1500,1930,180,1100,{maxA:14}],['acne','Acné sévère','Severe acne',1500,2100,180,1100,{minA:12,maxA:30}],
+ ['burnout','Burn-out','Burnout',1975,2100,90,540,{minA:20,maxA:66}],['allergie','Rhume des foins','Hay fever',1850,2100,120,700,{}],
+ ['fievrenum','Fièvre numérique','Digital fever',2031,2100,60,400,{}],['nanoderm','Nanodermite','Nanodermatitis',2035,2100,90,600,{}],
+ ['grippemars','Grippe martienne','Martian flu',2045,2100,60,300,{}],['holosyndrome','Syndrome holographique','Hologram syndrome',2060,2100,120,900,{}],
+ ['covid','Covid-19','Covid-19',2019,2024,120,540,{special:true}]
+];
+const MILD = byId(MILDS);
+const mildName = id => MILD[id] ? (LANG === 'fr' ? MILD[id][1] : MILD[id][2]) : id;
+const mildOn = (p, day = S.t) => (p.mild || []).filter(m => day >= m.start && day < m.end);
+const COVID_A = fromYMD(2019, 11, 1), COVID_B = fromYMD(2024, 11, 31);
+function catchMild(p, id, day){
+  const r = MILD[id]; p.mild = (p.mild || []).filter(m => m.end > day);
+  if(p.mild.some(m => m.dz === id)) return;
+  p.mild.push({dz:id, start:day, end: day + rnd(r[5], r[6])});
+  log('ill','mild',[p.id, id], day, false); dirty = true;
+}
+function mildYear(p, A, day){                         // une fois par an : peut-être une maladie bénigne (cumulable)
+  if(!R.diseases || immune(p, day) || p.death != null) return;
+  if(p.mild) p.mild = p.mild.filter(m => m.end > day);
+  if(day >= COVID_A && day <= COVID_B && !p.covidRoll){   // déc. 2019 - déc. 2024 : 8 % des vivants attrapent le Covid-19
+    p.covidRoll = true; if(Math.random() < .08) catchMild(p, 'covid', day);
+  }
+  if(Math.random() < .06 * R.illness/100){
+    const y = dataYear(yearOf(day)), ok = MILDS.filter(r => !r[7].special && y >= r[3] && y <= r[4] && (r[7].minA == null || A >= r[7].minA) && (r[7].maxA == null || A <= r[7].maxA));
+    if(ok.length) catchMild(p, pick(ok)[0], day);
+  }
+}
+function cureAll(p){                                  // potion de santé : plus aucune maladie, même grave
+  p.ill = null; p.onset = null; p.onsetAddict = false; p.mild = [];
+  log('cure','potion',[p.id], today(), true); dirty = true;
+}
 // maladies : [id, nom fr, « de … » fr, en, de, à, durée min (jours), durée max, chance de guérir, filtre]
 const DISEASES = [
  ['peste','Peste','de la peste','plague',1500,1722,3,14,.02],['variole','Variole','de la variole','smallpox',1500,1900,10,30,.05],
@@ -1786,6 +1841,7 @@ function pickDisease(p, day){
 /* Icônes (SVG 24×24) */
 const ICONS = {
   dna:'<path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/>',
+  potion:'<path d="M9 2h6v2h-1v4.3l5.5 9.6A2.7 2.7 0 0 1 17.2 22H6.8a2.7 2.7 0 0 1-2.3-4.1L10 8.3V4H9zm-1.4 13h8.8l-2.4-4.2h-4z"/>',
   bag:'<path d="M8 7V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-4 0v1zM4.2 8h15.6l-1.1 12.2A2 2 0 0 1 16.7 22H7.3a2 2 0 0 1-2-1.8z"/>',
   album:'<path d="M6 2h11a3 3 0 0 1 3 3v17H8a3 3 0 0 1-3-3V3zm2 15.5a1 1 0 0 0 0 2h10v-2zM9 5v7l2.5-1.6L14 12V5z"/>',
   pencil:'<path d="M4 17.2V20h2.8L17.6 9.2l-2.8-2.8zM19.7 7.1a1 1 0 0 0 0-1.4l-1.4-1.4a1 1 0 0 0-1.4 0l-1.1 1.1 2.8 2.8z"/>',
@@ -2064,7 +2120,12 @@ fr:{
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
-  shop_eyebrow:'Dépense tes Cyn', shopc_births:'Naissances', shopc_self:'Ton personnage', shopc_family:'Famille', shopc_themes:'Thèmes',
+  shop_eyebrow:'Dépense tes Cyn', shop_potion:'Potion de santé', shop_potion_d:"Guérit toutes les maladies d'un membre de la famille au choix, même les plus graves.",
+  shop_potion_none:"Personne n'est malade dans la famille.", pick_potion:()=>'Qui doit boire la potion ?', sick_soon:'Va bientôt tomber malade',
+  f_mild:'Maladies bénignes', until_y:y=>`jusqu'en ${y}`,
+  log_mild:(p,id)=>`${nm(p)} tombe malade : ${mildName(id).toLowerCase() === 'covid-19' ? 'Covid-19' : mildName(id)} (bénin).`,
+  log_potion:p=>`${nm(p)} boit une potion de santé : plus aucune maladie !`,
+  alb_school:'Écoles & formations', alb_mat:'Maternelle', alb_col:'Collège', alb_uni:'Études supérieures', alb_appr:'Apprenti', alb_dropout:'Déscolarisé', shopc_births:'Naissances', shopc_self:'Ton personnage', shopc_family:'Famille', shopc_themes:'Thèmes',
   shop_fertile:'Fertilité', shop_fertile_d:'La prochaine naissance de ton personnage sera multiple : jumeaux (77 %), triplés (15 %) ou quadruplés (8 %).',
   shop_immune:'Immunité', shop_immune_d:'Ton personnage ne peut plus tomber malade ni avoir d\'accident pendant 50 ans.',
   shop_midlife:'Crise de la cinquantaine', shop_midlife_d:'Ton personnage cumule un deuxième atout, au choix.',
@@ -2242,7 +2303,12 @@ en:{
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
-  shop_eyebrow:'Spend your Cyn', shopc_births:'Births', shopc_self:'Your character', shopc_family:'Family', shopc_themes:'Themes',
+  shop_eyebrow:'Spend your Cyn', shop_potion:'Health potion', shop_potion_d:'Cures every illness of a family member of your choice, even the most serious.',
+  shop_potion_none:'Nobody in the family is ill.', pick_potion:()=>'Who should drink the potion?', sick_soon:'About to fall ill',
+  f_mild:'Mild illnesses', until_y:y=>`until ${y}`,
+  log_mild:(p,id)=>`${nm(p)} falls ill: ${mildName(id)} (mild).`,
+  log_potion:p=>`${nm(p)} drinks a health potion: no more illness!`,
+  alb_school:'Schools & training', alb_mat:'Nursery', alb_col:'Middle school', alb_uni:'Higher education', alb_appr:'Apprentice', alb_dropout:'Out of school', shopc_births:'Births', shopc_self:'Your character', shopc_family:'Family', shopc_themes:'Themes',
   shop_fertile:'Fertility', shop_fertile_d:"Your character's next birth will be multiple: twins (77%), triplets (15%) or quadruplets (8%).",
   shop_immune:'Immunity', shop_immune_d:"Your character can't fall ill or have an accident for 50 years.",
   shop_midlife:'Midlife crisis', shop_midlife_d:'Your character gets a second gift of your choice.',
@@ -2356,6 +2422,7 @@ const ACHS = [
  ['twins2','other','special','Ça se répète','Avoir deux fois des jumeaux (ou plus) avec le même conjoint','Here we go again','Have twins (or more) twice with the same partner'],
  ['alb_i','album','gold','Passionné de passions',"Compléter la catégorie Centres d'intérêt de l'album",'Hobby hoarder','Complete the Interests category of the album'],
  ['alb_c','album','gold','Hors du commun',"Compléter la catégorie Particularités de l'album",'One of a kind','Complete the Traits category of the album'],
+ ['alb_e','album','gold','Premier de la classe',"Compléter la catégorie Écoles & formations de l'album",'Top of the class','Complete the Schools & training section of the album'],
  ['alb_j','album','platinum','Touche-à-tout',"Compléter la catégorie Métiers de l'album",'Jack of all trades','Complete the Jobs category of the album'],
  ['alb_d','album','platinum','Mille et une morts',"Compléter la catégorie Morts de l'album",'A thousand and one deaths','Complete the Deaths category of the album'],
  ['alb_a','album','silver','Toutes les tentations',"Compléter la catégorie Addictions de l'album",'Every temptation','Complete the Addictions category of the album'],
@@ -2702,6 +2769,7 @@ function activity(p, skipIll){
 /* ================= Mécanique ================= */
 function scheduleYear(p, A, day){
   if(A >= (R.oldAge ? 121 : 150)){ die(p, day, {old:true}); return; }      // sans mort de vieillesse : maximum 150 ans
+  mildYear(p, A, day);
   if(p.ill || p.onset!=null || p.deathAt!=null) return;
   const war = warAt(day), r = baseRisk(p, A, day) * (war ? 1.35 : 1);           // guerre : +35 % de mortalité
   if(Math.random() < r){
@@ -2720,7 +2788,7 @@ function baseRisk(p, A, day = S.t){
     return Math.min(1, yearlyRisk(A, p) * era / (hasAtout(p,'longevite') && A < 105 ? 10 : 1));   // après 105 ans : risque normal
   }
   if(!R.diseases) return 0;
-  return yearlyRisk(A > 80 ? 78 : A, p) * R.illness/100 * 1.15 * (sporty(p) ? .5 : 1);   // ×1,15 depuis la 0.1.1a   // curseur « maladies » ; sportifs : risque ÷ 2
+  return yearlyRisk(A > 80 ? 78 : A, p) * R.illness/100 * 1.15 * (sporty(p) ? .5 : 1) * (mildOn(p, day).length ? 2 : 1);   // maladie bénigne : ×2   // ×1,15 depuis la 0.1.1a   // curseur « maladies » ; sportifs : risque ÷ 2
 }
 const riskOf = p => { const A = age(p); return Math.min(1, baseRisk(p, A) + (A >= R.legal ? addictsOf(p).reduce((s,id) => s + addRisk(id, A), 0) : 0)); };
 function contract(p, day){
@@ -3188,6 +3256,7 @@ function nodeHTML(p, x, y){
   if(!p.blood) cls.push('partner');
   if(p.star){ cls.push('star'); if(p.star.famous){ cls.push('famous'); if(p.death==null && S.t - p.star.at < 200) cls.push('fresh'); } }
   if(p.ill && p.death==null) cls.push('ill');
+  else if(p.death==null && mildOn(p).length) cls.push('mild');
   if(p.crim){ cls.push('crim'); if(p.crim.declared){ cls.push('declared'); if(p.death==null && S.t - p.crim.at < 200) cls.push('fresh'); } }
   if(p.starKid && !p.star && !p.crim) cls.push('starkid');
   const jail = jailed(p); if(jail) cls.push('jailed');
@@ -3295,6 +3364,7 @@ function statusOf(p){
   if(ended && ended.endReason==='divorce') return t('st_divorced', p);
   return t('st_single');
 }
+const mildTile = p => { const on = p.death == null ? mildOn(p) : []; return on.length ? `<div class="span2 pinkf"><dt>${t('f_mild')}</dt><dd>${esc(on.map(m => `${mildName(m.dz)} (${t('until_y', yearOf(m.end))})`).join(' · '))}</dd></div>` : ''; };
 function riskTile(p, short){
   if(p.ill) return `<div class="red"><dt>${t('f_illness')}</dt><dd>${esc(dzName(p.ill.dz, p))}</dd></div>`;
   return `<div><dt>${t(short ? 'f_risk_short' : 'f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
@@ -3326,7 +3396,7 @@ function renderSide(){
       <dl class="facts">
         <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
         <div><dt>${t('f_gen')}</dt><dd>${genOf(me)}</dd></div>
-        ${riskTile(me)}
+        ${riskTile(me)}${mildTile(me)}
         <div><dt>${t('f_kids')}</dt><dd>${kids}</dd></div>
         <div><dt>${t('f_city')}</dt><dd>${esc(me.city)}</dd></div>
         <div class="${me.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(me, true))}</dd></div>
@@ -3688,7 +3758,7 @@ function openFiche(id){
   openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2>${esc(nm(p))}<button class="pen" data-act="rename" data-id="${p.id}" aria-label="${esc(t('rename', p.first))}" title="${esc(t('rename', p.first))}">${icon('pencil')}</button></h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
     <dl class="facts">
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
-      ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true)}
+      ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
       ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}
       ${fame}${crime}${deadCity}
@@ -3776,7 +3846,7 @@ function arm(b, label){
 
 /* ================= Album : tout ce qui a déjà été vu dans une partie (gardé d'une partie à l'autre) ================= */
 const ALB_KEY = 'lignee.album.v1';
-const ALB = loadJSON(ALB_KEY); ['i','c','j','d','a'].forEach(k => { ALB[k] = ALB[k] || {}; });
+const ALB = loadJSON(ALB_KEY); ['i','c','j','e','d','a'].forEach(k => { ALB[k] = ALB[k] || {}; });
 const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 'w_' + c.war : c.murder ? 'murder' : c.vanished ? 'vanished' : c.suicide ? 'suicide' : c.legend ? 'legend' : c.dz || null; };
 function albumScan(force){
   if(!S) return;
@@ -3787,7 +3857,7 @@ function albumScan(force){
     (p.conds || []).forEach(id => mark('c', id));
     if(p.work && (p.work.s === 'job' || p.work.s === 'star')) mark('j', p.work.job);
     addictsOf(p).forEach(id => mark('a', id));
-    if(p.death != null) mark('d', deathKey(p));
+    if(p.death != null) mark('d', deathKey(p)); else schoolKeys(p).forEach(id => mark('e', id));
   }
   if(ch) store.set(ALB_KEY, JSON.stringify(ALB));
   if(ch || force) albumCheck();
@@ -3798,7 +3868,32 @@ function albumCheck(){                              // succès Album : une caté
   if(all) unlock('leg_album');
 }
 const albYears = (a, b) => b >= 2100 ? (a <= 1500 ? t('alb_always') : t('alb_from', a)) : a <= 1500 ? t('alb_until', b) : t('alb_range', a, b);
-const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['d','alb_death'],['a','alb_addict']];
+const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['e','alb_school'],['d','alb_death'],['a','alb_addict']];
+function schoolKeys(p){                               // où en est la scolarité de quelqu'un (pour l'album)
+  const A = ageAt(p, S.t), y = yearOf(S.t), sc = p.school || {}, w = p.work;
+  if(w && w.s === 'uni') return ['f_' + w.field];
+  if(w && w.s === 'odd' && sc.drop) return ['dropout'];
+  if(w || A < 3 || A >= 18) return [];
+  if(A >= 11 && y >= 1881 && sc.drop) return ['dropout'];
+  if(y >= 1960){ if(A < 6) return ['mat' + (A-3)]; if(A < 11) return ['prim' + (A-6)]; if(A < 15) return ['col' + (A-11)]; return sc.track ? ['tr_' + sc.track] : []; }
+  if(y >= 1881){ if(A < 6) return ['mat' + (A-3)]; if(A < 11) return ['prim' + (A-6)]; if(A === 11) return ['cours_sup']; if(A === 12) return ['certif'];
+    return sc.k === 'lycee' ? ['lyc_old'] : sc.k === 'appr' ? ['appr'] : []; }
+  if(A < 7) return [];
+  if(A < 12) return sc.k0 ? [sc.k0 === 'ecole' ? 'petite_ecole' : 'betes'] : [];
+  return ['appr'];
+}
+function schoolItems(){
+  const fr = LANG === 'fr', it = (id, name, ic, a, b) => ({id, name, ic, y:a, desc: albYears(a, b)});
+  return [...t('mat').map((n, i) => it('mat' + i, `${t('alb_mat')} · ${n}`, 'puzzle', 1881, 2100)),
+    ...t('prim').map((n, i) => it('prim' + i, n, 'book', 1881, 2100)),
+    it('cours_sup', t('cours_sup'), 'book', 1881, 1959), it('certif', t('certif'), 'trophy', 1881, 1959),
+    ...t('col').map((n, i) => it('col' + i, `${t('alb_col')} · ${n}`, 'book', 1960, 2100)),
+    it('lyc_old', t('lycee'), 'bulb', 1881, 1959),
+    ...TRACKS.map(r => it('tr_' + r[0], trackName(r[0]), r[5] === 'bac' ? 'bulb' : 'shirt', r[3], r[4])),
+    ...FIELDS.map(r => it('f_' + r[0], `${t('alb_uni')} · ${fr ? r[1] : r[2]}`, 'atom', r[3], 2100)),
+    it('petite_ecole', t('petite_ecole'), 'book', 1500, 1880), it('betes', t('betes'), 'paw', 1500, 1880),
+    it('appr', t('alb_appr'), 'shirt', 1500, 1959), it('dropout', t('alb_dropout'), 'eyeoff', 1881, 2100)];
+}
 function albItems(k){
   const fr = LANG === 'fr', seen = new Set(), uniq = x => !seen.has(x.id) && seen.add(x.id);
   if(k === 'i') return INTERESTS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[5], y:r[6], desc: albYears(r[6], r[7])}));
@@ -3808,6 +3903,7 @@ function albItems(k){
   if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, y:1500, name: t('alb_d_' + id)}))
     .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
     .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
+  if(k === 'e') return schoolItems();
   return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
 }
@@ -3861,13 +3957,14 @@ const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v))
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
   ['self',   [['immune',290,'pill'],['midlife',350,'hourglass']]],
-  ['family', [['decrim',180,'dove']]],
+  ['family', [['decrim',180,'dove'],['potion',185,'potion']]],
   ['themes', [['orange',830,'sun'],['dark',5000,'moon']]]
 ];
 const SHOP = SHOP_CATS.flatMap(c => c[1]);
 const SHOP_THEMES = ['orange','dark'];
 let cynInfoOpen = false;
 const decrimList = () => S ? living().filter(p => p.crim && inFamily(p)) : [];
+const sickList = () => S ? living().filter(p => inFamily(p) && (p.ill || p.onset != null || mildOn(p).length)) : [];
 function shopState(id, price){                        // disponible ? sinon pourquoi
   const theme = SHOP_THEMES.includes(id), inGame = S && !$('#game').hidden && !S.over && !needHeir(), me = inGame ? active() : null;
   if(theme && UNL[id]) return {dis:true, owned:true};
@@ -3877,6 +3974,7 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'immune' && immune(me, S.t)) return {dis:true, note:t('shop_immune_on', yearOf(me.immuneUntil))};
   if(id === 'midlife' && me.atout2) return {dis:true, note:t('shop_midlife_done', me.first)};
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
+  if(id === 'potion' && !sickList().length) return {dis:true, note:t('shop_potion_none')};
   if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
   return {dis:false};
 }
@@ -3893,7 +3991,10 @@ function openShop(re){
 }
 function openPick(id){                                // décriminalisation / crise de la cinquantaine : on choisit avant de payer
   const price = SHOP.find(x => x[0] === id)[1], me = active();
-  const rows = id === 'decrim'
+  const sickTxt = p => [p.ill ? dzName(p.ill.dz, p) : null, ...mildOn(p).map(m => mildName(m.dz))].filter(Boolean).join(' · ') || t('sick_soon');
+  const rows = id === 'potion'
+    ? sickList().map(p => `<button class="pickrow" data-act="pickdo" data-v="potion" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(sickTxt(p))}</small></span><em>${t('shop_pick')}</em></button>`)
+    : id === 'decrim'
     ? decrimList().map(p => `<button class="pickrow" data-act="pickdo" data-v="decrim" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(jailed(p) ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p))}</small></span><em>${t('shop_pick')}</em></button>`)
     : ATOUTS.filter(a => a[0] !== me.atout).map(a => `<button class="pickrow" data-act="pickdo" data-v="midlife" data-id="${a[0]}"><i class="pickic">${icon(a[4])}</i><span><b>${esc(atoutName(a[0], me))}</b><small>${esc(a[LANG==='fr' ? 5 : 6])}</small></span><em>${t('shop_pick')}</em></button>`);
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop')} · ${cynFmt(price)} Cyn</div><h2>${t('shop_' + id)}</h2><p class="hint">${esc(t('pick_' + id, me.first))}</p></div>
@@ -3999,7 +4100,7 @@ const ACT = {
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
-    if(d.v === 'decrim' || d.v === 'midlife') return openPick(d.v);
+    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion') return openPick(d.v);
     if(!arm(b, t('shop_confirm'))) return;
     payCyn(it[1]);
     const me = S && active(), day = S ? today() : 0;
@@ -4022,6 +4123,7 @@ const ACT = {
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     const me = active();
     if(d.v === 'decrim'){ const p = P(+d.id); if(!p || !p.crim || p.death != null) return; payCyn(it[1]); decrim(p); sfx.cure(); burst(['#ffffff','#8cff1a','#3fd0ff'], 40); }
+    else if(d.v === 'potion'){ const p = P(+d.id); if(!p || p.death != null) return; payCyn(it[1]); cureAll(p); sfx.cure(); burst(['#ff6cc0','#ffffff','#8cff1a','#c3a2ff'], 44); }
     else { if(!ATOUT[d.id] || me.atout2) return; payCyn(it[1]); me.atout2 = d.id; log('star','midlife',[me.id, d.id], today(), true); sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff'], 40); }
     dirty = true; save(); render(); openShop(true);
   },
