@@ -16,7 +16,7 @@
 <title>Cyngenetic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Istok+Web:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
 <style>
 /* Layout : ciel saturé + collines vertes en fond ; barre de verre en haut avec l'horloge « LCD » et la décennie ;
    arbre à gauche, panneau latéral de verre à droite (empilés sur téléphone). Un seul look lumineux, assumé. */
@@ -190,6 +190,28 @@ input[type=range]{width:100%;accent-color:var(--aqua)}
 :root[data-skin="orange"]{--sky-top:#ff5a00;--sky-mid:#ff9a2e;--sky-low:#ffd27a;--sky-haze:#fff3d9;--aqua:#ff8a00;--aqua-deep:#c04800;
   --g1:#ffe2a8;--g2:#ff9a1f;--g3:#e25b00;--gedge:#b34700;--lcd-a:#ffb050;--lcd-b:#e86400;--lcd-c:#b84500;--lcd-d:#ff8a1f;--lcd-edge:#8a3300;--lcd-glow:rgba(255,230,150,.95);
   --shadow:0 14px 34px rgba(170,70,0,.28)}
+:root[data-skin="kid"]{--sky-top:#4fc2ff;--sky-mid:#93dcff;--sky-low:#d6f5ff;--sky-haze:#fff6c4;--aqua:#ff6fae;--aqua-deep:#e0407f;
+  --g1:#ffd9ec;--g2:#ff8cc4;--g3:#ff4f98;--gedge:#d83a7c;--lcd-a:#ffc04d;--lcd-b:#ff8f1f;--lcd-c:#e85d00;--lcd-d:#ffab3a;--lcd-edge:#b84a00;--lcd-glow:rgba(255,240,170,.95);
+  --hill-a1:#a6f760;--hill-a2:#58d63a;--hill-a3:#23a82e;--hill-b1:#ffe066;--hill-b2:#ffad1f;--shadow:0 14px 34px rgba(255,80,150,.24);
+  --font-display:"Fredoka","M PLUS Rounded 1c","Segoe UI",system-ui,sans-serif}
+.kidfx{position:absolute;inset:0;display:none;overflow:hidden}
+:root[data-skin="kid"] .kidfx{display:block}
+body.no-deco .kidfx b,body.no-deco .kidfx .cloud{display:none}
+.kidfx .rainbow{position:absolute;left:50%;top:12vh;width:min(1200px,150vw);aspect-ratio:2/1;transform:translateX(-50%);opacity:.5;
+  background:radial-gradient(circle at 50% 100%,rgba(0,0,0,0) 0 50%,#8f6bff 50% 53.4%,#3fa9ff 53.4% 56.8%,#3fd46b 56.8% 60.2%,#ffe14d 60.2% 63.6%,#ff9a2e 63.6% 67%,#ff4f6d 67% 70.4%,rgba(0,0,0,0) 70.4%)}
+.kidfx .cloud{position:absolute;left:0;top:var(--y);width:var(--w);height:calc(var(--w)*.34);border-radius:999px;background:#fff;opacity:.92;
+  box-shadow:0 6px 14px rgba(80,160,220,.18);animation:kidcloud var(--d) linear infinite;animation-delay:var(--dl)}
+.kidfx .cloud::before,.kidfx .cloud::after{content:"";position:absolute;bottom:40%;border-radius:50%;background:#fff}
+.kidfx .cloud::before{left:16%;width:38%;aspect-ratio:1}
+.kidfx .cloud::after{left:44%;width:44%;aspect-ratio:1}
+.kidfx b{position:absolute;width:var(--s);height:var(--s);background:var(--c);animation:kidbob var(--d) ease-in-out infinite;animation-delay:var(--dl);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.kidfx b.h{clip-path:path('M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z');width:24px;height:24px;transform-origin:center}
+@keyframes kidcloud{from{transform:translateX(-40vw)}to{transform:translateX(140vw)}}
+@keyframes kidbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(14deg)}}
+:root[data-skin="kid"] .logo{background:linear-gradient(90deg,#3fd46b,#3fa9ff 50%,#8f6bff);-webkit-background-clip:text;background-clip:text}
+:root[data-skin="kid"] .logo span{background:linear-gradient(90deg,#ff4f6d,#ff9a2e 50%,#ffc21f);-webkit-background-clip:text;background-clip:text}
+:root[data-skin="kid"] .glass{border-color:#fff;border-radius:26px}
 :root[data-skin="vapor"]{--sky-top:#00c8ff;--sky-mid:#4fe3ff;--sky-low:#ff8be4;--sky-haze:#ffd9f6;--aqua:#00c8ff;--aqua-deep:#b0008a;
   --g1:#b8fbff;--g2:#00d4ff;--g3:#00a0c8;--gedge:#0089a8;--lcd-a:#ff7ad8;--lcd-b:#d4009e;--lcd-c:#9e0077;--lcd-d:#ff2fc0;--lcd-edge:#7a005c;--lcd-glow:rgba(255,180,245,.95);
   --hill-a1:#ffa3f0;--hill-a2:#c43cff;--hill-a3:#6a00b8;--hill-b1:#e070ff;--hill-b2:#5a00a0;--shadow:0 14px 34px rgba(120,0,140,.28)}
@@ -343,6 +365,7 @@ body.no-deco .bubble{display:none}
 .skin.sk-aqua i{background:linear-gradient(180deg,#0062ec,#14a6ff 50%,#7fe3ff 70%,#5ed400)}
 .skin.sk-orange i{background:linear-gradient(180deg,#ff5a00,#ff9a2e 50%,#ffd27a 70%,#5ed400)}
 .skin.sk-vapor i{background:linear-gradient(180deg,#00c8ff,#4fe3ff 45%,#ff8be4 70%,#c43cff)}
+.skin.sk-kid i{background:radial-gradient(circle at 50% 100%,rgba(0,0,0,0) 0 38%,#8f6bff 38% 44%,#3fa9ff 44% 50%,#3fd46b 50% 56%,#ffe14d 56% 62%,#ff9a2e 62% 68%,#ff4f6d 68% 74%,rgba(0,0,0,0) 74%),linear-gradient(180deg,#5ec8ff,#bdeeff 70%,#9cf55a 72%,#53d63a)}
 .skin[aria-pressed="true"]{border-color:var(--aqua);box-shadow:0 0 0 3px rgba(0,180,255,.3)}
 @media (max-width:520px){ .skins{grid-template-columns:1fr 1fr} }
 /* Criminels : bulle rouge et noire, lueur sombre ; une fois révélés, des flammes */
@@ -399,6 +422,21 @@ body.no-deco .bubble{display:none}
 .ach{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 8px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:0 4px 10px rgba(0,70,160,.12)}
 .ach.locked{opacity:.5;filter:grayscale(.95)}
 .ach b{font:800 13.5px/1.2 var(--font-display)}
+.albtabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.albtabs button{display:inline-flex;align-items:center;gap:6px}
+.albtabs button small{font-size:11px;opacity:.7}
+.albgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.albc{display:grid;grid-template-columns:32px 1fr;gap:9px;align-items:center;padding:9px 11px;border-radius:16px;background:rgba(255,255,255,.78);border:1px solid #fff;box-shadow:0 3px 8px rgba(0,70,160,.1)}
+.albc>i{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 12%,var(--aqua) 70%);color:#fff;box-shadow:inset 0 -3px 6px rgba(0,0,0,.12)}
+.albc>i svg{width:17px;height:17px;fill:currentColor}
+.albc b{display:block;font:700 13px/1.2 var(--font-display)}
+.albc small{display:block;margin-top:2px;font-size:11.5px;line-height:1.3;color:var(--ink-soft)}
+.albc.unk{background:rgba(255,255,255,.42)}
+.albc.unk>i{background:radial-gradient(circle at 35% 30%,#fff 0 12%,#a3b6c8 70%)}
+.albc.unk b{color:var(--ink-faint);letter-spacing:.1em}
+:root[data-skin="dark"] .albc{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
+:root[data-skin="dark"] .albc.unk{background:rgba(255,255,255,.04)}
+@media (max-width:520px){ .albgrid{grid-template-columns:1fr 1fr} .albc{grid-template-columns:1fr;justify-items:center;text-align:center;padding:9px 7px} }
 .ach small{font-size:12px;line-height:1.35;color:var(--ink-soft)}
 .ach em{font-style:normal;font:700 11px var(--font-display);color:var(--lime-deep)}
 .ach.locked em{color:var(--ink-faint)}
@@ -713,7 +751,7 @@ body.no-deco .bubble{display:none}
   body[data-mtab="me"] .side .journal{display:none}
   body[data-mtab="journal"] .side>section:not(.journal){display:none}
   .tree-head #viewSw{display:none}
-  .topbar .achb{display:none}
+  .topbar .achb,.topbar .albb{display:none}
   .tree-head{padding:10px 12px 8px;gap:8px}
   .tree-head h2{font-size:17px}
   .toasts{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 24px))}
@@ -778,6 +816,7 @@ body.no-deco .bubble{display:none}
   <div id="bubbles"></div>
   <div class="goldfx" id="goldfx"></div>
   <div class="nightfx" id="nightfx"></div>
+  <div class="kidfx" id="kidfx"><i class="rainbow"></i></div>
 </div>
 
 <!-- ============ Écran de départ ============ -->
@@ -863,6 +902,7 @@ body.no-deco .bubble{display:none}
       <button class="gel round" id="btnPause" data-act="pause"></button>
       <span class="ctrl-sep" aria-hidden="true"></span>
       <button class="gel ghost autob" id="btnAuto" data-act="auto"></button>
+      <button class="gel round ghost albb" data-act="album" data-ta="album" data-tt="album"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h11a3 3 0 0 1 3 3v17H8a3 3 0 0 1-3-3V3zm2 15.5a1 1 0 0 0 0 2h10v-2zM9 5v7l2.5-1.6L14 12V5z"/></svg></button>
       <button class="gel ghost restartb" data-act="restart"><span data-t="restart"></span></button>
     </div>
   </header>
@@ -892,6 +932,7 @@ body.no-deco .bubble{display:none}
     <button data-act="mtab" data-v="map" data-icon="pin" id="mnavMap" aria-pressed="false" hidden><span data-t="view_map"></span></button>
     <button data-act="mtab" data-v="me" data-icon="user" aria-pressed="false"><span data-t="m_me"></span></button>
     <button class="mnav-ach" data-act="achs" data-icon="trophy" aria-pressed="false"><span data-t="m_ach"></span></button>
+    <button class="mnav-alb" data-act="album" data-icon="album" aria-pressed="false"><span data-t="m_album"></span></button>
     <button data-act="mtab" data-v="journal" data-icon="book" aria-pressed="false"><span data-t="m_journal"></span><b class="mbadge" id="mBadge" hidden></b></button>
   </nav>
 </section>
@@ -912,9 +953,30 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.2d';
+const APP_VERSION = '0.1.3a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.3a', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Album : un nouvel onglet (en bas sur téléphone, à droite du mode auto sur ordinateur) qui répertorie les centres d\'intérêt, particularités, métiers, morts et addictions. Tout reste en « ??????? » tant que ce n\'est pas apparu dans une de tes parties ; les métiers et centres d\'intérêt indiquent leurs années, les addictions leurs effets.',
+       'Atout Ambitieux : il ne force plus une carrière politique. S\'il en fait une, il a 33 % de chances de devenir président.',
+       'Criminels : la prison n\'est possible qu\'après leur premier crime, dans les 10 ans qui suivent.',
+       'Musique : quand un criminel se déclare, sa musique coupe la musique douce et joue plus fort. Elle s\'arrête quand plus aucun criminel n\'est libre (un criminel en prison n\'est plus un danger).',
+       'Nouveau thème Enfantin (arc-en-ciel, nuages et étoiles), débloqué à la naissance de quadruplés. Les criminels y deviennent des méchants.',
+       'Le thème Cyan & magenta devient Néon et se débloque quand une famille atteint 16 générations.',
+       '16 nouveaux métiers : projectionniste, réceptionniste, ambassadeur, câlineur (après 2040), créateur d\'espèces (après 2062), paléontologue, égyptologue, brasseur, tavernier, bourreau, concierge, gardien de prison, et pour le futur thérapeute pour IA, pilote de taxi-drone et nettoyeur orbital. L\'imprimeur existe maintenant jusqu\'en 2100.',
+       '5 nouvelles particularités : maniaque, borderline, personne à mobilité réduite, psychopathe, syndrome de Diogène.',
+       '12 nouveaux centres d\'intérêt : fan de vaporwave, fan de rap, gangster, dealeur, collectionneur de jeux, rétro-gameur, graffeur, fan de Star Wars, fan de comics, tiktokeur (2018-2037), néo-tiktokeur (2037-2087) et streameur extra-planétaire (après 2084).',
+       '19 nouveaux noms de famille, dont Da Vinci, Véga, Targuerien, Laudebrook et Castelgan.'],
+   en:['Album: a new tab (bottom bar on phone, right of auto mode on computer) listing interests, traits, jobs, deaths and addictions. Everything stays "???????" until it shows up in one of your games; jobs and interests show their years, addictions their effects.',
+       'Ambition gift: it no longer forces a political career. If they do go into politics, they have a 33% chance of becoming President.',
+       'Criminals: prison is only possible after their first crime, within the next 10 years.',
+       'Music: when a criminal is revealed, their theme cuts off the soft music and plays louder. It stops once no criminal is free anymore (a criminal in prison is no longer a threat).',
+       'New Kiddy theme (rainbow, clouds and stars), unlocked when quadruplets are born. Criminals become villains in it.',
+       'The Cyan & magenta theme is now called Neon and unlocks when a family reaches 16 generations.',
+       '16 new jobs: projectionist, receptionist, ambassador, professional cuddler (after 2040), species designer (after 2062), palaeontologist, egyptologist, brewer, tavern keeper, executioner, caretaker, prison guard, and for the future AI therapist, air taxi pilot and orbital debris cleaner. Printers now exist until 2100.',
+       '5 new traits: fastidious, borderline, reduced mobility, psychopath, Diogenes syndrome.',
+       '12 new interests: vaporwave fan, rap fan, gangster, dealer, game collector, retro gamer, graffiti artist, Star Wars fan, comics fan, TikToker (2018-2037), neo-TikToker (2037-2087) and off-world streamer (after 2084).',
+       '19 new surnames, including Da Vinci, Véga, Targuerien, Laudebrook and Castelgan.']},
   {v:'0.1.2d', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Sur ordinateur, la molette de la souris zoome directement dans l\'arbre (Maj + molette pour faire défiler).',
        'Renommer : dans la fiche de n\'importe qui, un petit crayon à côté du nom permet de changer son prénom.',
@@ -1138,7 +1200,8 @@ const SURNAMES_MODERN = ['Kowalski','Nowak','Wisniewski','Marchetti','Bellini','
 const SURNAMES_PLAIN = ['Martin','Bernard','Dubois','Durand','Moreau','Lefebvre','Fournier','Girard','Bonnet','Dupont','Lambert','Fontaine','Rousseau','Mercier','Guérin','Chevalier','Perrin','Gauthier','Roux','Clément'];
 const SN_PRE = ['','','','','Le ','De ','Du ','La '], SN_A = ['Ker','Bel','Mont','Roche','Val','Chab','Gour','Lan','Puy','Ver','Esc','Tour','Mal','Bour','Quin','Cas','Fon','Gras','Mar','Pey','Cler','Haut','Brou','Vill','Sauv','Corb','Lusc','Maub'], SN_B = ['ard','illon','eau','ennec','agne','ois','iac','elle','ier','ot','andre','ouze','erie','ain','ac','ignac','oux','ergue','aval','ebœuf','fort','mont','ville','ade','ière','enot'];
 // noms ajoutés en 0.1.2a
-const SURNAMES_ADDED = ['Le Meunier','Dubois','Renard','Duval','Thomas','Sapin','Papain','Grevsel','Lebon','Petit','Conseig','Dupuy','Dupont','Lalem','Mondragon','Aubin','Jubin','Moraclet','Kerval','Holland','Berry','Douglas','Webb','Spencer','Marty','Baron','Chevalier','Blanc','Muller','Fleury','Gillet','Pichon','Maréchal','Laporte','Meuron','Jacob','Le Goff','Le Roux','Hervé','Rey','Lecomte','Sanguilliot','Touret'];
+const SURNAMES_ADDED = ['Le Meunier','Dubois','Renard','Duval','Thomas','Sapin','Papain','Grevsel','Lebon','Petit','Conseig','Dupuy','Dupont','Lalem','Mondragon','Aubin','Jubin','Moraclet','Kerval','Holland','Berry','Douglas','Webb','Spencer','Marty','Baron','Chevalier','Blanc','Muller','Fleury','Gillet','Pichon','Maréchal','Laporte','Meuron','Jacob','Le Goff','Le Roux','Hervé','Rey','Lecomte','Sanguilliot','Touret',
+  'Da Vinci','Da Silva','Delaigue','Delporte','Norge','Vincet','Véga','Lebroke','Castelgan','Laudebrook','Lankweldan','Targuerien','Jaude','Neymar','Kartney','Lesage','Suffort','Bourgenet','Richard'];
 function pickSurname(y){
   if(Math.random() < .18) return pick(SURNAMES_ADDED);
   const r = Math.random();
@@ -1161,7 +1224,7 @@ const JOBS = [
  ['berger','Berger','Bergère','Shepherd','Shepherdess',1500,1949],['vigneron','Vigneron','Vigneronne','Winegrower','Winegrower',1500,2100],
  ['notaire','Notaire','Notaire','Notary','Notary',1500,2100],['apothicaire','Apothicaire','Apothicaire','Apothecary','Apothecary',1500,1799],
  ['soldat','Soldat','Cantinière','Soldier','Canteen keeper',1500,1899],['macon','Maçon','Maçonne','Mason','Mason',1500,2100],
- ['pecheur','Pêcheur','Pêcheuse','Fisherman','Fisherwoman',1500,2100],['imprimeur','Imprimeur','Imprimeuse','Printer','Printer',1500,1999],
+ ['pecheur','Pêcheur','Pêcheuse','Fisherman','Fisherwoman',1500,2100],['imprimeur','Imprimeur','Imprimeuse','Printer','Printer',1500,2100],
  ['medecin','Médecin','Médecin','Doctor','Doctor',1500,2100],['avocat','Avocat','Avocate','Lawyer','Lawyer',1500,2100],
  ['architecte','Architecte','Architecte','Architect','Architect',1500,2100],['professeur','Professeur','Professeure','Teacher','Teacher',1500,2100],
  ['cuisinier','Cuisinier','Cuisinière','Cook','Cook',1500,2100],['boucher','Boucher','Bouchère','Butcher','Butcher',1500,2100],
@@ -1249,7 +1312,15 @@ const JOBS = [
  ['mendiant','Mendiant','Mendiante','Beggar','Beggar',1500,2100],['agentsecret','Agent secret','Agente secrète','Secret agent','Secret agent',1871,2100],
  ['espion','Espion','Espionne','Spy','Spy',1500,2100],['pretre','Prêtre','Prêtresse','Priest','Priestess',1500,2100],
  ['astromeca','Astro-mécano','Astro-mécano','Space mechanic','Space mechanic',2050,2100],['proviseur','Proviseur','Proviseure','Head teacher','Head teacher',1802,2100],
- ['moniteurae',"Moniteur d'auto-école","Monitrice d'auto-école",'Driving instructor','Driving instructor',1920,2100],['mathematicien','Mathématicien','Mathématicienne','Mathematician','Mathematician',1500,2100]
+ ['moniteurae',"Moniteur d'auto-école","Monitrice d'auto-école",'Driving instructor','Driving instructor',1920,2100],['mathematicien','Mathématicien','Mathématicienne','Mathematician','Mathematician',1500,2100],
+ ['projectionniste','Projectionniste','Projectionniste','Projectionist','Projectionist',1897,2030],['receptionniste','Réceptionniste','Réceptionniste','Receptionist','Receptionist',1880,2100],
+ ['ambassadeur','Ambassadeur','Ambassadrice','Ambassador','Ambassador',1500,2100],['calineur','Câlineur','Câlineuse','Professional cuddler','Professional cuddler',2040,2100],
+ ['createurespece',"Créateur d'espèces","Créatrice d'espèces",'Species designer','Species designer',2062,2100],['paleontologue','Paléontologue','Paléontologue','Palaeontologist','Palaeontologist',1822,2100],
+ ['egyptologue','Égyptologue','Égyptologue','Egyptologist','Egyptologist',1822,2100],['brasseur','Brasseur','Brasseuse','Brewer','Brewer',1500,2100],
+ ['tavernier','Tavernier','Tavernière','Tavern keeper','Tavern keeper',1500,1900],['bourreau','Bourreau','Bourreau','Executioner','Executioner',1500,1977],
+ ['concierge','Concierge','Concierge','Caretaker','Caretaker',1500,2100],['gardienprison','Gardien de prison','Gardienne de prison','Prison guard','Prison guard',1800,2100],
+ ['therapeuteia','Thérapeute pour IA','Thérapeute pour IA','AI therapist','AI therapist',2032,2100],['pilotetaxidrone','Pilote de taxi-drone','Pilote de taxi-drone','Air taxi pilot','Air taxi pilot',2035,2100],
+ ['nettoyeurorbital','Nettoyeur orbital','Nettoyeuse orbitale','Orbital debris cleaner','Orbital debris cleaner',2045,2100]
 ];
 const STARJOBS = [
  ['peintre','Peintre','Peintre','Painter','Painter',1500,2100],['ecrivain','Écrivain','Écrivaine','Writer','Writer',1500,2100],
@@ -1280,7 +1351,10 @@ const CONDS = [
  ['anxsoc','Anxiété sociale','Anxiété sociale','Social anxiety','brain'],['cyclothymie','Cyclothymie','Cyclothymie','Cyclothymia','brain'],
  ['definte','Déficience intellectuelle','Déficience intellectuelle','Intellectual disability','brain'],['boulimie','Boulimique','Boulimique','Bulimic','cup'],
  ['insomnie','Insomniaque','Insomniaque','Insomniac','moon'],['narcolepsie','Narcoleptique','Narcoleptique','Narcoleptic','moon'],
- ['anxchron','Anxiété chronique','Anxiété chronique','Chronic anxiety','brain']
+ ['anxchron','Anxiété chronique','Anxiété chronique','Chronic anxiety','brain'],
+ ['maniaque','Maniaque','Maniaque','Fastidious','sparkle'],['borderline','Borderline','Borderline','Borderline','brain'],
+ ['pmr','Personne à mobilité réduite','Personne à mobilité réduite','Reduced mobility','user'],['psychopathe','Psychopathe','Psychopathe','Psychopath','brain'],
+ ['diogene','Syndrome de Diogène','Syndrome de Diogène','Diogenes syndrome','puzzle']
 ];
 /* Atouts (0.1.2a) : un seul par personne, reçu à la naissance par tout le monde, visible seulement dans la fiche.
    [id, fr masc., fr fém., en, icône, effet fr, effet en] */
@@ -1295,7 +1369,7 @@ const ATOUTS = [
  ['sante','Santé','Santé','Health','leaf','Ne tombe jamais malade avant 60 ans.','Never falls ill before 60.'],
  ['fertile','Fertilité','Fertilité','Fertility','heart','Jumeaux, triplés et quadruplés 10 fois plus fréquents.','Twins, triplets and quadruplets 10 times more likely.'],
  ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse entre 80 et 105 ans.','10 times less likely to die of old age between 80 and 105.'],
- ['ambition','Ambitieux','Ambitieuse','Ambition','flag','Fera carrière en politique, avec 30 % de chances de devenir président.','Will go into politics, with a 30% chance of becoming President.']
+ ['ambition','Ambitieux','Ambitieuse','Ambition','flag',"S'il fait carrière en politique, 33 % de chances de devenir président.",'If they go into politics, a 33% chance of becoming President.']
 ];
 const hasAtout = (p, id) => !!(p && p.atout === id);
 // métiers politiques, artistiques (pour l'atout Créativité) et sources de célébrité tardive
@@ -1349,7 +1423,13 @@ const INTERESTS = [
  ['spatial','Touriste spatial','Touriste spatiale','Space tourist','Space tourist','rocket',2060,9999],['robots','Dresseur de robots','Dresseuse de robots','Robot trainer','Robot trainer','robot',2060,9999],
  ['zerog','Sportif en apesanteur','Sportive en apesanteur','Zero-g athlete','Zero-g athlete','planet',2060,9999,true],['reves','Explorateur de rêves partagés','Exploratrice de rêves partagés','Shared-dream explorer','Shared-dream explorer','brain',2060,9999],
  ['faucon','Fauconnier','Fauconnière','Falconer','Falconer','dove',1500,1849],['duel','Duelliste','Duelliste','Duellist','Duellist','sword',1500,1849],
- ['paume','Joueur de jeu de paume','Joueuse de jeu de paume','Real tennis player','Real tennis player','trophy',1500,1849,true],['alchimie','Alchimiste amateur','Alchimiste amateure','Amateur alchemist','Amateur alchemist','atom',1500,1849]
+ ['paume','Joueur de jeu de paume','Joueuse de jeu de paume','Real tennis player','Real tennis player','trophy',1500,1849,true],['alchimie','Alchimiste amateur','Alchimiste amateure','Amateur alchemist','Amateur alchemist','atom',1500,1849],
+ ['vaporwave','Fan de vaporwave','Fan de vaporwave','Vaporwave fan','Vaporwave fan','wave',2011,9999],['rap','Fan de rap','Fan de rap','Rap fan','Rap fan','headphones',1984,9999],
+ ['gangster','Gangster','Gangster','Gangster','Gangster','knife',1900,9999],['dealeur','Dealeur','Dealeuse','Dealer','Dealer','pill',1960,9999],
+ ['collecjeux','Collectionneur de jeux','Collectionneuse de jeux','Game collector','Game collector','gamepad',1985,9999],['retrogamer','Rétro-gameur','Rétro-gameuse','Retro gamer','Retro gamer','gamepad',1995,9999],
+ ['graffeur','Graffeur','Graffeuse','Graffiti artist','Graffiti artist','palette',1980,9999],['starwars','Fan de Star Wars','Fan de Star Wars','Star Wars fan','Star Wars fan','planet',1977,9999],
+ ['comics','Fan de comics','Fan de comics','Comics fan','Comics fan','book',1938,9999],['streamex','Streameur extra-planétaire','Streameuse extra-planétaire','Off-world streamer','Off-world streamer','rocket',2084,9999],
+ ['tiktok','Tiktokeur','Tiktokeuse','TikToker','TikToker','phone',2018,2037],['neotiktok','Néo-Tiktokeur','Néo-Tiktokeuse','Neo-TikToker','Neo-TikToker','phone',2037,2087]
 ];
 const byId = list => Object.fromEntries(list.map(r => [r[0], r]));
 const INT = byId(INTERESTS);
@@ -1399,7 +1479,7 @@ function pickPol(y){
 }
 const pickJob = (y, p, noPol) => {
   y = dataYear(y);
-  if(!noPol && (hasAtout(p,'ambition') || Math.random() < .02/1.4)){ const j = pickPol(y); if(j) return j; }
+  if(!noPol && Math.random() < .02/1.4){ const j = pickPol(y); if(j) return j; }
   return pick(JOBS.filter(r => inRange(r,y) && !isPol(r[0])))[0];
 };
 const pickStarJob = y => { y = dataYear(y); return pick(STARJOBS.filter(r => inRange(r,y)))[0]; };
@@ -1533,6 +1613,7 @@ function pickDisease(p, day){
 
 /* Icônes (SVG 24×24) */
 const ICONS = {
+  album:'<path d="M6 2h11a3 3 0 0 1 3 3v17H8a3 3 0 0 1-3-3V3zm2 15.5a1 1 0 0 0 0 2h10v-2zM9 5v7l2.5-1.6L14 12V5z"/>',
   pencil:'<path d="M4 17.2V20h2.8L17.6 9.2l-2.8-2.8zM19.7 7.1a1 1 0 0 0 0-1.4l-1.4-1.4a1 1 0 0 0-1.4 0l-1.1 1.1 2.8 2.8z"/>',
   shirt:'<path d="M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',
   computer:'<path fill-rule="evenodd" d="M3 4h18v12H3zm2 2v8h14V6zM9 18h6l1 2H8z"/>',
@@ -1785,7 +1866,7 @@ fr:{
   relocate_note:c=>`Vous quittez ${c} avec votre conjoint et vos enfants mineurs.`,
   skin_gold:'Or', skin_locked:"Terminez une catégorie entière de succès pour débloquer ce thème.", gold_unlocked:'Thème Or débloqué !',
   settings:'Paramètres', custom:'Personnalisation', set_eyebrow:'Confort de jeu', set_lang:'Langue', set_sound:'Son', set_sound_hint:'Bruitages et petites musiques.',
-  set_volume:'Volume', set_theme:'Thème', skin_aqua:'Aqua (bleu)', skin_orange:'Orange', skin_vapor:'Cyan & magenta',
+  set_volume:'Volume', set_theme:'Thème', skin_aqua:'Aqua (bleu)', skin_orange:'Orange', skin_vapor:'Néon', skin_kid:'Enfantin',
   set_toasts:'Notifications', set_toasts_hint:"Bulles en bas de l'écran pour les naissances, décès, etc.", set_deco:'Animations décoratives', set_deco_hint:'Bulles qui flottent et confettis.',
   set_reset_ach:'Réinitialiser les succès', set_reset_ach_hint:'Efface tous les succès débloqués.', reset:'Réinitialiser',
   cust_eyebrow:'Règles du jeu', cust_intro:"Les changements s'appliquent tout de suite, y compris à la partie en cours.", cust_rules:'Règles', cust_probs:'Probabilités',
@@ -1808,9 +1889,16 @@ fr:{
   set_regnal:'Numéros de dynastie', set_regnal_hint:"Un enfant qui porte exactement le même nom qu'un parent ou un grand-parent reçoit un chiffre romain : Jean, Jean II, Jean III…",
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
-  multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès',
+  multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
+  alb_count:(n,m)=>`${n} / ${m} découvertes`, alb_int:"Centres d'intérêt", alb_cond:'Particularités', alb_job:'Métiers', alb_death:'Morts', alb_addict:'Addictions',
+  alb_always:'De tout temps', alb_from:a=>`À partir de ${a}`, alb_until:b=>`Jusqu'en ${b}`, alb_range:(a,b)=>`De ${a} à ${b}`,
+  alb_d_old:'Vieillesse', alb_d_murder:'Meurtre', alb_d_suicide:'Suicide', alb_d_vanished:'Disparition', alb_d_legend:'Entré dans la légende',
+  alb_add:(r,dz)=>`+${r} de risque de mourir chaque année (×2 après 60 ans, ×4 après 70 ans).` + (dz.length ? ` Peut causer : ${dz.join(', ')}.` : ''),
+  alb_hint:'Tout ce qui apparaît dans tes parties se découvre ici, pour toujours.',
   f_interests:"Centres d'intérêt", log_interest:(p,id)=>`${nm(p)} se découvre une passion : ${intName(id, P(p))}.`,
   skin_locked_night:'Le thème Nuit se débloque quand un criminel fait sa première victime.',
+  skin_locked_neon:'Le thème Néon se débloque quand une famille atteint 16 générations.', skin_locked_kid:'Le thème Enfantin se débloque à la naissance de quadruplés.',
+  log_neon_skin:()=>'16 générations ! Le thème Néon est débloqué dans les Paramètres.', log_kid_skin:()=>'Des quadruplés ! Le thème Enfantin est débloqué dans les Paramètres.',
   unknown_places:'Lieux inconnus', map_zoom_in:'Zoomer sur la carte', map_zoom_out:'Dézoomer la carte', map_zoom_reset:'Toute la France', log_addict:(p,a)=>`${nm(p)} tombe dans ${ADD[a][7]}.`,
   crim_future:p=>`☠ ${g(p,'Futur criminel','Future criminelle')}`, crim_now:p=>`☠ ${g(p,'Criminel','Criminelle')}`, crim_jail:p=>`⛓ ${g(p,'Emprisonné','Emprisonnée')}`, star_kid:'★ Enfant de star',
   prison:'En prison', vanished_short:p=>g(p,'Disparu','Disparue'), f_crime:'Casier judiciaire',
@@ -1933,7 +2021,7 @@ en:{
   relocate_note:c=>`You leave ${c} with your partner and underage children.`,
   skin_gold:'Gold', skin_locked:'Complete a whole achievement category to unlock this theme.', gold_unlocked:'Gold theme unlocked!',
   settings:'Settings', custom:'Customization', set_eyebrow:'Comfort', set_lang:'Language', set_sound:'Sound', set_sound_hint:'Sound effects and jingles.',
-  set_volume:'Volume', set_theme:'Theme', skin_aqua:'Aqua (blue)', skin_orange:'Orange', skin_vapor:'Cyan & magenta',
+  set_volume:'Volume', set_theme:'Theme', skin_aqua:'Aqua (blue)', skin_orange:'Orange', skin_vapor:'Neon', skin_kid:'Kiddy',
   set_toasts:'Notifications', set_toasts_hint:'Pop-ups at the bottom for births, deaths and more.', set_deco:'Decorative animations', set_deco_hint:'Floating bubbles and confetti.',
   set_reset_ach:'Reset achievements', set_reset_ach_hint:'Erases every unlocked achievement.', reset:'Reset',
   cust_eyebrow:'Game rules', cust_intro:'Changes apply immediately, including to the current game.', cust_rules:'Rules', cust_probs:'Probabilities',
@@ -1956,9 +2044,16 @@ en:{
   set_regnal:'Dynasty numbers', set_regnal_hint:'A child with exactly the same name as a parent or grandparent gets a Roman numeral: Jean, Jean II, Jean III…',
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
-  multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards',
+  multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
+  alb_count:(n,m)=>`${n} / ${m} discovered`, alb_int:'Interests', alb_cond:'Traits', alb_job:'Jobs', alb_death:'Deaths', alb_addict:'Addictions',
+  alb_always:'Any era', alb_from:a=>`From ${a}`, alb_until:b=>`Until ${b}`, alb_range:(a,b)=>`${a} to ${b}`,
+  alb_d_old:'Old age', alb_d_murder:'Murder', alb_d_suicide:'Suicide', alb_d_vanished:'Vanished', alb_d_legend:'Passed into legend',
+  alb_add:(r,dz)=>`+${r} risk of dying each year (×2 after 60, ×4 after 70).` + (dz.length ? ` Can cause: ${dz.join(', ')}.` : ''),
+  alb_hint:'Everything that shows up in your games is discovered here, for good.',
   f_interests:'Interests', log_interest:(p,id)=>`${nm(p)} discovers a new passion: ${intName(id, P(p))}.`,
   skin_locked_night:'The Night theme unlocks when a criminal claims their first victim.',
+  skin_locked_neon:'The Neon theme unlocks when a family reaches 16 generations.', skin_locked_kid:'The Kiddy theme unlocks when quadruplets are born.',
+  log_neon_skin:()=>'16 generations! The Neon theme is now available in Settings.', log_kid_skin:()=>'Quadruplets! The Kiddy theme is now available in Settings.',
   unknown_places:'Unknown places', map_zoom_in:'Zoom in on the map', map_zoom_out:'Zoom out of the map', map_zoom_reset:'All of France', log_addict:(p,a)=>`${nm(p)} develops ${ADD[a][8]}.`,
   crim_future:()=>'☠ Future criminal', crim_now:()=>'☠ Criminal', crim_jail:()=>'⛓ In prison', star_kid:'★ Star kid',
   prison:'In prison', vanished_short:()=>'Vanished', f_crime:'Criminal record',
@@ -2114,8 +2209,17 @@ const TX_DARK = {
   en:{ crim_future:()=>'☠ Future vampire', crim_now:()=>'☠ Vampire', crime_future:()=>'Future vampire', crime_now:()=>'Vampire', crime_fate_prison:()=>'Vampire, in prison', dest_crim:'Vampire',
     log_crim_declared:p=>`${nm(p)} becomes a vampire! ${g(P(p),'His','Her')} close family is in danger.` }
 };
+/* Thème Enfantin : les criminels deviennent des méchants (seulement les mots) */
+const isKid = () => document.documentElement.dataset.skin === 'kid';
+const TX_KID = {
+  fr:{ crim_future:p=>`☠ ${g(p,'Futur méchant','Future méchante')}`, crim_now:p=>`☠ ${g(p,'Méchant','Méchante')}`, crime_future:p=>g(p,'Futur méchant','Future méchante'),
+    crime_now:p=>g(p,'Grand méchant','Grande méchante'), crime_fate_prison:p=>g(p,'Grand méchant, en prison','Grande méchante, en prison'), dest_crim:'Méchant',
+    log_crim_declared:p=>`${nm(p)} devient ${g(P(p),'un grand méchant','une grande méchante')} ! Sa famille proche est en danger.` },
+  en:{ crim_future:()=>'☠ Future villain', crim_now:()=>'☠ Villain', crime_future:()=>'Future villain', crime_now:()=>'Big bad villain', crime_fate_prison:()=>'Big bad villain, in prison', dest_crim:'Villain',
+    log_crim_declared:p=>`${nm(p)} becomes a big bad villain! ${g(P(p),'His','Her')} close family is in danger.` }
+};
 function t(k, ...a){
-  const n = isNight() ? TX_NIGHT[LANG][k] : isDark() ? TX_DARK[LANG][k] : undefined;
+  const n = isNight() ? TX_NIGHT[LANG][k] : isDark() ? TX_DARK[LANG][k] : isKid() ? TX_KID[LANG][k] : undefined;
   const v = n !== undefined ? n : TX[LANG][k] !== undefined ? TX[LANG][k] : TX.fr[k];
   return typeof v === 'function' ? v(...a) : v;
 }
@@ -2181,7 +2285,7 @@ const music = (() => {
   let ctx = null, out = null, lp = null, timer = null, step = 0, next = 0, mode = 'calm', vol = .35, on = true;
   const CALM = {bpm:66, chords:[[48,55,64,71],[45,52,60,67],[41,48,57,64],[43,50,59,62]], mel:[72,74,76,79,81,84,86]};   // Do maj7 · La m7 · Fa maj7 · Sol
   const TENSE = {bpm:92, chords:[[45,52,60,64],[41,48,57,60],[38,45,53,57],[40,47,56,59]], mel:[69,71,72,75,76,80,81]};  // La m · Fa · Ré m · Mi
-  const mtof = m => 440 * Math.pow(2, (m-69)/12);
+  const mtof = m => 440 * Math.pow(2, (m-69)/12), TENSE_VOL = 1.7;   // la musique du criminel est plus forte
   function tone(f, t, dur, type, v, att){
     const o = ctx.createOscillator(), gn = ctx.createGain();
     o.type = type; o.frequency.value = f;
@@ -2192,6 +2296,7 @@ const music = (() => {
     const cfg = mode === 'tense' ? TENSE : CALM, beat = 60/cfg.bpm/2, ch = cfg.chords[Math.floor(s/8) % 4];
     if(s % 8 === 0) ch.forEach(m => { tone(mtof(m), t, beat*8.6, 'sine', .04, 1.2); tone(mtof(m)*1.004, t, beat*8.6, 'triangle', .016, 1.5); });
     if(mode === 'tense'){
+      if(s % 4 === 0){ tone(62, t, beat*1.4, 'sine', .16, .005); tone(mtof(ch[0]-24), t, beat*1.2, 'triangle', .06, .005); }   // battement de cœur
       tone(mtof(ch[0]-12), t, beat*.9, 'triangle', .07, .01);                       // basse qui martèle
       if(s % 2) tone(mtof(ch[0]), t, beat*.45, 'square', .01, .005);
       if(Math.random() < .3) tone(mtof(pick(cfg.mel)), t, beat*2, 'sine', .03, .01);
@@ -2210,17 +2315,23 @@ const music = (() => {
     if(timer) return;
     ctx = sfx.ctx(); if(!ctx) return;
     if(!out){ out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200; lp.connect(out); out.connect(ctx.destination); }
-    out.gain.value = vol; next = ctx.currentTime + .15; timer = setInterval(tick, 120);
+    out.gain.value = vol * (mode === 'tense' ? TENSE_VOL : 1); next = ctx.currentTime + .15; timer = setInterval(tick, 120);
   }
   document.addEventListener('visibilitychange', () => { if(document.hidden) stop(); else if(ctx) ensure(); });
   return {
     ensure, stop,
-    setVolume(v){ vol = v; if(out) out.gain.value = v; if(ctx) ensure(); },
+    setVolume(v){ vol = v; if(out) out.gain.value = v * (mode === 'tense' ? TENSE_VOL : 1); if(ctx) ensure(); },
     setOn(b){ on = b; if(ctx) ensure(); },
     setMode(m){
       if(m === mode) return;
-      mode = m; step = Math.ceil(step/8)*8;
-      if(lp) lp.frequency.setTargetAtTime(m === 'tense' ? 1400 : 2200, ctx.currentTime, .5);
+      mode = m; step = 0;
+      if(!lp || !ctx) return;
+      const old = lp, oldOut = out, now = ctx.currentTime;          // coupe net les notes en cours, puis repart tout de suite dans le nouveau mode
+      oldOut.gain.setTargetAtTime(.0001, now, .08); setTimeout(() => { try{ old.disconnect(); oldOut.disconnect(); }catch(e){} }, 600);
+      out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = m === 'tense' ? 1600 : 2200;
+      lp.connect(out); out.connect(ctx.destination);
+      out.gain.setValueAtTime(.0001, now); out.gain.linearRampToValueAtTime(vol * (m === 'tense' ? TENSE_VOL : 1), now + .35);
+      next = now + .2;
     }
   };
 })();
@@ -2298,7 +2409,7 @@ function workTick(p, day){
   const w = p.work; if(!w || !w.until || day < w.until) return;
   const y = yearOf(day);
   if(w.s==='uni'){
-    const f = FIELD[w.field], j = (!hasAtout(p,'ambition') && f && JOB[f[4]] && inRange(JOB[f[4]], dataYear(y))) ? f[4] : pickJob(y, p);
+    const f = FIELD[w.field], j = (f && JOB[f[4]] && inRange(JOB[f[4]], dataYear(y))) ? f[4] : pickJob(y, p);
     p.work = {s:'job', job:j}; log('work','graduate',[p.id,w.field,j],day);
   } else if(w.s==='odd'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); }
   else if(w.s==='unemp'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','back_to_work',[p.id,j],day); }
@@ -2399,6 +2510,7 @@ function die(p, day, cause){
   if(inFamily(p)){ if(A >= 121) unlock('maxage'); if(A < 10) unlock('young'); }
   if(cause.murder){
     const k = P(cause.murder); k.kills = (k.kills || 0) + 1; checkTiers('kill', k.kills, [2,4,6,8]); pendingFx.push(p.id); dirty = true;
+    if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
     if(!UNL.night){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
   }
   p.ill = null;
@@ -2541,11 +2653,11 @@ function fameTick(p, day){
     if(Math.random() < ch){ p.fameJob = hint; p.fameAt = Math.max(day, p.birth + Math.round(18*365.25)) + rnd(0, 15*365); return; }
   }
 }
-/* Politique : 3 % des élus (30 % des ambitieux) deviennent un jour Président(e) de la République, entre 40 et 62 ans */
+/* Politique : 3 % des élus (33 % des ambitieux) deviennent un jour Président(e) de la République, entre 40 et 62 ans */
 function polTick(p, day){
   if(p.work && p.work.s === 'job' && isPol(p.work.job) && !p.presRoll){
     p.presRoll = true;
-    if(Math.random() < (hasAtout(p,'ambition') ? .3 : .03)) p.presAt = Math.max(day + rnd(30, 365), p.birth + rnd(40, 62)*365);
+    if(Math.random() < (hasAtout(p,'ambition') ? .33 : .03)) p.presAt = Math.max(day + rnd(30, 365), p.birth + rnd(40, 62)*365);
   }
   if(p.presAt != null && day >= p.presAt){
     p.presAt = null;
@@ -2567,14 +2679,13 @@ function becomeStar(p, day, hint){
   [[2,'star1'],[4,'star2'],[8,'star4'],[12,'star6']].forEach(([n, id]) => { if(ns >= n) unlock(id); });
 }
 /* Criminels : après 18 ans, ils se révèlent ; parents, frères et sœurs, conjoint et enfants ont 60 % de risque d'être assassinés dans les 10 ans.
-   40 % finissent en prison dans ces 10 ans (jusqu'à leur mort) ; les autres disparaissent ou se suicident au bout de 10 ans. */
+   Après leur premier crime, 40 % finissent en prison dans les 10 ans (jusqu'à leur mort) ; les autres disparaissent ou se suicident au bout de 10 ans. */
 function declareCrim(p, day){
   p.crim.declared = true; p.crim.at = day;
   const mates = S.unions.filter(u => u.end == null && (u.a === p.id || u.b === p.id)).map(u => u.a === p.id ? u.b : u.a);
   const close = living().filter(q => q.id !== p.id && ((p.parents && p.parents.includes(q.id)) || (p.parents && q.parents && q.parents.some(i => p.parents.includes(i)))
     || mates.includes(q.id) || (q.parents && q.parents.includes(p.id))) && !hasAtout(q,'courage'));
   close.forEach(q => { if(Math.random() < .6){ q.murderAt = day + rnd(30, 3650); q.murderBy = p.id; } });
-  if(Math.random() < .4) p.crim.jailAt = day + rnd(30, 3600);
   log('crime','crim_declared',[p.id], day, true);
   checkTiers('crim', Object.values(S.people).filter(q => q.crim && q.crim.declared).length, [1,2,4,6]);
   sfx.crime(); burst(['#ff2a00','#1a0003','#b3001b','#ff7a00','#000000'], 55);
@@ -2691,7 +2802,8 @@ function birthChild(u, day){
   }
   [A, B].forEach(checkParentAch);
   ids.forEach(id => checkBirthAch(P(id)));
-  if(n === 4) unlock('quads');
+  if(n === 4){ unlock('quads'); unlockSkin('kid'); }
+  if(!UNL.neon && genOf(P(ids[0])) >= 16) unlockSkin('neon');
   if(n >= 2){ u.multiCount = (u.multiCount || 0) + 1; if(u.multiCount >= 2) unlock('twins2'); }
   dirty = true;
 }
@@ -2720,7 +2832,7 @@ function processDay(day){
       if(!p.crim.declared && day >= p.crim.day) declareCrim(p, day);
       else if(p.crim.declared && !p.crim.fate){
         if(p.crim.jailAt != null && day >= p.crim.jailAt) jailCrim(p, day);
-        else if(day >= p.crim.at + 3650 && crimFate(p, day)) continue;
+        else if(p.crim.jailAt == null && day >= p.crim.at + 3650 && crimFate(p, day)) continue;
       }
     }
     if(p.star && !p.star.famous && day >= p.star.day) becomeStar(p, day);
@@ -2761,8 +2873,10 @@ function advance(dt){
 
 /* ================= Boucle ================= */
 let lastTick = performance.now(), pointerHeld = false, musicTick = 0;
-setInterval(() => {                                // musique tendue tant qu'un criminel révélé est en vie
-  music.setMode(S && !$('#game').hidden && living().some(p => p.crim && p.crim.declared) ? 'tense' : 'calm');
+setInterval(() => {                                // musique du criminel tant qu'un criminel révélé est libre (en prison, il n'est plus un danger)
+  const on = S && !$('#game').hidden;
+  music.setMode(on && living().some(p => p.crim && p.crim.declared && !jailed(p)) ? 'tense' : 'calm');
+  if(on) albumScan();
 }, 1000);
 document.addEventListener('pointerdown', () => { pointerHeld = true; }, true);
 document.addEventListener('pointerup', () => { pointerHeld = false; }, true);
@@ -3417,9 +3531,57 @@ function arm(b, label){
   return false;
 }
 
+/* ================= Album : tout ce qui a déjà été vu dans une partie (gardé d'une partie à l'autre) ================= */
+const ALB_KEY = 'lignee.album.v1';
+const ALB = loadJSON(ALB_KEY); ['i','c','j','d','a'].forEach(k => { ALB[k] = ALB[k] || {}; });
+const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 'w_' + c.war : c.murder ? 'murder' : c.vanished ? 'vanished' : c.suicide ? 'suicide' : c.legend ? 'legend' : c.dz || null; };
+function albumScan(){
+  if(!S) return;
+  let ch = false;
+  const mark = (k, id) => { if(id != null && !ALB[k][id]){ ALB[k][id] = 1; ch = true; } };
+  for(const p of Object.values(S.people)){
+    interestsOf(p).forEach(id => mark('i', id));
+    (p.conds || []).forEach(id => mark('c', id));
+    if(p.work && (p.work.s === 'job' || p.work.s === 'star')) mark('j', p.work.job);
+    addictsOf(p).forEach(id => mark('a', id));
+    if(p.death != null) mark('d', deathKey(p));
+  }
+  if(ch) store.set(ALB_KEY, JSON.stringify(ALB));
+}
+const albYears = (a, b) => b >= 2100 ? (a <= 1500 ? t('alb_always') : t('alb_from', a)) : a <= 1500 ? t('alb_until', b) : t('alb_range', a, b);
+const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['d','alb_death'],['a','alb_addict']];
+function albItems(k){
+  const fr = LANG === 'fr', seen = new Set(), uniq = x => !seen.has(x.id) && seen.add(x.id);
+  if(k === 'i') return INTERESTS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[5], desc: albYears(r[6], r[7])}));
+  if(k === 'c') return CONDS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4]}));
+  if(k === 'j') return JOBS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic: isPol(r[0]) ? 'flag' : 'shirt', desc: albYears(r[5], r[6])}))
+    .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + (fr ? r[1] : r[3]), ic:'sparkle', desc: albYears(r[5], r[6])}))).filter(uniq);
+  if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, name: t('alb_d_' + id)}))
+    .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), desc: albYears(r[5], r[6]), secret:true})))
+    .concat(DISEASES.filter(d => d[0] !== 'disparu').map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
+  return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], secret:true,
+    desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
+}
+let albCat = 'i';
+function openAlbum(k, re){
+  albumScan(); if(k) albCat = k;
+  const all = ALB_CATS.map(([c]) => { const it = albItems(c); return [c, it, it.filter(x => ALB[c][x.id]).length]; });
+  const found = all.reduce((a, x) => a + x[2], 0), total = all.reduce((a, x) => a + x[1].length, 0);
+  const items = all.find(x => x[0] === albCat)[1];
+  openModal(`<div class="m-head"><div class="eyebrow">${t('alb_count', found, total)}</div><h2>${t('album')}</h2><p class="hint">${t('alb_hint')}</p></div>
+    <div class="pills albtabs" role="group">${all.map(([c, it, n]) => `<button data-act="albcat" data-v="${c}" aria-pressed="${c === albCat}">${t(ALB_CATS.find(x => x[0] === c)[1])}<small>${n}/${it.length}</small></button>`).join('')}</div>
+    <div class="albgrid">${items.map(x => { const ok = !!ALB[albCat][x.id];
+      return `<div class="albc ${ok ? '' : 'unk'}"><i>${icon(ok ? x.ic : 'lock')}</i><div><b>${ok ? esc(x.name) : '???????'}</b>${x.desc && (ok || !x.secret) ? `<small>${esc(x.desc)}</small>` : ''}</div></div>`; }).join('')}</div>`, {sound: !re});
+}
+
 /* ================= Paramètres & personnalisation ================= */
-const SKINS = ['aqua','orange','vapor','night','dark','gold'];
-const skinLocked = s => (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night);
+const SKINS = ['aqua','orange','vapor','kid','night','dark','gold'];
+const skinLocked = s => (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
+function unlockSkin(key){                            // Néon (16 générations), Enfantin (quadruplés)
+  if(UNL[key]) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
+  setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k: key + '_skin', a:[]}); sfx.ach(); }, 1500);
+}
+if(ACH.quads && !UNL.kid){ UNL.kid = true; store.set(UNL_KEY, JSON.stringify(UNL)); }   // déjà eu des quadruplés avant la 0.1.3a
 function applySettings(){
   document.documentElement.dataset.skin = skinLocked(SET.skin) ? 'aqua' : SET.skin;
   sfx.setMuted(!SET.sound); sfx.setVolume(SET.volume/100);
@@ -3440,6 +3602,8 @@ function openSettings(re){
     <div class="setrow col"><b>${t('set_theme')}</b><div class="skins">${SKINS.map(s => { const lock = skinLocked(s);
       return `<button class="skin sk-${s} ${lock?'locked':''}" data-act="skin" data-v="${s}" aria-pressed="${SET.skin===s && !lock}" ${lock?'disabled':''}><i>${lock?icon('lock'):''}</i><span>${t('skin_'+s)}</span></button>`; }).join('')}</div>
       ${UNL.night ? '' : `<small class="locknote">☾ ${t('skin_locked_night')}</small>`}
+      ${UNL.neon ? '' : `<small class="locknote">✦ ${t('skin_locked_neon')}</small>`}
+      ${UNL.kid ? '' : `<small class="locknote">♥ ${t('skin_locked_kid')}</small>`}
       ${goldUnlocked() ? '' : `<small class="locknote">★ ${t('skin_locked')}</small>`}</div>
     ${sw('data-set','toasts',SET.toasts,t('set_toasts'),t('set_toasts_hint'))}
     ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}
@@ -3539,6 +3703,8 @@ const ACT = {
   },
   famauto(d, b){ S.familyAuto = !!b.checked; dirty = true; save(); },
   achs(){ openAchievements(); },
+  album(){ openAlbum(); },
+  albcat(d){ openAlbum(d.v, true); },
   patchnotes(){ openPatchnotes(); },
   anyage(){ S.seekAge = null; cands = genCands(); sfx.pop(); openSoulmate(true); },
   rename(d){                                         // renommer n'importe qui (prénom)
@@ -3745,6 +3911,8 @@ function enterGame(){
   $('#setup').hidden = true; $('#game').hidden = false;
   S.nameQueue = S.nameQueue || [];
   Object.values(S.people).forEach(p => { if(!p.atout) p.atout = pick(ATOUTS)[0]; });   // anciennes parties : chacun reçoit son atout
+  if(!UNL.neon && Object.values(S.people).some(p => p.blood && genOf(p) >= 16)) unlockSkin('neon');
+  albumScan();
   if(modalOpen) closeModal(true);
   dirty = true; lastYear = null; lastDecade = null;
   $('#mapView').innerHTML = ''; dotEls = new Map();
@@ -3778,6 +3946,11 @@ function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); wind
     s.style.cssText = `left:${rnd(0,99)}%;top:${rnd(0,62)}%;--s:${rnd(1,3)}px;--d:${rnd(2,6)}s;--dl:-${rnd(0,50)/10}s`;
     nfx.appendChild(s);
   }
+  const kfx = $('#kidfx'), KC = ['#ff4f6d','#ff9a2e','#ffd21f','#3fd46b','#3fa9ff','#8f6bff','#ff6fae'];   // nuages, étoiles et cœurs du thème Enfantin
+  for(let i=0;i<4;i++){ const c = document.createElement('i'); c.className = 'cloud';
+    c.style.cssText = `--y:${rnd(4,40)}%;--w:${rnd(110,200)}px;--d:${rnd(70,130)}s;--dl:-${rnd(0,120)}s`; kfx.appendChild(c); }
+  for(let i=0;i<26;i++){ const b = document.createElement('b'); if(i % 3 === 0) b.className = 'h';
+    b.style.cssText = `left:${rnd(0,97)}%;top:${rnd(0,70)}%;--s:${rnd(12,24)}px;--c:${pick(KC)};--d:${rnd(30,60)/10}s;--dl:-${rnd(0,40)/10}s`; kfx.appendChild(b); }
   $$('.brand-slot').forEach((el,i) => { el.innerHTML = emblem('emb' + i); });
   $$('#mnav [data-icon]').forEach(b => b.insertAdjacentHTML('afterbegin', icon(b.dataset.icon)));   // icônes de la barre du bas
   // nouvelle version : les notes s'ouvrent une fois pour les joueurs qui avaient déjà joué

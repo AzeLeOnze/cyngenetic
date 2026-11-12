@@ -2,6 +2,19 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3a — 12 novembre 2026
+
+- Album : un nouvel onglet (en bas sur téléphone, à droite du mode auto sur ordinateur) qui répertorie les centres d'intérêt, particularités, métiers, morts et addictions. Tout reste en « ??????? » tant que ce n'est pas apparu dans une de tes parties ; les métiers et centres d'intérêt indiquent leurs années, les addictions leurs effets.
+- Atout Ambitieux : il ne force plus une carrière politique. S'il en fait une, il a 33 % de chances de devenir président.
+- Criminels : la prison n'est possible qu'après leur premier crime, dans les 10 ans qui suivent.
+- Musique : quand un criminel se déclare, sa musique coupe la musique douce et joue plus fort. Elle s'arrête quand plus aucun criminel n'est libre (un criminel en prison n'est plus un danger).
+- Nouveau thème Enfantin (arc-en-ciel, nuages et étoiles), débloqué à la naissance de quadruplés. Les criminels y deviennent des méchants.
+- Le thème Cyan & magenta devient Néon et se débloque quand une famille atteint 16 générations.
+- 16 nouveaux métiers : projectionniste, réceptionniste, ambassadeur, câlineur (après 2040), créateur d'espèces (après 2062), paléontologue, égyptologue, brasseur, tavernier, bourreau, concierge, gardien de prison, et pour le futur thérapeute pour IA, pilote de taxi-drone et nettoyeur orbital. L'imprimeur existe maintenant jusqu'en 2100.
+- 5 nouvelles particularités : maniaque, borderline, personne à mobilité réduite, psychopathe, syndrome de Diogène.
+- 12 nouveaux centres d'intérêt : fan de vaporwave, fan de rap, gangster, dealeur, collectionneur de jeux, rétro-gameur, graffeur, fan de Star Wars, fan de comics, tiktokeur (2018-2037), néo-tiktokeur (2037-2087) et streameur extra-planétaire (après 2084).
+- 19 nouveaux noms de famille, dont Da Vinci, Véga, Targuerien, Laudebrook et Castelgan.
+
 ## v0.1.2d — 12 novembre 2026
 
 - Sur ordinateur, la molette de la souris zoome directement dans l'arbre (Maj + molette pour faire défiler).
