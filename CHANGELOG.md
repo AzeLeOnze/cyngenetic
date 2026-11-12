@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3e — 12 novembre 2026
+
+- La carte de France remplit maintenant toute sa zone.
+- Accident de la route : de 1950 (quand les morts sur la route deviennent un vrai problème) à 2075, au lieu de 1900-1959. Nouvel accident spatial à partir de 2083 (l'atout Intelligence en protège).
+- Boutique réorganisée en sections (Naissances, Ton personnage, Famille, Thèmes), avec 4 nouveaux achats : Fertilité (625 Cyn, prochaine naissance multiple), Immunité (290 Cyn, ni maladie ni accident pendant 50 ans), Crise de la cinquantaine (350 Cyn, un deuxième atout au choix) et Décriminalisation (180 Cyn, un criminel de la famille redevient normal).
+
 ## v0.1.3d — 12 novembre 2026
 
 - Boutique : elle n'est plus dans les Paramètres. Elle a son propre bouton en haut (icône sac de courses), à côté des Paramètres et de la vitesse, et s'ouvre toujours en touchant le compteur de Cyn.

@@ -117,6 +117,33 @@ button{font:inherit;color:inherit}
 .shopit>i svg{width:22px;height:22px;fill:currentColor}
 .si-star{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ffd000 55%,#e09a00)}
 .si-crim{background:radial-gradient(circle at 35% 30%,#fff 0 8%,#ff3b3b 50%,#7a0010)}
+.shopsec+.shopsec{margin-top:14px}
+.shopsec>.eyebrow{margin-bottom:8px}
+.shopgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.shopgrid .shopit{grid-template-columns:44px 1fr;align-content:start}
+.shopgrid .shopit .gel{grid-column:1/-1;width:100%}
+.shopit.owned{opacity:.75}
+.si-fertile{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff6cc0 55%,#cc0070)}
+.si-immune{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#8cff1a 55%,#2c9200)}
+.si-midlife{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#c3a2ff 55%,#5a2ee0)}
+.si-decrim{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 55%,#0074dc)}
+.picklist{display:grid;gap:8px;max-height:min(60vh,520px);overflow:auto;padding:2px}
+.pickrow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;padding:10px 12px;border-radius:16px;border:1px solid #fff;background:rgba(255,255,255,.8);
+  box-shadow:0 2px 8px rgba(0,70,160,.1);cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .15s,box-shadow .15s}
+.pickrow:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(0,70,160,.18)}
+.pickrow .orb{width:40px;height:40px}
+.pickrow b{display:block;font:800 14.5px var(--font-display)}
+.pickrow small{display:block;font-size:12.5px;line-height:1.3;color:var(--ink-soft)}
+.pickrow em{font:800 12.5px var(--font-display);font-style:normal;color:var(--aqua-deep);white-space:nowrap}
+.pickrow.armed{background:linear-gradient(180deg,#fff4d6,#ffe38a);border-color:#ffd24a}
+.pickrow.armed em{color:#a05a00}
+.pickic{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ffcf4a 55%,#e08a00)}
+.pickic svg{width:20px;height:20px;fill:currentColor}
+.pickback{margin-top:12px}
+.facts .imf{background:linear-gradient(180deg,#f0ffe6,#d6ffc0);border-color:#b8f08a}
+.facts .imf dd{display:flex;align-items:center;gap:8px;color:#2c7a00}
+.facts .imf dd svg{width:18px;height:18px;fill:currentColor;flex:none}
+:root[data-skin="dark"] .pickrow{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
 .si-dark{background:radial-gradient(circle at 35% 30%,#ff8a95 0 8%,#b3001b 45%,#140205)}
 .si-orange{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff9a2e 55%,#e25b00)}
 .shopit b{display:block;font:800 15px var(--font-display)}
@@ -252,9 +279,9 @@ body.no-deco .kidfx b,body.no-deco .kidfx .cloud{display:none}
   --g1:#b8fbff;--g2:#00d4ff;--g3:#00a0c8;--gedge:#0089a8;--lcd-a:#ff7ad8;--lcd-b:#d4009e;--lcd-c:#9e0077;--lcd-d:#ff2fc0;--lcd-edge:#7a005c;--lcd-glow:rgba(255,180,245,.95);
   --hill-a1:#ffa3f0;--hill-a2:#c43cff;--hill-a3:#6a00b8;--hill-b1:#e070ff;--hill-b2:#5a00a0;--shadow:0 14px 34px rgba(120,0,140,.28)}
 /* Carte de France */
-.mapview{flex:1;min-height:0;overflow:auto;display:grid;place-items:center;padding:12px;border-top:1px solid rgba(255,255,255,.8)}
-.mapwrap{position:relative;width:min(100%,620px);display:flex;flex-direction:column;gap:8px}
-.francemap{width:100%;height:auto;border-radius:24px;box-shadow:0 10px 26px rgba(0,60,150,.25),inset 0 1px 0 #fff;cursor:zoom-in}
+.mapview{flex:1;min-height:0;display:flex;flex-direction:column;padding:12px;border-top:1px solid rgba(255,255,255,.8)}
+.mapwrap{position:relative;flex:1;min-height:0;width:100%;display:flex;flex-direction:column;gap:8px}
+.francemap{display:block;flex:1;min-height:0;width:100%;height:100%;border-radius:24px;background:var(--sky-mid);box-shadow:0 10px 26px rgba(0,60,150,.25),inset 0 1px 0 #fff;cursor:zoom-in}
 .francemap{touch-action:pan-y}
 .francemap.zoomed{cursor:grab;touch-action:none}
 .tree-scroll{touch-action:pan-x pan-y}
@@ -1023,9 +1050,16 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.3d';
+const APP_VERSION = '0.1.3e';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.3e', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['La carte de France remplit maintenant toute sa zone.',
+       'Accident de la route : de 1950 (quand les morts sur la route deviennent un vrai problème) à 2075, au lieu de 1900-1959. Nouvel accident spatial à partir de 2083 (l\'atout Intelligence en protège).',
+       'Boutique réorganisée en sections (Naissances, Ton personnage, Famille, Thèmes), avec 4 nouveaux achats : Fertilité (625 Cyn, prochaine naissance multiple), Immunité (290 Cyn, ni maladie ni accident pendant 50 ans), Crise de la cinquantaine (350 Cyn, un deuxième atout au choix) et Décriminalisation (180 Cyn, un criminel de la famille redevient normal).'],
+   en:['The map of France now fills its whole area.',
+       'Road accidents: from 1950 (when road deaths became a real problem) to 2075, instead of 1900-1959. New space accident from 2083 (the Intelligence gift protects from it).',
+       'Shop reorganised into sections (Births, Your character, Family, Themes), with 4 new items: Fertility (625 Cyn, next birth is multiple), Immunity (290 Cyn, no illness or accident for 50 years), Midlife crisis (350 Cyn, a second gift of your choice) and Decriminalisation (180 Cyn, a criminal in the family becomes normal again).']},
   {v:'0.1.3d', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Boutique : elle n\'est plus dans les Paramètres. Elle a son propre bouton en haut (icône sac de courses), à côté des Paramètres et de la vitesse, et s\'ouvre toujours en touchant le compteur de Cyn.',
        'Boutique : nouveau thème Obsidienne à 5 000 Cyn (il ne se débloque plus qu\'en l\'achetant). Toucher ses Cyn dans la boutique montre comment en gagner.',
@@ -1507,7 +1541,8 @@ const ATOUTS = [
  ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse entre 80 et 105 ans.','10 times less likely to die of old age between 80 and 105.'],
  ['ambition','Ambitieux','Ambitieuse','Ambition','flag',"S'il fait carrière en politique, 33 % de chances de devenir président.",'If they go into politics, a 33% chance of becoming President.']
 ];
-const hasAtout = (p, id) => !!(p && p.atout === id);
+const hasAtout = (p, id) => !!(p && (p.atout === id || p.atout2 === id));      // atout2 : crise de la cinquantaine (boutique)
+const immune = (p, day) => p.immuneUntil != null && day < p.immuneUntil;           // boutique : immunité 50 ans
 // métiers politiques, artistiques (pour l'atout Créativité) et sources de célébrité tardive
 const POLJOBS = {maire:50, depute:25, senateur:12, ministre:8, premierministre:2};
 const isPol = id => id in POLJOBS || id === 'president';
@@ -1653,8 +1688,9 @@ const DISEASES = [
  ['depression','Dépression suicidaire',"d'une dépression suicidaire",'suicidal depression',1500,2100,60,900,.08,{minA:14}],
  ['domestique','Accident domestique',"d'un accident domestique",'a household accident',1500,2100,1,4,.05],
  ['charrette','Accident de charrette',"d'un accident de charrette",'a cart accident',1500,1899,1,5,.05],
- ['route','Accident de la route',"d'un accident de la route",'a road accident',1900,1959,1,6,.06,{w:.5}],
- ['route2','Accident de la route',"d'un accident de la route",'a road accident',1960,2100,1,6,.06,{w:3,minA:5}],
+ ['route','Accident de la route',"d'un accident de la route",'a road accident',1,0,1,6,.06,{w:.5}],   // ancien doublon, gardé pour les vieilles parties
+ ['route2','Accident de la route',"d'un accident de la route",'a road accident',1950,2075,1,6,.06,{w:3,minA:5}],
+ ['spatial','Accident spatial',"d'un accident spatial",'a space accident',2083,2100,1,3,.04,{w:1.2,minA:12}],
  ['neurolink','Neurolink défectueux',"d'un Neurolink défectueux",'a faulty Neurolink',2030,2100,1,90,.05,{minA:16}],
  ['nanorobots','Overdose de nanorobots',"d'une overdose de nanorobots",'a nanobot overdose',2055,2100,1,10,.05,{minA:14}],
  ['cyber','Implant cybernétique défectueux',"d'un implant cybernétique défectueux",'a faulty cybernetic implant',2070,2100,3,120,.06,{minA:16}],
@@ -1738,11 +1774,11 @@ function pickWarCause(p, day){
 }
 const DZ = byId(DISEASES);
 // accidents et événements soudains : on en est « victime », on n'en est pas « atteint »
-const EVENTS = new Set(['mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
+const EVENTS = new Set(['spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
   'overdose_ecstasy','nanorobots','rage_jeux','cyn_fusion','arret_cafe','infarctus_tabac','infarctus_cannabis','avc','avc_tabac','avc_alcool','avc_cannabis']);
 function pickDisease(p, day){
   const y = dataYear(yearOf(day)), A = ageAt(p, day);
-  const safe = hasAtout(p,'intel') ? ['domestique','charrette','route','route2'] : [];      // atout Intelligence
+  const safe = hasAtout(p,'intel') ? ['domestique','charrette','route','route2','spatial'] : [];      // atout Intelligence
   const ok = DISEASES.filter(d => y >= d[4] && y <= d[5] && !(d[9] && d[9].addict) && !safe.includes(d[0]) && fits(d[9] || {}, p, A));
   return wPickRow(ok, 9) || DZ.pneumonie;
 }
@@ -2028,7 +2064,17 @@ fr:{
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
-  shop_eyebrow:'Dépense tes Cyn', shop_dark:'Thème Obsidienne', shop_dark_d:'Débloque le thème Obsidienne pour toujours.',
+  shop_eyebrow:'Dépense tes Cyn', shopc_births:'Naissances', shopc_self:'Ton personnage', shopc_family:'Famille', shopc_themes:'Thèmes',
+  shop_fertile:'Fertilité', shop_fertile_d:'La prochaine naissance de ton personnage sera multiple : jumeaux (77 %), triplés (15 %) ou quadruplés (8 %).',
+  shop_immune:'Immunité', shop_immune_d:'Ton personnage ne peut plus tomber malade ni avoir d\'accident pendant 50 ans.',
+  shop_midlife:'Crise de la cinquantaine', shop_midlife_d:'Ton personnage cumule un deuxième atout, au choix.',
+  shop_decrim:'Décriminalisation', shop_decrim_d:'Choisis un criminel ou un futur criminel de la famille : il redevient une personne normale.',
+  shop_immune_on:y=>`Déjà immunisé jusqu'en ${y}.`, shop_midlife_done:n=>`${n} a déjà cumulé un deuxième atout.`, shop_decrim_none:'Aucun criminel dans la famille.',
+  shop_pick:'Choisir', shop_back:'Retour à la boutique', pick_decrim:()=>'Qui doit redevenir quelqu\'un de normal ?', pick_midlife:n=>`Quel atout ${n} cumule-t-il ?`,
+  f_atout2:'Deuxième atout', f_immune:'Immunité', immune_until:y=>`Ni maladie ni accident jusqu'en ${y}`,
+  log_decrim:p=>`${nm(p)} n'est plus ${g(P(p),'un criminel','une criminelle')} : ${g(P(p),'il','elle')} redevient quelqu'un de normal.`,
+  log_midlife:(p,a)=>`Crise de la cinquantaine : ${nm(p)} gagne l'atout ${atoutName(a, P(p))} !`,
+  log_immune:(p,y)=>`${nm(p)} est ${g(P(p),'immunisé','immunisée')} contre les maladies et les accidents jusqu'en ${y}.`, shop_dark:'Thème Obsidienne', shop_dark_d:'Débloque le thème Obsidienne pour toujours.',
   skin_locked_dark:"S'achète dans la boutique pour 5 000 Cyn.",
   cg_title:'Comment gagner des Cyn ?', cg_hide:'Masquer', cg_birth:'Une naissance', cg_starkid:"Naissance d'un enfant de star", cg_star:'Une star perce',
   cg_crim:'Un criminel se déclare', cg_murder:'Un meurtre',
@@ -2196,7 +2242,17 @@ en:{
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
-  shop_eyebrow:'Spend your Cyn', shop_dark:'Obsidian theme', shop_dark_d:'Unlocks the Obsidian theme for good.',
+  shop_eyebrow:'Spend your Cyn', shopc_births:'Births', shopc_self:'Your character', shopc_family:'Family', shopc_themes:'Themes',
+  shop_fertile:'Fertility', shop_fertile_d:"Your character's next birth will be multiple: twins (77%), triplets (15%) or quadruplets (8%).",
+  shop_immune:'Immunity', shop_immune_d:"Your character can't fall ill or have an accident for 50 years.",
+  shop_midlife:'Midlife crisis', shop_midlife_d:'Your character gets a second gift of your choice.',
+  shop_decrim:'Decriminalisation', shop_decrim_d:'Pick a criminal or future criminal in the family: they become a normal person again.',
+  shop_immune_on:y=>`Already immune until ${y}.`, shop_midlife_done:n=>`${n} already has a second gift.`, shop_decrim_none:'No criminals in the family.',
+  shop_pick:'Choose', shop_back:'Back to the shop', pick_decrim:()=>'Who should become a normal person again?', pick_midlife:n=>`Which gift does ${n} get?`,
+  f_atout2:'Second gift', f_immune:'Immunity', immune_until:y=>`No illness or accident until ${y}`,
+  log_decrim:p=>`${nm(p)} is no longer a criminal and becomes a normal person again.`,
+  log_midlife:(p,a)=>`Midlife crisis: ${nm(p)} gets the ${atoutName(a, P(p))} gift!`,
+  log_immune:(p,y)=>`${nm(p)} is immune to illness and accidents until ${y}.`, shop_dark:'Obsidian theme', shop_dark_d:'Unlocks the Obsidian theme for good.',
   skin_locked_dark:'Buy it in the shop for 5,000 Cyn.',
   cg_title:'How do I earn Cyn?', cg_hide:'Hide', cg_birth:'A birth', cg_starkid:'A star kid is born', cg_star:'A star breaks through',
   cg_crim:'A criminal is revealed', cg_murder:'A murder',
@@ -2251,6 +2307,8 @@ const nodeBadges = p => {
   return items.length ? `<span class="cbadges">${items.slice(0, 4).join('')}</span>` : '';
 };
 const atoutName = (id, p) => { const r = ATOUT[id]; return LANG==='fr' ? (p && p.sex==='F' ? r[2] : r[1]) : r[3]; };
+const atoutTile2 = p => p.atout2 && ATOUT[p.atout2] ? `<div class="span2 atf"><dt>${t('f_atout2')}</dt><dd>${icon(ATOUT[p.atout2][4])}<span><b>${esc(atoutName(p.atout2, p))}</b><small>${esc(ATOUT[p.atout2][LANG==='fr' ? 5 : 6])}</small></span></dd></div>` : '';
+const immTile = p => p.death == null && S && immune(p, S.t) ? `<div class="span2 imf"><dt>${t('f_immune')}</dt><dd>${icon('pill')}<span>${esc(t('immune_until', yearOf(p.immuneUntil)))}</span></dd></div>` : '';
 const atoutTile = p => p.atout && ATOUT[p.atout] ? `<div class="span2 atf"><dt>${t('f_atout')}</dt><dd>${icon(ATOUT[p.atout][4])}<span><b>${esc(atoutName(p.atout, p))}</b><small>${esc(ATOUT[p.atout][LANG==='fr' ? 5 : 6])}</small></span></dd></div>` : '';
 const condTile = p => hasCond(p) ? `<div class="span2 condf"><dt>${t('f_cond')}</dt><dd>${condBadges(p)}${esc(condList(p))}</dd></div>` : '';
 
@@ -2650,9 +2708,9 @@ function scheduleYear(p, A, day){
     const when = day + rnd(1,360);
     if(war && Math.random() < .65){ p.deathAt = Math.min(when, war.b); p.warDeath = true; return; }   // surtout des morts de guerre
     if(A > 80 && R.oldAge){ p.deathAt = when; return; }                   // au-delà de 80 ans : vieillesse
-    if(R.diseases){ p.onset = when; return; }                             // sinon : maladie ou accident
+    if(R.diseases && !immune(p, day)){ p.onset = when; return; }                             // sinon : maladie ou accident
   }
-  if(A >= R.legal) for(const id of addictsOf(p)){                          // addictions : risque annuel en plus
+  if(A >= R.legal && !immune(p, day)) for(const id of addictsOf(p)){                          // addictions : risque annuel en plus
     if(Math.random() < addRisk(id, A)){ p.onset = day + rnd(1,360); p.onsetAddict = id; return; }
   }
 }
@@ -2667,6 +2725,7 @@ function baseRisk(p, A, day = S.t){
 const riskOf = p => { const A = age(p); return Math.min(1, baseRisk(p, A) + (A >= R.legal ? addictsOf(p).reduce((s,id) => s + addRisk(id, A), 0) : 0)); };
 function contract(p, day){
   p.onset = null;
+  if(immune(p, day)){ p.onsetAddict = false; return; }
   const aid = p.onsetAddict === true ? addictsOf(p)[0] : p.onsetAddict;
   const own = aid ? DISEASES.filter(x => x[9] && x[9].addict === aid) : [];
   const d = own.length ? pick(own) : pickDisease(p, day);
@@ -2939,6 +2998,9 @@ function birthChild(u, day){
     const k = [A,B].some(x => hasAtout(x,'fertile')) ? 10 : 1;          // atout Fertilité : ×10
     const r = Math.random()*100, q = R.quads*k, tr = q + R.triplets*k, tw = tr + R.twins*k;
     n = r < q ? 4 : r < tr ? 3 : r < tw ? 2 : 1;
+  }
+  if(!adopt && S.nextMulti && u.a === S.activeId){           // boutique « Fertilité » : jumeaux 77 %, triplés 15 %, quadruplés 8 %
+    S.nextMulti = false; const r2 = Math.random(); n = r2 < .77 ? 2 : r2 < .92 ? 3 : 4;
   }
   const ids = [];
   for(let i = 1; i <= n; i++){
@@ -3354,17 +3416,18 @@ function setView(v){
 }
 function buildMap(){
   const fr = polyPath(FR_OUTLINE), co = polyPath(CORSE);
-  const waves = [90,170,250,330,410,490].map((y,i) => `<path d="M${-20 + i*8} ${y}q30 -12 60 0t60 0t60 0" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2.5" stroke-linecap="round"/>`).join('');
+  const waves = [90,170,250,330,410,490].map((y,i) => `<path d="M${-20 + i*8} ${y}q30 -12 60 0t60 0t60 0" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2.5" stroke-linecap="round"/>`).join('')
+    + [60,200,340,470].map((y,i) => `<path d="M${-260 + i*14} ${y}q30 -12 60 0t60 0t60 0" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2.5" stroke-linecap="round"/><path d="M${600 + i*10} ${y + 40}q30 -12 60 0t60 0t60 0" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2.5" stroke-linecap="round"/>`).join('');
   const towns = Object.keys(CITY_POS).map(c => { const [x,y] = proj(CITY_POS[c]); return `<circle cx="${x}" cy="${y}" r="2" fill="#fff" opacity=".55"><title>${esc(c)}</title></circle>`; }).join('');
-  $('#mapView').innerHTML = `<div class="mapwrap"><svg class="francemap" viewBox="0 0 540 530" role="img" aria-label="${esc(t('view_map'))}">
+  $('#mapView').innerHTML = `<div class="mapwrap"><svg class="francemap" viewBox="0 0 540 530" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(t('view_map'))}">
     <defs>
-      <radialGradient id="mSea" cx="50%" cy="35%" r="80%"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset=".35" style="stop-color:var(--sky-low)"/><stop offset="1" style="stop-color:var(--sky-mid)"/></radialGradient>
+      <radialGradient id="mSea" gradientUnits="userSpaceOnUse" cx="270" cy="185" r="560"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset=".35" style="stop-color:var(--sky-low)"/><stop offset="1" style="stop-color:var(--sky-mid)"/></radialGradient>
       <linearGradient id="mLand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--hill-a1)"/><stop offset=".55" style="stop-color:var(--hill-a2)"/><stop offset="1" style="stop-color:var(--hill-a3)"/></linearGradient>
       <linearGradient id="mGloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".45" stop-color="#fff" stop-opacity=".08"/><stop offset=".46" stop-color="#fff" stop-opacity="0"/></linearGradient>
       <radialGradient id="mDot" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="#6fe0ff"/><stop offset="1" stop-color="#0050c8"/></radialGradient>
       <filter id="mShadow" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#002a70" flood-opacity=".35"/></filter>
     </defs>
-    <rect width="540" height="530" rx="24" fill="url(#mSea)"/>${waves}
+    <rect x="-1600" y="-1600" width="3740" height="3730" fill="url(#mSea)"/>${waves}
     <g filter="url(#mShadow)"><path d="${fr}" fill="url(#mLand)" stroke="#fff" stroke-width="3.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><path d="${co}" fill="url(#mLand)" stroke="#fff" stroke-width="3" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></g>
     <path d="${fr}" fill="url(#mGloss)"/><path d="${co}" fill="url(#mGloss)"/>
     <g class="unkzone"><rect x="${UNK.x}" y="${UNK.y}" width="${UNK.w}" height="${UNK.h}" rx="18" fill="#fff" fill-opacity=".38" stroke="#fff" stroke-width="2.5" stroke-dasharray="7 5"/>
@@ -3391,6 +3454,10 @@ function applyMapZoom(){
   svg.querySelectorAll('#mapDots .msc').forEach(g => g.setAttribute('transform', `scale(${1/mz.z})`));
   svg.querySelectorAll('#mapTowns circle').forEach(c => c.setAttribute('r', String(2/Math.sqrt(mz.z))));
 }
+function mapBox(svg){                                // zone réellement occupée par le dessin (la carte garde ses proportions)
+  const r = svg.getBoundingClientRect(), k = Math.min(r.width/540, r.height/530), w = 540*k, h = 530*k;
+  return {left: r.left + (r.width - w)/2, top: r.top + (r.height - h)/2, width: w, height: h};
+}
 function setMapZoom(z, sx, sy, fx, fy){
   z = clampN(z, 1, 6);
   if(sx == null){ fx = fy = .5; sx = mz.x + 270/mz.z; sy = mz.y + 265/mz.z; }
@@ -3407,7 +3474,7 @@ function setMapZoom(z, sx, sy, fx, fy){
   mv.addEventListener('touchmove', e => {
     if(!pinch || e.touches.length !== 2) return;
     e.preventDefault();
-    const svg = document.querySelector('.francemap'), r = svg.getBoundingClientRect(), [a,b] = e.touches;
+    const svg = document.querySelector('.francemap'), r = mapBox(svg), [a,b] = e.touches;
     const fx = ((a.clientX+b.clientX)/2 - r.left)/r.width, fy = ((a.clientY+b.clientY)/2 - r.top)/r.height;
     setMapZoom(pinch.z * Math.hypot(a.clientX-b.clientX, a.clientY-b.clientY) / pinch.d, mz.x + fx*540/mz.z, mz.y + fy*530/mz.z, fx, fy);
   }, {passive:false});
@@ -3420,12 +3487,12 @@ function setMapZoom(z, sx, sy, fx, fy){
   mv.addEventListener('wheel', e => {
     const svg = e.target.closest('.francemap'); if(!svg) return;
     e.preventDefault();
-    const r = svg.getBoundingClientRect(), fx = (e.clientX - r.left)/r.width, fy = (e.clientY - r.top)/r.height;
+    const r = mapBox(svg), fx = (e.clientX - r.left)/r.width, fy = (e.clientY - r.top)/r.height;
     setMapZoom(mz.z * Math.exp(-e.deltaY * .0018), mz.x + fx*540/mz.z, mz.y + fy*530/mz.z, fx, fy);
   }, {passive:false});
   mv.addEventListener('pointerdown', e => {
     const svg = e.target.closest('.francemap'); if(!svg || mz.z <= 1.01) return;
-    drag = {x:e.clientX, y:e.clientY, mx:mz.x, my:mz.y, r:svg.getBoundingClientRect()}; svg.setPointerCapture(e.pointerId); svg.classList.add('grabbing');
+    drag = {x:e.clientX, y:e.clientY, mx:mz.x, my:mz.y, r:mapBox(svg)}; svg.setPointerCapture(e.pointerId); svg.classList.add('grabbing');
   });
   mv.addEventListener('pointermove', e => {
     if(!drag || pinch) return;
@@ -3623,7 +3690,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${condTile(p)}${intTile(p)}${atoutTile(p)}
+      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>
@@ -3740,7 +3807,7 @@ function albItems(k){
     .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + (fr ? r[1] : r[3]), ic:'sparkle', y:r[5], desc: albYears(r[5], r[6])}))).filter(uniq);
   if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, y:1500, name: t('alb_d_' + id)}))
     .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
-    .concat(DISEASES.filter(d => d[0] !== 'disparu').map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
+    .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
   return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
 }
@@ -3791,27 +3858,54 @@ function applySettings(){
 }
 const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${disabled?'is-off':''}"><input type="checkbox" ${attr}="${key}" ${on?'checked':''} ${disabled?'disabled':''}><span class="sw"></span><span><b>${label}</b>${hint?`<small>${hint}</small>`:''}</span></label>`;
 const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG==='fr' ? ' %' : '%') : u);
-const SHOP = [['star',750,'sparkle'],['crim',600,'skull'],['orange',830,'sun'],['dark',5000,'moon']];
+const SHOP_CATS = [
+  ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
+  ['self',   [['immune',290,'pill'],['midlife',350,'hourglass']]],
+  ['family', [['decrim',180,'dove']]],
+  ['themes', [['orange',830,'sun'],['dark',5000,'moon']]]
+];
+const SHOP = SHOP_CATS.flatMap(c => c[1]);
 const SHOP_THEMES = ['orange','dark'];
 let cynInfoOpen = false;
+const decrimList = () => S ? living().filter(p => p.crim && inFamily(p)) : [];
+function shopState(id, price){                        // disponible ? sinon pourquoi
+  const theme = SHOP_THEMES.includes(id), inGame = S && !$('#game').hidden && !S.over && !needHeir(), me = inGame ? active() : null;
+  if(theme && UNL[id]) return {dis:true, owned:true};
+  if(!theme && !inGame) return {dis:true, note:t('shop_need_game')};
+  if((id === 'star' || id === 'crim') && S.nextFate) return {dis:true, note:t(S.nextFate === id ? 'shop_pending' : 'shop_other_pending')};
+  if(id === 'fertile' && S.nextMulti) return {dis:true, note:t('shop_pending')};
+  if(id === 'immune' && immune(me, S.t)) return {dis:true, note:t('shop_immune_on', yearOf(me.immuneUntil))};
+  if(id === 'midlife' && me.atout2) return {dis:true, note:t('shop_midlife_done', me.first)};
+  if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
+  if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
+  return {dis:false};
+}
 function openShop(re){
-  const inGame = S && !$('#game').hidden && !S.over;
-  const rows = SHOP.map(([id, price, ic]) => {
-    const theme = SHOP_THEMES.includes(id);
-    let note = '', dis = false, owned = theme && UNL[id];
-    if(owned) dis = true;
-    else if(!theme && !inGame){ dis = true; note = t('shop_need_game'); }
-    else if(!theme && S.nextFate){ dis = true; note = t(S.nextFate === id ? 'shop_pending' : 'shop_other_pending'); }
-    else if(CYN < price){ dis = true; note = t('shop_missing', cynFmt(price - CYN)); }
-    return `<div class="shopit"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${note ? `<em>${esc(note)}</em>` : ''}</div>
-      <button class="gel gold" data-act="buy" data-v="${id}" ${dis ? 'disabled' : ''}><span>${owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`;
-  }).join('');
   const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50]];
+  const secs = SHOP_CATS.map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.map(([id, price, ic]) => {
+    const st = shopState(id, price);
+    return `<div class="shopit ${st.owned ? 'owned' : ''}"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${st.note ? `<em>${esc(st.note)}</em>` : ''}</div>
+      <button class="gel gold" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`; }).join('')}</div></section>`).join('');
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop_eyebrow')}</div><h2>${t('shop')}</h2></div>
     <button class="shopbal" data-act="cyninfo" aria-expanded="${cynInfoOpen}" title="${esc(t('cg_title'))}">${icon('dna')}<b>${cynFmt(CYN)}</b><span>Cyn</span><small>${t(cynInfoOpen ? 'cg_hide' : 'cg_title')}</small></button>
     <div class="cyninfo" ${cynInfoOpen ? '' : 'hidden'}><b>${t('cg_title')}</b><ul>${gains.map(([ic, k, n]) => `<li>${icon(ic)}<span>${t(k)}</span><em>+${n} ${icon('dna')}</em></li>`).join('')}</ul></div>
-    <div class="shoplist">${rows}</div>`, {sound: !re});
+    ${secs}`, {sound: !re});
 }
+function openPick(id){                                // décriminalisation / crise de la cinquantaine : on choisit avant de payer
+  const price = SHOP.find(x => x[0] === id)[1], me = active();
+  const rows = id === 'decrim'
+    ? decrimList().map(p => `<button class="pickrow" data-act="pickdo" data-v="decrim" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(jailed(p) ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p))}</small></span><em>${t('shop_pick')}</em></button>`)
+    : ATOUTS.filter(a => a[0] !== me.atout).map(a => `<button class="pickrow" data-act="pickdo" data-v="midlife" data-id="${a[0]}"><i class="pickic">${icon(a[4])}</i><span><b>${esc(atoutName(a[0], me))}</b><small>${esc(a[LANG==='fr' ? 5 : 6])}</small></span><em>${t('shop_pick')}</em></button>`);
+  openModal(`<div class="m-head"><div class="eyebrow">${t('shop')} · ${cynFmt(price)} Cyn</div><h2>${t('shop_' + id)}</h2><p class="hint">${esc(t('pick_' + id, me.first))}</p></div>
+    <div class="picklist">${rows.join('')}</div><button class="gel ghost pickback" data-act="shop"><span>← ${t('shop_back')}</span></button>`, {sound:false});
+}
+function decrim(p){                                   // redevient une personne normale
+  for(const q of living()) if(q.murderBy === p.id){ q.murderAt = null; q.murderBy = null; }
+  const wasJailed = jailed(p);
+  delete p.crim; if(wasJailed) p.work = {s:'unemp'};
+  log('crime','decrim',[p.id], today(), true);
+}
+const payCyn = n => { CYN -= n; store.set(CYN_KEY, String(CYN)); cynShow(); };
 function wipeAll(){                                   // remise à zéro totale : fondu au noir, tout est effacé, retour à l'écran de départ
   if(window.__wiping) return; window.__wiping = true;
   store.set = () => {}; music.stop(); if(S) S.paused = true;
@@ -3904,15 +3998,32 @@ const ACT = {
   shop(){ openShop(false); },
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
-    const it = SHOP.find(x => x[0] === d.v); if(!it || CYN < it[1]) return;
-    if(SHOP_THEMES.includes(d.v)){ if(UNL[d.v]) return; }
-    else if(!S || $('#game').hidden || S.over || S.nextFate) return;
+    const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
+    if(d.v === 'decrim' || d.v === 'midlife') return openPick(d.v);
     if(!arm(b, t('shop_confirm'))) return;
-    CYN -= it[1]; store.set(CYN_KEY, String(CYN));
+    payCyn(it[1]);
+    const me = S && active(), day = S ? today() : 0;
     if(SHOP_THEMES.includes(d.v)){ UNL[d.v] = true; store.set(UNL_KEY, JSON.stringify(UNL)); }
-    else { S.nextFate = d.v; save(); }
-    sfx.fame(); burst(d.v === 'crim' ? ['#ff2a00','#ffffff','#b3001b'] : d.v === 'star' ? ['#ffd000','#ffffff','#ffb300'] : d.v === 'dark' ? ['#ff2a3a','#000000','#ffffff','#5a0010'] : ['#ff9a2e','#ffffff','#ffd27a'], 40);
-    cynShow(); openShop(true);
+    else if(d.v === 'star' || d.v === 'crim') S.nextFate = d.v;
+    else if(d.v === 'fertile') S.nextMulti = true;
+    else if(d.v === 'immune'){
+      me.immuneUntil = day + Math.round(50 * 365.25); me.onset = null; me.onsetAddict = false;
+      log('cure','immune',[me.id, yearOf(me.immuneUntil)], day, true);
+    }
+    if(S){ dirty = true; save(); }
+    sfx.fame(); burst({crim:['#ff2a00','#ffffff','#b3001b'], star:['#ffd000','#ffffff','#ffb300'], dark:['#ff2a3a','#000000','#ffffff','#5a0010'], fertile:['#ff6cc0','#ffffff','#3fd0ff','#8cff1a'], immune:['#8cff1a','#ffffff','#3fd0ff']}[d.v] || ['#ff9a2e','#ffffff','#ffd27a'], 40);
+    openShop(true);
+  },
+  pickdo(d, b){
+    if(b.dataset.armed !== '1'){                       // premier appui : « Confirmer ? »
+      $$('.pickrow.armed').forEach(x => { x.dataset.armed = ''; x.classList.remove('armed'); x.querySelector('em').textContent = t('shop_pick'); });
+      b.dataset.armed = '1'; b.classList.add('armed'); b.querySelector('em').textContent = t('shop_confirm'); return;
+    }
+    const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
+    const me = active();
+    if(d.v === 'decrim'){ const p = P(+d.id); if(!p || !p.crim || p.death != null) return; payCyn(it[1]); decrim(p); sfx.cure(); burst(['#ffffff','#8cff1a','#3fd0ff'], 40); }
+    else { if(!ATOUT[d.id] || me.atout2) return; payCyn(it[1]); me.atout2 = d.id; log('star','midlife',[me.id, d.id], today(), true); sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff'], 40); }
+    dirty = true; save(); render(); openShop(true);
   },
   wipe(d, b){
     const st = +(b.dataset.step || 0), L = t('wipe_steps'), sp = b.querySelector('span');
