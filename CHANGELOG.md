@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4j — 12 novembre 2026
+
+- Centres d'intérêt : « Fan de Star Wars » devient « Fan de séries », et nouveau centre d'intérêt « Fan de… » une star de la famille, actuelle ou passée (par exemple « Fan de Louise Prunier »).
+- Maladies bénignes : 1,17 fois plus fréquentes avant 1900, et 0,9 fois moins après 2010.
+- Succès « Le temps passe » : la Course des générations, Relais express, Sprint généalogique et Record absolu ne se gagnent qu'en commençant la partie en 1780, et leurs descriptions sont simplifiées.
+
 ## v0.1.4i — 12 novembre 2026
 
 - Nouveaux succès : Arrière-grand-parent express (arrière-grand-parent à 58 ans ou moins, 52 avec l'âge légal à 16 ans, 68 à 21 ans) et la Course des générations (arriver en 2100 avec une moyenne de 25, 22, 20 ou 19 ans par génération, proportionnelle à l'âge légal).

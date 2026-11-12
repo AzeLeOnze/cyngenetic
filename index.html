@@ -1144,9 +1144,16 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4i';
+const APP_VERSION = '0.1.4j';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4j', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Centres d\'intérêt : « Fan de Star Wars » devient « Fan de séries », et nouveau centre d\'intérêt « Fan de… » une star de la famille, actuelle ou passée (par exemple « Fan de Louise Prunier »).',
+       'Maladies bénignes : 1,17 fois plus fréquentes avant 1900, et 0,9 fois moins après 2010.',
+       'Succès « Le temps passe » : la Course des générations, Relais express, Sprint généalogique et Record absolu ne se gagnent qu\'en commençant la partie en 1780, et leurs descriptions sont simplifiées.'],
+   en:['Interests: "Star Wars fan" becomes "TV series fan", plus a new "…fan" interest for a current or past family star (for example "Louise Prunier fan").',
+       'Mild illnesses: 1.17 times more common before 1900, and 0.9 times as common after 2010.',
+       '"Time flies" achievements: Generation race, Express relay, Family-tree sprint and All-time record can only be earned by starting the game in 1780, and their descriptions are simpler.']},
   {v:'0.1.4i', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Nouveaux succès : Arrière-grand-parent express (arrière-grand-parent à 58 ans ou moins, 52 avec l\'âge légal à 16 ans, 68 à 21 ans) et la Course des générations (arriver en 2100 avec une moyenne de 25, 22, 20 ou 19 ans par génération, proportionnelle à l\'âge légal).',
        '20 nouvelles maladies bénignes : angine, sinusite, anémie, varicelle, otite, cystite, tendinite, gastrite, conjonctivite, urticaire ; plus longues (8 à 15 ans) : pré-diabète, polyarthrite, acouphènes, endométriose ; très longues (25 à 35 ans) : glaucome, excès de cholestérol ; du futur : allergie aux protéines synthétiques, fatigue de réalité virtuelle (2040), dysgravité et rejet d\'implant neuronal (2080).',
@@ -1821,7 +1828,8 @@ const INTERESTS = [
  ['vaporwave','Fan de vaporwave','Fan de vaporwave','Vaporwave fan','Vaporwave fan','wave',2011,9999],['rap','Fan de rap','Fan de rap','Rap fan','Rap fan','headphones',1984,9999],
  ['gangster','Gangster','Gangster','Gangster','Gangster','knife',1900,9999],['dealeur','Dealeur','Dealeuse','Dealer','Dealer','pill',1960,9999],
  ['collecjeux','Collectionneur de jeux','Collectionneuse de jeux','Game collector','Game collector','gamepad',1985,9999],['retrogamer','Rétro-gameur','Rétro-gameuse','Retro gamer','Retro gamer','gamepad',1995,9999],
- ['graffeur','Graffeur','Graffeuse','Graffiti artist','Graffiti artist','palette',1980,9999],['starwars','Fan de Star Wars','Fan de Star Wars','Star Wars fan','Star Wars fan','planet',1977,9999],
+ ['graffeur','Graffeur','Graffeuse','Graffiti artist','Graffiti artist','palette',1980,9999],['starwars','Fan de séries','Fan de séries','TV series fan','TV series fan','film',1960,9999],
+ ['fanof',"Fan d'une célébrité de la famille","Fan d'une célébrité de la famille",'Fan of a family celebrity','Fan of a family celebrity','sparkle',1500,9999],
  ['comics','Fan de comics','Fan de comics','Comics fan','Comics fan','book',1938,9999],['streamex','Streameur extra-planétaire','Streameuse extra-planétaire','Off-world streamer','Off-world streamer','rocket',2084,9999],
  ['tiktok','Tiktokeur','Tiktokeuse','TikToker','TikToker','phone',2018,2037],['neotiktok','Néo-Tiktokeur','Néo-Tiktokeuse','Neo-TikToker','Neo-TikToker','phone',2037,2087]
 ];
@@ -1830,9 +1838,11 @@ const INT = byId(INTERESTS);
 const interestsOf = p => (p.interests || []).slice(0, 1);                  // un seul centre d'intérêt par personne
 const sporty = p => interestsOf(p).some(id => INT[id] && INT[id][8]);
 function gainInterest(p, day, silent){
-  const y = yearOf(day), have = interestsOf(p), ok = INTERESTS.filter(r => y >= r[6] && y <= r[7]);
+  const y = yearOf(day), have = interestsOf(p), ok = INTERESTS.filter(r => r[0] !== 'fanof' && y >= r[6] && y <= r[7]);
   if(have.length || !ok.length) return null;
-  const id = pick(ok)[0];
+  const stars = S ? Object.values(S.people).filter(q => q.id !== p.id && q.star && q.star.famous && inFamily(q)) : [];
+  let id = pick(ok)[0];
+  if(stars.length && Math.random() < .2){ id = 'fanof'; p.fanOf = pick(stars).id; }   // fan d'une star (passée ou actuelle) de la famille
   p.interests = have.concat(id);
   if(!silent) log('interest','interest',[p.id, id], day, p.id === S.activeId);
   return id;
@@ -2040,7 +2050,8 @@ function mildYear(p, A, day){                         // une fois par an : peut-
   if(day >= COVID_A && day <= COVID_B && !p.covidRoll){   // déc. 2019 - déc. 2024 : 8 % des vivants attrapent le Covid-19
     p.covidRoll = true; if(Math.random() < .08) catchMild(p, 'covid', day);
   }
-  if(Math.random() < .06/1.29 * R.illness/100){                // 0.1.3g : fréquence ÷ 1,29
+  const era = yearOf(day) < 1900 ? 1.17 : yearOf(day) > 2010 ? .9 : 1;           // 0.1.4j : plus fréquentes avant 1900, moins après 2010
+  if(Math.random() < .06/1.29 * era * R.illness/100){                // 0.1.3g : fréquence ÷ 1,29
     const y = dataYear(yearOf(day)), ok = MILDS.filter(r => !r[7].special && y >= r[3] && y <= r[4] && (r[7].sex == null || p.sex === r[7].sex) && (r[7].minA == null || A >= r[7].minA) && (r[7].maxA == null || A <= r[7].maxA));
     if(ok.length) catchMild(p, pick(ok)[0], day);
   }
@@ -2740,7 +2751,8 @@ const condBadges = p => {
   addictsOf(p).forEach(id => items.push(`<span class="cb add" title="${esc(addName(id,p))}">${icon(ADD[id][4])}</span>`));
   return items.length ? `<span class="cbadges">${items.join('')}</span>` : '';
 };
-const intName = (id, p) => { const r = INT[id]; return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : (p.sex==='F' ? r[4] : r[3]); };
+const intName = (id, p) => { const r = INT[id];
+  if(id === 'fanof'){ const s2 = S && p.fanOf != null && P(p.fanOf); if(s2) return LANG === 'fr' ? `Fan de ${s2.first} ${s2.last}` : `${s2.first} ${s2.last} fan`; } return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : (p.sex==='F' ? r[4] : r[3]); };
 const intBadge = (id, p) => `<span class="cb int" title="${esc(intName(id,p))}">${icon(INT[id][5])}</span>`;
 const intList = p => interestsOf(p).filter(id => INT[id]).map(id => intName(id, p)).join(', ');
 const intTile = p => interestsOf(p).length ? `<div class="span2 intf"><dt>${t('f_interests')}</dt><dd><span class="cbadges">${interestsOf(p).filter(id => INT[id]).map(id => intBadge(id,p)).join('')}</span>${esc(intList(p))}</dd></div>` : '';
@@ -2814,10 +2826,10 @@ const ACHS = [
  ['r_nobleking','royal','gold','Du blason à la couronne','Un noble devient roi (ou reine)','From crest to crown','A noble becomes king (or queen)'],
  ['r_lateheir','royal','special','Miracle tardif',"Un roi sans héritier en retrouve un après ses 80 ans",'Late miracle','A king with no heir gets a new one after turning 80'],
  ['ggp_fast','kids','gold','Arrière-grand-parent express',"Devenir arrière-grand-parent à 58 ans ou moins (52 ans si l'âge légal est à 16 ans, 68 à 21 ans)",'Express great-grandparent','Become a great-grandparent at 58 or younger (52 with a legal age of 16, 68 with 21)'],
- ['gen25','time','bronze','Course des générations',"Arriver en 2100 avec une moyenne de 25 ans ou moins par génération (proportionnel à l'âge légal)",'Generation race','Reach 2100 averaging 25 years or less per generation (scaled to the legal age)'],
- ['gen22','time','silver','Relais express',"Arriver en 2100 avec une moyenne de 22 ans ou moins par génération (proportionnel à l'âge légal)",'Express relay','Reach 2100 averaging 22 years or less per generation (scaled to the legal age)'],
- ['gen20','time','gold','Sprint généalogique',"Arriver en 2100 avec une moyenne de 20 ans ou moins par génération (proportionnel à l'âge légal)",'Family-tree sprint','Reach 2100 averaging 20 years or less per generation (scaled to the legal age)'],
- ['gen19','time','platinum','Record absolu',"Arriver en 2100 avec une moyenne de 19 ans ou moins par génération (proportionnel à l'âge légal)",'All-time record','Reach 2100 averaging 19 years or less per generation (scaled to the legal age)'],
+ ['gen25','time','bronze','Course des générations',"Partir de 1780 et arriver en 2100 avec une moyenne de 25 ans ou moins par génération",'Generation race','Start in 1780 and reach 2100 averaging 25 years or less per generation'],
+ ['gen22','time','silver','Relais express',"Partir de 1780 et arriver en 2100 avec une moyenne de 22 ans ou moins par génération",'Express relay','Start in 1780 and reach 2100 averaging 22 years or less per generation'],
+ ['gen20','time','gold','Sprint généalogique',"Partir de 1780 et arriver en 2100 avec une moyenne de 20 ans ou moins par génération",'Family-tree sprint','Start in 1780 and reach 2100 averaging 20 years or less per generation'],
+ ['gen19','time','platinum','Record absolu',"Partir de 1780 et arriver en 2100 avec une moyenne de 19 ans ou moins par génération",'All-time record','Start in 1780 and reach 2100 averaging 19 years or less per generation'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
  ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
@@ -3475,7 +3487,8 @@ function onBirthday(p, A, day){
   scheduleYear(p, A, day);
 }
 function genRace(){                                  // « Course des générations » : moyenne d'années par génération en 2100
-  const yrs = 2100 - S.startYear; if(yrs < 100 || !living().some(p => p.blood)) return;
+  if(S.startYear !== 1780) return;                     // seulement pour une partie commencée en 1780
+  const yrs = 2100 - S.startYear; if(!living().some(p => p.blood)) return;
   const g = Math.max(...Object.values(S.people).filter(p => p.blood).map(genOf)); if(g < 2) return;
   const avg = yrs / (g - 1), k = R.legal / 18;       // seuils proportionnels à l'âge légal (18 ans = référence)
   [[25,'gen25'],[22,'gen22'],[20,'gen20'],[19,'gen19']].forEach(([n, id]) => { if(avg <= n * k) unlock(id); });
