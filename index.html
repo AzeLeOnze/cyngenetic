@@ -475,7 +475,7 @@ body.no-deco .bubble{display:none}
 @keyframes crownbob{50%{transform:translateX(-50%) translateY(-3px) rotate(-3deg)}}
 .rtt{display:inline;margin-right:3px;font:800 9px/1 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:#7a2bd6;vertical-align:1px}
 #treeCanvas .node.king,#treeCanvas .node.heirn,#treeCanvas .node.titled{gap:1px;padding-bottom:7px}
-#treeCanvas .node .nt b.tt{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;font-size:13.5px;line-height:1.12}
+#treeCanvas .node .nt b.tt{font-size:13.5px}
 #treeCanvas .node.king .n-life,#treeCanvas .node.heirn .n-life{line-height:1.12}
 #treeCanvas .node.king .n-band,#treeCanvas .node.heirn .n-band{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:10.5px;line-height:1.15;padding:2px 7px}
 #treeCanvas .node.king:not(.crim):not(.ill) .rtt,#treeCanvas .node.heirn:not(.crim):not(.ill) .rtt{color:#5a17b0}
@@ -673,7 +673,7 @@ body.no-deco .bubble{display:none}
   box-shadow:0 7px 16px rgba(0,70,160,.24),inset 0 1px 0 #fff,inset 0 -4px 10px rgba(0,150,255,.10);transition:transform .15s}
 .node:hover{transform:translateY(-2px) scale(1.03)}
 .node.partner{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(235,248,255,.78))}
-.n-top{display:flex;align-items:center;gap:8px;text-align:left;min-width:0;max-width:100%}
+.n-top{display:flex;align-items:center;justify-content:center;gap:8px;text-align:left;min-width:0;max-width:100%}
 .n-top .orb{width:40px;height:40px}
 .nt{display:flex;flex-direction:column;min-width:0;line-height:1.15;overflow:hidden}
 .nt b{font:800 14px var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1143,9 +1143,18 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4e';
+const APP_VERSION = '0.1.4f';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4f', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Arbre : les bulles s\'élargissent pour afficher le prénom en entier (titre compris), avec les informations toujours centrées.',
+       'Mode Royal : seuls les enfants d\'un duc ou d\'une duchesse deviennent comtes (plus ceux du prince héritier).',
+       'Mode Royal : 8 métiers réservés aux ducs et comtes (gère son domaine, gouverneur de province, grand chambellan, grand veneur…), aussi dans la catégorie Royal de l\'album.',
+       'Mode Royal : un comte ou une comtesse a 22 % de chances, après 16 ans, d\'être anobli : il devient « Noble » et rapporte 5 Cyn tous les 2 ans.'],
+   en:['Tree: bubbles now widen to show the full first name (title included), with the details still centred.',
+       'Royal mode: only the children of a duke or duchess become counts (no longer those of the crown prince).',
+       'Royal mode: 8 jobs reserved for dukes and counts (runs their estate, provincial governor, lord chamberlain, master of the hunt…), also in the Royal section of the album.',
+       'Royal mode: after 16, a count or countess has a 22% chance of being ennobled: they become "Noble" and bring in 5 Cyn every 2 years.']},
   {v:'0.1.4e', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode Royal : le titre (Roi, Reine, Prince, Duc…) se place devant le prénom. Un prénom long passe sur deux lignes au lieu de dépasser de la bulle, et le mot « Prince » n\'est plus écrit en énorme.'],
    en:['Royal mode: the title (King, Queen, Prince, Duke…) now sits in front of the first name. A long first name wraps onto two lines instead of spilling out of the bubble, and "Prince" is no longer written huge.']},
@@ -1853,7 +1862,9 @@ const MILD = byId(MILDS);
 const ROYAL_ACTS = [['paix','Signe un traité de paix','Signs a peace treaty','dove'],['guerre','Déclare la guerre','Declares war','sword'],['chateau','Fait bâtir un château','Builds a castle','castle'],['bal','Organise un grand bal','Throws a grand ball','disco'],['impot','Lève un nouvel impôt','Raises a new tax','crown'],['baisse','Baisse les impôts','Lowers taxes','heart'],['chasse','Part à la chasse royale','Goes on a royal hunt','paw'],['justice','Rend la justice','Dispenses justice','flag'],['grace','Gracie un condamné','Pardons a prisoner','lock'],['academie','Fonde une académie','Founds an academy','book'],['portrait','Pose pour son portrait officiel','Sits for an official portrait','palette'],['ambassade','Reçoit un ambassadeur','Receives an ambassador','planet'],['tournee','Visite ses provinces','Tours the provinces','pin'],['cathedrale','Fait bâtir une cathédrale','Builds a cathedral','building'],['arts','Protège les artistes','Patronises the arts','music'],['armee','Réforme l\'armée','Reforms the army','helmet'],['pain','Distribue du pain au peuple','Hands out bread to the people','cup'],['canal','Fait creuser un canal','Has a canal dug','wave'],['jardin','Inaugure un jardin royal','Opens a royal garden','leaf'],['conseil','Préside le conseil royal','Chairs the royal council','user'],['tournoi','Organise un tournoi','Holds a tournament','trophy'],['monnaie','Fait frapper une monnaie','Mints a new coin','sun'],['expedition','Lance une expédition lointaine','Launches a far-off expedition','rocket'],['memoires','Écrit ses mémoires','Writes their memoirs','book'],['audience','Accorde une audience au peuple','Grants an audience to the people','user'],['flotte','Fait construire une flotte','Has a fleet built','wave'],['opera','Fonde un opéra royal','Founds a royal opera','music'],['festin','Donne un grand festin','Hosts a grand feast','cup'],['alliance','Négocie une alliance','Negotiates an alliance','heart'],['route','Fait tracer une route royale','Has a royal road built','train'],['hopital','Fonde un hôpital','Founds a hospital','pill'],['feu','Offre un feu d\'artifice','Puts on fireworks','sparkle']];
 // ce que fait le prince (ou la princesse) héritier, dès 16 ans
 const PRINCE_ACTS = [['p_escrime','Prend des leçons d\'escrime','Takes fencing lessons','sword'],['p_equitation','Apprend l\'équitation','Learns horse riding','paw'],['p_precepteur','Étudie avec son précepteur','Studies with a tutor','book'],['p_bal','Fait ses débuts au bal','Makes a ball debut','disco'],['p_voyage','Part en voyage diplomatique','Goes on a diplomatic trip','planet'],['p_regiment','Commande un régiment','Commands a regiment','helmet'],['p_chasse','Accompagne la chasse royale','Joins the royal hunt','leaf'],['p_conseil','Assiste au conseil royal','Sits in on the royal council','crown'],['p_mecene','Protège un jeune peintre','Patronises a young painter','palette'],['p_pont','Inaugure un pont','Opens a new bridge','building'],['p_charite','Visite un orphelinat','Visits an orphanage','heart'],['p_clavecin','Apprend le clavecin','Learns the harpsichord','music'],['p_portrait','Pose pour un portrait','Sits for a portrait','palette'],['p_langues','Apprend des langues étrangères','Learns foreign languages','book'],['p_fete','Organise une fête au palais','Throws a palace party','sparkle'],['p_attente','Attend son tour de régner','Waits for their turn to reign','hourglass']];
-const ROYAL = byId(ROYAL_ACTS.concat(PRINCE_ACTS));
+// métiers réservés aux ducs et aux comtes
+const NOBLE_ACTS = [['n_domaine','Gère son domaine','Runs their estate','castle'],['n_ambassade','Ambassadeur de la couronne','Crown ambassador','planet'],['n_gouverneur','Gouverneur de province','Provincial governor','flag'],['n_officier','Officier de la garde royale','Royal Guard officer','helmet'],['n_chambellan','Grand chambellan','Lord chamberlain','crown'],['n_mecene','Mécène des arts','Patron of the arts','palette'],['n_ecuyer','Grand écuyer','Master of the horse','paw'],['n_veneur','Grand veneur','Master of the hunt','leaf']];
+const ROYAL = byId(ROYAL_ACTS.concat(PRINCE_ACTS, NOBLE_ACTS));
 const royalActName = id => ROYAL[id] ? (LANG === 'fr' ? ROYAL[id][1] : ROYAL[id][2]) : '';
 let RH;                                                // héritier en cache (recalculé à chaque rendu / naissance / décès)
 const royalOn = () => !!(S && S.royal && !S.royal.lost);
@@ -1879,16 +1890,25 @@ function heirId(){
 function nobleRank(p){                               // enfant d'un monarque : duc ; enfant d'un duc : comte ; « déchu » s'il a renoncé
   if(!p || !p.blood || !p.parents) return '';
   if(p.noble === 'dechu') return 'dechu';
+  if(p.noble === 'noble') return 'noble';
   const par = p.parents.map(P).filter(Boolean);
   if(par.some(q => q.wasKing)) return 'duc';
-  if(par.some(q => q.blood && q.noble !== 'dechu' && !q.wasKing && q.parents && q.parents.some(i => { const g2 = P(i); return g2 && g2.wasKing; }))) return 'comte';
+  if(par.some(q => q.blood && !q.noble && !q.wasKing && q.id !== heirId() && q.parents && q.parents.some(i => { const g2 = P(i); return g2 && g2.wasKing; }))) return 'comte';   // parent duc (pas prince)
   return '';
 }
 function nobleYear(p, A, day){                        // ducs et comtes : 3 % de chances dans leur vie de renoncer à la vie royale
   if(!royalOn() || p.death != null || p.id === S.royal.king || p.id === heirId()) return;
-  const r = nobleRank(p); if(r !== 'duc' && r !== 'comte') return;
+  const r = nobleRank(p);
+  if(r === 'noble'){ p.nobleYears = (p.nobleYears || 0) + 1; if(p.nobleYears % 2 === 0) cyn(5 * (hasAtout(p,'richesse') ? 2 : 1), p.id); return; }   // un noble rapporte 5 Cyn tous les 2 ans
+  if(r !== 'duc' && r !== 'comte') return;
+  const w = p.work;
+  if(A >= 18 && !p.nobleJobRoll && !(w && ['royal','star','prison','retired','uni'].includes(w.s))){       // 60 % prennent un métier réservé à la noblesse
+    p.nobleJobRoll = true; if(Math.random() < .6){ p.work = {s:'noble', act: pick(NOBLE_ACTS)[0]}; dirty = true; }
+  }
+  if(r === 'comte' && A >= 16 && !p.nobleRoll){ p.nobleRoll = true; if(Math.random() < .22) p.nobleAt = day + rnd(0, 40*365); }   // 22 % des comtes deviennent nobles
+  if(p.nobleAt != null && day >= p.nobleAt){ p.nobleAt = null; p.noble = 'noble'; RH = undefined; log('star','ennobled',[p.id], day, true); dirty = true; return; }
   if(!p.dechuRoll && A >= 18){ p.dechuRoll = true; if(Math.random() < .03) p.dechuAt = day + rnd(0, 40*365); }
-  if(p.dechuAt != null && day >= p.dechuAt){ p.dechuAt = null; p.noble = 'dechu'; RH = undefined; log('sad','dechu',[p.id], day, true); dirty = true; }
+  if(p.dechuAt != null && day >= p.dechuAt){ p.dechuAt = null; p.noble = 'dechu'; if(p.work && p.work.s === 'noble') p.work = {s:'unemp', until: day + rnd(60, 730)}; RH = undefined; log('sad','dechu',[p.id], day, true); dirty = true; }
 }
 const royalImmune = p => royalOn() && (p.id === S.royal.king || p.id === heirId());   // ni star ni criminel
 function royalTitle(p){
@@ -1902,6 +1922,7 @@ function royalTitle(p){
   if(rank === 'dechu') return fr ? (F ? 'Déchue' : 'Déchu') : 'Fallen';
   if(rank === 'duc') return fr ? (F ? 'Duchesse' : 'Duc') : (F ? 'Duchess' : 'Duke');
   if(rank === 'comte') return fr ? (F ? 'Comtesse' : 'Comte') : (F ? 'Countess' : 'Count');
+  if(rank === 'noble') return 'Noble';
   return '';
 }
 function crown(p, day, silent){
@@ -2351,7 +2372,8 @@ fr:{
   log_royal_lost:()=>"Ni héritier ni frère pour reprendre la couronne : la dynastie s'éteint.",
   over_royal_title:l=>`Fin de la dynastie ${l}`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} est ${g(P(d.id || d),'mort','morte')} sans héritier ni frère pour lui succéder. La couronne s'éteint avec ${g(P(d.id || d),'lui','elle')}.`,
   alb_prince_d:'Prince ou princesse héritier',
-  shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'),
+  shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'), alb_noble_d:'Duc, duchesse, comte ou comtesse',
+  log_ennobled:p=>`${P(p).first} ${P(p).last} est ${g(P(p),'anobli','anoblie')} : ${g(P(p),'il','elle')} rapportera 5 Cyn tous les 2 ans.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
   end_note_over:'La partie est terminée : les Cyn et les succès ne peuvent plus être gagnés dans cette partie.',
   end_note_2100:'Si tu continues à jouer, tu ne gagneras plus ni Cyn ni succès dans cette partie.',
@@ -2558,7 +2580,8 @@ en:{
   log_royal_lost:()=>'No heir and no brother to take the crown: the dynasty dies out.',
   over_royal_title:l=>`End of the ${l} dynasty`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} died with no heir and no brother to succeed them. The crown dies with them.`,
   alb_prince_d:'Crown prince or princess',
-  shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'),
+  shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'), alb_noble_d:'Duke, duchess, count or countess',
+  log_ennobled:p=>`${P(p).first} ${P(p).last} is ennobled and will bring in 5 Cyn every 2 years.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
   end_note_over:'The game is over: Cyn and achievements can no longer be earned in this game.',
   end_note_2100:"If you keep playing, you won't earn any more Cyn or achievements in this game.",
@@ -2994,6 +3017,11 @@ function workYear(p, A, day){
     let a; do { a = pick(PRINCE_ACTS)[0]; } while(a === p.princeAct); p.princeAct = a; log('star','royal_act',[p.id, a], day, false);
   }
   const w = p.work; if(w && w.s === 'royal'){ royalYear(p, A, day); return; }
+  if(w && w.s === 'noble'){                            // métier de duc ou de comte
+    if(A >= p.retireAge) p.work = {s:'retired'};
+    else if(Math.random() < .1){ let a; do { a = pick(NOBLE_ACTS)[0]; } while(a === w.act); w.act = a; dirty = true; }
+    return;
+  }
   if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
   if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
   if(w.s==='job' && w.job !== 'president'){
@@ -3038,6 +3066,7 @@ function activity(p, skipIll){
   if(!w) return A < 18 ? schoolLabel(p, A, y) : t('odd');
   if(w.s === 'prison') return t('prison');
   if(w.s === 'royal') return A < 16 ? t('regency') : royalActName(w.act);
+  if(w.s === 'noble') return royalActName(w.act);
   switch(w.s){
     case 'job': return jobName(w.job, p);
     case 'odd': return p.school && p.school.drop ? t('dropout', p) : t('odd');
@@ -3529,7 +3558,18 @@ function renderDecade(y, force){
 }
 
 /* ================= Rendu : arbre ================= */
-const NW = 172, NH = 140, GX = 22, PG = 26, GY = 92, PAD = 44;
+const NW = 172, NH = 140, GX = 22, PG = 26, GY = 92, PAD = 44, NW_MAX = 300;
+const measureCtx = document.createElement('canvas').getContext('2d');
+let nodeWidths = {};                                  // largeur de chaque bulle : la bulle s'agrandit pour afficher le prénom en entier
+function nodeWidthOf(p, fd){
+  const tt = royalTitle(p), first = p.first || '…';
+  measureCtx.font = `800 ${tt ? 13.5 : 14}px ${fd}`;
+  let line1 = measureCtx.measureText(first).width;
+  if(tt){ measureCtx.font = `800 9px ${fd}`; line1 += measureCtx.measureText(tt.replace(' consort', '').toUpperCase()).width + tt.length * .4 + 4; }
+  measureCtx.font = `400 12px ${fd}`;
+  const line2 = measureCtx.measureText(p.last || '').width;
+  return Math.min(NW_MAX, Math.max(NW, Math.ceil(20 + 40 + 8 + Math.max(line1, line2) + 8)));   // marges + photo + espace + texte
+}
 const CROWN_SVG = '<svg viewBox="0 0 64 40"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6c2"/><stop offset=".45" stop-color="#ffd23a"/><stop offset="1" stop-color="#c98a00"/></linearGradient></defs><path d="M6 34 3 10l14 11L32 3l15 18 14-11-3 24z" fill="url(#cg)" stroke="#8a5a00" stroke-width="2" stroke-linejoin="round"/><rect x="6" y="31" width="52" height="7" rx="2" fill="url(#cg)" stroke="#8a5a00" stroke-width="2"/><circle cx="32" cy="23" r="4" fill="#e8203a" stroke="#fff" stroke-width="1.2"/><circle cx="17" cy="26" r="3" fill="#2f6bff" stroke="#fff" stroke-width="1"/><circle cx="47" cy="26" r="3" fill="#2fbf5a" stroke="#fff" stroke-width="1"/><circle cx="3" cy="10" r="2.6" fill="#fff3a0"/><circle cx="32" cy="3" r="2.8" fill="#fff3a0"/><circle cx="61" cy="10" r="2.6" fill="#fff3a0"/></svg>';
 const ICON_BABY = '<svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-8.6C1 9.3 2.7 5.5 6.3 5.5c2.1 0 3.4 1.2 4.2 2.4h3c.8-1.2 2.1-2.4 4.2-2.4 3.6 0 5.3 3.8 3.6 6.9C19 16.6 12 21 12 21z"/></svg>';
 function avatar(p){
@@ -3572,7 +3612,7 @@ function nodeHTML(p, x, y){
   const cu = S.unions.find(u => u.end==null && (u.a===p.id||u.b===p.id) && u.preg && !u.preg.adopt);
   const sparkles = p.star ? '<i class="tw" style="left:8px;top:46px"></i><i class="tw" style="right:10px;top:30px;animation-delay:calc(var(--t,0s) + .6s)"></i><i class="tw" style="right:22px;bottom:30px;animation-delay:calc(var(--t,0s) + 1.1s)"></i>' : '';
   const flames = p.crim && p.crim.declared && p.death == null && !jail ? `<span class="flames" style="left:${x-12}px;top:${y-50}px"></span>` : '';
-  return `${flames}<button class="${cls.join(' ')}" style="left:${x}px;top:${y}px;--t:@T@" data-act="fiche" data-id="${p.id}" aria-label="${esc(nm(p))}">
+  return `${flames}<button class="${cls.join(' ')}" style="left:${x}px;top:${y}px;width:${nodeWidths[p.id] || NW}px;--t:@T@" data-act="fiche" data-id="${p.id}" aria-label="${esc(nm(p))}">
     ${p.id===S.activeId?`<em class="rib you">${t('you')}</em>`:''}${rib}${sparkles}${!p.ill && p.death==null && mildOn(p).length ? `<em class="rib sick">${t('sick_rib', p)}</em>` : ''}
     ${isKing || isHeir ? `<i class="crownfx ${isHeir ? 'small' : ''}">${CROWN_SVG}</i>` : ''}
     <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b class="${rtt ? 'tt' : ''}">${rtt ? `<small class="rtt">${esc(rtt.replace(' consort', ''))}</small>` : ''}${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
@@ -3583,6 +3623,9 @@ function nodeHTML(p, x, y){
 }
 function renderTree(){
   const memo = {}, pos = {}, unionsD = [], links = [];
+  const fd = getComputedStyle(document.documentElement).getPropertyValue('--font-display') || 'sans-serif';
+  nodeWidths = {};
+  const NWo = id => nodeWidths[id] ?? (nodeWidths[id] = nodeWidthOf(P(id), fd));
   const KC = new Map(), UA = new Map();               // 0.1.4a : index calculés une fois (avant : recherche dans toute la famille à chaque bulle)
   for(const c of Object.values(S.people)) if(c.parents){ const k = c.parents[0] + '-' + c.parents[1]; if(!KC.has(k)) KC.set(k, []); KC.get(k).push(c); }
   KC.forEach(a => a.sort((x, y) => x.birth - y.birth));
@@ -3591,26 +3634,27 @@ function renderTree(){
   const unionsL = pid => (UA.get(pid) || []).filter(u => u.end == null || u.married || kidsL(u).length);
   let maxDepth = 0;
   function measure(pid){
-    const us = unionsL(pid), selfW = NW + us.length*(NW+PG), kids = us.flatMap(kidsL);
+    const us = unionsL(pid), selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), kids = us.flatMap(kidsL);
     const kidsW = kids.length ? kids.reduce((s,k) => s + measure(k.id), 0) + (kids.length-1)*GX : 0;
     return memo[pid] = Math.max(selfW, kidsW);
   }
   function place(pid, x, depth){
     maxDepth = Math.max(maxDepth, depth);
     const us = unionsL(pid), w = memo[pid];
-    const selfW = NW + us.length*(NW+PG), y = PAD + depth*(NH+GY), sx = PAD + x + (w-selfW)/2;
+    const selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), y = PAD + depth*(NH+GY), sx = PAD + x + (w-selfW)/2;
     pos[pid] = {x:sx, y};
-    us.forEach((u,i) => { pos[u.b] = {x: sx + (i+1)*(NW+PG), y}; });
+    let ux = sx + NWo(pid) + PG;
+    us.forEach(u => { pos[u.b] = {x: ux, y}; ux += NWo(u.b) + PG; });
     const groups = us.map(kidsL), kids = groups.flat();
     const kidsW = kids.length ? kids.reduce((s,k) => s + memo[k.id], 0) + (kids.length-1)*GX : 0;
     let kx = x + (w-kidsW)/2;
     us.forEach((u,i) => {
-      const x1 = sx + NW/2, x2 = pos[u.b].x + NW/2, by = y + NH + 12 + i*9;
+      const x1 = sx + NWo(pid)/2, x2 = pos[u.b].x + NWo(u.b)/2, by = y + NH + 12 + i*9;
       const st = u.end==null ? (u.married ? 'married' : 'dating') : 'ended';
       unionsD.push({x1, x2, y0:y+NH, by, st, mx:(x1+x2)/2});
       groups[i].forEach(k => {
         place(k.id, kx, depth+1);
-        links.push({mx:(x1+x2)/2, y1:by, bus: y + NH + GY/2 + 8 + i*7, kx: pos[k.id].x + NW/2, ky: pos[k.id].y});
+        links.push({mx:(x1+x2)/2, y1:by, bus: y + NH + GY/2 + 8 + i*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
         kx += memo[k.id] + GX;
       });
     });
@@ -3637,7 +3681,7 @@ function renderTree(){
 }
 function centerOn(id, smooth){
   const p = layout[id], sc = $('#treeScroll'); if(!p) return;
-  sc.scrollTo({left: padX + (p.x + NW/2)*zoom - sc.clientWidth/2, top: padY + (p.y + NH/2)*zoom - sc.clientHeight/2.4, behavior: smooth && !reduced ? 'smooth' : 'auto'});
+  sc.scrollTo({left: padX + (p.x + (nodeWidths[id] || NW)/2)*zoom - sc.clientWidth/2, top: padY + (p.y + NH/2)*zoom - sc.clientHeight/2.4, behavior: smooth && !reduced ? 'smooth' : 'auto'});
 }
 /* Zoom de l'arbre : boutons, Ctrl + molette, pincement, touches + et −.
    Une grande marge invisible entoure l'arbre : on peut le déplacer librement, sans bord qui bloque. */
@@ -4175,6 +4219,7 @@ function albumScan(force){
     (p.mild || []).forEach(m => mark('m', m.dz));
     if(p.work && p.work.s === 'royal' && p.death == null && ageAt(p, S.t) >= 16) mark('r', p.work.act);
     else if(p.princeAct && p.death == null && royalOn() && heirId() === p.id && ageAt(p, S.t) >= 16) mark('r', p.princeAct);
+    else if(p.work && p.work.s === 'noble' && p.death == null) mark('r', p.work.act);
     (p.conds || []).forEach(id => mark('c', id));
     if(p.work && (p.work.s === 'job' || p.work.s === 'star')) mark('j', p.work.job);
     addictsOf(p).forEach(id => mark('a', id));
@@ -4226,7 +4271,8 @@ function albItems(k){
     .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
   if(k === 'e') return schoolItems();
   if(k === 'r') return ROYAL_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_royal_d')}))
-    .concat(PRINCE_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_prince_d')})));
+    .concat(PRINCE_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_prince_d')})))
+    .concat(NOBLE_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_noble_d')})));
   if(k === 'm') return MILDS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:'pill', y:r[3], desc: albYears(r[3], r[4]), secret:true}));
   return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));

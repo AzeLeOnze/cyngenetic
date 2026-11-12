@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4f — 12 novembre 2026
+
+- Arbre : les bulles s'élargissent pour afficher le prénom en entier (titre compris), avec les informations toujours centrées.
+- Mode Royal : seuls les enfants d'un duc ou d'une duchesse deviennent comtes (plus ceux du prince héritier).
+- Mode Royal : 8 métiers réservés aux ducs et comtes (gère son domaine, gouverneur de province, grand chambellan, grand veneur…), aussi dans la catégorie Royal de l'album.
+- Mode Royal : un comte ou une comtesse a 22 % de chances, après 16 ans, d'être anobli : il devient « Noble » et rapporte 5 Cyn tous les 2 ans.
+
 ## v0.1.4e — 12 novembre 2026
 
 - Mode Royal : le titre (Roi, Reine, Prince, Duc…) se place devant le prénom. Un prénom long passe sur deux lignes au lieu de dépasser de la bulle, et le mot « Prince » n'est plus écrit en énorme.
