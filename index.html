@@ -150,6 +150,23 @@ button{font:inherit;color:inherit}
 .fieldhint{display:block;margin-top:4px;font:700 11.5px var(--font-display);color:var(--aqua-deep)}
 .endnote{margin:8px 0 0;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.55);font-size:13px;color:var(--ink-soft)}
 .si-lueur{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#c9a8ff 50%,#5a17b0)}
+.autowarn{text-align:center}
+.aw-ic{display:inline-grid;place-items:center;width:58px;height:58px;margin-bottom:6px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
+.aw-ic svg{width:30px;height:30px;fill:currentColor}
+.autowarn h2{margin:4px 0 8px;font:800 22px var(--font-display)}
+.autowarn p{margin:0 auto 14px;max-width:380px;color:var(--ink-soft);line-height:1.45}
+.aw-check{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;font-size:14px;color:var(--ink-soft);cursor:pointer}
+.aw-check input{width:18px;height:18px;accent-color:var(--aqua-deep)}
+.autowarn .m-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.reigns{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.reigns li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 2px 8px rgba(0,70,160,.1)}
+.reigns li.now{background:linear-gradient(180deg,#fffbe6,#ffe9a6);border-color:#ffd24a;box-shadow:0 0 0 2px rgba(122,43,214,.25)}
+.reigns li .orb{width:40px;height:40px}
+.reigns b{display:block;font:800 15px var(--font-display)}
+.reigns small{display:block;font-size:12px;color:var(--ink-soft)}
+.reigns em{font:800 14px var(--font-display);font-style:normal;color:#7a2bd6;text-align:right;white-space:nowrap}
+.reigns em i{display:block;font:700 12px var(--font-display);font-style:normal;color:var(--ink-soft)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .reigns li{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
 .si-potion{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff7ad8 55%,#9e0077)}
 .si-decrim{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 55%,#0074dc)}
 .picklist{display:grid;gap:8px;max-height:min(60vh,520px);overflow:auto;padding:2px}
@@ -186,11 +203,11 @@ button{font:inherit;color:inherit}
   padding-block:28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .setup-inner{width:100%;max-width:580px;display:flex;flex-direction:column;gap:18px}
 .setup-top{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
-.logo{margin:0;font:800 clamp(56px,13vw,96px)/.95 var(--font-display);letter-spacing:-.02em;text-align:center;
+.logo{margin:0;font:800 clamp(56px,13vw,96px)/.95 var(--font-display);letter-spacing:-.035em;text-align:center;
   background:linear-gradient(180deg,#ffffff 0%,#e9fbff 46%,#7fdcff 52%,#00a2ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 3px 0 rgba(0,70,170,.55)) drop-shadow(0 10px 18px rgba(0,60,160,.35))}
 .brand{display:flex;align-items:center;justify-content:center;gap:12px}
-.brand .emblem{flex:none;width:clamp(56px,13vw,84px);height:auto;filter:drop-shadow(0 6px 12px rgba(0,60,160,.35));animation:embfloat 5s ease-in-out infinite}
+.brand .emblem{flex:none;width:clamp(58px,13.5vw,88px);height:auto;filter:drop-shadow(0 8px 14px rgba(0,60,160,.32)) drop-shadow(0 2px 0 rgba(255,255,255,.6));animation:embfloat 5s ease-in-out infinite}
 @keyframes embfloat{50%{transform:translateY(-4px) rotate(-3deg)}}
 .brand .logo{font-size:clamp(38px,9.5vw,72px);line-height:1.2;padding-bottom:.06em}
 .logo span{background:linear-gradient(180deg,#f6ffd8 0%,#dcff80 46%,#7be000 52%,#3aa600 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -485,6 +502,9 @@ body.no-deco .bubble{display:none}
 #treeCanvas .node.noble:not(.crim):not(.ill){border-color:#c9a8ff;box-shadow:0 0 0 1.5px rgba(150,90,230,.45),0 7px 16px rgba(60,20,120,.16)}
 #treeCanvas .node.dechu:not(.crim):not(.ill){filter:grayscale(.65) brightness(.93);border-color:#9d97a8;background:linear-gradient(180deg,#eceaf0,#d3cfdb)}
 #treeCanvas .node.dechu .rtt{color:#6b6478}
+.facts .rgf{background:linear-gradient(180deg,#fffbe8,#ffeeb0);border-color:#ffd24a}
+.facts .rgf dd{color:#7a4a00}
+.reignline{margin:4px 0 0;font:700 13px var(--font-display);color:#7a2bd6}
 .regnal.royalrec{order:-1;padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,#fff9e0,#ffe9a6);border:1px solid #ffd24a;box-shadow:0 0 0 2px rgba(122,43,214,.25)}
 .node.crim{border-color:#7a0012;color:#ffe6e8;background:linear-gradient(160deg,#3a0008 0%,#12000a 46%,#5c0012 100%);
   box-shadow:0 0 0 2px #b0001a,0 0 18px 4px rgba(200,0,30,.45),0 8px 18px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,80,90,.35);animation:dark 3.2s ease-in-out var(--t,0s) infinite}
@@ -1092,6 +1112,7 @@ body.no-deco .gothfx .bat{display:none}
       <button class="gel round" id="btnPause" data-act="pause"></button>
       <span class="ctrl-sep" aria-hidden="true"></span>
       <button class="gel ghost autob" id="btnAuto" data-act="auto"></button>
+      <button class="gel round gold reignb" id="btnReigns" data-act="reigns" data-ta="rg_title" data-tt="rg_title" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v2H3zm0-2 1.5-9 4.5 4 3-6 3 6 4.5-4L21 16z"/></svg></button>
       <button class="gel round ghost albb" data-act="album" data-ta="album" data-tt="album"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h11a3 3 0 0 1 3 3v17H8a3 3 0 0 1-3-3V3zm2 15.5a1 1 0 0 0 0 2h10v-2zM9 5v7l2.5-1.6L14 12V5z"/></svg></button>
       <button class="gel ghost restartb" data-act="restart"><span data-t="restart"></span></button>
     </div>
@@ -1144,9 +1165,22 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4k';
+const APP_VERSION = '0.1.4l';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4l', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode Royal : à la mort (ou l\'emprisonnement) d\'un monarque, ses dates de règne s\'affichent, par exemple « A régné du 17 mars 1902 au 19 mai 1954 (52 ans, 2 mois) », dans le journal, sa fiche et l\'annonce de sa mort.',
+       'Mode auto : l\'arbre suit le personnage joué. Si tu déplaces l\'arbre, le suivi s\'arrête ; « Recentrer » (ou l\'onglet Arbre sur téléphone) le relance, et il reprend tout seul sur le personnage suivant à chaque décès.',
+       'Plus de prénoms en double dans une fratrie (demi-frères et demi-sœurs compris), que le prénom soit choisi, proposé ou donné automatiquement.',
+       'Nouveau logo : une icône brillante aux coins arrondis, avec une hélice d\'ADN qui pousse en arbre.',
+       'Mode auto : les gains de Cyn sont réduits à 25 %. Une fenêtre prévient en activant le mode auto, avec une case « Ne plus afficher ».',
+       'Mode Royal : nouveau bouton « Règnes » (couronne, en haut) avec la liste de tous les monarques et leurs années de règne, par exemple « Roi Jules II 1801 – 1851 (50 ans) ».'],
+   en:['Royal mode: when a monarch dies (or is jailed), their reign is shown, for example "Reigned from 17 March 1902 to 19 May 1954 (52 years, 2 months)", in the journal, on their card and in the death announcement.',
+       'Auto mode: the tree follows the played character. If you move the tree, it stops following; "Recenter" (or the Tree tab on phones) turns it back on, and it automatically moves on to the next character after each death.',
+       'No more duplicate first names among siblings (half-siblings included), whether the name is typed, suggested or given automatically.',
+       'New logo: a glossy rounded icon with a DNA helix growing into a tree.',
+       'Auto mode: Cyn gains are cut to 25%. A window warns you when turning auto mode on, with a "Don\'t show again" box.',
+       'Royal mode: new "Reigns" button (crown, at the top) listing every monarch and their years on the throne, for example "King Jules II 1801 – 1851 (50 years)".']},
   {v:'0.1.4k', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode auto : le personnage joué cherche maintenant toujours l\'âme sœur (entre 20 et 28 ans) et veut au moins 2 enfants. Avant, il pouvait rester seul toute sa vie et éteindre la lignée dès la première génération.',
        'Mode Royal : le monarque et l\'héritier cherchent aussi toujours l\'âme sœur et veulent au moins 2 enfants, pour que la dynastie ne s\'éteigne pas bêtement.'],
@@ -1426,6 +1460,7 @@ let CYN = Math.max(0, +store.get(CYN_KEY) || 0), cynPend = 0;
 const cynFx = new Map();                              // gains à afficher au-dessus de la bulle concernée
 function cyn(n, pid){
   if(S && (S.over || S.end2100 >= 1)) return;          // partie terminée : plus de Cyn
+  if(S && S.auto) n = Math.max(1, Math.round(n * .25)); // mode auto : 25 % des gains
   CYN += n; cynPend += n; store.set(CYN_KEY, String(CYN));
   if(pid != null){ const e = cynFx.get(pid) || {n:0, tries:0}; e.n += n; cynFx.set(pid, e); }
 }
@@ -2023,7 +2058,7 @@ function crown(p, day, silent){
   const prev = P(S.royal.king);
   if(p.noble === 'noble') unlock('r_nobleking');
   if(prev && prev.id !== p.id && (p.parents || []).some(i => { const q = P(i); return q && (q.parents || []).includes(prev.id); })) unlock('r_grandheir');
-  S.royal.king = p.id; p.wasKing = true; RH = undefined;
+  S.royal.king = p.id; p.wasKing = true; p.reignStart = day; RH = undefined;
   if(p.crim && !p.crim.declared) delete p.crim; if(p.star && !p.star.famous) delete p.star; p.fameAt = null;   // un monarque n'a pas d'autre destin
   p.work = {s:'royal', act: actPick(ROYAL_ACTS, day)};
   log('star','crowned',[p.id], day, !silent);
@@ -2245,17 +2280,24 @@ const icon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICO
 /* Emblème Cyngenetic : une bulle de verre, un arbre dont le tronc est une double hélice d'ADN */
 const emblem = id => `<svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
   <defs>
-    <radialGradient id="${id}b" cx="35%" cy="28%" r="78%"><stop offset="0" stop-color="#fff"/><stop offset=".22" style="stop-color:var(--g1)"/><stop offset=".68" style="stop-color:var(--g2)"/><stop offset="1" style="stop-color:var(--g3)"/></radialGradient>
-    <radialGradient id="${id}l" cx="40%" cy="30%" r="70%"><stop offset="0" stop-color="#f2ffc0"/><stop offset=".55" style="stop-color:var(--hill-a2)"/><stop offset="1" style="stop-color:var(--hill-a3)"/></radialGradient>
-    <linearGradient id="${id}h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="${id}b" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" style="stop-color:var(--g1)"/><stop offset=".55" style="stop-color:var(--g2)"/><stop offset="1" style="stop-color:var(--g3)"/></linearGradient>
+    <radialGradient id="${id}l" cx="38%" cy="30%" r="72%"><stop offset="0" stop-color="#fbffe0"/><stop offset=".5" style="stop-color:var(--hill-a1)"/><stop offset="1" style="stop-color:var(--hill-a3)"/></radialGradient>
+    <linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="${id}s" cx="50%" cy="100%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
   </defs>
-  <circle cx="32" cy="32" r="30" fill="url(#${id}b)" stroke="#fff" stroke-width="2"/>
-  <path d="M26.5 30c0 6 11 8 11 13.5s-11 7.5-11 13" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
-  <path d="M37.5 30c0 6-11 8-11 13.5s11 7.5 11 13" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" opacity=".75"/>
-  <path d="M28 35h8M28 51.5h8" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/>
-  <circle cx="23" cy="24" r="9" fill="url(#${id}l)"/><circle cx="41" cy="24" r="9" fill="url(#${id}l)"/><circle cx="32" cy="17" r="11" fill="url(#${id}l)"/>
-  <circle cx="28" cy="13.5" r="2.2" fill="#fff" opacity=".8"/>
-  <ellipse cx="32" cy="15" rx="21" ry="11" fill="url(#${id}h)" opacity=".75"/>
+  <rect x="3" y="3" width="58" height="58" rx="18" fill="url(#${id}b)"/>
+  <rect x="3" y="3" width="58" height="58" rx="18" fill="url(#${id}s)"/>
+  <rect x="3.75" y="3.75" width="56.5" height="56.5" rx="17.3" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="1.5"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M25 57c12-5 12-9 0-14s0-10 7-15" stroke="#fff" stroke-width="3.6"/>
+    <path d="M39 57c-12-5-12-9 0-14s0-10-7-15" stroke="#e8ff9e" stroke-width="3.6"/>
+    <path d="M27.5 52.6h9M28.5 47.5h7M27.5 39h9" stroke="#fff" stroke-width="1.8" stroke-opacity=".75"/>
+  </g>
+  <circle cx="22.5" cy="22" r="8" fill="url(#${id}l)" stroke="#fff" stroke-opacity=".7"/>
+  <circle cx="41.5" cy="22" r="8" fill="url(#${id}l)" stroke="#fff" stroke-opacity=".7"/>
+  <circle cx="32" cy="15" r="10" fill="url(#${id}l)" stroke="#fff" stroke-opacity=".8"/>
+  <circle cx="28.5" cy="11.5" r="2.4" fill="#fff" opacity=".85"/><circle cx="20" cy="19.5" r="1.6" fill="#fff" opacity=".7"/><circle cx="39" cy="19.5" r="1.6" fill="#fff" opacity=".7"/>
+  <path d="M10 22C10 11 15 6 26 6h12c11 0 16 5 16 16-6-4-14-6-22-6s-16 2-22 6z" fill="url(#${id}g)" opacity=".7"/>
 </svg>`;
 // décennies et grandes périodes : [de, à, icône, fr, en]
 const DECADES = [
@@ -2473,6 +2515,12 @@ fr:{
   over_royal_title:l=>`Fin de la dynastie ${l}`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} est ${g(P(d.id || d),'mort','morte')} sans héritier ni frère pour lui succéder. La couronne s'éteint avec ${g(P(d.id || d),'lui','elle')}.`,
   alb_prince_d:'Prince ou princesse héritier',
   shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'),
+  name_sib_taken:n=>`Un frère ou une sœur s'appelle déjà ${n}.`,
+  aw_title:'Mode auto', aw_txt:"Attention : avec le mode auto activé, tu ne gagnes que 25 % des Cyn habituels (4 fois moins). Joue toi-même pour en gagner plus !",
+  aw_nomore:'Ne plus afficher', aw_ok:'Activer le mode auto', aw_cancel:'Annuler', cg_auto:'En mode auto : 25 % des gains',
+  rg_title:'Règnes', rg_now:'en cours', rg_y:n=>`${n} an${n>1?'s':''}`, rg_now_y:n=>`${n} an${n>1?'s':''}, en cours`, rg_lost:'La couronne a quitté la famille : la dynastie est terminée.', f_reign:'Règne', span_ym:(y,m)=>`${y} an${y>1?'s':''}, ${m} mois`,
+  reign_done:(a,b,d)=>`A régné du ${a} au ${b} (${d})`, reign_now:(a,d)=>`Règne depuis le ${a} (${d})`,
+  log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^A/, 'a')}.`,
   shop_lueur:'Lueur Noble', shop_lueur_d:"Anoblit le membre de la famille de ton choix (mode Royal).", shop_lueur_none:"Personne à anoblir.", pick_lueur:()=>'Qui doit devenir noble ?', alb_noble_d:'Duc, duchesse, comte ou comtesse', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} est ${g(P(p),'anobli','anoblie')} : ${g(P(p),'il','elle')} rapportera 5 Cyn tous les 2 ans.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
@@ -2682,6 +2730,12 @@ en:{
   over_royal_title:l=>`End of the ${l} dynasty`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} died with no heir and no brother to succeed them. The crown dies with them.`,
   alb_prince_d:'Crown prince or princess',
   shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'),
+  name_sib_taken:n=>`A brother or sister is already called ${n}.`,
+  aw_title:'Auto mode', aw_txt:'Heads up: with auto mode on, you only earn 25% of the usual Cyn (4 times less). Play yourself to earn more!',
+  aw_nomore:"Don't show again", aw_ok:'Turn on auto mode', aw_cancel:'Cancel', cg_auto:'In auto mode: 25% of the gains',
+  rg_title:'Reigns', rg_now:'ongoing', rg_y:n=>`${n} year${n>1?'s':''}`, rg_now_y:n=>`${n} year${n>1?'s':''}, ongoing`, rg_lost:'The crown has left the family: the dynasty is over.', f_reign:'Reign', span_ym:(y,m)=>`${y} year${y>1?'s':''}, ${m} month${m>1?'s':''}`,
+  reign_done:(a,b,d)=>`Reigned from ${a} to ${b} (${d})`, reign_now:(a,d)=>`Reigning since ${a} (${d})`,
+  log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^R/, 'r')}.`,
   shop_lueur:'Noble Glow', shop_lueur_d:'Ennobles the family member of your choice (Royal mode).', shop_lueur_none:'Nobody left to ennoble.', pick_lueur:()=>'Who should become a noble?', alb_noble_d:'Duke, duchess, count or countess', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} is ennobled and will bring in 5 Cyn every 2 years.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
@@ -2770,6 +2824,14 @@ const nodeBadges = p => {
 };
 const atoutName = (id, p) => { const r = ATOUT[id]; return LANG==='fr' ? (p && p.sex==='F' ? r[2] : r[1]) : r[3]; };
 const atoutTile2 = p => p.atout2 && ATOUT[p.atout2] ? `<div class="span2 atf"><dt>${t('f_atout2')}</dt><dd>${icon(ATOUT[p.atout2][4])}<span><b>${esc(atoutName(p.atout2, p))}</b><small>${esc(ATOUT[p.atout2][LANG==='fr' ? 5 : 6])}</small></span></dd></div>` : '';
+function spanTxt(a, b){                               // durée entre deux jours : « 52 ans, 2 mois »
+  const x = toDate(a), y = toDate(b);
+  let m = (y.getUTCFullYear() - x.getUTCFullYear())*12 + (y.getUTCMonth() - x.getUTCMonth()) - (y.getUTCDate() < x.getUTCDate() ? 1 : 0);
+  m = Math.max(0, m); return t('span_ym', Math.floor(m/12), m % 12);
+}
+const reignTxt = p => p.reignStart == null ? '' : p.reignEnd != null ? t('reign_done', fmt(p.reignStart), fmt(p.reignEnd), spanTxt(p.reignStart, p.reignEnd))
+  : t('reign_now', fmt(p.reignStart), spanTxt(p.reignStart, S.t));
+const reignTile = p => p.reignStart != null ? `<div class="span2 rgf"><dt>${t('f_reign')}</dt><dd>${esc(reignTxt(p))}</dd></div>` : '';
 const immTile = p => p.death == null && S && immune(p, S.t) ? `<div class="span2 imf"><dt>${t('f_immune')}</dt><dd>${icon('pill')}<span>${esc(t('immune_until', yearOf(p.immuneUntil)))}</span></dd></div>` : '';
 const atoutTile = p => p.atout && ATOUT[p.atout] ? `<div class="span2 atf"><dt>${t('f_atout')}</dt><dd>${icon(ATOUT[p.atout][4])}<span><b>${esc(atoutName(p.atout, p))}</b><small>${esc(ATOUT[p.atout][LANG==='fr' ? 5 : 6])}</small></span></dd></div>` : '';
 const condTile = p => hasCond(p) ? `<div class="span2 condf"><dt>${t('f_cond')}</dt><dd>${condBadges(p)}${esc(condList(p))}</dd></div>` : '';
@@ -3234,7 +3296,7 @@ function die(p, day, cause){
   const wasHeir = royalOn() && p.id === heirId();
   const A = ageAt(p, day);
   p.death = day; p.deathAt = null; p.onset = null; p.warDeath = false; p.murderAt = null; p.deathCity = p.city;
-  RH = undefined; if(royalOn() && p.id === S.royal.king) crownNext(day);
+  RH = undefined; if(royalOn() && p.id === S.royal.king){ p.reignEnd = day; log('star','reign_end',[p.id], day, false); crownNext(day); }
   p.cause = Object.assign({}, cause);
   if(inFamily(p)){ if(A >= 121) unlock('maxage'); if(A < 10) unlock('young'); }
   if(cause.murder){
@@ -3342,14 +3404,16 @@ function heirList(d){
 function autoHeir(){
   const d = active(), h = heirList(d);
   if(!h.length){ render(); gameOver(d); return; }
-  S.activeId = h[0].p.id; log('info','heir',[h[0].p.id, d.id]);
+  S.activeId = h[0].p.id; log('info','heir',[h[0].p.id, d.id]); followActive = true; lastFocusKey = '';
   render(); centerOn(S.activeId, true); save();
 }
+const isSib = (x, c) => x.id !== c.id && x.parents && c.parents && x.parents.some(i => c.parents.includes(i));
+const sibBases = c => new Set(Object.values(S.people).filter(x => isSib(x, c) && x.first).map(x => (x.base || x.first).toLowerCase()));
 function nameFor(c){
   if((SET.regnal || royalOn()) && Math.random() < (royalOn() ? .7 : .15)){                 // dynasties : parfois, on reprend le prénom d'un parent ou grand-parent
-    const fam = familyNames(c); if(fam.length) return pick(fam);
+    const sb = sibBases(c), fam = familyNames(c).filter(n => !sb.has(n.toLowerCase())); if(fam.length) return pick(fam);
   }
-  const sibs = new Set(Object.values(S.people).filter(x => x.parents && x.parents[0]===c.parents[0] && x.first).map(x => x.first).concat(c.parents.map(i => P(i).first)));
+  const sibs = new Set(Object.values(S.people).filter(x => isSib(x, c) && x.first).map(x => x.base || x.first).concat(c.parents.map(i => P(i).first)));
   return wpick(namePool(yearOf(c.birth), c.sex), sibs);
 }
 /* ================= Numéros de dynastie : Jean, Jean II, Jean III… ================= */
@@ -3438,7 +3502,7 @@ function crimFate(p, day){                  // 10 ans plus tard, s'il n'a pas é
 const jailed = p => !!(p && p.crim && p.crim.fate === 'prison' && p.death == null);
 function jailCrim(p, day){                   // prison à vie : plus de couple, plus d'enfants, plus de victimes
   p.crim.fate = 'prison'; p.crim.jailAt = null; p.work = {s:'prison'};
-  RH = undefined; if(royalOn() && p.id === S.royal.king) crownNext(day);         // un roi en prison perd sa couronne
+  RH = undefined; if(royalOn() && p.id === S.royal.king){ p.reignEnd = day; crownNext(day); }         // un roi en prison perd sa couronne
   for(const u of S.unions) if(u.end == null && (u.a === p.id || u.b === p.id)){
     u.end = day; u.endReason = 'prison';
     const o = P(u.a === p.id ? u.b : u.a);
@@ -3824,6 +3888,13 @@ function centerOn(id, smooth){
 /* Zoom de l'arbre : boutons, Ctrl + molette, pincement, touches + et −.
    Une grande marge invisible entoure l'arbre : on peut le déplacer librement, sans bord qui bloque. */
 let zoom = 1, treeW = 0, treeH = 0, padX = 0, padY = 0;
+let followActive = true, lastFocusKey = '';          // mode auto : l'arbre reste centré sur le personnage joué tant que le joueur ne le déplace pas
+function followFocus(){
+  if(!S || !S.auto || !followActive || curView !== 'tree') return;
+  const p = layout[S.activeId]; if(!p) return;
+  const key = `${S.activeId}:${Math.round(p.x)}:${Math.round(p.y)}:${zoom}`;
+  if(key !== lastFocusKey){ lastFocusKey = key; centerOn(S.activeId, true); }
+}
 function applyZoom(){
   const sc = $('#treeScroll'), sz = $('#treeSizer'), cv = $('#treeCanvas');
   padX = Math.round(Math.max(240, sc.clientWidth * .75)); padY = Math.round(Math.max(200, sc.clientHeight * .7));
@@ -3914,9 +3985,10 @@ function renderControls(){
   const ab = $('#btnAuto');
   ab.innerHTML = `${icon('robot')}<span>${t('auto')}</span>`;
   ab.classList.toggle('on', !!S.auto); ab.setAttribute('aria-pressed', String(!!S.auto)); ab.title = t('auto_title');
+  $('#btnReigns').hidden = !S.royal;                  // la liste des règnes n'existe qu'en mode Royal
   updateClock();
 }
-function render(){ RH = undefined; renderTree(); renderSide(); if(curView === 'map') renderMap(); dirty = false; runFx(); updateBadge(); }
+function render(){ RH = undefined; renderTree(); followFocus(); renderSide(); if(curView === 'map') renderMap(); dirty = false; runFx(); updateBadge(); }
 
 /* ================= Téléphone : onglets du bas ================= */
 let mtab = 'tree', seenLog = 0;
@@ -3925,7 +3997,7 @@ function setMobileTab(v){
   mtab = v; document.body.dataset.mtab = v;
   $$('#mnav button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
   if(v === 'tree' || v === 'map') setView(v);
-  if(v === 'tree' && S) requestAnimationFrame(() => { renderTree(); centerOn(S.activeId, false); });   // l'arbre réapparaît centré sur vous
+  if(v === 'tree' && S) requestAnimationFrame(() => { followActive = true; renderTree(); centerOn(S.activeId, false); });   // l'arbre réapparaît centré sur vous
   if(v === 'journal' && S) seenLog = S.log.length;
   if((v === 'me' || v === 'journal') && S) requestAnimationFrame(renderSide);
   updateBadge();
@@ -4184,7 +4256,8 @@ function openNaming(id){
   const c = P(id); if(!c){ S.nameQueue.shift(); return; }
   namingId = id;
   const [a,b] = kinOf(c), y = yearOf(c.birth), mu = c.multi;
-  const sibs = new Set(Object.values(S.people).filter(x => x.parents && x.parents[0]===c.parents[0] && x.first).map(x => x.first).concat([a.first, b.first]));
+  const sibB = sibBases(c), famOk = familyNames(c).filter(n => !sibB.has(n.toLowerCase()));      // pas deux fois le même prénom dans une fratrie
+  const sibs = new Set(Object.values(S.people).filter(x => isSib(x, c) && x.first).map(x => x.base || x.first).concat([a.first, b.first]));
   const sugg = [];
   for(let i=0; i<40 && sugg.length<3; i++){ const n = wpick(namePool(y, c.sex), new Set([...sibs, ...sugg])); if(!sugg.includes(n)) sugg.push(n); }
   const group = mu ? Object.values(S.people).filter(x => x.multi && x.multi.first === mu.first).sort((x,z) => x.multi.i - z.multi.i) : [c];
@@ -4198,11 +4271,15 @@ function openNaming(id){
     ${c.star ? `<p class="starnote">★ ${t('star_baby')}</p>` : ''}
     ${c.conds && c.conds.length ? `<p class="condnote">${condBadges(c)}${esc(t('cond_birth', condList(c)))}</p>` : ''}
     <div class="names">${sugg.map(n => `<button class="gel ${c.sex==='F'?'pink':''}" data-act="name" data-n="${esc(n)}"><span>${esc(n)}</span></button>`).join('')}</div>
-    ${(SET.regnal || royalOn()) && familyNames(c).length ? `<div class="regnal ${royalOn() ? 'royalrec' : ''}"><span class="lab">${t(royalOn() ? 'royal_names' : 'regnal_pick')}</span><div class="regnal-row">${familyNames(c).slice(0,3).map(n =>
+    ${(SET.regnal || royalOn()) && famOk.length ? `<div class="regnal ${royalOn() ? 'royalrec' : ''}"><span class="lab">${t(royalOn() ? 'royal_names' : 'regnal_pick')}</span><div class="regnal-row">${famOk.slice(0,3).map(n =>
       `<button class="gel gold" data-act="name" data-n="${esc(n)}"><span>${esc(n)} ${roman(regnalNum(c, n) || 2)}</span></button>`).join('')}</div></div>` : ''}
     <form class="custom" id="nameForm"><input class="inp" id="nameOther" maxlength="20" placeholder="${esc(t('name_other'))}" autocomplete="off" aria-label="${esc(t('name_other'))}">
       <button class="gel lime" type="submit"><span>${t('validate')}</span></button></form>`, {locked:true, sound:false});
-  $('#nameForm').addEventListener('submit', e => { e.preventDefault(); const v = $('#nameOther').value.trim().replace(/\s+/g,' '); if(v){ sfx.click(); giveName(cap(v)); } else $('#nameOther').focus(); });
+  $('#nameOther').addEventListener('input', e => e.target.setCustomValidity(''));
+  $('#nameForm').addEventListener('submit', e => { e.preventDefault(); const inp = $('#nameOther'), v = inp.value.trim().replace(/\s+/g,' ');
+    if(!v){ inp.focus(); return; }
+    if(sibB.has(cap(v).toLowerCase())){ inp.setCustomValidity(t('name_sib_taken', cap(v))); inp.reportValidity(); sfx.refuse(); return; }
+    sfx.click(); giveName(cap(v)); });
 }
 function giveName(n){
   const c = namingId != null && P(namingId); if(!c) return;
@@ -4260,7 +4337,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}
+      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>
@@ -4293,7 +4370,7 @@ function openHeir(){
   if(!heirs.length){ gameOver(d); return; }
   const list = heirs.map(h => `<button class="heir" data-act="heir" data-id="${h.p.id}">${orb(h.p,'lg')}<span><b>${esc(nm(h.p))}</b><small>${esc(h.r[1])} · ${tA(age(h.p))} · ${esc(activity(h.p))}</small></span></button>`).join('');
   openModal(`<div class="who">${orb(d,'xl')}<div><div class="eyebrow">${fmt(d.death)}</div><h2>${esc(t('left_us', d.first))}</h2>
-      <p>${esc(t('death_sentence', d, age(d)))}</p></div></div>
+      <p>${esc(t('death_sentence', d, age(d)))}</p>${d.reignStart != null ? `<p class="reignline">${esc(reignTxt(d))}</p>` : ''}</div></div>
     <p style="margin:0"><b>${t('who_next')}</b></p><div class="heirs">${list}</div>`, {locked:true, sound:false});
 }
 function statsBlock(){
@@ -4506,7 +4583,7 @@ function openShop(re){
       <button class="gel gold" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`; }).join('')}</div></section>`).join('');
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop_eyebrow')}</div><h2>${t('shop')}</h2></div>
     <button class="shopbal" data-act="cyninfo" aria-expanded="${cynInfoOpen}" title="${esc(t('cg_title'))}">${icon('dna')}<b>${cynFmt(CYN)}</b><span>Cyn</span><small>${t(cynInfoOpen ? 'cg_hide' : 'cg_title')}</small></button>
-    <div class="cyninfo" ${cynInfoOpen ? '' : 'hidden'}><b>${t('cg_title')}</b><ul>${gains.map(([ic, k, n]) => `<li>${icon(ic)}<span>${t(k)}</span><em>+${n} ${icon('dna')}</em></li>`).join('')}</ul></div>
+    <div class="cyninfo" ${cynInfoOpen ? '' : 'hidden'}><b>${t('cg_title')}</b><ul>${gains.map(([ic, k, n]) => `<li>${icon(ic)}<span>${t(k)}</span><em>+${n} ${icon('dna')}</em></li>`).join('')}<li>${icon('robot')}<span>${t('cg_auto')}</span><em>×0,25</em></li></ul></div>
     ${secs}`, {sound: !re});
 }
 function openPick(id){                                // décriminalisation / crise de la cinquantaine : on choisit avant de payer
@@ -4586,6 +4663,29 @@ function openSpouseForm(){                            // conjoint(e) entièremen
     checkConq(me.id);
     dirty = true; closeModal(); render(); save();
   });
+}
+const AUTOWARN_KEY = 'lignee.autowarn.v1';
+function toggleAuto(){
+  S.auto = !S.auto; followActive = true; lastFocusKey = ''; dirty = true;
+  log('info', S.auto ? 'auto_on' : 'auto_off', [], undefined, true); renderControls(); save();
+}
+function openAutoWarn(){                              // avant d'activer le mode auto : les Cyn sont réduits
+  openModal(`<div class="autowarn"><span class="aw-ic">${icon('dna')}</span><div class="eyebrow">${t('auto')}</div><h2>${t('aw_title')}</h2><p>${t('aw_txt')}</p>
+    <label class="aw-check"><input type="checkbox" id="autoNoMore"><span>${t('aw_nomore')}</span></label>
+    <div class="m-actions"><button class="gel ghost" data-act="close"><span>${t('aw_cancel')}</span></button><button class="gel lime" data-act="autook"><span>${t('aw_ok')}</span></button></div></div>`);
+}
+function openReigns(){                                // mode Royal : la liste de tous les monarques
+  if(!S || !S.royal) return;
+  const ks = Object.values(S.people).filter(p => p.reignStart != null).sort((a, b) => a.reignStart - b.reignStart);
+  const rows = ks.map(p => {
+    const end = p.reignEnd != null ? p.reignEnd : (royalOn() && p.id === S.royal.king ? null : (p.death ?? S.t));
+    const yrs = Math.floor(((end ?? S.t) - p.reignStart) / 365.25);
+    const title = LANG === 'fr' ? (p.sex === 'F' ? 'Reine' : 'Roi') : (p.sex === 'F' ? 'Queen' : 'King');
+    return `<li class="${end == null ? 'now' : ''}">${orb(p)}<span><b>${esc(title)} ${esc(p.first || '…')}</b><small>${esc(p.last)}</small></span>
+      <em>${yearOf(p.reignStart)} – ${end == null ? t('rg_now') : yearOf(end)} <i>(${end == null ? (yrs >= 1 ? t('rg_now_y', yrs) : t('rg_now')) : t('rg_y', yrs)})</i></em></li>`;
+  }).join('');
+  openModal(`<div class="m-head"><div class="eyebrow">${t('lab_royal')} · ${t(S.royal.rule === 'matri' ? 'rule_matri' : S.royal.rule === 'both' ? 'rule_both' : 'rule_patri')}</div><h2>${t('rg_title')}</h2></div>
+    <ol class="reigns">${rows}</ol>${S.royal.lost ? `<p class="hint">${t('rg_lost')}</p>` : ''}`);
 }
 function decrim(p){                                   // redevient une personne normale
   for(const q of living()) if(q.murderBy === p.id){ q.murderAt = null; q.murderBy = null; }
@@ -4779,6 +4879,7 @@ const ACT = {
     $('#renameForm').addEventListener('submit', e => {
       e.preventDefault(); const v = inp.value.trim().replace(/\s+/g, ' ');
       if(!v){ inp.focus(); return; }
+      if(p.parents && cap(v).toLowerCase() !== (p.base || p.first || '').toLowerCase() && sibBases(p).has(cap(v).toLowerCase())){ inp.setCustomValidity(t('name_sib_taken', cap(v))); inp.reportValidity(); inp.addEventListener('input', () => inp.setCustomValidity(''), {once:true}); sfx.refuse(); return; }
       p.first = cap(v).slice(0, 20); sfx.sparkle(); dirty = true; save(); render(); openFiche(p.id);
     });
   },
@@ -4794,7 +4895,9 @@ const ACT = {
   view(d){ setView(d.v); },
   mtab(d){ setMobileTab(d.v); },
   mapzoom(d){ const v = +d.v; if(v === 0){ mz = {z:1, x:0, y:0}; applyMapZoom(); } else setMapZoom(mz.z * (v > 0 ? 1.5 : 1/1.5)); },
-  auto(){ S.auto = !S.auto; dirty = true; log('info', S.auto ? 'auto_on' : 'auto_off', [], undefined, true); renderControls(); save(); },
+  auto(){ if(!S.auto && !store.get(AUTOWARN_KEY)) return openAutoWarn(); toggleAuto(); },
+  autook(){ if($('#autoNoMore') && $('#autoNoMore').checked) store.set(AUTOWARN_KEY, '1'); closeModal(true); if(!S.auto) toggleAuto(); },
+  reigns(){ openReigns(); },
   zoom(d){ const v = +d.v; if(v === 0) fitZoom(); else setZoom(zoom * (v > 0 ? 1.25 : 0.8)); },
   marry(d){
     const me = active(), u = currentUnion(me.id), p = P(+d.id); if(!u || u.married || u.noMarry) return;
@@ -4815,7 +4918,7 @@ const ACT = {
   },
   keep(){ if(S.end2100 !== 1) return; S.end2100 = 2; closeModal(true); save(); },
   close(){ closeModal(); },
-  center(){ centerOn(S.activeId, true); },
+  center(){ followActive = true; lastFocusKey = ''; centerOn(S.activeId, true); },
   restart(d, b){ if(!arm(b, t('confirm'))) return; newGame(); },
   newgame(){ newGame(); },
   resume(){ try{ S = JSON.parse(store.get(SAVE_KEY)); }catch(e){ S = null; } if(S) enterGame(); },
@@ -4837,6 +4940,7 @@ document.addEventListener('keydown', e => {
 (() => {   // glisser pour se déplacer dans l'arbre (souris)
   const sc = $('#treeScroll'); let drag = null;
   sc.addEventListener('pointerdown', e => {
+    if(!e.target.closest('.node')) followActive = false;          // le joueur déplace l'arbre : on arrête de suivre
     if(e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('.node')) return;
     drag = {x:e.clientX, y:e.clientY, l:sc.scrollLeft, t:sc.scrollTop}; sc.setPointerCapture(e.pointerId); sc.classList.add('grabbing');
   });
@@ -4853,6 +4957,7 @@ document.addEventListener('keydown', e => {
   }, {passive:false});
   sc.addEventListener('touchend', e => { if(e.touches.length < 2) pinch = null; });
   sc.addEventListener('wheel', e => {                // molette : zoom (Maj + molette : défilement normal)
+    followActive = false;
     if(e.shiftKey && !e.ctrlKey && !e.metaKey) return;
     e.preventDefault();
     const r = sc.getBoundingClientRect(), dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1);

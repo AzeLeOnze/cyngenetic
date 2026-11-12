@@ -2,6 +2,15 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4l — 12 novembre 2026
+
+- Mode Royal : à la mort (ou l'emprisonnement) d'un monarque, ses dates de règne s'affichent, par exemple « A régné du 17 mars 1902 au 19 mai 1954 (52 ans, 2 mois) », dans le journal, sa fiche et l'annonce de sa mort.
+- Mode auto : l'arbre suit le personnage joué. Si tu déplaces l'arbre, le suivi s'arrête ; « Recentrer » (ou l'onglet Arbre sur téléphone) le relance, et il reprend tout seul sur le personnage suivant à chaque décès.
+- Plus de prénoms en double dans une fratrie (demi-frères et demi-sœurs compris), que le prénom soit choisi, proposé ou donné automatiquement.
+- Nouveau logo : une icône brillante aux coins arrondis, avec une hélice d'ADN qui pousse en arbre.
+- Mode auto : les gains de Cyn sont réduits à 25 %. Une fenêtre prévient en activant le mode auto, avec une case « Ne plus afficher ».
+- Mode Royal : nouveau bouton « Règnes » (couronne, en haut) avec la liste de tous les monarques et leurs années de règne, par exemple « Roi Jules II 1801 – 1851 (50 ans) ».
+
 ## v0.1.4k — 12 novembre 2026
 
 - Mode auto : le personnage joué cherche maintenant toujours l'âme sœur (entre 20 et 28 ans) et veut au moins 2 enfants. Avant, il pouvait rester seul toute sa vie et éteindre la lignée dès la première génération.
