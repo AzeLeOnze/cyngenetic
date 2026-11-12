@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4g — 12 novembre 2026
+
+- Mode Royal : les enfants du prince héritier sont comtes ; quand il devient roi, ils deviennent ducs (et l'aîné prince héritier).
+- Mode Royal : nouvelles activités selon l'époque. Fin du XXe et XXIe siècle : discours télévisé, visite d'État, fondation caritative et réseaux sociaux pour le roi ; ONG, pilote d'hélicoptère, marathon caritatif et influenceur royal pour le prince. Après 2030-2040 : plan climat, traité avec une IA, règne par hologramme et base lunaire pour le roi ; ambassadeur dans le métavers, course de drones, mission vers Mars et cités sous-marines pour le prince. Et pour les comtes du futur : gouverneur de station orbitale et directeur de terraformation.
+- Mode Royal : 18 métiers pour les nobles (vit de ses rentes, salon littéraire, vignoble, haras, banquier, philanthrope…), dont 3 du passé (seigneur de village, mousquetaire du roi, courtisan) et 4 du futur (start-up spatiales, écurie de robots, chevaux clonés, île flottante). Le titre « Noble » est définitif. Tout est dans la catégorie Royal de l'album.
+- Mode Royal : si le roi n'a pas d'enfant pouvant hériter, la couronne passe à son premier petit-enfant du bon sexe, avant ses frères.
+
 ## v0.1.4f — 12 novembre 2026
 
 - Arbre : les bulles s'élargissent pour afficher le prénom en entier (titre compris), avec les informations toujours centrées.

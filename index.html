@@ -1143,9 +1143,18 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4f';
+const APP_VERSION = '0.1.4g';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4g', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode Royal : les enfants du prince héritier sont comtes ; quand il devient roi, ils deviennent ducs (et l\'aîné prince héritier).',
+       'Mode Royal : nouvelles activités selon l\'époque. Fin du XXe et XXIe siècle : discours télévisé, visite d\'État, fondation caritative et réseaux sociaux pour le roi ; ONG, pilote d\'hélicoptère, marathon caritatif et influenceur royal pour le prince. Après 2030-2040 : plan climat, traité avec une IA, règne par hologramme et base lunaire pour le roi ; ambassadeur dans le métavers, course de drones, mission vers Mars et cités sous-marines pour le prince. Et pour les comtes du futur : gouverneur de station orbitale et directeur de terraformation.',
+       'Mode Royal : 18 métiers pour les nobles (vit de ses rentes, salon littéraire, vignoble, haras, banquier, philanthrope…), dont 3 du passé (seigneur de village, mousquetaire du roi, courtisan) et 4 du futur (start-up spatiales, écurie de robots, chevaux clonés, île flottante). Le titre « Noble » est définitif. Tout est dans la catégorie Royal de l\'album.',
+       'Mode Royal : si le roi n\'a pas d\'enfant pouvant hériter, la couronne passe à son premier petit-enfant du bon sexe, avant ses frères.'],
+   en:['Royal mode: the crown prince\'s children are counts; when he becomes king, they become dukes (and the eldest crown prince).',
+       'Royal mode: new activities depending on the era. Late 20th and 21st century: televised speech, state visit, charity foundation and social media for the king; NGO, helicopter pilot, charity marathon and royal influencer for the prince. After 2030-2040: climate plan, treaty with an AI, reigning by hologram and a lunar base for the king; metaverse ambassador, drone racing, mission to Mars and underwater cities for the prince. And for future counts: orbital station governor and terraforming director.',
+       'Royal mode: 18 jobs for nobles (lives off their income, literary salon, vineyard, racehorses, banker, philanthropist…), including 3 from the past (village lord, king\'s musketeer, courtier) and 4 from the future (space start-ups, robot racing team, cloned horses, floating island). The "Noble" title is permanent. All of them are in the Royal section of the album.',
+       'Royal mode: if the king has no child who can inherit, the crown goes to their eldest grandchild of the right sex, ahead of their brothers.']},
   {v:'0.1.4f', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Arbre : les bulles s\'élargissent pour afficher le prénom en entier (titre compris), avec les informations toujours centrées.',
        'Mode Royal : seuls les enfants d\'un duc ou d\'une duchesse deviennent comtes (plus ceux du prince héritier).',
@@ -1859,12 +1868,20 @@ const MILDS = [
 ];
 const MILD = byId(MILDS);
 /* Mode Royal : ce que fait le roi (ou la reine) à la place d'un métier — [id, fr, en, icône] */
-const ROYAL_ACTS = [['paix','Signe un traité de paix','Signs a peace treaty','dove'],['guerre','Déclare la guerre','Declares war','sword'],['chateau','Fait bâtir un château','Builds a castle','castle'],['bal','Organise un grand bal','Throws a grand ball','disco'],['impot','Lève un nouvel impôt','Raises a new tax','crown'],['baisse','Baisse les impôts','Lowers taxes','heart'],['chasse','Part à la chasse royale','Goes on a royal hunt','paw'],['justice','Rend la justice','Dispenses justice','flag'],['grace','Gracie un condamné','Pardons a prisoner','lock'],['academie','Fonde une académie','Founds an academy','book'],['portrait','Pose pour son portrait officiel','Sits for an official portrait','palette'],['ambassade','Reçoit un ambassadeur','Receives an ambassador','planet'],['tournee','Visite ses provinces','Tours the provinces','pin'],['cathedrale','Fait bâtir une cathédrale','Builds a cathedral','building'],['arts','Protège les artistes','Patronises the arts','music'],['armee','Réforme l\'armée','Reforms the army','helmet'],['pain','Distribue du pain au peuple','Hands out bread to the people','cup'],['canal','Fait creuser un canal','Has a canal dug','wave'],['jardin','Inaugure un jardin royal','Opens a royal garden','leaf'],['conseil','Préside le conseil royal','Chairs the royal council','user'],['tournoi','Organise un tournoi','Holds a tournament','trophy'],['monnaie','Fait frapper une monnaie','Mints a new coin','sun'],['expedition','Lance une expédition lointaine','Launches a far-off expedition','rocket'],['memoires','Écrit ses mémoires','Writes their memoirs','book'],['audience','Accorde une audience au peuple','Grants an audience to the people','user'],['flotte','Fait construire une flotte','Has a fleet built','wave'],['opera','Fonde un opéra royal','Founds a royal opera','music'],['festin','Donne un grand festin','Hosts a grand feast','cup'],['alliance','Négocie une alliance','Negotiates an alliance','heart'],['route','Fait tracer une route royale','Has a royal road built','train'],['hopital','Fonde un hôpital','Founds a hospital','pill'],['feu','Offre un feu d\'artifice','Puts on fireworks','sparkle']];
+const ROYAL_ACTS = [['paix','Signe un traité de paix','Signs a peace treaty','dove'],['guerre','Déclare la guerre','Declares war','sword'],['chateau','Fait bâtir un château','Builds a castle','castle'],['bal','Organise un grand bal','Throws a grand ball','disco'],['impot','Lève un nouvel impôt','Raises a new tax','crown'],['baisse','Baisse les impôts','Lowers taxes','heart'],['chasse','Part à la chasse royale','Goes on a royal hunt','paw'],['justice','Rend la justice','Dispenses justice','flag'],['grace','Gracie un condamné','Pardons a prisoner','lock'],['academie','Fonde une académie','Founds an academy','book'],['portrait','Pose pour son portrait officiel','Sits for an official portrait','palette'],['ambassade','Reçoit un ambassadeur','Receives an ambassador','planet'],['tournee','Visite ses provinces','Tours the provinces','pin'],['cathedrale','Fait bâtir une cathédrale','Builds a cathedral','building'],['arts','Protège les artistes','Patronises the arts','music'],['armee','Réforme l\'armée','Reforms the army','helmet'],['pain','Distribue du pain au peuple','Hands out bread to the people','cup'],['canal','Fait creuser un canal','Has a canal dug','wave'],['jardin','Inaugure un jardin royal','Opens a royal garden','leaf'],['conseil','Préside le conseil royal','Chairs the royal council','user'],['tournoi','Organise un tournoi','Holds a tournament','trophy'],['monnaie','Fait frapper une monnaie','Mints a new coin','sun'],['expedition','Lance une expédition lointaine','Launches a far-off expedition','rocket'],['memoires','Écrit ses mémoires','Writes their memoirs','book'],['audience','Accorde une audience au peuple','Grants an audience to the people','user'],['flotte','Fait construire une flotte','Has a fleet built','wave'],['opera','Fonde un opéra royal','Founds a royal opera','music'],['festin','Donne un grand festin','Hosts a grand feast','cup'],['alliance','Négocie une alliance','Negotiates an alliance','heart'],['route','Fait tracer une route royale','Has a royal road built','train'],['hopital','Fonde un hôpital','Founds a hospital','pill'],['feu','Offre un feu d\'artifice','Puts on fireworks','sparkle'],['discours','Fait son discours télévisé','Gives a televised speech','film',1970,2100],['visite','Effectue une visite d\'État','Makes a state visit','planet',1970,2100],['fondation','Préside une fondation caritative','Chairs a charity foundation','heart',1970,2100],['reseaux','Publie sur les réseaux sociaux','Posts on social media','phone',2005,2100],['climat','Lance un grand plan climat','Launches a major climate plan','leaf',2030,2100],['ia','Signe un traité avec une IA','Signs a treaty with an AI','robot',2035,2100],['hologramme','Règne par hologramme','Reigns by hologram','sparkle',2040,2100],['lune','Inaugure une base lunaire','Opens a lunar base','moon',2040,2100]];
 // ce que fait le prince (ou la princesse) héritier, dès 16 ans
-const PRINCE_ACTS = [['p_escrime','Prend des leçons d\'escrime','Takes fencing lessons','sword'],['p_equitation','Apprend l\'équitation','Learns horse riding','paw'],['p_precepteur','Étudie avec son précepteur','Studies with a tutor','book'],['p_bal','Fait ses débuts au bal','Makes a ball debut','disco'],['p_voyage','Part en voyage diplomatique','Goes on a diplomatic trip','planet'],['p_regiment','Commande un régiment','Commands a regiment','helmet'],['p_chasse','Accompagne la chasse royale','Joins the royal hunt','leaf'],['p_conseil','Assiste au conseil royal','Sits in on the royal council','crown'],['p_mecene','Protège un jeune peintre','Patronises a young painter','palette'],['p_pont','Inaugure un pont','Opens a new bridge','building'],['p_charite','Visite un orphelinat','Visits an orphanage','heart'],['p_clavecin','Apprend le clavecin','Learns the harpsichord','music'],['p_portrait','Pose pour un portrait','Sits for a portrait','palette'],['p_langues','Apprend des langues étrangères','Learns foreign languages','book'],['p_fete','Organise une fête au palais','Throws a palace party','sparkle'],['p_attente','Attend son tour de régner','Waits for their turn to reign','hourglass']];
+const PRINCE_ACTS = [['p_escrime','Prend des leçons d\'escrime','Takes fencing lessons','sword'],['p_equitation','Apprend l\'équitation','Learns horse riding','paw'],['p_precepteur','Étudie avec son précepteur','Studies with a tutor','book'],['p_bal','Fait ses débuts au bal','Makes a ball debut','disco'],['p_voyage','Part en voyage diplomatique','Goes on a diplomatic trip','planet'],['p_regiment','Commande un régiment','Commands a regiment','helmet'],['p_chasse','Accompagne la chasse royale','Joins the royal hunt','leaf'],['p_conseil','Assiste au conseil royal','Sits in on the royal council','crown'],['p_mecene','Protège un jeune peintre','Patronises a young painter','palette'],['p_pont','Inaugure un pont','Opens a new bridge','building'],['p_charite','Visite un orphelinat','Visits an orphanage','heart'],['p_clavecin','Apprend le clavecin','Learns the harpsichord','music'],['p_portrait','Pose pour un portrait','Sits for a portrait','palette'],['p_langues','Apprend des langues étrangères','Learns foreign languages','book'],['p_fete','Organise une fête au palais','Throws a palace party','sparkle'],['p_attente','Attend son tour de régner','Waits for their turn to reign','hourglass'],['p_ong','S\'engage dans une ONG','Works with an NGO','dove',1970,2100],['p_helico','Pilote d\'hélicoptère dans l\'armée','Army helicopter pilot','helmet',1970,2100],['p_marathon','Court un marathon caritatif','Runs a charity marathon','bolt',1980,2100],['p_influence','Influenceur royal','Royal influencer','phone',2010,2100],['p_metavers','Ambassadeur dans le métavers','Ambassador in the metaverse','computer',2035,2100],['p_drone','Champion de course de drones','Drone racing champion','bolt',2035,2100],['p_mars','Part en mission vers Mars','Goes on a mission to Mars','rocket',2040,2100],['p_ocean','Explore les cités sous-marines','Explores underwater cities','wave',2045,2100]];
 // métiers réservés aux ducs et aux comtes
-const NOBLE_ACTS = [['n_domaine','Gère son domaine','Runs their estate','castle'],['n_ambassade','Ambassadeur de la couronne','Crown ambassador','planet'],['n_gouverneur','Gouverneur de province','Provincial governor','flag'],['n_officier','Officier de la garde royale','Royal Guard officer','helmet'],['n_chambellan','Grand chambellan','Lord chamberlain','crown'],['n_mecene','Mécène des arts','Patron of the arts','palette'],['n_ecuyer','Grand écuyer','Master of the horse','paw'],['n_veneur','Grand veneur','Master of the hunt','leaf']];
-const ROYAL = byId(ROYAL_ACTS.concat(PRINCE_ACTS, NOBLE_ACTS));
+const NOBLE_ACTS = [['n_domaine','Gère son domaine','Runs their estate','castle'],['n_ambassade','Ambassadeur de la couronne','Crown ambassador','planet'],['n_gouverneur','Gouverneur de province','Provincial governor','flag'],['n_officier','Officier de la garde royale','Royal Guard officer','helmet'],['n_chambellan','Grand chambellan','Lord chamberlain','crown'],['n_mecene','Mécène des arts','Patron of the arts','palette'],['n_ecuyer','Grand écuyer','Master of the horse','paw'],['n_veneur','Grand veneur','Master of the hunt','leaf'],['n_orbital','Gouverneur d\'une station orbitale','Orbital station governor','planet',2045,2100],['n_terraform','Directeur de terraformation','Terraforming director','leaf',2050,2100]];
+// métiers des nobles (comtes anoblis)
+const NOBILITY_ACTS = [['nb_rentier','Vit de ses rentes','Lives off their income','sun'],['nb_salon','Tient un salon littéraire','Hosts a literary salon','book'],['nb_collection','Collectionneur d\'art','Art collector','palette'],['nb_vignoble','Propriétaire d\'un vignoble','Vineyard owner','cup'],['nb_haras','Éleveur de chevaux de course','Racehorse breeder','paw'],['nb_magistrat','Magistrat','Magistrate','flag'],['nb_diplomate','Diplomate','Diplomat','planet'],['nb_banquier','Banquier','Banker','crown'],['nb_theatre','Mécène d\'un théâtre','Patron of a theatre','music'],['nb_chateau','Restaure son château','Restores their castle','castle'],['nb_philanthrope','Philanthrope','Philanthropist','heart'],['nb_seigneur','Seigneur de village','Village lord','castle',1500,1789],['nb_mousquetaire','Mousquetaire du roi','King\'s musketeer','sword',1600,1776],['nb_courtisan','Courtisan à la cour','Courtier','crown',1500,1830],['nb_spatial','Investisseur en start-up spatiales','Space start-up investor','rocket',2030,2100],['nb_robots','Patron d\'une écurie de robots','Owner of a robot racing team','robot',2040,2100],['nb_clones','Éleveur de chevaux clonés','Cloned horse breeder','paw',2045,2100],['nb_ile','Propriétaire d\'une île flottante','Floating island owner','wave',2050,2100]];
+const ROYAL = byId(ROYAL_ACTS.concat(PRINCE_ACTS, NOBLE_ACTS, NOBILITY_ACTS));
+const nobleJobs = p => nobleRank(p) === 'noble' ? NOBILITY_ACTS : NOBLE_ACTS;
+function actPick(list, day, cur){                     // activité de l'époque, différente de l'actuelle si possible
+  const y = dataYear(yearOf(day)), ok = list.filter(r => y >= (r[4] || 0) && y <= (r[5] || 9999));
+  const pool = ok.length ? ok : list, other = pool.filter(r => r[0] !== cur);
+  return pick(other.length ? other : pool)[0];
+}
 const royalActName = id => ROYAL[id] ? (LANG === 'fr' ? ROYAL[id][1] : ROYAL[id][2]) : '';
 let RH;                                                // héritier en cache (recalculé à chaque rendu / naissance / décès)
 const royalOn = () => !!(S && S.royal && !S.royal.lost);
@@ -1873,12 +1890,14 @@ function findHeir(k){                                // 1) descendants du roi (a
   const kids = new Map();
   for(const c of Object.values(S.people)) if(c.parents && c.blood && !c.adopted) for(const pid of c.parents){ if(!kids.has(pid)) kids.set(pid, []); kids.get(pid).push(c); }
   const ok = c => S.royal.rule === 'both' || c.sex === (S.royal.rule === 'matri' ? 'F' : 'M');
-  const can = c => c.death == null && !jailed(c) && c.noble !== 'dechu';      // un déchu a renoncé à la couronne
-  const walk = p => {
-    for(const c of (kids.get(p.id) || []).filter(ok).sort((x, y) => x.birth - y.birth)){ if(can(c)) return c.id; const r = walk(c); if(r) return r; }
-    return null;
-  };
-  const d = walk(k); if(d) return d;
+  const can = c => c.death == null && !jailed(c) && c.noble !== 'dechu';      // un déchu a renoncé à la couronne      // un déchu a renoncé à la couronne
+  // génération par génération : d'abord les enfants, puis les petits-enfants (par n'importe quel enfant), etc. — l'aîné du bon sexe
+  let gen = kids.get(k.id) || [];
+  while(gen.length){
+    const c = gen.filter(x => ok(x) && can(x)).sort((x, y) => x.birth - y.birth)[0];
+    if(c) return c.id;
+    gen = gen.flatMap(x => kids.get(x.id) || []);
+  }
   const bro = k.parents ? Object.values(S.people).filter(x => x.id !== k.id && x.blood && !x.adopted && can(x) && ok(x) && x.parents && x.parents.some(i => k.parents.includes(i))).sort((x, y) => x.birth - y.birth) : [];
   return bro.length ? bro[0].id : null;
 }
@@ -1890,23 +1909,27 @@ function heirId(){
 function nobleRank(p){                               // enfant d'un monarque : duc ; enfant d'un duc : comte ; « déchu » s'il a renoncé
   if(!p || !p.blood || !p.parents) return '';
   if(p.noble === 'dechu') return 'dechu';
-  if(p.noble === 'noble') return 'noble';
+  if(p.noble === 'noble') return 'noble';                      // titre définitif
   const par = p.parents.map(P).filter(Boolean);
-  if(par.some(q => q.wasKing)) return 'duc';
-  if(par.some(q => q.blood && !q.noble && !q.wasKing && q.id !== heirId() && q.parents && q.parents.some(i => { const g2 = P(i); return g2 && g2.wasKing; }))) return 'comte';   // parent duc (pas prince)
+  if(par.some(q => q.wasKing)) return 'duc';                   // enfant d'un monarque
+  if(par.some(q => q.blood && !q.noble && !q.wasKing && q.parents && q.parents.some(i => { const g2 = P(i); return g2 && g2.wasKing; }))) return 'comte';   // enfant d'un duc ou du prince héritier
   return '';
 }
 function nobleYear(p, A, day){                        // ducs et comtes : 3 % de chances dans leur vie de renoncer à la vie royale
   if(!royalOn() || p.death != null || p.id === S.royal.king || p.id === heirId()) return;
   const r = nobleRank(p);
+  if(r === 'noble' && A >= 18 && !p.nobilityJob && !(p.work && ['royal','star','prison','retired','uni','noble'].includes(p.work.s))){ p.nobilityJob = true; p.work = {s:'noble', act: actPick(NOBILITY_ACTS, day)}; }
   if(r === 'noble'){ p.nobleYears = (p.nobleYears || 0) + 1; if(p.nobleYears % 2 === 0) cyn(5 * (hasAtout(p,'richesse') ? 2 : 1), p.id); return; }   // un noble rapporte 5 Cyn tous les 2 ans
   if(r !== 'duc' && r !== 'comte') return;
   const w = p.work;
   if(A >= 18 && !p.nobleJobRoll && !(w && ['royal','star','prison','retired','uni'].includes(w.s))){       // 60 % prennent un métier réservé à la noblesse
-    p.nobleJobRoll = true; if(Math.random() < .6){ p.work = {s:'noble', act: pick(NOBLE_ACTS)[0]}; dirty = true; }
+    p.nobleJobRoll = true; if(Math.random() < .6){ p.work = {s:'noble', act: actPick(NOBLE_ACTS, day)}; dirty = true; }
   }
   if(r === 'comte' && A >= 16 && !p.nobleRoll){ p.nobleRoll = true; if(Math.random() < .22) p.nobleAt = day + rnd(0, 40*365); }   // 22 % des comtes deviennent nobles
-  if(p.nobleAt != null && day >= p.nobleAt){ p.nobleAt = null; p.noble = 'noble'; RH = undefined; log('star','ennobled',[p.id], day, true); dirty = true; return; }
+  if(p.nobleAt != null && day >= p.nobleAt){ p.nobleAt = null; p.noble = 'noble'; RH = undefined;
+    if(A >= 18 && !(p.work && ['royal','star','prison','retired','uni'].includes(p.work.s))) p.work = {s:'noble', act: actPick(NOBILITY_ACTS, day)};
+    log('star','ennobled',[p.id], day, true); dirty = true; return;            // un métier de noble
+  }
   if(!p.dechuRoll && A >= 18){ p.dechuRoll = true; if(Math.random() < .03) p.dechuAt = day + rnd(0, 40*365); }
   if(p.dechuAt != null && day >= p.dechuAt){ p.dechuAt = null; p.noble = 'dechu'; if(p.work && p.work.s === 'noble') p.work = {s:'unemp', until: day + rnd(60, 730)}; RH = undefined; log('sad','dechu',[p.id], day, true); dirty = true; }
 }
@@ -1928,7 +1951,7 @@ function royalTitle(p){
 function crown(p, day, silent){
   S.royal.king = p.id; p.wasKing = true; RH = undefined;
   if(p.crim && !p.crim.declared) delete p.crim; if(p.star && !p.star.famous) delete p.star; p.fameAt = null;   // un monarque n'a pas d'autre destin
-  p.work = {s:'royal', act: pick(ROYAL_ACTS)[0]};
+  p.work = {s:'royal', act: actPick(ROYAL_ACTS, day)};
   log('star','crowned',[p.id], day, !silent);
   if(!silent){ sfx.fame(); burst(['#ffd000','#ffffff','#7a2bd6','#ffb300'], 60); cyn(100 * (hasAtout(p,'richesse') ? 2 : 1), p.id); }
   dirty = true;
@@ -1940,7 +1963,7 @@ function crownNext(day){                              // le roi meurt (ou part e
 }
 function royalYear(p, A, day){                        // chaque année, 40 % de chances que le monarque change d'activité
   if(A < 16 || Math.random() >= .4) return;
-  let a; do { a = pick(ROYAL_ACTS)[0]; } while(a === p.work.act);
+  const a = actPick(ROYAL_ACTS, day, p.work.act);
   p.work.act = a; log('star','royal_act',[p.id, a], day, false);
 }
 const mildName = id => MILD[id] ? (LANG === 'fr' ? MILD[id][1] : MILD[id][2]) : id;
@@ -2372,7 +2395,7 @@ fr:{
   log_royal_lost:()=>"Ni héritier ni frère pour reprendre la couronne : la dynastie s'éteint.",
   over_royal_title:l=>`Fin de la dynastie ${l}`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} est ${g(P(d.id || d),'mort','morte')} sans héritier ni frère pour lui succéder. La couronne s'éteint avec ${g(P(d.id || d),'lui','elle')}.`,
   alb_prince_d:'Prince ou princesse héritier',
-  shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'), alb_noble_d:'Duc, duchesse, comte ou comtesse',
+  shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'), alb_noble_d:'Duc, duchesse, comte ou comtesse', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} est ${g(P(p),'anobli','anoblie')} : ${g(P(p),'il','elle')} rapportera 5 Cyn tous les 2 ans.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
   end_note_over:'La partie est terminée : les Cyn et les succès ne peuvent plus être gagnés dans cette partie.',
@@ -2580,7 +2603,7 @@ en:{
   log_royal_lost:()=>'No heir and no brother to take the crown: the dynasty dies out.',
   over_royal_title:l=>`End of the ${l} dynasty`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} died with no heir and no brother to succeed them. The crown dies with them.`,
   alb_prince_d:'Crown prince or princess',
-  shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'), alb_noble_d:'Duke, duchess, count or countess',
+  shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'), alb_noble_d:'Duke, duchess, count or countess', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} is ennobled and will bring in 5 Cyn every 2 years.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
   end_note_over:'The game is over: Cyn and achievements can no longer be earned in this game.',
@@ -3014,12 +3037,12 @@ function workTick(p, day){
 function workYear(p, A, day){
   nobleYear(p, A, day);
   if(royalOn() && A >= 16 && heirId() === p.id && (!p.princeAct || Math.random() < .4)){       // le prince héritier change d'occupation
-    let a; do { a = pick(PRINCE_ACTS)[0]; } while(a === p.princeAct); p.princeAct = a; log('star','royal_act',[p.id, a], day, false);
+    const a = actPick(PRINCE_ACTS, day, p.princeAct); p.princeAct = a; log('star','royal_act',[p.id, a], day, false);
   }
   const w = p.work; if(w && w.s === 'royal'){ royalYear(p, A, day); return; }
   if(w && w.s === 'noble'){                            // métier de duc ou de comte
     if(A >= p.retireAge) p.work = {s:'retired'};
-    else if(Math.random() < .1){ let a; do { a = pick(NOBLE_ACTS)[0]; } while(a === w.act); w.act = a; dirty = true; }
+    else if(Math.random() < .1){ w.act = actPick(nobleJobs(p), day, w.act); dirty = true; }
     return;
   }
   if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
@@ -4270,9 +4293,10 @@ function albItems(k){
     .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
     .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
   if(k === 'e') return schoolItems();
-  if(k === 'r') return ROYAL_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_royal_d')}))
-    .concat(PRINCE_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_prince_d')})))
-    .concat(NOBLE_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_noble_d')})));
+  if(k === 'r'){
+    const one = d => r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], y: r[4] || 1500, desc: t(d) + (r[4] ? ' · ' + albYears(r[4], r[5] || 2100) : '')});
+    return ROYAL_ACTS.map(one('alb_royal_d')).concat(PRINCE_ACTS.map(one('alb_prince_d')), NOBLE_ACTS.map(one('alb_noble_d')), NOBILITY_ACTS.map(one('alb_nobility_d')));
+  }
   if(k === 'm') return MILDS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:'pill', y:r[3], desc: albYears(r[3], r[4]), secret:true}));
   return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
