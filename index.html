@@ -473,7 +473,10 @@ body.no-deco .bubble{display:none}
 .crownfx.small{top:-22px;width:36px;opacity:.95}
 .crownfx svg{display:block;width:100%}
 @keyframes crownbob{50%{transform:translateX(-50%) translateY(-3px) rotate(-3deg)}}
-.rtt{display:block;font:800 9.5px/1.1 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:#7a2bd6}
+.rtt{display:inline;margin-right:3px;font:800 9px/1 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:#7a2bd6;vertical-align:1px}
+#treeCanvas .node.king,#treeCanvas .node.heir{gap:1px;padding-bottom:7px}
+#treeCanvas .node.king .n-life,#treeCanvas .node.heir .n-life{line-height:1.12}
+#treeCanvas .node.king .n-band,#treeCanvas .node.heir .n-band{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:10.5px;line-height:1.15;padding:2px 7px}
 #treeCanvas .node.king:not(.crim):not(.ill) .rtt,#treeCanvas .node.heir:not(.crim):not(.ill) .rtt{color:#5a17b0}
 #treeCanvas .node.heir:not(.crim):not(.ill) .nt span,#treeCanvas .node.heir:not(.crim):not(.ill) .n-city,#treeCanvas .node.heir:not(.crim):not(.ill) .n-life,#treeCanvas .node.heir:not(.crim):not(.ill) .nt b{color:#4a3000}
 .rib.exk{right:8px;color:#5a3a00;background:linear-gradient(180deg,#f3ead2,#d9c48a);border:1px solid #b8962e}
@@ -1136,9 +1139,18 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4a';
+const APP_VERSION = '0.1.4b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4b', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode Royal : les bulles du roi et du prince héritier sont bien cadrées (le titre est sur la ligne du prénom, l\'activité peut tenir sur deux lignes).',
+       'Mode Royal : 8 nouvelles activités pour le roi (audience au peuple, flotte, opéra, festin, alliance, route royale, hôpital, feu d\'artifice) et 16 pour le prince héritier dès 16 ans (escrime, équitation, précepteur, régiment, voyage diplomatique…). Elles rejoignent la catégorie Royal de l\'album.',
+       'Mode Royal : si le roi meurt sans héritier, la couronne revient à l\'un de ses frères ; sans frère, la partie se termine.',
+       'Naissances en mode Royal : « Prénom dynastique recommandé ».'],
+   en:['Royal mode: the king\'s and crown prince\'s bubbles are properly laid out (the title sits on the first-name line, and the activity can use two lines).',
+       'Royal mode: 8 new activities for the king (audience with the people, fleet, opera, feast, alliance, royal road, hospital, fireworks) and 16 for the crown prince from age 16 (fencing, riding, tutor, regiment, diplomatic trip…). They join the Royal section of the album.',
+       'Royal mode: if the king dies with no heir, the crown goes to one of their brothers; with no brother, the game ends.',
+       'Royal births: "Dynastic name recommended".']},
   {v:'0.1.4a', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode Royal : une case à cocher avant de commencer, avec le sexe dominant (patriarcale, matriarcale ou les deux). Ton premier personnage est sacré roi (ou reine) avec une couronne sur sa bulle ; l\'héritier (le premier enfant du bon sexe) devient prince ou princesse. Le monarque ne travaille plus : il signe des traités, bâtit des châteaux, organise des bals… À sa mort, la couronne passe automatiquement à l\'héritier (+100 Cyn au couronnement). Les prénoms de la dynastie sont mis en avant à chaque naissance.',
        'Album : nouvelle catégorie Royal, avec les 24 activités d\'un monarque, et son succès « Règne exemplaire ».',
@@ -1821,25 +1833,30 @@ const MILDS = [
 ];
 const MILD = byId(MILDS);
 /* Mode Royal : ce que fait le roi (ou la reine) à la place d'un métier — [id, fr, en, icône] */
-const ROYAL_ACTS = [['paix','Signe un traité de paix','Signs a peace treaty','dove'],['guerre','Déclare la guerre','Declares war','sword'],['chateau','Fait bâtir un château','Builds a castle','castle'],['bal','Organise un grand bal','Throws a grand ball','disco'],['impot','Lève un nouvel impôt','Raises a new tax','crown'],['baisse','Baisse les impôts','Lowers taxes','heart'],['chasse','Part à la chasse royale','Goes on a royal hunt','paw'],['justice','Rend la justice','Dispenses justice','flag'],['grace','Gracie un condamné','Pardons a prisoner','lock'],['academie','Fonde une académie','Founds an academy','book'],['portrait','Pose pour son portrait officiel','Sits for an official portrait','palette'],['ambassade','Reçoit un ambassadeur','Receives an ambassador','planet'],['tournee','Visite ses provinces','Tours the provinces','pin'],['cathedrale','Fait bâtir une cathédrale','Builds a cathedral','building'],['arts','Protège les artistes','Patronises the arts','music'],['armee','Réforme l\'armée','Reforms the army','helmet'],['pain','Distribue du pain au peuple','Hands out bread to the people','cup'],['canal','Fait creuser un canal','Has a canal dug','wave'],['jardin','Inaugure un jardin royal','Opens a royal garden','leaf'],['conseil','Préside le conseil royal','Chairs the royal council','user'],['tournoi','Organise un tournoi','Holds a tournament','trophy'],['monnaie','Fait frapper une monnaie','Mints a new coin','sun'],['expedition','Lance une expédition lointaine','Launches a far-off expedition','rocket'],['memoires','Écrit ses mémoires','Writes their memoirs','book']];
-const ROYAL = byId(ROYAL_ACTS);
+const ROYAL_ACTS = [['paix','Signe un traité de paix','Signs a peace treaty','dove'],['guerre','Déclare la guerre','Declares war','sword'],['chateau','Fait bâtir un château','Builds a castle','castle'],['bal','Organise un grand bal','Throws a grand ball','disco'],['impot','Lève un nouvel impôt','Raises a new tax','crown'],['baisse','Baisse les impôts','Lowers taxes','heart'],['chasse','Part à la chasse royale','Goes on a royal hunt','paw'],['justice','Rend la justice','Dispenses justice','flag'],['grace','Gracie un condamné','Pardons a prisoner','lock'],['academie','Fonde une académie','Founds an academy','book'],['portrait','Pose pour son portrait officiel','Sits for an official portrait','palette'],['ambassade','Reçoit un ambassadeur','Receives an ambassador','planet'],['tournee','Visite ses provinces','Tours the provinces','pin'],['cathedrale','Fait bâtir une cathédrale','Builds a cathedral','building'],['arts','Protège les artistes','Patronises the arts','music'],['armee','Réforme l\'armée','Reforms the army','helmet'],['pain','Distribue du pain au peuple','Hands out bread to the people','cup'],['canal','Fait creuser un canal','Has a canal dug','wave'],['jardin','Inaugure un jardin royal','Opens a royal garden','leaf'],['conseil','Préside le conseil royal','Chairs the royal council','user'],['tournoi','Organise un tournoi','Holds a tournament','trophy'],['monnaie','Fait frapper une monnaie','Mints a new coin','sun'],['expedition','Lance une expédition lointaine','Launches a far-off expedition','rocket'],['memoires','Écrit ses mémoires','Writes their memoirs','book'],['audience','Accorde une audience au peuple','Grants an audience to the people','user'],['flotte','Fait construire une flotte','Has a fleet built','wave'],['opera','Fonde un opéra royal','Founds a royal opera','music'],['festin','Donne un grand festin','Hosts a grand feast','cup'],['alliance','Négocie une alliance','Negotiates an alliance','heart'],['route','Fait tracer une route royale','Has a royal road built','train'],['hopital','Fonde un hôpital','Founds a hospital','pill'],['feu','Offre un feu d\'artifice','Puts on fireworks','sparkle']];
+// ce que fait le prince (ou la princesse) héritier, dès 16 ans
+const PRINCE_ACTS = [['p_escrime','Prend des leçons d\'escrime','Takes fencing lessons','sword'],['p_equitation','Apprend l\'équitation','Learns horse riding','paw'],['p_precepteur','Étudie avec son précepteur','Studies with a tutor','book'],['p_bal','Fait ses débuts au bal','Makes a ball debut','disco'],['p_voyage','Part en voyage diplomatique','Goes on a diplomatic trip','planet'],['p_regiment','Commande un régiment','Commands a regiment','helmet'],['p_chasse','Accompagne la chasse royale','Joins the royal hunt','leaf'],['p_conseil','Assiste au conseil royal','Sits in on the royal council','crown'],['p_mecene','Protège un jeune peintre','Patronises a young painter','palette'],['p_pont','Inaugure un pont','Opens a new bridge','building'],['p_charite','Visite un orphelinat','Visits an orphanage','heart'],['p_clavecin','Apprend le clavecin','Learns the harpsichord','music'],['p_portrait','Pose pour un portrait','Sits for a portrait','palette'],['p_langues','Apprend des langues étrangères','Learns foreign languages','book'],['p_fete','Organise une fête au palais','Throws a palace party','sparkle'],['p_attente','Attend son tour de régner','Waits for their turn to reign','hourglass']];
+const ROYAL = byId(ROYAL_ACTS.concat(PRINCE_ACTS));
 const royalActName = id => ROYAL[id] ? (LANG === 'fr' ? ROYAL[id][1] : ROYAL[id][2]) : '';
 let RH;                                                // héritier en cache (recalculé à chaque rendu / naissance / décès)
 const royalOn = () => !!(S && S.royal && !S.royal.lost);
-function successionOrder(){                           // primogéniture : on descend l'arbre depuis le fondateur, aîné d'abord
+function findHeir(k){                                // 1) descendants du roi (aîné d'abord), 2) sinon un de ses frères, 3) sinon personne
+  if(!k) return null;
   const kids = new Map();
   for(const c of Object.values(S.people)) if(c.parents && c.blood && !c.adopted) for(const pid of c.parents){ if(!kids.has(pid)) kids.set(pid, []); kids.get(pid).push(c); }
   const ok = c => S.royal.rule === 'both' || c.sex === (S.royal.rule === 'matri' ? 'F' : 'M');
-  const out = [], seen = new Set();
-  (function walk(p){
-    if(seen.has(p.id)) return; seen.add(p.id); out.push(p);
-    (kids.get(p.id) || []).filter(ok).sort((a, b) => a.birth - b.birth).forEach(walk);
-  })(P(S.founderId));
-  return out;
+  const can = c => c.death == null && !jailed(c);
+  const walk = p => {
+    for(const c of (kids.get(p.id) || []).filter(ok).sort((x, y) => x.birth - y.birth)){ if(can(c)) return c.id; const r = walk(c); if(r) return r; }
+    return null;
+  };
+  const d = walk(k); if(d) return d;
+  const bro = k.parents ? Object.values(S.people).filter(x => x.id !== k.id && x.blood && !x.adopted && can(x) && ok(x) && x.parents && x.parents.some(i => k.parents.includes(i))).sort((x, y) => x.birth - y.birth) : [];
+  return bro.length ? bro[0].id : null;
 }
 function heirId(){
   if(!royalOn()) return null;
-  if(RH === undefined){ const k = S.royal.king, h = successionOrder().find(p => p.death == null && p.id !== k && !jailed(p)); RH = h ? h.id : null; }
+  if(RH === undefined) RH = findHeir(P(S.royal.king));
   return RH;
 }
 function royalTitle(p){
@@ -1861,7 +1878,7 @@ function crown(p, day, silent){
 function crownNext(day){                              // le roi meurt (ou part en prison) : la couronne passe à l'héritier
   RH = undefined; const h = heirId();
   if(h) crown(P(h), day);
-  else { S.royal.lost = true; log('world','royal_lost',[], day, true); }
+  else { S.royal.lost = true; S.royalEnd = S.royal.king; log('world','royal_lost',[], day, true); }   // ni héritier ni frère : la partie se termine
 }
 function royalYear(p, A, day){                        // chaque année, 40 % de chances que le monarque change d'activité
   if(A < 16 || Math.random() >= .4) return;
@@ -2288,13 +2305,15 @@ fr:{
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
-  start_hint:'Conseillé : 1780', lab_royal:'Mode Royal', royal_hint:'Ton personnage est sacré roi (ou reine) : une couronne à transmettre de génération en génération.',
+  start_hint:'Conseillé : 1780', lab_royal:'Mode Royal', royal_hint:"Ton personnage est sacré roi (ou reine). Sans héritier ni frère à sa mort, la partie s'arrête.",
   lab_rule:'Sexe dominant', rule_patri:'Patriarcale (par défaut)', rule_matri:'Matriarcale', rule_both:'Les deux',
   regency:'Règne sous régence', heir_act:p=>g(p,'Prince héritier','Princesse héritière'), ex_king:p=>g(p,'Ancien roi','Ancienne reine'),
-  royal_names:'Prénoms de la dynastie (fortement recommandés)', alb_royal:'Royal', alb_royal_d:'Mode Royal',
+  royal_names:'Prénom dynastique recommandé', alb_royal:'Royal', alb_royal_d:'Mode Royal',
   log_crowned:p=>`${nm(p)} monte sur le trône ! Vive ${g(P(p),'le roi','la reine')} !`,
   log_royal_act:(p,a)=>`${nm(p)} ${lc(royalActName(a))}.`,
-  log_royal_lost:()=>"Plus aucun héritier : la couronne quitte la famille. Le mode Royal s'achève.",
+  log_royal_lost:()=>"Ni héritier ni frère pour reprendre la couronne : la dynastie s'éteint.",
+  over_royal_title:l=>`Fin de la dynastie ${l}`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} est ${g(P(d.id || d),'mort','morte')} sans héritier ni frère pour lui succéder. La couronne s'éteint avec ${g(P(d.id || d),'lui','elle')}.`,
+  alb_prince_d:'Prince ou princesse héritier',
   end_note_over:'La partie est terminée : les Cyn et les succès ne peuvent plus être gagnés dans cette partie.',
   end_note_2100:'Si tu continues à jouer, tu ne gagneras plus ni Cyn ni succès dans cette partie.',
   skin_goth:'Dark', skin_locked_goth:"Se débloque après 10 meurtres commis par des criminels (toutes parties confondues).",
@@ -2491,13 +2510,15 @@ en:{
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
-  start_hint:'Recommended: 1780', lab_royal:'Royal mode', royal_hint:'Your character is crowned king (or queen): a crown to pass down from generation to generation.',
+  start_hint:'Recommended: 1780', lab_royal:'Royal mode', royal_hint:'Your character is crowned king (or queen). With no heir and no brother at their death, the game ends.',
   lab_rule:'Ruling sex', rule_patri:'Patriarchal (default)', rule_matri:'Matriarchal', rule_both:'Both',
   regency:'Reigns under a regency', heir_act:p=>g(p,'Crown prince','Crown princess'), ex_king:p=>g(p,'Former king','Former queen'),
-  royal_names:'Dynasty names (strongly recommended)', alb_royal:'Royal', alb_royal_d:'Royal mode',
+  royal_names:'Dynastic name recommended', alb_royal:'Royal', alb_royal_d:'Royal mode',
   log_crowned:p=>`${nm(p)} takes the throne! Long live the ${g(P(p),'king','queen')}!`,
   log_royal_act:(p,a)=>`${nm(p)} ${lc(royalActName(a))}.`,
-  log_royal_lost:()=>'No heir left: the crown leaves the family. Royal mode is over.',
+  log_royal_lost:()=>'No heir and no brother to take the crown: the dynasty dies out.',
+  over_royal_title:l=>`End of the ${l} dynasty`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} died with no heir and no brother to succeed them. The crown dies with them.`,
+  alb_prince_d:'Crown prince or princess',
   end_note_over:'The game is over: Cyn and achievements can no longer be earned in this game.',
   end_note_2100:"If you keep playing, you won't earn any more Cyn or achievements in this game.",
   skin_goth:'Dark', skin_locked_goth:'Unlocks after 10 murders committed by criminals (across all games).',
@@ -2927,6 +2948,9 @@ function workTick(p, day){
   else if(w.s==='unemp'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','back_to_work',[p.id,j],day); }
 }
 function workYear(p, A, day){
+  if(royalOn() && A >= 16 && heirId() === p.id && (!p.princeAct || Math.random() < .4)){       // le prince héritier change d'occupation
+    let a; do { a = pick(PRINCE_ACTS)[0]; } while(a === p.princeAct); p.princeAct = a; log('star','royal_act',[p.id, a], day, false);
+  }
   const w = p.work; if(w && w.s === 'royal'){ royalYear(p, A, day); return; }
   if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
   if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
@@ -2968,10 +2992,10 @@ function activity(p, skipIll){
   if(p.death==null && p.ill && !skipIll) return dzName(p.ill.dz, p);
   if(p.star && p.star.famous) return jobName(p.star.job, p);
   const w = p.work;
+  if(royalOn() && A >= 16 && p.death == null && heirId() === p.id && !(w && (w.s === 'royal' || w.s === 'prison'))) return royalActName(p.princeAct || 'p_attente');   // prince héritier
   if(!w) return A < 18 ? schoolLabel(p, A, y) : t('odd');
   if(w.s === 'prison') return t('prison');
   if(w.s === 'royal') return A < 16 ? t('regency') : royalActName(w.act);
-  if(royalOn() && A >= 18 && p.death == null && heirId() === p.id) return t('heir_act', p);
   switch(w.s){
     case 'job': return jobName(w.job, p);
     case 'odd': return p.school && p.school.drop ? t('dropout', p) : t('odd');
@@ -3398,7 +3422,7 @@ function advance(dt){
   const d0 = Math.floor(before), d1 = Math.floor(S.t);
   for(let d = d0+1; d <= d1; d++){
     processDay(d);
-    if(blocked()){ S.t = d + .001; break; }
+    if(blocked() || S.royalEnd){ S.t = d + .001; break; }
   }
 }
 
@@ -3418,6 +3442,7 @@ setInterval(() => {
   if(!S.paused && !modalOpen && !S.over && !blocked()) advance(dt);
   updateClock();
   if(!modalOpen){
+    if(S.royalEnd && !S.over){ render(); gameOver(P(S.royalEnd), true); return; }
     if(S.nameQueue.length){ render(); openNaming(S.nameQueue[0]); return; }
     if(needHeir()){ if(S.auto) autoHeir(); else { render(); openHeir(); } return; }
     if(S.end2100 === 1){ render(); open2100(); return; }
@@ -3506,7 +3531,7 @@ function nodeHTML(p, x, y){
   return `${flames}<button class="${cls.join(' ')}" style="left:${x}px;top:${y}px;--t:@T@" data-act="fiche" data-id="${p.id}" aria-label="${esc(nm(p))}">
     ${p.id===S.activeId?`<em class="rib you">${t('you')}</em>`:''}${rib}${sparkles}${!p.ill && p.death==null && mildOn(p).length ? `<em class="rib sick">${t('sick_rib', p)}</em>` : ''}
     ${isKing || isHeir ? `<i class="crownfx ${isHeir ? 'small' : ''}">${CROWN_SVG}</i>` : ''}
-    <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt">${rtt ? `<small class="rtt">${esc(rtt)}</small>` : ''}<b>${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
+    <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b>${rtt ? `<small class="rtt">${esc(rtt)}</small>` : ''}${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
     <span class="n-life"><span>${years}</span><b>${ageL}</b></span>
     <span class="n-city">${icon('pin')}<span>${esc(cityLine(p))}</span></span>
     <span class="n-band">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
@@ -4049,11 +4074,11 @@ function statsBlock(){
   const all = Object.values(S.people), gens = Math.max(...all.filter(p => p.blood).map(genOf));
   return `<div class="bigstats"><div><b>${yearOf(S.t)-S.startYear}</b><span>${t('years')}</span></div><div><b>${all.length}</b><span>${t('members')}</span></div><div><b>${gens}</b><span>${t('gens', gens)}</span></div></div>`;
 }
-function gameOver(d){
+function gameOver(d, royal){
   S.over = true; save();
   const f = P(S.founderId);
-  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(t('over_title', familyName(f)))}</h2>
-      <p>${esc(t('over_txt', d, f, S.startYear))}</p><p class="endnote">${t('end_note_over')}</p></div>${statsBlock()}
+  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(royal ? t('over_royal_title', familyName(f)) : t('over_title', familyName(f)))}</h2>
+      <p>${esc(royal ? t('over_royal_txt', d) : t('over_txt', d, f, S.startYear))}</p><p class="endnote">${t('end_note_over')}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 function open2100(){
@@ -4105,6 +4130,7 @@ function albumScan(force){
     interestsOf(p).forEach(id => mark('i', id));
     (p.mild || []).forEach(m => mark('m', m.dz));
     if(p.work && p.work.s === 'royal' && p.death == null && ageAt(p, S.t) >= 16) mark('r', p.work.act);
+    else if(p.princeAct && p.death == null && royalOn() && heirId() === p.id && ageAt(p, S.t) >= 16) mark('r', p.princeAct);
     (p.conds || []).forEach(id => mark('c', id));
     if(p.work && (p.work.s === 'job' || p.work.s === 'star')) mark('j', p.work.job);
     addictsOf(p).forEach(id => mark('a', id));
@@ -4155,7 +4181,8 @@ function albItems(k){
     .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
     .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
   if(k === 'e') return schoolItems();
-  if(k === 'r') return ROYAL_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_royal_d')}));
+  if(k === 'r') return ROYAL_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_royal_d')}))
+    .concat(PRINCE_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_prince_d')})));
   if(k === 'm') return MILDS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:'pill', y:r[3], desc: albYears(r[3], r[4]), secret:true}));
   return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));

@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4b — 12 novembre 2026
+
+- Mode Royal : les bulles du roi et du prince héritier sont bien cadrées (le titre est sur la ligne du prénom, l'activité peut tenir sur deux lignes).
+- Mode Royal : 8 nouvelles activités pour le roi (audience au peuple, flotte, opéra, festin, alliance, route royale, hôpital, feu d'artifice) et 16 pour le prince héritier dès 16 ans (escrime, équitation, précepteur, régiment, voyage diplomatique…). Elles rejoignent la catégorie Royal de l'album.
+- Mode Royal : si le roi meurt sans héritier, la couronne revient à l'un de ses frères ; sans frère, la partie se termine.
+- Naissances en mode Royal : « Prénom dynastique recommandé ».
+
 ## v0.1.4a — 12 novembre 2026
 
 - Mode Royal : une case à cocher avant de commencer, avec le sexe dominant (patriarcale, matriarcale ou les deux). Ton premier personnage est sacré roi (ou reine) avec une couronne sur sa bulle ; l'héritier (le premier enfant du bon sexe) devient prince ou princesse. Le monarque ne travaille plus : il signe des traités, bâtit des châteaux, organise des bals… À sa mort, la couronne passe automatiquement à l'héritier (+100 Cyn au couronnement). Les prénoms de la dynastie sont mis en avant à chaque naissance.
