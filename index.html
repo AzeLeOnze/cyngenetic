@@ -88,6 +88,31 @@ button{font:inherit;color:inherit}
 .gel.round{width:42px;min-height:42px;padding:0}
 .gel.wide{width:100%}
 .gel.big{min-height:50px;font-size:17px;padding:12px 28px}
+.gel.danger{--c1:#ffb8b8;--c2:#ff2d3d;--c3:#c4001a;--edge:#8f0012;--ts:rgba(90,0,0,.55);transition:transform .45s cubic-bezier(.2,1.5,.4,1),filter .2s}
+.gel.danger.wob{animation:wob .35s}
+.gel.danger.flee:disabled{filter:none;cursor:default}
+@keyframes wob{25%{rotate:-5deg}75%{rotate:5deg}}
+.wipefade{position:fixed;inset:0;z-index:9999;background:#000;opacity:0;transition:opacity 1.5s ease;pointer-events:all}
+.wipefade.on{opacity:1}
+.settabs{display:flex;width:max-content;max-width:100%;margin:0 0 14px}
+.settabs button{display:inline-flex;align-items:center;gap:6px}
+.settabs svg{width:16px;height:16px;fill:currentColor}
+.shopbal{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:12px 16px;border-radius:20px;background:linear-gradient(180deg,#effffa,#cdf6ea);border:1px solid #fff;
+  box-shadow:0 3px 10px rgba(0,110,90,.15);font:800 28px var(--font-display);color:#00876a;font-variant-numeric:tabular-nums}
+.shopbal svg{width:40px;height:40px;padding:7px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
+.shopbal span{font-size:15px;color:var(--ink-soft)}
+.shoplist{display:grid;gap:10px}
+.shopit{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 3px 10px rgba(0,70,160,.1)}
+.shopit>i{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;color:#fff;box-shadow:inset 0 -3px 6px rgba(0,0,0,.15)}
+.shopit>i svg{width:22px;height:22px;fill:currentColor}
+.si-star{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ffd000 55%,#e09a00)}
+.si-crim{background:radial-gradient(circle at 35% 30%,#fff 0 8%,#ff3b3b 50%,#7a0010)}
+.si-orange{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff9a2e 55%,#e25b00)}
+.shopit b{display:block;font:800 15px var(--font-display)}
+.shopit small{display:block;font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
+.shopit em{display:block;margin-top:3px;font:700 11.5px var(--font-display);font-style:normal;color:var(--magenta-deep)}
+.shopit .gel{white-space:nowrap}
+@media (max-width:520px){ .shopit{grid-template-columns:40px 1fr} .shopit .gel{grid-column:1/-1} }
 .gel.armed{--c1:#ffd0d0;--c2:#ff4d4d;--c3:#d10000;--edge:#a00000}
 .pills{display:flex;padding:3px;gap:3px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid #fff;box-shadow:inset 0 1px 3px rgba(0,60,140,.2)}
 .pills button{min-width:40px;min-height:34px;padding:0 8px;border:0;border-radius:999px;background:transparent;cursor:pointer;font:800 14px var(--font-display);color:var(--ink-soft);font-variant-numeric:tabular-nums}
@@ -448,6 +473,13 @@ body.no-deco .bubble{display:none}
 .t-gold{--m1:#ffe066;--m2:#c98a00;--m3:#fff3a8}
 .t-platinum{--m1:#e6fbff;--m2:#4fb0d0;--m3:#fff}
 .t-special{--m1:#c3a2ff;--m2:#5a2ee0;--m3:#ece2ff}
+.t-legend{--m1:#fff;--m2:#c9b6ff;--m3:#fff}
+.medal.t-legend::before{content:"";position:absolute;inset:-30%;background:conic-gradient(#ff4f6d,#ff9a2e,#ffe14d,#3fd46b,#3fa9ff,#8f6bff,#ff4f9c,#ff4f6d);animation:legspin 4s linear infinite}
+.medal.t-legend svg{position:relative;z-index:1}
+.medal.t-legend::after{z-index:2}
+@keyframes legspin{to{transform:rotate(360deg)}}
+.ach.leg:not(.locked){background:linear-gradient(135deg,#ffe3ec,#fff6d6 25%,#e2ffe9 50%,#e0f0ff 75%,#efe4ff);border-color:#fff;box-shadow:0 0 0 2px #ffd0ea,0 4px 16px rgba(150,110,255,.3)}
+.achpop.t-legend{box-shadow:0 0 0 3px #fff,0 0 0 6px #ff9ad5,0 0 50px rgba(160,120,255,.75),var(--shadow)}
 .achpop{position:fixed;left:50%;top:30%;z-index:80;transform:translate(-50%,-50%);display:flex;align-items:center;gap:16px;width:min(420px,calc(100% - 32px));
   padding:16px 22px;border-radius:26px;pointer-events:none;animation:achin .55s cubic-bezier(.2,1.4,.4,1)}
 .achpop .medal{width:70px;height:70px;animation:medalin .9s ease}
@@ -507,6 +539,16 @@ body.no-deco .bubble{display:none}
 .treebox{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
 .tree-head{display:flex;align-items:center;gap:12px;padding:14px 16px 10px;flex-wrap:wrap}
 .tree-head h2{margin:0;font:800 20px/1.1 var(--font-display);text-wrap:balance}
+.cyn{position:relative;display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 5px;border-radius:999px;background:linear-gradient(180deg,#fff,#e2fbf3);border:1px solid #fff;
+  box-shadow:0 2px 8px rgba(0,110,90,.2),inset 0 -2px 4px rgba(0,140,110,.1);font:800 15px var(--font-display);color:#00876a;font-variant-numeric:tabular-nums}
+.cyn svg{width:24px;height:24px;padding:3px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a);box-shadow:inset 0 -2px 4px rgba(0,0,0,.15)}
+.cyn.bump{animation:cynbump .5s cubic-bezier(.2,1.6,.4,1)}
+.cyn.bump svg{animation:cynspin .7s ease}
+.cynplus{position:absolute;left:100%;top:50%;margin:-9px 0 0 6px;font:800 13px var(--font-display);font-style:normal;color:#00a37f;white-space:nowrap;pointer-events:none;text-shadow:0 1px 0 #fff;animation:cynup 1.3s ease-out forwards}
+@keyframes cynbump{35%{transform:scale(1.15)}}
+@keyframes cynspin{to{transform:rotate(360deg)}}
+@keyframes cynup{0%{opacity:0;transform:translateY(4px)}20%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
+:root[data-skin="dark"] .cyn,:root[data-skin="dark"] .shopit,:root[data-skin="dark"] .shopbal{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14);color:#7ef0d0}
 .tree-head .stats{color:var(--ink-soft);font-size:13px;font-variant-numeric:tabular-nums}
 .tree-head .gel{min-height:34px;padding:6px 14px;font-size:13px}
 .tree-head .zoomer{margin-left:auto}
@@ -909,6 +951,7 @@ body.no-deco .bubble{display:none}
   <main class="board">
     <section class="glass treebox">
       <div class="tree-head">
+        <span class="cyn" id="cynBox" title="Cyn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span>
         <h2 id="treeTitle"></h2>
         <span class="stats" id="treeStats"></span>
         <div class="pills" id="viewSw" role="group" hidden>
@@ -953,9 +996,22 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.3a';
+const APP_VERSION = '0.1.3b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.3b', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Cyn : une monnaie qui se gagne en jouant (10 par naissance, 25 pour un enfant de star, 200 quand une star perce, 100 quand un criminel se déclare, 50 par meurtre). Le compteur, avec son icône ADN, est en haut à gauche de l\'arbre.',
+       'Boutique, dans un nouvel onglet des Paramètres : prochain bébé star (750 Cyn), prochain bébé criminel (600 Cyn) et thème Orange (830 Cyn). Le thème Orange ne se débloque plus qu\'en l\'achetant.',
+       'Paramètres : un bouton rouge pour tout remettre à zéro (Cyn, succès, parties, album, thèmes et réglages). Il faut vraiment insister.',
+       'Album : chaque catégorie est triée par ordre alphabétique.',
+       'Nouvelle catégorie de succès Album : compléter les Centres d\'intérêt, les Particularités, les Métiers, les Morts ou les Addictions de l\'album.',
+       'Nouvelle catégorie de succès Légende, avec des médailles multicolores : « Légende vivante » (débloquer tous les autres succès) et « Album complet » (compléter toutes les catégories de l\'album).'],
+   en:['Cyn: a currency you earn by playing (10 per birth, 25 for a star kid, 200 when a star breaks through, 100 when a criminal is revealed, 50 per murder). The counter, with its DNA icon, sits at the top left of the tree.',
+       'Shop, in a new Settings tab: next baby is a star (750 Cyn), next baby is a criminal (600 Cyn) and the Orange theme (830 Cyn). The Orange theme can now only be bought.',
+       'Settings: a red button to reset everything (Cyn, achievements, games, album, themes and settings). You really have to insist.',
+       'Album: every section is sorted alphabetically.',
+       'New Album achievement category: complete the Interests, Traits, Jobs, Deaths or Addictions section of the album.',
+       'New Legend achievement category with rainbow medals: "Living legend" (unlock every other achievement) and "Full album" (complete every section of the album).']},
   {v:'0.1.3a', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Album : un nouvel onglet (en bas sur téléphone, à droite du mode auto sur ordinateur) qui répertorie les centres d\'intérêt, particularités, métiers, morts et addictions. Tout reste en « ??????? » tant que ce n\'est pas apparu dans une de tes parties ; les métiers et centres d\'intérêt indiquent leurs années, les addictions leurs effets.',
        'Atout Ambitieux : il ne force plus une carrière politique. S\'il en fait une, il a 33 % de chances de devenir président.',
@@ -1083,6 +1139,22 @@ let R = Object.assign({}, RULES_DEF, loadJSON(RULES_KEY));
 delete R.legend;                                                     // ancien mode Légende, retiré
 const saveSet = () => store.set(SET_KEY, JSON.stringify(SET));
 const UNL_KEY = 'lignee.unlocks.v1';
+/* Cyn : la monnaie du jeu, gardée d'une partie à l'autre */
+const CYN_KEY = 'lignee.cyn.v1';
+let CYN = Math.max(0, +store.get(CYN_KEY) || 0), cynPend = 0;
+function cyn(n){ CYN += n; cynPend += n; store.set(CYN_KEY, String(CYN)); }
+const cynFmt = n => n.toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US');
+function cynShow(){                                   // compteur + petite animation à chaque gain
+  const box = $('#cynBox'); if(!box) return;
+  $('#cynVal').textContent = cynFmt(CYN);
+  if(cynPend > 0 && !$('#game').hidden && !document.hidden){
+    const f = document.createElement('em'); f.className = 'cynplus'; f.textContent = '+' + cynFmt(cynPend);
+    box.appendChild(f); setTimeout(() => f.remove(), 1300);
+    box.classList.remove('bump'); void box.offsetWidth; box.classList.add('bump');
+  }
+  cynPend = 0;
+}
+setInterval(cynShow, 600);
 let UNL = loadJSON(UNL_KEY);                                         // déblocages (thème Nuit…)
 const saveRules = () => store.set(RULES_KEY, JSON.stringify(R));
 const DAY = 86400000, BASE = Date.UTC(1500,0,1);
@@ -1613,6 +1685,7 @@ function pickDisease(p, day){
 
 /* Icônes (SVG 24×24) */
 const ICONS = {
+  dna:'<path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/>',
   album:'<path d="M6 2h11a3 3 0 0 1 3 3v17H8a3 3 0 0 1-3-3V3zm2 15.5a1 1 0 0 0 0 2h10v-2zM9 5v7l2.5-1.6L14 12V5z"/>',
   pencil:'<path d="M4 17.2V20h2.8L17.6 9.2l-2.8-2.8zM19.7 7.1a1 1 0 0 0 0-1.4l-1.4-1.4a1 1 0 0 0-1.4 0l-1.1 1.1 2.8 2.8z"/>',
   shirt:'<path d="M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',
@@ -1882,7 +1955,7 @@ fr:{
   r_reset:'Rétablir les valeurs par défaut', legend_note:'Mode Légende : ni mariage ni séparation.', legend_badge:'Mode Légende',
   cause_legend:p=>`${g(p,'entré','entrée')} dans la légende`, log_death_legend:p=>`${nm(p)} entre dans la légende à 33 ans.`,
   ach_title:'Succès', ach_unlocked:'Succès débloqué !', ach_locked:'Verrouillé', ach_got:(y,f)=>`Débloqué en ${y} · famille ${f}`,
-  ach_count:(n,m)=>`${n} / ${m} débloqués`, tier_bronze:'Bronze', tier_silver:'Argent', tier_gold:'Or', tier_platinum:'Platine', tier_special:'Spécial',
+  ach_count:(n,m)=>`${n} / ${m} débloqués`, tier_bronze:'Bronze', tier_silver:'Argent', tier_gold:'Or', tier_platinum:'Platine', tier_special:'Spécial', tier_legend:'Multicolore',
   log_ach:id=>`Succès débloqué : ${achTitle(id)} !`, log_gold:()=>'Catégorie de succès complète : le thème Or est débloqué dans les Paramètres !',
   log_night:()=>'Une première victime… Le thème Nuit est débloqué dans les Paramètres.',
   maiden_line:n=>`Nom de jeune fille : ${n}`,
@@ -1890,6 +1963,14 @@ fr:{
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
+  shop:'Boutique', shop_star:'Prochain bébé star', shop_star_d:'La prochaine naissance de ton personnage sera une future star.',
+  shop_crim:'Prochain bébé criminel', shop_crim_d:'La prochaine naissance de ton personnage sera un futur criminel.',
+  shop_orange:'Thème Orange', shop_orange_d:'Débloque le thème Orange pour toujours.', shop_owned:'Acheté', shop_confirm:'Confirmer ?',
+  shop_need_game:'Lance une partie pour acheter ça.', shop_pending:'Commandé : la prochaine naissance est réservée.', shop_other_pending:'Une autre naissance est déjà commandée.',
+  shop_missing:n=>`Il manque ${n} Cyn.`, shop_hint:'Les Cyn se gagnent en jouant : 10 par naissance, 25 pour un enfant de star, 200 quand une star perce, 100 quand un criminel se déclare et 50 par meurtre.',
+  skin_locked_orange:"Le thème Orange s'achète dans la boutique.",
+  set_wipe:'Tout remettre à zéro', set_wipe_hint:'Efface vraiment tout : Cyn, succès, parties, album, thèmes débloqués et réglages.', wipe_btn:'Tout effacer',
+  wipe_steps:['Confirmé ?','Vraiment ?','Sûr ?',"D'accord !!"],
   alb_count:(n,m)=>`${n} / ${m} découvertes`, alb_int:"Centres d'intérêt", alb_cond:'Particularités', alb_job:'Métiers', alb_death:'Morts', alb_addict:'Addictions',
   alb_always:'De tout temps', alb_from:a=>`À partir de ${a}`, alb_until:b=>`Jusqu'en ${b}`, alb_range:(a,b)=>`De ${a} à ${b}`,
   alb_d_old:'Vieillesse', alb_d_murder:'Meurtre', alb_d_suicide:'Suicide', alb_d_vanished:'Disparition', alb_d_legend:'Entré dans la légende',
@@ -2037,7 +2118,7 @@ en:{
   r_reset:'Restore defaults', legend_note:'Legend mode: no marriage or breakup.', legend_badge:'Legend mode',
   cause_legend:()=>'passed into legend', log_death_legend:p=>`${nm(p)} passes into legend at 33.`,
   ach_title:'Achievements', ach_unlocked:'Achievement unlocked!', ach_locked:'Locked', ach_got:(y,f)=>`Unlocked in ${y} · ${f} family`,
-  ach_count:(n,m)=>`${n} / ${m} unlocked`, tier_bronze:'Bronze', tier_silver:'Silver', tier_gold:'Gold', tier_platinum:'Platinum', tier_special:'Special',
+  ach_count:(n,m)=>`${n} / ${m} unlocked`, tier_bronze:'Bronze', tier_silver:'Silver', tier_gold:'Gold', tier_platinum:'Platinum', tier_special:'Special', tier_legend:'Rainbow',
   log_ach:id=>`Achievement unlocked: ${achTitle(id)}!`, log_gold:()=>'Achievement category complete: the Gold theme is now available in Settings!',
   log_night:()=>'A first victim… The Night theme is now available in Settings.',
   maiden_line:n=>`Maiden name: ${n}`,
@@ -2045,6 +2126,14 @@ en:{
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
+  shop:'Shop', shop_star:'Next baby is a star', shop_star_d:"Your character's next birth will be a future star.",
+  shop_crim:'Next baby is a criminal', shop_crim_d:"Your character's next birth will be a future criminal.",
+  shop_orange:'Orange theme', shop_orange_d:'Unlocks the Orange theme for good.', shop_owned:'Owned', shop_confirm:'Confirm?',
+  shop_need_game:'Start a game to buy this.', shop_pending:'Ordered: the next birth is reserved.', shop_other_pending:'Another birth is already ordered.',
+  shop_missing:n=>`${n} Cyn short.`, shop_hint:'You earn Cyn by playing: 10 per birth, 25 for a star kid, 200 when a star breaks through, 100 when a criminal is revealed and 50 per murder.',
+  skin_locked_orange:'The Orange theme can be bought in the shop.',
+  set_wipe:'Reset everything', set_wipe_hint:'Truly erases it all: Cyn, achievements, games, album, unlocked themes and settings.', wipe_btn:'Erase all',
+  wipe_steps:['Confirmed?','Really?','Sure?','Okay!!'],
   alb_count:(n,m)=>`${n} / ${m} discovered`, alb_int:'Interests', alb_cond:'Traits', alb_job:'Jobs', alb_death:'Deaths', alb_addict:'Addictions',
   alb_always:'Any era', alb_from:a=>`From ${a}`, alb_until:b=>`Until ${b}`, alb_range:(a,b)=>`${a} to ${b}`,
   alb_d_old:'Old age', alb_d_murder:'Murder', alb_d_suicide:'Suicide', alb_d_vanished:'Vanished', alb_d_legend:'Passed into legend',
@@ -2131,10 +2220,17 @@ const ACHS = [
  ['boys5','other','special','Que des garçons','Avoir 5 garçons et aucune fille','All boys','Have 5 sons and no daughters'],
  ['girls5','other','special','Que des filles','Avoir 5 filles et aucun garçon','All girls','Have 5 daughters and no sons'],
  ['cured3','other','special','Increvable',"Guérir 3 fois d'une maladie mortelle dans une même vie",'Unkillable','Recover from a fatal illness 3 times in one life'],
- ['twins2','other','special','Ça se répète','Avoir deux fois des jumeaux (ou plus) avec le même conjoint','Here we go again','Have twins (or more) twice with the same partner']
+ ['twins2','other','special','Ça se répète','Avoir deux fois des jumeaux (ou plus) avec le même conjoint','Here we go again','Have twins (or more) twice with the same partner'],
+ ['alb_i','album','gold','Passionné de passions',"Compléter la catégorie Centres d'intérêt de l'album",'Hobby hoarder','Complete the Interests category of the album'],
+ ['alb_c','album','gold','Hors du commun',"Compléter la catégorie Particularités de l'album",'One of a kind','Complete the Traits category of the album'],
+ ['alb_j','album','platinum','Touche-à-tout',"Compléter la catégorie Métiers de l'album",'Jack of all trades','Complete the Jobs category of the album'],
+ ['alb_d','album','platinum','Mille et une morts',"Compléter la catégorie Morts de l'album",'A thousand and one deaths','Complete the Deaths category of the album'],
+ ['alb_a','album','silver','Toutes les tentations',"Compléter la catégorie Addictions de l'album",'Every temptation','Complete the Addictions category of the album'],
+ ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
+ ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
 ];
 const ACHV = byId(ACHS);
-const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['other','trophy','Autres','Others']];
+const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['legend','crown','Légende','Legend']];
 // thème Or : débloqué dès qu'une catégorie entière de succès est complète
 const goldUnlocked = () => ACH_CATS.some(c => ACHS.filter(a => a[1]===c[0]).every(a => ACH[a[0]]));
 const ACH_KEY = 'lignee.ach.v1';
@@ -2150,6 +2246,7 @@ function unlock(id){
   store.set(ACH_KEY, JSON.stringify(ACH));
   if(S) log('ach','ach',[id], undefined, false);
   achQueue.push(id); if(!achBusy) nextAch();
+  if(id !== 'leg_all' && ACHS.every(a => a[0] === 'leg_all' || ACH[a[0]])) unlock('leg_all');   // Légende vivante : tous les autres succès
 }
 const checkTiers = (prefix, value, steps) => steps.forEach(s => { if(value >= s) unlock(prefix + s); });
 const achQueue = []; let achBusy = false;
@@ -2168,8 +2265,9 @@ function nextAch(){
   el.innerHTML = `${medal(id)}<div><div class="eyebrow">${t('ach_unlocked')} · ${t('tier_' + tier)}</div><b>${esc(achTitle(id))}</b><small>${esc(achDesc(id))}</small></div>`;
   el.hidden = false;
   sfx.ach();
-  const colors = {bronze:['#e7a35c','#ffffff','#8a4b14'], silver:['#e9eef3','#ffffff','#8a96a3'], gold:['#ffe066','#ffffff','#ffb300'], platinum:['#dff9ff','#ffffff','#5fb8d6','#c3a2ff'], special:['#c3a2ff','#ffffff','#5a2ee0']}[tier];
-  burst(colors, 34);
+  const colors = {bronze:['#e7a35c','#ffffff','#8a4b14'], silver:['#e9eef3','#ffffff','#8a96a3'], gold:['#ffe066','#ffffff','#ffb300'], platinum:['#dff9ff','#ffffff','#5fb8d6','#c3a2ff'], special:['#c3a2ff','#ffffff','#5a2ee0'],
+    legend:['#ff4f6d','#ff9a2e','#ffe14d','#3fd46b','#3fa9ff','#8f6bff','#ffffff']}[tier];
+  burst(colors, tier === 'legend' ? 90 : 34);
   setTimeout(() => { el.classList.add('out'); setTimeout(() => { el.hidden = true; nextAch(); }, 420); }, 3000);
 }
 function openPatchnotes(){
@@ -2180,7 +2278,7 @@ function openAchievements(){
   const n = ACHS.filter(a => ACH[a[0]]).length;
   const cats = ACH_CATS.map(c => `<div class="achcat"><div class="eyebrow sect">${LANG==='fr' ? c[2] : c[3]}</div><div class="achgrid">${
     ACHS.filter(a => a[1]===c[0]).map(a => { const got = ACH[a[0]];
-      return `<div class="ach ${got ? '' : 'locked'}">${medal(a[0])}<b>${esc(achTitle(a[0]))}</b><small>${esc(achDesc(a[0]))}</small>
+      return `<div class="ach ${got ? '' : 'locked'} ${a[2] === 'legend' ? 'leg' : ''}">${medal(a[0])}<b>${esc(achTitle(a[0]))}</b><small>${esc(achDesc(a[0]))}</small>
         <em>${got ? esc(got.y ? t('ach_got', got.y, got.f) : t('tier_' + a[2])) : t('ach_locked')}</em></div>`; }).join('')}</div></div>`).join('');
   openModal(`<div class="m-head"><div class="eyebrow">${t('ach_count', n, ACHS.length)}</div><h2>${t('ach_title')}</h2></div>${cats}`);
 }
@@ -2509,7 +2607,7 @@ function die(p, day, cause){
   p.cause = Object.assign({}, cause);
   if(inFamily(p)){ if(A >= 121) unlock('maxage'); if(A < 10) unlock('young'); }
   if(cause.murder){
-    const k = P(cause.murder); k.kills = (k.kills || 0) + 1; checkTiers('kill', k.kills, [2,4,6,8]); pendingFx.push(p.id); dirty = true;
+    const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50); checkTiers('kill', k.kills, [2,4,6,8]); pendingFx.push(p.id); dirty = true;
     if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
     if(!UNL.night){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
   }
@@ -2673,7 +2771,7 @@ function polTick(p, day){
 function becomeStar(p, day, hint){
   const y = yearOf(day), h = hint && STARJOBS.find(r => r[0] === hint && y >= r[5] && y <= r[6]);
   const j = h ? h[0] : pickStarJob(y);
-  p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j};
+  p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j}; cyn(200);
   log('star','star',[p.id, j], day); sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 40);
   const ns = Object.values(S.people).filter(q => q.star && q.star.famous).length;            // 0.1.2a : exigences ×2
   [[2,'star1'],[4,'star2'],[8,'star4'],[12,'star6']].forEach(([n, id]) => { if(ns >= n) unlock(id); });
@@ -2681,7 +2779,7 @@ function becomeStar(p, day, hint){
 /* Criminels : après 18 ans, ils se révèlent ; parents, frères et sœurs, conjoint et enfants ont 60 % de risque d'être assassinés dans les 10 ans.
    Après leur premier crime, 40 % finissent en prison dans les 10 ans (jusqu'à leur mort) ; les autres disparaissent ou se suicident au bout de 10 ans. */
 function declareCrim(p, day){
-  p.crim.declared = true; p.crim.at = day;
+  p.crim.declared = true; p.crim.at = day; cyn(100);
   const mates = S.unions.filter(u => u.end == null && (u.a === p.id || u.b === p.id)).map(u => u.a === p.id ? u.b : u.a);
   const close = living().filter(q => q.id !== p.id && ((p.parents && p.parents.includes(q.id)) || (p.parents && q.parents && q.parents.some(i => p.parents.includes(i)))
     || mates.includes(q.id) || (q.parents && q.parents.includes(p.id))) && !hasAtout(q,'courage'));
@@ -2777,9 +2875,12 @@ function birthChild(u, day){
     const fate = Math.random()*100;
     const pStar = [A,B].some(x => hasAtout(x,'chance')) ? Math.max(12, R.star) : R.star;      // atout Chance
     const pCrim = [A,B].some(x => hasAtout(x,'ego')) ? Math.max(12, R.crim) : R.crim;          // atout Égoïsme
-    if(fate < pStar) c.star = {day: day + rnd(16,40)*365 + rnd(0,364), famous:false};                             // 2,5 % : une future star
-    else if(fate < pStar + pCrim) c.crim = {day: day + rnd(18,60)*365 + rnd(0,364), declared:false, fate:null};  // 2 % : un futur criminel
+    const buy = i === 1 && S.nextFate && u.a === S.activeId ? S.nextFate : null;      // boutique : prochaine naissance du personnage joué
+    if(buy) S.nextFate = null;
+    if(buy === 'star' || (!buy && fate < pStar)) c.star = {day: day + rnd(16,40)*365 + rnd(0,364), famous:false};      // 2,5 % : une future star
+    else if(buy === 'crim' || (!buy && fate < pStar + pCrim)) c.crim = {day: day + rnd(18,60)*365 + rnd(0,364), declared:false, fate:null};  // 2 % : un futur criminel
     if([A,B].some(q => q.star && q.star.famous) && Math.random() < .9) c.starKid = true;     // 90 % : enfant de star
+    cyn(c.starKid ? 25 : 10);                                                                // Cyn : 10 par naissance, 25 pour un enfant de star
     if(c.starKid && !c.star && !c.crim && Math.random() < .12) c.fameAt = day + rnd(18, 60)*365 + rnd(0, 364);   // 12 % : star à son tour
     scheduleYear(c, 0, day);
     ids.push(c.id);
@@ -3535,7 +3636,7 @@ function arm(b, label){
 const ALB_KEY = 'lignee.album.v1';
 const ALB = loadJSON(ALB_KEY); ['i','c','j','d','a'].forEach(k => { ALB[k] = ALB[k] || {}; });
 const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 'w_' + c.war : c.murder ? 'murder' : c.vanished ? 'vanished' : c.suicide ? 'suicide' : c.legend ? 'legend' : c.dz || null; };
-function albumScan(){
+function albumScan(force){
   if(!S) return;
   let ch = false;
   const mark = (k, id) => { if(id != null && !ALB[k][id]){ ALB[k][id] = 1; ch = true; } };
@@ -3547,6 +3648,12 @@ function albumScan(){
     if(p.death != null) mark('d', deathKey(p));
   }
   if(ch) store.set(ALB_KEY, JSON.stringify(ALB));
+  if(ch || force) albumCheck();
+}
+function albumCheck(){                              // succès Album : une catégorie entière découverte ; Album complet : toutes
+  let all = true;
+  for(const [k] of ALB_CATS){ const done = albItems(k).every(x => ALB[k][x.id]); if(done) unlock('alb_' + k); else all = false; }
+  if(all) unlock('leg_album');
 }
 const albYears = (a, b) => b >= 2100 ? (a <= 1500 ? t('alb_always') : t('alb_from', a)) : a <= 1500 ? t('alb_until', b) : t('alb_range', a, b);
 const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['d','alb_death'],['a','alb_addict']];
@@ -3567,7 +3674,8 @@ function openAlbum(k, re){
   albumScan(); if(k) albCat = k;
   const all = ALB_CATS.map(([c]) => { const it = albItems(c); return [c, it, it.filter(x => ALB[c][x.id]).length]; });
   const found = all.reduce((a, x) => a + x[2], 0), total = all.reduce((a, x) => a + x[1].length, 0);
-  const items = all.find(x => x[0] === albCat)[1];
+  const key = x => x.name.replace(/^★ /, '');
+  const items = all.find(x => x[0] === albCat)[1].slice().sort((a, b) => key(a).localeCompare(key(b), LANG, {sensitivity:'base'}));
   openModal(`<div class="m-head"><div class="eyebrow">${t('alb_count', found, total)}</div><h2>${t('album')}</h2><p class="hint">${t('alb_hint')}</p></div>
     <div class="pills albtabs" role="group">${all.map(([c, it, n]) => `<button data-act="albcat" data-v="${c}" aria-pressed="${c === albCat}">${t(ALB_CATS.find(x => x[0] === c)[1])}<small>${n}/${it.length}</small></button>`).join('')}</div>
     <div class="albgrid">${items.map(x => { const ok = !!ALB[albCat][x.id];
@@ -3576,7 +3684,7 @@ function openAlbum(k, re){
 
 /* ================= Paramètres & personnalisation ================= */
 const SKINS = ['aqua','orange','vapor','kid','night','dark','gold'];
-const skinLocked = s => (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
+const skinLocked = s => (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
 function unlockSkin(key){                            // Néon (16 générations), Enfantin (quadruplés)
   if(UNL[key]) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
   setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k: key + '_skin', a:[]}); sfx.ach(); }, 1500);
@@ -3592,8 +3700,40 @@ function applySettings(){
 }
 const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${disabled?'is-off':''}"><input type="checkbox" ${attr}="${key}" ${on?'checked':''} ${disabled?'disabled':''}><span class="sw"></span><span><b>${label}</b>${hint?`<small>${hint}</small>`:''}</span></label>`;
 const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG==='fr' ? ' %' : '%') : u);
+let setTab = 'set';
+const setTabs = () => `<div class="pills settabs" role="group"><button data-act="settab" data-v="set" aria-pressed="${setTab === 'set'}">${t('settings')}</button>
+  <button data-act="settab" data-v="shop" aria-pressed="${setTab === 'shop'}">${icon('dna')}${t('shop')}</button></div>`;
+const SHOP = [['star',750,'sparkle'],['crim',600,'skull'],['orange',830,'sun']];
+function openShop(re){
+  const inGame = S && !$('#game').hidden && !S.over;
+  const rows = SHOP.map(([id, price, ic]) => {
+    let note = '', dis = false, owned = id === 'orange' && UNL.orange;
+    if(owned) dis = true;
+    else if(id !== 'orange' && !inGame){ dis = true; note = t('shop_need_game'); }
+    else if(id !== 'orange' && S.nextFate){ dis = true; note = t(S.nextFate === id ? 'shop_pending' : 'shop_other_pending'); }
+    else if(CYN < price){ dis = true; note = t('shop_missing', cynFmt(price - CYN)); }
+    return `<div class="shopit"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${note ? `<em>${esc(note)}</em>` : ''}</div>
+      <button class="gel gold" data-act="buy" data-v="${id}" ${dis ? 'disabled' : ''}><span>${owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`;
+  }).join('');
+  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('shop')}</h2></div>${setTabs()}
+    <div class="shopbal">${icon('dna')}<b>${cynFmt(CYN)}</b><span>Cyn</span></div>
+    <div class="shoplist">${rows}</div><p class="hint">${t('shop_hint')}</p>`, {sound: !re});
+}
+function wipeAll(){                                   // remise à zéro totale : fondu au noir, tout est effacé, retour à l'écran de départ
+  if(window.__wiping) return; window.__wiping = true;
+  store.set = () => {}; music.stop(); if(S) S.paused = true;
+  const el = document.createElement('div'); el.className = 'wipefade'; document.body.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('on')));
+  setTimeout(() => {
+    try{ Object.keys(localStorage).filter(k => k.startsWith('lignee.')).forEach(k => localStorage.removeItem(k)); }catch(e){}
+    try{ sessionStorage.setItem('lignee.wiped', '1'); }catch(e){}
+    location.reload();
+  }, 1800);
+}
 function openSettings(re){
-  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('settings')}</h2></div>
+  if(!re) setTab = 'set';
+  if(setTab === 'shop') return openShop(re);
+  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('settings')}</h2></div>${setTabs()}
   <div class="setlist">
     <div class="setrow"><b>${t('set_lang')}</b><div class="pills" role="group">${['fr','en'].map(l => `<button data-act="lang" data-v="${l}" aria-pressed="${LANG===l}">${l.toUpperCase()}</button>`).join('')}</div></div>
     ${sw('data-set','sound',SET.sound,t('set_sound'),t('set_sound_hint'))}
@@ -3602,6 +3742,7 @@ function openSettings(re){
     <div class="setrow col"><b>${t('set_theme')}</b><div class="skins">${SKINS.map(s => { const lock = skinLocked(s);
       return `<button class="skin sk-${s} ${lock?'locked':''}" data-act="skin" data-v="${s}" aria-pressed="${SET.skin===s && !lock}" ${lock?'disabled':''}><i>${lock?icon('lock'):''}</i><span>${t('skin_'+s)}</span></button>`; }).join('')}</div>
       ${UNL.night ? '' : `<small class="locknote">☾ ${t('skin_locked_night')}</small>`}
+      ${UNL.orange ? '' : `<small class="locknote">◆ ${t('skin_locked_orange')}</small>`}
       ${UNL.neon ? '' : `<small class="locknote">✦ ${t('skin_locked_neon')}</small>`}
       ${UNL.kid ? '' : `<small class="locknote">♥ ${t('skin_locked_kid')}</small>`}
       ${goldUnlocked() ? '' : `<small class="locknote">★ ${t('skin_locked')}</small>`}</div>
@@ -3611,6 +3752,7 @@ function openSettings(re){
     ${sw('data-set','regnal',SET.regnal,t('set_regnal'),t('set_regnal_hint'))}
     <div class="setrow"><span><b>${t('set_reset_ach')}</b><small>${t('set_reset_ach_hint')}</small></span><button class="gel ghost" data-act="resetach"><span>${t('reset')}</span></button></div>
     <div class="setrow"><span><b>${t('pn_title')}</b><small>${t('pn_hint', APP_VERSION)}</small></span><button class="gel ghost" data-act="patchnotes"><span>${t('pn_open')}</span></button></div>
+    <div class="setrow wiperow"><span><b>${t('set_wipe')}</b><small>${t('set_wipe_hint')}</small></span><button class="gel danger" data-act="wipe" data-step="0"><span>${t('wipe_btn')}</span></button></div>
     <p class="ver">Cyngenetic v${APP_VERSION}</p>
   </div>`, {sound: !re});
 }
@@ -3672,6 +3814,28 @@ const ACT = {
   skin(d){ if(skinLocked(d.v)) return; SET.skin = d.v; saveSet(); applySettings(); if(d.v === 'gold'){ sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 50); } openSettings(true); },
   legal(d){ R.legal = +d.v; saveRules(); dirty = true; openCustom(true); },
   resetrules(){ R = Object.assign({}, RULES_DEF); saveRules(); dirty = true; sfx.pop(); openCustom(true); },
+  settab(d){ setTab = d.v; openSettings(true); },
+  buy(d, b){
+    const it = SHOP.find(x => x[0] === d.v); if(!it || CYN < it[1]) return;
+    if(d.v === 'orange'){ if(UNL.orange) return; }
+    else if(!S || $('#game').hidden || S.over || S.nextFate) return;
+    if(!arm(b, t('shop_confirm'))) return;
+    CYN -= it[1]; store.set(CYN_KEY, String(CYN));
+    if(d.v === 'orange'){ UNL.orange = true; store.set(UNL_KEY, JSON.stringify(UNL)); }
+    else { S.nextFate = d.v; save(); }
+    sfx.fame(); burst(d.v === 'crim' ? ['#ff2a00','#ffffff','#b3001b'] : d.v === 'star' ? ['#ffd000','#ffffff','#ffb300'] : ['#ff9a2e','#ffffff','#ffd27a'], 40);
+    cynShow(); openSettings(true);
+  },
+  wipe(d, b){
+    const st = +(b.dataset.step || 0), L = t('wipe_steps'), sp = b.querySelector('span');
+    b.classList.remove('wob'); void b.offsetWidth; b.classList.add('wob');
+    if(st < 3){ b.dataset.step = st + 1; sp.textContent = L[st]; return; }
+    if(st === 3){
+      b.dataset.step = 4; sp.textContent = L[3]; b.disabled = true; b.classList.add('flee');
+      b.style.transform = `translate(${-rnd(70,170)}px, ${-rnd(14,46)}px) rotate(${rnd(-9,9)}deg)`;
+      sfx.pop(); setTimeout(wipeAll, 1000);
+    }
+  },
   resetach(d, b){ if(!arm(b, t('confirm'))) return; ACH = {}; store.del(ACH_KEY); applySettings(); sfx.breakup(); openSettings(true); },
   soulmate(){ if(jailed(active())) return; openSoulmate(false); },
   seek(d){ S.seek = d.sex; cands = genCands(); sfx.pop(); openSoulmate(true); },
@@ -3912,7 +4076,7 @@ function enterGame(){
   S.nameQueue = S.nameQueue || [];
   Object.values(S.people).forEach(p => { if(!p.atout) p.atout = pick(ATOUTS)[0]; });   // anciennes parties : chacun reçoit son atout
   if(!UNL.neon && Object.values(S.people).some(p => p.blood && genOf(p) >= 16)) unlockSkin('neon');
-  albumScan();
+  albumScan(true); cynPend = 0; cynShow();
   if(modalOpen) closeModal(true);
   dirty = true; lastYear = null; lastDecade = null;
   $('#mapView').innerHTML = ''; dotEls = new Map();
@@ -3953,6 +4117,11 @@ function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); wind
     b.style.cssText = `left:${rnd(0,97)}%;top:${rnd(0,70)}%;--s:${rnd(12,24)}px;--c:${pick(KC)};--d:${rnd(30,60)/10}s;--dl:-${rnd(0,40)/10}s`; kfx.appendChild(b); }
   $$('.brand-slot').forEach((el,i) => { el.innerHTML = emblem('emb' + i); });
   $$('#mnav [data-icon]').forEach(b => b.insertAdjacentHTML('afterbegin', icon(b.dataset.icon)));   // icônes de la barre du bas
+  try{ if(sessionStorage.getItem('lignee.wiped')){                     // après une remise à zéro : on revient du noir
+    sessionStorage.removeItem('lignee.wiped');
+    const fade = document.createElement('div'); fade.className = 'wipefade on'; document.body.appendChild(fade);
+    requestAnimationFrame(() => requestAnimationFrame(() => fade.classList.remove('on'))); setTimeout(() => fade.remove(), 1700);
+  } }catch(e){}
   // nouvelle version : les notes s'ouvrent une fois pour les joueurs qui avaient déjà joué
   const SEEN_KEY = 'lignee.seenVersion', seen = store.get(SEEN_KEY);
   if(seen !== APP_VERSION){

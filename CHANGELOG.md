@@ -2,6 +2,15 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3b — 12 novembre 2026
+
+- Cyn : une monnaie qui se gagne en jouant (10 par naissance, 25 pour un enfant de star, 200 quand une star perce, 100 quand un criminel se déclare, 50 par meurtre). Le compteur, avec son icône ADN, est en haut à gauche de l'arbre.
+- Boutique, dans un nouvel onglet des Paramètres : prochain bébé star (750 Cyn), prochain bébé criminel (600 Cyn) et thème Orange (830 Cyn). Le thème Orange ne se débloque plus qu'en l'achetant.
+- Paramètres : un bouton rouge pour tout remettre à zéro (Cyn, succès, parties, album, thèmes et réglages). Il faut vraiment insister.
+- Album : chaque catégorie est triée par ordre alphabétique.
+- Nouvelle catégorie de succès Album : compléter les Centres d'intérêt, les Particularités, les Métiers, les Morts ou les Addictions de l'album.
+- Nouvelle catégorie de succès Légende, avec des médailles multicolores : « Légende vivante » (débloquer tous les autres succès) et « Album complet » (compléter toutes les catégories de l'album).
+
 ## v0.1.3a — 12 novembre 2026
 
 - Album : un nouvel onglet (en bas sur téléphone, à droite du mode auto sur ordinateur) qui répertorie les centres d'intérêt, particularités, métiers, morts et addictions. Tout reste en « ??????? » tant que ce n'est pas apparu dans une de tes parties ; les métiers et centres d'intérêt indiquent leurs années, les addictions leurs effets.
