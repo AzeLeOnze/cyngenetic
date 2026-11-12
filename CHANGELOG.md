@@ -2,6 +2,19 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4a — 12 novembre 2026
+
+- Mode Royal : une case à cocher avant de commencer, avec le sexe dominant (patriarcale, matriarcale ou les deux). Ton premier personnage est sacré roi (ou reine) avec une couronne sur sa bulle ; l'héritier (le premier enfant du bon sexe) devient prince ou princesse. Le monarque ne travaille plus : il signe des traités, bâtit des châteaux, organise des bals… À sa mort, la couronne passe automatiquement à l'héritier (+100 Cyn au couronnement). Les prénoms de la dynastie sont mis en avant à chaque naissance.
+- Album : nouvelle catégorie Royal, avec les 24 activités d'un monarque, et son succès « Règne exemplaire ».
+- Boutique : Conjoint sur mesure (1 100 Cyn), une âme sœur dont tu choisis tout (nom, sexe, date de naissance, métier, atout, centre d'intérêt, addiction, particularité, destin, ville).
+- Nouveau thème Dark, gothique (lune pâle, brume, chauves-souris, lettres gothiques), débloqué après 10 meurtres.
+- Nouvel atout Riche : 2 fois plus de Cyn toute sa vie, y compris pour la naissance de ses enfants.
+- 9 nouveaux métiers : fermier, chasseur, chocolatier, vigile, garde du corps, voyant, et trois métiers disparus (allumeur de réverbères, porteur d'eau, poinçonneur).
+- Porté disparu : dure maintenant 12 à 24 mois, avec 20 % de chances d'être retrouvé.
+- Succès Criminels et Crimes : toutes les exigences sont doublées.
+- Fin de partie : plus de Cyn ni de succès une fois la partie terminée (ou après 2100), et c'est indiqué sur le message de fin. L'écran de départ conseille de commencer en 1780.
+- Corrections : le couteau du meurtre suit la bulle quand l'arbre bouge, un criminel gravement malade reste lisible, et le jeu est bien plus fluide sur téléphone au fil des années.
+
 ## v0.1.3h — 12 novembre 2026
 
 - Tutoriel : les nouveaux joueurs (et après une remise à zéro totale) peuvent suivre un petit tutoriel pas à pas, ou le refuser. Il met en lumière chaque partie de l'écran, et se relance à tout moment dans les Paramètres.

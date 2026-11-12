@@ -16,7 +16,7 @@
 <title>Cyngenetic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Istok+Web:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=UnifrakturMaguntia&family=Fredoka:wght@500;600;700&family=Istok+Web:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
 <style>
 /* Layout : ciel saturé + collines vertes en fond ; barre de verre en haut avec l'horloge « LCD » et la décennie ;
    arbre à gauche, panneau latéral de verre à droite (empilés sur téléphone). Un seul look lumineux, assumé. */
@@ -126,7 +126,7 @@ button{font:inherit;color:inherit}
 .cyninfo li>svg{width:18px;height:18px;fill:var(--aqua-deep)}
 .cyninfo em{display:inline-flex;align-items:center;gap:3px;font:800 13px var(--font-display);font-style:normal;color:#00876a}
 .cyninfo em svg{width:14px;height:14px;fill:#00a37f}
-:root[data-skin="dark"] .cyninfo{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .cyninfo{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
 .shopbal svg{width:40px;height:40px;padding:7px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
 .shopbal span{font-size:15px;color:var(--ink-soft)}
 .shoplist{display:grid;gap:10px}
@@ -144,6 +144,11 @@ button{font:inherit;color:inherit}
 .si-fertile{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff6cc0 55%,#cc0070)}
 .si-immune{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#8cff1a 55%,#2c9200)}
 .si-midlife{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#c3a2ff 55%,#5a2ee0)}
+.si-spouse{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff6cc0 50%,#c4006a)}
+.spform{display:grid;gap:10px}
+.spform .m-actions{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.fieldhint{display:block;margin-top:4px;font:700 11.5px var(--font-display);color:var(--aqua-deep)}
+.endnote{margin:8px 0 0;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.55);font-size:13px;color:var(--ink-soft)}
 .si-potion{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff7ad8 55%,#9e0077)}
 .si-decrim{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 55%,#0074dc)}
 .picklist{display:grid;gap:8px;max-height:min(60vh,520px);overflow:auto;padding:2px}
@@ -162,7 +167,7 @@ button{font:inherit;color:inherit}
 .facts .imf{background:linear-gradient(180deg,#f0ffe6,#d6ffc0);border-color:#b8f08a}
 .facts .imf dd{display:flex;align-items:center;gap:8px;color:#2c7a00}
 .facts .imf dd svg{width:18px;height:18px;fill:currentColor;flex:none}
-:root[data-skin="dark"] .pickrow{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .pickrow{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
 .si-dark{background:radial-gradient(circle at 35% 30%,#ff8a95 0 8%,#b3001b 45%,#140205)}
 .si-orange{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff9a2e 55%,#e25b00)}
 .shopit b{display:block;font:800 15px var(--font-display)}
@@ -381,7 +386,7 @@ body.no-deco .goldfx{display:none}
 .skinhint svg{width:16px;height:16px;flex:none;fill:var(--aqua-deep)}
 .skinhint b{color:var(--ink)}
 .skinhint.pop{animation:slidein .35s cubic-bezier(.2,1.3,.4,1)}
-:root[data-skin="dark"] .skinhint{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .skinhint{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
 .skin.locked i{display:grid;place-items:center}
 .tree-scroll,.mapview,.node,.topbar{-webkit-user-select:none;user-select:none}       /* pas de surlignage bleu en glissant */
 .skin.locked i svg{width:18px;height:18px;fill:#fff;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
@@ -401,51 +406,51 @@ body.no-deco .bubble{display:none}
 .skin.sk-night i{background:radial-gradient(circle at 75% 30%,#f4f8ff 0 8%,rgba(255,255,255,0) 10%),linear-gradient(180deg,#050c2e,#13286b 50%,#2d4fa8 72%,#0f4a4a)}
 .skin.sk-dark i{background:radial-gradient(circle at 70% 35%,rgba(255,40,55,.75) 0 12%,rgba(255,40,55,0) 40%),linear-gradient(180deg,#000,#120305 60%,#2a060a)}
 /* Thème Obsidienne : très sombre, noir avec un peu de rouge et de blanc */
-:root[data-skin="dark"]{color-scheme:dark;--sky-top:#000;--sky-mid:#070708;--sky-low:#120406;--sky-haze:#1c0609;
+:root:is([data-skin="dark"],[data-skin="goth"]){color-scheme:dark;--sky-top:#000;--sky-mid:#070708;--sky-low:#120406;--sky-haze:#1c0609;
   --ink:#f3f3f5;--ink-soft:#b8b8c0;--ink-faint:#80808a;--aqua:#ff2a3a;--aqua-deep:#ff4d5a;
   --glass-hi:rgba(30,30,34,.9);--glass-lo:rgba(10,10,12,.86);--glass-edge:rgba(255,255,255,.14);
   --g1:#ff7a83;--g2:#d4101f;--g3:#8a000f;--gedge:#4a0008;
   --lcd-a:#2c2c31;--lcd-b:#0e0e10;--lcd-c:#000;--lcd-d:#1c1c20;--lcd-edge:#000;--lcd-glow:rgba(255,50,65,.9);
   --hill-a1:#3a0b10;--hill-a2:#1a0507;--hill-a3:#050102;--hill-b1:#24070a;--hill-b2:#000;--shadow:0 14px 34px rgba(0,0,0,.65)}
-:root[data-skin="dark"] .glass{background:linear-gradient(180deg,rgba(34,34,38,.92) 0%,rgba(18,18,21,.9) 50%,rgba(10,10,12,.88) 100%);
+:root:is([data-skin="dark"],[data-skin="goth"]) .glass{background:linear-gradient(180deg,rgba(34,34,38,.92) 0%,rgba(18,18,21,.9) 50%,rgba(10,10,12,.88) 100%);
   box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -10px 24px rgba(255,30,50,.06)}
-:root[data-skin="dark"] .sky-sun{background:radial-gradient(circle,rgba(255,40,55,.32) 0 10%,rgba(255,40,55,.1) 30%,rgba(0,0,0,0) 60%)}
-:root[data-skin="dark"] .flare{display:none}
-:root[data-skin="dark"] .swoosh,:root[data-skin="dark"] .bubble{opacity:.12}
-:root[data-skin="dark"] .logo{background:linear-gradient(180deg,#ffffff 0%,#e6e6ea 46%,#ff4d5a 52%,#9a0010 100%);-webkit-background-clip:text;background-clip:text;
+:root:is([data-skin="dark"],[data-skin="goth"]) .sky-sun{background:radial-gradient(circle,rgba(255,40,55,.32) 0 10%,rgba(255,40,55,.1) 30%,rgba(0,0,0,0) 60%)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .flare{display:none}
+:root:is([data-skin="dark"],[data-skin="goth"]) .swoosh,:root:is([data-skin="dark"],[data-skin="goth"]) .bubble{opacity:.12}
+:root:is([data-skin="dark"],[data-skin="goth"]) .logo{background:linear-gradient(180deg,#ffffff 0%,#e6e6ea 46%,#ff4d5a 52%,#9a0010 100%);-webkit-background-clip:text;background-clip:text;
   filter:drop-shadow(0 3px 0 rgba(0,0,0,.8)) drop-shadow(0 0 14px rgba(255,40,55,.35))}
-:root[data-skin="dark"] .logo span{background:linear-gradient(180deg,#ffffff 0%,#ffffff 46%,#c8c8ce 52%,#7a7a82 100%);-webkit-background-clip:text;background-clip:text}
-:root[data-skin="dark"] .gel.ghost{--c1:#46464d;--c2:#2a2a30;--c3:#18181c;--edge:#55555e;--txt:#f3f3f5;--ts:rgba(0,0,0,.6)}
-:root[data-skin="dark"] .gel.lime{--c1:#ff8a92;--c2:#e0182a;--c3:#9a0012;--edge:#5a000a;--ts:rgba(60,0,8,.6)}
-:root[data-skin="dark"] .gel.pink{--c1:#c2404c;--c2:#8a0f1c;--c3:#4f0009;--edge:#320006;--ts:rgba(0,0,0,.6)}
-:root[data-skin="dark"] .gel.gold{--c1:#ffffff;--c2:#dcdce0;--c3:#9a9aa3;--edge:#6a6a72;--txt:#111114;--ts:rgba(255,255,255,.7)}
-:root[data-skin="dark"] .pills{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
-:root[data-skin="dark"] .inp{background:#131316;border-color:#3a3a42;color:var(--ink);box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}
-:root[data-skin="dark"] .segs .seg{background:linear-gradient(180deg,#26262b,#18181c);border-color:#3a3a42;color:var(--ink-soft)}
-:root[data-skin="dark"] .agebox,:root[data-skin="dark"] .seekage,:root[data-skin="dark"] .relocate,:root[data-skin="dark"] .pn,
-:root[data-skin="dark"] .facts div:not(.red):not(.goldf):not(.condf):not(.intf):not(.skf):not(.crf){background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
-:root[data-skin="dark"] .node:not(.star):not(.ill):not(.crim):not(.pol){background:linear-gradient(180deg,#26262b 0%,#18181c 55%,#101013 100%);border-color:rgba(255,255,255,.14);
+:root:is([data-skin="dark"],[data-skin="goth"]) .logo span{background:linear-gradient(180deg,#ffffff 0%,#ffffff 46%,#c8c8ce 52%,#7a7a82 100%);-webkit-background-clip:text;background-clip:text}
+:root:is([data-skin="dark"],[data-skin="goth"]) .gel.ghost{--c1:#46464d;--c2:#2a2a30;--c3:#18181c;--edge:#55555e;--txt:#f3f3f5;--ts:rgba(0,0,0,.6)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .gel.lime{--c1:#ff8a92;--c2:#e0182a;--c3:#9a0012;--edge:#5a000a;--ts:rgba(60,0,8,.6)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .gel.pink{--c1:#c2404c;--c2:#8a0f1c;--c3:#4f0009;--edge:#320006;--ts:rgba(0,0,0,.6)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .gel.gold{--c1:#ffffff;--c2:#dcdce0;--c3:#9a9aa3;--edge:#6a6a72;--txt:#111114;--ts:rgba(255,255,255,.7)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .pills{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .inp{background:#131316;border-color:#3a3a42;color:var(--ink);box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .segs .seg{background:linear-gradient(180deg,#26262b,#18181c);border-color:#3a3a42;color:var(--ink-soft)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .agebox,:root:is([data-skin="dark"],[data-skin="goth"]) .seekage,:root:is([data-skin="dark"],[data-skin="goth"]) .relocate,:root:is([data-skin="dark"],[data-skin="goth"]) .pn,
+:root:is([data-skin="dark"],[data-skin="goth"]) .facts div:not(.red):not(.goldf):not(.condf):not(.intf):not(.skf):not(.crf){background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .node:not(.star):not(.ill):not(.crim):not(.pol){background:linear-gradient(180deg,#26262b 0%,#18181c 55%,#101013 100%);border-color:rgba(255,255,255,.14);
   box-shadow:0 7px 16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1)}
-:root[data-skin="dark"] .n-band{background:rgba(255,40,60,.16);color:#ff8088}
-:root[data-skin="dark"] .node.active{box-shadow:0 0 0 3px #fff,0 0 24px 6px rgba(255,40,55,.55),0 7px 16px rgba(0,0,0,.6);animation:darkglow 2.4s ease-in-out var(--t,0s) infinite}
+:root:is([data-skin="dark"],[data-skin="goth"]) .n-band{background:rgba(255,40,60,.16);color:#ff8088}
+:root:is([data-skin="dark"],[data-skin="goth"]) .node.active{box-shadow:0 0 0 3px #fff,0 0 24px 6px rgba(255,40,55,.55),0 7px 16px rgba(0,0,0,.6);animation:darkglow 2.4s ease-in-out var(--t,0s) infinite}
 @keyframes darkglow{50%{box-shadow:0 0 0 3px #fff,0 0 34px 10px rgba(255,40,55,.4),0 7px 16px rgba(0,0,0,.6)}}
-:root[data-skin="dark"] .lcd{box-shadow:0 6px 16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -6px 14px rgba(255,30,50,.3)}
-:root[data-skin="dark"] .rib.you{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a);border-color:#5a000a}
-:root[data-skin="dark"] .ln-wire{stroke:#e8e8ec}
-:root[data-skin="dark"] .ln-wire-under{stroke:rgba(255,30,50,.35)}
-:root[data-skin="dark"] .pcard,:root[data-skin="dark"] .cand,:root[data-skin="dark"] .heir,:root[data-skin="dark"] .chip,:root[data-skin="dark"] .ach,
-:root[data-skin="dark"] .skin,:root[data-skin="dark"] .decade{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14);color:var(--ink)}
-:root[data-skin="dark"] .pcard em,:root[data-skin="dark"] .decade b{color:#ff6b75}
-:root[data-skin="dark"] .yearbar{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
-:root[data-skin="dark"] .yearbar i{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a)}
-:root[data-skin="dark"] .switch .sw{background:linear-gradient(180deg,#18181c,#26262b);border-color:#44444c}
-:root[data-skin="dark"] .switch input:checked+.sw{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a);border-color:#5a000a}
-:root[data-skin="dark"] .overlay{background:rgba(0,0,0,.6)}
-:root[data-skin="dark"] .setrow{border-bottom-color:rgba(255,255,255,.08)}
-:root[data-skin="dark"] .francemap text{stroke:#000}
-:root[data-skin="dark"] .tree-scroll{background:radial-gradient(ellipse at 50% 0%,rgba(255,40,55,.08),rgba(0,0,0,0) 70%)}
-:root[data-skin="dark"] .ctrl-sep{background:rgba(255,255,255,.15)}
-:root[data-skin="dark"] .topbar .ctrls{border-bottom-color:rgba(255,255,255,.1)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .lcd{box-shadow:0 6px 16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -6px 14px rgba(255,30,50,.3)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .rib.you{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a);border-color:#5a000a}
+:root:is([data-skin="dark"],[data-skin="goth"]) .ln-wire{stroke:#e8e8ec}
+:root:is([data-skin="dark"],[data-skin="goth"]) .ln-wire-under{stroke:rgba(255,30,50,.35)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .pcard,:root:is([data-skin="dark"],[data-skin="goth"]) .cand,:root:is([data-skin="dark"],[data-skin="goth"]) .heir,:root:is([data-skin="dark"],[data-skin="goth"]) .chip,:root:is([data-skin="dark"],[data-skin="goth"]) .ach,
+:root:is([data-skin="dark"],[data-skin="goth"]) .skin,:root:is([data-skin="dark"],[data-skin="goth"]) .decade{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14);color:var(--ink)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .pcard em,:root:is([data-skin="dark"],[data-skin="goth"]) .decade b{color:#ff6b75}
+:root:is([data-skin="dark"],[data-skin="goth"]) .yearbar{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .yearbar i{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .switch .sw{background:linear-gradient(180deg,#18181c,#26262b);border-color:#44444c}
+:root:is([data-skin="dark"],[data-skin="goth"]) .switch input:checked+.sw{background:linear-gradient(180deg,#ff8a92,#e0182a 50%,#9a0012 51%,#e0182a);border-color:#5a000a}
+:root:is([data-skin="dark"],[data-skin="goth"]) .overlay{background:rgba(0,0,0,.6)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .setrow{border-bottom-color:rgba(255,255,255,.08)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .francemap text{stroke:#000}
+:root:is([data-skin="dark"],[data-skin="goth"]) .tree-scroll{background:radial-gradient(ellipse at 50% 0%,rgba(255,40,55,.08),rgba(0,0,0,0) 70%)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .ctrl-sep{background:rgba(255,255,255,.15)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .topbar .ctrls{border-bottom-color:rgba(255,255,255,.1)}
 @media (max-width:640px){ .skins{grid-template-columns:repeat(3,minmax(0,1fr))} }
 .skin{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:16px;border:2px solid #fff;background:rgba(255,255,255,.7);cursor:pointer;font:700 12.5px var(--font-display);color:var(--ink)}
 .skin i{width:100%;height:34px;border-radius:12px;box-shadow:inset 0 2px 6px rgba(255,255,255,.7)}
@@ -456,6 +461,23 @@ body.no-deco .bubble{display:none}
 .skin[aria-pressed="true"]{border-color:var(--aqua);box-shadow:0 0 0 3px rgba(0,180,255,.3)}
 @media (max-width:520px){ .skins{grid-template-columns:1fr 1fr} }
 /* Criminels : bulle rouge et noire, lueur sombre ; une fois révélés, des flammes */
+#treeCanvas .node.king:not(.crim):not(.ill){border:2px solid #d9a400;color:#3a1a00;background:linear-gradient(160deg,#fffbe6 0%,#ffe48a 40%,#f6c33a 70%,#e8a800 100%);
+  box-shadow:0 0 0 3px #7a2bd6,0 0 0 5px #ffd23a,0 0 26px 6px rgba(255,200,40,.55),0 10px 22px rgba(90,30,140,.35)}
+#treeCanvas .node.king:not(.crim):not(.ill) .n-band{background:linear-gradient(180deg,#9a4dff,#5a17b0);color:#ffe9a8;text-shadow:0 1px 1px rgba(40,0,80,.6);border:1px solid #ffd23a}
+#treeCanvas .node.king:not(.crim):not(.ill) .nt span,#treeCanvas .node.king:not(.crim):not(.ill) .n-city{color:#7a4a00}
+#treeCanvas .node.king:not(.crim):not(.ill) .n-life,#treeCanvas .node.king:not(.crim):not(.ill) .nt b{color:#3a1a00}
+#treeCanvas .node.king.active:not(.crim):not(.ill){box-shadow:0 0 0 3px var(--lime),0 0 0 6px #ffd23a,0 0 26px 6px rgba(255,200,40,.55),0 10px 22px rgba(90,30,140,.35)}
+#treeCanvas .node.heir:not(.crim):not(.ill){color:#3a2400;border:2px solid #e8c25a;background:linear-gradient(160deg,#fffdf4 0%,#fff3cc 55%,#ffe7a3 100%);box-shadow:0 0 0 2px rgba(150,90,230,.55),0 0 14px 2px rgba(255,210,80,.4),0 8px 18px rgba(90,30,140,.2)}
+#treeCanvas .node.heir:not(.crim):not(.ill) .n-band{background:linear-gradient(180deg,#c9a2ff,#8a4ee0);color:#fff}
+.crownfx{position:absolute;left:50%;top:-30px;width:56px;transform:translateX(-50%);z-index:7;pointer-events:none;filter:drop-shadow(0 3px 4px rgba(90,40,0,.45));animation:crownbob 3s ease-in-out var(--t,0s) infinite}
+.crownfx.small{top:-22px;width:36px;opacity:.95}
+.crownfx svg{display:block;width:100%}
+@keyframes crownbob{50%{transform:translateX(-50%) translateY(-3px) rotate(-3deg)}}
+.rtt{display:block;font:800 9.5px/1.1 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:#7a2bd6}
+#treeCanvas .node.king:not(.crim):not(.ill) .rtt,#treeCanvas .node.heir:not(.crim):not(.ill) .rtt{color:#5a17b0}
+#treeCanvas .node.heir:not(.crim):not(.ill) .nt span,#treeCanvas .node.heir:not(.crim):not(.ill) .n-city,#treeCanvas .node.heir:not(.crim):not(.ill) .n-life,#treeCanvas .node.heir:not(.crim):not(.ill) .nt b{color:#4a3000}
+.rib.exk{right:8px;color:#5a3a00;background:linear-gradient(180deg,#f3ead2,#d9c48a);border:1px solid #b8962e}
+.regnal.royalrec{order:-1;padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,#fff9e0,#ffe9a6);border:1px solid #ffd24a;box-shadow:0 0 0 2px rgba(122,43,214,.25)}
 .node.crim{border-color:#7a0012;color:#ffe6e8;background:linear-gradient(160deg,#3a0008 0%,#12000a 46%,#5c0012 100%);
   box-shadow:0 0 0 2px #b0001a,0 0 18px 4px rgba(200,0,30,.45),0 8px 18px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,80,90,.35);animation:dark 3.2s ease-in-out var(--t,0s) infinite}
 .node.crim::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
@@ -484,8 +506,8 @@ body.no-deco .bubble{display:none}
 .facts .atf dd{display:flex;gap:8px;align-items:flex-start;color:#7a4a00}
 .facts .atf dd svg{flex:none;width:20px;height:20px;fill:#e08a00;margin-top:1px}
 .facts .atf small{display:block;font-weight:600;opacity:.85}
-:root[data-skin="dark"] .facts .atf{background:rgba(255,190,60,.12);border-color:rgba(255,190,60,.35)}
-:root[data-skin="dark"] .facts .atf dd{color:#ffd28a}
+:root:is([data-skin="dark"],[data-skin="goth"]) .facts .atf{background:rgba(255,190,60,.12);border-color:rgba(255,190,60,.35)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .facts .atf dd{color:#ffd28a}
 .setnote{margin:2px 2px 0;font-size:12.5px;opacity:.85;min-height:1em}
 @media (max-width:520px){ .cands.six{grid-template-columns:1fr 1fr} }
 .node.crim .n-band{background:linear-gradient(180deg,#4a0008,#1a0003);color:#ff6b78;border:1px solid #7a0012}
@@ -526,8 +548,8 @@ body.no-deco .bubble{display:none}
 .albc.unk{background:rgba(255,255,255,.42)}
 .albc.unk>i{background:radial-gradient(circle at 35% 30%,#fff 0 12%,#a3b6c8 70%)}
 .albc.unk b{color:var(--ink-faint);letter-spacing:.1em}
-:root[data-skin="dark"] .albc{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
-:root[data-skin="dark"] .albc.unk{background:rgba(255,255,255,.04)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .albc{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .albc.unk{background:rgba(255,255,255,.04)}
 @media (max-width:520px){ .albgrid{grid-template-columns:1fr 1fr} .albc{grid-template-columns:1fr;justify-items:center;text-align:center;padding:9px 7px} }
 .ach small{font-size:12px;line-height:1.35;color:var(--ink-soft)}
 .ach em{font-style:normal;font:700 11px var(--font-display);color:var(--lime-deep)}
@@ -619,7 +641,7 @@ body.no-deco .bubble{display:none}
 @keyframes cynbump{35%{transform:scale(1.15)}}
 @keyframes cynspin{to{transform:rotate(360deg)}}
 @keyframes cynup{0%{opacity:0;transform:translateY(4px)}20%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
-:root[data-skin="dark"] .cyn,:root[data-skin="dark"] .shopit,:root[data-skin="dark"] .shopbal{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14);color:#7ef0d0}
+:root:is([data-skin="dark"],[data-skin="goth"]) .cyn,:root:is([data-skin="dark"],[data-skin="goth"]) .shopit,:root:is([data-skin="dark"],[data-skin="goth"]) .shopbal{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14);color:#7ef0d0}
 .tree-head .stats{color:var(--ink-soft);font-size:13px;font-variant-numeric:tabular-nums}
 .tree-head .gel{min-height:34px;padding:6px 14px;font-size:13px}
 .tree-head .zoomer{margin-left:auto}
@@ -687,6 +709,10 @@ body.no-deco .bubble{display:none}
 @keyframes sick{50%{box-shadow:0 0 0 2px var(--red),0 0 28px 8px rgba(255,40,50,.3),0 7px 16px rgba(150,0,20,.25)}}
 .node.ill .n-band{background:linear-gradient(180deg,#ff6b78,#d4001e);color:#fff;text-shadow:0 1px 1px rgba(90,0,10,.5)}
 .node.ill .nt span,.node.ill .n-city{color:#8a1020}
+/* criminel gravement malade : on garde le fond sombre pour que tout reste lisible */
+.node.crim.ill{background:linear-gradient(160deg,#5a0010 0%,#24000a 46%,#7a0018 100%);color:#ffe6e8}
+.node.crim.ill .nt span,.node.crim.ill .n-city{color:#ffb3bb}
+.node.crim.ill .n-life{color:#ffd0d4}
 /* Maladie bénigne : bulle rouge pâle, sans danger immédiat */
 .node.mild{border-color:#ffd3d8;box-shadow:0 0 0 1.5px rgba(255,130,145,.55),0 7px 16px rgba(0,60,140,.16)}
 .rib.sick{top:auto;bottom:-10px;left:8px;color:#c0394a;background:linear-gradient(180deg,#fff6f7,#ffdfe3);border:1px solid #ffb3bd;font-size:9px}
@@ -870,6 +896,7 @@ body.no-deco .bubble{display:none}
   body[data-mtab="journal"] .side>section:not(.journal){display:none}
   .tree-head #viewSw{display:none}
   .topbar .achb,.topbar .albb{display:none}
+  .glass,.overlay{-webkit-backdrop-filter:none;backdrop-filter:none}
   .tree-head{padding:10px 12px 8px;gap:8px}
   .tree-head h2{font-size:17px}
   .toasts{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 24px))}
@@ -905,6 +932,37 @@ body.no-deco .bubble{display:none}
   .bubble{display:none}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* ---------- Thème Dark : gothique (débloqué après 10 meurtres) ---------- */
+:root[data-skin="goth"]{color-scheme:dark;--sky-top:#030008;--sky-mid:#0e0316;--sky-low:#240a22;--sky-haze:#3a0c1c;
+  --ink:#f1e8f5;--ink-soft:#bfa9c8;--ink-faint:#86718e;--aqua:#b14cff;--aqua-deep:#d690ff;--magenta-deep:#ff6b8a;
+  --glass-hi:rgba(28,12,34,.92);--glass-lo:rgba(8,3,12,.9);--glass-edge:rgba(196,140,255,.2);
+  --g1:#e0b0ff;--g2:#7d22c2;--g3:#3b0a62;--gedge:#1f0336;
+  --lcd-a:#2b0f36;--lcd-b:#10031a;--lcd-c:#040007;--lcd-d:#1e0829;--lcd-edge:#000;--lcd-glow:rgba(200,110,255,.9);
+  --hill-a1:#1e0a24;--hill-a2:#0b030f;--hill-a3:#000;--hill-b1:#16061a;--hill-b2:#000;--shadow:0 14px 36px rgba(0,0,0,.8);
+  --font-display:"Cinzel","M PLUS Rounded 1c",Georgia,serif}
+:root[data-skin="goth"] .glass{background:linear-gradient(180deg,rgba(30,12,36,.93) 0%,rgba(14,5,18,.92) 55%,rgba(6,2,9,.9) 100%);border-color:rgba(196,140,255,.24);
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,220,255,.12),inset 0 0 0 3px rgba(0,0,0,.35),inset 0 0 0 4px rgba(150,40,90,.25),inset 0 -14px 30px rgba(140,0,50,.16)}
+:root[data-skin="goth"] .sky-sun{top:30px;right:70px;width:170px;height:170px;
+  background:radial-gradient(circle at 42% 40%,#fbf3ff 0 30%,#dacbe8 40%,rgba(190,150,230,.28) 52%,rgba(0,0,0,0) 68%);filter:drop-shadow(0 0 30px rgba(200,170,255,.45))}
+:root[data-skin="goth"] .logo{font-family:"UnifrakturMaguntia","Cinzel",serif;font-weight:400;letter-spacing:0;
+  background:linear-gradient(180deg,#ffffff 0%,#d8c8e6 45%,#c0203f 55%,#5a0018 100%);-webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 3px 0 rgba(0,0,0,.85)) drop-shadow(0 0 16px rgba(190,40,90,.45))}
+:root[data-skin="goth"] .logo span{background:linear-gradient(180deg,#f7eaff 0%,#c8a8e6 45%,#8a2be2 55%,#3b0a62 100%);-webkit-background-clip:text;background-clip:text}
+:root[data-skin="goth"] .node{border-color:rgba(196,140,255,.28)}
+.gothfx{position:absolute;inset:0;display:none;overflow:hidden}
+:root[data-skin="goth"] .gothfx{display:block}
+body.no-deco .gothfx .bat{display:none}
+.gothfx .fog{position:absolute;left:-30%;right:-30%;bottom:-5%;height:55vh;opacity:.9;
+  background:radial-gradient(ellipse 40% 50% at 25% 85%,rgba(130,90,160,.28),rgba(0,0,0,0) 70%),radial-gradient(ellipse 45% 45% at 70% 90%,rgba(110,40,90,.25),rgba(0,0,0,0) 70%);
+  animation:fogdrift 38s ease-in-out infinite alternate}
+.gothfx .fog.f2{bottom:10%;opacity:.55;animation-duration:52s;animation-direction:alternate-reverse}
+@keyframes fogdrift{to{transform:translateX(14%)}}
+.gothfx .bat{position:absolute;left:-12vw;top:var(--y);width:var(--w);animation:batfly var(--d) linear infinite;animation-delay:var(--dl)}
+.gothfx .bat svg{display:block;width:100%;fill:#05000a;filter:drop-shadow(0 0 3px rgba(190,120,255,.5));animation:flap .28s ease-in-out infinite alternate}
+@keyframes batfly{0%{transform:translate(0,0)}25%{transform:translate(32vw,-5vh)}50%{transform:translate(62vw,3vh)}75%{transform:translate(92vw,-4vh)}100%{transform:translate(126vw,0)}}
+@keyframes flap{to{transform:scaleY(.35)}}
+.skin.sk-goth i{background:radial-gradient(circle at 72% 30%,#f7efff 0 11%,rgba(0,0,0,0) 14%),linear-gradient(180deg,#030008,#1a0626 55%,#5a0f2e)}
 </style>
 </head>
 <body>
@@ -935,6 +993,7 @@ body.no-deco .bubble{display:none}
   <div class="goldfx" id="goldfx"></div>
   <div class="nightfx" id="nightfx"></div>
   <div class="kidfx" id="kidfx"><i class="rainbow"></i></div>
+  <div class="gothfx" id="gothfx"><i class="fog"></i><i class="fog f2"></i></div>
 </div>
 
 <!-- ============ Écran de départ ============ -->
@@ -965,7 +1024,7 @@ body.no-deco .bubble{display:none}
         </div>
       </fieldset>
       <div class="row2">
-        <label class="field"><span class="lab" data-t="lab_start"></span><input id="fStart" class="inp" type="number" min="1500" max="2050" value="1780"></label>
+        <label class="field"><span class="lab" data-t="lab_start"></span><input id="fStart" class="inp" type="number" min="1500" max="2050" value="1780"><small class="fieldhint" data-t="start_hint"></small></label>
         <label class="field"><span class="lab" data-t="lab_city"></span><select id="fCity" class="inp"></select></label>
       </div>
       <fieldset class="field">
@@ -985,6 +1044,9 @@ body.no-deco .bubble{display:none}
         <label class="field"><span class="lab" data-t="lab_destiny"></span><select id="fDestiny" class="inp"></select></label>
       </div>
       <p id="fAtoutNote" class="setnote"></p>
+      <label class="switch royalsw"><input type="checkbox" id="fRoyal"><span class="sw"></span>
+        <span><b data-t="lab_royal"></b><small data-t="royal_hint"></small></span></label>
+      <label class="field" id="fRuleBox" hidden><span class="lab" data-t="lab_rule"></span><select id="fRule" class="inp"></select></label>
       <label class="switch"><input type="checkbox" id="fFam"><span class="sw"></span>
         <span><b data-t="fam_auto"></b><small data-t="fam_auto_hint"></small></span></label>
       <p id="fErr" class="err" hidden></p>
@@ -1074,9 +1136,30 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.3h';
+const APP_VERSION = '0.1.4a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4a', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode Royal : une case à cocher avant de commencer, avec le sexe dominant (patriarcale, matriarcale ou les deux). Ton premier personnage est sacré roi (ou reine) avec une couronne sur sa bulle ; l\'héritier (le premier enfant du bon sexe) devient prince ou princesse. Le monarque ne travaille plus : il signe des traités, bâtit des châteaux, organise des bals… À sa mort, la couronne passe automatiquement à l\'héritier (+100 Cyn au couronnement). Les prénoms de la dynastie sont mis en avant à chaque naissance.',
+       'Album : nouvelle catégorie Royal, avec les 24 activités d\'un monarque, et son succès « Règne exemplaire ».',
+       'Boutique : Conjoint sur mesure (1 100 Cyn), une âme sœur dont tu choisis tout (nom, sexe, date de naissance, métier, atout, centre d\'intérêt, addiction, particularité, destin, ville).',
+       'Nouveau thème Dark, gothique (lune pâle, brume, chauves-souris, lettres gothiques), débloqué après 10 meurtres.',
+       'Nouvel atout Riche : 2 fois plus de Cyn toute sa vie, y compris pour la naissance de ses enfants.',
+       '9 nouveaux métiers : fermier, chasseur, chocolatier, vigile, garde du corps, voyant, et trois métiers disparus (allumeur de réverbères, porteur d\'eau, poinçonneur).',
+       'Porté disparu : dure maintenant 12 à 24 mois, avec 20 % de chances d\'être retrouvé.',
+       'Succès Criminels et Crimes : toutes les exigences sont doublées.',
+       'Fin de partie : plus de Cyn ni de succès une fois la partie terminée (ou après 2100), et c\'est indiqué sur le message de fin. L\'écran de départ conseille de commencer en 1780.',
+       'Corrections : le couteau du meurtre suit la bulle quand l\'arbre bouge, un criminel gravement malade reste lisible, et le jeu est bien plus fluide sur téléphone au fil des années.'],
+   en:['Royal mode: a checkbox before starting, with the ruling sex (patriarchal, matriarchal or both). Your first character is crowned king (or queen) with a crown on their bubble; the heir (the first child of the right sex) becomes prince or princess. The monarch no longer works: they sign treaties, build castles, throw balls… When they die, the crown passes to the heir automatically (+100 Cyn per coronation). Dynasty names are put forward at each birth.',
+       'Album: new Royal section with the 24 activities of a monarch, and its "Model reign" achievement.',
+       'Shop: Custom partner (1,100 Cyn), a soulmate you design entirely (name, sex, date of birth, job, gift, interest, addiction, trait, destiny, city).',
+       'New Dark theme, gothic (pale moon, mist, bats, blackletter title), unlocked after 10 murders.',
+       'New Wealth gift: twice as many Cyn for life, including for the births of their children.',
+       '9 new jobs: farmer, hunter, chocolatier, security guard, bodyguard, psychic, and three lost trades (lamplighter, water carrier, ticket puncher).',
+       'Gone missing: now lasts 12 to 24 months, with a 20% chance of being found.',
+       'Criminals and Crimes achievements: every requirement is doubled.',
+       'End of game: no more Cyn or achievements once the game is over (or after 2100), and the end message says so. The start screen recommends starting in 1780.',
+       'Fixes: the murder knife follows the bubble when the tree moves, a seriously ill criminal stays readable, and the game runs much more smoothly on phones as the years go by.']},
   {v:'0.1.3h', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Tutoriel : les nouveaux joueurs (et après une remise à zéro totale) peuvent suivre un petit tutoriel pas à pas, ou le refuser. Il met en lumière chaque partie de l\'écran, et se relance à tout moment dans les Paramètres.'],
    en:['Tutorial: new players (and anyone after a full reset) can follow a short step-by-step tutorial, or turn it down. It highlights each part of the screen, and can be replayed anytime from Settings.']},
@@ -1264,6 +1347,7 @@ const CYN_KEY = 'lignee.cyn.v1';
 let CYN = Math.max(0, +store.get(CYN_KEY) || 0), cynPend = 0;
 const cynFx = new Map();                              // gains à afficher au-dessus de la bulle concernée
 function cyn(n, pid){
+  if(S && (S.over || S.end2100 >= 1)) return;          // partie terminée : plus de Cyn
   CYN += n; cynPend += n; store.set(CYN_KEY, String(CYN));
   if(pid != null){ const e = cynFx.get(pid) || {n:0, tries:0}; e.n += n; cynFx.set(pid, e); }
 }
@@ -1533,7 +1617,12 @@ const JOBS = [
  ['tavernier','Tavernier','Tavernière','Tavern keeper','Tavern keeper',1500,1900],['bourreau','Bourreau','Bourreau','Executioner','Executioner',1500,1977],
  ['concierge','Concierge','Concierge','Caretaker','Caretaker',1500,2100],['gardienprison','Gardien de prison','Gardienne de prison','Prison guard','Prison guard',1800,2100],
  ['therapeuteia','Thérapeute pour IA','Thérapeute pour IA','AI therapist','AI therapist',2032,2100],['pilotetaxidrone','Pilote de taxi-drone','Pilote de taxi-drone','Air taxi pilot','Air taxi pilot',2035,2100],
- ['nettoyeurorbital','Nettoyeur orbital','Nettoyeuse orbitale','Orbital debris cleaner','Orbital debris cleaner',2045,2100]
+ ['nettoyeurorbital','Nettoyeur orbital','Nettoyeuse orbitale','Orbital debris cleaner','Orbital debris cleaner',2045,2100],
+ ['fermier','Fermier','Fermière','Farmer','Farmer',1500,2100],['chasseur','Chasseur','Chasseuse','Hunter','Hunter',1500,2100],
+ ['chocolatier','Chocolatier','Chocolatière','Chocolatier','Chocolatier',1660,2100],['vigile','Vigile','Vigile','Security guard','Security guard',1960,2100],
+ ['gardecorps','Garde du corps','Garde du corps','Bodyguard','Bodyguard',1850,2100],['voyant','Voyant','Voyante','Psychic','Psychic',1500,2100],
+ ['allumeur','Allumeur de réverbères','Allumeuse de réverbères','Lamplighter','Lamplighter',1700,1930],['porteureau',"Porteur d'eau","Porteuse d'eau",'Water carrier','Water carrier',1500,1880],
+ ['poinconneur','Poinçonneur','Poinçonneuse','Ticket puncher','Ticket puncher',1900,1973]
 ];
 const STARJOBS = [
  ['peintre','Peintre','Peintre','Painter','Painter',1500,2100],['ecrivain','Écrivain','Écrivaine','Writer','Writer',1500,2100],
@@ -1582,6 +1671,7 @@ const ATOUTS = [
  ['sante','Santé','Santé','Health','leaf','Ne tombe jamais malade avant 60 ans.','Never falls ill before 60.'],
  ['fertile','Fertilité','Fertilité','Fertility','heart','Jumeaux, triplés et quadruplés 10 fois plus fréquents.','Twins, triplets and quadruplets 10 times more likely.'],
  ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse entre 80 et 105 ans.','10 times less likely to die of old age between 80 and 105.'],
+ ['richesse','Riche','Riche','Wealth','sun','Gagne 2 fois plus de Cyn toute sa vie, y compris pour la naissance de ses enfants.','Earns twice as many Cyn for life, including for the births of their children.'],
  ['ambition','Ambitieux','Ambitieuse','Ambition','flag',"S'il fait carrière en politique, 33 % de chances de devenir président.",'If they go into politics, a 33% chance of becoming President.']
 ];
 const hasAtout = (p, id) => !!(p && (p.atout === id || p.atout2 === id));      // atout2 : crise de la cinquantaine (boutique)
@@ -1730,6 +1820,54 @@ const MILDS = [
  ['covid','Covid-19','Covid-19',2019,2024,120,540,{special:true}]
 ];
 const MILD = byId(MILDS);
+/* Mode Royal : ce que fait le roi (ou la reine) à la place d'un métier — [id, fr, en, icône] */
+const ROYAL_ACTS = [['paix','Signe un traité de paix','Signs a peace treaty','dove'],['guerre','Déclare la guerre','Declares war','sword'],['chateau','Fait bâtir un château','Builds a castle','castle'],['bal','Organise un grand bal','Throws a grand ball','disco'],['impot','Lève un nouvel impôt','Raises a new tax','crown'],['baisse','Baisse les impôts','Lowers taxes','heart'],['chasse','Part à la chasse royale','Goes on a royal hunt','paw'],['justice','Rend la justice','Dispenses justice','flag'],['grace','Gracie un condamné','Pardons a prisoner','lock'],['academie','Fonde une académie','Founds an academy','book'],['portrait','Pose pour son portrait officiel','Sits for an official portrait','palette'],['ambassade','Reçoit un ambassadeur','Receives an ambassador','planet'],['tournee','Visite ses provinces','Tours the provinces','pin'],['cathedrale','Fait bâtir une cathédrale','Builds a cathedral','building'],['arts','Protège les artistes','Patronises the arts','music'],['armee','Réforme l\'armée','Reforms the army','helmet'],['pain','Distribue du pain au peuple','Hands out bread to the people','cup'],['canal','Fait creuser un canal','Has a canal dug','wave'],['jardin','Inaugure un jardin royal','Opens a royal garden','leaf'],['conseil','Préside le conseil royal','Chairs the royal council','user'],['tournoi','Organise un tournoi','Holds a tournament','trophy'],['monnaie','Fait frapper une monnaie','Mints a new coin','sun'],['expedition','Lance une expédition lointaine','Launches a far-off expedition','rocket'],['memoires','Écrit ses mémoires','Writes their memoirs','book']];
+const ROYAL = byId(ROYAL_ACTS);
+const royalActName = id => ROYAL[id] ? (LANG === 'fr' ? ROYAL[id][1] : ROYAL[id][2]) : '';
+let RH;                                                // héritier en cache (recalculé à chaque rendu / naissance / décès)
+const royalOn = () => !!(S && S.royal && !S.royal.lost);
+function successionOrder(){                           // primogéniture : on descend l'arbre depuis le fondateur, aîné d'abord
+  const kids = new Map();
+  for(const c of Object.values(S.people)) if(c.parents && c.blood && !c.adopted) for(const pid of c.parents){ if(!kids.has(pid)) kids.set(pid, []); kids.get(pid).push(c); }
+  const ok = c => S.royal.rule === 'both' || c.sex === (S.royal.rule === 'matri' ? 'F' : 'M');
+  const out = [], seen = new Set();
+  (function walk(p){
+    if(seen.has(p.id)) return; seen.add(p.id); out.push(p);
+    (kids.get(p.id) || []).filter(ok).sort((a, b) => a.birth - b.birth).forEach(walk);
+  })(P(S.founderId));
+  return out;
+}
+function heirId(){
+  if(!royalOn()) return null;
+  if(RH === undefined){ const k = S.royal.king, h = successionOrder().find(p => p.death == null && p.id !== k && !jailed(p)); RH = h ? h.id : null; }
+  return RH;
+}
+function royalTitle(p){
+  if(!royalOn() || !p || p.id == null || p.death != null) return '';
+  const fr = LANG === 'fr', F = p.sex === 'F';
+  if(p.id === S.royal.king) return fr ? (F ? 'Reine' : 'Roi') : (F ? 'Queen' : 'King');
+  if(p.id === heirId()) return fr ? (F ? 'Princesse' : 'Prince') : (F ? 'Princess' : 'Prince');
+  const u = S.unions.find(x => x.end == null && ((x.a === S.royal.king && x.b === p.id) || (x.b === S.royal.king && x.a === p.id)));
+  if(u) return F ? (fr ? 'Reine' : 'Queen') : (fr ? 'Prince consort' : 'Prince consort');
+  return '';
+}
+function crown(p, day, silent){
+  S.royal.king = p.id; p.wasKing = true; RH = undefined;
+  p.work = {s:'royal', act: pick(ROYAL_ACTS)[0]};
+  log('star','crowned',[p.id], day, !silent);
+  if(!silent){ sfx.fame(); burst(['#ffd000','#ffffff','#7a2bd6','#ffb300'], 60); cyn(100 * (hasAtout(p,'richesse') ? 2 : 1), p.id); }
+  dirty = true;
+}
+function crownNext(day){                              // le roi meurt (ou part en prison) : la couronne passe à l'héritier
+  RH = undefined; const h = heirId();
+  if(h) crown(P(h), day);
+  else { S.royal.lost = true; log('world','royal_lost',[], day, true); }
+}
+function royalYear(p, A, day){                        // chaque année, 40 % de chances que le monarque change d'activité
+  if(A < 16 || Math.random() >= .4) return;
+  let a; do { a = pick(ROYAL_ACTS)[0]; } while(a === p.work.act);
+  p.work.act = a; log('star','royal_act',[p.id, a], day, false);
+}
 const mildName = id => MILD[id] ? (LANG === 'fr' ? MILD[id][1] : MILD[id][2]) : id;
 const mildOn = (p, day = S.t) => (p.mild || []).filter(m => day >= m.start && day < m.end);
 const COVID_A = fromYMD(2019, 11, 1), COVID_B = fromYMD(2024, 11, 31);
@@ -1808,7 +1946,7 @@ const DISEASES = [
  ['hyperthermie',"Hyperthermie sévère due à l'ecstasy","d'une hyperthermie sévère due à l'ecstasy",'severe ecstasy-induced hyperthermia',1500,2100,1,5,.04,{addict:'ecstasy'}],
  ['mst','MST',"d'une MST",'an STD',1500,2100,90,1800,.06,{addict:'sexe'}],['ist','IST',"d'une IST",'an STI',1500,2100,60,1200,.07,{addict:'sexe'}],
  // nouvelles maladies (0.1.1a)
- ['disparu','Porté disparu','de sa disparition','disappearance',1500,2100,30,730,.08],
+ ['disparu','Porté disparu','de sa disparition','disappearance',1500,2100,365,730,.2],   // 0.1.4a : 12 à 24 mois, 20 % retrouvés
  ['mortcerebrale','Mort cérébrale',"d'une mort cérébrale",'brain death',1500,2100,1,30,.01],
  ['necrose','Nécrose',"d'une nécrose",'necrosis',1500,2100,7,120,.06],
  ['diabete','Diabète','du diabète','diabetes',1500,2100,365,3650,.05,{minA:10}],
@@ -2003,7 +2141,7 @@ const g = (p,m,f) => p.sex==='F' ? f : m;
 const P = id => S.people[id];
 const per = x => typeof x === 'object' ? x : P(x);
 const fn = x => per(x).first || '…';
-const nm = x => { const p = per(x); return `${p.first || '…'} ${p.last}`; };
+const nm = x => { const p = per(x), tt = royalTitle(p); return `${tt ? tt + ' ' : ''}${p.first || '…'} ${p.last}`; };
 const art = s => /^[aeiouAEIOU]/.test(s) ? 'an ' + s : 'a ' + s;
 const jobName = (id, p) => { const r = JOB[id] || STARJOB[id]; if(!r) return ''; return LANG==='fr' ? (p.sex==='F'?r[2]:r[1]) : (p.sex==='F'?r[4]:r[3]); };
 const dzName = (id, p) => { const d = DZ[id]; if(id === 'disparu' && p && p.sex === 'F' && LANG==='fr') return 'Portée disparue'; return LANG==='fr' ? d[1] : cap(d[3].replace(/^(the|a|an) /,'')); };
@@ -2150,6 +2288,22 @@ fr:{
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
+  start_hint:'Conseillé : 1780', lab_royal:'Mode Royal', royal_hint:'Ton personnage est sacré roi (ou reine) : une couronne à transmettre de génération en génération.',
+  lab_rule:'Sexe dominant', rule_patri:'Patriarcale (par défaut)', rule_matri:'Matriarcale', rule_both:'Les deux',
+  regency:'Règne sous régence', heir_act:p=>g(p,'Prince héritier','Princesse héritière'), ex_king:p=>g(p,'Ancien roi','Ancienne reine'),
+  royal_names:'Prénoms de la dynastie (fortement recommandés)', alb_royal:'Royal', alb_royal_d:'Mode Royal',
+  log_crowned:p=>`${nm(p)} monte sur le trône ! Vive ${g(P(p),'le roi','la reine')} !`,
+  log_royal_act:(p,a)=>`${nm(p)} ${lc(royalActName(a))}.`,
+  log_royal_lost:()=>"Plus aucun héritier : la couronne quitte la famille. Le mode Royal s'achève.",
+  end_note_over:'La partie est terminée : les Cyn et les succès ne peuvent plus être gagnés dans cette partie.',
+  end_note_2100:'Si tu continues à jouer, tu ne gagneras plus ni Cyn ni succès dans cette partie.',
+  skin_goth:'Dark', skin_locked_goth:"Se débloque après 10 meurtres commis par des criminels (toutes parties confondues).",
+  log_goth_skin:()=>'10 meurtres… Le thème Dark est débloqué dans les Paramètres.',
+  shop_spouse:'Conjoint sur mesure', shop_spouse_d:"Crée l'âme sœur parfaite de ton personnage : nom, âge, métier, atout, centre d'intérêt, addiction, destin…",
+  shop_spouse_taken:p=>`${p.first} est déjà en couple.`, shop_spouse_young:p=>`${p.first} est encore trop jeune.`,
+  sp_intro:n=>`Choisis tout de la future âme sœur de ${n}.`, sp_job:'Métier', sp_int:"Centre d'intérêt", sp_add:'Addiction', sp_cond:'Particularité',
+  sp_none:'Aucun', sp_none_f:'Aucune', sp_go:'Faire la rencontre', sp_age:a=>`Âge : ${a} ans`, sp_err_age:n=>`L'âge doit être entre ${n} et 100 ans.`,
+  cg_crown:'Un couronnement (mode Royal)',
   tuto_offer_e:'Nouveau joueur ?', tuto_offer_t:'Bienvenue !', tuto_offer:"Tu découvres Cyngenetic ? Un petit tutoriel d'environ 2 minutes te montre les bases du jeu.",
   tuto_yes:'Oui, montre-moi', tuto_no:'Non merci, je me débrouille', tuto_next:'Suivant', tuto_prev:'Retour', tuto_skip:'Passer', tuto_end:"C'est parti !",
   tuto_set:'Tutoriel', tuto_set_hint:'Revoir les bases du jeu.', tuto_set_btn:'Lancer', tuto_planned:'Au début de la prochaine partie',
@@ -2337,6 +2491,22 @@ en:{
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
+  start_hint:'Recommended: 1780', lab_royal:'Royal mode', royal_hint:'Your character is crowned king (or queen): a crown to pass down from generation to generation.',
+  lab_rule:'Ruling sex', rule_patri:'Patriarchal (default)', rule_matri:'Matriarchal', rule_both:'Both',
+  regency:'Reigns under a regency', heir_act:p=>g(p,'Crown prince','Crown princess'), ex_king:p=>g(p,'Former king','Former queen'),
+  royal_names:'Dynasty names (strongly recommended)', alb_royal:'Royal', alb_royal_d:'Royal mode',
+  log_crowned:p=>`${nm(p)} takes the throne! Long live the ${g(P(p),'king','queen')}!`,
+  log_royal_act:(p,a)=>`${nm(p)} ${lc(royalActName(a))}.`,
+  log_royal_lost:()=>'No heir left: the crown leaves the family. Royal mode is over.',
+  end_note_over:'The game is over: Cyn and achievements can no longer be earned in this game.',
+  end_note_2100:"If you keep playing, you won't earn any more Cyn or achievements in this game.",
+  skin_goth:'Dark', skin_locked_goth:'Unlocks after 10 murders committed by criminals (across all games).',
+  log_goth_skin:()=>'10 murders… The Dark theme is now available in Settings.',
+  shop_spouse:'Custom partner', shop_spouse_d:"Create your character's perfect soulmate: name, age, job, gift, interest, addiction, destiny…",
+  shop_spouse_taken:p=>`${p.first} is already in a relationship.`, shop_spouse_young:p=>`${p.first} is still too young.`,
+  sp_intro:n=>`Choose everything about ${n}'s future soulmate.`, sp_job:'Job', sp_int:'Interest', sp_add:'Addiction', sp_cond:'Trait',
+  sp_none:'None', sp_none_f:'None', sp_go:'Meet them', sp_age:a=>`Age: ${a}`, sp_err_age:n=>`Age must be between ${n} and 100.`,
+  cg_crown:'A coronation (Royal mode)',
   tuto_offer_e:'New player?', tuto_offer_t:'Welcome!', tuto_offer:'New to Cyngenetic? A short tutorial (about 2 minutes) shows you the basics.',
   tuto_yes:'Yes, show me', tuto_no:"No thanks, I'll figure it out", tuto_next:'Next', tuto_prev:'Back', tuto_skip:'Skip', tuto_end:"Let's go!",
   tuto_set:'Tutorial', tuto_set_hint:'Go over the basics again.', tuto_set_btn:'Start', tuto_planned:'At the start of the next game',
@@ -2435,14 +2605,14 @@ const ACHS = [
  ['conq6','conq','silver','Charmeur','Une personne a eu 6 conjoints','Charmer','One person has had 6 partners'],
  ['conq10','conq','gold','Don Juan','Une personne a eu 10 conjoints','Casanova','One person has had 10 partners'],
  ['conq15','conq','platinum',"Légende de l'amour",'Une personne a eu 15 conjoints','Love legend','One person has had 15 partners'],
- ['crim1','crim','bronze','Mouton noir','1 criminel dans une même partie','Black sheep','1 criminal in a single game'],
- ['crim2','crim','silver','Mauvaise graine','2 criminels dans une même partie','Bad seed','2 criminals in a single game'],
- ['crim4','crim','gold','Famille de truands','4 criminels dans une même partie','Crime family','4 criminals in a single game'],
- ['crim6','crim','platinum','Cartel familial','6 criminels dans une même partie','Family cartel','6 criminals in a single game'],
- ['kill2','kill','bronze','Double peine','Un criminel commet 2 meurtres','Double trouble','A criminal commits 2 murders'],
- ['kill4','kill','silver','Série noire','Un criminel commet 4 meurtres','Killing spree','A criminal commits 4 murders'],
- ['kill6','kill','gold','Tueur en série','Un criminel commet 6 meurtres','Serial killer','A criminal commits 6 murders'],
- ['kill8','kill','platinum','Légende du crime','Un criminel commet 8 meurtres','Crime legend','A criminal commits 8 murders'],
+ ['crim1','crim','bronze','Mouton noir','2 criminels dans une même partie','Black sheep','2 criminals in a single game'],
+ ['crim2','crim','silver','Mauvaise graine','4 criminels dans une même partie','Bad seed','4 criminals in a single game'],
+ ['crim4','crim','gold','Famille de truands','8 criminels dans une même partie','Crime family','8 criminals in a single game'],
+ ['crim6','crim','platinum','Cartel familial','12 criminels dans une même partie','Family cartel','12 criminals in a single game'],
+ ['kill2','kill','bronze','Double peine','Un criminel commet 4 meurtres','Double trouble','A criminal commits 4 murders'],
+ ['kill4','kill','silver','Série noire','Un criminel commet 8 meurtres','Killing spree','A criminal commits 8 murders'],
+ ['kill6','kill','gold','Tueur en série','Un criminel commet 12 meurtres','Serial killer','A criminal commits 12 murders'],
+ ['kill8','kill','platinum','Légende du crime','Un criminel commet 16 meurtres','Crime legend','A criminal commits 16 murders'],
  ['time100','time','bronze','Un siècle','100 ans de jeu dans une même partie','A century','100 years played in a single game'],
  ['time250','time','silver','Deux siècles et demi','250 ans de jeu dans une même partie','Two and a half centuries','250 years played in a single game'],
  ['time500','time','gold','Demi-millénaire','500 ans de jeu dans une même partie','Half a millennium','500 years played in a single game'],
@@ -2460,6 +2630,7 @@ const ACHS = [
  ['twins2','other','special','Ça se répète','Avoir deux fois des jumeaux (ou plus) avec le même conjoint','Here we go again','Have twins (or more) twice with the same partner'],
  ['alb_i','album','gold','Passionné de passions',"Compléter la catégorie Centres d'intérêt de l'album",'Hobby hoarder','Complete the Interests category of the album'],
  ['alb_c','album','gold','Hors du commun',"Compléter la catégorie Particularités de l'album",'One of a kind','Complete the Traits category of the album'],
+ ['alb_r','album','gold','Règne exemplaire',"Compléter la catégorie Royal de l'album",'Model reign','Complete the Royal section of the album'],
  ['alb_m','album','gold','Carnet de santé',"Compléter la catégorie Maladies de l'album",'Health record','Complete the Illnesses section of the album'],
  ['alb_e','album','gold','Premier de la classe',"Compléter la catégorie Écoles & formations de l'album",'Top of the class','Complete the Schools & training section of the album'],
  ['alb_j','album','platinum','Touche-à-tout',"Compléter la catégorie Métiers de l'album",'Jack of all trades','Complete the Jobs category of the album'],
@@ -2478,7 +2649,7 @@ const achTitle = id => LANG==='fr' ? ACHV[id][3] : ACHV[id][5];
 const achDesc = id => LANG==='fr' ? ACHV[id][4] : ACHV[id][6];
 const medal = (id, cls='') => `<span class="medal t-${ACHV[id][2]} ${cls}">${icon(ACH_CATS.find(c => c[0]===ACHV[id][1])[1])}</span>`;
 function unlock(id){
-  if(!R.ach || rulesTweaked() || (S && S.noAch) || ACH[id] || !ACHV[id]) return;
+  if(!R.ach || rulesTweaked() || (S && (S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
   const hadGold = goldUnlocked();
   ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? familyName(P(S.founderId)) : ''};
   if(!hadGold && goldUnlocked()) setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k:'gold', a:[]}); sfx.fame(); }, 3600);
@@ -2706,7 +2877,11 @@ function addPerson(o){
   if(!p.birthCity) p.birthCity = p.city;
   S.people[p.id] = p; return p;
 }
-function save(){ if(S) store.set(SAVE_KEY, JSON.stringify(S)); }
+let lastSave = 0;
+function save(){ if(S){ store.set(SAVE_KEY, JSON.stringify(S)); lastSave = performance.now(); } }
+const saveSoon = () => { if(performance.now() - lastSave > 4000) save(); };
+document.addEventListener('visibilitychange', () => { if(document.hidden) save(); });
+addEventListener('pagehide', () => save());
 const TOAST_KINDS = new Set(['birth','death','love','wed','break','sad','world','ill','cure','star','crime']);
 function log(kind, k, a, d, forceToast){
   if((S.auto || S.familyAuto) && (kind === 'work' || kind === 'move' || kind === 'interest') && a && a[0] !== S.activeId) return;   // mode auto : journal centré sur l'essentiel
@@ -2736,7 +2911,7 @@ function dropout(p){
   return p.school.drop;
 }
 function onAdult(p, day){               // 18 ans
-  if(p.work && p.work.s==='star') return;
+  if(p.work && (p.work.s==='star' || p.work.s==='royal')) return;
   const y = yearOf(day);
   if(!dropout(p) && Math.random() < p.uniP){ const f = pickField(y)[0]; p.work = {s:'uni', field:f, until: day + rnd(3,7)*365}; log('work','uni',[p.id,f],day); return; }
   if(p.firstJobAge <= 18){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); return; }
@@ -2752,7 +2927,8 @@ function workTick(p, day){
   else if(w.s==='unemp'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','back_to_work',[p.id,j],day); }
 }
 function workYear(p, A, day){
-  const w = p.work; if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
+  const w = p.work; if(w && w.s === 'royal'){ royalYear(p, A, day); return; }
+  if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
   if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
   if(w.s==='job' && w.job !== 'president'){
     const r = Math.random();
@@ -2794,6 +2970,8 @@ function activity(p, skipIll){
   const w = p.work;
   if(!w) return A < 18 ? schoolLabel(p, A, y) : t('odd');
   if(w.s === 'prison') return t('prison');
+  if(w.s === 'royal') return A < 16 ? t('regency') : royalActName(w.act);
+  if(royalOn() && A >= 18 && p.death == null && heirId() === p.id) return t('heir_act', p);
   switch(w.s){
     case 'job': return jobName(w.job, p);
     case 'odd': return p.school && p.school.drop ? t('dropout', p) : t('odd');
@@ -2845,10 +3023,12 @@ function die(p, day, cause){
   if(p.death != null) return;
   const A = ageAt(p, day);
   p.death = day; p.deathAt = null; p.onset = null; p.warDeath = false; p.murderAt = null; p.deathCity = p.city;
+  RH = undefined; if(royalOn() && p.id === S.royal.king) crownNext(day);
   p.cause = Object.assign({}, cause);
   if(inFamily(p)){ if(A >= 121) unlock('maxage'); if(A < 10) unlock('young'); }
   if(cause.murder){
-    const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50, p.id); checkTiers('kill', k.kills, [2,4,6,8]); pendingFx.push(p.id); dirty = true;
+    const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50 * (hasAtout(k,'richesse') ? 2 : 1), p.id);
+    UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 10) unlockSkin('goth');   // thème Dark : 10 meurtres [[4,'kill2'],[8,'kill4'],[12,'kill6'],[16,'kill8']].forEach(([n, id]) => { if(k.kills >= n) unlock(id); }); pendingFx.push(p.id); dirty = true;
     if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
     if(!UNL.night){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
   }
@@ -2938,7 +3118,10 @@ function autoDay(day){
     pl.next = pr.due + rnd(270, 3*365);
   }
 }
-function heirList(d){ return living().filter(p => p.blood).map(p => ({p, r: relation(p,d)})).sort((a,b) => a.r[0]-b.r[0] || a.p.birth-b.p.birth); }
+function heirList(d){
+  const k = royalOn() ? S.royal.king : null;            // mode Royal : le nouveau monarque est proposé en premier
+  return living().filter(p => p.blood).map(p => ({p, r: relation(p,d)})).sort((a,b) => (b.p.id === k) - (a.p.id === k) || a.r[0]-b.r[0] || a.p.birth-b.p.birth);
+}
 function autoHeir(){
   const d = active(), h = heirList(d);
   if(!h.length){ render(); gameOver(d); return; }
@@ -2946,7 +3129,7 @@ function autoHeir(){
   render(); centerOn(S.activeId, true); save();
 }
 function nameFor(c){
-  if(SET.regnal && Math.random() < .15){                 // dynasties : parfois, on reprend le prénom d'un parent ou grand-parent
+  if((SET.regnal || royalOn()) && Math.random() < (royalOn() ? .7 : .15)){                 // dynasties : parfois, on reprend le prénom d'un parent ou grand-parent
     const fam = familyNames(c); if(fam.length) return pick(fam);
   }
   const sibs = new Set(Object.values(S.people).filter(x => x.parents && x.parents[0]===c.parents[0] && x.first).map(x => x.first).concat(c.parents.map(i => P(i).first)));
@@ -2974,7 +3157,7 @@ function regnalNum(c, base){                            // numéro que prendrait
   return best ? best + 1 : 0;
 }
 function regnalize(c){
-  if(!SET.regnal || !c.first) return;
+  if(!(SET.regnal || royalOn()) || !c.first) return;
   const n = regnalNum(c, c.first);
   if(n){ c.base = c.first; c.num = n; c.first = c.first + ' ' + roman(n); }
 }
@@ -3012,7 +3195,7 @@ function polTick(p, day){
 function becomeStar(p, day, hint){
   const y = yearOf(day), h = hint && STARJOBS.find(r => r[0] === hint && y >= r[5] && y <= r[6]);
   const j = h ? h[0] : pickStarJob(y);
-  p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j}; cyn(200, p.id);
+  p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j}; cyn(200 * (hasAtout(p,'richesse') ? 2 : 1), p.id);
   log('star','star',[p.id, j], day); sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 40);
   const ns = Object.values(S.people).filter(q => q.star && q.star.famous).length;            // 0.1.2a : exigences ×2
   [[2,'star1'],[4,'star2'],[8,'star4'],[12,'star6']].forEach(([n, id]) => { if(ns >= n) unlock(id); });
@@ -3020,13 +3203,14 @@ function becomeStar(p, day, hint){
 /* Criminels : après 18 ans, ils se révèlent ; parents, frères et sœurs, conjoint et enfants ont 60 % de risque d'être assassinés dans les 10 ans.
    Après leur premier crime, 40 % finissent en prison dans les 10 ans (jusqu'à leur mort) ; les autres disparaissent ou se suicident au bout de 10 ans. */
 function declareCrim(p, day){
-  p.crim.declared = true; p.crim.at = day; cyn(100, p.id);
+  p.crim.declared = true; p.crim.at = day; cyn(100 * (hasAtout(p,'richesse') ? 2 : 1), p.id);
   const mates = S.unions.filter(u => u.end == null && (u.a === p.id || u.b === p.id)).map(u => u.a === p.id ? u.b : u.a);
   const close = living().filter(q => q.id !== p.id && ((p.parents && p.parents.includes(q.id)) || (p.parents && q.parents && q.parents.some(i => p.parents.includes(i)))
     || mates.includes(q.id) || (q.parents && q.parents.includes(p.id))) && !hasAtout(q,'courage'));
   close.forEach(q => { if(Math.random() < .6){ q.murderAt = day + rnd(30, 3650); q.murderBy = p.id; } });
   log('crime','crim_declared',[p.id], day, true);
-  checkTiers('crim', Object.values(S.people).filter(q => q.crim && q.crim.declared).length, [1,2,4,6]);
+  const nCrim = Object.values(S.people).filter(q => q.crim && q.crim.declared).length;          // 0.1.4a : exigences ×2
+  [[2,'crim1'],[4,'crim2'],[8,'crim4'],[12,'crim6']].forEach(([n, id]) => { if(nCrim >= n) unlock(id); });
   sfx.crime(); burst(['#ff2a00','#1a0003','#b3001b','#ff7a00','#000000'], 55);
 }
 function crimFate(p, day){                  // 10 ans plus tard, s'il n'a pas été arrêté : disparition ou suicide (1 chance sur 2)
@@ -3037,6 +3221,7 @@ function crimFate(p, day){                  // 10 ans plus tard, s'il n'a pas é
 const jailed = p => !!(p && p.crim && p.crim.fate === 'prison' && p.death == null);
 function jailCrim(p, day){                   // prison à vie : plus de couple, plus d'enfants, plus de victimes
   p.crim.fate = 'prison'; p.crim.jailAt = null; p.work = {s:'prison'};
+  RH = undefined; if(royalOn() && p.id === S.royal.king) crownNext(day);         // un roi en prison perd sa couronne
   for(const u of S.unions) if(u.end == null && (u.a === p.id || u.b === p.id)){
     u.end = day; u.endReason = 'prison';
     const o = P(u.a === p.id ? u.b : u.a);
@@ -3124,7 +3309,7 @@ function birthChild(u, day){
     if(buy === 'star' || (!buy && fate < pStar)) c.star = {day: day + rnd(16,40)*365 + rnd(0,364), famous:false};      // 2,5 % : une future star
     else if(buy === 'crim' || (!buy && fate < pStar + pCrim)) c.crim = {day: day + rnd(18,60)*365 + rnd(0,364), declared:false, fate:null};  // 2 % : un futur criminel
     if([A,B].some(q => q.star && q.star.famous) && Math.random() < .9) c.starKid = true;     // 90 % : enfant de star
-    cyn(c.starKid ? 25 : 10, c.id);                                                                // Cyn : 10 par naissance, 25 pour un enfant de star
+    cyn((c.starKid ? 25 : 10) * ([A,B].some(x => hasAtout(x,'richesse')) ? 2 : 1), c.id);   // atout Richesse : ×2                                                                // Cyn : 10 par naissance, 25 pour un enfant de star
     if(c.starKid && !c.star && !c.crim && Math.random() < .12) c.fameAt = day + rnd(18, 60)*365 + rnd(0, 364);   // 12 % : star à son tour
     scheduleYear(c, 0, day);
     ids.push(c.id);
@@ -3148,6 +3333,7 @@ function birthChild(u, day){
   [A, B].forEach(checkParentAch);
   ids.forEach(id => checkBirthAch(P(id)));
   if(n === 4){ unlock('quads'); unlockSkin('kid'); }
+  RH = undefined;
   if(!UNL.neon && genOf(P(ids[0])) >= 16) unlockSkin('neon');
   if(n >= 2){ u.multiCount = (u.multiCount || 0) + 1; if(u.multiCount >= 2) unlock('twins2'); }
   dirty = true;
@@ -3217,7 +3403,7 @@ function advance(dt){
 }
 
 /* ================= Boucle ================= */
-let lastTick = performance.now(), pointerHeld = false, musicTick = 0;
+let lastTick = performance.now(), pointerHeld = false, musicTick = 0, renderGap = 180;
 setInterval(() => {                                // musique du criminel tant qu'un criminel révélé est libre (en prison, il n'est plus un danger)
   const on = S && !$('#game').hidden;
   music.setMode(on && living().some(p => p.crim && p.crim.declared && !jailed(p)) ? 'tense' : 'calm');
@@ -3236,7 +3422,9 @@ setInterval(() => {
     if(needHeir()){ if(S.auto) autoHeir(); else { render(); openHeir(); } return; }
     if(S.end2100 === 1){ render(); open2100(); return; }
   }
-  if(dirty && !pointerHeld && now - lastRender > 180){ render(); lastRender = now; }
+  if(dirty && !pointerHeld && now - lastRender > renderGap){
+    const a = performance.now(); render(); renderGap = Math.min(1500, Math.max(180, (performance.now() - a) * 6)); lastRender = now;
+  }
 }, 50);
 
 function updateClock(){
@@ -3247,7 +3435,7 @@ function updateClock(){
   $('#yearFill').style.width = ((S.t - start)/len*100).toFixed(2) + '%';
   if(lastYear !== null && y !== lastYear){
     const l = $('#lcd'); l.classList.remove('flash'); void l.offsetWidth; l.classList.add('flash');
-    sfx.tick(); save();
+    sfx.tick(); saveSoon();
     checkTiers('time', y - S.startYear, [100,250,500,1000]);              // « Le temps passe »
   }
   lastYear = y;
@@ -3275,6 +3463,7 @@ function renderDecade(y, force){
 
 /* ================= Rendu : arbre ================= */
 const NW = 172, NH = 140, GX = 22, PG = 26, GY = 92, PAD = 44;
+const CROWN_SVG = '<svg viewBox="0 0 64 40"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6c2"/><stop offset=".45" stop-color="#ffd23a"/><stop offset="1" stop-color="#c98a00"/></linearGradient></defs><path d="M6 34 3 10l14 11L32 3l15 18 14-11-3 24z" fill="url(#cg)" stroke="#8a5a00" stroke-width="2" stroke-linejoin="round"/><rect x="6" y="31" width="52" height="7" rx="2" fill="url(#cg)" stroke="#8a5a00" stroke-width="2"/><circle cx="32" cy="23" r="4" fill="#e8203a" stroke="#fff" stroke-width="1.2"/><circle cx="17" cy="26" r="3" fill="#2f6bff" stroke="#fff" stroke-width="1"/><circle cx="47" cy="26" r="3" fill="#2fbf5a" stroke="#fff" stroke-width="1"/><circle cx="3" cy="10" r="2.6" fill="#fff3a0"/><circle cx="32" cy="3" r="2.8" fill="#fff3a0"/><circle cx="61" cy="10" r="2.6" fill="#fff3a0"/></svg>';
 const ICON_BABY = '<svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-8.6C1 9.3 2.7 5.5 6.3 5.5c2.1 0 3.4 1.2 4.2 2.4h3c.8-1.2 2.1-2.4 4.2-2.4 3.6 0 5.3 3.8 3.6 6.9C19 16.6 12 21 12 21z"/></svg>';
 function avatar(p){
   const hair = p.sex==='F' ? '<path d="M11 21c-1.6-9 2.6-14.5 9-14.5s10.6 5.5 9 14.5l1.4 8H9.6z" fill="rgba(0,0,0,.2)"/>' : '<path d="M12.6 14.2c.6-5 3.6-7.4 7.4-7.4s6.8 2.4 7.4 7.4c-2.2-2-4.6-2.8-7.4-2.8s-5.2.8-7.4 2.8z" fill="rgba(0,0,0,.18)"/>';
@@ -3301,19 +3490,23 @@ function nodeHTML(p, x, y){
   const jail = jailed(p); if(jail) cls.push('jailed');
   const pol = !p.star && !p.crim && p.work && p.work.s === 'job' && isPol(p.work.job), pres = pol && p.work.job === 'president';
   if(pol){ cls.push('pol'); if(pres) cls.push('pres'); }
+  const rtt = royalTitle(p), isKing = royalOn() && p.id === S.royal.king && p.death == null, isHeir = !isKing && heirId() === p.id;
+  if(isKing) cls.push('king'); else if(isHeir) cls.push('heir');
   const A = age(p), by = yearOf(p.birth), gone = p.cause && p.cause.vanished;
   const years = p.death!=null ? `${by} – ${yearOf(p.death)}${gone ? ' ?' : ''}` : `${by} –`;
   const ageL = gone ? `${t('vanished_short', p)} · ${tA(A)}` : p.death!=null ? `✝ ${tA(A)}` : tA(A);
   const rib = p.crim ? `<em class="rib cr${jail ? ' jail' : ''}">${jail ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p)}</em>`
     : pres ? `<em class="rib pr">${t('pres_rib', p)}</em>`
+    : p.wasKing && p.death != null ? `<em class="rib exk">${t('ex_king', p)}</em>`
     : p.star ? `<em class="rib st">${p.star.famous ? t('star') : t('future_star')}</em>`
     : p.starKid ? `<em class="rib sk">${t('star_kid')}</em>` : '';
   const cu = S.unions.find(u => u.end==null && (u.a===p.id||u.b===p.id) && u.preg && !u.preg.adopt);
   const sparkles = p.star ? '<i class="tw" style="left:8px;top:46px"></i><i class="tw" style="right:10px;top:30px;animation-delay:calc(var(--t,0s) + .6s)"></i><i class="tw" style="right:22px;bottom:30px;animation-delay:calc(var(--t,0s) + 1.1s)"></i>' : '';
   const flames = p.crim && p.crim.declared && p.death == null && !jail ? `<span class="flames" style="left:${x-12}px;top:${y-50}px"></span>` : '';
-  return `${flames}<button class="${cls.join(' ')}" style="left:${x}px;top:${y}px;--t:${animT()}" data-act="fiche" data-id="${p.id}" aria-label="${esc(nm(p))}">
+  return `${flames}<button class="${cls.join(' ')}" style="left:${x}px;top:${y}px;--t:@T@" data-act="fiche" data-id="${p.id}" aria-label="${esc(nm(p))}">
     ${p.id===S.activeId?`<em class="rib you">${t('you')}</em>`:''}${rib}${sparkles}${!p.ill && p.death==null && mildOn(p).length ? `<em class="rib sick">${t('sick_rib', p)}</em>` : ''}
-    <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b>${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
+    ${isKing || isHeir ? `<i class="crownfx ${isHeir ? 'small' : ''}">${CROWN_SVG}</i>` : ''}
+    <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt">${rtt ? `<small class="rtt">${esc(rtt)}</small>` : ''}<b>${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
     <span class="n-life"><span>${years}</span><b>${ageL}</b></span>
     <span class="n-city">${icon('pin')}<span>${esc(cityLine(p))}</span></span>
     <span class="n-band">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
@@ -3321,19 +3514,25 @@ function nodeHTML(p, x, y){
 }
 function renderTree(){
   const memo = {}, pos = {}, unionsD = [], links = [];
+  const KC = new Map(), UA = new Map();               // 0.1.4a : index calculés une fois (avant : recherche dans toute la famille à chaque bulle)
+  for(const c of Object.values(S.people)) if(c.parents){ const k = c.parents[0] + '-' + c.parents[1]; if(!KC.has(k)) KC.set(k, []); KC.get(k).push(c); }
+  KC.forEach(a => a.sort((x, y) => x.birth - y.birth));
+  for(const u of S.unions){ if(!UA.has(u.a)) UA.set(u.a, []); UA.get(u.a).push(u); }
+  const kidsL = u => KC.get(u.a + '-' + u.b) || [];
+  const unionsL = pid => (UA.get(pid) || []).filter(u => u.end == null || u.married || kidsL(u).length);
   let maxDepth = 0;
   function measure(pid){
-    const us = unionsShown(pid), selfW = NW + us.length*(NW+PG), kids = us.flatMap(kidsOf);
+    const us = unionsL(pid), selfW = NW + us.length*(NW+PG), kids = us.flatMap(kidsL);
     const kidsW = kids.length ? kids.reduce((s,k) => s + measure(k.id), 0) + (kids.length-1)*GX : 0;
     return memo[pid] = Math.max(selfW, kidsW);
   }
   function place(pid, x, depth){
     maxDepth = Math.max(maxDepth, depth);
-    const us = unionsShown(pid), w = memo[pid];
+    const us = unionsL(pid), w = memo[pid];
     const selfW = NW + us.length*(NW+PG), y = PAD + depth*(NH+GY), sx = PAD + x + (w-selfW)/2;
     pos[pid] = {x:sx, y};
     us.forEach((u,i) => { pos[u.b] = {x: sx + (i+1)*(NW+PG), y}; });
-    const groups = us.map(kidsOf), kids = groups.flat();
+    const groups = us.map(kidsL), kids = groups.flat();
     const kidsW = kids.length ? kids.reduce((s,k) => s + memo[k.id], 0) + (kids.length-1)*GX : 0;
     let kx = x + (w-kidsW)/2;
     us.forEach((u,i) => {
@@ -3360,7 +3559,8 @@ function renderTree(){
   for(const id in pos) nodes += nodeHTML(P(id), pos[id].x, pos[id].y);
   const cv = $('#treeCanvas');
   cv.style.width = W+'px'; cv.style.height = H+'px';
-  cv.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}`;
+  const html = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}`;
+  if(html !== cv._h){ cv._h = html; cv.innerHTML = html.split('@T@').join(animT()); }
   layout = pos; treeW = W; treeH = H; applyZoom();
   const f = P(S.founderId), all = Object.values(S.people), gens = Math.max(...all.filter(p => p.blood).map(genOf));
   $('#treeTitle').textContent = t('family', familyName(f));
@@ -3409,6 +3609,7 @@ function riskTile(p, short){
   return `<div><dt>${t(short ? 'f_risk_short' : 'f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
 }
 function renderSide(){
+  if(!$('#side').offsetParent) return;                // onglet caché sur téléphone : rien à dessiner
   const me = active(), a = age(me), u = currentUnion(me.id), partner = u && P(u.b);
   let hint = '';
   if(jailed(me)) hint = t('hint_prison', me);
@@ -3428,7 +3629,7 @@ function renderSide(){
   }
   const journal = S.log.slice(-150).reverse().map(e => `<li class="k-${e.kind}"><i></i><div><time>${fmt(e.d)}</time><p>${esc(logText(e))}</p></div></li>`).join('');
   const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(me.id)).length;
-  $('#side').innerHTML = `
+  const sideEl = $('#side'); sideEl.innerHTML = `
     <section class="glass card">
       <div class="eyebrow">${t('you_play')}</div>
       <button class="me-head" data-act="fiche" data-id="${me.id}">${orb(me,'xl')}<span><h3>${esc(nm(me))}</h3><p>${esc(t('born_in', me, fmt(me.birth), me.birthCity))}</p></span></button>
@@ -3464,7 +3665,7 @@ function renderControls(){
   ab.classList.toggle('on', !!S.auto); ab.setAttribute('aria-pressed', String(!!S.auto)); ab.title = t('auto_title');
   updateClock();
 }
-function render(){ renderTree(); renderSide(); if(curView === 'map') renderMap(); dirty = false; runFx(); updateBadge(); }
+function render(){ RH = undefined; renderTree(); renderSide(); if(curView === 'map') renderMap(); dirty = false; runFx(); updateBadge(); }
 
 /* ================= Téléphone : onglets du bas ================= */
 let mtab = 'tree', seenLog = 0;
@@ -3475,6 +3676,7 @@ function setMobileTab(v){
   if(v === 'tree' || v === 'map') setView(v);
   if(v === 'tree' && S) requestAnimationFrame(() => { renderTree(); centerOn(S.activeId, false); });   // l'arbre réapparaît centré sur vous
   if(v === 'journal' && S) seenLog = S.log.length;
+  if((v === 'me' || v === 'journal') && S) requestAnimationFrame(renderSide);
   updateBadge();
 }
 function updateBadge(){
@@ -3657,6 +3859,14 @@ function runFx(){
     fx.innerHTML = `<span class="slash"></span><span class="slash s2"></span><span class="knife">${icon('knife')}</span>` +
       Array.from({length:9}, (_,i) => `<i class="drop" style="--a:${i*40 + rnd(-12,12)}deg;--r:${rnd(30,70)}px"></i>`).join('');
     document.body.appendChild(fx);
+    const t0 = performance.now();
+    const follow = () => {                                // le couteau suit la bulle si l'arbre bouge (défilement, zoom, nouveau rendu)
+      if(!fx.isConnected) return;
+      const n = document.querySelector(`.node[data-id="${id}"]`);
+      if(n){ const q = n.getBoundingClientRect(); fx.style.left = (q.left + q.width/2) + 'px'; fx.style.top = (q.top + q.height/2) + 'px'; }
+      if(performance.now() - t0 < 1500) requestAnimationFrame(follow);
+    };
+    requestAnimationFrame(follow);
     setTimeout(() => fx.remove(), 1500);
   }
 }
@@ -3737,7 +3947,7 @@ function openNaming(id){
     ${c.star ? `<p class="starnote">★ ${t('star_baby')}</p>` : ''}
     ${c.conds && c.conds.length ? `<p class="condnote">${condBadges(c)}${esc(t('cond_birth', condList(c)))}</p>` : ''}
     <div class="names">${sugg.map(n => `<button class="gel ${c.sex==='F'?'pink':''}" data-act="name" data-n="${esc(n)}"><span>${esc(n)}</span></button>`).join('')}</div>
-    ${SET.regnal && familyNames(c).length ? `<div class="regnal"><span class="lab">${t('regnal_pick')}</span><div class="regnal-row">${familyNames(c).slice(0,3).map(n =>
+    ${(SET.regnal || royalOn()) && familyNames(c).length ? `<div class="regnal ${royalOn() ? 'royalrec' : ''}"><span class="lab">${t(royalOn() ? 'royal_names' : 'regnal_pick')}</span><div class="regnal-row">${familyNames(c).slice(0,3).map(n =>
       `<button class="gel gold" data-act="name" data-n="${esc(n)}"><span>${esc(n)} ${roman(regnalNum(c, n) || 2)}</span></button>`).join('')}</div></div>` : ''}
     <form class="custom" id="nameForm"><input class="inp" id="nameOther" maxlength="20" placeholder="${esc(t('name_other'))}" autocomplete="off" aria-label="${esc(t('name_other'))}">
       <button class="gel lime" type="submit"><span>${t('validate')}</span></button></form>`, {locked:true, sound:false});
@@ -3843,13 +4053,13 @@ function gameOver(d){
   S.over = true; save();
   const f = P(S.founderId);
   openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(t('over_title', familyName(f)))}</h2>
-      <p>${esc(t('over_txt', d, f, S.startYear))}</p></div>${statsBlock()}
+      <p>${esc(t('over_txt', d, f, S.startYear))}</p><p class="endnote">${t('end_note_over')}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 function open2100(){
   const f = P(S.founderId);
   sfx.fame(); burst(['#ffd000','#ffffff','#3fd0ff','#ff2f9c'], 40);
-  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${t('end_title')}</h2><p>${esc(t('end_txt', familyName(f), yearOf(S.t)-S.startYear))}</p></div>${statsBlock()}
+  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${t('end_title')}</h2><p>${esc(t('end_txt', familyName(f), yearOf(S.t)-S.startYear))}</p><p class="endnote">${t('end_note_2100')}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="keep"><span>${t('keep_playing')}</span></button><button class="gel ghost big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 
@@ -3885,7 +4095,7 @@ function arm(b, label){
 
 /* ================= Album : tout ce qui a déjà été vu dans une partie (gardé d'une partie à l'autre) ================= */
 const ALB_KEY = 'lignee.album.v1';
-const ALB = loadJSON(ALB_KEY); ['i','c','j','e','m','d','a'].forEach(k => { ALB[k] = ALB[k] || {}; });
+const ALB = loadJSON(ALB_KEY); ['i','c','j','e','m','d','a','r'].forEach(k => { ALB[k] = ALB[k] || {}; });
 const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 'w_' + c.war : c.murder ? 'murder' : c.vanished ? 'vanished' : c.suicide ? 'suicide' : c.legend ? 'legend' : c.dz || null; };
 function albumScan(force){
   if(!S) return;
@@ -3894,6 +4104,7 @@ function albumScan(force){
   for(const p of Object.values(S.people)){
     interestsOf(p).forEach(id => mark('i', id));
     (p.mild || []).forEach(m => mark('m', m.dz));
+    if(p.work && p.work.s === 'royal' && p.death == null && ageAt(p, S.t) >= 16) mark('r', p.work.act);
     (p.conds || []).forEach(id => mark('c', id));
     if(p.work && (p.work.s === 'job' || p.work.s === 'star')) mark('j', p.work.job);
     addictsOf(p).forEach(id => mark('a', id));
@@ -3908,7 +4119,7 @@ function albumCheck(){                              // succès Album : une caté
   if(all) unlock('leg_album');
 }
 const albYears = (a, b) => b >= 2100 ? (a <= 1500 ? t('alb_always') : t('alb_from', a)) : a <= 1500 ? t('alb_until', b) : t('alb_range', a, b);
-const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['e','alb_school'],['m','alb_mild'],['d','alb_death'],['a','alb_addict']];
+const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['e','alb_school'],['m','alb_mild'],['d','alb_death'],['a','alb_addict'],['r','alb_royal']];
 function schoolKeys(p){                               // où en est la scolarité de quelqu'un (pour l'album)
   const A = ageAt(p, S.t), y = yearOf(S.t), sc = p.school || {}, w = p.work;
   if(w && w.s === 'uni') return ['f_' + w.field];
@@ -3944,6 +4155,7 @@ function albItems(k){
     .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
     .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
   if(k === 'e') return schoolItems();
+  if(k === 'r') return ROYAL_ACTS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], desc: t('alb_royal_d')}));
   if(k === 'm') return MILDS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:'pill', y:r[3], desc: albYears(r[3], r[4]), secret:true}));
   return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
@@ -3972,14 +4184,14 @@ function openAlbum(k, re){
 }
 
 /* ================= Paramètres & personnalisation ================= */
-const SKINS = ['aqua','orange','vapor','kid','night','dark','gold'];
-const SKIN_LOCK = {gold:'skin_locked', night:'skin_locked_night', vapor:'skin_locked_neon', kid:'skin_locked_kid', orange:'skin_locked_orange', dark:'skin_locked_dark'};
+const SKINS = ['aqua','orange','vapor','kid','night','dark','goth','gold'];
+const SKIN_LOCK = {goth:'skin_locked_goth', gold:'skin_locked', night:'skin_locked_night', vapor:'skin_locked_neon', kid:'skin_locked_kid', orange:'skin_locked_orange', dark:'skin_locked_dark'};
 function skinHint(v){                                 // thème bloqué : on explique comment le débloquer
   const h = $('#skinHint'); if(!h) return;
   h.innerHTML = `${icon('lock')}<span><b>${esc(t('skin_' + v))}</b> · ${esc(t(SKIN_LOCK[v]))}</span>`; h.hidden = false;
   h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop');
 }
-const skinLocked = s => (s === 'dark' && !UNL.dark) || (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
+const skinLocked = s => (s === 'goth' && !UNL.goth) || (s === 'dark' && !UNL.dark) || (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
 function unlockSkin(key){                            // Néon (16 générations), Enfantin (quadruplés)
   if(UNL[key]) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
   setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k: key + '_skin', a:[]}); sfx.ach(); }, 1500);
@@ -3997,7 +4209,7 @@ const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${dis
 const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG==='fr' ? ' %' : '%') : u);
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
-  ['self',   [['immune',290,'pill'],['midlife',350,'hourglass']]],
+  ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
   ['family', [['decrim',180,'dove'],['potion',185,'potion']]],
   ['themes', [['orange',830,'sun'],['dark',5000,'moon']]]
 ];
@@ -4014,13 +4226,14 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'fertile' && S.nextMulti) return {dis:true, note:t('shop_pending')};
   if(id === 'immune' && immune(me, S.t)) return {dis:true, note:t('shop_immune_on', yearOf(me.immuneUntil))};
   if(id === 'midlife' && me.atout2) return {dis:true, note:t('shop_midlife_done', me.first)};
+  if(id === 'spouse' && (currentUnion(me.id) || jailed(me) || age(me) < R.legal)) return {dis:true, note:t(jailed(me) ? 'hint_prison' : currentUnion(me.id) ? 'shop_spouse_taken' : 'shop_spouse_young', me)};
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
   if(id === 'potion' && !sickList().length) return {dis:true, note:t('shop_potion_none')};
   if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
   return {dis:false};
 }
 function openShop(re){
-  const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50]];
+  const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50],['crown','cg_crown',100]];
   const secs = SHOP_CATS.map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.map(([id, price, ic]) => {
     const st = shopState(id, price);
     return `<div class="shopit ${st.owned ? 'owned' : ''}"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${st.note ? `<em>${esc(st.note)}</em>` : ''}</div>
@@ -4040,6 +4253,71 @@ function openPick(id){                                // décriminalisation / cr
     : ATOUTS.filter(a => a[0] !== me.atout).map(a => `<button class="pickrow" data-act="pickdo" data-v="midlife" data-id="${a[0]}"><i class="pickic">${icon(a[4])}</i><span><b>${esc(atoutName(a[0], me))}</b><small>${esc(a[LANG==='fr' ? 5 : 6])}</small></span><em>${t('shop_pick')}</em></button>`);
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop')} · ${cynFmt(price)} Cyn</div><h2>${t('shop_' + id)}</h2><p class="hint">${esc(t('pick_' + id, me.first))}</p></div>
     <div class="picklist">${rows.join('')}</div><button class="gel ghost pickback" data-act="shop"><span>← ${t('shop_back')}</span></button>`, {sound:false});
+}
+const isoDay = day => toDate(day).toISOString().slice(0, 10);
+const dayOfIso = v => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ''); return m ? fromYMD(+m[1], +m[2]-1, +m[3]) : null; };
+function openSpouseForm(){                            // conjoint(e) entièrement sur mesure
+  const me = active(), y = yearOf(S.t), dy = dataYear(y), opp = me.sex === 'M' ? 'F' : 'M';
+  const lo = S.t - Math.round(100*365.25), hi = S.t - Math.round(R.legal*365.25);
+  const def = Math.max(lo, Math.min(hi, me.birth));
+  const byName = (a, b) => a[0].localeCompare(b[0], LANG);
+  const opt = (v, l, sel) => `<option value="${esc(v)}" ${sel ? 'selected' : ''}>${esc(l)}</option>`;
+  const jobs = JOBS.filter(r => inRange(r, dy) && r[0] !== 'president').map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const ints = INTERESTS.filter(r => dy >= r[6] && dy <= r[7]).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const adds = ADDICTIONS.filter(r => dy >= r[6]).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const conds = CONDS.map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const sexes = (R.sameSex ? ['F','M'] : [opp]);
+  openModal(`<div class="m-head"><div class="eyebrow">${t('shop')} · ${cynFmt(1100)} Cyn</div><h2>${t('shop_spouse')}</h2><p class="hint">${esc(t('sp_intro', me.first))}</p></div>
+    <form id="spForm" class="spform" novalidate>
+      <div class="row2"><label class="field"><span class="lab">${t('lab_first')}</span><input class="inp" id="spFirst" maxlength="20" autocomplete="off" value="${esc(wpick(namePool(y, opp)))}"></label>
+        <label class="field"><span class="lab">${t('lab_last')}</span><input class="inp" id="spLast" maxlength="26" autocomplete="off" value="${esc(pickSurname(y))}"></label></div>
+      <div class="row2"><label class="field"><span class="lab">${t('lab_sex')}</span><select class="inp" id="spSex">${sexes.map(x => opt(x, t(x === 'F' ? 'female' : 'male'), x === opp)).join('')}</select></label>
+        <label class="field"><span class="lab">${t('lab_dob')}</span><input class="inp" type="date" id="spDob" min="${isoDay(lo)}" max="${isoDay(hi)}" value="${isoDay(def)}"></label></div>
+      <p class="setnote" id="spAge"></p>
+      <div class="row2"><label class="field"><span class="lab">${t('sp_job')}</span><select class="inp" id="spJob">${opt('', t('atout_none'))}${jobs.map(([l, v]) => opt(v, l)).join('')}</select></label>
+        <label class="field"><span class="lab">${t('lab_atout')}</span><select class="inp" id="spAtout">${opt('', t('atout_none'))}${ATOUTS.map(r => opt(r[0], atoutName(r[0]))).join('')}</select></label></div>
+      <div class="row2"><label class="field"><span class="lab">${t('sp_int')}</span><select class="inp" id="spInt">${opt('', t('sp_none'))}${ints.map(([l, v]) => opt(v, l)).join('')}</select></label>
+        <label class="field"><span class="lab">${t('sp_add')}</span><select class="inp" id="spAdd">${opt('', t('sp_none_f'))}${adds.map(([l, v]) => opt(v, l)).join('')}</select></label></div>
+      <div class="row2"><label class="field"><span class="lab">${t('sp_cond')}</span><select class="inp" id="spCond">${opt('', t('sp_none_f'))}${conds.map(([l, v]) => opt(v, l)).join('')}</select></label>
+        <label class="field"><span class="lab">${t('lab_destiny')}</span><select class="inp" id="spDest">${[['none','dest_none'],['crim','dest_crim'],['star','dest_star']].map(([v, k]) => opt(v, t(k))).join('')}</select></label></div>
+      <label class="field"><span class="lab">${t('lab_city')}</span><select class="inp" id="spCity">${allCities().map(c => opt(c, c, c === me.city)).join('')}</select></label>
+      <p class="err" id="spErr" hidden></p>
+      <div class="m-actions"><button type="button" class="gel ghost" data-act="shop"><span>← ${t('shop_back')}</span></button>
+        <button type="submit" class="gel pink big" id="spGo"><span>${t('sp_go')} · ${cynFmt(1100)} Cyn</span></button></div>
+    </form>`, {sound:false});
+  const ageOut = () => { const d = dayOfIso($('#spDob').value); $('#spAge').textContent = d != null ? t('sp_age', ageAt({birth:d}, S.t)) : ''; };
+  $('#spDob').addEventListener('input', ageOut); ageOut();
+  $('#spSex').addEventListener('change', e => { $('#spFirst').value = wpick(namePool(y, e.target.value)); });
+  $('#spForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const err = $('#spErr'), first = $('#spFirst').value.trim().replace(/\s+/g, ' '), last = $('#spLast').value.trim().replace(/\s+/g, ' '), birth = dayOfIso($('#spDob').value);
+    let msg = '';
+    if(!first || !last) msg = t('err_name');
+    else if(birth == null || birth < lo || birth > hi) msg = t('sp_err_age', R.legal);
+    if(msg){ err.textContent = msg; err.hidden = false; sfx.refuse(); return; }
+    err.hidden = true;
+    const go = $('#spGo');
+    if(go.dataset.armed !== '1'){ go.dataset.armed = '1'; go.classList.add('armed'); go.querySelector('span').textContent = t('shop_confirm'); return; }
+    if(shopState('spouse', 1100).dis) return;
+    payCyn(1100);
+    const day = today(), sex = $('#spSex').value;
+    const c = Object.assign({first: cap(first), last: cap(last), sex, birth, city: me.city, birthCity: $('#spCity').value, conds: $('#spCond').value ? [$('#spCond').value] : []}, traits());
+    c.atout = $('#spAtout').value || pick(ATOUTS)[0];
+    const p = addPerson(Object.assign(c, {blood:false}));
+    p.addicts = $('#spAdd').value ? [$('#spAdd').value] : [];
+    p.intAges = []; p.interests = $('#spInt').value ? [$('#spInt').value] : [];
+    const job = $('#spJob').value;
+    if(job) p.work = {s:'job', job}; else setupWork(p, day);
+    const dest = $('#spDest').value;
+    if(dest === 'crim') p.crim = {day: day + rnd(30, 720), declared:false, fate:null};
+    if(dest === 'star') p.star = {day: day + rnd(30, 720), famous:false};
+    p.lastAge = ageAt(p, day); scheduleYear(p, p.lastAge, day);
+    S.unions.push({id:S.nextId++, a:me.id, b:p.id, start:day, married:false, marriedAt:null, end:null, endReason:null, preg:null});
+    log('love','couple',[me.id, p.id]);
+    sfx.sparkle(); burst(['#ff2f9c','#ffffff','#ff9ad2','#ffd000'], 50);
+    checkConq(me.id);
+    dirty = true; closeModal(); render(); save();
+  });
 }
 function decrim(p){                                   // redevient une personne normale
   for(const q of living()) if(q.murderBy === p.id){ q.murderAt = null; q.murderBy = null; }
@@ -4151,6 +4429,7 @@ const ACT = {
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion') return openPick(d.v);
+    if(d.v === 'spouse') return openSpouseForm();
     if(!arm(b, t('shop_confirm'))) return;
     payCyn(it[1]);
     const me = S && active(), day = S ? today() : 0;
@@ -4328,6 +4607,8 @@ function applyStatic(){
   ATOUTS.forEach(r => fa.add(new Option(atoutName(r[0]), r[0]))); fa.value = av;
   const fd = $('#fDestiny'), dv = fd.value || 'none'; fd.innerHTML = '';
   [['none','dest_none'],['crim','dest_crim'],['star','dest_star']].forEach(([v,k]) => fd.add(new Option(t(k), v))); fd.value = dv;
+  const fr2 = $('#fRule'), rv = fr2.value || 'patri'; fr2.innerHTML = '';
+  [['patri','rule_patri'],['matri','rule_matri'],['both','rule_both']].forEach(([v,k]) => fr2.add(new Option(t(k), v))); fr2.value = rv;
   setupNote();
   refreshAge();
 }
@@ -4336,6 +4617,18 @@ function setupNote(){
   $('#fAtoutNote').textContent = [a && ATOUT[a] ? ATOUT[a][LANG==='fr' ? 5 : 6] : '', d && d !== 'none' ? t('dest_note') : ''].filter(Boolean).join(' ');
 }
 ['#fAtout','#fDestiny'].forEach(id => $(id).addEventListener('change', setupNote));
+function royalSetup(){                                // mode Royal : le premier personnage est forcément roi (ou reine)
+  const on = $('#fRoyal').checked, r = $('#fRule').value || 'patri';
+  $('#fRuleBox').hidden = !on;
+  const radios = $$('input[name=sex]');
+  radios.forEach(x => { x.disabled = false; });
+  if(on && r !== 'both'){
+    const want = r === 'patri' ? 'M' : 'F';
+    if(fSex() !== want){ radios.forEach(x => { x.checked = x.value === want; }); const y = +fYear.value || 1760; $('#fFirst').value = wpick(namePool(y, want)); }
+    radios.forEach(x => { x.disabled = x.value !== want; });
+  }
+}
+['#fRoyal','#fRule'].forEach(id => $(id).addEventListener('change', royalSetup));
 function setLang(l){
   LANG = l === 'en' ? 'en' : 'fr'; store.set(LANG_KEY, LANG);
   $('#mapView').innerHTML = ''; dotEls = new Map();                    // la carte se redessine dans la nouvelle langue
@@ -4407,6 +4700,11 @@ $('#setupForm').addEventListener('submit', e => {
   S.activeId = S.founderId = p.id;
   S.familyAuto = $('#fFam').checked;
   log('info','start',[p.id, p.lastAge], day);
+  if($('#fRoyal').checked){                             // mode Royal
+    S.royal = {rule: $('#fRule').value || 'patri', king: p.id, lost:false};
+    if(S.royal.rule !== 'both') p.sex = S.royal.rule === 'patri' ? 'M' : 'F';
+    crown(p, day, true);
+  }
   scheduleYear(p, p.lastAge, day);
   sfx.start(); store.del(SAVE_KEY); enterGame(); save();
 });
@@ -4531,6 +4829,11 @@ function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); wind
     c.style.cssText = `--y:${rnd(4,40)}%;--w:${rnd(110,200)}px;--d:${rnd(70,130)}s;--dl:-${rnd(0,120)}s`; kfx.appendChild(c); }
   for(let i=0;i<26;i++){ const b = document.createElement('b'); if(i % 3 === 0) b.className = 'h';
     b.style.cssText = `left:${rnd(0,97)}%;top:${rnd(0,70)}%;--s:${rnd(12,24)}px;--c:${pick(KC)};--d:${rnd(30,60)/10}s;--dl:-${rnd(0,40)/10}s`; kfx.appendChild(b); }
+  const gfx2 = $('#gothfx');                         // chauves-souris du thème Dark
+  for(let i=0;i<6;i++){ const b = document.createElement('i'); b.className = 'bat';
+    b.style.cssText = `--y:${rnd(6,48)}%;--w:${rnd(26,54)}px;--d:${rnd(18,34)}s;--dl:-${rnd(0,34)}s`;
+    b.innerHTML = '<svg viewBox="0 0 64 30"><path d="M32 9c1.6-3 3.4-5 3.4-5s.9 2.6.2 5.2C41 6 49 3.6 60 6c-4.6 2-7 6-7 11-3.4-3.4-8-3.6-11.4-.4-.4-2.6-2-4-4.2-4.2C35 12.6 33.4 14 32 16c-1.4-2-3-3.4-5.4-3.6-2.2.2-3.8 1.6-4.2 4.2-3.4-3.2-8-3-11.4.4 0-5-2.4-9-7-11C15 3.6 23 6 28.4 9.2c-.7-2.6.2-5.2.2-5.2S30.4 6 32 9z"/></svg>';
+    gfx2.appendChild(b); }
   $$('.brand-slot').forEach((el,i) => { el.innerHTML = emblem('emb' + i); });
   $$('#mnav [data-icon]').forEach(b => b.insertAdjacentHTML('afterbegin', icon(b.dataset.icon)));   // icônes de la barre du bas
   try{ if(sessionStorage.getItem('lignee.wiped')){                     // après une remise à zéro : on revient du noir
