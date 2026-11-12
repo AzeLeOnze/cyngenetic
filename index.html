@@ -480,6 +480,9 @@ body.no-deco .bubble{display:none}
 #treeCanvas .node.king:not(.crim):not(.ill) .rtt,#treeCanvas .node.heir:not(.crim):not(.ill) .rtt{color:#5a17b0}
 #treeCanvas .node.heir:not(.crim):not(.ill) .nt span,#treeCanvas .node.heir:not(.crim):not(.ill) .n-city,#treeCanvas .node.heir:not(.crim):not(.ill) .n-life,#treeCanvas .node.heir:not(.crim):not(.ill) .nt b{color:#4a3000}
 .rib.exk{right:8px;color:#5a3a00;background:linear-gradient(180deg,#f3ead2,#d9c48a);border:1px solid #b8962e}
+#treeCanvas .node.noble:not(.crim):not(.ill){border-color:#c9a8ff;box-shadow:0 0 0 1.5px rgba(150,90,230,.45),0 7px 16px rgba(60,20,120,.16)}
+#treeCanvas .node.dechu:not(.crim):not(.ill){filter:grayscale(.65) brightness(.93);border-color:#9d97a8;background:linear-gradient(180deg,#eceaf0,#d3cfdb)}
+#treeCanvas .node.dechu .rtt{color:#6b6478}
 .regnal.royalrec{order:-1;padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,#fff9e0,#ffe9a6);border:1px solid #ffd24a;box-shadow:0 0 0 2px rgba(122,43,214,.25)}
 .node.crim{border-color:#7a0012;color:#ffe6e8;background:linear-gradient(160deg,#3a0008 0%,#12000a 46%,#5c0012 100%);
   box-shadow:0 0 0 2px #b0001a,0 0 18px 4px rgba(200,0,30,.45),0 8px 18px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,80,90,.35);animation:dark 3.2s ease-in-out var(--t,0s) infinite}
@@ -1139,9 +1142,16 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4c';
+const APP_VERSION = '0.1.4d';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4d', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode Royal : le roi (ou la reine) et le prince héritier ne peuvent devenir ni star ni criminel. Les bébés star ou criminel de la boutique ne fonctionnent pas pour un monarque.',
+       'Mode Royal : les autres enfants du monarque deviennent ducs et duchesses, et leurs enfants comtes et comtesses. Un duc ou un comte a 3 % de chances dans sa vie de renoncer à la vie royale : il devient « Déchu », avec une bulle grise, perd ses droits à la couronne, et ses enfants n\'ont plus de titre.',
+       'Écran de départ : « Patriarcale » (sans « par défaut »).'],
+   en:['Royal mode: the king (or queen) and the crown prince can no longer become a star or a criminal. The shop\'s star or criminal babies don\'t work for a monarch.',
+       'Royal mode: the monarch\'s other children become dukes and duchesses, and their children counts and countesses. A duke or count has a 3% chance in their life of giving up royal life: they become "Fallen", with a grey bubble, lose their claim to the crown, and their children get no title.',
+       'Start screen: "Patriarchal" (no more "default").']},
   {v:'0.1.4c', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode Royal : le prénom du roi, de la reine et des princes s\'affiche en entier dans la bulle (le titre passe devant le nom de famille).'],
    en:['Royal mode: the first name of kings, queens and princes now shows in full in the bubble (the title moves in front of the surname).']},
@@ -1848,7 +1858,7 @@ function findHeir(k){                                // 1) descendants du roi (a
   const kids = new Map();
   for(const c of Object.values(S.people)) if(c.parents && c.blood && !c.adopted) for(const pid of c.parents){ if(!kids.has(pid)) kids.set(pid, []); kids.get(pid).push(c); }
   const ok = c => S.royal.rule === 'both' || c.sex === (S.royal.rule === 'matri' ? 'F' : 'M');
-  const can = c => c.death == null && !jailed(c);
+  const can = c => c.death == null && !jailed(c) && c.noble !== 'dechu';      // un déchu a renoncé à la couronne
   const walk = p => {
     for(const c of (kids.get(p.id) || []).filter(ok).sort((x, y) => x.birth - y.birth)){ if(can(c)) return c.id; const r = walk(c); if(r) return r; }
     return null;
@@ -1862,6 +1872,21 @@ function heirId(){
   if(RH === undefined) RH = findHeir(P(S.royal.king));
   return RH;
 }
+function nobleRank(p){                               // enfant d'un monarque : duc ; enfant d'un duc : comte ; « déchu » s'il a renoncé
+  if(!p || !p.blood || !p.parents) return '';
+  if(p.noble === 'dechu') return 'dechu';
+  const par = p.parents.map(P).filter(Boolean);
+  if(par.some(q => q.wasKing)) return 'duc';
+  if(par.some(q => q.blood && q.noble !== 'dechu' && !q.wasKing && q.parents && q.parents.some(i => { const g2 = P(i); return g2 && g2.wasKing; }))) return 'comte';
+  return '';
+}
+function nobleYear(p, A, day){                        // ducs et comtes : 3 % de chances dans leur vie de renoncer à la vie royale
+  if(!royalOn() || p.death != null || p.id === S.royal.king || p.id === heirId()) return;
+  const r = nobleRank(p); if(r !== 'duc' && r !== 'comte') return;
+  if(!p.dechuRoll && A >= 18){ p.dechuRoll = true; if(Math.random() < .03) p.dechuAt = day + rnd(0, 40*365); }
+  if(p.dechuAt != null && day >= p.dechuAt){ p.dechuAt = null; p.noble = 'dechu'; RH = undefined; log('sad','dechu',[p.id], day, true); dirty = true; }
+}
+const royalImmune = p => royalOn() && (p.id === S.royal.king || p.id === heirId());   // ni star ni criminel
 function royalTitle(p){
   if(!royalOn() || !p || p.id == null || p.death != null) return '';
   const fr = LANG === 'fr', F = p.sex === 'F';
@@ -1869,10 +1894,15 @@ function royalTitle(p){
   if(p.id === heirId()) return fr ? (F ? 'Princesse' : 'Prince') : (F ? 'Princess' : 'Prince');
   const u = S.unions.find(x => x.end == null && ((x.a === S.royal.king && x.b === p.id) || (x.b === S.royal.king && x.a === p.id)));
   if(u) return F ? (fr ? 'Reine' : 'Queen') : (fr ? 'Prince consort' : 'Prince consort');
+  const rank = nobleRank(p);
+  if(rank === 'dechu') return fr ? (F ? 'Déchue' : 'Déchu') : 'Fallen';
+  if(rank === 'duc') return fr ? (F ? 'Duchesse' : 'Duc') : (F ? 'Duchess' : 'Duke');
+  if(rank === 'comte') return fr ? (F ? 'Comtesse' : 'Comte') : (F ? 'Countess' : 'Count');
   return '';
 }
 function crown(p, day, silent){
   S.royal.king = p.id; p.wasKing = true; RH = undefined;
+  if(p.crim && !p.crim.declared) delete p.crim; if(p.star && !p.star.famous) delete p.star; p.fameAt = null;   // un monarque n'a pas d'autre destin
   p.work = {s:'royal', act: pick(ROYAL_ACTS)[0]};
   log('star','crowned',[p.id], day, !silent);
   if(!silent){ sfx.fame(); burst(['#ffd000','#ffffff','#7a2bd6','#ffb300'], 60); cyn(100 * (hasAtout(p,'richesse') ? 2 : 1), p.id); }
@@ -2309,7 +2339,7 @@ fr:{
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
   start_hint:'Conseillé : 1780', lab_royal:'Mode Royal', royal_hint:"Ton personnage est sacré roi (ou reine). Sans héritier ni frère à sa mort, la partie s'arrête.",
-  lab_rule:'Sexe dominant', rule_patri:'Patriarcale (par défaut)', rule_matri:'Matriarcale', rule_both:'Les deux',
+  lab_rule:'Sexe dominant', rule_patri:'Patriarcale', rule_matri:'Matriarcale', rule_both:'Les deux',
   regency:'Règne sous régence', heir_act:p=>g(p,'Prince héritier','Princesse héritière'), ex_king:p=>g(p,'Ancien roi','Ancienne reine'),
   royal_names:'Prénom dynastique recommandé', alb_royal:'Royal', alb_royal_d:'Mode Royal',
   log_crowned:p=>`${nm(p)} monte sur le trône ! Vive ${g(P(p),'le roi','la reine')} !`,
@@ -2317,6 +2347,8 @@ fr:{
   log_royal_lost:()=>"Ni héritier ni frère pour reprendre la couronne : la dynastie s'éteint.",
   over_royal_title:l=>`Fin de la dynastie ${l}`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} est ${g(P(d.id || d),'mort','morte')} sans héritier ni frère pour lui succéder. La couronne s'éteint avec ${g(P(d.id || d),'lui','elle')}.`,
   alb_prince_d:'Prince ou princesse héritier',
+  shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'),
+  log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
   end_note_over:'La partie est terminée : les Cyn et les succès ne peuvent plus être gagnés dans cette partie.',
   end_note_2100:'Si tu continues à jouer, tu ne gagneras plus ni Cyn ni succès dans cette partie.',
   skin_goth:'Dark', skin_locked_goth:"Se débloque après 10 meurtres commis par des criminels (toutes parties confondues).",
@@ -2514,7 +2546,7 @@ en:{
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
   start_hint:'Recommended: 1780', lab_royal:'Royal mode', royal_hint:'Your character is crowned king (or queen). With no heir and no brother at their death, the game ends.',
-  lab_rule:'Ruling sex', rule_patri:'Patriarchal (default)', rule_matri:'Matriarchal', rule_both:'Both',
+  lab_rule:'Ruling sex', rule_patri:'Patriarchal', rule_matri:'Matriarchal', rule_both:'Both',
   regency:'Reigns under a regency', heir_act:p=>g(p,'Crown prince','Crown princess'), ex_king:p=>g(p,'Former king','Former queen'),
   royal_names:'Dynastic name recommended', alb_royal:'Royal', alb_royal_d:'Royal mode',
   log_crowned:p=>`${nm(p)} takes the throne! Long live the ${g(P(p),'king','queen')}!`,
@@ -2522,6 +2554,8 @@ en:{
   log_royal_lost:()=>'No heir and no brother to take the crown: the dynasty dies out.',
   over_royal_title:l=>`End of the ${l} dynasty`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} died with no heir and no brother to succeed them. The crown dies with them.`,
   alb_prince_d:'Crown prince or princess',
+  shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'),
+  log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
   end_note_over:'The game is over: Cyn and achievements can no longer be earned in this game.',
   end_note_2100:"If you keep playing, you won't earn any more Cyn or achievements in this game.",
   skin_goth:'Dark', skin_locked_goth:'Unlocks after 10 murders committed by criminals (across all games).',
@@ -2951,6 +2985,7 @@ function workTick(p, day){
   else if(w.s==='unemp'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','back_to_work',[p.id,j],day); }
 }
 function workYear(p, A, day){
+  nobleYear(p, A, day);
   if(royalOn() && A >= 16 && heirId() === p.id && (!p.princeAct || Math.random() < .4)){       // le prince héritier change d'occupation
     let a; do { a = pick(PRINCE_ACTS)[0]; } while(a === p.princeAct); p.princeAct = a; log('star','royal_act',[p.id, a], day, false);
   }
@@ -3331,7 +3366,7 @@ function birthChild(u, day){
     const fate = Math.random()*100;
     const pStar = [A,B].some(x => hasAtout(x,'chance')) ? Math.max(12, R.star) : R.star;      // atout Chance
     const pCrim = [A,B].some(x => hasAtout(x,'ego')) ? Math.max(12, R.crim) : R.crim;          // atout Égoïsme
-    const buy = i === 1 && S.nextFate && u.a === S.activeId ? S.nextFate : null;      // boutique : prochaine naissance du personnage joué
+    const buy = i === 1 && S.nextFate && u.a === S.activeId && !(royalOn() && u.a === S.royal.king) ? S.nextFate : null;      // boutique : prochaine naissance du personnage joué
     if(buy) S.nextFate = null;
     if(buy === 'star' || (!buy && fate < pStar)) c.star = {day: day + rnd(16,40)*365 + rnd(0,364), famous:false};      // 2,5 % : une future star
     else if(buy === 'crim' || (!buy && fate < pStar + pCrim)) c.crim = {day: day + rnd(18,60)*365 + rnd(0,364), declared:false, fate:null};  // 2 % : un futur criminel
@@ -3387,19 +3422,19 @@ function processDay(day){
     }
     if(p.murderAt != null && day >= p.murderAt){ die(p, day, {murder: p.murderBy}); continue; }
     if(p.crim){
-      if(!p.crim.declared && day >= p.crim.day) declareCrim(p, day);
+      if(!p.crim.declared && day >= p.crim.day){ if(royalImmune(p)) delete p.crim; else declareCrim(p, day); }
       else if(p.crim.declared && !p.crim.fate){
         if(p.crim.jailAt != null && day >= p.crim.jailAt) jailCrim(p, day);
         else if(p.crim.jailAt == null && day >= p.crim.at + 3650 && crimFate(p, day)) continue;
       }
     }
-    if(p.star && !p.star.famous && day >= p.star.day) becomeStar(p, day);
+    if(p.star && !p.star.famous && day >= p.star.day){ if(royalImmune(p)) delete p.star; else becomeStar(p, day); }
     if(p.fameAt != null && day >= p.fameAt){                 // célébrité tardive (enfant de star, streameur, joueur e-sport)
       const hint = p.fameJob; p.fameAt = null; p.fameJob = null;
-      if(!p.star && !p.crim){ p.star = {day, famous:false}; becomeStar(p, day, hint); }
+      if(!p.star && !p.crim && !royalImmune(p)){ p.star = {day, famous:false}; becomeStar(p, day, hint); }
     }
-    if(!p.star && !p.crim && p.fameAt == null) fameTick(p, day);
-    if(hasAtout(p,'crea') && !p.star && !p.crim && p.work && p.work.s === 'job' && p.work.job in ARTJOBS){   // atout Créativité
+    if(!p.star && !p.crim && p.fameAt == null && !royalImmune(p)) fameTick(p, day);
+    if(hasAtout(p,'crea') && !p.star && !p.crim && !royalImmune(p) && p.work && p.work.s === 'job' && p.work.job in ARTJOBS){   // atout Créativité
       p.star = {day, famous:false}; becomeStar(p, day, ARTJOBS[p.work.job]);
     }
     polTick(p, day);
@@ -3520,6 +3555,7 @@ function nodeHTML(p, x, y){
   if(pol){ cls.push('pol'); if(pres) cls.push('pres'); }
   const rtt = royalTitle(p), isKing = royalOn() && p.id === S.royal.king && p.death == null, isHeir = !isKing && heirId() === p.id;
   if(isKing) cls.push('king'); else if(isHeir) cls.push('heir');
+  else if(royalOn() && p.blood && p.death == null){ const nr = nobleRank(p); if(nr === 'dechu') cls.push('dechu'); else if(nr) cls.push('noble'); }
   const A = age(p), by = yearOf(p.birth), gone = p.cause && p.cause.vanished;
   const years = p.death!=null ? `${by} – ${yearOf(p.death)}${gone ? ' ?' : ''}` : `${by} –`;
   const ageL = gone ? `${t('vanished_short', p)} · ${tA(A)}` : p.death!=null ? `✝ ${tA(A)}` : tA(A);
@@ -4252,6 +4288,7 @@ function shopState(id, price){                        // disponible ? sinon pour
   const theme = SHOP_THEMES.includes(id), inGame = S && !$('#game').hidden && !S.over && !needHeir(), me = inGame ? active() : null;
   if(theme && UNL[id]) return {dis:true, owned:true};
   if(!theme && !inGame) return {dis:true, note:t('shop_need_game')};
+  if((id === 'star' || id === 'crim') && royalOn() && me.id === S.royal.king) return {dis:true, note:t('shop_royal_no', me)};
   if((id === 'star' || id === 'crim') && S.nextFate) return {dis:true, note:t(S.nextFate === id ? 'shop_pending' : 'shop_other_pending')};
   if(id === 'fertile' && S.nextMulti) return {dis:true, note:t('shop_pending')};
   if(id === 'immune' && immune(me, S.t)) return {dis:true, note:t('shop_immune_on', yearOf(me.immuneUntil))};

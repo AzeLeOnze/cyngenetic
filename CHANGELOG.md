@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4d — 12 novembre 2026
+
+- Mode Royal : le roi (ou la reine) et le prince héritier ne peuvent devenir ni star ni criminel. Les bébés star ou criminel de la boutique ne fonctionnent pas pour un monarque.
+- Mode Royal : les autres enfants du monarque deviennent ducs et duchesses, et leurs enfants comtes et comtesses. Un duc ou un comte a 3 % de chances dans sa vie de renoncer à la vie royale : il devient « Déchu », avec une bulle grise, perd ses droits à la couronne, et ses enfants n'ont plus de titre.
+- Écran de départ : « Patriarcale » (sans « par défaut »).
+
 ## v0.1.4c — 12 novembre 2026
 
 - Mode Royal : le prénom du roi, de la reine et des princes s'affiche en entier dans la bulle (le titre passe devant le nom de famille).
