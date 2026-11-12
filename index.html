@@ -95,6 +95,24 @@ button{font:inherit;color:inherit}
 .gel.danger.wob{animation:wob .35s}
 .gel.danger.flee:disabled{filter:none;cursor:default}
 @keyframes wob{25%{rotate:-5deg}75%{rotate:5deg}}
+#tuto{position:fixed;inset:0;z-index:95}
+.tuto-hole{position:fixed;border-radius:18px;pointer-events:none;box-shadow:0 0 0 9999px rgba(0,25,70,.6),0 0 0 3px #fff,0 0 26px 8px rgba(120,220,255,.85);
+  transition:left .35s cubic-bezier(.3,1.2,.4,1),top .35s cubic-bezier(.3,1.2,.4,1),width .35s cubic-bezier(.3,1.2,.4,1),height .35s cubic-bezier(.3,1.2,.4,1)}
+.tuto-hole.center{left:50%;top:50%;width:0;height:0;box-shadow:0 0 0 9999px rgba(0,25,70,.6)}
+.tuto-card{position:fixed;width:min(340px,calc(100vw - 24px));padding:16px 18px 14px;border-radius:22px;transition:left .35s ease,top .35s ease}
+.tuto-card.pop{animation:tutoin .35s cubic-bezier(.2,1.3,.4,1)}
+.tuto-card h3{margin:2px 0 6px;font:800 19px/1.2 var(--font-display)}
+.tuto-card p{margin:0 0 14px;font-size:14px;line-height:1.45;color:var(--ink-soft)}
+.tuto-btns{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tuto-btns>span{display:flex;gap:6px}
+.tuto-btns .gel{min-height:38px;padding:6px 16px;font-size:14px}
+@keyframes tutoin{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.tuto-offer{text-align:center;padding:6px 4px 2px}
+.tuto-offer h2{margin:4px 0 8px;font:800 26px var(--font-display)}
+.tuto-offer p{margin:0 auto 18px;max-width:380px;color:var(--ink-soft);line-height:1.45}
+.tuto-ic{display:inline-grid;place-items:center;width:64px;height:64px;margin-bottom:8px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ffd23a 50%,#ff9500);box-shadow:0 6px 16px rgba(255,150,0,.35)}
+.tuto-ic svg{width:32px;height:32px;fill:currentColor}
+.tuto-choice{display:flex;flex-direction:column;align-items:center;gap:10px}
 .wipefade{position:fixed;inset:0;z-index:9999;background:#000;opacity:0;transition:opacity 1.5s ease;pointer-events:all}
 .wipefade.on{opacity:1}
 .shopbal{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 12px;padding:12px 16px;border-radius:20px;background:linear-gradient(180deg,#effffa,#cdf6ea);border:1px solid #fff;
@@ -1056,9 +1074,12 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.3g';
+const APP_VERSION = '0.1.3h';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.3h', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Tutoriel : les nouveaux joueurs (et après une remise à zéro totale) peuvent suivre un petit tutoriel pas à pas, ou le refuser. Il met en lumière chaque partie de l\'écran, et se relance à tout moment dans les Paramètres.'],
+   en:['Tutorial: new players (and anyone after a full reset) can follow a short step-by-step tutorial, or turn it down. It highlights each part of the screen, and can be replayed anytime from Settings.']},
   {v:'0.1.3g', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Maladies bénignes : la bulle est plus discrète (simple liseré rose) et une petite étiquette « Malade » s\'affiche en bas.',
        'Maladies bénignes 1,29 fois moins fréquentes, et 3 nouvelles qui durent de 15 à 30 ans : arthrose, hypertension et hypothyroïdie.',
@@ -2129,6 +2150,10 @@ fr:{
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
+  tuto_offer_e:'Nouveau joueur ?', tuto_offer_t:'Bienvenue !', tuto_offer:"Tu découvres Cyngenetic ? Un petit tutoriel d'environ 2 minutes te montre les bases du jeu.",
+  tuto_yes:'Oui, montre-moi', tuto_no:'Non merci, je me débrouille', tuto_next:'Suivant', tuto_prev:'Retour', tuto_skip:'Passer', tuto_end:"C'est parti !",
+  tuto_set:'Tutoriel', tuto_set_hint:'Revoir les bases du jeu.', tuto_set_btn:'Lancer', tuto_planned:'Au début de la prochaine partie',
+  tuto_steps:[['Bienvenue dans Cyngenetic','Tu incarnes une personne. Ton but : faire vivre sa lignée le plus longtemps possible, de génération en génération.'],['Le temps passe','La date avance toute seule : une année dure 4 secondes. Ton personnage grandit, étudie, travaille et vieillit.'],['Vitesse et pause','Accélère, ralentis, ou mets le jeu en pause quand tu as besoin de réfléchir.'],['Ton personnage','C\'est toi ! Touche n\'importe quelle bulle de l\'arbre pour ouvrir sa fiche : âge, métier, santé, atout… Pince ou utilise la molette pour zoomer.'],['L\'âme sœur','Dès 18 ans, trouve l\'âme sœur (ici, ou dans ta fiche). En couple, vous pouvez vous marier et avoir des enfants.'],['La relève','Personne ne vit éternellement : à la mort de ton personnage, tu continues avec un de ses descendants. Sans héritier, la lignée s\'éteint.'],['Les Cyn','Naissances, stars, criminels… les événements te rapportent des Cyn. Touche le compteur pour ouvrir la boutique.'],['La boutique','Dépense tes Cyn : bébé star, fertilité, immunité, potion de santé, nouveaux thèmes…'],['L\'album','Tout ce que tu découvres (métiers, maladies, écoles…) s\'y range pour toujours, d\'une partie à l\'autre.'],['Les succès','Des défis à relever au fil de tes parties. Certains débloquent des thèmes.'],['Le journal','Naissances, mariages, maladies, décès : tout ce qui arrive à ta famille y est raconté.'],['Le mode auto','Envie de simplement regarder ? Le mode auto joue à ta place.'],['Réglages','Les Paramètres (son, thème, langue) et la Personnalisation (règles du jeu) se trouvent ici.'],['À toi de jouer !','Tu pourras revoir ce tutoriel à tout moment dans les Paramètres. Bonne chance pour ta lignée !']],
   shop_eyebrow:'Dépense tes Cyn', shop_potion:'Potion de santé', shop_potion_d:"Guérit toutes les maladies d'un membre de la famille au choix, même les plus graves.",
   shop_potion_none:"Personne n'est malade dans la famille.", pick_potion:()=>'Qui doit boire la potion ?', sick_soon:'Va bientôt tomber malade',
   f_mild:'Maladies bénignes', sick_rib:()=>'Malade', alb_mild:'Maladies', until_y:y=>`jusqu'en ${y}`,
@@ -2312,6 +2337,10 @@ en:{
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
+  tuto_offer_e:'New player?', tuto_offer_t:'Welcome!', tuto_offer:'New to Cyngenetic? A short tutorial (about 2 minutes) shows you the basics.',
+  tuto_yes:'Yes, show me', tuto_no:"No thanks, I'll figure it out", tuto_next:'Next', tuto_prev:'Back', tuto_skip:'Skip', tuto_end:"Let's go!",
+  tuto_set:'Tutorial', tuto_set_hint:'Go over the basics again.', tuto_set_btn:'Start', tuto_planned:'At the start of the next game',
+  tuto_steps:[['Welcome to Cyngenetic','You play one person. Your goal: keep their bloodline going for as long as possible, generation after generation.'],['Time flies','The date moves on by itself: one year lasts 4 seconds. Your character grows up, studies, works and gets older.'],['Speed and pause','Speed up, slow down, or pause the game whenever you need to think.'],['Your character','That\'s you! Tap any bubble in the tree to open its card: age, job, health, gift… Pinch or use the mouse wheel to zoom.'],['Your soulmate','From 18, find your soulmate (here, or from your card). As a couple, you can marry and have children.'],['Carrying on','Nobody lives forever: when your character dies, you carry on as one of their descendants. With no heir, the bloodline ends.'],['Cyn','Births, stars, criminals… events earn you Cyn. Tap the counter to open the shop.'],['The shop','Spend your Cyn: star baby, fertility, immunity, health potion, new themes…'],['The album','Everything you discover (jobs, illnesses, schools…) is kept here for good, from one game to the next.'],['Achievements','Challenges to complete across your games. Some unlock themes.'],['The journal','Births, weddings, illnesses, deaths: everything that happens to your family is told here.'],['Auto mode','Just want to watch? Auto mode plays for you.'],['Settings','Settings (sound, theme, language) and Customization (game rules) are right here.'],['Your turn!','You can replay this tutorial anytime from Settings. Good luck with your bloodline!']],
   shop_eyebrow:'Spend your Cyn', shop_potion:'Health potion', shop_potion_d:'Cures every illness of a family member of your choice, even the most serious.',
   shop_potion_none:'Nobody in the family is ill.', pick_potion:()=>'Who should drink the potion?', sick_soon:'About to fall ill',
   f_mild:'Mild illnesses', sick_rib:()=>'Sick', alb_mild:'Illnesses', until_y:y=>`until ${y}`,
@@ -4046,6 +4075,7 @@ function openSettings(re){
     ${sw('data-set','regnal',SET.regnal,t('set_regnal'),t('set_regnal_hint'))}
     <div class="setrow"><span><b>${t('set_reset_ach')}</b><small>${t('set_reset_ach_hint')}</small></span><button class="gel ghost" data-act="resetach"><span>${t('reset')}</span></button></div>
     <div class="setrow"><span><b>${t('pn_title')}</b><small>${t('pn_hint', APP_VERSION)}</small></span><button class="gel ghost" data-act="patchnotes"><span>${t('pn_open')}</span></button></div>
+    <div class="setrow"><span><b>${t('tuto_set')}</b><small>${t('tuto_set_hint')}</small></span><button class="gel ghost" data-act="tutostart"><span>${t('tuto_set_btn')}</span></button></div>
     <div class="setrow wiperow"><span><b>${t('set_wipe')}</b><small>${t('set_wipe_hint')}</small></span><button class="gel danger" data-act="wipe" data-step="0"><span>${t('wipe_btn')}</span></button></div>
     <p class="ver">Cyngenetic v${APP_VERSION}</p>
   </div>`, {sound: !re});
@@ -4109,6 +4139,14 @@ const ACT = {
   legal(d){ R.legal = +d.v; saveRules(); dirty = true; openCustom(true); },
   resetrules(){ R = Object.assign({}, RULES_DEF); saveRules(); dirty = true; sfx.pop(); openCustom(true); },
   shop(){ openShop(false); },
+  tuto(d){ if(d.v === 'yes') startTuto(); else { store.set(TUTO_KEY, 'skip'); closeModal(true); } },
+  tnext(){ const n = t('tuto_steps').length; if(tutoI >= n - 1) endTuto(); else tutoShow(tutoI + 1); },
+  tprev(){ if(tutoI > 0) tutoShow(tutoI - 1); },
+  tskip(){ endTuto(); },
+  tutostart(d, b){
+    if(S && !$('#game').hidden && !S.over){ closeModal(true); startTuto(); return; }
+    store.del(TUTO_KEY); b.disabled = true; b.querySelector('span').textContent = t('tuto_planned');
+  },
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
@@ -4398,7 +4436,72 @@ function enterGame(){
   renderControls(); setView(curView); render();
   requestAnimationFrame(() => centerOn(S.activeId, false));
   if(S.over){ gameOver(active()); }
+  else setTimeout(tutoCheck, 1500);
 }
+/* ================= Tutoriel (nouveaux joueurs, ou après une remise à zéro) ================= */
+const TUTO_KEY = 'lignee.tuto.v1';
+const TUTO_SEL = [[], ['#lcd'], ['#speeds'], ['#treeCanvas .node.active', '#treeScroll'], ['.side [data-act="soulmate"]', '#mnav [data-v="me"]'], [],
+  ['#cynBox'], ['.topbar [data-act="shop"]'], ['.topbar .albb', '#mnav [data-act="album"]'], ['.topbar .achb', '#mnav [data-act="achs"]'],
+  ['.side .journal', '#mnav [data-v="journal"]'], ['#btnAuto'], ['.topbar [data-act="settings"]'], []];
+let tutoI = -1, tutoWasPaused = false;
+function tutoCheck(){                                 // propose le tutoriel dès que l'écran est libre
+  if(store.get(TUTO_KEY) || !S || $('#game').hidden || tutoI >= 0) return;
+  if(modalOpen || blocked()){ setTimeout(tutoCheck, 800); return; }
+  openModal(`<div class="tuto-offer"><span class="tuto-ic">${icon('bulb')}</span><div class="eyebrow">${t('tuto_offer_e')}</div><h2>${t('tuto_offer_t')}</h2><p>${t('tuto_offer')}</p>
+    <div class="tuto-choice"><button class="gel lime big" data-act="tuto" data-v="yes"><span>${t('tuto_yes')}</span></button><button class="gel ghost" data-act="tuto" data-v="no"><span>${t('tuto_no')}</span></button></div></div>`, {locked:true});
+}
+function startTuto(){
+  if(!S || $('#game').hidden) return;
+  if(modalOpen) closeModal(true);
+  setMobileTab('tree'); if(curView !== 'tree') setView('tree');
+  tutoWasPaused = S.paused; S.paused = true; renderControls();
+  let box = $('#tuto'); if(box) box.remove();
+  document.body.insertAdjacentHTML('beforeend', '<div id="tuto" role="dialog" aria-modal="true"><div class="tuto-hole center" id="tutoHole"></div><div class="tuto-card glass" id="tutoCard"></div></div>');
+  centerOn(S.activeId, false);
+  tutoShow(0);
+}
+function tutoShow(i){
+  const steps = t('tuto_steps'); tutoI = i;
+  const [title, txt] = steps[i], last = i === steps.length - 1;
+  $('#tutoCard').innerHTML = `<div class="eyebrow">${i + 1} / ${steps.length}</div><h3>${esc(title)}</h3><p>${esc(txt)}</p>
+    <div class="tuto-btns">${last ? '<span></span>' : `<button class="gel ghost" data-act="tskip"><span>${t('tuto_skip')}</span></button>`}
+      <span>${i ? `<button class="gel ghost" data-act="tprev"><span>${t('tuto_prev')}</span></button>` : ''}<button class="gel lime" data-act="tnext"><span>${t(last ? 'tuto_end' : 'tuto_next')}</span></button></span></div>`;
+  const c = $('#tutoCard'); c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop');
+  requestAnimationFrame(tutoPlace);
+}
+function tutoPlace(){                                 // met en lumière l'élément et place la bulle d'explication à côté
+  const card = $('#tutoCard'), hole = $('#tutoHole'); if(!card || tutoI < 0) return;
+  let el = null;
+  for(const sel of TUTO_SEL[tutoI] || []){
+    const e = document.querySelector(sel); if(!e) continue;
+    const r = e.getBoundingClientRect(); if(r.width > 0 && r.height > 0 && e.getClientRects().length){ el = e; break; }
+  }
+  const W = innerWidth, H = innerHeight, cw = card.offsetWidth, ch = card.offsetHeight;
+  if(!el){ hole.classList.add('center'); card.style.left = Math.max(12, (W - cw)/2) + 'px'; card.style.top = Math.max(12, (H - ch)/2) + 'px'; return; }
+  el.scrollIntoView({block:'nearest', inline:'nearest'});
+  const r = el.getBoundingClientRect(), pad = 6;
+  const L = Math.max(4, r.left - pad), T = Math.max(4, r.top - pad), Rr = Math.min(W - 4, r.right + pad), B = Math.min(H - 4, r.bottom + pad);
+  hole.classList.remove('center');
+  Object.assign(hole.style, {left: L + 'px', top: T + 'px', width: (Rr - L) + 'px', height: (B - T) + 'px'});
+  let top = B + 12;
+  if(top + ch > H - 12) top = T - ch - 12;
+  if(top < 12) top = Math.max(12, Math.min(H - ch - 12, (T + B)/2 - ch/2));
+  const left = Math.max(12, Math.min(W - cw - 12, (L + Rr)/2 - cw/2));
+  card.style.left = left + 'px'; card.style.top = top + 'px';
+}
+function endTuto(){
+  const box = $('#tuto'); if(box) box.remove();
+  tutoI = -1; store.set(TUTO_KEY, 'done');
+  const ctr = $('.topbar .ctrls'); if(ctr) ctr.scrollLeft = 0;          // la barre du haut revient au début
+  if(S){ S.paused = tutoWasPaused; renderControls(); }
+}
+addEventListener('resize', () => { if(tutoI >= 0) tutoPlace(); });
+document.addEventListener('keydown', e => {
+  if(tutoI < 0) return;
+  if(e.key === 'Escape'){ e.preventDefault(); e.stopPropagation(); endTuto(); }
+  else if(e.key === 'Enter' || e.key === 'ArrowRight'){ e.preventDefault(); ACT.tnext(); }
+  else if(e.key === 'ArrowLeft' && tutoI > 0){ e.preventDefault(); tutoShow(tutoI - 1); }
+}, true);
 function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
 
 /* ================= Démarrage ================= */
@@ -4435,6 +4538,7 @@ function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); wind
     const fade = document.createElement('div'); fade.className = 'wipefade on'; document.body.appendChild(fade);
     requestAnimationFrame(() => requestAnimationFrame(() => fade.classList.remove('on'))); setTimeout(() => fade.remove(), 1700);
   } }catch(e){}
+  if(!store.get(TUTO_KEY) && (store.get(SAVE_KEY) || store.get(ACH_KEY) || store.get(CYN_KEY))) store.set(TUTO_KEY, 'old');
   // nouvelle version : les notes s'ouvrent une fois pour les joueurs qui avaient déjà joué
   const SEEN_KEY = 'lignee.seenVersion', seen = store.get(SEEN_KEY);
   if(seen !== APP_VERSION){

@@ -2,6 +2,10 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3h — 12 novembre 2026
+
+- Tutoriel : les nouveaux joueurs (et après une remise à zéro totale) peuvent suivre un petit tutoriel pas à pas, ou le refuser. Il met en lumière chaque partie de l'écran, et se relance à tout moment dans les Paramètres.
+
 ## v0.1.3g — 12 novembre 2026
 
 - Maladies bénignes : la bulle est plus discrète (simple liseré rose) et une petite étiquette « Malade » s'affiche en bas.
