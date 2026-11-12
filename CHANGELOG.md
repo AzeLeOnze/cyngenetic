@@ -2,6 +2,11 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4k — 12 novembre 2026
+
+- Mode auto : le personnage joué cherche maintenant toujours l'âme sœur (entre 20 et 28 ans) et veut au moins 2 enfants. Avant, il pouvait rester seul toute sa vie et éteindre la lignée dès la première génération.
+- Mode Royal : le monarque et l'héritier cherchent aussi toujours l'âme sœur et veulent au moins 2 enfants, pour que la dynastie ne s'éteigne pas bêtement.
+
 ## v0.1.4j — 12 novembre 2026
 
 - Centres d'intérêt : « Fan de Star Wars » devient « Fan de séries », et nouveau centre d'intérêt « Fan de… » une star de la famille, actuelle ou passée (par exemple « Fan de Louise Prunier »).
