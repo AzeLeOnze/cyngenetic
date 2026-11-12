@@ -669,9 +669,9 @@ body.no-deco .bubble{display:none}
   box-shadow:0 7px 16px rgba(0,70,160,.24),inset 0 1px 0 #fff,inset 0 -4px 10px rgba(0,150,255,.10);transition:transform .15s}
 .node:hover{transform:translateY(-2px) scale(1.03)}
 .node.partner{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(235,248,255,.78))}
-.n-top{display:flex;align-items:center;gap:8px;text-align:left;min-width:0}
+.n-top{display:flex;align-items:center;gap:8px;text-align:left;min-width:0;max-width:100%}
 .n-top .orb{width:40px;height:40px}
-.nt{display:flex;flex-direction:column;min-width:0;line-height:1.15}
+.nt{display:flex;flex-direction:column;min-width:0;line-height:1.15;overflow:hidden}
 .nt b{font:800 14px var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nt span{font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .n-life{display:flex;flex-direction:column;align-items:center;line-height:1.2;font-size:12px;font-variant-numeric:tabular-nums}
@@ -1139,9 +1139,12 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4b';
+const APP_VERSION = '0.1.4c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4c', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode Royal : le prénom du roi, de la reine et des princes s\'affiche en entier dans la bulle (le titre passe devant le nom de famille).'],
+   en:['Royal mode: the first name of kings, queens and princes now shows in full in the bubble (the title moves in front of the surname).']},
   {v:'0.1.4b', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode Royal : les bulles du roi et du prince héritier sont bien cadrées (le titre est sur la ligne du prénom, l\'activité peut tenir sur deux lignes).',
        'Mode Royal : 8 nouvelles activités pour le roi (audience au peuple, flotte, opéra, festin, alliance, route royale, hôpital, feu d\'artifice) et 16 pour le prince héritier dès 16 ans (escrime, équitation, précepteur, régiment, voyage diplomatique…). Elles rejoignent la catégorie Royal de l\'album.',
@@ -3531,7 +3534,7 @@ function nodeHTML(p, x, y){
   return `${flames}<button class="${cls.join(' ')}" style="left:${x}px;top:${y}px;--t:@T@" data-act="fiche" data-id="${p.id}" aria-label="${esc(nm(p))}">
     ${p.id===S.activeId?`<em class="rib you">${t('you')}</em>`:''}${rib}${sparkles}${!p.ill && p.death==null && mildOn(p).length ? `<em class="rib sick">${t('sick_rib', p)}</em>` : ''}
     ${isKing || isHeir ? `<i class="crownfx ${isHeir ? 'small' : ''}">${CROWN_SVG}</i>` : ''}
-    <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b>${rtt ? `<small class="rtt">${esc(rtt)}</small>` : ''}${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
+    <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b>${esc(p.first||'…')}</b><span>${rtt ? `<small class="rtt">${esc(rtt.replace(' consort', ''))}</small>` : ''}${esc(p.last)}</span></span></span>
     <span class="n-life"><span>${years}</span><b>${ageL}</b></span>
     <span class="n-city">${icon('pin')}<span>${esc(cityLine(p))}</span></span>
     <span class="n-band">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}

@@ -2,6 +2,10 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4c — 12 novembre 2026
+
+- Mode Royal : le prénom du roi, de la reine et des princes s'affiche en entier dans la bulle (le titre passe devant le nom de famille).
+
 ## v0.1.4b — 12 novembre 2026
 
 - Mode Royal : les bulles du roi et du prince héritier sont bien cadrées (le titre est sur la ligne du prénom, l'activité peut tenir sur deux lignes).
