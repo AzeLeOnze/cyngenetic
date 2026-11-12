@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3g — 12 novembre 2026
+
+- Maladies bénignes : la bulle est plus discrète (simple liseré rose) et une petite étiquette « Malade » s'affiche en bas.
+- Maladies bénignes 1,29 fois moins fréquentes, et 3 nouvelles qui durent de 15 à 30 ans : arthrose, hypertension et hypothyroïdie.
+- Album : nouvelle catégorie Maladies pour les maladies bénignes, avec son succès « Carnet de santé ».
+
 ## v0.1.3f — 12 novembre 2026
 
 - Maladies bénignes : 18 nouvelles maladies qui ne tuent pas (gale, goutte, asthme, zona, burn-out, rhume des foins…) selon les époques, et 4 du futur après 2030 (fièvre numérique, nanodermite, grippe martienne, syndrome holographique). Elles durent de quelques mois à quelques années, se cumulent, donnent une bulle rouge pâle et doublent le risque d'une maladie grave.
