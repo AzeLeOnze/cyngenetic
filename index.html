@@ -159,9 +159,20 @@ button{font:inherit;color:inherit}
 .si-crim{background:radial-gradient(circle at 35% 30%,#fff 0 8%,#ff3b3b 50%,#7a0010)}
 .shopsec+.shopsec{margin-top:14px}
 .shopsec>.eyebrow{margin-bottom:8px}
-.shopgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.shopgrid .shopit{grid-template-columns:44px 1fr;align-content:start}
-.shopgrid .shopit .gel{grid-column:1/-1;width:100%}
+.shopgrid{display:grid;grid-template-columns:1fr;gap:8px}
+.shopgrid .shopit{grid-template-columns:52px 1fr auto;gap:14px;padding:12px 14px 12px 12px}
+.shopgrid .shopit>i{width:52px;height:52px;border-radius:16px}
+.shopgrid .shopit>i svg{width:26px;height:26px}
+.shopgrid .shopit b{font-size:16px}
+.shopgrid .shopit small{font-size:13px;line-height:1.4;margin-top:2px}
+.shopgrid .shopit .gel{min-width:104px;min-height:42px;padding:6px 14px;gap:6px;font-size:15px}
+.shopgrid .shopit .gel svg{width:16px;height:16px}
+.shopgrid .shopit .gel.gold:not(:disabled){color:#5a2c00;text-shadow:0 1px 0 rgba(255,255,255,.55);font-weight:900}
+.shopgrid .shopit .gel.gold:not(:disabled) svg{fill:#5a2c00}
+.shopgrid .shopit em{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:99px;background:rgba(255,47,156,.1)}
+.shopsec>.eyebrow{display:flex;align-items:center;gap:8px;margin:2px 0 8px;font-size:12.5px}
+.shopsec>.eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(0,90,200,.25),transparent)}
+@media (max-width:520px){ .shopgrid .shopit{grid-template-columns:44px 1fr} .shopgrid .shopit>i{width:44px;height:44px} .shopgrid .shopit .gel{grid-column:1/-1;width:100%} }
 .shopit.owned{opacity:.75}
 .si-fertile{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff6cc0 55%,#cc0070)}
 .si-immune{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#8cff1a 55%,#2c9200)}
@@ -171,6 +182,7 @@ button{font:inherit;color:inherit}
 .spform .m-actions{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .fieldhint{display:block;margin-top:4px;font:700 11.5px var(--font-display);color:var(--aqua-deep)}
 .endnote{margin:8px 0 0;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.55);font-size:13px;color:var(--ink-soft)}
+.si-antidote{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#b6ff6a 50%,#2f7a10)}
 .si-vaccin{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 50%,#0a7a8a)}
 .si-lueur{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#c9a8ff 50%,#5a17b0)}
 .autowarn{display:flex;flex-direction:column;align-items:center;text-align:center;padding:4px 6px 2px;max-width:420px;margin:0 auto}
@@ -572,6 +584,25 @@ body.no-deco .bubble{display:none}
 .facts .zf{background:linear-gradient(180deg,#eef8df,#d0e8ad);border-color:#a9c47e}
 .facts .zf dd{color:#3d5a14}
 .opt-ic.zomb{background:linear-gradient(160deg,#c8f08a,#6aa82e 55%,#2f5410)}
+/* Ambiance zombie */
+.zfx{position:fixed;inset:0;z-index:45;pointer-events:none;display:none}
+body.zmode .zfx{display:block}
+.zfx .ztint{position:absolute;inset:0;background:#3f7a12;mix-blend-mode:multiply;opacity:calc(.06 + var(--zp,0) * .32);transition:opacity 3s}
+.zfx .zvig{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 45%,rgba(10,30,0,.55) 100%);opacity:calc(.35 + var(--zp,0) * .65);animation:zbreath 6s ease-in-out infinite}
+@keyframes zbreath{50%{filter:brightness(.8)}}
+body.zmode .sky{filter:hue-rotate(calc(var(--zp,0) * -70deg)) saturate(calc(1 - var(--zp,0) * .35)) brightness(calc(1 - var(--zp,0) * .3));transition:filter 3s}
+body.zmode .bubble{opacity:calc(.6 - var(--zp,0) * .5)}
+.zcracks{position:absolute;inset:0;pointer-events:none;display:none}
+body.zmode .zcracks{display:block}
+.zcracks.deco{z-index:1}
+body.zmode .treebox{position:relative}
+#zTreeCracks{z-index:4}
+.zcracks svg{width:100%;height:100%;display:block}
+.zcracks .ck{opacity:0;transition:opacity 2.5s}
+.zcracks .ck.on{opacity:1}
+.zcracks .ck-l{fill:none;stroke:rgba(230,255,200,.35);stroke-width:3.2;stroke-linejoin:round;transform:translate(1.5px,1.5px)}
+.zcracks .ck-d{fill:none;stroke:rgba(20,35,8,.75);stroke-width:2;stroke-linejoin:round}
+#zTreeCracks .ck-d{stroke:rgba(20,35,8,.55)}
 .regnal.royalrec{order:-1;padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,#fff9e0,#ffe9a6);border:1px solid #ffd24a;box-shadow:0 0 0 2px rgba(122,43,214,.25)}
 .node.crim{border-color:#7a0012;color:#ffe6e8;background:linear-gradient(160deg,#3a0008 0%,#12000a 46%,#5c0012 100%);
   box-shadow:0 0 0 2px #b0001a,0 0 18px 4px rgba(200,0,30,.45),0 8px 18px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,80,90,.35);animation:dark 3.2s ease-in-out var(--t,0s) infinite}
@@ -1060,6 +1091,8 @@ body.no-deco .gothfx .bat{display:none}
 @keyframes flap{to{transform:scaleY(.35)}}
 .skin.sk-goth i{background:radial-gradient(circle at 72% 30%,#f7efff 0 11%,rgba(0,0,0,0) 14%),linear-gradient(180deg,#030008,#1a0626 55%,#5a0f2e)}
 </style>
+
+<div class="zfx" aria-hidden="true"><i class="ztint"></i><i class="zvig"></i></div>
 </head>
 <body>
 <div class="sky" aria-hidden="true">
@@ -1089,6 +1122,7 @@ body.no-deco .gothfx .bat{display:none}
   <div class="goldfx" id="goldfx"></div>
   <div class="nightfx" id="nightfx"></div>
   <div class="kidfx" id="kidfx"><i class="rainbow"></i></div>
+  <div class="zcracks deco" id="zSkyCracks"></div>
   <div class="gothfx" id="gothfx"><i class="fog"></i><i class="fog f2"></i></div>
 </div>
 
@@ -1211,6 +1245,7 @@ body.no-deco .gothfx .bat{display:none}
       </div>
       <div id="treeScroll" class="tree-scroll"><div id="treeSizer" class="tree-sizer"><div id="treeCanvas" class="tree-canvas"></div></div></div>
       <div id="mapView" class="mapview" hidden></div>
+      <div class="zcracks" id="zTreeCracks" aria-hidden="true"></div>
     </section>
     <aside id="side" class="side"></aside>
   </main>
@@ -1240,9 +1275,18 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.5a';
+const APP_VERSION = '0.1.5b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.5b', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode Zombie : dès le premier zombie, l\'ambiance change. L\'écran verdit et s\'assombrit peu à peu, et des fissures apparaissent dans le décor et sur l\'arbre, de plus en plus nombreuses jusqu\'en 2100.',
+       'Mode Zombie : contamination réduite à 2 % par an. En devenant zombie, une star ou un criminel perd ce statut.',
+       'Boutique refaite, plus lisible (une liste claire avec le prix à droite), avec une section Survie en mode Zombie : le Vaccin protège maintenant 20 ans, et le nouvel Antidote (500 Cyn) guérit un zombie, qui redevient humain et reste protégé 20 ans. Ni l\'un ni l\'autre ne s\'achète après 2050.',
+       'Nouveau succès « Survivant » : terminer le mode Zombie de 1780 à 2100.'],
+   en:['Zombie mode: from the first zombie on, the mood changes. The screen slowly turns greener and darker, and cracks spread across the scenery and the tree, more and more until 2100.',
+       'Zombie mode: infection lowered to 2% per year. A star or a criminal loses that status on turning into a zombie.',
+       'Shop redesigned and easier to read (a clear list with the price on the right), with a Survival section in Zombie mode: the Vaccine now protects for 20 years, and the new Antidote (500 Cyn) cures a zombie, who becomes human again and stays protected for 20 years. Neither can be bought after 2050.',
+       'New achievement "Survivor": finish Zombie mode from 1780 to 2100.']},
   {v:'0.1.5a', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Nouveau mode de jeu : le Mode Zombie, à cocher au départ (comme le mode Royal, mais pas les deux à la fois). Pendant 60 ans, rien d\'anormal, avec un compte à rebours à côté des Cyn (« 59,4 ans avant le premier zombie ») et sa barre qui se vide.',
        'Puis un membre de la famille, au hasard, devient zombie : bulle verdâtre et pourrie, âge figé, date de mort « ? ». Un zombie ne peut plus se marier ni avoir d\'enfant, mais reste jouable. Chaque année, il contamine 3 % de ses voisins généalogiques (parents, enfants, conjoints), morts compris : les morts se relèvent !',
@@ -2609,9 +2653,13 @@ fr:{
   rg_title:'Règnes', rg_now:'en cours', rg_y:n=>`${n} an${n>1?'s':''}`, rg_now_y:n=>`${n} an${n>1?'s':''}, en cours`, rg_lost:'La couronne a quitté la famille : la dynastie est terminée.', f_reign:'Règne', span_ym:(y,m)=>`${y} an${y>1?'s':''}, ${m} mois`,
   reign_done:(a,b,d)=>`A régné du ${a} au ${b} (${d})`, reign_now:(a,d)=>`Règne depuis le ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^A/, 'a')}.`,
-  shop_vaccin:'Vaccin', shop_vaccin_d:'Protège un membre de la famille de la contamination zombie, pour toujours (mode Zombie).', shop_vaccin_none:'Personne à vacciner.', pick_vaccin:()=>'Qui doit être vacciné ?',
+  shopc_survie:'Survie', shop_vaccin:'Vaccin', shop_vaccin_d:'Protège un membre de la famille de la contamination zombie pendant 20 ans.',
+  shop_antidote:'Antidote', shop_antidote_d:'Guérit un zombie de la famille : il redevient humain et reste protégé pendant 20 ans.',
+  shop_antidote_none:'Aucun zombie à soigner.', pick_antidote:()=>'Quel zombie doit être soigné ?', shop_z_late:"Plus disponible après 2050.",
+  zprot_until:(p,y)=>`${g(p,'Protégé','Protégée')} des zombies jusqu'en ${y}`,
+  log_zcured:p=>`💉 ${P(p).first} ${P(p).last} reçoit l'antidote et redevient ${g(P(p),'humain','humaine')} !`, shop_vaccin_none:'Personne à vacciner.', pick_vaccin:()=>'Qui doit être vacciné ?',
   f_vaccin:'Vaccin', vaccinated:p=>g(p,'Vacciné contre les zombies','Vaccinée contre les zombies'),
-  log_vaccin:p=>`💉 ${nm(p)} est ${g(P(p),'vacciné','vaccinée')} : les zombies ne pourront plus ${g(P(p),'le','la')} contaminer.`,
+  log_vaccin:p=>`💉 ${nm(p)} est ${g(P(p),'vacciné','vaccinée')} : protection contre les zombies pendant 20 ans.`,
   shop_lueur:'Lueur Noble', shop_lueur_d:"Anoblit le membre de la famille de ton choix (mode Royal).", shop_lueur_none:"Personne à anoblir.", pick_lueur:()=>'Qui doit devenir noble ?', alb_noble_d:'Duc, duchesse, comte ou comtesse', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} est ${g(P(p),'anobli','anoblie')} : ${g(P(p),'il','elle')} rapportera 5 Cyn tous les 2 ans.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
@@ -2835,9 +2883,13 @@ en:{
   rg_title:'Reigns', rg_now:'ongoing', rg_y:n=>`${n} year${n>1?'s':''}`, rg_now_y:n=>`${n} year${n>1?'s':''}, ongoing`, rg_lost:'The crown has left the family: the dynasty is over.', f_reign:'Reign', span_ym:(y,m)=>`${y} year${y>1?'s':''}, ${m} month${m>1?'s':''}`,
   reign_done:(a,b,d)=>`Reigned from ${a} to ${b} (${d})`, reign_now:(a,d)=>`Reigning since ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^R/, 'r')}.`,
-  shop_vaccin:'Vaccine', shop_vaccin_d:'Protects a family member from zombie infection for good (Zombie mode).', shop_vaccin_none:'Nobody left to vaccinate.', pick_vaccin:()=>'Who should be vaccinated?',
+  shopc_survie:'Survival', shop_vaccin:'Vaccine', shop_vaccin_d:'Protects a family member from zombie infection for 20 years.',
+  shop_antidote:'Antidote', shop_antidote_d:'Cures a zombie in the family: they become human again and stay protected for 20 years.',
+  shop_antidote_none:'No zombie to cure.', pick_antidote:()=>'Which zombie should be cured?', shop_z_late:'No longer available after 2050.',
+  zprot_until:(p,y)=>`Protected from zombies until ${y}`,
+  log_zcured:p=>`💉 ${P(p).first} ${P(p).last} gets the antidote and is human again!`, shop_vaccin_none:'Nobody left to vaccinate.', pick_vaccin:()=>'Who should be vaccinated?',
   f_vaccin:'Vaccine', vaccinated:()=>'Vaccinated against zombies',
-  log_vaccin:p=>`💉 ${nm(p)} is vaccinated: zombies can no longer infect them.`,
+  log_vaccin:p=>`💉 ${nm(p)} is vaccinated: protected from zombies for 20 years.`,
   shop_lueur:'Noble Glow', shop_lueur_d:'Ennobles the family member of your choice (Royal mode).', shop_lueur_none:'Nobody left to ennoble.', pick_lueur:()=>'Who should become a noble?', alb_noble_d:'Duke, duchess, count or countess', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} is ennobled and will bring in 5 Cyn every 2 years.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
@@ -3007,6 +3059,7 @@ const ACHS = [
  ['gen22','time','silver','Relais express',"Partir de 1780 et arriver en 2100 avec une moyenne de 22 ans ou moins par génération",'Express relay','Start in 1780 and reach 2100 averaging 22 years or less per generation'],
  ['gen20','time','gold','Sprint généalogique',"Partir de 1780 et arriver en 2100 avec une moyenne de 20 ans ou moins par génération",'Family-tree sprint','Start in 1780 and reach 2100 averaging 20 years or less per generation'],
  ['gen19','time','platinum','Record absolu',"Partir de 1780 et arriver en 2100 avec une moyenne de 19 ans ou moins par génération",'All-time record','Start in 1780 and reach 2100 averaging 19 years or less per generation'],
+ ['z1780','other','platinum','Survivant',"Terminer le mode Zombie de 1780 à 2100",'Survivor','Finish Zombie mode from 1780 to 2100'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
  ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
@@ -3753,36 +3806,46 @@ function birthChild(u, day){
   dirty = true;
 }
 /* ================= Mode Zombie ================= */
+function unzombify(p, day){                          // antidote : redevient humain, protégé 20 ans
+  delete p.zombie; p.zvacUntil = day + Math.round(20*365.25);
+  p.lastAge = ageAt(p, day); p.work = null; setupWork(p, day); scheduleYear(p, p.lastAge, day);
+  log('cure','zcured',[p.id], day, true); dirty = true;
+}
 function zombify(p, day){                             // devient zombie (même s'il était mort : il se relève)
   if(!p || p.zombie) return;
   const wasDead = p.death != null;
   p.zombie = {at: day, ref: wasDead ? p.death : day, rose: wasDead};
   if(wasDead){ p.death = null; p.cause = null; }
   p.ill = null; p.onset = null; p.deathAt = null; p.murderAt = null; p.mild = []; p.fameAt = null;
+  if(p.crim) for(const q of living()) if(q.murderBy === p.id){ q.murderAt = null; q.murderBy = null; }
+  p.star = null; p.crim = null; p.starKid = false;            // un zombie n'est plus ni star ni criminel
   p.work = {s:'zombie'};
   for(const u of S.unions) if(u.end == null && (u.a === p.id || u.b === p.id)) u.preg = null;   // plus d'enfant
   log('crime', wasDead ? 'zombie_rise' : 'zombie_bite', [p.id], day, false); dirty = true;
 }
-function zombieSpread(day){                           // chaque mois : 3 % par an et par voisin généalogique (parents, enfants, conjoints), morts compris
-  const pr = 1 - Math.pow(1 - .03, 1/12), all = Object.values(S.people), kids = new Map();
+const zProtTxt = p => p.vaccinated ? t('vaccinated', p) : t('zprot_until', p, yearOf(p.zvacUntil));
+const zProtected = (p, day = S.t) => !!(p.vaccinated || (p.zvacUntil != null && day < p.zvacUntil));   // vaccin ou antidote : 20 ans de protection
+function zombieSpread(day){                           // chaque mois : 2 % par an et par voisin généalogique (parents, enfants, conjoints), morts compris
+  const pr = 1 - Math.pow(1 - .02, 1/12), all = Object.values(S.people), kids = new Map();
   for(const c of all) if(c.parents) for(const i of c.parents){ if(!kids.has(i)) kids.set(i, []); kids.get(i).push(c); }
   const hit = new Set();
   for(const z of all){
     if(!z.zombie) continue;
     const nb = [...(z.parents || []).map(P), ...(kids.get(z.id) || []), ...S.unions.filter(u => u.a === z.id || u.b === z.id).map(u => P(u.a === z.id ? u.b : u.a))];
-    for(const q of nb) if(q && !q.zombie && !q.vaccinated && !hit.has(q.id) && Math.random() < pr) hit.add(q.id);   // vacciné : protégé
+    for(const q of nb) if(q && !q.zombie && !zProtected(q, day) && !hit.has(q.id) && Math.random() < pr) hit.add(q.id);   // protégé : pas de contamination
   }
   hit.forEach(id => zombify(P(id), day));
   if(!S.over && !living().some(p => !p.zombie && inFamily(p))) S.zombieLost = true;           // plus aucun humain : défaite
 }
 function processDay(day){
   if(S.zombie && !S.zombie.began && day >= S.zombie.firstAt){                // 60 ans après le départ : le premier zombie
-    const c = living().filter(p => inFamily(p) && !p.vaccinated);
+    const c = living().filter(p => inFamily(p) && !zProtected(p, day));
     if(c.length){ const z = pick(c); zombify(z, day); S.zombie.began = true; log('crime','zombie_first',[z.id], day, true); sfx.crime(); burst(['#6aa82e','#2f5410','#d8ffb0','#000000'], 50); }
   }
   if(S.zombie && S.zombie.began && day % 30 === 0) zombieSpread(day);
   while(S.worldIdx >= 0 && S.worldIdx < WORLD.length && WORLD[S.worldIdx].day <= day){ log('world','world',[S.worldIdx], WORLD[S.worldIdx].day); S.worldIdx++; }
-  if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100'); genRace(); S.end2100 = 1; log('world','y2100',[],day); }
+  if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100');
+    if(S.zombie && S.startYear === 1780 && !S.zombieLost && living().some(p => !p.zombie && inFamily(p))) unlock('z1780'); genRace(); S.end2100 = 1; log('world','y2100',[],day); }
   const wi = warIndexAt(day), prevWar = S.warIdx ?? -1;
   if(wi !== prevWar){
     if(prevWar >= 0) log('world','war_end',[prevWar],day);
@@ -3878,7 +3941,36 @@ setInterval(() => {
 }, 50);
 
 let zHudT = 0;
+function crackSvg(n, w, h, seed){                   // fissures dessinées au hasard (mais toujours les mêmes)
+  let r = seed; const rand = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+  let out = '';
+  for(let i=0;i<n;i++){
+    const side = i % 4; let x = side === 0 ? rand()*w : side === 1 ? w : side === 2 ? rand()*w : 0, y = side === 0 ? 0 : side === 1 ? rand()*h : side === 2 ? h : rand()*h;
+    let d = `M${x.toFixed(0)} ${y.toFixed(0)}`; const ang0 = Math.atan2(h/2 - y, w/2 - x);
+    const segs = 7 + Math.floor(rand()*6), len = Math.min(w, h) * (.05 + rand()*.05);
+    for(let k=0;k<segs;k++){ const a = ang0 + (rand() - .5) * 1.4; x += Math.cos(a)*len; y += Math.sin(a)*len; d += ` L${x.toFixed(0)} ${y.toFixed(0)}`;
+      if(rand() < .3){ const b = a + (rand() < .5 ? 1 : -1) * (.6 + rand()*.6); d += ` M${x.toFixed(0)} ${y.toFixed(0)} l${(Math.cos(b)*len*.8).toFixed(0)} ${(Math.sin(b)*len*.8).toFixed(0)} M${x.toFixed(0)} ${y.toFixed(0)}`; } }
+    out += `<g class="ck" data-i="${i}"><path class="ck-l" d="${d}"/><path class="ck-d" d="${d}"/></g>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">${out}</svg>`;
+}
+const ZCRACKS = 14;
+function zombieAmbiance(){                             // l'écran verdit et se fissure au fil des années, jusqu'en 2100
+  const on = !!(S && S.zombie && S.zombie.began && !$('#game').hidden);
+  document.body.classList.toggle('zmode', on);
+  if(!on) return;
+  const zp = Math.max(0, Math.min(1, (S.t - S.zombie.firstAt) / (DAY2100 - S.zombie.firstAt)));
+  document.documentElement.style.setProperty('--zp', zp.toFixed(3));
+  ['#zSkyCracks','#zTreeCracks'].forEach((sel, j) => {
+    const el = $(sel); if(!el) return;
+    if(!el.firstChild) el.innerHTML = crackSvg(ZCRACKS, 1000, 700, 17 + j*31);
+    if(j === 1){ const ts = $('#treeScroll'); if(ts) el.style.top = ts.offsetTop + 'px'; }
+    const shown = Math.max(1, Math.ceil(zp * ZCRACKS));
+    el.querySelectorAll('.ck').forEach(g => g.classList.toggle('on', +g.dataset.i < shown));
+  });
+}
 function zombieHud(){                                  // compte à rebours avant le premier zombie, puis zombies / humains
+  zombieAmbiance();
   const box = $('#zBox'); if(!box) return;
   if(!S || !S.zombie){ box.hidden = true; return; }
   box.hidden = false;
@@ -4099,7 +4191,7 @@ function statusOf(p){
 const mildTile = p => { const on = p.death == null ? mildOn(p) : []; return on.length ? `<div class="span2 pinkf"><dt>${t('f_mild')}</dt><dd>${esc(on.map(m => `${mildName(m.dz)} (${t('until_y', yearOf(m.end))})`).join(' · '))}</dd></div>` : ''; };
 function riskTile(p, short){
   if(p.zombie) return `<div class="span2 zf"><dt>${t('f_status')}</dt><dd>☣ ${esc(t('zombie_since', p, yearOf(p.zombie.at)))}</dd></div>`;
-  if(p.vaccinated && S && S.zombie && !short) return `<div class="imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(t('vaccinated', p))}</span></dd></div><div><dt>${t('f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
+  if(S && S.zombie && zProtected(p) && !short) return `<div class="imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div><div><dt>${t('f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
   if(p.ill) return `<div class="red"><dt>${t('f_illness')}</dt><dd>${esc(dzName(p.ill.dz, p))}</dd></div>`;
   return `<div><dt>${t(short ? 'f_risk_short' : 'f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
 }
@@ -4536,7 +4628,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${p.vaccinated && S.zombie && !p.zombie ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(t('vaccinated', p))}</span></dd></div>` : ''}
+      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>
@@ -4742,7 +4834,8 @@ const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v))
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
   ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
-  ['family', [['decrim',180,'dove'],['potion',185,'potion'],['vaccin',320,'pill'],['lueur',800,'sparkle']]],
+  ['family', [['decrim',180,'dove'],['potion',185,'potion'],['lueur',800,'sparkle']]],
+  ['survie', [['vaccin',320,'pill'],['antidote',500,'potion']]],
   ['themes', [['orange',830,'sun'],['dark',5000,'moon']]]
 ];
 const SHOP = SHOP_CATS.flatMap(c => c[1]);
@@ -4750,8 +4843,9 @@ const SHOP_THEMES = ['orange','dark'];
 let cynInfoOpen = false;
 const decrimList = () => S ? living().filter(p => p.crim && inFamily(p)) : [];
 const SHOP_ROYAL = ['lueur'];                       // achats qui n'existent qu'en mode Royal
-const SHOP_ZOMBIE = ['vaccin'];                     // … ou qu'en mode Zombie
-const vaccinList = () => S && S.zombie ? living().filter(p => inFamily(p) && !p.zombie && !p.vaccinated) : [];
+const SHOP_ZOMBIE = ['vaccin','antidote'];          // … ou qu'en mode Zombie
+const vaccinList = () => S && S.zombie ? living().filter(p => inFamily(p) && !p.zombie && !zProtected(p)) : [];
+const antidoteList = () => S && S.zombie ? living().filter(p => inFamily(p) && p.zombie) : [];
 const lueurList = () => royalOn() ? living().filter(p => p.blood && p.noble !== 'noble' && p.id !== S.royal.king && p.id !== heirId()) : [];
 function ennoble(p, day){                             // devient noble (titre définitif) et prend un métier de noble s'il est adulte
   p.noble = 'noble'; p.nobleAt = null; RH = undefined;
@@ -4773,16 +4867,18 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
   if(id === 'potion' && !sickList().length) return {dis:true, note:t('shop_potion_none')};
   if(id === 'lueur' && !lueurList().length) return {dis:true, note:t('shop_lueur_none')};
+  if((id === 'vaccin' || id === 'antidote') && yearOf(S.t) > 2050) return {dis:true, note:t('shop_z_late')};       // plus rien après 2050
   if(id === 'vaccin' && !vaccinList().length) return {dis:true, note:t('shop_vaccin_none')};
+  if(id === 'antidote' && !antidoteList().length) return {dis:true, note:t('shop_antidote_none')};
   if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
   return {dis:false};
 }
 function openShop(re){
   const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50],['crown','cg_crown',100]];
-  const secs = SHOP_CATS.map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie))).map(([id, price, ic]) => {
+  const secs = SHOP_CATS.map(([cat, items]) => [cat, items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie)))]).filter(([, items]) => items.length).map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie))).map(([id, price, ic]) => {
     const st = shopState(id, price);
     return `<div class="shopit ${st.owned ? 'owned' : ''}"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${st.note ? `<em>${esc(st.note)}</em>` : ''}</div>
-      <button class="gel gold" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`; }).join('')}</div></section>`).join('');
+      <button class="gel gold" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : cynFmt(price)}</span>${st.owned ? '' : icon('dna')}</button></div>`; }).join('')}</div></section>`).join('');
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop_eyebrow')}</div><h2>${t('shop')}</h2></div>
     <button class="shopbal" data-act="cyninfo" aria-expanded="${cynInfoOpen}" title="${esc(t('cg_title'))}">${icon('dna')}<b>${cynFmt(CYN)}</b><span>Cyn</span><small>${t(cynInfoOpen ? 'cg_hide' : 'cg_title')}</small></button>
     <div class="cyninfo" ${cynInfoOpen ? '' : 'hidden'}><b>${t('cg_title')}</b><ul>${gains.map(([ic, k, n]) => `<li>${icon(ic)}<span>${t(k)}</span><em>+${n} ${icon('dna')}</em></li>`).join('')}<li>${icon('robot')}<span>${t('cg_auto')}</span><em>×0,25</em></li></ul></div>
@@ -4791,7 +4887,9 @@ function openShop(re){
 function openPick(id){                                // décriminalisation / crise de la cinquantaine : on choisit avant de payer
   const price = SHOP.find(x => x[0] === id)[1], me = active();
   const sickTxt = p => [p.ill ? dzName(p.ill.dz, p) : null, ...mildOn(p).map(m => mildName(m.dz))].filter(Boolean).join(' · ') || t('sick_soon');
-  const rows = id === 'vaccin'
+  const rows = id === 'antidote'
+    ? antidoteList().map(p => `<button class="pickrow" data-act="pickdo" data-v="antidote" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>☣ ${esc(t('zombie_since', p, yearOf(p.zombie.at)))}</small></span><em>${t('shop_pick')}</em></button>`)
+    : id === 'vaccin'
     ? vaccinList().map(p => `<button class="pickrow" data-act="pickdo" data-v="vaccin" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(tA(age(p)) + ' · ' + activity(p))}</small></span><em>${t('shop_pick')}</em></button>`)
     : id === 'lueur'
     ? lueurList().map(p => `<button class="pickrow" data-act="pickdo" data-v="lueur" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(tA(age(p)) + ' · ' + activity(p))}</small></span><em>${t('shop_pick')}</em></button>`)
@@ -5003,7 +5101,7 @@ const ACT = {
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
-    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur' || d.v === 'vaccin') return openPick(d.v);
+    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur' || d.v === 'vaccin' || d.v === 'antidote') return openPick(d.v);
     if(d.v === 'spouse') return openSpouseForm();
     if(!arm(b, t('shop_confirm'))) return;
     payCyn(it[1]);
@@ -5027,7 +5125,8 @@ const ACT = {
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     const me = active();
     if(d.v === 'decrim'){ const p = P(+d.id); if(!p || !p.crim || p.death != null) return; payCyn(it[1]); decrim(p); sfx.cure(); burst(['#ffffff','#8cff1a','#3fd0ff'], 40); }
-    else if(d.v === 'vaccin'){ const p = P(+d.id); if(!p || p.death != null || p.zombie || p.vaccinated) return; payCyn(it[1]); p.vaccinated = true; log('cure','vaccin',[p.id], today(), true); sfx.cure(); burst(['#8cff1a','#ffffff','#3fd0ff'], 40); }
+    else if(d.v === 'vaccin'){ const p = P(+d.id); if(!p || p.death != null || p.zombie || zProtected(p)) return; payCyn(it[1]); p.zvacUntil = today() + Math.round(20*365.25); log('cure','vaccin',[p.id], today(), true); sfx.cure(); burst(['#8cff1a','#ffffff','#3fd0ff'], 40); }
+    else if(d.v === 'antidote'){ const p = P(+d.id); if(!p || !p.zombie) return; payCyn(it[1]); unzombify(p, today()); sfx.cure(); burst(['#8cff1a','#ffffff','#7fe3ff','#ffd000'], 50); }
     else if(d.v === 'lueur'){ const p = P(+d.id); if(!p || p.death != null || p.noble === 'noble') return; payCyn(it[1]); ennoble(p, today()); sfx.fame(); burst(['#c9a8ff','#ffffff','#ffd23a','#7a2bd6'], 50); }
     else if(d.v === 'potion'){ const p = P(+d.id); if(!p || p.death != null) return; payCyn(it[1]); cureAll(p); sfx.cure(); burst(['#ff6cc0','#ffffff','#8cff1a','#c3a2ff'], 44); }
     else { if(!ATOUT[d.id] || me.atout2) return; payCyn(it[1]); me.atout2 = d.id; log('star','midlife',[me.id, d.id], today(), true); sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff'], 40); }
@@ -5386,7 +5485,7 @@ document.addEventListener('keydown', e => {
   else if(e.key === 'Enter' || e.key === 'ArrowRight'){ e.preventDefault(); ACT.tnext(); }
   else if(e.key === 'ArrowLeft' && tutoI > 0){ e.preventDefault(); tutoShow(tutoI - 1); }
 }, true);
-function newGame(){ S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
+function newGame(){ document.body.classList.remove('zmode'); S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
 
 /* ================= Démarrage ================= */
 (() => {

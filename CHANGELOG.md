@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.5b — 12 novembre 2026
+
+- Mode Zombie : dès le premier zombie, l'ambiance change. L'écran verdit et s'assombrit peu à peu, et des fissures apparaissent dans le décor et sur l'arbre, de plus en plus nombreuses jusqu'en 2100.
+- Mode Zombie : contamination réduite à 2 % par an. En devenant zombie, une star ou un criminel perd ce statut.
+- Boutique refaite, plus lisible (une liste claire avec le prix à droite), avec une section Survie en mode Zombie : le Vaccin protège maintenant 20 ans, et le nouvel Antidote (500 Cyn) guérit un zombie, qui redevient humain et reste protégé 20 ans. Ni l'un ni l'autre ne s'achète après 2050.
+- Nouveau succès « Survivant » : terminer le mode Zombie de 1780 à 2100.
+
 ## v0.1.5a — 12 novembre 2026
 
 - Nouveau mode de jeu : le Mode Zombie, à cocher au départ (comme le mode Royal, mais pas les deux à la fois). Pendant 60 ans, rien d'anormal, avec un compte à rebours à côté des Cyn (« 59,4 ans avant le premier zombie ») et sa barre qui se vide.
