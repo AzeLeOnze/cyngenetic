@@ -2,6 +2,21 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.5a — 12 novembre 2026
+
+- Nouveau mode de jeu : le Mode Zombie, à cocher au départ (comme le mode Royal, mais pas les deux à la fois). Pendant 60 ans, rien d'anormal, avec un compte à rebours à côté des Cyn (« 59,4 ans avant le premier zombie ») et sa barre qui se vide.
+- Puis un membre de la famille, au hasard, devient zombie : bulle verdâtre et pourrie, âge figé, date de mort « ? ». Un zombie ne peut plus se marier ni avoir d'enfant, mais reste jouable. Chaque année, il contamine 3 % de ses voisins généalogiques (parents, enfants, conjoints), morts compris : les morts se relèvent !
+- Quand plus aucun membre de la famille n'est humain, la partie est perdue. Tenir jusqu'en 2100, c'est la victoire. Dès le premier zombie, la musique devient angoissante.
+- Boutique, en mode Zombie seulement : Vaccin (320 Cyn), qui protège pour toujours un membre de la famille de la contamination.
+
+## v0.1.4m — 12 novembre 2026
+
+- Mode auto : la fenêtre d'avertissement est plus claire et plus jolie, et la vue ne se recentre plus à chaque naissance : elle ne bouge que si ton personnage sort du centre de l'écran.
+- Chute d'astéroïde : 0,05 % de chances par an (au lieu de 0,1 %), avec une animation d'astéroïde enflammé qui tombe sur la bulle et explose.
+- Sur ordinateur, le compteur de Cyn est plus grand et posé en haut à gauche de l'arbre.
+- Nouveau logo, plus moderne : un « C » blanc qui s'enroule autour d'une hélice d'ADN, avec une feuille.
+- Écran de départ : les options (mode Royal, sexe dominant, famille autonome) sont regroupées dans un encadré plus clair, et le slogan devient « Une lignée, mille histoires ».
+
 ## v0.1.4l — 12 novembre 2026
 
 - Mode Royal : à la mort (ou l'emprisonnement) d'un monarque, ses dates de règne s'affichent, par exemple « A régné du 17 mars 1902 au 19 mai 1954 (52 ans, 2 mois) », dans le journal, sa fiche et l'annonce de sa mort.

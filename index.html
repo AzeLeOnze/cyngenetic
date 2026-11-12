@@ -90,6 +90,28 @@ button{font:inherit;color:inherit}
 .gel.big{min-height:50px;font-size:17px;padding:12px 28px}
 .gel.shopb{--c1:#c8fff0;--c2:#16cfa4;--c3:#009a78;--edge:#007a5f;--ts:rgba(0,70,55,.55)}
 .cyn{cursor:pointer;transition:filter .15s}
+.hud{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.zbox{display:inline-flex;align-items:center;gap:8px;padding:4px 12px 4px 5px;border-radius:999px;background:linear-gradient(180deg,#f3ffe6,#d6efb8);border:1px solid #fff;
+  box-shadow:0 2px 8px rgba(60,90,20,.25);color:#3d5a14}
+.zbox .zic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,#d8ffb0 0 10%,#6aa82e 55%,#2f5410)}
+.zbox .zic svg{width:20px;height:20px;fill:currentColor}
+.zbox .ztxt{display:flex;flex-direction:column;gap:3px;min-width:150px}
+.zbox b{font:800 12.5px/1.1 var(--font-display);white-space:nowrap}
+.zbar{display:block;height:6px;border-radius:99px;background:rgba(60,90,20,.18);overflow:hidden}
+.zbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#9be05a,#4f8a1e);transition:width .5s}
+.zbox.out{background:linear-gradient(180deg,#ffe9e6,#ffc7bd);color:#7a1a0a}
+.zbox.out .zic{background:radial-gradient(circle at 35% 30%,#ffd0c0 0 10%,#c0392b 55%,#5a0d05)}
+.zbox.out .zbar i{background:linear-gradient(90deg,#ff7a5a,#a3150a)}
+:root:is([data-skin="dark"],[data-skin="goth"]) .zbox{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.18);color:#b9f07e}
+@media (min-width:901px){
+  .tree-head .hud{position:absolute;left:16px;top:66px;z-index:6;display:flex;align-items:center;gap:10px}
+  .tree-head .zbox{padding:8px 14px 8px 8px}
+  .tree-head .cyn{gap:10px;padding:7px 18px 7px 7px;font-size:24px;
+    background:linear-gradient(180deg,#ffffff,#d9fbef);border:2px solid #fff;box-shadow:0 6px 18px rgba(0,110,90,.28),inset 0 -3px 6px rgba(0,140,110,.12)}
+  .tree-head .cyn svg{width:38px;height:38px;padding:7px}
+  .tree-head .cyn::after{content:"Cyn";font:800 13px var(--font-display);color:#00876a;opacity:.75;align-self:center}
+  :root:is([data-skin="dark"],[data-skin="goth"]) .tree-head .cyn{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.18)}
+}
 .cyn:hover{filter:brightness(1.05) saturate(1.2)}
 .gel.danger{--c1:#ffb8b8;--c2:#ff2d3d;--c3:#c4001a;--edge:#8f0012;--ts:rgba(90,0,0,.55);transition:transform .45s cubic-bezier(.2,1.5,.4,1),filter .2s}
 .gel.danger.wob{animation:wob .35s}
@@ -149,15 +171,25 @@ button{font:inherit;color:inherit}
 .spform .m-actions{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .fieldhint{display:block;margin-top:4px;font:700 11.5px var(--font-display);color:var(--aqua-deep)}
 .endnote{margin:8px 0 0;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.55);font-size:13px;color:var(--ink-soft)}
+.si-vaccin{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 50%,#0a7a8a)}
 .si-lueur{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#c9a8ff 50%,#5a17b0)}
-.autowarn{text-align:center}
-.aw-ic{display:inline-grid;place-items:center;width:58px;height:58px;margin-bottom:6px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
-.aw-ic svg{width:30px;height:30px;fill:currentColor}
-.autowarn h2{margin:4px 0 8px;font:800 22px var(--font-display)}
-.autowarn p{margin:0 auto 14px;max-width:380px;color:var(--ink-soft);line-height:1.45}
-.aw-check{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;font-size:14px;color:var(--ink-soft);cursor:pointer}
+.autowarn{display:flex;flex-direction:column;align-items:center;text-align:center;padding:4px 6px 2px;max-width:420px;margin:0 auto}
+.aw-ic{display:grid;place-items:center;width:64px;height:64px;border-radius:20px;color:#fff;background:linear-gradient(160deg,var(--g1),var(--g2) 55%,var(--g3));
+  box-shadow:0 8px 18px rgba(0,80,190,.3),inset 0 2px 0 rgba(255,255,255,.7)}
+.aw-ic svg{width:34px;height:34px;fill:currentColor;filter:drop-shadow(0 1px 1px rgba(0,40,110,.4))}
+.autowarn h2{margin:12px 0 4px;font:800 24px var(--font-display)}
+.aw-lead{margin:0 0 14px;color:var(--ink-soft);font-size:14.5px}
+.aw-box{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:18px;text-align:left;
+  background:linear-gradient(180deg,#effffa,#cdf6ea);border:1px solid #fff;box-shadow:0 3px 10px rgba(0,110,90,.15)}
+.aw-cyn{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
+.aw-cyn svg{width:22px;height:22px;fill:currentColor}
+.aw-box b{display:block;font:800 17px var(--font-display);color:#00876a}
+.aw-box small{display:block;font-size:13px;line-height:1.4;color:var(--ink-soft)}
+.aw-check{display:inline-flex;align-items:center;gap:8px;margin:14px 0 16px;font-size:14px;color:var(--ink-soft);cursor:pointer}
 .aw-check input{width:18px;height:18px;accent-color:var(--aqua-deep)}
-.autowarn .m-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.aw-actions{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;width:100%}
+.aw-actions .gel{min-height:46px}
+:root:is([data-skin="dark"],[data-skin="goth"]) .aw-box{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
 .reigns{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .reigns li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 2px 8px rgba(0,70,160,.1)}
 .reigns li.now{background:linear-gradient(180deg,#fffbe6,#ffe9a6);border-color:#ffd24a;box-shadow:0 0 0 2px rgba(122,43,214,.25)}
@@ -167,6 +199,22 @@ button{font:inherit;color:inherit}
 .reigns em{font:800 14px var(--font-display);font-style:normal;color:#7a2bd6;text-align:right;white-space:nowrap}
 .reigns em i{display:block;font:700 12px var(--font-display);font-style:normal;color:var(--ink-soft)}
 :root:is([data-skin="dark"],[data-skin="goth"]) .reigns li{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
+.optcard{display:grid;gap:8px;padding:12px;border-radius:20px;background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.9)}
+.optcard>.lab{margin:0 0 2px 4px}
+.switch.optrow{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;margin:0;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.8);
+  border:1px solid #fff;box-shadow:0 2px 8px rgba(0,70,160,.08);transition:box-shadow .15s}
+.switch.optrow:hover{box-shadow:0 4px 14px rgba(0,70,160,.16)}
+.opt-ic{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;color:#fff;box-shadow:inset 0 2px 0 rgba(255,255,255,.55),0 3px 8px rgba(0,60,140,.2)}
+.opt-ic svg{width:23px;height:23px;fill:currentColor}
+.opt-ic.royal{background:linear-gradient(160deg,#ffe066,#f0a800 55%,#9a4dff)}
+.opt-ic.fam{background:linear-gradient(160deg,var(--g1),var(--g2) 55%,var(--g3))}
+.optrow .opt-txt b{display:block;font:800 14.5px var(--font-display)}
+.optrow .opt-txt small{display:block;font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
+.optsub{display:grid;gap:6px;padding:4px 6px 4px 58px}
+.rulepills{display:flex}
+.rulepills button{flex:1;font-size:13px}
+@media (max-width:520px){ .optsub{padding-left:6px} }
+:root:is([data-skin="dark"],[data-skin="goth"]) .switch.optrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
 .si-potion{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff7ad8 55%,#9e0077)}
 .si-decrim{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 55%,#0074dc)}
 .picklist{display:grid;gap:8px;max-height:min(60vh,520px);overflow:auto;padding:2px}
@@ -204,13 +252,13 @@ button{font:inherit;color:inherit}
 .setup-inner{width:100%;max-width:580px;display:flex;flex-direction:column;gap:18px}
 .setup-top{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
 .logo{margin:0;font:800 clamp(56px,13vw,96px)/.95 var(--font-display);letter-spacing:-.035em;text-align:center;
-  background:linear-gradient(180deg,#ffffff 0%,#e9fbff 46%,#7fdcff 52%,#00a2ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  background:linear-gradient(180deg,#ffffff 0%,#e3f8ff 40%,#5fd0ff 62%,#0090f0 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 3px 0 rgba(0,70,170,.55)) drop-shadow(0 10px 18px rgba(0,60,160,.35))}
 .brand{display:flex;align-items:center;justify-content:center;gap:12px}
 .brand .emblem{flex:none;width:clamp(58px,13.5vw,88px);height:auto;filter:drop-shadow(0 8px 14px rgba(0,60,160,.32)) drop-shadow(0 2px 0 rgba(255,255,255,.6));animation:embfloat 5s ease-in-out infinite}
 @keyframes embfloat{50%{transform:translateY(-4px) rotate(-3deg)}}
 .brand .logo{font-size:clamp(38px,9.5vw,72px);line-height:1.2;padding-bottom:.06em}
-.logo span{background:linear-gradient(180deg,#f6ffd8 0%,#dcff80 46%,#7be000 52%,#3aa600 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo span{background:linear-gradient(180deg,#f8ffe0 0%,#d4ff70 40%,#6fd400 60%,#2f9a00 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .brand.small{justify-content:flex-start;gap:8px}
 .brand.small .emblem{width:38px;animation:none}
 .brand.small .logo{font-size:30px;line-height:1.25}
@@ -345,6 +393,14 @@ body.no-deco .kidfx b,body.no-deco .kidfx .cloud{display:none}
 .tree-head #viewSw{margin-left:auto}
 .tree-head #viewSw:not([hidden])~.zoomer{margin-left:0}
 /* Couteau du meurtre */
+.astfx{position:fixed;left:0;top:0;z-index:76;width:30px;height:30px;margin:-15px 0 0 -15px;pointer-events:none}
+.astfx .rock{position:absolute;inset:0;border-radius:46% 54% 50% 50%;background:radial-gradient(circle at 35% 30%,#b8a594 0 14%,#6a5442 55%,#2a1e16);
+  box-shadow:0 0 14px 5px rgba(255,150,0,.9),0 0 34px 12px rgba(255,70,0,.5)}
+.astfx .trail{position:absolute;left:50%;top:50%;width:170px;height:14px;margin-top:-7px;border-radius:99px;transform-origin:0 50%;transform:rotate(var(--a));
+  background:linear-gradient(90deg,rgba(255,230,140,.95),rgba(255,120,0,.65) 35%,rgba(255,60,0,0));filter:blur(1.5px)}
+.astboom{position:fixed;z-index:76;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;pointer-events:none;
+  border:4px solid rgba(255,190,60,.95);box-shadow:0 0 30px 10px rgba(255,120,0,.6);animation:astboom .75s ease-out forwards}
+@keyframes astboom{from{transform:scale(.4);opacity:1}to{transform:scale(6);opacity:0}}
 .knifefx{position:fixed;z-index:75;width:0;height:0;pointer-events:none}
 .knifefx .knife{position:absolute;left:-30px;top:-30px;width:60px;height:60px;animation:stab .9s cubic-bezier(.3,1.4,.5,1) forwards}
 .knifefx .knife svg{width:100%;height:100%;fill:#e9eef5;filter:drop-shadow(0 0 2px #000) drop-shadow(0 3px 6px rgba(0,0,0,.5))}
@@ -505,6 +561,17 @@ body.no-deco .bubble{display:none}
 .facts .rgf{background:linear-gradient(180deg,#fffbe8,#ffeeb0);border-color:#ffd24a}
 .facts .rgf dd{color:#7a4a00}
 .reignline{margin:4px 0 0;font:700 13px var(--font-display);color:#7a2bd6}
+/* Zombie : bulle pourrie, verdâtre */
+#treeCanvas .node.zombie{border:2px solid #4e6b2f;color:#1f2e0c;background:radial-gradient(circle at 20% 80%,rgba(90,60,20,.25) 0 10%,transparent 12%),radial-gradient(circle at 85% 30%,rgba(90,60,20,.22) 0 8%,transparent 10%),linear-gradient(170deg,#d8e8b8 0%,#a9c47e 50%,#6f8f43 100%);
+  box-shadow:0 0 0 2px rgba(80,120,30,.45),0 0 18px 3px rgba(110,170,40,.35),0 8px 16px rgba(40,60,10,.3);filter:saturate(.85)}
+#treeCanvas .node.zombie .n-band{background:linear-gradient(180deg,#6aa82e,#2f5410);color:#e6ffc8;border:1px solid #2f5410}
+#treeCanvas .node.zombie .nt span,#treeCanvas .node.zombie .n-city{color:#3d5a14}
+#treeCanvas .node.zombie .orb{filter:hue-rotate(60deg) saturate(.6) brightness(.9)}
+#treeCanvas .node.zombie::after{content:"";position:absolute;left:18%;right:18%;bottom:-7px;height:9px;pointer-events:none;
+  background:radial-gradient(circle at 15% 0,#6f8f43 0 3px,transparent 4px),radial-gradient(circle at 55% 0,#6f8f43 0 4px,transparent 5px),radial-gradient(circle at 85% 0,#6f8f43 0 2.5px,transparent 3.5px)}
+.facts .zf{background:linear-gradient(180deg,#eef8df,#d0e8ad);border-color:#a9c47e}
+.facts .zf dd{color:#3d5a14}
+.opt-ic.zomb{background:linear-gradient(160deg,#c8f08a,#6aa82e 55%,#2f5410)}
 .regnal.royalrec{order:-1;padding:10px 12px;border-radius:16px;background:linear-gradient(180deg,#fff9e0,#ffe9a6);border:1px solid #ffd24a;box-shadow:0 0 0 2px rgba(122,43,214,.25)}
 .node.crim{border-color:#7a0012;color:#ffe6e8;background:linear-gradient(160deg,#3a0008 0%,#12000a 46%,#5c0012 100%);
   box-shadow:0 0 0 2px #b0001a,0 0 18px 4px rgba(200,0,30,.45),0 8px 18px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,80,90,.35);animation:dark 3.2s ease-in-out var(--t,0s) infinite}
@@ -925,6 +992,7 @@ body.no-deco .bubble{display:none}
   .tree-head #viewSw{display:none}
   .topbar .achb,.topbar .albb{display:none}
   .glass,.overlay{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .modal.glass{background:linear-gradient(180deg,rgba(255,255,255,.97) 0%,rgba(246,252,255,.96) 50%,rgba(232,247,255,.95) 100%)}   /* sans flou : fenêtre plus opaque pour rester lisible */
   .tree-head{padding:10px 12px 8px;gap:8px}
   .tree-head h2{font-size:17px}
   .toasts{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 24px))}
@@ -1072,11 +1140,18 @@ body.no-deco .gothfx .bat{display:none}
         <label class="field"><span class="lab" data-t="lab_destiny"></span><select id="fDestiny" class="inp"></select></label>
       </div>
       <p id="fAtoutNote" class="setnote"></p>
-      <label class="switch royalsw"><input type="checkbox" id="fRoyal"><span class="sw"></span>
-        <span><b data-t="lab_royal"></b><small data-t="royal_hint"></small></span></label>
-      <label class="field" id="fRuleBox" hidden><span class="lab" data-t="lab_rule"></span><select id="fRule" class="inp"></select></label>
-      <label class="switch"><input type="checkbox" id="fFam"><span class="sw"></span>
-        <span><b data-t="fam_auto"></b><small data-t="fam_auto_hint"></small></span></label>
+      <div class="optcard">
+        <div class="lab" data-t="opt_title"></div>
+        <label class="switch optrow"><span class="opt-ic royal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v2H3zm0-2 1.5-9 4.5 4 3-6 3 6 4.5-4L21 16z"/></svg></span>
+          <span class="opt-txt"><b data-t="lab_royal"></b><small data-t="royal_hint"></small></span><input type="checkbox" id="fRoyal"><span class="sw"></span></label>
+        <div class="optsub" id="fRuleBox" hidden><span class="lab" data-t="lab_rule"></span>
+          <div class="pills rulepills" role="group"><button type="button" data-act="rulepick" data-v="patri" data-t="rule_patri" aria-pressed="true"></button><button type="button" data-act="rulepick" data-v="matri" data-t="rule_matri" aria-pressed="false"></button><button type="button" data-act="rulepick" data-v="both" data-t="rule_both" aria-pressed="false"></button></div>
+          <select id="fRule" class="inp" hidden></select></div>
+        <label class="switch optrow"><span class="opt-ic zomb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM7 14.8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-5 4.2c-1.4 0-2.6-.6-3.4-1.6l1.5-1.2c.5.6 1.2.9 1.9.9s1.4-.3 1.9-.9l1.5 1.2c-.8 1-2 1.6-3.4 1.6z"/></svg></span>
+          <span class="opt-txt"><b data-t="lab_zombie"></b><small data-t="zombie_hint"></small></span><input type="checkbox" id="fZombie"><span class="sw"></span></label>
+        <label class="switch optrow"><span class="opt-ic fam"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm8 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM1.5 20c0-4 3-6.5 6.5-6.5s6.5 2.5 6.5 6.5zm14 0c0-2.2-.7-4-2-5.3 1-.6 1.9-.9 2.5-.9 3 0 5.5 2.1 5.5 6.2z"/></svg></span>
+          <span class="opt-txt"><b data-t="fam_auto"></b><small data-t="fam_auto_hint"></small></span><input type="checkbox" id="fFam"><span class="sw"></span></label>
+      </div>
       <p id="fErr" class="err" hidden></p>
       <div class="form-actions">
         <button type="button" class="gel ghost" data-act="random"><span data-t="random"></span></button>
@@ -1120,7 +1195,7 @@ body.no-deco .gothfx .bat{display:none}
   <main class="board">
     <section class="glass treebox">
       <div class="tree-head">
-        <span class="cyn" id="cynBox" data-act="shop" role="button" tabindex="0" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span>
+        <div class="hud"><span class="cyn" id="cynBox" data-act="shop" role="button" tabindex="0" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span><div class="zbox" id="zBox" hidden><span class="zic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM7 14.8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-5 4.2c-1.4 0-2.6-.6-3.4-1.6l1.5-1.2c.5.6 1.2.9 1.9.9s1.4-.3 1.9-.9l1.5 1.2c-.8 1-2 1.6-3.4 1.6z"/></svg></span><span class="ztxt"><b id="zTxt"></b><i class="zbar"><i id="zFill"></i></i></span></div></div>
         <h2 id="treeTitle"></h2>
         <span class="stats" id="treeStats"></span>
         <div class="pills" id="viewSw" role="group" hidden>
@@ -1165,9 +1240,29 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4l';
+const APP_VERSION = '0.1.5a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.5a', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Nouveau mode de jeu : le Mode Zombie, à cocher au départ (comme le mode Royal, mais pas les deux à la fois). Pendant 60 ans, rien d\'anormal, avec un compte à rebours à côté des Cyn (« 59,4 ans avant le premier zombie ») et sa barre qui se vide.',
+       'Puis un membre de la famille, au hasard, devient zombie : bulle verdâtre et pourrie, âge figé, date de mort « ? ». Un zombie ne peut plus se marier ni avoir d\'enfant, mais reste jouable. Chaque année, il contamine 3 % de ses voisins généalogiques (parents, enfants, conjoints), morts compris : les morts se relèvent !',
+       'Quand plus aucun membre de la famille n\'est humain, la partie est perdue. Tenir jusqu\'en 2100, c\'est la victoire. Dès le premier zombie, la musique devient angoissante.',
+       'Boutique, en mode Zombie seulement : Vaccin (320 Cyn), qui protège pour toujours un membre de la famille de la contamination.'],
+   en:['New game mode: Zombie mode, ticked at the start (like Royal mode, but not both at once). For 60 years nothing unusual happens, with a countdown next to the Cyn ("59.4 years until the first zombie") and a draining bar.',
+       'Then a random family member turns into a zombie: a rotten green bubble, a frozen age and a "?" death date. A zombie can no longer marry or have children, but stays playable. Each year it infects 3% of its genealogical neighbours (parents, children, partners), the dead included: the dead rise again!',
+       'When no family member is human any more, the game is lost. Holding out until 2100 is a victory. From the first zombie on, the music turns creepy.',
+       'Shop, Zombie mode only: Vaccine (320 Cyn), which protects a family member from infection for good.']},
+  {v:'0.1.4m', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Mode auto : la fenêtre d\'avertissement est plus claire et plus jolie, et la vue ne se recentre plus à chaque naissance : elle ne bouge que si ton personnage sort du centre de l\'écran.',
+       'Chute d\'astéroïde : 0,05 % de chances par an (au lieu de 0,1 %), avec une animation d\'astéroïde enflammé qui tombe sur la bulle et explose.',
+       'Sur ordinateur, le compteur de Cyn est plus grand et posé en haut à gauche de l\'arbre.',
+       'Nouveau logo, plus moderne : un « C » blanc qui s\'enroule autour d\'une hélice d\'ADN, avec une feuille.',
+       'Écran de départ : les options (mode Royal, sexe dominant, famille autonome) sont regroupées dans un encadré plus clair, et le slogan devient « Une lignée, mille histoires ».'],
+   en:['Auto mode: the warning window is clearer and nicer, and the view no longer recentres at every birth: it only moves if your character leaves the middle of the screen.',
+       'Falling asteroid: 0.05% chance per year (instead of 0.1%), with an animated flaming asteroid that crashes onto the bubble and explodes.',
+       'On computers, the Cyn counter is bigger and sits at the top left of the tree.',
+       'New, more modern logo: a white "C" curling around a DNA helix, with a leaf.',
+       'Start screen: the options (Royal mode, ruling sex, autonomous family) are grouped in a clearer box, and the tagline becomes "One bloodline, a thousand stories".']},
   {v:'0.1.4l', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode Royal : à la mort (ou l\'emprisonnement) d\'un monarque, ses dates de règne s\'affichent, par exemple « A régné du 17 mars 1902 au 19 mai 1954 (52 ans, 2 mois) », dans le journal, sa fiche et l\'annonce de sa mort.',
        'Mode auto : l\'arbre suit le personnage joué. Si tu déplaces l\'arbre, le suivi s\'arrête ; « Recentrer » (ou l\'onglet Arbre sur téléphone) le relance, et il reprend tout seul sur le personnage suivant à chaque décès.',
@@ -2280,24 +2375,17 @@ const icon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICO
 /* Emblème Cyngenetic : une bulle de verre, un arbre dont le tronc est une double hélice d'ADN */
 const emblem = id => `<svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
   <defs>
-    <linearGradient id="${id}b" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" style="stop-color:var(--g1)"/><stop offset=".55" style="stop-color:var(--g2)"/><stop offset="1" style="stop-color:var(--g3)"/></linearGradient>
-    <radialGradient id="${id}l" cx="38%" cy="30%" r="72%"><stop offset="0" stop-color="#fbffe0"/><stop offset=".5" style="stop-color:var(--hill-a1)"/><stop offset="1" style="stop-color:var(--hill-a3)"/></radialGradient>
-    <linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-    <radialGradient id="${id}s" cx="50%" cy="100%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="${id}b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--g1)"/><stop offset=".5" style="stop-color:var(--g2)"/><stop offset="1" style="stop-color:var(--g3)"/></linearGradient>
+    <linearGradient id="${id}l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4ffb0"/><stop offset=".55" style="stop-color:var(--hill-a1)"/><stop offset="1" style="stop-color:var(--hill-a2)"/></linearGradient>
+    <linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
   </defs>
-  <rect x="3" y="3" width="58" height="58" rx="18" fill="url(#${id}b)"/>
-  <rect x="3" y="3" width="58" height="58" rx="18" fill="url(#${id}s)"/>
-  <rect x="3.75" y="3.75" width="56.5" height="56.5" rx="17.3" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="1.5"/>
-  <g fill="none" stroke-linecap="round">
-    <path d="M25 57c12-5 12-9 0-14s0-10 7-15" stroke="#fff" stroke-width="3.6"/>
-    <path d="M39 57c-12-5-12-9 0-14s0-10-7-15" stroke="#e8ff9e" stroke-width="3.6"/>
-    <path d="M27.5 52.6h9M28.5 47.5h7M27.5 39h9" stroke="#fff" stroke-width="1.8" stroke-opacity=".75"/>
-  </g>
-  <circle cx="22.5" cy="22" r="8" fill="url(#${id}l)" stroke="#fff" stroke-opacity=".7"/>
-  <circle cx="41.5" cy="22" r="8" fill="url(#${id}l)" stroke="#fff" stroke-opacity=".7"/>
-  <circle cx="32" cy="15" r="10" fill="url(#${id}l)" stroke="#fff" stroke-opacity=".8"/>
-  <circle cx="28.5" cy="11.5" r="2.4" fill="#fff" opacity=".85"/><circle cx="20" cy="19.5" r="1.6" fill="#fff" opacity=".7"/><circle cx="39" cy="19.5" r="1.6" fill="#fff" opacity=".7"/>
-  <path d="M10 22C10 11 15 6 26 6h12c11 0 16 5 16 16-6-4-14-6-22-6s-16 2-22 6z" fill="url(#${id}g)" opacity=".7"/>
+  <rect x="2" y="2" width="60" height="60" rx="19" fill="url(#${id}b)"/>
+  <path d="M8 24C8 12 14 6 26 6h12c12 0 18 6 18 18-7-3-15-4.5-24-4.5S15 21 8 24z" fill="url(#${id}g)"/>
+  <path d="M44.5 22.5A16 16 0 1 0 44.5 43.5" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  <path d="M27 25c6 2.5 6 5.5 0 8s-6 5.5 0 8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/>
+  <path d="M35 25c-6 2.5-6 5.5 0 8s6 5.5 0 8" fill="none" stroke="#e8ff9e" stroke-width="2.6" stroke-linecap="round" opacity=".95"/>
+  <path d="M46.5 20.5c1-6.5 6-10 12-10-.5 6.5-5 10.5-12 10z" fill="url(#${id}l)" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>
+  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="18.3" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="1.5"/>
 </svg>`;
 // décennies et grandes périodes : [de, à, icône, fr, en]
 const DECADES = [
@@ -2373,7 +2461,7 @@ fr:{
   months:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
   date:(j,m,y)=>`${j===1?'1er':j} ${m} ${y}`, monthYear:(m,y)=>`${m} ${y}`,
   ans:n=>n+(n<=1?' an':' ans'), ageNum:n=>n+(n<=1?' an':' ans'),
-  tagline:"Une seule personne au départ. Jusqu'où ira sa descendance ?",
+  tagline:'Une lignée, mille histoires.', opt_title:'Options de partie',
   first_ancestor:'Votre premier ancêtre', lab_first:'Prénom', lab_last:'Nom', lab_sex:'Sexe', female:'Femme', male:'Homme',
   lab_dob:'Date de naissance', lab_city:'Ville de naissance', lab_start:'Année de départ', lab_day:'Jour', lab_month:'Mois', lab_year:'Année',
   age_on:d=>`Âge le ${d}`, not_born:'pas encore né', random:'Au hasard', start_btn:y=>`Commencer en ${y}`, choose_age:"Choisir l'âge",
@@ -2516,11 +2604,14 @@ fr:{
   alb_prince_d:'Prince ou princesse héritier',
   shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'),
   name_sib_taken:n=>`Un frère ou une sœur s'appelle déjà ${n}.`,
-  aw_title:'Mode auto', aw_txt:"Attention : avec le mode auto activé, tu ne gagnes que 25 % des Cyn habituels (4 fois moins). Joue toi-même pour en gagner plus !",
+  aw_title:'Mode auto', aw_lead:'Ta famille va vivre sa vie toute seule.', aw_box_t:'Cyn ×0,25', aw_box:'Tant que le mode auto est actif, tu gagnes 4 fois moins de Cyn. Joue toi-même pour en gagner plus !',
   aw_nomore:'Ne plus afficher', aw_ok:'Activer le mode auto', aw_cancel:'Annuler', cg_auto:'En mode auto : 25 % des gains',
   rg_title:'Règnes', rg_now:'en cours', rg_y:n=>`${n} an${n>1?'s':''}`, rg_now_y:n=>`${n} an${n>1?'s':''}, en cours`, rg_lost:'La couronne a quitté la famille : la dynastie est terminée.', f_reign:'Règne', span_ym:(y,m)=>`${y} an${y>1?'s':''}, ${m} mois`,
   reign_done:(a,b,d)=>`A régné du ${a} au ${b} (${d})`, reign_now:(a,d)=>`Règne depuis le ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^A/, 'a')}.`,
+  shop_vaccin:'Vaccin', shop_vaccin_d:'Protège un membre de la famille de la contamination zombie, pour toujours (mode Zombie).', shop_vaccin_none:'Personne à vacciner.', pick_vaccin:()=>'Qui doit être vacciné ?',
+  f_vaccin:'Vaccin', vaccinated:p=>g(p,'Vacciné contre les zombies','Vaccinée contre les zombies'),
+  log_vaccin:p=>`💉 ${nm(p)} est ${g(P(p),'vacciné','vaccinée')} : les zombies ne pourront plus ${g(P(p),'le','la')} contaminer.`,
   shop_lueur:'Lueur Noble', shop_lueur_d:"Anoblit le membre de la famille de ton choix (mode Royal).", shop_lueur_none:"Personne à anoblir.", pick_lueur:()=>'Qui doit devenir noble ?', alb_noble_d:'Duc, duchesse, comte ou comtesse', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} est ${g(P(p),'anobli','anoblie')} : ${g(P(p),'il','elle')} rapportera 5 Cyn tous les 2 ans.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
@@ -2533,6 +2624,14 @@ fr:{
   sp_intro:n=>`Choisis tout de la future âme sœur de ${n}.`, sp_job:'Métier', sp_int:"Centre d'intérêt", sp_add:'Addiction', sp_cond:'Particularité',
   sp_none:'Aucun', sp_none_f:'Aucune', sp_go:'Faire la rencontre', sp_age:a=>`Âge : ${a} ans`, sp_err_age:n=>`L'âge doit être entre ${n} et 100 ans.`,
   cg_crown:'Un couronnement (mode Royal)',
+  lab_zombie:'Mode Zombie', zombie_hint:"Rien ne se passe pendant 60 ans… puis le premier zombie apparaît. Survis jusqu'en 2100 ! (Conseillé : 1780)",
+  z_count:n=>`${n} ans avant le premier zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} humain${h>1?'s':''}`,
+  zombie_act:p=>g(p,'Zombie','Zombie'), zombie_since:(p,y)=>`${g(p,'Zombie','Zombie')} depuis ${y}`, zombie_no_baby:"Un zombie ne peut pas avoir d'enfant.",
+  log_zombie_first:p=>`☣ ${nm(p)} devient le premier zombie ! L'épidémie commence.`,
+  log_zombie_bite:p=>`☣ ${nm(p)} a été ${g(P(p),'contaminé','contaminée')} : ${g(P(p),'il','elle')} devient un zombie.`,
+  log_zombie_rise:p=>`☣ ${nm(p)} sort de sa tombe… en zombie !`,
+  over_zombie_title:'Les zombies ont gagné', over_zombie_txt:(l,y)=>`En ${y}, plus aucun membre de la famille ${l} n'est humain.`,
+  z_win_title:'Victoire, la famille a survécu !', z_win_txt:(l,n)=>`La famille ${l} a tenu face aux zombies jusqu'en 2100, avec ${n} survivant${n>1?'s':''}.`,
   tuto_offer_e:'Nouveau joueur ?', tuto_offer_t:'Bienvenue !', tuto_offer:"Tu découvres Cyngenetic ? Un petit tutoriel d'environ 2 minutes te montre les bases du jeu.",
   tuto_yes:'Oui, montre-moi', tuto_no:'Non merci, je me débrouille', tuto_next:'Suivant', tuto_prev:'Retour', tuto_skip:'Passer', tuto_end:"C'est parti !",
   tuto_set:'Tutoriel', tuto_set_hint:'Revoir les bases du jeu.', tuto_set_btn:'Lancer', tuto_planned:'Au début de la prochaine partie',
@@ -2590,7 +2689,7 @@ en:{
   months:['January','February','March','April','May','June','July','August','September','October','November','December'],
   date:(j,m,y)=>`${m} ${j}, ${y}`, monthYear:(m,y)=>`${m} ${y}`,
   ans:n=>`${n} yr${n===1?'':'s'}`, ageNum:n=>`${n}`,
-  tagline:'It starts with one person. How far will the family line go?',
+  tagline:'One bloodline, a thousand stories.', opt_title:'Game options',
   first_ancestor:'Your first ancestor', lab_first:'First name', lab_last:'Last name', lab_sex:'Sex', female:'Woman', male:'Man',
   lab_dob:'Date of birth', lab_city:'Birthplace', lab_start:'Starting year', lab_day:'Day', lab_month:'Month', lab_year:'Year',
   age_on:d=>`Age on ${d}`, not_born:'not born yet', random:'Randomize', start_btn:y=>`Start in ${y}`, choose_age:'Choose age',
@@ -2731,11 +2830,14 @@ en:{
   alb_prince_d:'Crown prince or princess',
   shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'),
   name_sib_taken:n=>`A brother or sister is already called ${n}.`,
-  aw_title:'Auto mode', aw_txt:'Heads up: with auto mode on, you only earn 25% of the usual Cyn (4 times less). Play yourself to earn more!',
+  aw_title:'Auto mode', aw_lead:'Your family will live its life on its own.', aw_box_t:'Cyn ×0.25', aw_box:'While auto mode is on, you earn 4 times fewer Cyn. Play yourself to earn more!',
   aw_nomore:"Don't show again", aw_ok:'Turn on auto mode', aw_cancel:'Cancel', cg_auto:'In auto mode: 25% of the gains',
   rg_title:'Reigns', rg_now:'ongoing', rg_y:n=>`${n} year${n>1?'s':''}`, rg_now_y:n=>`${n} year${n>1?'s':''}, ongoing`, rg_lost:'The crown has left the family: the dynasty is over.', f_reign:'Reign', span_ym:(y,m)=>`${y} year${y>1?'s':''}, ${m} month${m>1?'s':''}`,
   reign_done:(a,b,d)=>`Reigned from ${a} to ${b} (${d})`, reign_now:(a,d)=>`Reigning since ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^R/, 'r')}.`,
+  shop_vaccin:'Vaccine', shop_vaccin_d:'Protects a family member from zombie infection for good (Zombie mode).', shop_vaccin_none:'Nobody left to vaccinate.', pick_vaccin:()=>'Who should be vaccinated?',
+  f_vaccin:'Vaccine', vaccinated:()=>'Vaccinated against zombies',
+  log_vaccin:p=>`💉 ${nm(p)} is vaccinated: zombies can no longer infect them.`,
   shop_lueur:'Noble Glow', shop_lueur_d:'Ennobles the family member of your choice (Royal mode).', shop_lueur_none:'Nobody left to ennoble.', pick_lueur:()=>'Who should become a noble?', alb_noble_d:'Duke, duchess, count or countess', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} is ennobled and will bring in 5 Cyn every 2 years.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
@@ -2748,6 +2850,14 @@ en:{
   sp_intro:n=>`Choose everything about ${n}'s future soulmate.`, sp_job:'Job', sp_int:'Interest', sp_add:'Addiction', sp_cond:'Trait',
   sp_none:'None', sp_none_f:'None', sp_go:'Meet them', sp_age:a=>`Age: ${a}`, sp_err_age:n=>`Age must be between ${n} and 100.`,
   cg_crown:'A coronation (Royal mode)',
+  lab_zombie:'Zombie mode', zombie_hint:'Nothing happens for 60 years… then the first zombie appears. Survive until 2100! (Recommended: 1780)',
+  z_count:n=>`${n} years until the first zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} human${h>1?'s':''}`,
+  zombie_act:()=>'Zombie', zombie_since:(p,y)=>`Zombie since ${y}`, zombie_no_baby:"A zombie can't have children.",
+  log_zombie_first:p=>`☣ ${nm(p)} becomes the first zombie! The outbreak begins.`,
+  log_zombie_bite:p=>`☣ ${nm(p)} has been infected and turns into a zombie.`,
+  log_zombie_rise:p=>`☣ ${nm(p)} rises from the grave… as a zombie!`,
+  over_zombie_title:'The zombies won', over_zombie_txt:(l,y)=>`In ${y}, no member of the ${l} family is human any more.`,
+  z_win_title:'Victory, the family survived!', z_win_txt:(l,n)=>`The ${l} family held out against the zombies until 2100, with ${n} survivor${n>1?'s':''}.`,
   tuto_offer_e:'New player?', tuto_offer_t:'Welcome!', tuto_offer:'New to Cyngenetic? A short tutorial (about 2 minutes) shows you the basics.',
   tuto_yes:'Yes, show me', tuto_no:"No thanks, I'll figure it out", tuto_next:'Next', tuto_prev:'Back', tuto_skip:'Skip', tuto_end:"Let's go!",
   tuto_set:'Tutorial', tuto_set_hint:'Go over the basics again.', tuto_set_btn:'Start', tuto_planned:'At the start of the next game',
@@ -3054,6 +3164,7 @@ const sfx = (() => {
 const music = (() => {
   let ctx = null, out = null, lp = null, timer = null, step = 0, next = 0, mode = 'calm', vol = .35, on = true;
   const CALM = {bpm:66, chords:[[48,55,64,71],[45,52,60,67],[41,48,57,64],[43,50,59,62]], mel:[72,74,76,79,81,84,86]};   // Do maj7 · La m7 · Fa maj7 · Sol
+  const ZOMB = {bpm:118, chords:[[45,48,51,54],[44,47,50,53],[43,46,49,52],[46,49,52,55]], mel:[69,70,72,73,75,76,78]};   // accords diminués, inquiétants
   const TENSE = {bpm:92, chords:[[45,52,60,64],[41,48,57,60],[38,45,53,57],[40,47,56,59]], mel:[69,71,72,75,76,80,81]};  // La m · Fa · Ré m · Mi
   const mtof = m => 440 * Math.pow(2, (m-69)/12), TENSE_VOL = 1.7;   // la musique du criminel est plus forte
   function tone(f, t, dur, type, v, att){
@@ -3063,9 +3174,17 @@ const music = (() => {
     o.connect(gn); gn.connect(lp); o.start(t); o.stop(t + dur + .1);
   }
   function play(s, t){
-    const cfg = mode === 'tense' ? TENSE : CALM, beat = 60/cfg.bpm/2, ch = cfg.chords[Math.floor(s/8) % 4];
+    const cfg = mode === 'zombie' ? ZOMB : mode === 'tense' ? TENSE : CALM, beat = 60/cfg.bpm/2, ch = cfg.chords[Math.floor(s/8) % 4];
     if(s % 8 === 0) ch.forEach(m => { tone(mtof(m), t, beat*8.6, 'sine', .04, 1.2); tone(mtof(m)*1.004, t, beat*8.6, 'triangle', .016, 1.5); });
-    if(mode === 'tense'){
+    if(mode === 'zombie'){
+      if(s % 2 === 0) tone(55, t, beat*1.1, 'sine', .18, .004);                  // pulsation rapide
+      if(s % 4 === 2) tone(mtof(ch[0]-24), t, beat*.8, 'sawtooth', .05, .004);
+      tone(mtof(ch[(s>>1) % 4]-12), t, beat*.6, 'square', .018, .004);             // arpège grinçant
+      if(Math.random() < .18){ const f0 = mtof(pick(cfg.mel)+12); const o = ctx.createOscillator(), gn = ctx.createGain();   // plainte qui glisse
+        o.type = 'sine'; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f0*.7, t + beat*4);
+        gn.gain.setValueAtTime(.0001, t); gn.gain.linearRampToValueAtTime(.035, t + .2); gn.gain.exponentialRampToValueAtTime(.0001, t + beat*4);
+        o.connect(gn); gn.connect(lp); o.start(t); o.stop(t + beat*4 + .1); }
+    } else if(mode === 'tense'){
       if(s % 4 === 0){ tone(62, t, beat*1.4, 'sine', .16, .005); tone(mtof(ch[0]-24), t, beat*1.2, 'triangle', .06, .005); }   // battement de cœur
       tone(mtof(ch[0]-12), t, beat*.9, 'triangle', .07, .01);                       // basse qui martèle
       if(s % 2) tone(mtof(ch[0]), t, beat*.45, 'square', .01, .005);
@@ -3077,7 +3196,7 @@ const music = (() => {
   }
   function tick(){
     if(!ctx) return;
-    while(next < ctx.currentTime + .4){ play(step, next); next += 60/(mode === 'tense' ? TENSE : CALM).bpm/2; step++; }
+    while(next < ctx.currentTime + .4){ play(step, next); next += 60/(mode === 'zombie' ? ZOMB : mode === 'tense' ? TENSE : CALM).bpm/2; step++; }
   }
   function stop(){ if(timer){ clearInterval(timer); timer = null; } }
   function ensure(){
@@ -3085,12 +3204,12 @@ const music = (() => {
     if(timer) return;
     ctx = sfx.ctx(); if(!ctx) return;
     if(!out){ out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200; lp.connect(out); out.connect(ctx.destination); }
-    out.gain.value = vol * (mode === 'tense' ? TENSE_VOL : 1); next = ctx.currentTime + .15; timer = setInterval(tick, 120);
+    out.gain.value = vol * (mode !== 'calm' ? TENSE_VOL : 1); next = ctx.currentTime + .15; timer = setInterval(tick, 120);
   }
   document.addEventListener('visibilitychange', () => { if(document.hidden) stop(); else if(ctx) ensure(); });
   return {
     ensure, stop,
-    setVolume(v){ vol = v; if(out) out.gain.value = v * (mode === 'tense' ? TENSE_VOL : 1); if(ctx) ensure(); },
+    setVolume(v){ vol = v; if(out) out.gain.value = v * (mode !== 'calm' ? TENSE_VOL : 1); if(ctx) ensure(); },
     setOn(b){ on = b; if(ctx) ensure(); },
     setMode(m){
       if(m === mode) return;
@@ -3098,9 +3217,9 @@ const music = (() => {
       if(!lp || !ctx) return;
       const old = lp, oldOut = out, now = ctx.currentTime;          // coupe net les notes en cours, puis repart tout de suite dans le nouveau mode
       oldOut.gain.setTargetAtTime(.0001, now, .08); setTimeout(() => { try{ old.disconnect(); oldOut.disconnect(); }catch(e){} }, 600);
-      out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = m === 'tense' ? 1600 : 2200;
+      out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = m === 'zombie' ? 1400 : m === 'tense' ? 1600 : 2200;
       lp.connect(out); out.connect(ctx.destination);
-      out.gain.setValueAtTime(.0001, now); out.gain.linearRampToValueAtTime(vol * (m === 'tense' ? TENSE_VOL : 1), now + .35);
+      out.gain.setValueAtTime(.0001, now); out.gain.linearRampToValueAtTime(vol * (m !== 'calm' ? TENSE_VOL : 1), now + .35);
       next = now + .2;
     }
   };
@@ -3116,7 +3235,7 @@ const newState = start => ({v:2,t:fromYMD(start,0,1),startYear:start,people:{},u
   auto:false,warIdx:-1});
 const active = () => P(S.activeId);
 const living = () => Object.values(S.people).filter(p => p.death==null);
-const age = p => ageAt(p, p.death!=null ? p.death : S.t);
+const age = p => ageAt(p, p.death!=null ? p.death : p.zombie ? p.zombie.ref : S.t);      // un zombie garde l'âge qu'il avait
 const today = () => Math.floor(S.t);
 const currentUnion = pid => S.unions.find(u => u.a===pid && u.end==null);
 const householdUnion = pid => S.unions.find(u => u.end==null && (u.a===pid || u.b===pid));
@@ -3235,6 +3354,7 @@ function schoolLabel(p, A, y){
   return t('apprentice', p, jobName(p.school.job, p));
 }
 function activity(p, skipIll){
+  if(p.zombie) return t('zombie_act', p);
   const d = p.death!=null ? p.death : S.t, A = ageAt(p, d), y = yearOf(d);
   if(p.death==null && p.ill && !skipIll) return dzName(p.ill.dz, p);
   if(p.star && p.star.famous) return jobName(p.star.job, p);
@@ -3367,7 +3487,7 @@ function autoDay(day){
   // 0.1.4k : le personnage joué en mode auto, le monarque et l'héritier cherchent toujours l'âme sœur et veulent au moins 2 enfants
   const must = p => (S.auto && p.id === S.activeId) || (royalOn() && (p.id === S.royal.king || p.id === heirId()));
   for(const p of living()){
-    if(!p.blood || p.id === skip || ageAt(p, day) < R.legal || currentUnion(p.id) || (p.work && p.work.s === 'prison')) continue;
+    if(!p.blood || p.zombie || p.id === skip || ageAt(p, day) < R.legal || currentUnion(p.id) || (p.work && p.work.s === 'prison')) continue;
     if(!p.plan) p.plan = {will: Math.random() < PAIR_P, at: Math.max(day, p.birth + Math.round(rnd(18,35)*365.25) + rnd(0,364))};
     const mp = must(p);
     if(mp){ p.plan.will = true; p.plan.at = Math.min(p.plan.at, Math.max(day, p.birth + Math.round(rnd(20,28)*365.25))); }
@@ -3379,6 +3499,7 @@ function autoDay(day){
   for(const u of S.unions){
     if(u.end != null || u.a === skip) continue;
     const a = P(u.a), b = P(u.b), mine = u.a === S.activeId;
+    if(a.zombie || b.zombie) continue;
     if(!u.plan) u.plan = newUnionPlan(day);
     const pl = u.plan, mu = must(a);
     if(mu && pl.target < 2) pl.target = 2;
@@ -3631,7 +3752,35 @@ function birthChild(u, day){
   if(n >= 2){ u.multiCount = (u.multiCount || 0) + 1; if(u.multiCount >= 2) unlock('twins2'); }
   dirty = true;
 }
+/* ================= Mode Zombie ================= */
+function zombify(p, day){                             // devient zombie (même s'il était mort : il se relève)
+  if(!p || p.zombie) return;
+  const wasDead = p.death != null;
+  p.zombie = {at: day, ref: wasDead ? p.death : day, rose: wasDead};
+  if(wasDead){ p.death = null; p.cause = null; }
+  p.ill = null; p.onset = null; p.deathAt = null; p.murderAt = null; p.mild = []; p.fameAt = null;
+  p.work = {s:'zombie'};
+  for(const u of S.unions) if(u.end == null && (u.a === p.id || u.b === p.id)) u.preg = null;   // plus d'enfant
+  log('crime', wasDead ? 'zombie_rise' : 'zombie_bite', [p.id], day, false); dirty = true;
+}
+function zombieSpread(day){                           // chaque mois : 3 % par an et par voisin généalogique (parents, enfants, conjoints), morts compris
+  const pr = 1 - Math.pow(1 - .03, 1/12), all = Object.values(S.people), kids = new Map();
+  for(const c of all) if(c.parents) for(const i of c.parents){ if(!kids.has(i)) kids.set(i, []); kids.get(i).push(c); }
+  const hit = new Set();
+  for(const z of all){
+    if(!z.zombie) continue;
+    const nb = [...(z.parents || []).map(P), ...(kids.get(z.id) || []), ...S.unions.filter(u => u.a === z.id || u.b === z.id).map(u => P(u.a === z.id ? u.b : u.a))];
+    for(const q of nb) if(q && !q.zombie && !q.vaccinated && !hit.has(q.id) && Math.random() < pr) hit.add(q.id);   // vacciné : protégé
+  }
+  hit.forEach(id => zombify(P(id), day));
+  if(!S.over && !living().some(p => !p.zombie && inFamily(p))) S.zombieLost = true;           // plus aucun humain : défaite
+}
 function processDay(day){
+  if(S.zombie && !S.zombie.began && day >= S.zombie.firstAt){                // 60 ans après le départ : le premier zombie
+    const c = living().filter(p => inFamily(p) && !p.vaccinated);
+    if(c.length){ const z = pick(c); zombify(z, day); S.zombie.began = true; log('crime','zombie_first',[z.id], day, true); sfx.crime(); burst(['#6aa82e','#2f5410','#d8ffb0','#000000'], 50); }
+  }
+  if(S.zombie && S.zombie.began && day % 30 === 0) zombieSpread(day);
   while(S.worldIdx >= 0 && S.worldIdx < WORLD.length && WORLD[S.worldIdx].day <= day){ log('world','world',[S.worldIdx], WORLD[S.worldIdx].day); S.worldIdx++; }
   if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100'); genRace(); S.end2100 = 1; log('world','y2100',[],day); }
   const wi = warIndexAt(day), prevWar = S.warIdx ?? -1;
@@ -3640,11 +3789,12 @@ function processDay(day){
     if(wi >= 0){ log('world','war_start',[wi],day); sfx.war(); }
     S.warIdx = wi; lastDecade = null;
   }
-  if(R.diseases && Math.random() < .001/365.25){             // chute d'astéroïde : 0,1 % de chances par an, sur un membre de la famille
+  if(R.diseases && Math.random() < .0005/365.25){            // chute d'astéroïde : 0,05 % de chances par an, sur un membre de la famille
     const ok = living().filter(p => inFamily(p) && !immune(p, day));
-    if(ok.length){ const v = pick(ok); die(v, day, {dz:'asteroide'}); unlock('asteroid'); sfx.war(); burst(['#ff7a00','#ffd000','#5a3a2a','#ffffff'], 60); }
+    if(ok.length){ const v = pick(ok); die(v, day, {dz:'asteroide'}); unlock('asteroid'); pendingAst.push(v.id); dirty = true; }
   }
   for(const p of living()){
+    if(p.zombie) continue;                                   // un zombie ne vieillit plus, ne tombe plus malade, ne meurt plus
     if(p.onset != null && day >= p.onset) contract(p, day);
     if(p.ill && day >= p.ill.end){
       if(p.ill.cure){ const dz = p.ill.dz; p.ill = null; p.cures = (p.cures || 0) + 1; log('cure','cured',[p.id, dz], day); sfx.cure(); if(p.cures >= 3) unlock('cured3'); }
@@ -3684,6 +3834,7 @@ function processDay(day){
     } else if(day >= pr.due) birthChild(u, day);
   }
   for(const p of living()){
+    if(p.zombie) continue;
     const A = ageAt(p, day);
     if(A > p.lastAge){ p.lastAge = A; onBirthday(p, A, day); }
   }
@@ -3695,7 +3846,7 @@ function advance(dt){
   const d0 = Math.floor(before), d1 = Math.floor(S.t);
   for(let d = d0+1; d <= d1; d++){
     processDay(d);
-    if(blocked() || S.royalEnd){ S.t = d + .001; break; }
+    if(blocked() || S.royalEnd || S.zombieLost){ S.t = d + .001; break; }
   }
 }
 
@@ -3703,7 +3854,7 @@ function advance(dt){
 let lastTick = performance.now(), pointerHeld = false, musicTick = 0, renderGap = 180;
 setInterval(() => {                                // musique du criminel tant qu'un criminel révélé est libre (en prison, il n'est plus un danger)
   const on = S && !$('#game').hidden;
-  music.setMode(on && living().some(p => p.crim && p.crim.declared && !jailed(p)) ? 'tense' : 'calm');
+  music.setMode(on && S.zombie && S.zombie.began ? 'zombie' : on && living().some(p => p.crim && p.crim.declared && !jailed(p)) ? 'tense' : 'calm');
   if(on){ albumScan(); royalHeirWatch(); }
 }, 1000);
 document.addEventListener('pointerdown', () => { pointerHeld = true; }, true);
@@ -3716,6 +3867,7 @@ setInterval(() => {
   updateClock();
   if(!modalOpen){
     if(S.royalEnd && !S.over){ render(); gameOver(P(S.royalEnd), true); return; }
+    if(S.zombieLost && !S.over){ render(); gameOver(active(), 'zombie'); return; }
     if(S.nameQueue.length){ render(); openNaming(S.nameQueue[0]); return; }
     if(needHeir()){ if(S.auto) autoHeir(); else { render(); openHeir(); } return; }
     if(S.end2100 === 1){ render(); open2100(); return; }
@@ -3725,8 +3877,23 @@ setInterval(() => {
   }
 }, 50);
 
+let zHudT = 0;
+function zombieHud(){                                  // compte à rebours avant le premier zombie, puis zombies / humains
+  const box = $('#zBox'); if(!box) return;
+  if(!S || !S.zombie){ box.hidden = true; return; }
+  box.hidden = false;
+  if(!S.zombie.began){
+    const rem = Math.max(0, (S.zombie.firstAt - S.t) / 365.25);
+    $('#zTxt').textContent = t('z_count', rem.toFixed(1).replace('.', LANG === 'fr' ? ',' : '.'));
+    $('#zFill').style.width = (rem / 60 * 100).toFixed(1) + '%'; box.classList.remove('out');
+  } else {
+    const fam = living().filter(p => inFamily(p)), z = fam.filter(p => p.zombie).length, h = fam.length - z;
+    $('#zTxt').textContent = t('z_status', z, h); $('#zFill').style.width = (fam.length ? z / fam.length * 100 : 100).toFixed(1) + '%'; box.classList.add('out');
+  }
+}
 function updateClock(){
   if(!S) return;
+  const nowT = performance.now(); if(nowT - zHudT > 400){ zHudT = nowT; zombieHud(); }
   $('#dateText').textContent = fmt(S.t);
   const x = toDate(S.t), y = x.getUTCFullYear();
   const start = fromYMD(y,0,1), len = fromYMD(y+1,0,1) - start;
@@ -3789,6 +3956,7 @@ const animT = () => `-${(performance.now()/1000).toFixed(2)}s`;
 function nodeHTML(p, x, y){
   const cls = ['node'];
   if(p.death!=null) cls.push('dead');
+  if(p.zombie) cls.push('zombie');
   if(p.id===S.activeId) cls.push('active');
   if(!p.blood) cls.push('partner');
   if(p.star){ cls.push('star'); if(p.star.famous){ cls.push('famous'); if(p.death==null && S.t - p.star.at < 200) cls.push('fresh'); } }
@@ -3804,8 +3972,8 @@ function nodeHTML(p, x, y){
   if(rtt) cls.push('titled');
   else if(royalOn() && p.blood && p.death == null){ const nr = nobleRank(p); if(nr === 'dechu') cls.push('dechu'); else if(nr) cls.push('noble'); }
   const A = age(p), by = yearOf(p.birth), gone = p.cause && p.cause.vanished;
-  const years = p.death!=null ? `${by} – ${yearOf(p.death)}${gone ? ' ?' : ''}` : `${by} –`;
-  const ageL = gone ? `${t('vanished_short', p)} · ${tA(A)}` : p.death!=null ? `✝ ${tA(A)}` : tA(A);
+  const years = p.zombie ? `${by} – ?` : p.death!=null ? `${by} – ${yearOf(p.death)}${gone ? ' ?' : ''}` : `${by} –`;
+  const ageL = p.zombie ? `☣ ${tA(A)}` : gone ? `${t('vanished_short', p)} · ${tA(A)}` : p.death!=null ? `✝ ${tA(A)}` : tA(A);
   const rib = p.crim ? `<em class="rib cr${jail ? ' jail' : ''}">${jail ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p)}</em>`
     : pres ? `<em class="rib pr">${t('pres_rib', p)}</em>`
     : p.wasKing && p.death != null ? `<em class="rib exk">${t('ex_king', p)}</em>`
@@ -3891,9 +4059,12 @@ let zoom = 1, treeW = 0, treeH = 0, padX = 0, padY = 0;
 let followActive = true, lastFocusKey = '';          // mode auto : l'arbre reste centré sur le personnage joué tant que le joueur ne le déplace pas
 function followFocus(){
   if(!S || !S.auto || !followActive || curView !== 'tree') return;
-  const p = layout[S.activeId]; if(!p) return;
-  const key = `${S.activeId}:${Math.round(p.x)}:${Math.round(p.y)}:${zoom}`;
-  if(key !== lastFocusKey){ lastFocusKey = key; centerOn(S.activeId, true); }
+  if(!layout[S.activeId]) return;
+  if(lastFocusKey === ''){ lastFocusKey = 'on'; centerOn(S.activeId, true); return; }      // nouveau personnage suivi : on recentre
+  const n = document.querySelector(`#treeCanvas [data-id="${S.activeId}"]`), sc = $('#treeScroll'); if(!n || !sc) return;
+  const r = n.getBoundingClientRect(), v = sc.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+  // zone calme au centre : tant que la bulle y reste, la vue ne bouge pas (plus de recentrages à chaque naissance)
+  if(cx < v.left + v.width*.2 || cx > v.right - v.width*.2 || cy < v.top + v.height*.2 || cy > v.bottom - v.height*.2) centerOn(S.activeId, true);
 }
 function applyZoom(){
   const sc = $('#treeScroll'), sz = $('#treeSizer'), cv = $('#treeCanvas');
@@ -3927,6 +4098,8 @@ function statusOf(p){
 }
 const mildTile = p => { const on = p.death == null ? mildOn(p) : []; return on.length ? `<div class="span2 pinkf"><dt>${t('f_mild')}</dt><dd>${esc(on.map(m => `${mildName(m.dz)} (${t('until_y', yearOf(m.end))})`).join(' · '))}</dd></div>` : ''; };
 function riskTile(p, short){
+  if(p.zombie) return `<div class="span2 zf"><dt>${t('f_status')}</dt><dd>☣ ${esc(t('zombie_since', p, yearOf(p.zombie.at)))}</dd></div>`;
+  if(p.vaccinated && S && S.zombie && !short) return `<div class="imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(t('vaccinated', p))}</span></dd></div><div><dt>${t('f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
   if(p.ill) return `<div class="red"><dt>${t('f_illness')}</dt><dd>${esc(dzName(p.ill.dz, p))}</dd></div>`;
   return `<div><dt>${t(short ? 'f_risk_short' : 'f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
 }
@@ -3934,7 +4107,7 @@ function renderSide(){
   if(!$('#side').offsetParent) return;                // onglet caché sur téléphone : rien à dessiner
   const me = active(), a = age(me), u = currentUnion(me.id), partner = u && P(u.b);
   let hint = '';
-  if(jailed(me)) hint = t('hint_prison', me);
+  if((jailed(me)||!!me.zombie)) hint = t('hint_prison', me);
   else if(a < R.legal) hint = t('hint_age', R.legal, R.legal-a);
   else if(u) hint = t('hint_couple', esc(partner.first));
   let couple = '';
@@ -3965,7 +4138,7 @@ function renderSide(){
         ${condTile(me)}${intTile(me)}
         <div class="span2"><dt>${t('f_status')}</dt><dd>${esc(statusOf(me))}</dd></div>
       </dl>
-      <button class="gel pink wide big" data-act="soulmate" ${a<R.legal||u||jailed(me)?'disabled':''}><span>${t('find')}</span></button>
+      <button class="gel pink wide big" data-act="soulmate" ${a<R.legal||u||(jailed(me)||!!me.zombie)?'disabled':''}><span>${t('find')}</span></button>
       ${hint?`<p class="hint">${hint}</p>`:''}
       <label class="switch ${S.auto?'is-off':''}"><input type="checkbox" id="famAuto" data-act="famauto" ${S.familyAuto||S.auto?'checked':''} ${S.auto?'disabled':''}><span class="sw"></span>
         <span><b>${t('fam_auto')}</b><small>${t(S.auto ? 'fam_auto_inauto' : 'fam_auto_hint')}</small></span></label>
@@ -4166,7 +4339,32 @@ function renderMap(){
 
 /* Meurtre : un couteau frappe la bulle de la victime */
 const pendingFx = [];
+const pendingAst = [];
+function asteroidFx(){                                 // un astéroïde enflammé tombe sur la bulle, puis explose
+  while(pendingAst.length){
+    const id = pendingAst.shift(); sfx.war();
+    const node = document.querySelector(`.node[data-id="${id}"]`);
+    if(!node || curView !== 'tree' || reduced || !SET.deco){ burst(['#ff7a00','#ffd000','#5a3a2a','#ffffff'], 40); continue; }
+    const r = node.getBoundingClientRect(), tx = r.left + r.width/2, ty = r.top + r.height/2;
+    const sx = Math.min(innerWidth + 40, tx + 320), sy = Math.max(-60, ty - 460), ang = Math.atan2(sy - ty, sx - tx) * 180 / Math.PI;
+    const a = document.createElement('div'); a.className = 'astfx'; a.style.setProperty('--a', ang + 'deg');
+    a.innerHTML = '<i class="trail"></i><i class="rock"></i>'; document.body.appendChild(a);
+    a.animate([{transform:`translate(${sx}px,${sy}px) scale(.55)`},{transform:`translate(${tx}px,${ty}px) scale(1.1)`}], {duration:950, easing:'cubic-bezier(.55,0,1,.6)'}).onfinish = () => {
+      a.remove(); node.classList.remove('stabbed'); void node.offsetWidth; node.classList.add('stabbed');
+      const ring = document.createElement('div'); ring.className = 'astboom'; ring.style.left = tx + 'px'; ring.style.top = ty + 'px'; document.body.appendChild(ring);
+      setTimeout(() => ring.remove(), 800);
+      for(let i=0;i<22;i++){
+        const sp = document.createElement('i'), c = pick(['#ff7a00','#ffd000','#ff3b1f','#5a3a2a','#ffffff']), sz = rnd(6,16);
+        sp.className = 'spark'; sp.style.cssText = `left:${tx}px;top:${ty}px;width:${sz}px;height:${sz}px;background:radial-gradient(circle at 35% 30%,#fff 0 18%,${c} 60%);box-shadow:0 0 8px ${c}`;
+        document.body.appendChild(sp);
+        const an = Math.random()*Math.PI*2, d = rnd(40,130);
+        sp.animate([{transform:'translate(-50%,-50%) scale(1)',opacity:1},{transform:`translate(calc(-50% + ${Math.cos(an)*d}px),calc(-50% + ${Math.sin(an)*d}px)) scale(.3)`,opacity:0}], {duration:rnd(500,900),easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish = () => sp.remove();
+      }
+    };
+  }
+}
 function runFx(){
+  asteroidFx();
   while(pendingFx.length){
     const id = pendingFx.shift();
     sfx.stab();
@@ -4310,6 +4508,7 @@ function openFiche(id){
     const pa = P(u.a), pb = P(u.b), hetero = pa.sex !== pb.sex;
     const mother = hetero ? [pa,pb].find(x => x.sex==='F') : null;
     let note = t(hetero ? 'note_baby' : 'note_adopt'), dis = false;
+    if(pa.zombie || pb.zombie){ dis = true; note = t('zombie_no_baby'); }
     if(u.preg){ dis = true; note = u.preg.adopt ? t('note_adopting', fmtMonth(u.preg.due)) : t('note_pregnant', mother.first, fmtMonth(u.preg.due)); }
     else if(mother && !fertile(mother, today())){ dis = true; note = t('menopause', mother.first); }
     actions = `<div class="eyebrow sect">${t('our_couple')}</div><div class="acts couple-acts">
@@ -4322,7 +4521,7 @@ function openFiche(id){
         <button class="gel wide" data-act="relocate"><span>${t('relocate_btn')}</span></button><p class="note">${esc(t('relocate_note', me.city))}</p></details>
     </div>`;
   } else if(isMe){
-    actions = `<div class="acts" style="margin-top:14px"><button class="gel pink wide" data-act="soulmate" ${a<R.legal||u||jailed(me)?'disabled':''}><span>${t('find')}</span></button></div>`;
+    actions = `<div class="acts" style="margin-top:14px"><button class="gel pink wide" data-act="soulmate" ${a<R.legal||u||(jailed(me)||!!me.zombie)?'disabled':''}><span>${t('find')}</span></button></div>`;
   } else if(p.blood && p.death==null){
     actions = `<div class="acts" style="margin-top:14px"><button class="gel wide" data-act="incarnate" data-id="${p.id}"><span>${esc(t('incarnate', p.first))}</span></button><p class="note">${t('note_incarnate')}</p></div>`;
   }
@@ -4337,7 +4536,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}
+      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${p.vaccinated && S.zombie && !p.zombie ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(t('vaccinated', p))}</span></dd></div>` : ''}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>
@@ -4380,14 +4579,14 @@ function statsBlock(){
 function gameOver(d, royal){
   S.over = true; save();
   const f = P(S.founderId);
-  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(royal ? t('over_royal_title', familyName(f)) : t('over_title', familyName(f)))}</h2>
-      <p>${esc(royal ? t('over_royal_txt', d) : t('over_txt', d, f, S.startYear))}</p><p class="endnote">${t('end_note_over')}</p></div>${statsBlock()}
+  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(royal === 'zombie' ? t('over_zombie_title') : royal ? t('over_royal_title', familyName(f)) : t('over_title', familyName(f)))}</h2>
+      <p>${esc(royal === 'zombie' ? t('over_zombie_txt', familyName(f), yearOf(S.t)) : royal ? t('over_royal_txt', d) : t('over_txt', d, f, S.startYear))}</p><p class="endnote">${t('end_note_over')}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 function open2100(){
   const f = P(S.founderId);
   sfx.fame(); burst(['#ffd000','#ffffff','#3fd0ff','#ff2f9c'], 40);
-  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${t('end_title')}</h2><p>${esc(t('end_txt', familyName(f), yearOf(S.t)-S.startYear))}</p><p class="endnote">${t('end_note_2100')}</p></div>${statsBlock()}
+  openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${S.zombie ? t('z_win_title') : t('end_title')}</h2><p>${esc(S.zombie ? t('z_win_txt', familyName(f), living().filter(p => !p.zombie && inFamily(p)).length) : t('end_txt', familyName(f), yearOf(S.t)-S.startYear))}</p><p class="endnote">${t('end_note_2100')}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="keep"><span>${t('keep_playing')}</span></button><button class="gel ghost big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 
@@ -4543,7 +4742,7 @@ const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v))
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
   ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
-  ['family', [['decrim',180,'dove'],['potion',185,'potion'],['lueur',800,'sparkle']]],
+  ['family', [['decrim',180,'dove'],['potion',185,'potion'],['vaccin',320,'pill'],['lueur',800,'sparkle']]],
   ['themes', [['orange',830,'sun'],['dark',5000,'moon']]]
 ];
 const SHOP = SHOP_CATS.flatMap(c => c[1]);
@@ -4551,6 +4750,8 @@ const SHOP_THEMES = ['orange','dark'];
 let cynInfoOpen = false;
 const decrimList = () => S ? living().filter(p => p.crim && inFamily(p)) : [];
 const SHOP_ROYAL = ['lueur'];                       // achats qui n'existent qu'en mode Royal
+const SHOP_ZOMBIE = ['vaccin'];                     // … ou qu'en mode Zombie
+const vaccinList = () => S && S.zombie ? living().filter(p => inFamily(p) && !p.zombie && !p.vaccinated) : [];
 const lueurList = () => royalOn() ? living().filter(p => p.blood && p.noble !== 'noble' && p.id !== S.royal.king && p.id !== heirId()) : [];
 function ennoble(p, day){                             // devient noble (titre définitif) et prend un métier de noble s'il est adulte
   p.noble = 'noble'; p.nobleAt = null; RH = undefined;
@@ -4568,16 +4769,17 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'fertile' && S.nextMulti) return {dis:true, note:t('shop_pending')};
   if(id === 'immune' && immune(me, S.t)) return {dis:true, note:t('shop_immune_on', yearOf(me.immuneUntil))};
   if(id === 'midlife' && me.atout2) return {dis:true, note:t('shop_midlife_done', me.first)};
-  if(id === 'spouse' && (currentUnion(me.id) || jailed(me) || age(me) < R.legal)) return {dis:true, note:t(jailed(me) ? 'hint_prison' : currentUnion(me.id) ? 'shop_spouse_taken' : 'shop_spouse_young', me)};
+  if(id === 'spouse' && (currentUnion(me.id) || (jailed(me)||!!me.zombie) || age(me) < R.legal)) return {dis:true, note:t((jailed(me)||!!me.zombie) ? 'hint_prison' : currentUnion(me.id) ? 'shop_spouse_taken' : 'shop_spouse_young', me)};
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
   if(id === 'potion' && !sickList().length) return {dis:true, note:t('shop_potion_none')};
   if(id === 'lueur' && !lueurList().length) return {dis:true, note:t('shop_lueur_none')};
+  if(id === 'vaccin' && !vaccinList().length) return {dis:true, note:t('shop_vaccin_none')};
   if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
   return {dis:false};
 }
 function openShop(re){
   const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50],['crown','cg_crown',100]];
-  const secs = SHOP_CATS.map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.filter(([id]) => !SHOP_ROYAL.includes(id) || royalOn()).map(([id, price, ic]) => {
+  const secs = SHOP_CATS.map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie))).map(([id, price, ic]) => {
     const st = shopState(id, price);
     return `<div class="shopit ${st.owned ? 'owned' : ''}"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${st.note ? `<em>${esc(st.note)}</em>` : ''}</div>
       <button class="gel gold" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`; }).join('')}</div></section>`).join('');
@@ -4589,7 +4791,9 @@ function openShop(re){
 function openPick(id){                                // décriminalisation / crise de la cinquantaine : on choisit avant de payer
   const price = SHOP.find(x => x[0] === id)[1], me = active();
   const sickTxt = p => [p.ill ? dzName(p.ill.dz, p) : null, ...mildOn(p).map(m => mildName(m.dz))].filter(Boolean).join(' · ') || t('sick_soon');
-  const rows = id === 'lueur'
+  const rows = id === 'vaccin'
+    ? vaccinList().map(p => `<button class="pickrow" data-act="pickdo" data-v="vaccin" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(tA(age(p)) + ' · ' + activity(p))}</small></span><em>${t('shop_pick')}</em></button>`)
+    : id === 'lueur'
     ? lueurList().map(p => `<button class="pickrow" data-act="pickdo" data-v="lueur" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(tA(age(p)) + ' · ' + activity(p))}</small></span><em>${t('shop_pick')}</em></button>`)
     : id === 'potion'
     ? sickList().map(p => `<button class="pickrow" data-act="pickdo" data-v="potion" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(sickTxt(p))}</small></span><em>${t('shop_pick')}</em></button>`)
@@ -4670,9 +4874,11 @@ function toggleAuto(){
   log('info', S.auto ? 'auto_on' : 'auto_off', [], undefined, true); renderControls(); save();
 }
 function openAutoWarn(){                              // avant d'activer le mode auto : les Cyn sont réduits
-  openModal(`<div class="autowarn"><span class="aw-ic">${icon('dna')}</span><div class="eyebrow">${t('auto')}</div><h2>${t('aw_title')}</h2><p>${t('aw_txt')}</p>
+  openModal(`<div class="autowarn">
+    <span class="aw-ic">${icon('robot')}</span><h2>${t('aw_title')}</h2><p class="aw-lead">${t('aw_lead')}</p>
+    <div class="aw-box"><span class="aw-cyn">${icon('dna')}</span><span><b>${t('aw_box_t')}</b><small>${t('aw_box')}</small></span></div>
     <label class="aw-check"><input type="checkbox" id="autoNoMore"><span>${t('aw_nomore')}</span></label>
-    <div class="m-actions"><button class="gel ghost" data-act="close"><span>${t('aw_cancel')}</span></button><button class="gel lime" data-act="autook"><span>${t('aw_ok')}</span></button></div></div>`);
+    <div class="aw-actions"><button class="gel ghost" data-act="close"><span>${t('aw_cancel')}</span></button><button class="gel lime" data-act="autook"><span>${t('aw_ok')}</span></button></div></div>`, {locked:true});
 }
 function openReigns(){                                // mode Royal : la liste de tous les monarques
   if(!S || !S.royal) return;
@@ -4785,6 +4991,7 @@ const ACT = {
   legal(d){ R.legal = +d.v; saveRules(); dirty = true; openCustom(true); },
   resetrules(){ R = Object.assign({}, RULES_DEF); saveRules(); dirty = true; sfx.pop(); openCustom(true); },
   shop(){ openShop(false); },
+  rulepick(d){ const s2 = $('#fRule'); s2.value = d.v; s2.dispatchEvent(new Event('change')); },
   tuto(d){ if(d.v === 'yes') startTuto(); else { store.set(TUTO_KEY, 'skip'); closeModal(true); } },
   tnext(){ const n = t('tuto_steps').length; if(tutoI >= n - 1) endTuto(); else tutoShow(tutoI + 1); },
   tprev(){ if(tutoI > 0) tutoShow(tutoI - 1); },
@@ -4796,7 +5003,7 @@ const ACT = {
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
-    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur') return openPick(d.v);
+    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur' || d.v === 'vaccin') return openPick(d.v);
     if(d.v === 'spouse') return openSpouseForm();
     if(!arm(b, t('shop_confirm'))) return;
     payCyn(it[1]);
@@ -4820,6 +5027,7 @@ const ACT = {
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     const me = active();
     if(d.v === 'decrim'){ const p = P(+d.id); if(!p || !p.crim || p.death != null) return; payCyn(it[1]); decrim(p); sfx.cure(); burst(['#ffffff','#8cff1a','#3fd0ff'], 40); }
+    else if(d.v === 'vaccin'){ const p = P(+d.id); if(!p || p.death != null || p.zombie || p.vaccinated) return; payCyn(it[1]); p.vaccinated = true; log('cure','vaccin',[p.id], today(), true); sfx.cure(); burst(['#8cff1a','#ffffff','#3fd0ff'], 40); }
     else if(d.v === 'lueur'){ const p = P(+d.id); if(!p || p.death != null || p.noble === 'noble') return; payCyn(it[1]); ennoble(p, today()); sfx.fame(); burst(['#c9a8ff','#ffffff','#ffd23a','#7a2bd6'], 50); }
     else if(d.v === 'potion'){ const p = P(+d.id); if(!p || p.death != null) return; payCyn(it[1]); cureAll(p); sfx.cure(); burst(['#ff6cc0','#ffffff','#8cff1a','#c3a2ff'], 44); }
     else { if(!ATOUT[d.id] || me.atout2) return; payCyn(it[1]); me.atout2 = d.id; log('star','midlife',[me.id, d.id], today(), true); sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff'], 40); }
@@ -4858,7 +5066,7 @@ const ACT = {
     sfx.breakup(); closeModal(); render(); save();
   },
   baby(d){
-    const me = active(), u = currentUnion(me.id); if(!u || u.preg) return;
+    const me = active(), u = currentUnion(me.id); if(!u || u.preg || P(u.a).zombie || P(u.b).zombie) return;
     const pa = P(u.a), pb = P(u.b), mother = pa.sex !== pb.sex ? [pa,pb].find(q => q.sex==='F') : null;
     if(mother && !fertile(mother, today())) return;
     startPregnancy(u, today(), true);
@@ -4900,7 +5108,7 @@ const ACT = {
   reigns(){ openReigns(); },
   zoom(d){ const v = +d.v; if(v === 0) fitZoom(); else setZoom(zoom * (v > 0 ? 1.25 : 0.8)); },
   marry(d){
-    const me = active(), u = currentUnion(me.id), p = P(+d.id); if(!u || u.married || u.noMarry) return;
+    const me = active(), u = currentUnion(me.id), p = P(+d.id); if(!u || u.married || u.noMarry || me.zombie || p.zombie) return;
     if(!hasAtout(me,'charisme') && Math.random() < .05){ u.noMarry = true; log('sad','refuse',[p.id, me.id]); sfx.refuse(); }   // atout Charisme : toujours oui                     // 5 % de refus
     else { u.married = true; u.marriedAt = today(); takeHusbandName(u); log('wed','wed',[me.id, p.id]); sfx.wedding(); burst(['#ffcc00','#ffffff','#ff8a00','#ff2f9c']); }
     dirty = true; save(); openFiche(p.id);
@@ -4994,6 +5202,7 @@ function setupNote(){
 function royalSetup(){                                // mode Royal : le premier personnage est forcément roi (ou reine)
   const on = $('#fRoyal').checked, r = $('#fRule').value || 'patri';
   $('#fRuleBox').hidden = !on;
+  $$('#fRuleBox [data-act="rulepick"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === r)));
   const radios = $$('input[name=sex]');
   radios.forEach(x => { x.disabled = false; });
   if(on && r !== 'both'){
@@ -5003,6 +5212,8 @@ function royalSetup(){                                // mode Royal : le premier
   }
 }
 ['#fRoyal','#fRule'].forEach(id => $(id).addEventListener('change', royalSetup));
+$('#fRoyal').addEventListener('change', () => { if($('#fRoyal').checked && $('#fZombie').checked){ $('#fZombie').checked = false; } });   // un seul mode spécial à la fois
+$('#fZombie').addEventListener('change', () => { if($('#fZombie').checked && $('#fRoyal').checked){ $('#fRoyal').checked = false; royalSetup(); } });
 function setLang(l){
   LANG = l === 'en' ? 'en' : 'fr'; store.set(LANG_KEY, LANG);
   $('#mapView').innerHTML = ''; dotEls = new Map();                    // la carte se redessine dans la nouvelle langue
@@ -5074,6 +5285,7 @@ $('#setupForm').addEventListener('submit', e => {
   S.activeId = S.founderId = p.id;
   S.familyAuto = $('#fFam').checked;
   log('info','start',[p.id, p.lastAge], day);
+  if($('#fZombie').checked) S.zombie = {firstAt: day + Math.round(60*365.25), began:false};   // mode Zombie : le premier zombie dans 60 ans
   if($('#fRoyal').checked){                             // mode Royal
     S.royal = {rule: $('#fRule').value || 'patri', king: p.id, lost:false};
     if(S.royal.rule !== 'both') p.sex = S.royal.rule === 'patri' ? 'M' : 'F';
