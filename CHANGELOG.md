@@ -2,6 +2,10 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4e — 12 novembre 2026
+
+- Mode Royal : le titre (Roi, Reine, Prince, Duc…) se place devant le prénom. Un prénom long passe sur deux lignes au lieu de dépasser de la bulle, et le mot « Prince » n'est plus écrit en énorme.
+
 ## v0.1.4d — 12 novembre 2026
 
 - Mode Royal : le roi (ou la reine) et le prince héritier ne peuvent devenir ni star ni criminel. Les bébés star ou criminel de la boutique ne fonctionnent pas pour un monarque.
