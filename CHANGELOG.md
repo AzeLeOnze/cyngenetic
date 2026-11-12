@@ -2,6 +2,18 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.6a — 13 novembre 2026
+
+- Mode Zombie : l'Antidote ne s'achète qu'à partir de la 120e année de jeu (1900 pour une partie commencée en 1780).
+- Nouveau logo, beaucoup plus épuré : un « C » blanc sur fond bleu, avec trois points verts comme trois générations.
+- Boutique : nouveau thème Windows XP (2 000 Cyn), avec sa colline verte, son ciel bleu et ses fenêtres d'époque.
+- Nouveau diplôme marrant : le CAP Flemme (rare). Ses diplômés passent quelques années sur le canapé avant de chercher du travail.
+- 8 nouveaux métiers : garde-chasse, éclusier, criminologue (depuis 1890), organiste liturgique, souffleur de verre, maître verrier, taxidermiste (depuis 1750) et professeur de kung-fu (depuis 1970).
+- 5 nouveaux centres d'intérêt : urbex (depuis 1990), langues mortes, radioamateur (depuis 1910), paintball (depuis 1985) et airsoft (depuis 1990).
+- 6 nouvelles particularités : trouble délirant, oniomanie (depuis 1900), TDI (depuis 1880), syndrome d'Alice au pays des merveilles (depuis 1955), syndrome de Cotard (depuis 1880) et syndrome de Capgras (depuis 1923).
+- Correction : un conjoint sur mesure « fan d'une célébrité de la famille » affiche maintenant le nom de la star, vivante ou morte. Ce choix n'apparaît plus s'il n'y a aucune star dans la famille.
+- Ordinateur : la bulle des Cyn est à la même distance du bord du haut que du bord de gauche.
+
 ## v0.1.5b — 12 novembre 2026
 
 - Mode Zombie : dès le premier zombie, l'ambiance change. L'écran verdit et s'assombrit peu à peu, et des fissures apparaissent dans le décor et sur l'arbre, de plus en plus nombreuses jusqu'en 2100.

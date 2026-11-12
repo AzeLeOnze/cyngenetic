@@ -104,7 +104,8 @@ button{font:inherit;color:inherit}
 .zbox.out .zbar i{background:linear-gradient(90deg,#ff7a5a,#a3150a)}
 :root:is([data-skin="dark"],[data-skin="goth"]) .zbox{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.18);color:#b9f07e}
 @media (min-width:901px){
-  .tree-head .hud{position:absolute;left:16px;top:66px;z-index:6;display:flex;align-items:center;gap:10px}
+  .tree-head{position:relative}
+  .tree-head .hud{position:absolute;left:16px;top:calc(100% + 17px);z-index:6;display:flex;align-items:center;gap:10px}
   .tree-head .zbox{padding:8px 14px 8px 8px}
   .tree-head .cyn{gap:10px;padding:7px 18px 7px 7px;font-size:24px;
     background:linear-gradient(180deg,#ffffff,#d9fbef);border:2px solid #fff;box-shadow:0 6px 18px rgba(0,110,90,.28),inset 0 -3px 6px rgba(0,140,110,.12)}
@@ -247,6 +248,7 @@ button{font:inherit;color:inherit}
 .facts .imf dd svg{width:18px;height:18px;fill:currentColor;flex:none}
 :root:is([data-skin="dark"],[data-skin="goth"]) .pickrow{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14)}
 .si-dark{background:radial-gradient(circle at 35% 30%,#ff8a95 0 8%,#b3001b 45%,#140205)}
+.si-xp{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#4a95ee 50%,#0a3fa8)}
 .si-orange{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff9a2e 55%,#e25b00)}
 .shopit b{display:block;font:800 15px var(--font-display)}
 .shopit small{display:block;font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
@@ -541,6 +543,7 @@ body.no-deco .bubble{display:none}
 .skin{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:16px;border:2px solid #fff;background:rgba(255,255,255,.7);cursor:pointer;font:700 12.5px var(--font-display);color:var(--ink)}
 .skin i{width:100%;height:34px;border-radius:12px;box-shadow:inset 0 2px 6px rgba(255,255,255,.7)}
 .skin.sk-aqua i{background:linear-gradient(180deg,#0062ec,#14a6ff 50%,#7fe3ff 70%,#5ed400)}
+.skin.sk-xp i{background:linear-gradient(180deg,#1d5fd1,#4a95ee 45%,#9cccff 60%,#7fd13b 61%,#2f7d16)}
 .skin.sk-orange i{background:linear-gradient(180deg,#ff5a00,#ff9a2e 50%,#ffd27a 70%,#5ed400)}
 .skin.sk-vapor i{background:linear-gradient(180deg,#00c8ff,#4fe3ff 45%,#ff8be4 70%,#c43cff)}
 .skin.sk-kid i{background:radial-gradient(circle at 50% 100%,rgba(0,0,0,0) 0 38%,#8f6bff 38% 44%,#3fa9ff 44% 50%,#3fd46b 50% 56%,#ffe14d 56% 62%,#ff9a2e 62% 68%,#ff4f6d 68% 74%,rgba(0,0,0,0) 74%),linear-gradient(180deg,#5ec8ff,#bdeeff 70%,#9cf55a 72%,#53d63a)}
@@ -584,6 +587,25 @@ body.no-deco .bubble{display:none}
 .facts .zf{background:linear-gradient(180deg,#eef8df,#d0e8ad);border-color:#a9c47e}
 .facts .zf dd{color:#3d5a14}
 .opt-ic.zomb{background:linear-gradient(160deg,#c8f08a,#6aa82e 55%,#2f5410)}
+/* Thème Windows XP */
+:root[data-skin="xp"]{--sky-top:#1d5fd1;--sky-mid:#4a95ee;--sky-low:#9cccff;--sky-haze:#e9f5ff;--aqua:#2a7ae2;--aqua-deep:#0a3fa8;
+  --g1:#cfe3ff;--g2:#3b8af0;--g3:#1458c8;--gedge:#0a3fa8;--hill-a1:#9be05a;--hill-a2:#55b02a;--hill-a3:#2f7d16;--hill-b1:#b4e870;--hill-b2:#5aa82c;
+  --glass-hi:#f4f2e8;--glass-lo:#ece9d8;--glass-edge:#0a3fa8;--ink:#101010;--ink-soft:#404040;--ink-faint:#707070;
+  --font-display:"Trebuchet MS",Tahoma,Verdana,sans-serif;--font-body:Tahoma,Verdana,"Segoe UI",sans-serif;--shadow:2px 4px 12px rgba(0,20,80,.38)}
+:root[data-skin="xp"] .glass{border:1px solid #0a3fa8;border-radius:9px 9px 4px 4px;-webkit-backdrop-filter:none;backdrop-filter:none;
+  background:linear-gradient(180deg,#0a4fd0 0,#3a8cf4 4px,#2569e0 7px,#ece9d8 7px,#f4f2e8 100%);box-shadow:var(--shadow),inset 0 0 0 1px rgba(255,255,255,.5)}
+:root[data-skin="xp"] .gel{border-radius:4px;letter-spacing:0;box-shadow:0 1px 2px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.7)}
+:root[data-skin="xp"] .gel::before{border-radius:3px;opacity:.5}
+:root[data-skin="xp"] .gel.ghost{--c1:#ffffff;--c2:#f4f3ee;--c3:#e3e0d0;--edge:#003c74;--txt:#101010;--ts:rgba(255,255,255,0)}
+:root[data-skin="xp"] .gel.lime{--c1:#9be09b;--c2:#3ca63c;--c3:#2a8a2a;--edge:#1d5e1d;font-style:italic}
+:root[data-skin="xp"] .logo{background:none;color:#0a3fa8;-webkit-text-fill-color:#0a3fa8;font-style:italic;filter:none;text-shadow:1px 1px 0 #fff}
+:root[data-skin="xp"] .logo span{background:none;color:#f07800;-webkit-text-fill-color:#f07800}
+:root[data-skin="xp"] .setup .logo,:root[data-skin="xp"] .brand:not(.small) .logo{color:#fff;-webkit-text-fill-color:#fff;text-shadow:2px 2px 0 #0a3fa8,0 0 16px rgba(0,40,140,.5)}
+:root[data-skin="xp"] .bubble,:root[data-skin="xp"] .flare,:root[data-skin="xp"] .swoosh{display:none}
+:root[data-skin="xp"] .sky-sun{opacity:.55}
+:root[data-skin="xp"] .sky::after{content:"";position:absolute;inset:0 0 35% 0;pointer-events:none;
+  background:radial-gradient(ellipse 16% 6% at 20% 20%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%),radial-gradient(ellipse 22% 7% at 72% 13%,rgba(255,255,255,.85),rgba(255,255,255,0) 70%),
+    radial-gradient(ellipse 12% 4.5% at 50% 33%,rgba(255,255,255,.75),rgba(255,255,255,0) 70%),radial-gradient(ellipse 18% 5% at 88% 38%,rgba(255,255,255,.7),rgba(255,255,255,0) 70%)}
 /* Ambiance zombie */
 .zfx{position:fixed;inset:0;z-index:45;pointer-events:none;display:none}
 body.zmode .zfx{display:block}
@@ -1275,9 +1297,28 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.5b';
+const APP_VERSION = '0.1.6a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.6a', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Mode Zombie : l\'Antidote ne s\'achète qu\'à partir de la 120e année de jeu (1900 pour une partie commencée en 1780).',
+       'Nouveau logo, beaucoup plus épuré : un « C » blanc sur fond bleu, avec trois points verts comme trois générations.',
+       'Boutique : nouveau thème Windows XP (2 000 Cyn), avec sa colline verte, son ciel bleu et ses fenêtres d\'époque.',
+       'Nouveau diplôme marrant : le CAP Flemme (rare). Ses diplômés passent quelques années sur le canapé avant de chercher du travail.',
+       '8 nouveaux métiers : garde-chasse, éclusier, criminologue (depuis 1890), organiste liturgique, souffleur de verre, maître verrier, taxidermiste (depuis 1750) et professeur de kung-fu (depuis 1970).',
+       '5 nouveaux centres d\'intérêt : urbex (depuis 1990), langues mortes, radioamateur (depuis 1910), paintball (depuis 1985) et airsoft (depuis 1990).',
+       '6 nouvelles particularités : trouble délirant, oniomanie (depuis 1900), TDI (depuis 1880), syndrome d\'Alice au pays des merveilles (depuis 1955), syndrome de Cotard (depuis 1880) et syndrome de Capgras (depuis 1923).',
+       'Correction : un conjoint sur mesure « fan d\'une célébrité de la famille » affiche maintenant le nom de la star, vivante ou morte. Ce choix n\'apparaît plus s\'il n\'y a aucune star dans la famille.',
+       'Ordinateur : la bulle des Cyn est à la même distance du bord du haut que du bord de gauche.'],
+   en:['Zombie mode: the Antidote can only be bought from the 120th year of the game (1900 for a game started in 1780).',
+       'New, much cleaner logo: a white "C" on a blue background, with three green dots like three generations.',
+       'Shop: new Windows XP theme (2,000 Cyn), with its green hill, blue sky and old-school windows.',
+       'New funny diploma: the Slacking CAP (rare). Its graduates spend a few years on the sofa before looking for work.',
+       '8 new jobs: gamekeeper, lock keeper, criminologist (from 1890), church organist, glassblower, master glazier, taxidermist (from 1750) and kung fu teacher (from 1970).',
+       '5 new interests: urban exploring (from 1990), dead languages, radio ham (from 1910), paintball (from 1985) and airsoft (from 1990).',
+       '6 new traits: delusional disorder, compulsive buying (from 1900), DID (from 1880), Alice in Wonderland syndrome (from 1955), Cotard syndrome (from 1880) and Capgras syndrome (from 1923).',
+       'Fix: a custom spouse who is a "fan of a family celebrity" now shows the star\'s name, alive or dead. The option no longer appears when the family has no star.',
+       'Computer: the Cyn bubble now sits as far from the top edge as from the left edge.']},
   {v:'0.1.5b', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode Zombie : dès le premier zombie, l\'ambiance change. L\'écran verdit et s\'assombrit peu à peu, et des fissures apparaissent dans le décor et sur l\'arbre, de plus en plus nombreuses jusqu\'en 2100.',
        'Mode Zombie : contamination réduite à 2 % par an. En devenant zombie, une star ou un criminel perd ce statut.',
@@ -1787,6 +1828,10 @@ const CITIES = ['Ajaccio','Albi','Amiens','Angers','Annecy','Arles','Avignon','B
 
 // [id, fr masc., fr fém., en masc., en fém., de, à]
 const JOBS = [
+ ['gardechasse','Garde-chasse','Garde-chasse','Gamekeeper','Gamekeeper',1500,2100],['eclusier','Éclusier','Éclusière','Lock keeper','Lock keeper',1600,2040],
+ ['criminologue','Criminologue','Criminologue','Criminologist','Criminologist',1890,2100],['organiste','Organiste liturgique','Organiste liturgique','Church organist','Church organist',1500,2100],
+ ['souffleur','Souffleur de verre','Souffleuse de verre','Glassblower','Glassblower',1500,2100],['maitreverrier','Maître verrier','Maîtresse verrière','Master glazier','Master glazier',1500,2100],
+ ['kungfu','Professeur de kung-fu','Professeure de kung-fu','Kung fu teacher','Kung fu teacher',1970,2100],['taxidermiste','Taxidermiste','Taxidermiste','Taxidermist','Taxidermist',1750,2100],
  ['laboureur','Laboureur','Laboureuse','Ploughman','Farm labourer',1500,1849],['tisserand','Tisserand','Tisserande','Weaver','Weaver',1500,1949],
  ['forgeron','Forgeron','Forgeronne','Blacksmith','Blacksmith',1500,1959],['meunier','Meunier','Meunière','Miller','Miller',1500,1929],
  ['cordonnier','Cordonnier','Cordonnière','Shoemaker','Shoemaker',1500,1979],['tonnelier','Tonnelier','Tonnelière','Cooper','Cooper',1500,1919],
@@ -1914,7 +1959,7 @@ const STARJOBS = [
  ['streamstar','Star du streaming','Star du streaming','Streaming star','Streaming star',2012,2100],
  ['speedstar','Speedrunner de légende','Speedrunneuse de légende','Legendary speedrunner','Legendary speedrunner',2005,2100]
 ];
-// particularités (non mortelles) : [id, fr masc., fr fém., en, icône]
+// particularités (non mortelles) : [id, fr masc., fr fém., en, icône, possible à partir de (facultatif)]
 const CONDS = [
  ['schizo','Schizophrénie','Schizophrénie','Schizophrenia','brain'],['bipolaire','Trouble bipolaire','Trouble bipolaire','Bipolar disorder','brain'],
  ['tdah','TDAH','TDAH','ADHD','bolt'],['autisme','Autisme','Autisme','Autism','puzzle'],['autisme_nv','Autisme non verbal','Autisme non verbal','Non-verbal autism','puzzle'],
@@ -1932,7 +1977,10 @@ const CONDS = [
  ['anxchron','Anxiété chronique','Anxiété chronique','Chronic anxiety','brain'],
  ['maniaque','Maniaque','Maniaque','Fastidious','sparkle'],['borderline','Borderline','Borderline','Borderline','brain'],
  ['pmr','Personne à mobilité réduite','Personne à mobilité réduite','Reduced mobility','user'],['psychopathe','Psychopathe','Psychopathe','Psychopath','brain'],
- ['diogene','Syndrome de Diogène','Syndrome de Diogène','Diogenes syndrome','puzzle']
+ ['diogene','Syndrome de Diogène','Syndrome de Diogène','Diogenes syndrome','puzzle'],
+ ['delirant','Trouble délirant','Trouble délirant','Delusional disorder','brain'],['oniomanie','Oniomanie','Oniomanie','Compulsive buying disorder','bag',1900],
+ ['tdi','TDI','TDI','Dissociative identity disorder','user',1880],['alice',"Syndrome d'Alice au pays des merveilles","Syndrome d'Alice au pays des merveilles",'Alice in Wonderland syndrome','eyeoff',1955],
+ ['cotard','Syndrome de Cotard','Syndrome de Cotard','Cotard syndrome','skull',1880],['capgras','Syndrome de Capgras','Syndrome de Capgras','Capgras syndrome','user',1923]
 ];
 /* Atouts (0.1.2a) : un seul par personne, reçu à la naissance par tout le monde, visible seulement dans la fiche.
    [id, fr masc., fr fém., en, icône, effet fr, effet en] */
@@ -1976,6 +2024,11 @@ const addRisk = (id, A) => ADDICTIONS.find(a => a[0]===id)[5] * (A >= 70 ? 4 : A
 // centres d'intérêt (sans effet, sauf les sportifs : risque de maladie divisé par 2) :
 // [id, fr masc., fr fém., en masc., en fém., icône, de, à, sportif]
 const INTERESTS = [
+ ['urbex',"Adepte d'urbex","Adepte d'urbex",'Urban explorer','Urban explorer','building',1990,9999],
+ ['langmortes','Passionné de langues mortes','Passionnée de langues mortes','Dead languages buff','Dead languages buff','book',1500,9999],
+ ['radioam','Radioamateur','Radioamatrice','Radio ham','Radio ham','headphones',1910,9999],
+ ['paintball','Joueur de paintball','Joueuse de paintball','Paintball player','Paintball player','palette',1985,9999,true],
+ ['airsoft',"Joueur d'airsoft","Joueuse d'airsoft",'Airsoft player','Airsoft player','helmet',1990,9999,true],
  ['geek','Geek','Geek','Geek','Geek','computer',2002,9999],['furry','Fandom furry','Fandom furry','Furry fandom','Furry fandom','paw',1997,9999],
  ['kpop','K-Pop stan','K-Pop stan','K-Pop stan','K-Pop stan','music',2006,9999],['auto',"Féru d'automobiles","Férue d'automobiles",'Car enthusiast','Car enthusiast','car',1970,9999],
  ['otaku','Otaku','Otaku','Otaku','Otaku','sparkle',2008,9999],['sorcier','Sorcier','Sorcière','Wizard','Witch','moon',1500,1899],
@@ -2015,6 +2068,7 @@ const INTERESTS = [
 const byId = list => Object.fromEntries(list.map(r => [r[0], r]));
 const INT = byId(INTERESTS);
 const interestsOf = p => (p.interests || []).slice(0, 1);                  // un seul centre d'intérêt par personne
+const famStars = p => S ? Object.values(S.people).filter(q => q.id !== p.id && q.star && q.star.famous && inFamily(q)) : [];   // stars de la famille, vivantes ou mortes
 const sporty = p => interestsOf(p).some(id => INT[id] && INT[id][8]);
 function gainInterest(p, day, silent){
   const y = yearOf(day), have = interestsOf(p), ok = INTERESTS.filter(r => r[0] !== 'fanof' && y >= r[6] && y <= r[7]);
@@ -2045,10 +2099,10 @@ function rollAddiction(p, day){
 }
 const rollAddictions = (p, day) => { const a = rollAddiction(p, day), b = a ? rollAddiction(p, day) : null; return [a, b].filter(Boolean); };
 /* 4 % de chances d'avoir une particularité ; 13 % d'hériter de celle d'un parent */
-function rollConds(parents){
+function rollConds(parents, y){
   const out = [], inherited = new Set(parents.flatMap(p => p.conds || []));
   for(const id of inherited) if(Math.random() < R.inherit/100) out.push(id);
-  if(!out.length && Math.random() < R.conds/100) out.push(pick(CONDS)[0]);
+  if(!out.length && Math.random() < R.conds/100) out.push(pick(CONDS.filter(r => !r[5] || !y || y >= r[5]))[0]);   // certaines n'existent qu'à partir d'une année
   return out;
 }
 const inRange = (r,y) => y >= r[5] && y <= r[6];
@@ -2079,7 +2133,8 @@ const TRACKS = [['bacphilo','Bac philosophie','Bac · Philosophy',1960,1967,'bac
  ['bacprocom','Bac Pro Commerce','Vocational bac · Retail',1987,2100,'bac'],['bacproelec','Bac Pro Électrotechnique','Vocational bac · Electrical',1987,2100,'bac'],
  ['bacprorobot','Bac Pro Robotique','Vocational bac · Robotics',2045,2100,'bac'],['capcuisine','CAP Cuisine','CAP · Cooking',1960,2100,'cap'],
  ['capcoif','CAP Coiffure','CAP · Hairdressing',1960,2100,'cap'],['capmenu','CAP Menuiserie','CAP · Joinery',1960,2100,'cap'],
- ['bma','BMA Ébénisterie','BMA · Cabinetmaking',1990,2100,'cap'],['bep','BEP Comptabilité','BEP · Accounting',1966,2009,'cap']];
+ ['bma','BMA Ébénisterie','BMA · Cabinetmaking',1990,2100,'cap'],['bep','BEP Comptabilité','BEP · Accounting',1966,2009,'cap'],
+ ['capflemme','CAP Flemme','CAP · Professional slacking',1960,2100,'cap']];
 const TRACK = byId(TRACKS);
 // maladies bénignes : [id, fr, en, de, à, durée min (jours), durée max, filtre] — elles ne tuent pas, mais doublent le risque de maladie grave
 const MILDS = [
@@ -2418,18 +2473,10 @@ const ICONS = {
 const icon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICONS.sparkle}</svg>`;
 /* Emblème Cyngenetic : une bulle de verre, un arbre dont le tronc est une double hélice d'ADN */
 const emblem = id => `<svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
-  <defs>
-    <linearGradient id="${id}b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--g1)"/><stop offset=".5" style="stop-color:var(--g2)"/><stop offset="1" style="stop-color:var(--g3)"/></linearGradient>
-    <linearGradient id="${id}l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4ffb0"/><stop offset=".55" style="stop-color:var(--hill-a1)"/><stop offset="1" style="stop-color:var(--hill-a2)"/></linearGradient>
-    <linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-  </defs>
-  <rect x="2" y="2" width="60" height="60" rx="19" fill="url(#${id}b)"/>
-  <path d="M8 24C8 12 14 6 26 6h12c12 0 18 6 18 18-7-3-15-4.5-24-4.5S15 21 8 24z" fill="url(#${id}g)"/>
-  <path d="M44.5 22.5A16 16 0 1 0 44.5 43.5" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
-  <path d="M27 25c6 2.5 6 5.5 0 8s-6 5.5 0 8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/>
-  <path d="M35 25c-6 2.5-6 5.5 0 8s6 5.5 0 8" fill="none" stroke="#e8ff9e" stroke-width="2.6" stroke-linecap="round" opacity=".95"/>
-  <path d="M46.5 20.5c1-6.5 6-10 12-10-.5 6.5-5 10.5-12 10z" fill="url(#${id}l)" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>
-  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="18.3" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="1.5"/>
+  <defs><linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--g2)"/><stop offset="1" style="stop-color:var(--g3)"/></linearGradient></defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#${id}b)"/>
+  <path d="M44.14 20.51A15 15 0 1 0 44.14 43.49" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+  <g style="fill:var(--lime)" stroke="#fff" stroke-width="2.2"><circle cx="44.14" cy="20.51" r="5.4"/><circle cx="19.5" cy="32" r="5.4"/><circle cx="44.14" cy="43.49" r="5.4"/></g>
 </svg>`;
 // décennies et grandes périodes : [de, à, icône, fr, en]
 const DECADES = [
@@ -2563,7 +2610,7 @@ fr:{
   birth_txt:(a,b,d,c)=>`${a} et ${b} accueillent leur enfant le ${d} à ${c}. Choisissez son prénom :`,
   name_other:'Autre prénom…', validate:'Valider', rename:f=>`Renommer ${f || ''}`.trim(), star_baby:'Une étoile brille au-dessus du berceau : cet enfant deviendra une star.',
   baby:'Nourrisson', child:'Enfant', mat:['Petite section','Moyenne section','Grande section'], prim:['CP','CE1','CE2','CM1','CM2'], col:['6e','5e','4e','3e'],
-  lyc:['Seconde','Première','Terminale'], capy:['1re année','2e année','Diplômé'], cours_sup:'Cours supérieur', certif:"Certificat d'études",
+  lyc:['Seconde','Première','Terminale'], capy:['1re année','2e année','Diplômé'], capfl:['1re année, au fond près du radiateur','2e année (redoublée)','Diplôme obtenu sans forcer'], cours_sup:'Cours supérieur', certif:"Certificat d'études",
   old_lyc:['4e','3e','Seconde','Première','Terminale'], lycee:'Lycée', petite_ecole:'Petite école', betes:'Garde les bêtes',
   apprentice:(p,j)=>`${g(p,'Apprenti','Apprentie')} ${lc(j)}`, odd:'Petits boulots', student:(p,f)=>`${g(p,'Étudiant','Étudiante')} · ${f}`,
   unemployed:'Au chômage', retired:p=>g(p,'Retraité','Retraitée'),
@@ -2585,7 +2632,7 @@ fr:{
   log_graduate:(p,f,j)=>`${nm(p)} termine ses études (${lc(fieldName(f))}) et devient ${lc(jobName(j,P(p)))}.`,
   log_job_change:(p,j)=>`${nm(p)} change de métier et devient ${lc(jobName(j,P(p)))}.`,
   log_unemployed:p=>`${nm(p)} perd son emploi.`, log_back_to_work:(p,j)=>`${nm(p)} retrouve du travail : ${lc(jobName(j,P(p)))}.`,
-  log_retired:p=>`${nm(p)} prend sa retraite.`, log_uni:(p,f)=>`${nm(p)} entre à l'université (${lc(fieldName(f))}).`,
+  log_retired:p=>`${nm(p)} prend sa retraite.`, log_capflemme:p=>`🛋️ ${nm(p)} décroche son CAP Flemme, mention « Peut mieux faire ». Le canapé l'attend.`, log_uni:(p,f)=>`${nm(p)} entre à l'université (${lc(fieldName(f))}).`,
   log_president:p=>`${nm(p)} est ${g(P(p),'élu Président','élue Présidente')} de la République !`, pres_rib:p=>`★ ${g(p,'Président','Présidente')}`,
   f_atout:'Atout', lab_atout:'Atout de départ', lab_destiny:'Destin', atout_none:'Au hasard', dest_none:'Normal', dest_crim:'Criminel', dest_star:'Star',
   dest_note:'Les succès seront désactivés pour cette partie.',
@@ -2613,7 +2660,7 @@ fr:{
   relocate_note:c=>`Vous quittez ${c} avec votre conjoint et vos enfants mineurs.`,
   skin_gold:'Or', skin_locked:"Terminez une catégorie entière de succès pour débloquer ce thème.", gold_unlocked:'Thème Or débloqué !',
   settings:'Paramètres', custom:'Personnalisation', set_eyebrow:'Confort de jeu', set_lang:'Langue', set_sound:'Son', set_sound_hint:'Bruitages et petites musiques.',
-  set_volume:'Volume', set_theme:'Thème', skin_aqua:'Aqua (bleu)', skin_orange:'Orange', skin_vapor:'Néon', skin_kid:'Enfantin',
+  set_volume:'Volume', set_theme:'Thème', skin_aqua:'Aqua (bleu)', skin_orange:'Orange', skin_vapor:'Néon', skin_kid:'Enfantin', skin_xp:'Windows XP', shop_xp:'Thème Windows XP', shop_xp_d:'Débloque le thème Windows XP pour toujours : colline verte, ciel bleu et fenêtres d\'époque.', skin_locked_xp:"S'achète dans la boutique pour 2 000 Cyn.",
   set_toasts:'Notifications', set_toasts_hint:"Bulles en bas de l'écran pour les naissances, décès, etc.", set_deco:'Animations décoratives', set_deco_hint:'Bulles qui flottent et confettis.',
   set_reset_ach:'Réinitialiser les succès', set_reset_ach_hint:'Efface tous les succès débloqués.', reset:'Réinitialiser',
   cust_eyebrow:'Règles du jeu', cust_intro:"Les changements s'appliquent tout de suite, y compris à la partie en cours.", cust_rules:'Règles', cust_probs:'Probabilités',
@@ -2655,7 +2702,7 @@ fr:{
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^A/, 'a')}.`,
   shopc_survie:'Survie', shop_vaccin:'Vaccin', shop_vaccin_d:'Protège un membre de la famille de la contamination zombie pendant 20 ans.',
   shop_antidote:'Antidote', shop_antidote_d:'Guérit un zombie de la famille : il redevient humain et reste protégé pendant 20 ans.',
-  shop_antidote_none:'Aucun zombie à soigner.', pick_antidote:()=>'Quel zombie doit être soigné ?', shop_z_late:"Plus disponible après 2050.",
+  shop_antidote_none:'Aucun zombie à soigner.', shop_antidote_wait:y=>`Disponible à partir de ${y} (120 ans après le début de la partie).`, pick_antidote:()=>'Quel zombie doit être soigné ?', shop_z_late:"Plus disponible après 2050.",
   zprot_until:(p,y)=>`${g(p,'Protégé','Protégée')} des zombies jusqu'en ${y}`,
   log_zcured:p=>`💉 ${P(p).first} ${P(p).last} reçoit l'antidote et redevient ${g(P(p),'humain','humaine')} !`, shop_vaccin_none:'Personne à vacciner.', pick_vaccin:()=>'Qui doit être vacciné ?',
   f_vaccin:'Vaccin', vaccinated:p=>g(p,'Vacciné contre les zombies','Vaccinée contre les zombies'),
@@ -2795,7 +2842,7 @@ en:{
   birth_txt:(a,b,d,c)=>`${a} and ${b} welcome their child on ${d} in ${c}. Choose a name:`,
   name_other:'Another name…', validate:'Confirm', rename:f=>`Rename ${f || ''}`.trim(), star_baby:'A star shines over the cradle: this child will become a star.',
   baby:'Baby', child:'Child', mat:['Preschool','Pre-K','Kindergarten'], prim:['Grade 1','Grade 2','Grade 3','Grade 4','Grade 5'], col:['Grade 6','Grade 7','Grade 8','Grade 9'],
-  lyc:['Grade 10','Grade 11','Grade 12'], capy:['Year 1','Year 2','Graduated'], cours_sup:'Upper primary', certif:'Primary certificate',
+  lyc:['Grade 10','Grade 11','Grade 12'], capy:['Year 1','Year 2','Graduated'], capfl:['Year 1, back row by the radiator','Year 2 (again)','Graduated without trying'], cours_sup:'Upper primary', certif:'Primary certificate',
   old_lyc:['Grade 8','Grade 9','Grade 10','Grade 11','Grade 12'], lycee:'Lycée', petite_ecole:'Village school', betes:'Tends the animals',
   apprentice:(p,j)=>`Apprentice ${lc(j)}`, odd:'Odd jobs', student:(p,f)=>`Student · ${f}`, unemployed:'Unemployed', retired:()=>'Retired',
   log_start:(id,a)=>`${nm(id)}, ${a} years old, opens the first chapter of the ${P(id).last} family.`,
@@ -2815,7 +2862,7 @@ en:{
   log_graduate:(p,f,j)=>`${nm(p)} graduates (${lc(fieldName(f))}) and becomes ${art(lc(jobName(j,P(p))))}.`,
   log_job_change:(p,j)=>`${nm(p)} changes careers and becomes ${art(lc(jobName(j,P(p))))}.`,
   log_unemployed:p=>`${nm(p)} loses ${g(P(p),'his','her')} job.`, log_back_to_work:(p,j)=>`${nm(p)} finds work again as ${art(lc(jobName(j,P(p))))}.`,
-  log_retired:p=>`${nm(p)} retires.`, log_uni:(p,f)=>`${nm(p)} starts university (${lc(fieldName(f))}).`,
+  log_retired:p=>`${nm(p)} retires.`, log_capflemme:p=>`🛋️ ${nm(p)} earns a Slacking CAP, with the comment "could try harder". The sofa awaits.`, log_uni:(p,f)=>`${nm(p)} starts university (${lc(fieldName(f))}).`,
   log_president:p=>`${nm(p)} is elected President of the Republic!`, pres_rib:()=>'★ President',
   f_atout:'Gift', lab_atout:'Starting gift', lab_destiny:'Destiny', atout_none:'Random', dest_none:'Normal', dest_crim:'Criminal', dest_star:'Star',
   dest_note:'Achievements will be off for this game.',
@@ -2843,7 +2890,7 @@ en:{
   relocate_note:c=>`You leave ${c} with your partner and underage children.`,
   skin_gold:'Gold', skin_locked:'Complete a whole achievement category to unlock this theme.', gold_unlocked:'Gold theme unlocked!',
   settings:'Settings', custom:'Customization', set_eyebrow:'Comfort', set_lang:'Language', set_sound:'Sound', set_sound_hint:'Sound effects and jingles.',
-  set_volume:'Volume', set_theme:'Theme', skin_aqua:'Aqua (blue)', skin_orange:'Orange', skin_vapor:'Neon', skin_kid:'Kiddy',
+  set_volume:'Volume', set_theme:'Theme', skin_aqua:'Aqua (blue)', skin_orange:'Orange', skin_vapor:'Neon', skin_kid:'Kiddy', skin_xp:'Windows XP', shop_xp:'Windows XP theme', shop_xp_d:'Unlocks the Windows XP theme for good: green hill, blue sky and old-school windows.', skin_locked_xp:'Buy it in the shop for 2,000 Cyn.',
   set_toasts:'Notifications', set_toasts_hint:'Pop-ups at the bottom for births, deaths and more.', set_deco:'Decorative animations', set_deco_hint:'Floating bubbles and confetti.',
   set_reset_ach:'Reset achievements', set_reset_ach_hint:'Erases every unlocked achievement.', reset:'Reset',
   cust_eyebrow:'Game rules', cust_intro:'Changes apply immediately, including to the current game.', cust_rules:'Rules', cust_probs:'Probabilities',
@@ -2885,7 +2932,7 @@ en:{
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^R/, 'r')}.`,
   shopc_survie:'Survival', shop_vaccin:'Vaccine', shop_vaccin_d:'Protects a family member from zombie infection for 20 years.',
   shop_antidote:'Antidote', shop_antidote_d:'Cures a zombie in the family: they become human again and stay protected for 20 years.',
-  shop_antidote_none:'No zombie to cure.', pick_antidote:()=>'Which zombie should be cured?', shop_z_late:'No longer available after 2050.',
+  shop_antidote_none:'No zombie to cure.', shop_antidote_wait:y=>`Available from ${y} (120 years into the game).`, pick_antidote:()=>'Which zombie should be cured?', shop_z_late:'No longer available after 2050.',
   zprot_until:(p,y)=>`Protected from zombies until ${y}`,
   log_zcured:p=>`💉 ${P(p).first} ${P(p).last} gets the antidote and is human again!`, shop_vaccin_none:'Nobody left to vaccinate.', pick_vaccin:()=>'Who should be vaccinated?',
   f_vaccin:'Vaccine', vaccinated:()=>'Vaccinated against zombies',
@@ -2973,7 +3020,8 @@ const condBadges = p => {
   return items.length ? `<span class="cbadges">${items.join('')}</span>` : '';
 };
 const intName = (id, p) => { const r = INT[id];
-  if(id === 'fanof'){ const s2 = S && p.fanOf != null && P(p.fanOf); if(s2) return LANG === 'fr' ? `Fan de ${s2.first} ${s2.last}` : `${s2.first} ${s2.last} fan`; } return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : (p.sex==='F' ? r[4] : r[3]); };
+  if(id === 'fanof'){ if(S && p.fanOf == null){ const st = famStars(p); if(st.length) p.fanOf = pick(st).id; }   // ancien conjoint sur mesure : on lui trouve son idole
+    const s2 = S && p.fanOf != null && P(p.fanOf); if(s2) return LANG === 'fr' ? `Fan de ${s2.first} ${s2.last}` : `${s2.first} ${s2.last} fan`; } return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : (p.sex==='F' ? r[4] : r[3]); };
 const intBadge = (id, p) => `<span class="cb int" title="${esc(intName(id,p))}">${icon(INT[id][5])}</span>`;
 const intList = p => interestsOf(p).filter(id => INT[id]).map(id => intName(id, p)).join(', ');
 const intTile = p => interestsOf(p).length ? `<div class="span2 intf"><dt>${t('f_interests')}</dt><dd><span class="cbadges">${interestsOf(p).filter(id => INT[id]).map(id => intBadge(id,p)).join('')}</span>${esc(intList(p))}</dd></div>` : '';
@@ -3347,6 +3395,9 @@ function dropout(p){
 function onAdult(p, day){               // 18 ans
   if(p.work && (p.work.s==='star' || p.work.s==='royal')) return;
   const y = yearOf(day);
+  if(p.school && p.school.track === 'capflemme'){                  // CAP Flemme : quelques années sur le canapé avant de chercher du travail
+    log('work','capflemme',[p.id],day); p.work = {s:'odd', until: day + Math.max(0, p.firstJobAge-18)*365 + rnd(365, 4*365)}; return;
+  }
   if(!dropout(p) && Math.random() < p.uniP){ const f = pickField(y)[0]; p.work = {s:'uni', field:f, until: day + rnd(3,7)*365}; log('work','uni',[p.id,f],day); return; }
   if(p.firstJobAge <= 18){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); return; }
   p.work = {s:'odd', until: day + (p.firstJobAge-18)*365 + rnd(0,300)};
@@ -3387,8 +3438,9 @@ function schoolLabel(p, A, y){
     if(A < 6) return t('mat')[A-3];
     if(A < 11) return t('prim')[A-6];
     if(A < 15) return t('col')[A-11];
-    if(!p.school.track){ const ok = TRACKS.filter(r => dataYear(y) >= r[3] && dataYear(y) <= r[4]); p.school.track = pick(ok)[0]; }
+    if(!p.school.track){ const ok = TRACKS.filter(r => dataYear(y) >= r[3] && dataYear(y) <= r[4] && r[0] !== 'capflemme'); p.school.track = Math.random() < .04 ? 'capflemme' : pick(ok)[0]; }   // 4 % : CAP Flemme
     const r = TRACK[p.school.track], i = Math.min(2, A-15);
+    if(r[0] === 'capflemme') return `${trackName(r[0])} · ${t('capfl')[i]}`;
     return r[5]==='bac' ? `${t('lyc')[i]} · ${trackName(r[0])}` : `${trackName(r[0])} · ${t('capy')[i]}`;
   }
   if(y >= 1881){
@@ -3766,7 +3818,7 @@ function birthChild(u, day){
     const c = addPerson({first:null, last: father ? father.last : A.last, sex: Math.random()*100 < R.boys ? 'M' : 'F', birth:day, blood:true,
       parents:[u.a,u.b], adopted:adopt, city, birthCity:city});
     if(n > 1) c.multi = {n, i, first: ids.length ? ids[0] : c.id};
-    c.conds = rollConds(adopt ? [] : [A, B]);
+    c.conds = rollConds(adopt ? [] : [A, B], yearOf(day));
     planInterests(c, day);
     const fate = Math.random()*100;
     const pStar = [A,B].some(x => hasAtout(x,'chance')) ? Math.max(12, R.star) : R.star;      // atout Chance
@@ -4510,7 +4562,7 @@ function genCandidate(me, sex, day){
   const d = rnd(1, m===1 ? 28 : daysIn(y,m));
   if(m > now.getUTCMonth() || (m===now.getUTCMonth() && d > now.getUTCDate())) y--;
   let last; do { last = pickSurname(cy); } while(last === me.last);
-  const c = Object.assign({first: wpick(namePool(y, sex)), last, sex, birth: fromYMD(y,m,d), city: me.city, birthCity: Math.random() < .6 ? me.city : pick(CITIES), conds: rollConds([])}, traits());
+  const c = Object.assign({first: wpick(namePool(y, sex)), last, sex, birth: fromYMD(y,m,d), city: me.city, birthCity: Math.random() < .6 ? me.city : pick(CITIES), conds: rollConds([], yearOf(day))}, traits());
   rollAddictions(c, day);
   planInterests(c, day);
   setupWork(c, day);
@@ -4769,7 +4821,7 @@ function schoolItems(){
 function albItems(k){
   const fr = LANG === 'fr', seen = new Set(), uniq = x => !seen.has(x.id) && seen.add(x.id);
   if(k === 'i') return INTERESTS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[5], y:r[6], desc: albYears(r[6], r[7])}));
-  if(k === 'c') return CONDS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4]}));
+  if(k === 'c') return CONDS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], ...(r[5] ? {y:r[5], desc: albYears(r[5], 2100)} : {})}));
   if(k === 'j') return JOBS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic: isPol(r[0]) ? 'flag' : 'shirt', y:r[5], desc: albYears(r[5], r[6])}))
     .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + (fr ? r[1] : r[3]), ic:'sparkle', y:r[5], desc: albYears(r[5], r[6])}))).filter(uniq);
   if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, y:1500, name: t('alb_d_' + id)}))
@@ -4808,14 +4860,14 @@ function openAlbum(k, re){
 }
 
 /* ================= Paramètres & personnalisation ================= */
-const SKINS = ['aqua','orange','vapor','kid','night','dark','goth','gold'];
-const SKIN_LOCK = {goth:'skin_locked_goth', gold:'skin_locked', night:'skin_locked_night', vapor:'skin_locked_neon', kid:'skin_locked_kid', orange:'skin_locked_orange', dark:'skin_locked_dark'};
+const SKINS = ['aqua','orange','xp','vapor','kid','night','dark','goth','gold'];
+const SKIN_LOCK = {goth:'skin_locked_goth', gold:'skin_locked', night:'skin_locked_night', vapor:'skin_locked_neon', kid:'skin_locked_kid', orange:'skin_locked_orange', dark:'skin_locked_dark', xp:'skin_locked_xp'};
 function skinHint(v){                                 // thème bloqué : on explique comment le débloquer
   const h = $('#skinHint'); if(!h) return;
   h.innerHTML = `${icon('lock')}<span><b>${esc(t('skin_' + v))}</b> · ${esc(t(SKIN_LOCK[v]))}</span>`; h.hidden = false;
   h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop');
 }
-const skinLocked = s => (s === 'goth' && !UNL.goth) || (s === 'dark' && !UNL.dark) || (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
+const skinLocked = s => (s === 'xp' && !UNL.xp) || (s === 'goth' && !UNL.goth) || (s === 'dark' && !UNL.dark) || (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
 function unlockSkin(key){                            // Néon (16 générations), Enfantin (quadruplés)
   if(UNL[key]) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
   setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k: key + '_skin', a:[]}); sfx.ach(); }, 1500);
@@ -4836,10 +4888,10 @@ const SHOP_CATS = [
   ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
   ['family', [['decrim',180,'dove'],['potion',185,'potion'],['lueur',800,'sparkle']]],
   ['survie', [['vaccin',320,'pill'],['antidote',500,'potion']]],
-  ['themes', [['orange',830,'sun'],['dark',5000,'moon']]]
+  ['themes', [['orange',830,'sun'],['xp',2000,'computer'],['dark',5000,'moon']]]
 ];
 const SHOP = SHOP_CATS.flatMap(c => c[1]);
-const SHOP_THEMES = ['orange','dark'];
+const SHOP_THEMES = ['orange','xp','dark'];
 let cynInfoOpen = false;
 const decrimList = () => S ? living().filter(p => p.crim && inFamily(p)) : [];
 const SHOP_ROYAL = ['lueur'];                       // achats qui n'existent qu'en mode Royal
@@ -4867,7 +4919,8 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
   if(id === 'potion' && !sickList().length) return {dis:true, note:t('shop_potion_none')};
   if(id === 'lueur' && !lueurList().length) return {dis:true, note:t('shop_lueur_none')};
-  if((id === 'vaccin' || id === 'antidote') && yearOf(S.t) > 2050) return {dis:true, note:t('shop_z_late')};       // plus rien après 2050
+  if((id === 'vaccin' || id === 'antidote') && yearOf(S.t) > 2050) return {dis:true, note:t('shop_z_late')};
+  if(id === 'antidote' && yearOf(S.t) < S.startYear + 120) return {dis:true, note:t('shop_antidote_wait', S.startYear + 120)};   // 120 ans après le début de la partie       // plus rien après 2050
   if(id === 'vaccin' && !vaccinList().length) return {dis:true, note:t('shop_vaccin_none')};
   if(id === 'antidote' && !antidoteList().length) return {dis:true, note:t('shop_antidote_none')};
   if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
@@ -4910,9 +4963,9 @@ function openSpouseForm(){                            // conjoint(e) entièremen
   const byName = (a, b) => a[0].localeCompare(b[0], LANG);
   const opt = (v, l, sel) => `<option value="${esc(v)}" ${sel ? 'selected' : ''}>${esc(l)}</option>`;
   const jobs = JOBS.filter(r => inRange(r, dy) && r[0] !== 'president').map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
-  const ints = INTERESTS.filter(r => dy >= r[6] && dy <= r[7]).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const ints = INTERESTS.filter(r => dy >= r[6] && dy <= r[7] && (r[0] !== 'fanof' || famStars({id:-1}).length)).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
   const adds = ADDICTIONS.filter(r => dy >= r[6]).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
-  const conds = CONDS.map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const conds = CONDS.filter(r => !r[5] || dy >= r[5]).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
   const sexes = (R.sameSex ? ['F','M'] : [opp]);
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop')} · ${cynFmt(1100)} Cyn</div><h2>${t('shop_spouse')}</h2><p class="hint">${esc(t('sp_intro', me.first))}</p></div>
     <form id="spForm" class="spform" novalidate>
@@ -4953,6 +5006,7 @@ function openSpouseForm(){                            // conjoint(e) entièremen
     const p = addPerson(Object.assign(c, {blood:false}));
     p.addicts = $('#spAdd').value ? [$('#spAdd').value] : [];
     p.intAges = []; p.interests = $('#spInt').value ? [$('#spInt').value] : [];
+    if(p.interests[0] === 'fanof'){ const st = famStars(p); if(st.length) p.fanOf = pick(st).id; }
     const job = $('#spJob').value;
     if(job) p.work = {s:'job', job}; else setupWork(p, day);
     const dest = $('#spDest').value;
@@ -5372,7 +5426,7 @@ $('#setupForm').addEventListener('submit', e => {
   const day = today(), city = fCity.value;
   const p = addPerson({first: cap(first), last: cap(last), sex:fSex(), birth:fromYMD(y,m,d), blood:true, city, birthCity:city});
   p.lastAge = ageAt(p, day);
-  p.conds = rollConds([]);
+  p.conds = rollConds([], S.startYear);
   p.atout = $('#fAtout').value || pick(ATOUTS)[0];                         // atout choisi (ou au hasard)
   const dest = $('#fDestiny').value, adult = Math.max(day, p.birth + Math.round(18*365.25));
   if(dest === 'crim') p.crim = {day: adult, declared:false, fate:null};   // commencer en criminel…
