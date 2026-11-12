@@ -2,6 +2,11 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3c — 12 novembre 2026
+
+- Boutique : un bouton dédié en haut (à côté des Paramètres, et sur l'écran de départ). Toucher le compteur de Cyn ouvre aussi la boutique.
+- Album : les onglets du haut sont bien cadrés sur téléphone.
+
 ## v0.1.3b — 12 novembre 2026
 
 - Cyn : une monnaie qui se gagne en jouant (10 par naissance, 25 pour un enfant de star, 200 quand une star perce, 100 quand un criminel se déclare, 50 par meurtre). Le compteur, avec son icône ADN, est en haut à gauche de l'arbre.

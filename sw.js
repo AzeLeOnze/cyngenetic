@@ -1,5 +1,5 @@
-// Cyngenetic : cache hors ligne. Version 20261112-032732 (change à chaque fabrication, pour que les mises à jour arrivent).
-const VERSION = 'cyngenetic-20261112-032732';
+// Cyngenetic : cache hors ligne. Version 20261112-033444 (change à chaque fabrication, pour que les mises à jour arrivent).
+const VERSION = 'cyngenetic-20261112-033444';
 const FONTS = 'cyngenetic-fonts';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png',
   './icons/icon-maskable-512.png', './icons/apple-touch-icon.png'];

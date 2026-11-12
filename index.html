@@ -88,6 +88,9 @@ button{font:inherit;color:inherit}
 .gel.round{width:42px;min-height:42px;padding:0}
 .gel.wide{width:100%}
 .gel.big{min-height:50px;font-size:17px;padding:12px 28px}
+.gel.shopb{--c1:#c8fff0;--c2:#16cfa4;--c3:#009a78;--edge:#007a5f;--ts:rgba(0,70,55,.55)}
+.cyn{cursor:pointer;transition:filter .15s}
+.cyn:hover{filter:brightness(1.05) saturate(1.2)}
 .gel.danger{--c1:#ffb8b8;--c2:#ff2d3d;--c3:#c4001a;--edge:#8f0012;--ts:rgba(90,0,0,.55);transition:transform .45s cubic-bezier(.2,1.5,.4,1),filter .2s}
 .gel.danger.wob{animation:wob .35s}
 .gel.danger.flee:disabled{filter:none;cursor:default}
@@ -447,9 +450,11 @@ body.no-deco .bubble{display:none}
 .ach{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 8px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:0 4px 10px rgba(0,70,160,.12)}
 .ach.locked{opacity:.5;filter:grayscale(.95)}
 .ach b{font:800 13.5px/1.2 var(--font-display)}
-.albtabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
-.albtabs button{display:inline-flex;align-items:center;gap:6px}
-.albtabs button small{font-size:11px;opacity:.7}
+.albtabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:4px;margin:6px 0 12px;padding:4px;border-radius:18px}
+.albtabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;min-height:44px;padding:5px 6px;border-radius:14px;
+  font-size:13px;line-height:1.15;text-align:center;white-space:normal;overflow-wrap:anywhere}
+.albtabs button small{font-size:11px;opacity:.75}
+@media (max-width:520px){ .albtabs{grid-template-columns:repeat(3,minmax(0,1fr))} .albtabs button{font-size:12px} }
 .albgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
 .albc{display:grid;grid-template-columns:32px 1fr;gap:9px;align-items:center;padding:9px 11px;border-radius:16px;background:rgba(255,255,255,.78);border:1px solid #fff;box-shadow:0 3px 8px rgba(0,70,160,.1)}
 .albc>i{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 12%,var(--aqua) 70%);color:#fff;box-shadow:inset 0 -3px 6px rgba(0,0,0,.12)}
@@ -866,6 +871,7 @@ body.no-deco .bubble{display:none}
   <div class="setup-inner">
     <div class="setup-top">
       <button class="gel gold" data-act="achs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg><span data-t="ach_title"></span></button>
+      <button class="gel shopb" data-act="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><span data-t="shop"></span></button>
       <button class="gel ghost" data-act="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg><span data-t="custom"></span></button>
       <button class="gel ghost" data-act="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.4.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6L2 13.7v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg><span data-t="settings"></span></button>
     </div>
@@ -933,6 +939,7 @@ body.no-deco .bubble{display:none}
     <div class="ctrls" role="toolbar">
       <button class="gel round ghost" data-act="settings" data-ta="settings" data-tt="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.4.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6L2 13.7v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg></button>
       <button class="gel round ghost" data-act="custom" data-ta="custom" data-tt="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
+      <button class="gel round shopb" data-act="shop" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg></button>
       <button class="gel round gold achb" data-act="achs" data-ta="ach_title" data-tt="ach_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg></button>
       <div class="pills" role="group" id="speeds">
         <button data-act="speed" data-v="0.25">×0,25</button>
@@ -951,7 +958,7 @@ body.no-deco .bubble{display:none}
   <main class="board">
     <section class="glass treebox">
       <div class="tree-head">
-        <span class="cyn" id="cynBox" title="Cyn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span>
+        <span class="cyn" id="cynBox" data-act="shop" role="button" tabindex="0" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span>
         <h2 id="treeTitle"></h2>
         <span class="stats" id="treeStats"></span>
         <div class="pills" id="viewSw" role="group" hidden>
@@ -996,9 +1003,14 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.3b';
+const APP_VERSION = '0.1.3c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.3c', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Boutique : un bouton dédié en haut (à côté des Paramètres, et sur l\'écran de départ). Toucher le compteur de Cyn ouvre aussi la boutique.',
+       'Album : les onglets du haut sont bien cadrés sur téléphone.'],
+   en:['Shop: its own button at the top (next to Settings, and on the start screen). Tapping the Cyn counter opens the shop too.',
+       'Album: the tabs at the top now fit nicely on phones.']},
   {v:'0.1.3b', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Cyn : une monnaie qui se gagne en jouant (10 par naissance, 25 pour un enfant de star, 200 quand une star perce, 100 quand un criminel se déclare, 50 par meurtre). Le compteur, avec son icône ADN, est en haut à gauche de l\'arbre.',
        'Boutique, dans un nouvel onglet des Paramètres : prochain bébé star (750 Cyn), prochain bébé criminel (600 Cyn) et thème Orange (830 Cyn). Le thème Orange ne se débloque plus qu\'en l\'achetant.',
@@ -3815,6 +3827,7 @@ const ACT = {
   legal(d){ R.legal = +d.v; saveRules(); dirty = true; openCustom(true); },
   resetrules(){ R = Object.assign({}, RULES_DEF); saveRules(); dirty = true; sfx.pop(); openCustom(true); },
   settab(d){ setTab = d.v; openSettings(true); },
+  shop(){ setTab = 'shop'; openShop(false); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || CYN < it[1]) return;
     if(d.v === 'orange'){ if(UNL.orange) return; }
