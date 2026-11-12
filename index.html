@@ -149,6 +149,7 @@ button{font:inherit;color:inherit}
 .spform .m-actions{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .fieldhint{display:block;margin-top:4px;font:700 11.5px var(--font-display);color:var(--aqua-deep)}
 .endnote{margin:8px 0 0;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.55);font-size:13px;color:var(--ink-soft)}
+.si-lueur{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#c9a8ff 50%,#5a17b0)}
 .si-potion{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff7ad8 55%,#9e0077)}
 .si-decrim{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 55%,#0074dc)}
 .picklist{display:grid;gap:8px;max-height:min(60vh,520px);overflow:auto;padding:2px}
@@ -1143,9 +1144,20 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.4g';
+const APP_VERSION = '0.1.4h';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.4h', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Nouveaux prénoms : Erwan, Alexis, Anthony, Benjamin, Corentin, Anaïs et Mélissa dans les années 1990-2005 ; des prénoms bretons, corses et occitans après 1950 (Yann, Ronan, Nolwenn, Maïwenn, Lisandru, Saveria, Guilhem, Magali…) ; et des prénoms néo-bretons, néo-corses et néo-occitans après 2040 (Ewenn, Kaëlig, Lizenn, Orsu, Ghjuvan-Leo, Mirèlha…).',
+       'Noms de famille : Neymar devient Neidega et Targuerien devient Tarney ; nouveaux noms Höll, Sanchez, Pollez, Droey, McGonagall, Loës et Bravat.',
+       'Boutique, en mode Royal uniquement : Lueur Noble (800 Cyn), qui anoblit le membre de la famille de ton choix.',
+       'Nouvelle catégorie de succès Royal : Règne éternel (arriver en 2100 en mode Royal), Cour de nobles (5 nobles), Ombre sur la couronne (un héritier assassiné), Le flambeau (un petit-enfant reprend la couronne) et Du blason à la couronne (un noble devient roi).',
+       'Nouveau succès Royal « Miracle tardif » : un roi sans héritier en retrouve un après ses 80 ans.'],
+   en:['New first names: Erwan, Alexis, Anthony, Benjamin, Corentin, Anaïs and Mélissa in 1990-2005; Breton, Corsican and Occitan names after 1950 (Yann, Ronan, Nolwenn, Maïwenn, Lisandru, Saveria, Guilhem, Magali…); and neo-Breton, neo-Corsican and neo-Occitan names after 2040 (Ewenn, Kaëlig, Lizenn, Orsu, Ghjuvan-Leo, Mirèlha…).',
+       'Surnames: Neymar becomes Neidega and Targuerien becomes Tarney; new surnames Höll, Sanchez, Pollez, Droey, McGonagall, Loës and Bravat.',
+       'Shop, Royal mode only: Noble Glow (800 Cyn), which ennobles the family member of your choice.',
+       'New Royal achievement category: Eternal reign (reach 2100 in Royal mode), Court of nobles (5 nobles), Shadow over the crown (an heir is murdered), Passing the torch (a grandchild takes the crown) and From crest to crown (a noble becomes king).',
+       'New Royal achievement "Late miracle": a king with no heir gets a new one after turning 80.']},
   {v:'0.1.4g', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Mode Royal : les enfants du prince héritier sont comtes ; quand il devient roi, ils deviennent ducs (et l\'aîné prince héritier).',
        'Mode Royal : nouvelles activités selon l\'époque. Fin du XXe et XXIe siècle : discours télévisé, visite d\'État, fondation caritative et réseaux sociaux pour le roi ; ONG, pilote d\'hélicoptère, marathon caritatif et influenceur royal pour le prince. Après 2030-2040 : plan climat, traité avec une IA, règne par hologramme et base lunaire pour le roi ; ambassadeur dans le métavers, course de drones, mission vers Mars et cités sous-marines pour le prince. Et pour les comtes du futur : gouverneur de station orbitale et directeur de terraformation.',
@@ -1512,6 +1524,29 @@ const NAMES = [
   NAMES.splice(i, 0, [1779, a[1], a[2]]);                       // 1700–1779 inchangé
   a[1] = add(a[1], M); a[2] = add(a[2], F);                     // 1780–1789
 })();
+/* 0.1.4h : prénoms des années 1990-2005, prénoms bretons, corses et occitans (surtout après 1950) et néo-régionaux après 2040 */
+(() => {
+  const add = (list, extra) => {                                  // intercalés pour qu'ils sortent aussi souvent que les autres
+    const ex = extra.filter(n => !list.includes(n)), out = [];
+    list.forEach((n,k) => { out.push(n); if(ex[k]) out.push(ex[k]); });
+    return out.concat(ex.slice(list.length));
+  };
+  const row = y => NAMES.find(r => r[0] === y);
+  const POP_M = ['Erwan','Alexis','Anthony','Benjamin','Corentin'], POP_F = ['Anaïs','Mélissa'];
+  const REG_M = ['Yann','Loïc','Ronan','Gwenaël','Tanguy','Goulven','Erwan','Corentin','Ange','Paul-Antoine','Lisandru','Matteu','Petru','Ghjacumu','Guilhem','Arnaud','Joan','Pau','Aurèli','Esteve'], REG_F = ['Nolwenn','Maïwenn','Gwenaëlle','Rozenn','Soazig','Klervi','Enora','Morgane','Marie-Ange','Laetizia','Ghjulia','Saveria','Vanina','Paola','Magali','Mireille','Laureta','Aurelha','Aliénor','Clamença'];
+  const NEO_M = ['Ewenn','Kaëlig','Tremeur','Gwenvaël','Brivaël','Orsu','Ghjuvan-Leo','Santu','Paulu','Lisandru','Aurelian','Guilhèm','Raimon','Sòl','Estève'], NEO_F = ['Lizenn','Azilis','Bleuenn','Gwenola','Maëlenn','Orsola','Sarina','Lavinia','Saveria','Ghjulia','Estela','Mirèlha','Clara-Lùa','Jòrdana','Aurelha'];
+  [1994, 2004].forEach(y => { const r = row(y); if(r){ r[1] = add(r[1], POP_M); r[2] = add(r[2], POP_F); } });
+  [1964, 1974, 1984, 1994, 2004, 2014, 2024, 2039].forEach((y, i) => {      // quelques prénoms régionaux à chaque époque, différents d'une décennie à l'autre
+    const r = row(y); if(!r) return;
+    const m = [0,1,2,3,4,5].map(k => REG_M[(i*5 + k*3) % REG_M.length]), f = [0,1,2,3,4,5].map(k => REG_F[(i*5 + k*3) % REG_F.length]);
+    r[1] = add(r[1], m); r[2] = add(r[2], f);
+  });
+  [2049, 2064, 2079].forEach((y, i) => {                          // après 2040 : néo-breton, néo-corse, néo-occitan
+    const r = row(y); if(!r) return;
+    const m = [0,1,2,3,4,5,6,7].map(k => NEO_M[(i*4 + k*2) % NEO_M.length]), f = [0,1,2,3,4,5,6,7].map(k => NEO_F[(i*4 + k*2) % NEO_F.length]);
+    r[1] = add(r[1], m); r[2] = add(r[2], f);
+  });
+})();
 /* Après 2100 : prénoms générés (X-Aëdiel, MétaCambara, X-AE-D…) ; après 2300 : codes de machines (X0 EA ETA, BOT -E- KON, G33BYS…) */
 const NEO_PRE = ['X-','Méta','Néo','Zy','Ax','Q-','Ultra','Cyber','Holo','Nova-','Omni','Lux-','Æ','Vex','Kyro'];
 const NEO_MID = ['aëd','cambar','lun','syr','thal','orb','kael','nyx','zor','vel','quar','sel','dri','mir','aur','xen','vor','ilyth','orion','zeb'];
@@ -1545,7 +1580,8 @@ const SURNAMES_PLAIN = ['Martin','Bernard','Dubois','Durand','Moreau','Lefebvre'
 const SN_PRE = ['','','','','Le ','De ','Du ','La '], SN_A = ['Ker','Bel','Mont','Roche','Val','Chab','Gour','Lan','Puy','Ver','Esc','Tour','Mal','Bour','Quin','Cas','Fon','Gras','Mar','Pey','Cler','Haut','Brou','Vill','Sauv','Corb','Lusc','Maub'], SN_B = ['ard','illon','eau','ennec','agne','ois','iac','elle','ier','ot','andre','ouze','erie','ain','ac','ignac','oux','ergue','aval','ebœuf','fort','mont','ville','ade','ière','enot'];
 // noms ajoutés en 0.1.2a
 const SURNAMES_ADDED = ['Le Meunier','Dubois','Renard','Duval','Thomas','Sapin','Papain','Grevsel','Lebon','Petit','Conseig','Dupuy','Dupont','Lalem','Mondragon','Aubin','Jubin','Moraclet','Kerval','Holland','Berry','Douglas','Webb','Spencer','Marty','Baron','Chevalier','Blanc','Muller','Fleury','Gillet','Pichon','Maréchal','Laporte','Meuron','Jacob','Le Goff','Le Roux','Hervé','Rey','Lecomte','Sanguilliot','Touret',
-  'Da Vinci','Da Silva','Delaigue','Delporte','Norge','Vincet','Véga','Lebroke','Castelgan','Laudebrook','Lankweldan','Targuerien','Jaude','Neymar','Kartney','Lesage','Suffort','Bourgenet','Richard'];
+  'Da Vinci','Da Silva','Delaigue','Delporte','Norge','Vincet','Véga','Lebroke','Castelgan','Laudebrook','Lankweldan','Tarney','Jaude','Neidega','Kartney','Lesage','Suffort','Bourgenet','Richard',
+  'Höll','Sanchez','Pollez','Droey','McGonagall','Loës','Bravat'];
 function pickSurname(y){
   if(Math.random() < .18) return pick(SURNAMES_ADDED);
   const r = Math.random();
@@ -1926,12 +1962,15 @@ function nobleYear(p, A, day){                        // ducs et comtes : 3 % de
     p.nobleJobRoll = true; if(Math.random() < .6){ p.work = {s:'noble', act: actPick(NOBLE_ACTS, day)}; dirty = true; }
   }
   if(r === 'comte' && A >= 16 && !p.nobleRoll){ p.nobleRoll = true; if(Math.random() < .22) p.nobleAt = day + rnd(0, 40*365); }   // 22 % des comtes deviennent nobles
-  if(p.nobleAt != null && day >= p.nobleAt){ p.nobleAt = null; p.noble = 'noble'; RH = undefined;
-    if(A >= 18 && !(p.work && ['royal','star','prison','retired','uni'].includes(p.work.s))) p.work = {s:'noble', act: actPick(NOBILITY_ACTS, day)};
-    log('star','ennobled',[p.id], day, true); dirty = true; return;            // un métier de noble
-  }
+  if(p.nobleAt != null && day >= p.nobleAt){ ennoble(p, day); return; }
   if(!p.dechuRoll && A >= 18){ p.dechuRoll = true; if(Math.random() < .03) p.dechuAt = day + rnd(0, 40*365); }
   if(p.dechuAt != null && day >= p.dechuAt){ p.dechuAt = null; p.noble = 'dechu'; if(p.work && p.work.s === 'noble') p.work = {s:'unemp', until: day + rnd(60, 730)}; RH = undefined; log('sad','dechu',[p.id], day, true); dirty = true; }
+}
+function royalHeirWatch(){                           // succès « Miracle tardif » : plus d'héritier, puis un nouveau après 80 ans
+  if(!royalOn()) return;
+  const k = P(S.royal.king); if(!k || k.death != null) return;
+  if(!heirId()){ S.royal.noHeir = true; return; }
+  if(S.royal.noHeir){ S.royal.noHeir = false; if(age(k) >= 80) unlock('r_lateheir'); }
 }
 const royalImmune = p => royalOn() && (p.id === S.royal.king || p.id === heirId());   // ni star ni criminel
 function royalTitle(p){
@@ -1949,6 +1988,9 @@ function royalTitle(p){
   return '';
 }
 function crown(p, day, silent){
+  const prev = P(S.royal.king);
+  if(p.noble === 'noble') unlock('r_nobleking');
+  if(prev && prev.id !== p.id && (p.parents || []).some(i => { const q = P(i); return q && (q.parents || []).includes(prev.id); })) unlock('r_grandheir');
   S.royal.king = p.id; p.wasKing = true; RH = undefined;
   if(p.crim && !p.crim.declared) delete p.crim; if(p.star && !p.star.famous) delete p.star; p.fameAt = null;   // un monarque n'a pas d'autre destin
   p.work = {s:'royal', act: actPick(ROYAL_ACTS, day)};
@@ -2395,7 +2437,8 @@ fr:{
   log_royal_lost:()=>"Ni héritier ni frère pour reprendre la couronne : la dynastie s'éteint.",
   over_royal_title:l=>`Fin de la dynastie ${l}`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} est ${g(P(d.id || d),'mort','morte')} sans héritier ni frère pour lui succéder. La couronne s'éteint avec ${g(P(d.id || d),'lui','elle')}.`,
   alb_prince_d:'Prince ou princesse héritier',
-  shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'), alb_noble_d:'Duc, duchesse, comte ou comtesse', alb_nobility_d:'Noble',
+  shop_royal_no:p=>g(p,'Impossible pour un roi.','Impossible pour une reine.'),
+  shop_lueur:'Lueur Noble', shop_lueur_d:"Anoblit le membre de la famille de ton choix (mode Royal).", shop_lueur_none:"Personne à anoblir.", pick_lueur:()=>'Qui doit devenir noble ?', alb_noble_d:'Duc, duchesse, comte ou comtesse', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} est ${g(P(p),'anobli','anoblie')} : ${g(P(p),'il','elle')} rapportera 5 Cyn tous les 2 ans.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
   end_note_over:'La partie est terminée : les Cyn et les succès ne peuvent plus être gagnés dans cette partie.',
@@ -2603,7 +2646,8 @@ en:{
   log_royal_lost:()=>'No heir and no brother to take the crown: the dynasty dies out.',
   over_royal_title:l=>`End of the ${l} dynasty`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} died with no heir and no brother to succeed them. The crown dies with them.`,
   alb_prince_d:'Crown prince or princess',
-  shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'), alb_noble_d:'Duke, duchess, count or countess', alb_nobility_d:'Noble',
+  shop_royal_no:p=>g(p,'Not possible for a king.','Not possible for a queen.'),
+  shop_lueur:'Noble Glow', shop_lueur_d:'Ennobles the family member of your choice (Royal mode).', shop_lueur_none:'Nobody left to ennoble.', pick_lueur:()=>'Who should become a noble?', alb_noble_d:'Duke, duchess, count or countess', alb_nobility_d:'Noble',
   log_ennobled:p=>`${P(p).first} ${P(p).last} is ennobled and will bring in 5 Cyn every 2 years.`,
   log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
   end_note_over:'The game is over: Cyn and achievements can no longer be earned in this game.',
@@ -2744,11 +2788,17 @@ const ACHS = [
  ['alb_j','album','platinum','Touche-à-tout',"Compléter la catégorie Métiers de l'album",'Jack of all trades','Complete the Jobs category of the album'],
  ['alb_d','album','platinum','Mille et une morts',"Compléter la catégorie Morts de l'album",'A thousand and one deaths','Complete the Deaths category of the album'],
  ['alb_a','album','silver','Toutes les tentations',"Compléter la catégorie Addictions de l'album",'Every temptation','Complete the Addictions category of the album'],
+ ['r_2100','royal','platinum','Règne éternel','Arriver en 2100 en mode Royal, la couronne toujours dans la famille','Eternal reign','Reach 2100 in Royal mode with the crown still in the family'],
+ ['r_nobles5','royal','gold','Cour de nobles','Avoir 5 nobles dans une même partie','Court of nobles','Have 5 nobles in a single game'],
+ ['r_heirkill','royal','special','Ombre sur la couronne','Un héritier du trône meurt assassiné','Shadow over the crown','An heir to the throne is murdered'],
+ ['r_grandheir','royal','silver','Le flambeau','Un petit-enfant du monarque reprend la couronne','Passing the torch','A grandchild of the monarch takes the crown'],
+ ['r_nobleking','royal','gold','Du blason à la couronne','Un noble devient roi (ou reine)','From crest to crown','A noble becomes king (or queen)'],
+ ['r_lateheir','royal','special','Miracle tardif',"Un roi sans héritier en retrouve un après ses 80 ans",'Late miracle','A king with no heir gets a new one after turning 80'],
  ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
 ];
 const ACHV = byId(ACHS);
-const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['legend','crown','Légende','Legend']];
+const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['royal','castle','Royal','Royal'],['legend','crown','Légende','Legend']];
 // thème Or : débloqué dès qu'une catégorie entière de succès est complète
 const goldUnlocked = () => ACH_CATS.some(c => ACHS.filter(a => a[1]===c[0]).every(a => ACH[a[0]]));
 const ACH_KEY = 'lignee.ach.v1';
@@ -3139,12 +3189,14 @@ function contract(p, day){
 }
 function die(p, day, cause){
   if(p.death != null) return;
+  const wasHeir = royalOn() && p.id === heirId();
   const A = ageAt(p, day);
   p.death = day; p.deathAt = null; p.onset = null; p.warDeath = false; p.murderAt = null; p.deathCity = p.city;
   RH = undefined; if(royalOn() && p.id === S.royal.king) crownNext(day);
   p.cause = Object.assign({}, cause);
   if(inFamily(p)){ if(A >= 121) unlock('maxage'); if(A < 10) unlock('young'); }
   if(cause.murder){
+    if(wasHeir) unlock('r_heirkill');                   // succès : un héritier assassiné
     const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50 * (hasAtout(k,'richesse') ? 2 : 1), p.id);
     UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 10) unlockSkin('goth');   // thème Dark : 10 meurtres [[4,'kill2'],[8,'kill4'],[12,'kill6'],[16,'kill8']].forEach(([n, id]) => { if(k.kills >= n) unlock(id); }); pendingFx.push(p.id); dirty = true;
     if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
@@ -3458,7 +3510,7 @@ function birthChild(u, day){
 }
 function processDay(day){
   while(S.worldIdx >= 0 && S.worldIdx < WORLD.length && WORLD[S.worldIdx].day <= day){ log('world','world',[S.worldIdx], WORLD[S.worldIdx].day); S.worldIdx++; }
-  if(S.end2100 === 0 && day >= DAY2100){ S.end2100 = 1; log('world','y2100',[],day); }
+  if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100'); S.end2100 = 1; log('world','y2100',[],day); }
   const wi = warIndexAt(day), prevWar = S.warIdx ?? -1;
   if(wi !== prevWar){
     if(prevWar >= 0) log('world','war_end',[prevWar],day);
@@ -3525,7 +3577,7 @@ let lastTick = performance.now(), pointerHeld = false, musicTick = 0, renderGap 
 setInterval(() => {                                // musique du criminel tant qu'un criminel révélé est libre (en prison, il n'est plus un danger)
   const on = S && !$('#game').hidden;
   music.setMode(on && living().some(p => p.crim && p.crim.declared && !jailed(p)) ? 'tense' : 'calm');
-  if(on) albumScan();
+  if(on){ albumScan(); royalHeirWatch(); }
 }, 1000);
 document.addEventListener('pointerdown', () => { pointerHeld = true; }, true);
 document.addEventListener('pointerup', () => { pointerHeld = false; }, true);
@@ -4351,13 +4403,21 @@ const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v))
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
   ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
-  ['family', [['decrim',180,'dove'],['potion',185,'potion']]],
+  ['family', [['decrim',180,'dove'],['potion',185,'potion'],['lueur',800,'sparkle']]],
   ['themes', [['orange',830,'sun'],['dark',5000,'moon']]]
 ];
 const SHOP = SHOP_CATS.flatMap(c => c[1]);
 const SHOP_THEMES = ['orange','dark'];
 let cynInfoOpen = false;
 const decrimList = () => S ? living().filter(p => p.crim && inFamily(p)) : [];
+const SHOP_ROYAL = ['lueur'];                       // achats qui n'existent qu'en mode Royal
+const lueurList = () => royalOn() ? living().filter(p => p.blood && p.noble !== 'noble' && p.id !== S.royal.king && p.id !== heirId()) : [];
+function ennoble(p, day){                             // devient noble (titre définitif) et prend un métier de noble s'il est adulte
+  p.noble = 'noble'; p.nobleAt = null; RH = undefined;
+  if(ageAt(p, day) >= 18 && !(p.work && ['royal','star','prison','retired','uni'].includes(p.work.s))) p.work = {s:'noble', act: actPick(NOBILITY_ACTS, day)};
+  log('star','ennobled',[p.id], day, true); dirty = true;
+  if(Object.values(S.people).filter(q => q.noble === 'noble').length >= 5) unlock('r_nobles5');
+}
 const sickList = () => S ? living().filter(p => inFamily(p) && (p.ill || p.onset != null || mildOn(p).length)) : [];
 function shopState(id, price){                        // disponible ? sinon pourquoi
   const theme = SHOP_THEMES.includes(id), inGame = S && !$('#game').hidden && !S.over && !needHeir(), me = inGame ? active() : null;
@@ -4371,12 +4431,13 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'spouse' && (currentUnion(me.id) || jailed(me) || age(me) < R.legal)) return {dis:true, note:t(jailed(me) ? 'hint_prison' : currentUnion(me.id) ? 'shop_spouse_taken' : 'shop_spouse_young', me)};
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
   if(id === 'potion' && !sickList().length) return {dis:true, note:t('shop_potion_none')};
+  if(id === 'lueur' && !lueurList().length) return {dis:true, note:t('shop_lueur_none')};
   if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
   return {dis:false};
 }
 function openShop(re){
   const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50],['crown','cg_crown',100]];
-  const secs = SHOP_CATS.map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.map(([id, price, ic]) => {
+  const secs = SHOP_CATS.map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.filter(([id]) => !SHOP_ROYAL.includes(id) || royalOn()).map(([id, price, ic]) => {
     const st = shopState(id, price);
     return `<div class="shopit ${st.owned ? 'owned' : ''}"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${st.note ? `<em>${esc(st.note)}</em>` : ''}</div>
       <button class="gel gold" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`; }).join('')}</div></section>`).join('');
@@ -4388,7 +4449,9 @@ function openShop(re){
 function openPick(id){                                // décriminalisation / crise de la cinquantaine : on choisit avant de payer
   const price = SHOP.find(x => x[0] === id)[1], me = active();
   const sickTxt = p => [p.ill ? dzName(p.ill.dz, p) : null, ...mildOn(p).map(m => mildName(m.dz))].filter(Boolean).join(' · ') || t('sick_soon');
-  const rows = id === 'potion'
+  const rows = id === 'lueur'
+    ? lueurList().map(p => `<button class="pickrow" data-act="pickdo" data-v="lueur" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(tA(age(p)) + ' · ' + activity(p))}</small></span><em>${t('shop_pick')}</em></button>`)
+    : id === 'potion'
     ? sickList().map(p => `<button class="pickrow" data-act="pickdo" data-v="potion" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(sickTxt(p))}</small></span><em>${t('shop_pick')}</em></button>`)
     : id === 'decrim'
     ? decrimList().map(p => `<button class="pickrow" data-act="pickdo" data-v="decrim" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(jailed(p) ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p))}</small></span><em>${t('shop_pick')}</em></button>`)
@@ -4570,7 +4633,7 @@ const ACT = {
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
-    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion') return openPick(d.v);
+    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur') return openPick(d.v);
     if(d.v === 'spouse') return openSpouseForm();
     if(!arm(b, t('shop_confirm'))) return;
     payCyn(it[1]);
@@ -4594,6 +4657,7 @@ const ACT = {
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     const me = active();
     if(d.v === 'decrim'){ const p = P(+d.id); if(!p || !p.crim || p.death != null) return; payCyn(it[1]); decrim(p); sfx.cure(); burst(['#ffffff','#8cff1a','#3fd0ff'], 40); }
+    else if(d.v === 'lueur'){ const p = P(+d.id); if(!p || p.death != null || p.noble === 'noble') return; payCyn(it[1]); ennoble(p, today()); sfx.fame(); burst(['#c9a8ff','#ffffff','#ffd23a','#7a2bd6'], 50); }
     else if(d.v === 'potion'){ const p = P(+d.id); if(!p || p.death != null) return; payCyn(it[1]); cureAll(p); sfx.cure(); burst(['#ff6cc0','#ffffff','#8cff1a','#c3a2ff'], 44); }
     else { if(!ATOUT[d.id] || me.atout2) return; payCyn(it[1]); me.atout2 = d.id; log('star','midlife',[me.id, d.id], today(), true); sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff'], 40); }
     dirty = true; save(); render(); openShop(true);

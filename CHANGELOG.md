@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.4h — 12 novembre 2026
+
+- Nouveaux prénoms : Erwan, Alexis, Anthony, Benjamin, Corentin, Anaïs et Mélissa dans les années 1990-2005 ; des prénoms bretons, corses et occitans après 1950 (Yann, Ronan, Nolwenn, Maïwenn, Lisandru, Saveria, Guilhem, Magali…) ; et des prénoms néo-bretons, néo-corses et néo-occitans après 2040 (Ewenn, Kaëlig, Lizenn, Orsu, Ghjuvan-Leo, Mirèlha…).
+- Noms de famille : Neymar devient Neidega et Targuerien devient Tarney ; nouveaux noms Höll, Sanchez, Pollez, Droey, McGonagall, Loës et Bravat.
+- Boutique, en mode Royal uniquement : Lueur Noble (800 Cyn), qui anoblit le membre de la famille de ton choix.
+- Nouvelle catégorie de succès Royal : Règne éternel (arriver en 2100 en mode Royal), Cour de nobles (5 nobles), Ombre sur la couronne (un héritier assassiné), Le flambeau (un petit-enfant reprend la couronne) et Du blason à la couronne (un noble devient roi).
+- Nouveau succès Royal « Miracle tardif » : un roi sans héritier en retrouve un après ses 80 ans.
+
 ## v0.1.4g — 12 novembre 2026
 
 - Mode Royal : les enfants du prince héritier sont comtes ; quand il devient roi, ils deviennent ducs (et l'aîné prince héritier).
