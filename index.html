@@ -97,11 +97,18 @@ button{font:inherit;color:inherit}
 @keyframes wob{25%{rotate:-5deg}75%{rotate:5deg}}
 .wipefade{position:fixed;inset:0;z-index:9999;background:#000;opacity:0;transition:opacity 1.5s ease;pointer-events:all}
 .wipefade.on{opacity:1}
-.settabs{display:flex;width:max-content;max-width:100%;margin:0 0 14px}
-.settabs button{display:inline-flex;align-items:center;gap:6px}
-.settabs svg{width:16px;height:16px;fill:currentColor}
-.shopbal{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:12px 16px;border-radius:20px;background:linear-gradient(180deg,#effffa,#cdf6ea);border:1px solid #fff;
-  box-shadow:0 3px 10px rgba(0,110,90,.15);font:800 28px var(--font-display);color:#00876a;font-variant-numeric:tabular-nums}
+.shopbal{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 12px;padding:12px 16px;border-radius:20px;background:linear-gradient(180deg,#effffa,#cdf6ea);border:1px solid #fff;
+  box-shadow:0 3px 10px rgba(0,110,90,.15);font:800 28px var(--font-display);color:#00876a;font-variant-numeric:tabular-nums;cursor:pointer;text-align:left;transition:filter .15s}
+.shopbal:hover{filter:brightness(1.04) saturate(1.15)}
+.shopbal small{margin-left:auto;font:700 12px var(--font-display);color:#00876a;opacity:.8;text-decoration:underline dotted;text-underline-offset:3px}
+.cyninfo{margin:0 0 14px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 3px 10px rgba(0,110,90,.12);animation:slidein .3s ease}
+.cyninfo>b{display:block;margin-bottom:6px;font:800 14px var(--font-display)}
+.cyninfo ul{margin:0;padding:0;list-style:none;display:grid;gap:5px}
+.cyninfo li{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:center;font-size:13.5px}
+.cyninfo li>svg{width:18px;height:18px;fill:var(--aqua-deep)}
+.cyninfo em{display:inline-flex;align-items:center;gap:3px;font:800 13px var(--font-display);font-style:normal;color:#00876a}
+.cyninfo em svg{width:14px;height:14px;fill:#00a37f}
+:root[data-skin="dark"] .cyninfo{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
 .shopbal svg{width:40px;height:40px;padding:7px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
 .shopbal span{font-size:15px;color:var(--ink-soft)}
 .shoplist{display:grid;gap:10px}
@@ -110,6 +117,7 @@ button{font:inherit;color:inherit}
 .shopit>i svg{width:22px;height:22px;fill:currentColor}
 .si-star{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ffd000 55%,#e09a00)}
 .si-crim{background:radial-gradient(circle at 35% 30%,#fff 0 8%,#ff3b3b 50%,#7a0010)}
+.si-dark{background:radial-gradient(circle at 35% 30%,#ff8a95 0 8%,#b3001b 45%,#140205)}
 .si-orange{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff9a2e 55%,#e25b00)}
 .shopit b{display:block;font:800 15px var(--font-display)}
 .shopit small{display:block;font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
@@ -322,7 +330,12 @@ body.no-deco .kidfx b,body.no-deco .kidfx .cloud{display:none}
 @keyframes gdrift{0%,100%{translate:0 0}50%{translate:20px -40px}}
 body.no-deco .goldfx{display:none}
 .skin.sk-gold i{display:grid;place-items:center;background:linear-gradient(180deg,#9a6400,#e6a400 45%,#ffd75a 70%,#fff0a0);box-shadow:inset 0 2px 6px rgba(255,255,255,.7),0 0 12px rgba(255,200,0,.6)}
-.skin.locked{opacity:.6;cursor:not-allowed;filter:grayscale(.6)}
+.skin.locked{opacity:.6;cursor:help;filter:grayscale(.6)}
+.skinhint{display:flex;align-items:center;gap:8px;margin:10px 0 0;padding:9px 12px;border-radius:14px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 2px 8px rgba(0,70,160,.12);font-size:13px;line-height:1.35;color:var(--ink-soft)}
+.skinhint svg{width:16px;height:16px;flex:none;fill:var(--aqua-deep)}
+.skinhint b{color:var(--ink)}
+.skinhint.pop{animation:slidein .35s cubic-bezier(.2,1.3,.4,1)}
+:root[data-skin="dark"] .skinhint{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
 .skin.locked i{display:grid;place-items:center}
 .tree-scroll,.mapview,.node,.topbar{-webkit-user-select:none;user-select:none}       /* pas de surlignage bleu en glissant */
 .skin.locked i svg{width:18px;height:18px;fill:#fff;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
@@ -338,7 +351,7 @@ body.no-deco .bubble{display:none}
 .setrow>span{min-width:0;flex:1 1 200px}
 .rowhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .rowhead output{font:800 14px var(--font-display);color:var(--aqua-deep);font-variant-numeric:tabular-nums}
-.skins{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.skins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .skin.sk-night i{background:radial-gradient(circle at 75% 30%,#f4f8ff 0 8%,rgba(255,255,255,0) 10%),linear-gradient(180deg,#050c2e,#13286b 50%,#2d4fa8 72%,#0f4a4a)}
 .skin.sk-dark i{background:radial-gradient(circle at 70% 35%,rgba(255,40,55,.75) 0 12%,rgba(255,40,55,0) 40%),linear-gradient(180deg,#000,#120305 60%,#2a060a)}
 /* Thème Obsidienne : très sombre, noir avec un peu de rouge et de blanc */
@@ -455,6 +468,9 @@ body.no-deco .bubble{display:none}
   font-size:13px;line-height:1.15;text-align:center;white-space:normal;overflow-wrap:anywhere}
 .albtabs button small{font-size:11px;opacity:.75}
 @media (max-width:520px){ .albtabs{grid-template-columns:repeat(3,minmax(0,1fr))} .albtabs button{font-size:12px} }
+.albsort{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:-4px 0 10px}
+.albsort label{font:700 12.5px var(--font-display);color:var(--ink-soft)}
+.albsort select{width:auto;min-height:36px;padding:5px 12px;font-size:13.5px}
 .albgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
 .albc{display:grid;grid-template-columns:32px 1fr;gap:9px;align-items:center;padding:9px 11px;border-radius:16px;background:rgba(255,255,255,.78);border:1px solid #fff;box-shadow:0 3px 8px rgba(0,70,160,.1)}
 .albc>i{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 12%,var(--aqua) 70%);color:#fff;box-shadow:inset 0 -3px 6px rgba(0,0,0,.12)}
@@ -549,6 +565,10 @@ body.no-deco .bubble{display:none}
 .cyn svg{width:24px;height:24px;padding:3px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a);box-shadow:inset 0 -2px 4px rgba(0,0,0,.15)}
 .cyn.bump{animation:cynbump .5s cubic-bezier(.2,1.6,.4,1)}
 .cyn.bump svg{animation:cynspin .7s ease}
+.cynfx{position:fixed;z-index:44;display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 9px;border-radius:999px;background:rgba(255,255,255,.94);
+  box-shadow:0 2px 10px rgba(0,110,90,.3);font:800 13px var(--font-display);color:#00876a;white-space:nowrap;pointer-events:none;transform:translate(-50%,-50%);animation:cynfx 1.45s ease-out forwards}
+.cynfx svg{width:15px;height:15px;fill:#00a37f}
+@keyframes cynfx{0%{opacity:0;transform:translate(-50%,-30%) scale(.7)}15%{opacity:1;transform:translate(-50%,-70%) scale(1.06)}65%{opacity:1}100%{opacity:0;transform:translate(-50%,-230%) scale(1)}}
 .cynplus{position:absolute;left:100%;top:50%;margin:-9px 0 0 6px;font:800 13px var(--font-display);font-style:normal;color:#00a37f;white-space:nowrap;pointer-events:none;text-shadow:0 1px 0 #fff;animation:cynup 1.3s ease-out forwards}
 @keyframes cynbump{35%{transform:scale(1.15)}}
 @keyframes cynspin{to{transform:rotate(360deg)}}
@@ -871,7 +891,7 @@ body.no-deco .bubble{display:none}
   <div class="setup-inner">
     <div class="setup-top">
       <button class="gel gold" data-act="achs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg><span data-t="ach_title"></span></button>
-      <button class="gel shopb" data-act="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><span data-t="shop"></span></button>
+      <button class="gel shopb" data-act="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-4 0v1zM4.2 8h15.6l-1.1 12.2A2 2 0 0 1 16.7 22H7.3a2 2 0 0 1-2-1.8z"/></svg><span data-t="shop"></span></button>
       <button class="gel ghost" data-act="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg><span data-t="custom"></span></button>
       <button class="gel ghost" data-act="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.4.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6L2 13.7v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg><span data-t="settings"></span></button>
     </div>
@@ -939,7 +959,7 @@ body.no-deco .bubble{display:none}
     <div class="ctrls" role="toolbar">
       <button class="gel round ghost" data-act="settings" data-ta="settings" data-tt="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.4.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6L2 13.7v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg></button>
       <button class="gel round ghost" data-act="custom" data-ta="custom" data-tt="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
-      <button class="gel round shopb" data-act="shop" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg></button>
+      <button class="gel round shopb" data-act="shop" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-4 0v1zM4.2 8h15.6l-1.1 12.2A2 2 0 0 1 16.7 22H7.3a2 2 0 0 1-2-1.8z"/></svg></button>
       <button class="gel round gold achb" data-act="achs" data-ta="ach_title" data-tt="ach_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg></button>
       <div class="pills" role="group" id="speeds">
         <button data-act="speed" data-v="0.25">×0,25</button>
@@ -1003,9 +1023,20 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.3c';
+const APP_VERSION = '0.1.3d';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.3d', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
+   fr:['Boutique : elle n\'est plus dans les Paramètres. Elle a son propre bouton en haut (icône sac de courses), à côté des Paramètres et de la vitesse, et s\'ouvre toujours en touchant le compteur de Cyn.',
+       'Boutique : nouveau thème Obsidienne à 5 000 Cyn (il ne se débloque plus qu\'en l\'achetant). Toucher ses Cyn dans la boutique montre comment en gagner.',
+       'Cyn : chaque gain s\'affiche à l\'endroit où il est gagné, « +10 » avec l\'icône ADN au-dessus de la bulle, puis disparaît en fondu.',
+       'Thèmes : les explications ne sont plus listées sous les thèmes. Touche un thème bloqué pour savoir comment le débloquer.',
+       'Album : on peut trier chaque catégorie de A à Z, par année d\'apparition, les débloqués en premier ou par ordre d\'obtention.'],
+   en:['Shop: it\'s no longer in Settings. It has its own button at the top (shopping bag icon), next to Settings and the speed controls, and still opens when you tap the Cyn counter.',
+       'Shop: new Obsidian theme for 5,000 Cyn (it can now only be bought). Tap your Cyn in the shop to see how to earn more.',
+       'Cyn: every gain shows up where it happens, "+10" with the DNA icon above the bubble, then fades away.',
+       'Themes: the unlock conditions are no longer listed under the themes. Tap a locked theme to see how to unlock it.',
+       'Album: each section can be sorted A to Z, by year of appearance, unlocked first or in the order you got them.']},
   {v:'0.1.3c', date:{fr:'12 novembre 2026', en:'November 12, 2026'},
    fr:['Boutique : un bouton dédié en haut (à côté des Paramètres, et sur l\'écran de départ). Toucher le compteur de Cyn ouvre aussi la boutique.',
        'Album : les onglets du haut sont bien cadrés sur téléphone.'],
@@ -1154,14 +1185,35 @@ const UNL_KEY = 'lignee.unlocks.v1';
 /* Cyn : la monnaie du jeu, gardée d'une partie à l'autre */
 const CYN_KEY = 'lignee.cyn.v1';
 let CYN = Math.max(0, +store.get(CYN_KEY) || 0), cynPend = 0;
-function cyn(n){ CYN += n; cynPend += n; store.set(CYN_KEY, String(CYN)); }
+const cynFx = new Map();                              // gains à afficher au-dessus de la bulle concernée
+function cyn(n, pid){
+  CYN += n; cynPend += n; store.set(CYN_KEY, String(CYN));
+  if(pid != null){ const e = cynFx.get(pid) || {n:0, tries:0}; e.n += n; cynFx.set(pid, e); }
+}
+function cynFxTick(){                                 // « +10 [ADN] » qui monte au-dessus de la bulle puis disparaît en fondu
+  if(!cynFx.size) return;
+  const tree = $('#treeScroll');
+  if(!S || $('#game').hidden || document.hidden || !tree || tree.hidden || !tree.offsetParent){ cynFx.clear(); return; }
+  const tr = tree.getBoundingClientRect(); let shown = $$('.cynfx').length;
+  for(const [id, e] of cynFx){
+    const el = document.querySelector(`#treeCanvas [data-id="${id}"]`);
+    if(!el){ if(++e.tries > 6) cynFx.delete(id); continue; }
+    cynFx.delete(id);
+    const r = el.getBoundingClientRect();
+    if(r.bottom < tr.top || r.top > tr.bottom || r.right < tr.left || r.left > tr.right || shown >= 14) continue;
+    shown++;
+    const fx = document.createElement('div'); fx.className = 'cynfx';
+    fx.innerHTML = `+${cynFmt(e.n)} ${icon('dna')}`;
+    fx.style.left = (r.left + r.width/2) + 'px'; fx.style.top = Math.max(tr.top + 12, r.top + 6) + 'px';
+    document.body.appendChild(fx); setTimeout(() => fx.remove(), 1500);
+  }
+}
+setInterval(cynFxTick, 250);
 const cynFmt = n => n.toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US');
 function cynShow(){                                   // compteur + petite animation à chaque gain
   const box = $('#cynBox'); if(!box) return;
   $('#cynVal').textContent = cynFmt(CYN);
   if(cynPend > 0 && !$('#game').hidden && !document.hidden){
-    const f = document.createElement('em'); f.className = 'cynplus'; f.textContent = '+' + cynFmt(cynPend);
-    box.appendChild(f); setTimeout(() => f.remove(), 1300);
     box.classList.remove('bump'); void box.offsetWidth; box.classList.add('bump');
   }
   cynPend = 0;
@@ -1698,6 +1750,7 @@ function pickDisease(p, day){
 /* Icônes (SVG 24×24) */
 const ICONS = {
   dna:'<path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/>',
+  bag:'<path d="M8 7V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-4 0v1zM4.2 8h15.6l-1.1 12.2A2 2 0 0 1 16.7 22H7.3a2 2 0 0 1-2-1.8z"/>',
   album:'<path d="M6 2h11a3 3 0 0 1 3 3v17H8a3 3 0 0 1-3-3V3zm2 15.5a1 1 0 0 0 0 2h10v-2zM9 5v7l2.5-1.6L14 12V5z"/>',
   pencil:'<path d="M4 17.2V20h2.8L17.6 9.2l-2.8-2.8zM19.7 7.1a1 1 0 0 0 0-1.4l-1.4-1.4a1 1 0 0 0-1.4 0l-1.1 1.1 2.8 2.8z"/>',
   shirt:'<path d="M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',
@@ -1975,12 +2028,17 @@ fr:{
   regnal_pick:'Perpétuer un prénom de famille :',
   pn_title:'Notes de mise à jour', pn_hint:v=>`Les nouveautés de la version ${v} et des précédentes.`, pn_open:'Voir',
   multi_pop:(a,b,names)=>`${a} et ${b} accueillent ${names}.`, m_me:'Moi', m_journal:'Journal', m_ach:'Succès', m_album:'Album', album:'Album',
+  shop_eyebrow:'Dépense tes Cyn', shop_dark:'Thème Obsidienne', shop_dark_d:'Débloque le thème Obsidienne pour toujours.',
+  skin_locked_dark:"S'achète dans la boutique pour 5 000 Cyn.",
+  cg_title:'Comment gagner des Cyn ?', cg_hide:'Masquer', cg_birth:'Une naissance', cg_starkid:"Naissance d'un enfant de star", cg_star:'Une star perce',
+  cg_crim:'Un criminel se déclare', cg_murder:'Un meurtre',
+  alb_sort:'Trier', alb_s_az:'A à Z', alb_s_year:"Année d'apparition", alb_s_found:'Débloqués en premier', alb_s_order:"Ordre d'obtention",
   shop:'Boutique', shop_star:'Prochain bébé star', shop_star_d:'La prochaine naissance de ton personnage sera une future star.',
   shop_crim:'Prochain bébé criminel', shop_crim_d:'La prochaine naissance de ton personnage sera un futur criminel.',
   shop_orange:'Thème Orange', shop_orange_d:'Débloque le thème Orange pour toujours.', shop_owned:'Acheté', shop_confirm:'Confirmer ?',
   shop_need_game:'Lance une partie pour acheter ça.', shop_pending:'Commandé : la prochaine naissance est réservée.', shop_other_pending:'Une autre naissance est déjà commandée.',
   shop_missing:n=>`Il manque ${n} Cyn.`, shop_hint:'Les Cyn se gagnent en jouant : 10 par naissance, 25 pour un enfant de star, 200 quand une star perce, 100 quand un criminel se déclare et 50 par meurtre.',
-  skin_locked_orange:"Le thème Orange s'achète dans la boutique.",
+  skin_locked_orange:"S'achète dans la boutique pour 830 Cyn.",
   set_wipe:'Tout remettre à zéro', set_wipe_hint:'Efface vraiment tout : Cyn, succès, parties, album, thèmes débloqués et réglages.', wipe_btn:'Tout effacer',
   wipe_steps:['Confirmé ?','Vraiment ?','Sûr ?',"D'accord !!"],
   alb_count:(n,m)=>`${n} / ${m} découvertes`, alb_int:"Centres d'intérêt", alb_cond:'Particularités', alb_job:'Métiers', alb_death:'Morts', alb_addict:'Addictions',
@@ -2138,12 +2196,17 @@ en:{
   regnal_pick:'Carry on a family name:',
   pn_title:'Patch notes', pn_hint:v=>`What's new in version ${v} and earlier.`, pn_open:'View',
   multi_pop:(a,b,names)=>`${a} and ${b} welcome ${names}.`, m_me:'Me', m_journal:'Journal', m_ach:'Awards', m_album:'Album', album:'Album',
+  shop_eyebrow:'Spend your Cyn', shop_dark:'Obsidian theme', shop_dark_d:'Unlocks the Obsidian theme for good.',
+  skin_locked_dark:'Buy it in the shop for 5,000 Cyn.',
+  cg_title:'How do I earn Cyn?', cg_hide:'Hide', cg_birth:'A birth', cg_starkid:'A star kid is born', cg_star:'A star breaks through',
+  cg_crim:'A criminal is revealed', cg_murder:'A murder',
+  alb_sort:'Sort', alb_s_az:'A to Z', alb_s_year:'Year of appearance', alb_s_found:'Unlocked first', alb_s_order:'Order obtained',
   shop:'Shop', shop_star:'Next baby is a star', shop_star_d:"Your character's next birth will be a future star.",
   shop_crim:'Next baby is a criminal', shop_crim_d:"Your character's next birth will be a future criminal.",
   shop_orange:'Orange theme', shop_orange_d:'Unlocks the Orange theme for good.', shop_owned:'Owned', shop_confirm:'Confirm?',
   shop_need_game:'Start a game to buy this.', shop_pending:'Ordered: the next birth is reserved.', shop_other_pending:'Another birth is already ordered.',
   shop_missing:n=>`${n} Cyn short.`, shop_hint:'You earn Cyn by playing: 10 per birth, 25 for a star kid, 200 when a star breaks through, 100 when a criminal is revealed and 50 per murder.',
-  skin_locked_orange:'The Orange theme can be bought in the shop.',
+  skin_locked_orange:'Buy it in the shop for 830 Cyn.',
   set_wipe:'Reset everything', set_wipe_hint:'Truly erases it all: Cyn, achievements, games, album, unlocked themes and settings.', wipe_btn:'Erase all',
   wipe_steps:['Confirmed?','Really?','Sure?','Okay!!'],
   alb_count:(n,m)=>`${n} / ${m} discovered`, alb_int:'Interests', alb_cond:'Traits', alb_job:'Jobs', alb_death:'Deaths', alb_addict:'Addictions',
@@ -2619,7 +2682,7 @@ function die(p, day, cause){
   p.cause = Object.assign({}, cause);
   if(inFamily(p)){ if(A >= 121) unlock('maxage'); if(A < 10) unlock('young'); }
   if(cause.murder){
-    const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50); checkTiers('kill', k.kills, [2,4,6,8]); pendingFx.push(p.id); dirty = true;
+    const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50, p.id); checkTiers('kill', k.kills, [2,4,6,8]); pendingFx.push(p.id); dirty = true;
     if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
     if(!UNL.night){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
   }
@@ -2783,7 +2846,7 @@ function polTick(p, day){
 function becomeStar(p, day, hint){
   const y = yearOf(day), h = hint && STARJOBS.find(r => r[0] === hint && y >= r[5] && y <= r[6]);
   const j = h ? h[0] : pickStarJob(y);
-  p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j}; cyn(200);
+  p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j}; cyn(200, p.id);
   log('star','star',[p.id, j], day); sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 40);
   const ns = Object.values(S.people).filter(q => q.star && q.star.famous).length;            // 0.1.2a : exigences ×2
   [[2,'star1'],[4,'star2'],[8,'star4'],[12,'star6']].forEach(([n, id]) => { if(ns >= n) unlock(id); });
@@ -2791,7 +2854,7 @@ function becomeStar(p, day, hint){
 /* Criminels : après 18 ans, ils se révèlent ; parents, frères et sœurs, conjoint et enfants ont 60 % de risque d'être assassinés dans les 10 ans.
    Après leur premier crime, 40 % finissent en prison dans les 10 ans (jusqu'à leur mort) ; les autres disparaissent ou se suicident au bout de 10 ans. */
 function declareCrim(p, day){
-  p.crim.declared = true; p.crim.at = day; cyn(100);
+  p.crim.declared = true; p.crim.at = day; cyn(100, p.id);
   const mates = S.unions.filter(u => u.end == null && (u.a === p.id || u.b === p.id)).map(u => u.a === p.id ? u.b : u.a);
   const close = living().filter(q => q.id !== p.id && ((p.parents && p.parents.includes(q.id)) || (p.parents && q.parents && q.parents.some(i => p.parents.includes(i)))
     || mates.includes(q.id) || (q.parents && q.parents.includes(p.id))) && !hasAtout(q,'courage'));
@@ -2892,7 +2955,7 @@ function birthChild(u, day){
     if(buy === 'star' || (!buy && fate < pStar)) c.star = {day: day + rnd(16,40)*365 + rnd(0,364), famous:false};      // 2,5 % : une future star
     else if(buy === 'crim' || (!buy && fate < pStar + pCrim)) c.crim = {day: day + rnd(18,60)*365 + rnd(0,364), declared:false, fate:null};  // 2 % : un futur criminel
     if([A,B].some(q => q.star && q.star.famous) && Math.random() < .9) c.starKid = true;     // 90 % : enfant de star
-    cyn(c.starKid ? 25 : 10);                                                                // Cyn : 10 par naissance, 25 pour un enfant de star
+    cyn(c.starKid ? 25 : 10, c.id);                                                                // Cyn : 10 par naissance, 25 pour un enfant de star
     if(c.starKid && !c.star && !c.crim && Math.random() < .12) c.fameAt = day + rnd(18, 60)*365 + rnd(0, 364);   // 12 % : star à son tour
     scheduleYear(c, 0, day);
     ids.push(c.id);
@@ -3651,7 +3714,7 @@ const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 
 function albumScan(force){
   if(!S) return;
   let ch = false;
-  const mark = (k, id) => { if(id != null && !ALB[k][id]){ ALB[k][id] = 1; ch = true; } };
+  const mark = (k, id) => { if(id != null && !ALB[k][id]){ ALB.n = (ALB.n || 1) + 1; ALB[k][id] = ALB.n; ch = true; } };   // numéro d'ordre de découverte
   for(const p of Object.values(S.people)){
     interestsOf(p).forEach(id => mark('i', id));
     (p.conds || []).forEach(id => mark('c', id));
@@ -3671,14 +3734,14 @@ const albYears = (a, b) => b >= 2100 ? (a <= 1500 ? t('alb_always') : t('alb_fro
 const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['d','alb_death'],['a','alb_addict']];
 function albItems(k){
   const fr = LANG === 'fr', seen = new Set(), uniq = x => !seen.has(x.id) && seen.add(x.id);
-  if(k === 'i') return INTERESTS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[5], desc: albYears(r[6], r[7])}));
+  if(k === 'i') return INTERESTS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[5], y:r[6], desc: albYears(r[6], r[7])}));
   if(k === 'c') return CONDS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4]}));
-  if(k === 'j') return JOBS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic: isPol(r[0]) ? 'flag' : 'shirt', desc: albYears(r[5], r[6])}))
-    .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + (fr ? r[1] : r[3]), ic:'sparkle', desc: albYears(r[5], r[6])}))).filter(uniq);
-  if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, name: t('alb_d_' + id)}))
-    .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), desc: albYears(r[5], r[6]), secret:true})))
-    .concat(DISEASES.filter(d => d[0] !== 'disparu').map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
-  return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], secret:true,
+  if(k === 'j') return JOBS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic: isPol(r[0]) ? 'flag' : 'shirt', y:r[5], desc: albYears(r[5], r[6])}))
+    .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + (fr ? r[1] : r[3]), ic:'sparkle', y:r[5], desc: albYears(r[5], r[6])}))).filter(uniq);
+  if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, y:1500, name: t('alb_d_' + id)}))
+    .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
+    .concat(DISEASES.filter(d => d[0] !== 'disparu').map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
+  return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
 }
 let albCat = 'i';
@@ -3686,17 +3749,33 @@ function openAlbum(k, re){
   albumScan(); if(k) albCat = k;
   const all = ALB_CATS.map(([c]) => { const it = albItems(c); return [c, it, it.filter(x => ALB[c][x.id]).length]; });
   const found = all.reduce((a, x) => a + x[2], 0), total = all.reduce((a, x) => a + x[1].length, 0);
-  const key = x => x.name.replace(/^★ /, '');
-  const items = all.find(x => x[0] === albCat)[1].slice().sort((a, b) => key(a).localeCompare(key(b), LANG, {sensitivity:'base'}));
+  const mode = (ALB.sort && ALB.sort[albCat]) || 'az', got = x => ALB[albCat][x.id] || 0;
+  const key = x => x.name.replace(/^★ /, ''), az = (a, b) => key(a).localeCompare(key(b), LANG, {sensitivity:'base'});
+  const cmp = mode === 'year' ? (a, b) => (a.y ?? 9999) - (b.y ?? 9999) || az(a, b)
+    : mode === 'found' ? (a, b) => (!got(a)) - (!got(b)) || az(a, b)
+    : mode === 'order' ? (a, b) => (!got(a)) - (!got(b)) || (got(a) && got(b) ? got(a) - got(b) : 0) || az(a, b)
+    : az;
+  const items = all.find(x => x[0] === albCat)[1].slice().sort(cmp);
+  const SORTS = [['az','alb_s_az'],['year','alb_s_year'],['found','alb_s_found'],['order','alb_s_order']];
   openModal(`<div class="m-head"><div class="eyebrow">${t('alb_count', found, total)}</div><h2>${t('album')}</h2><p class="hint">${t('alb_hint')}</p></div>
     <div class="pills albtabs" role="group">${all.map(([c, it, n]) => `<button data-act="albcat" data-v="${c}" aria-pressed="${c === albCat}">${t(ALB_CATS.find(x => x[0] === c)[1])}<small>${n}/${it.length}</small></button>`).join('')}</div>
+    <div class="albsort"><label for="albSort">${t('alb_sort')}</label><select class="inp" id="albSort">${SORTS.map(([v, l]) => `<option value="${v}" ${v === mode ? 'selected' : ''}>${t(l)}</option>`).join('')}</select></div>
     <div class="albgrid">${items.map(x => { const ok = !!ALB[albCat][x.id];
       return `<div class="albc ${ok ? '' : 'unk'}"><i>${icon(ok ? x.ic : 'lock')}</i><div><b>${ok ? esc(x.name) : '???????'}</b>${x.desc && (ok || !x.secret) ? `<small>${esc(x.desc)}</small>` : ''}</div></div>`; }).join('')}</div>`, {sound: !re});
+  $('#albSort').addEventListener('change', e => {
+    ALB.sort = ALB.sort || {}; ALB.sort[albCat] = e.target.value; store.set(ALB_KEY, JSON.stringify(ALB)); sfx.click(); openAlbum(null, true);
+  });
 }
 
 /* ================= Paramètres & personnalisation ================= */
 const SKINS = ['aqua','orange','vapor','kid','night','dark','gold'];
-const skinLocked = s => (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
+const SKIN_LOCK = {gold:'skin_locked', night:'skin_locked_night', vapor:'skin_locked_neon', kid:'skin_locked_kid', orange:'skin_locked_orange', dark:'skin_locked_dark'};
+function skinHint(v){                                 // thème bloqué : on explique comment le débloquer
+  const h = $('#skinHint'); if(!h) return;
+  h.innerHTML = `${icon('lock')}<span><b>${esc(t('skin_' + v))}</b> · ${esc(t(SKIN_LOCK[v]))}</span>`; h.hidden = false;
+  h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop');
+}
+const skinLocked = s => (s === 'dark' && !UNL.dark) || (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
 function unlockSkin(key){                            // Néon (16 générations), Enfantin (quadruplés)
   if(UNL[key]) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
   setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k: key + '_skin', a:[]}); sfx.ach(); }, 1500);
@@ -3712,24 +3791,26 @@ function applySettings(){
 }
 const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${disabled?'is-off':''}"><input type="checkbox" ${attr}="${key}" ${on?'checked':''} ${disabled?'disabled':''}><span class="sw"></span><span><b>${label}</b>${hint?`<small>${hint}</small>`:''}</span></label>`;
 const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG==='fr' ? ' %' : '%') : u);
-let setTab = 'set';
-const setTabs = () => `<div class="pills settabs" role="group"><button data-act="settab" data-v="set" aria-pressed="${setTab === 'set'}">${t('settings')}</button>
-  <button data-act="settab" data-v="shop" aria-pressed="${setTab === 'shop'}">${icon('dna')}${t('shop')}</button></div>`;
-const SHOP = [['star',750,'sparkle'],['crim',600,'skull'],['orange',830,'sun']];
+const SHOP = [['star',750,'sparkle'],['crim',600,'skull'],['orange',830,'sun'],['dark',5000,'moon']];
+const SHOP_THEMES = ['orange','dark'];
+let cynInfoOpen = false;
 function openShop(re){
   const inGame = S && !$('#game').hidden && !S.over;
   const rows = SHOP.map(([id, price, ic]) => {
-    let note = '', dis = false, owned = id === 'orange' && UNL.orange;
+    const theme = SHOP_THEMES.includes(id);
+    let note = '', dis = false, owned = theme && UNL[id];
     if(owned) dis = true;
-    else if(id !== 'orange' && !inGame){ dis = true; note = t('shop_need_game'); }
-    else if(id !== 'orange' && S.nextFate){ dis = true; note = t(S.nextFate === id ? 'shop_pending' : 'shop_other_pending'); }
+    else if(!theme && !inGame){ dis = true; note = t('shop_need_game'); }
+    else if(!theme && S.nextFate){ dis = true; note = t(S.nextFate === id ? 'shop_pending' : 'shop_other_pending'); }
     else if(CYN < price){ dis = true; note = t('shop_missing', cynFmt(price - CYN)); }
     return `<div class="shopit"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${note ? `<em>${esc(note)}</em>` : ''}</div>
       <button class="gel gold" data-act="buy" data-v="${id}" ${dis ? 'disabled' : ''}><span>${owned ? t('shop_owned') : cynFmt(price) + ' Cyn'}</span></button></div>`;
   }).join('');
-  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('shop')}</h2></div>${setTabs()}
-    <div class="shopbal">${icon('dna')}<b>${cynFmt(CYN)}</b><span>Cyn</span></div>
-    <div class="shoplist">${rows}</div><p class="hint">${t('shop_hint')}</p>`, {sound: !re});
+  const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50]];
+  openModal(`<div class="m-head"><div class="eyebrow">${t('shop_eyebrow')}</div><h2>${t('shop')}</h2></div>
+    <button class="shopbal" data-act="cyninfo" aria-expanded="${cynInfoOpen}" title="${esc(t('cg_title'))}">${icon('dna')}<b>${cynFmt(CYN)}</b><span>Cyn</span><small>${t(cynInfoOpen ? 'cg_hide' : 'cg_title')}</small></button>
+    <div class="cyninfo" ${cynInfoOpen ? '' : 'hidden'}><b>${t('cg_title')}</b><ul>${gains.map(([ic, k, n]) => `<li>${icon(ic)}<span>${t(k)}</span><em>+${n} ${icon('dna')}</em></li>`).join('')}</ul></div>
+    <div class="shoplist">${rows}</div>`, {sound: !re});
 }
 function wipeAll(){                                   // remise à zéro totale : fondu au noir, tout est effacé, retour à l'écran de départ
   if(window.__wiping) return; window.__wiping = true;
@@ -3743,21 +3824,15 @@ function wipeAll(){                                   // remise à zéro totale 
   }, 1800);
 }
 function openSettings(re){
-  if(!re) setTab = 'set';
-  if(setTab === 'shop') return openShop(re);
-  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('settings')}</h2></div>${setTabs()}
+  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('settings')}</h2></div>
   <div class="setlist">
     <div class="setrow"><b>${t('set_lang')}</b><div class="pills" role="group">${['fr','en'].map(l => `<button data-act="lang" data-v="${l}" aria-pressed="${LANG===l}">${l.toUpperCase()}</button>`).join('')}</div></div>
     ${sw('data-set','sound',SET.sound,t('set_sound'),t('set_sound_hint'))}
     <div class="setrow col"><div class="rowhead"><b>${t('set_volume')}</b><output>${numTxt(SET.volume,'%')}</output></div><input type="range" min="0" max="100" step="5" value="${SET.volume}" data-set="volume" data-unit="%" aria-label="${t('set_volume')}"></div>
     <div class="setrow col"><div class="rowhead"><b>${t('set_music')}</b><output>${numTxt(SET.music,'%')}</output></div><input type="range" min="0" max="100" step="5" value="${SET.music}" data-set="music" data-unit="%" aria-label="${t('set_music')}"><small>${t('set_music_hint')}</small></div>
     <div class="setrow col"><b>${t('set_theme')}</b><div class="skins">${SKINS.map(s => { const lock = skinLocked(s);
-      return `<button class="skin sk-${s} ${lock?'locked':''}" data-act="skin" data-v="${s}" aria-pressed="${SET.skin===s && !lock}" ${lock?'disabled':''}><i>${lock?icon('lock'):''}</i><span>${t('skin_'+s)}</span></button>`; }).join('')}</div>
-      ${UNL.night ? '' : `<small class="locknote">☾ ${t('skin_locked_night')}</small>`}
-      ${UNL.orange ? '' : `<small class="locknote">◆ ${t('skin_locked_orange')}</small>`}
-      ${UNL.neon ? '' : `<small class="locknote">✦ ${t('skin_locked_neon')}</small>`}
-      ${UNL.kid ? '' : `<small class="locknote">♥ ${t('skin_locked_kid')}</small>`}
-      ${goldUnlocked() ? '' : `<small class="locknote">★ ${t('skin_locked')}</small>`}</div>
+      return `<button class="skin sk-${s} ${lock?'locked':''}" data-act="skin" data-v="${s}" aria-pressed="${SET.skin===s && !lock}"><i>${lock?icon('lock'):''}</i><span>${t('skin_'+s)}</span></button>`; }).join('')}</div>
+      <p class="skinhint" id="skinHint" hidden></p></div>
     ${sw('data-set','toasts',SET.toasts,t('set_toasts'),t('set_toasts_hint'))}
     ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}
     ${sw('data-set','map',SET.map,t('set_map'),t('set_map_hint'))}
@@ -3823,21 +3898,21 @@ const ACT = {
   lang(d){ const wasOpen = modalOpen && $('#modal .setlist'); setLang(d.v); if(wasOpen) openSettings(true); },
   settings(){ openSettings(false); },
   custom(){ openCustom(false); },
-  skin(d){ if(skinLocked(d.v)) return; SET.skin = d.v; saveSet(); applySettings(); if(d.v === 'gold'){ sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 50); } openSettings(true); },
+  skin(d){ if(skinLocked(d.v)){ skinHint(d.v); return; } SET.skin = d.v; saveSet(); applySettings(); if(d.v === 'gold'){ sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 50); } openSettings(true); },
   legal(d){ R.legal = +d.v; saveRules(); dirty = true; openCustom(true); },
   resetrules(){ R = Object.assign({}, RULES_DEF); saveRules(); dirty = true; sfx.pop(); openCustom(true); },
-  settab(d){ setTab = d.v; openSettings(true); },
-  shop(){ setTab = 'shop'; openShop(false); },
+  shop(){ openShop(false); },
+  cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || CYN < it[1]) return;
-    if(d.v === 'orange'){ if(UNL.orange) return; }
+    if(SHOP_THEMES.includes(d.v)){ if(UNL[d.v]) return; }
     else if(!S || $('#game').hidden || S.over || S.nextFate) return;
     if(!arm(b, t('shop_confirm'))) return;
     CYN -= it[1]; store.set(CYN_KEY, String(CYN));
-    if(d.v === 'orange'){ UNL.orange = true; store.set(UNL_KEY, JSON.stringify(UNL)); }
+    if(SHOP_THEMES.includes(d.v)){ UNL[d.v] = true; store.set(UNL_KEY, JSON.stringify(UNL)); }
     else { S.nextFate = d.v; save(); }
-    sfx.fame(); burst(d.v === 'crim' ? ['#ff2a00','#ffffff','#b3001b'] : d.v === 'star' ? ['#ffd000','#ffffff','#ffb300'] : ['#ff9a2e','#ffffff','#ffd27a'], 40);
-    cynShow(); openSettings(true);
+    sfx.fame(); burst(d.v === 'crim' ? ['#ff2a00','#ffffff','#b3001b'] : d.v === 'star' ? ['#ffd000','#ffffff','#ffb300'] : d.v === 'dark' ? ['#ff2a3a','#000000','#ffffff','#5a0010'] : ['#ff9a2e','#ffffff','#ffd27a'], 40);
+    cynShow(); openShop(true);
   },
   wipe(d, b){
     const st = +(b.dataset.step || 0), L = t('wipe_steps'), sp = b.querySelector('span');

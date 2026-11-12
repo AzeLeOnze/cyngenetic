@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.3d — 12 novembre 2026
+
+- Boutique : elle n'est plus dans les Paramètres. Elle a son propre bouton en haut (icône sac de courses), à côté des Paramètres et de la vitesse, et s'ouvre toujours en touchant le compteur de Cyn.
+- Boutique : nouveau thème Obsidienne à 5 000 Cyn (il ne se débloque plus qu'en l'achetant). Toucher ses Cyn dans la boutique montre comment en gagner.
+- Cyn : chaque gain s'affiche à l'endroit où il est gagné, « +10 » avec l'icône ADN au-dessus de la bulle, puis disparaît en fondu.
+- Thèmes : les explications ne sont plus listées sous les thèmes. Touche un thème bloqué pour savoir comment le débloquer.
+- Album : on peut trier chaque catégorie de A à Z, par année d'apparition, les débloqués en premier ou par ordre d'obtention.
+
 ## v0.1.3c — 12 novembre 2026
 
 - Boutique : un bouton dédié en haut (à côté des Paramètres, et sur l'écran de départ). Toucher le compteur de Cyn ouvre aussi la boutique.
