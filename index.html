@@ -227,6 +227,12 @@ button{font:inherit;color:inherit}
 .optsub{display:grid;gap:6px;padding:4px 6px 4px 58px}
 .rulepills{display:flex}
 .rulepills button{flex:1;font-size:13px}
+.zpills [data-v="easy"]{color:#0a74e8}.zpills [data-v="med"]{color:#279a00}.zpills [data-v="hard"]{color:#e07a00}.zpills [data-v="ext"]{color:#d8102a}
+.zpills button[aria-pressed="true"]{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.zpills [data-v="easy"][aria-pressed="true"]{background:linear-gradient(180deg,#9fd2ff 0%,#2a8cff 49%,#0a64d0 51%,#2a8cff 100%)}
+.zpills [data-v="med"][aria-pressed="true"]{background:linear-gradient(180deg,#c8f59a 0%,#4cc21a 49%,#279a00 51%,#4cc21a 100%)}
+.zpills [data-v="hard"][aria-pressed="true"]{background:linear-gradient(180deg,#ffdc9a 0%,#ffa31a 49%,#e07a00 51%,#ffa31a 100%)}
+.zpills [data-v="ext"][aria-pressed="true"]{background:linear-gradient(180deg,#ffa8b3 0%,#ff3a52 49%,#d8102a 51%,#ff3a52 100%)}
 @media (max-width:520px){ .optsub{padding-left:6px} }
 :root:is([data-skin="dark"],[data-skin="goth"]) .switch.optrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
 .si-potion{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff7ad8 55%,#9e0077)}
@@ -552,39 +558,39 @@ body.no-deco .bubble{display:none}
 .skin[aria-pressed="true"]{border-color:var(--aqua);box-shadow:0 0 0 3px rgba(0,180,255,.3)}
 @media (max-width:520px){ .skins{grid-template-columns:1fr 1fr} }
 /* Criminels : bulle rouge et noire, lueur sombre ; une fois révélés, des flammes */
-#treeCanvas .node.king:not(.crim):not(.ill){border:2px solid #d9a400;color:#3a1a00;background:linear-gradient(160deg,#fffbe6 0%,#ffe48a 40%,#f6c33a 70%,#e8a800 100%);
+:is(#treeCanvas,#aiCanvas) .node.king:not(.crim):not(.ill){border:2px solid #d9a400;color:#3a1a00;background:linear-gradient(160deg,#fffbe6 0%,#ffe48a 40%,#f6c33a 70%,#e8a800 100%);
   box-shadow:0 0 0 3px #7a2bd6,0 0 0 5px #ffd23a,0 0 26px 6px rgba(255,200,40,.55),0 10px 22px rgba(90,30,140,.35)}
-#treeCanvas .node.king:not(.crim):not(.ill) .n-band{background:linear-gradient(180deg,#9a4dff,#5a17b0);color:#ffe9a8;text-shadow:0 1px 1px rgba(40,0,80,.6);border:1px solid #ffd23a}
-#treeCanvas .node.king:not(.crim):not(.ill) .nt span,#treeCanvas .node.king:not(.crim):not(.ill) .n-city{color:#7a4a00}
-#treeCanvas .node.king:not(.crim):not(.ill) .n-life,#treeCanvas .node.king:not(.crim):not(.ill) .nt b{color:#3a1a00}
-#treeCanvas .node.king.active:not(.crim):not(.ill){box-shadow:0 0 0 3px var(--lime),0 0 0 6px #ffd23a,0 0 26px 6px rgba(255,200,40,.55),0 10px 22px rgba(90,30,140,.35)}
-#treeCanvas .node.heirn:not(.crim):not(.ill){color:#3a2400;border:2px solid #e8c25a;background:linear-gradient(160deg,#fffdf4 0%,#fff3cc 55%,#ffe7a3 100%);box-shadow:0 0 0 2px rgba(150,90,230,.55),0 0 14px 2px rgba(255,210,80,.4),0 8px 18px rgba(90,30,140,.2)}
-#treeCanvas .node.heirn:not(.crim):not(.ill) .n-band{background:linear-gradient(180deg,#c9a2ff,#8a4ee0);color:#fff}
+:is(#treeCanvas,#aiCanvas) .node.king:not(.crim):not(.ill) .n-band{background:linear-gradient(180deg,#9a4dff,#5a17b0);color:#ffe9a8;text-shadow:0 1px 1px rgba(40,0,80,.6);border:1px solid #ffd23a}
+:is(#treeCanvas,#aiCanvas) .node.king:not(.crim):not(.ill) .nt span,:is(#treeCanvas,#aiCanvas) .node.king:not(.crim):not(.ill) .n-city{color:#7a4a00}
+:is(#treeCanvas,#aiCanvas) .node.king:not(.crim):not(.ill) .n-life,:is(#treeCanvas,#aiCanvas) .node.king:not(.crim):not(.ill) .nt b{color:#3a1a00}
+:is(#treeCanvas,#aiCanvas) .node.king.active:not(.crim):not(.ill){box-shadow:0 0 0 3px var(--lime),0 0 0 6px #ffd23a,0 0 26px 6px rgba(255,200,40,.55),0 10px 22px rgba(90,30,140,.35)}
+:is(#treeCanvas,#aiCanvas) .node.heirn:not(.crim):not(.ill){color:#3a2400;border:2px solid #e8c25a;background:linear-gradient(160deg,#fffdf4 0%,#fff3cc 55%,#ffe7a3 100%);box-shadow:0 0 0 2px rgba(150,90,230,.55),0 0 14px 2px rgba(255,210,80,.4),0 8px 18px rgba(90,30,140,.2)}
+:is(#treeCanvas,#aiCanvas) .node.heirn:not(.crim):not(.ill) .n-band{background:linear-gradient(180deg,#c9a2ff,#8a4ee0);color:#fff}
 .crownfx{position:absolute;left:50%;top:-30px;width:56px;transform:translateX(-50%);z-index:7;pointer-events:none;filter:drop-shadow(0 3px 4px rgba(90,40,0,.45));animation:crownbob 3s ease-in-out var(--t,0s) infinite}
 .crownfx.small{top:-22px;width:36px;opacity:.95}
 .crownfx svg{display:block;width:100%}
 @keyframes crownbob{50%{transform:translateX(-50%) translateY(-3px) rotate(-3deg)}}
 .rtt{display:inline;margin-right:3px;font:800 9px/1 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:#7a2bd6;vertical-align:1px}
-#treeCanvas .node.king,#treeCanvas .node.heirn,#treeCanvas .node.titled{gap:1px;padding-bottom:7px}
-#treeCanvas .node .nt b.tt{font-size:13.5px}
-#treeCanvas .node.king .n-life,#treeCanvas .node.heirn .n-life{line-height:1.12}
-#treeCanvas .node.king .n-band,#treeCanvas .node.heirn .n-band{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:10.5px;line-height:1.15;padding:2px 7px}
-#treeCanvas .node.king:not(.crim):not(.ill) .rtt,#treeCanvas .node.heirn:not(.crim):not(.ill) .rtt{color:#5a17b0}
-#treeCanvas .node.heirn:not(.crim):not(.ill) .nt span,#treeCanvas .node.heirn:not(.crim):not(.ill) .n-city,#treeCanvas .node.heirn:not(.crim):not(.ill) .n-life,#treeCanvas .node.heirn:not(.crim):not(.ill) .nt b{color:#4a3000}
+:is(#treeCanvas,#aiCanvas) .node.king,:is(#treeCanvas,#aiCanvas) .node.heirn,:is(#treeCanvas,#aiCanvas) .node.titled{gap:1px;padding-bottom:7px}
+:is(#treeCanvas,#aiCanvas) .node .nt b.tt{font-size:13.5px}
+:is(#treeCanvas,#aiCanvas) .node.king .n-life,:is(#treeCanvas,#aiCanvas) .node.heirn .n-life{line-height:1.12}
+:is(#treeCanvas,#aiCanvas) .node.king .n-band,:is(#treeCanvas,#aiCanvas) .node.heirn .n-band{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:10.5px;line-height:1.15;padding:2px 7px}
+:is(#treeCanvas,#aiCanvas) .node.king:not(.crim):not(.ill) .rtt,:is(#treeCanvas,#aiCanvas) .node.heirn:not(.crim):not(.ill) .rtt{color:#5a17b0}
+:is(#treeCanvas,#aiCanvas) .node.heirn:not(.crim):not(.ill) .nt span,:is(#treeCanvas,#aiCanvas) .node.heirn:not(.crim):not(.ill) .n-city,:is(#treeCanvas,#aiCanvas) .node.heirn:not(.crim):not(.ill) .n-life,:is(#treeCanvas,#aiCanvas) .node.heirn:not(.crim):not(.ill) .nt b{color:#4a3000}
 .rib.exk{right:8px;color:#5a3a00;background:linear-gradient(180deg,#f3ead2,#d9c48a);border:1px solid #b8962e}
-#treeCanvas .node.noble:not(.crim):not(.ill){border-color:#c9a8ff;box-shadow:0 0 0 1.5px rgba(150,90,230,.45),0 7px 16px rgba(60,20,120,.16)}
-#treeCanvas .node.dechu:not(.crim):not(.ill){filter:grayscale(.65) brightness(.93);border-color:#9d97a8;background:linear-gradient(180deg,#eceaf0,#d3cfdb)}
-#treeCanvas .node.dechu .rtt{color:#6b6478}
+:is(#treeCanvas,#aiCanvas) .node.noble:not(.crim):not(.ill){border-color:#c9a8ff;box-shadow:0 0 0 1.5px rgba(150,90,230,.45),0 7px 16px rgba(60,20,120,.16)}
+:is(#treeCanvas,#aiCanvas) .node.dechu:not(.crim):not(.ill){filter:grayscale(.65) brightness(.93);border-color:#9d97a8;background:linear-gradient(180deg,#eceaf0,#d3cfdb)}
+:is(#treeCanvas,#aiCanvas) .node.dechu .rtt{color:#6b6478}
 .facts .rgf{background:linear-gradient(180deg,#fffbe8,#ffeeb0);border-color:#ffd24a}
 .facts .rgf dd{color:#7a4a00}
 .reignline{margin:4px 0 0;font:700 13px var(--font-display);color:#7a2bd6}
 /* Zombie : bulle pourrie, verdâtre */
-#treeCanvas .node.zombie{border:2px solid #4e6b2f;color:#1f2e0c;background:radial-gradient(circle at 20% 80%,rgba(90,60,20,.25) 0 10%,transparent 12%),radial-gradient(circle at 85% 30%,rgba(90,60,20,.22) 0 8%,transparent 10%),linear-gradient(170deg,#d8e8b8 0%,#a9c47e 50%,#6f8f43 100%);
+:is(#treeCanvas,#aiCanvas) .node.zombie{border:2px solid #4e6b2f;color:#1f2e0c;background:radial-gradient(circle at 20% 80%,rgba(90,60,20,.25) 0 10%,transparent 12%),radial-gradient(circle at 85% 30%,rgba(90,60,20,.22) 0 8%,transparent 10%),linear-gradient(170deg,#d8e8b8 0%,#a9c47e 50%,#6f8f43 100%);
   box-shadow:0 0 0 2px rgba(80,120,30,.45),0 0 18px 3px rgba(110,170,40,.35),0 8px 16px rgba(40,60,10,.3);filter:saturate(.85)}
-#treeCanvas .node.zombie .n-band{background:linear-gradient(180deg,#6aa82e,#2f5410);color:#e6ffc8;border:1px solid #2f5410}
-#treeCanvas .node.zombie .nt span,#treeCanvas .node.zombie .n-city{color:#3d5a14}
-#treeCanvas .node.zombie .orb{filter:hue-rotate(60deg) saturate(.6) brightness(.9)}
-#treeCanvas .node.zombie::after{content:"";position:absolute;left:18%;right:18%;bottom:-7px;height:9px;pointer-events:none;
+:is(#treeCanvas,#aiCanvas) .node.zombie .n-band{background:linear-gradient(180deg,#6aa82e,#2f5410);color:#e6ffc8;border:1px solid #2f5410}
+:is(#treeCanvas,#aiCanvas) .node.zombie .nt span,:is(#treeCanvas,#aiCanvas) .node.zombie .n-city{color:#3d5a14}
+:is(#treeCanvas,#aiCanvas) .node.zombie .orb{filter:hue-rotate(60deg) saturate(.6) brightness(.9)}
+:is(#treeCanvas,#aiCanvas) .node.zombie::after{content:"";position:absolute;left:18%;right:18%;bottom:-7px;height:9px;pointer-events:none;
   background:radial-gradient(circle at 15% 0,#6f8f43 0 3px,transparent 4px),radial-gradient(circle at 55% 0,#6f8f43 0 4px,transparent 5px),radial-gradient(circle at 85% 0,#6f8f43 0 2.5px,transparent 3.5px)}
 .facts .zf{background:linear-gradient(180deg,#eef8df,#d0e8ad);border-color:#a9c47e}
 .facts .zf dd{color:#3d5a14}
@@ -677,6 +683,49 @@ body.zmode .treebox{position:relative}
 .k-crime{--dot:#b0001a} .k-ach{--dot:#ffb300}
 /* Succès */
 .achcat{margin-top:4px}
+/* 0.1.7e : menu des succès refait */
+.modal.wide{width:min(900px,100%)}
+.achprog{display:flex;align-items:center;gap:10px;margin:8px 0 10px}
+.achprog b{font:800 15px var(--font-display);color:var(--ink);font-variant-numeric:tabular-nums}
+.achbar{flex:1;display:block;height:8px;border-radius:99px;background:rgba(0,80,160,.12);overflow:hidden}
+.achbar.big{height:12px}
+.achbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#ffd23a,#ff9a2e 35%,#ff4f9c 70%,#8f6bff)}
+.achtiers{display:flex;flex-wrap:wrap;gap:8px}
+.achtier{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 4px;border-radius:99px;background:rgba(255,255,255,.85);border:1px solid #fff;
+  font:700 13px var(--font-display);color:var(--ink-soft);box-shadow:0 2px 6px rgba(0,70,160,.1)}
+.achtier b{color:var(--ink)}
+.medal.mini{width:26px;height:26px;border-width:1.5px}
+.medal.mini svg{width:14px;height:14px}
+.achnav{position:sticky;top:-22px;z-index:3;display:flex;gap:6px;overflow-x:auto;margin:12px -22px 4px;padding:10px 22px;
+  background:linear-gradient(180deg,rgba(242,251,255,.98),rgba(236,248,255,.94));border-bottom:1px solid rgba(0,80,160,.1);scrollbar-width:thin}
+.achchip{flex:none;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid rgba(0,100,200,.18);background:#fff;
+  cursor:pointer;font:700 12.5px var(--font-display);color:var(--ink)}
+.achchip:hover{box-shadow:0 3px 10px rgba(0,70,160,.16)}
+.achchip svg{width:16px;height:16px;fill:var(--g3)}
+.achchip em{font-style:normal;color:var(--ink-soft);font-size:11.5px}
+.achchip.full{background:linear-gradient(180deg,#fff8d6,#ffe27a);border-color:#ffd23a}
+.achsec{margin-top:14px;padding:14px;border-radius:20px;background:rgba(255,255,255,.55);border:1px solid #fff;box-shadow:0 4px 14px rgba(0,70,160,.08);scroll-margin-top:64px}
+.achsec.full{background:linear-gradient(180deg,rgba(255,249,220,.95),rgba(255,255,255,.6));border-color:#ffe27a}
+.achsec header{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin-bottom:10px}
+.achic{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:linear-gradient(160deg,var(--g1),var(--g2) 55%,var(--g3));
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.55),0 3px 8px rgba(0,60,140,.2)}
+.achic svg{width:19px;height:19px;fill:#fff}
+.achsec header b{font:800 17px var(--font-display)}
+.achsec header em{margin-left:auto;font:800 13px var(--font-display);font-style:normal;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.achsec header .achbar{flex-basis:100%}
+.achdone{padding:2px 10px;border-radius:99px;background:linear-gradient(180deg,#ffe066,#f0a800);color:#5a3500;font:800 11px var(--font-display)}
+.achlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:8px}
+.achlist .ach{flex-direction:row;align-items:center;text-align:left;gap:12px;padding:10px 12px;border-radius:16px}
+.achlist .ach.got{background:linear-gradient(180deg,#fff,#f0fbff)}
+.achlist .ach.locked{opacity:1;filter:none;background:rgba(255,255,255,.62);box-shadow:none}
+.achlist .ach.locked .medal{filter:grayscale(1);opacity:.4}
+.achlist .ach.locked b{color:var(--ink-soft)}
+.achlist .ach.locked .achtag{opacity:.45}
+.achtx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.achtag{flex:none;align-self:flex-start;padding:2px 8px;border-radius:99px;font:800 10px var(--font-display);text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--tg,#b8732f)}
+.achtag.t-silver{--tg:#8593a3}.achtag.t-gold{--tg:#d39600}.achtag.t-platinum{--tg:#2f9fc4}.achtag.t-special{--tg:#8f6bff}
+.achtag.t-legend{background:linear-gradient(90deg,#ff4f6d,#ff9a2e,#3fd46b,#3fa9ff,#8f6bff)}
+@media (max-width:900px){ .achnav{top:-16px;margin:12px -16px 4px;padding:10px 16px} }
 .achgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px}
 .ach{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 8px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:0 4px 10px rgba(0,70,160,.12)}
 .ach.locked{opacity:.5;filter:grayscale(.95)}
@@ -794,7 +843,8 @@ body.zmode .treebox{position:relative}
 :root:is([data-skin="dark"],[data-skin="goth"]) .cyn,:root:is([data-skin="dark"],[data-skin="goth"]) .shopit,:root:is([data-skin="dark"],[data-skin="goth"]) .shopbal{background:linear-gradient(180deg,#26262b,#16161a);border-color:rgba(255,255,255,.14);color:#7ef0d0}
 .tree-head .stats{color:var(--ink-soft);font-size:13px;font-variant-numeric:tabular-nums}
 .tree-head .gel{min-height:34px;padding:6px 14px;font-size:13px}
-.tree-head .zoomer{margin-left:auto}
+.tree-head [data-act="center"],.tree-head [data-act="aicenter"]{margin-left:auto}
+.tree-head #viewSw:not([hidden])~[data-act="center"]{margin-left:0}
 .zoomer button{min-width:36px;min-height:32px;font-size:15px}
 .zoomer #zoomPct{min-width:56px;font-size:13px}
 .tree-scroll{flex:1;min-height:0;overflow:auto;cursor:grab;border-top:1px solid rgba(255,255,255,.8);
@@ -1106,7 +1156,6 @@ body.vsmode .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px}
   .aibox{display:none}
   body[data-mtab="ai"] .aibox{display:flex}
   body[data-mtab="ai"] .treebox:not(.aibox),body[data-mtab="ai"] .side{display:none}
-  .tree-head.ai-head .zoomer{display:inline-flex!important}
   .tree-head #viewSw{display:none}
   .topbar .achb,.topbar .albb{display:none}
   .glass,.overlay{-webkit-backdrop-filter:none;backdrop-filter:none}
@@ -1273,6 +1322,9 @@ body.no-deco .gothfx .bat{display:none}
           <select id="fRule" class="inp" hidden></select></div>
         <label class="switch optrow"><span class="opt-ic zomb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM7 14.8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-5 4.2c-1.4 0-2.6-.6-3.4-1.6l1.5-1.2c.5.6 1.2.9 1.9.9s1.4-.3 1.9-.9l1.5 1.2c-.8 1-2 1.6-3.4 1.6z"/></svg></span>
           <span class="opt-txt"><b data-t="lab_zombie"></b><small data-t="zombie_hint"></small></span><input type="checkbox" id="fZombie"><span class="sw"></span></label>
+        <div class="optsub" id="fZBox" hidden><span class="lab" data-t="lab_zdiff"></span>
+          <div class="pills rulepills zpills" role="group"><button type="button" data-act="zpick" data-v="easy" data-t="zd_easy" aria-pressed="false"></button><button type="button" data-act="zpick" data-v="med" data-t="zd_med" aria-pressed="true"></button><button type="button" data-act="zpick" data-v="hard" data-t="zd_hard" aria-pressed="false"></button><button type="button" data-act="zpick" data-v="ext" data-t="zd_ext" aria-pressed="false"></button></div>
+          <small class="fieldhint" id="fZHint"></small></div>
         <label class="switch optrow"><span class="opt-ic fam"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm8 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM1.5 20c0-4 3-6.5 6.5-6.5s6.5 2.5 6.5 6.5zm14 0c0-2.2-.7-4-2-5.3 1-.6 1.9-.9 2.5-.9 3 0 5.5 2.1 5.5 6.2z"/></svg></span>
           <span class="opt-txt"><b data-t="fam_auto"></b><small data-t="fam_auto_hint"></small></span><input type="checkbox" id="fFam"><span class="sw"></span></label>
       </div>
@@ -1326,11 +1378,6 @@ body.no-deco .gothfx .bat{display:none}
           <button data-act="view" data-v="tree" data-t="view_tree" aria-pressed="true"></button>
           <button data-act="view" data-v="map" data-t="view_map" aria-pressed="false"></button>
         </div>
-        <div class="pills zoomer" role="group">
-          <button data-act="zoom" data-v="-1" data-ta="zoom_out" data-tt="zoom_out">−</button>
-          <button data-act="zoom" data-v="0" id="zoomPct" data-ta="zoom_fit" data-tt="zoom_fit">100%</button>
-          <button data-act="zoom" data-v="1" data-ta="zoom_in" data-tt="zoom_in">+</button>
-        </div>
         <button class="gel ghost" data-act="center"><span data-t="center"></span></button>
       </div>
       <div id="treeScroll" class="tree-scroll"><div id="treeSizer" class="tree-sizer"><div id="treeCanvas" class="tree-canvas"></div></div></div>
@@ -1339,16 +1386,11 @@ body.no-deco .gothfx .bat{display:none}
     </section>
     <section class="glass treebox aibox" id="aiBox" hidden>
       <div class="tree-head ai-head">
-        <div class="hud ai-hud"><span class="cyn ai-cynb" data-ta="vs_ai_cyn" data-tt="vs_ai_cyn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6 1-4.6 2.5-6.2z"/></svg><b id="aiCynVal">0</b></span></div>
+        <div class="hud ai-hud"><div class="zbox" id="aiZBox" hidden><span class="zic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM7 14.8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-5 4.2c-1.4 0-2.6-.6-3.4-1.6l1.5-1.2c.5.6 1.2.9 1.9.9s1.4-.3 1.9-.9l1.5 1.2c-.8 1-2 1.6-3.4 1.6z"/></svg></span><span class="ztxt"><b id="aiZTxt"></b><i class="zbar"><i id="aiZFill"></i></i></span></div><span class="cyn ai-cynb" data-ta="vs_ai_cyn" data-tt="vs_ai_cyn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6 1-4.6 2.5-6.2z"/></svg><b id="aiCynVal">0</b></span></div>
         <span class="vs-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v2h4a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4zM8.5 9a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM8 14v2h8v-2zM1 9h2v5H1zm20 0h2v5h-2zM9 20h6v2H9z"/></svg><span data-t="vs_ai"></span></span>
         <h2 id="aiTitle"></h2>
         <span class="stats" id="aiStats"></span>
         <span class="ai-out" id="aiOut" data-t="vs_out" hidden></span>
-        <div class="pills zoomer" role="group">
-          <button data-act="aizoom" data-v="-1" data-ta="zoom_out" data-tt="zoom_out">−</button>
-          <button data-act="aizoom" data-v="0" id="aiZoomPct" data-ta="zoom_fit" data-tt="zoom_fit">100%</button>
-          <button data-act="aizoom" data-v="1" data-ta="zoom_in" data-tt="zoom_in">+</button>
-        </div>
         <button class="gel ghost" data-act="aicenter"><span data-t="center"></span></button>
       </div>
       <div id="aiScroll" class="ai-scroll"><div id="aiSizer" class="ai-sizer"><div id="aiCanvas" class="tree-canvas"></div></div></div>
@@ -1382,9 +1424,37 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.7d';
+const APP_VERSION = '0.1.7f';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.7f', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Mode Zombie : 4 difficultés au départ, comme le sexe dominant du mode Royal : Facile (2 % de propagation par an), Moyen (3 %, par défaut), Dur (4,4 %) et Extrême (6,5 %). En Versus Zombie, l\'IA joue avec la même difficulté que toi.',
+       'Nouvelle catégorie de succès Zombie : finir une partie de 1780 à 2100 en Facile (bronze), Moyen (argent), Dur (or) et Extrême (platine).',
+       'Nouveau succès Légende « Maître du duel » : battre l\'IA dans toutes les difficultés de tous les modes Versus.',
+       '4 nouveaux centres d\'intérêt : naturiste (depuis 1920), nudiste (depuis 1930), campeur (depuis 1910) et escaladeur (depuis 1890).',
+       'Correction : le bouton « Annuler » de la fenêtre du mode auto fonctionne.',
+       'Correction : le compteur de zombies de l\'IA ne reste plus affiché dans un Versus Normal ou Royal après un Versus Zombie.',
+       'Succès : « Jeunes grands-parents » passe dans la catégorie Enfants.'],
+   en:['Zombie mode: 4 difficulties at the start, like the dominant sex in Royal mode: Easy (2% spread per year), Medium (3%, default), Hard (4.4%) and Extreme (6.5%). In Zombie Versus, the AI plays on the same difficulty as you.',
+       'New Zombie achievement category: finish a game from 1780 to 2100 on Easy (bronze), Medium (silver), Hard (gold) and Extreme (platinum).',
+       'New Legend achievement "Duel master": beat the AI at every difficulty in every Versus mode.',
+       '4 new interests: naturist (since 1920), nudist (since 1930), camper (since 1910) and climber (since 1890).',
+       'Fix: the "Cancel" button in the auto mode window works.',
+       'Fix: the AI\'s zombie counter no longer stays on screen in a Normal or Royal Versus after a Zombie Versus.',
+       'Achievements: "Young grandparents" moves to the Children category.']},
+  {v:'0.1.7e', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['12 nouveaux succès Versus : gagner une partie en Normal, en Royal et en Zombie, à chaque difficulté (bronze, argent, or, platine). Ce sont les seuls succès possibles pendant un duel.',
+       'Menu des succès refait : progression globale, total par médaille, raccourcis vers chaque catégorie, catégories en cartes avec leur barre de progression, et succès en lignes plus lisibles. Et une musique de fête tant qu\'il est ouvert !',
+       'Versus Zombie : les zombies de l\'IA s\'affichent enfin comme des zombies (ils existaient, mais leur bulle restait normale). Même correction pour les rois, reines, héritiers et nobles de l\'IA.',
+       'Mode Zombie : nouveau son de contamination, plus mystérieux.',
+       'Versus : la vitesse ×4 est interdite. Dans le menu, la victoire à +900 Cyn est indiquée dans la Partie Classique.',
+       'Plus de boutons de zoom sur les arbres : la molette de la souris et le pincement des doigts suffisent.'],
+   en:['12 new Versus achievements: win a Normal, Royal and Zombie game at each difficulty (bronze, silver, gold, platinum). They are the only achievements you can unlock during a duel.',
+       'Achievements menu redone: overall progress, total per medal, shortcuts to each category, categories as cards with their progress bar, and easier-to-read rows. Plus party music while it is open!',
+       'Zombie Versus: the AI\'s zombies finally look like zombies (they were there, but their bubble stayed normal). Same fix for the AI\'s kings, queens, heirs and nobles.',
+       'Zombie mode: new, more mysterious infection sound.',
+       'Versus: ×4 speed is not allowed. In the menu, the +900 Cyn win is now shown under the Classic game.',
+       'No more zoom buttons on the trees: the mouse wheel and pinching are enough.']},
   {v:'0.1.7d', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Versus : gagner en mode Zombie rapporte 900 Cyn, quelle que soit la difficulté.',
        'Versus : les succès sont désactivés pendant une partie contre l\'IA.'],
@@ -2146,6 +2216,10 @@ const addRisk = (id, A) => ADDICTIONS.find(a => a[0]===id)[5] * (A >= 70 ? 4 : A
 // centres d'intérêt (sans effet, sauf les sportifs : risque de maladie divisé par 2) :
 // [id, fr masc., fr fém., en masc., en fém., icône, de, à, sportif]
 const INTERESTS = [
+ ['naturiste','Naturiste','Naturiste','Naturist','Naturist','leaf',1920,9999],
+ ['nudiste','Nudiste','Nudiste','Nudist','Nudist','sun',1930,9999],
+ ['campeur','Campeur','Campeuse','Camper','Camper','tree',1910,9999],
+ ['escalade','Escaladeur','Escaladeuse','Climber','Climber','flag',1890,9999,true],
  ['urbex',"Adepte d'urbex","Adepte d'urbex",'Urban explorer','Urban explorer','building',1990,9999],
  ['langmortes','Passionné de langues mortes','Passionnée de langues mortes','Dead languages buff','Dead languages buff','book',1500,9999],
  ['radioam','Radioamateur','Radioamatrice','Radio ham','Radio ham','headphones',1910,9999],
@@ -2797,6 +2871,7 @@ fr:{
   r_conds:'Particularités à la naissance', r_inherit:'Hérédité des particularités', r_addict:'Addictions', r_star:'Stars', r_crim:'Criminels',
   r_reset:'Rétablir les valeurs par défaut', legend_note:'Mode Légende : ni mariage ni séparation.', legend_badge:'Mode Légende',
   cause_legend:p=>`${g(p,'entré','entrée')} dans la légende`, log_death_legend:p=>`${nm(p)} entre dans la légende à 33 ans.`,
+  ach_full:'Complet !', ach_done:'Débloqué',
   ach_title:'Succès', ach_unlocked:'Succès débloqué !', ach_locked:'Verrouillé', ach_got:(y,f)=>`Débloqué en ${y} · famille ${f}`,
   ach_count:(n,m)=>`${n} / ${m} débloqués`, tier_bronze:'Bronze', tier_silver:'Argent', tier_gold:'Or', tier_platinum:'Platine', tier_special:'Spécial', tier_legend:'Multicolore',
   log_ach:id=>`Succès débloqué : ${achTitle(id)} !`, log_gold:()=>'Catégorie de succès complète : le thème Or est débloqué dans les Paramètres !',
@@ -2845,16 +2920,16 @@ fr:{
   vs_title:"Affronte l'IA", vs_intro:"Deux familles démarrent en 1780 : la tienne à gauche, celle de l'IA à droite. L'IA joue toute seule, selon la difficulté choisie, et gagne ses propres Cyn. Si plus personne n'est en vie dans une famille, elle a perdu.",
   vs_mode:'Mode de jeu', vs_m_normal:'Normal', vs_m_royal:'Royal', vs_m_zombie:'Zombie',
   vs_diff:'Difficulté', vs_d_easy:'Promenade de santé', vs_d_std:'Standard', vs_d_hard:'Périple', vs_d_ext:'Extrême',
-  vs_d_easy_h:"L'IA joue sans stratégie et ne dépense jamais ses Cyn. Victoire : +500 Cyn (Zombie : +900).", vs_d_std_h:"L'IA joue normalement, fait quelques achats et change parfois de personnage. Victoire : +650 Cyn.",
-  vs_d_hard_h:"L'IA vise l'objectif, change souvent de personnage et dépense ses Cyn avec soin. Victoire : +800 Cyn.", vs_d_ext_h:"L'IA joue à fond, démarre avec 900 Cyn et en gagne presque deux fois plus. Victoire : +1 000 Cyn.",
+  vs_d_easy_h:"L'IA joue sans stratégie et ne dépense jamais ses Cyn.", vs_d_std_h:"L'IA joue normalement, fait quelques achats et change parfois de personnage.",
+  vs_d_hard_h:"L'IA vise l'objectif, change souvent de personnage et dépense ses Cyn avec soin.", vs_d_ext_h:"L'IA joue à fond, démarre avec 900 Cyn et en gagne presque deux fois plus.",
   vs_goal:'Objectif de victoire',
   vs_g_speed:'Partie de vitesse', vs_g_speed_h:"Le plus de générations en 2100. En cas d'égalité, gagne la famille dont la personne la plus âgée de la dernière génération est née en premier.",
   vs_g_slow:'Partie de lenteur', vs_g_slow_h:"Le moins de générations en 2100. En cas d'égalité, gagne la famille dont la personne la plus jeune de la dernière génération est née en dernier.",
   vs_g_star:'Partie de Star', vs_g_star_h:'Le plus de stars en 2100. Égalité possible.',
   vs_g_crime:'Partie de Crime', vs_g_crime_h:'Le plus de meurtres en 2100. Égalité possible.',
   vs_g_noble:'Partie de Noble', vs_g_noble_h:'Le plus de Nobles en 2100, morts et vivants. Égalité possible.',
-  vs_g_classic:'Partie Classique', vs_g_classic_h:'Le plus de membres de la famille vivants (et humains) en 2100. Égalité possible.',
-  vs_1780:"Victoire en mode Zombie : +900 Cyn, quelle que soit la difficulté. Les succès sont désactivés en Versus. La partie commence obligatoirement en 1780. Le premier personnage de l'IA est un homme de 18 ans, tiré au hasard. Pas de destin de départ en Versus.",
+  vs_g_classic:'Partie Classique', vs_g_classic_h:'Le plus de membres de la famille vivants (et humains) en 2100. Égalité possible. Victoire : +900 Cyn, quelle que soit la difficulté.', vs_win_cyn:n=>`Victoire : +${n} Cyn.`,
+  vs_1780:"Seuls les succès Versus se débloquent pendant un duel. La partie commence obligatoirement en 1780. Le premier personnage de l'IA est un homme de 18 ans, tiré au hasard. Pas de destin de départ en Versus.",
   vs_ok:'Valider', vs_cancel:'Annuler', vs_edit:'Modifier', vs_sum:(m,d,g)=>`Contre l'IA · ${m} · ${d} · ${g}`,
   vs_ai:'IA', vs_you:'Toi', vs_ai_cyn:"Cyn de l'IA", vs_reward:n=>`+${n} Cyn pour ta victoire !`, vs_played:"Personnage joué par l'IA", vs_out:'Éliminée', vs_ai_fam:"Famille de l'IA", m_ai:'IA', vs_keep:'Continuer seul',
   vs_u_gen:n=>n>1?'générations':'génération', vs_u_star:n=>n>1?'stars':'star', vs_u_crime:n=>n>1?'meurtres':'meurtre', vs_u_noble:n=>n>1?'nobles':'noble', vs_u_live:n=>n>1?'vivants':'vivant',
@@ -2865,6 +2940,8 @@ fr:{
   vs_ai_dead:f=>`La famille ${f} de l'IA s'est éteinte : tu remportes le duel !`, vs_over_lose:"Ta famille s'est éteinte : l'IA remporte le duel.",
   log_vs_ai_out:()=>"La famille de l'IA s'est éteinte.",
   vs_t_fam:'Famille', vs_t_gen:'Générations', vs_t_live:'Vivants', vs_t_star:'Stars', vs_t_crime:'Meurtres', vs_t_noble:'Nobles',
+  lab_zdiff:'Difficulté', zd_easy:'Facile', zd_med:'Moyen', zd_hard:'Dur', zd_ext:'Extrême',
+  zd_hint:p=>`${p} % de risque de contamination par an, pour chaque parent, enfant ou conjoint d'un zombie.`,
   lab_zombie:'Mode Zombie', zombie_hint:"Rien ne se passe pendant 60 ans… puis le premier zombie apparaît. Survis jusqu'en 2100 ! (Conseillé : 1780)",
   z_count:n=>`${n} ans avant le premier zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} humain${h>1?'s':''}`,
   zombie_act:p=>g(p,'Zombie','Zombie'), zombie_since:(p,y)=>`${g(p,'Zombie','Zombie')} depuis ${y}`, zombie_no_baby:"Un zombie ne peut pas avoir d'enfant.",
@@ -3053,6 +3130,7 @@ en:{
   r_conds:'Conditions at birth', r_inherit:'Condition inheritance', r_addict:'Addictions', r_star:'Stars', r_crim:'Criminals',
   r_reset:'Restore defaults', legend_note:'Legend mode: no marriage or breakup.', legend_badge:'Legend mode',
   cause_legend:()=>'passed into legend', log_death_legend:p=>`${nm(p)} passes into legend at 33.`,
+  ach_full:'Complete!', ach_done:'Unlocked',
   ach_title:'Achievements', ach_unlocked:'Achievement unlocked!', ach_locked:'Locked', ach_got:(y,f)=>`Unlocked in ${y} · ${f} family`,
   ach_count:(n,m)=>`${n} / ${m} unlocked`, tier_bronze:'Bronze', tier_silver:'Silver', tier_gold:'Gold', tier_platinum:'Platinum', tier_special:'Special', tier_legend:'Rainbow',
   log_ach:id=>`Achievement unlocked: ${achTitle(id)}!`, log_gold:()=>'Achievement category complete: the Gold theme is now available in Settings!',
@@ -3101,16 +3179,16 @@ en:{
   vs_title:'Face the AI', vs_intro:"Two families start in 1780: yours on the left, the AI's on the right. The AI plays on its own, at the difficulty you pick, and earns its own Cyn. When nobody is left alive in a family, that family loses.",
   vs_mode:'Game mode', vs_m_normal:'Normal', vs_m_royal:'Royal', vs_m_zombie:'Zombie',
   vs_diff:'Difficulty', vs_d_easy:'Walk in the park', vs_d_std:'Standard', vs_d_hard:'Odyssey', vs_d_ext:'Extreme',
-  vs_d_easy_h:'The AI plays without a plan and never spends its Cyn. Win: +500 Cyn (Zombie: +900).', vs_d_std_h:'The AI plays normally, buys a few things and sometimes switches character. Win: +650 Cyn.',
-  vs_d_hard_h:'The AI aims for the goal, often switches character and spends its Cyn wisely. Win: +800 Cyn.', vs_d_ext_h:'The AI plays all-out, starts with 900 Cyn and earns almost twice as many. Win: +1,000 Cyn.',
+  vs_d_easy_h:'The AI plays without a plan and never spends its Cyn.', vs_d_std_h:'The AI plays normally, buys a few things and sometimes switches character.',
+  vs_d_hard_h:'The AI aims for the goal, often switches character and spends its Cyn wisely.', vs_d_ext_h:'The AI plays all-out, starts with 900 Cyn and earns almost twice as many.',
   vs_goal:'Victory goal',
   vs_g_speed:'Speed game', vs_g_speed_h:'Most generations by 2100. On a tie, the family whose oldest member of the last generation was born first wins.',
   vs_g_slow:'Slow game', vs_g_slow_h:'Fewest generations by 2100. On a tie, the family whose youngest member of the last generation was born last wins.',
   vs_g_star:'Star game', vs_g_star_h:'Most stars by 2100. Ties are possible.',
   vs_g_crime:'Crime game', vs_g_crime_h:'Most murders by 2100. Ties are possible.',
   vs_g_noble:'Noble game', vs_g_noble_h:'Most Nobles by 2100, dead or alive. Ties are possible.',
-  vs_g_classic:'Classic game', vs_g_classic_h:'Most family members alive (and human) in 2100. Ties are possible.',
-  vs_1780:"Winning in Zombie mode: +900 Cyn, whatever the difficulty. Achievements are turned off in Versus. The game always starts in 1780. The AI's first character is a random 18-year-old man. No starting destiny in Versus.",
+  vs_g_classic:'Classic game', vs_g_classic_h:'Most family members alive (and human) in 2100. Ties are possible. Win: +900 Cyn, whatever the difficulty.', vs_win_cyn:n=>`Win: +${n} Cyn.`,
+  vs_1780:"Only Versus achievements can be unlocked during a duel. The game always starts in 1780. The AI's first character is a random 18-year-old man. No starting destiny in Versus.",
   vs_ok:'Confirm', vs_cancel:'Cancel', vs_edit:'Change', vs_sum:(m,d,g)=>`Against the AI · ${m} · ${d} · ${g}`,
   vs_ai:'AI', vs_you:'You', vs_ai_cyn:"AI's Cyn", vs_reward:n=>`+${n} Cyn for your win!`, vs_played:'Played by the AI', vs_out:'Eliminated', vs_ai_fam:"AI's family", m_ai:'AI', vs_keep:'Keep playing alone',
   vs_u_gen:n=>n>1?'generations':'generation', vs_u_star:n=>n>1?'stars':'star', vs_u_crime:n=>n>1?'murders':'murder', vs_u_noble:n=>n>1?'nobles':'noble', vs_u_live:n=>n>1?'alive':'alive',
@@ -3121,6 +3199,8 @@ en:{
   vs_ai_dead:f=>`The AI's ${f} family has died out: you win the duel!`, vs_over_lose:'Your family has died out: the AI wins the duel.',
   log_vs_ai_out:()=>"The AI's family has died out.",
   vs_t_fam:'Family', vs_t_gen:'Generations', vs_t_live:'Alive', vs_t_star:'Stars', vs_t_crime:'Murders', vs_t_noble:'Nobles',
+  lab_zdiff:'Difficulty', zd_easy:'Easy', zd_med:'Medium', zd_hard:'Hard', zd_ext:'Extreme',
+  zd_hint:p=>`${p}% yearly infection risk for each parent, child or partner of a zombie.`,
   lab_zombie:'Zombie mode', zombie_hint:'Nothing happens for 60 years… then the first zombie appears. Survive until 2100! (Recommended: 1780)',
   z_count:n=>`${n} years until the first zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} human${h>1?'s':''}`,
   zombie_act:()=>'Zombie', zombie_since:(p,y)=>`Zombie since ${y}`, zombie_no_baby:"A zombie can't have children.",
@@ -3252,7 +3332,7 @@ const ACHS = [
  ['time500','time','gold','Demi-millénaire','500 ans de jeu dans une même partie','Half a millennium','500 years played in a single game'],
  ['time1000','time','platinum','Millénaire','1000 ans de jeu dans une même partie','Millennium','1,000 years played in a single game'],
  ['quads','other','special',"Quatre d'un coup",'Avoir des quadruplés','Four at once','Have quadruplets'],
- ['grand40','other','special','Jeunes grands-parents','Devenir grand-parent à 40 ans ou moins','Young grandparents','Become a grandparent at 40 or younger'],
+ ['grand40','kids','special','Jeunes grands-parents','Devenir grand-parent à 40 ans ou moins','Young grandparents','Become a grandparent at 40 or younger'],
  ['sib50','other','special','Fossé des générations',"Avoir une fratrie avec 50 ans d'écart (demi-frères et sœurs compris)",'Generation gap','Have siblings 50 years apart (half-siblings included)'],
  ['xmas','other','special','Cadeau de Noël','Naître un 25 décembre','Christmas present','Be born on December 25'],
  ['parent90','other','special','Jamais trop tard','Devenir parent après 90 ans','Never too late','Become a parent after 90'],
@@ -3282,12 +3362,29 @@ const ACHS = [
  ['gen20','time','gold','Sprint généalogique',"Partir de 1780 et arriver en 2100 avec une moyenne de 20 ans ou moins par génération",'Family-tree sprint','Start in 1780 and reach 2100 averaging 20 years or less per generation'],
  ['gen19','time','platinum','Record absolu',"Partir de 1780 et arriver en 2100 avec une moyenne de 19 ans ou moins par génération",'All-time record','Start in 1780 and reach 2100 averaging 19 years or less per generation'],
  ['z1780','other','platinum','Survivant',"Terminer le mode Zombie de 1780 à 2100",'Survivor','Finish Zombie mode from 1780 to 2100'],
+ ['zd_easy','zomb','bronze','Rescapé','Finir une partie du mode Zombie en Facile (de 1780 à 2100)','Escapee','Finish a Zombie mode game on Easy (from 1780 to 2100)'],
+ ['zd_med','zomb','silver','Résistant','Finir une partie du mode Zombie en Moyen (de 1780 à 2100)','Resistance fighter','Finish a Zombie mode game on Medium (from 1780 to 2100)'],
+ ['zd_hard','zomb','gold','Increvable','Finir une partie du mode Zombie en Dur (de 1780 à 2100)','Unkillable','Finish a Zombie mode game on Hard (from 1780 to 2100)'],
+ ['zd_ext','zomb','platinum','Fin du monde','Finir une partie du mode Zombie en Extrême (de 1780 à 2100)','End of the world','Finish a Zombie mode game on Extreme (from 1780 to 2100)'],
+ ['vs_n_easy','vsn','bronze','Premier duel','Remporter une partie Versus Normal en Promenade de santé','First duel','Win a Normal Versus game on Walk in the park'],
+ ['vs_n_std','vsn','silver','Duelliste','Remporter une partie Versus Normal en Standard','Duelist','Win a Normal Versus game on Standard'],
+ ['vs_n_hard','vsn','gold','Grand périple','Remporter une partie Versus Normal en Périple','Great odyssey','Win a Normal Versus game on Odyssey'],
+ ['vs_n_ext','vsn','platinum','Imbattable','Remporter une partie Versus Normal en Extrême','Unbeatable','Win a Normal Versus game on Extreme'],
+ ['vs_r_easy','vsr','bronze','Petit prince','Remporter une partie Versus Royal en Promenade de santé','Little prince','Win a Royal Versus game on Walk in the park'],
+ ['vs_r_std','vsr','silver','Prétendant','Remporter une partie Versus Royal en Standard','Pretender','Win a Royal Versus game on Standard'],
+ ['vs_r_hard','vsr','gold','Sacre','Remporter une partie Versus Royal en Périple','Coronation','Win a Royal Versus game on Odyssey'],
+ ['vs_r_ext','vsr','platinum','Empereur','Remporter une partie Versus Royal en Extrême','Emperor','Win a Royal Versus game on Extreme'],
+ ['vs_z_easy','vsz','bronze','Balade des morts','Remporter une partie Versus Zombie en Promenade de santé','Stroll of the dead','Win a Zombie Versus game on Walk in the park'],
+ ['vs_z_std','vsz','silver','Chasseur de zombies','Remporter une partie Versus Zombie en Standard','Zombie hunter','Win a Zombie Versus game on Standard'],
+ ['vs_z_hard','vsz','gold','Dernier rempart','Remporter une partie Versus Zombie en Périple','Last bastion','Win a Zombie Versus game on Odyssey'],
+ ['vs_z_ext','vsz','platinum','Apocalypse domptée','Remporter une partie Versus Zombie en Extrême','Apocalypse tamed','Win a Zombie Versus game on Extreme'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
+ ['vs_all','legend','legend','Maître du duel',"Battre l'IA dans toutes les difficultés de tous les modes Versus",'Duel master','Beat the AI at every difficulty in every Versus mode'],
  ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
 ];
 const ACHV = byId(ACHS);
-const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['royal','castle','Royal','Royal'],['legend','crown','Légende','Legend']];
+const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['royal','castle','Royal','Royal'],['zomb','brain','Zombie','Zombie'],['vsn','robot','Versus Normal','Versus Normal'],['vsr','crown','Versus Royal','Versus Royal'],['vsz','brain','Versus Zombie','Versus Zombie'],['legend','crown','Légende','Legend']];
 // thème Or : débloqué dès qu'une catégorie entière de succès est complète
 const goldUnlocked = () => ACH_CATS.some(c => ACHS.filter(a => a[1]===c[0]).every(a => ACH[a[0]]));
 const ACH_KEY = 'lignee.ach.v1';
@@ -3296,13 +3393,15 @@ const achTitle = id => LANG==='fr' ? ACHV[id][3] : ACHV[id][5];
 const achDesc = id => LANG==='fr' ? ACHV[id][4] : ACHV[id][6];
 const medal = (id, cls='') => `<span class="medal t-${ACHV[id][2]} ${cls}">${icon(ACH_CATS.find(c => c[0]===ACHV[id][1])[1])}</span>`;
 function unlock(id){
-  if(VSH || !R.ach || rulesTweaked() || (S && (S.vs || S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
+  const vsA = id.startsWith('vs_');                    // succès Versus : seuls succès possibles pendant un duel, même en 2100
+  if(VSH || !R.ach || rulesTweaked() || (!vsA && S && (S.vs || S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
   const hadGold = goldUnlocked();
   ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? familyName(P(S.founderId)) : ''};
   if(!hadGold && goldUnlocked()) setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k:'gold', a:[]}); sfx.fame(); }, 3600);
   store.set(ACH_KEY, JSON.stringify(ACH));
   if(S) log('ach','ach',[id], undefined, false);
   achQueue.push(id); if(!achBusy) nextAch();
+  if(/^vs_[nrz]_/.test(id) && ACHS.filter(a => /^vs_[nrz]_/.test(a[0])).every(a => ACH[a[0]])) unlock('vs_all');   // Maître du duel : les 12 victoires Versus
   if(id !== 'leg_all' && ACHS.every(a => a[0] === 'leg_all' || ACH[a[0]])) unlock('leg_all');   // Légende vivante : tous les autres succès
 }
 const checkTiers = (prefix, value, steps) => steps.forEach(s => { if(value >= s) unlock(prefix + s); });
@@ -3331,13 +3430,22 @@ function openPatchnotes(){
   openModal(`<div class="m-head"><div class="eyebrow">Cyngenetic v${APP_VERSION}</div><h2>${t('pn_title')}</h2></div>
     ${PATCHNOTES.map(n => `<section class="pn"><h3>v${esc(n.v)} <small>${esc(n.date[LANG])}</small></h3><ul>${n[LANG].map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}`);
 }
+let achOpen = false;                                   // menu des succès ouvert : musique de fête
 function openAchievements(){
-  const n = ACHS.filter(a => ACH[a[0]]).length;
-  const cats = ACH_CATS.map(c => `<div class="achcat"><div class="eyebrow sect">${LANG==='fr' ? c[2] : c[3]}</div><div class="achgrid">${
-    ACHS.filter(a => a[1]===c[0]).map(a => { const got = ACH[a[0]];
-      return `<div class="ach ${got ? '' : 'locked'} ${a[2] === 'legend' ? 'leg' : ''}">${medal(a[0])}<b>${esc(achTitle(a[0]))}</b><small>${esc(achDesc(a[0]))}</small>
-        <em>${got ? esc(got.y ? t('ach_got', got.y, got.f) : t('tier_' + a[2])) : t('ach_locked')}</em></div>`; }).join('')}</div></div>`).join('');
-  openModal(`<div class="m-head"><div class="eyebrow">${t('ach_count', n, ACHS.length)}</div><h2>${t('ach_title')}</h2></div>${cats}`);
+  const n = ACHS.filter(a => ACH[a[0]]).length, pct = Math.round(n / ACHS.length * 100), cn = c => LANG === 'fr' ? c[2] : c[3];
+  const prog = c => { const all = ACHS.filter(a => a[1] === c[0]); return [all, all.filter(a => ACH[a[0]]).length]; };
+  const tiers = ['bronze','silver','gold','platinum'].map(tr => { const all = ACHS.filter(a => a[2] === tr);
+    return `<span class="achtier" title="${t('tier_' + tr)}"><span class="medal mini t-${tr}">${icon('trophy')}</span><b>${all.filter(a => ACH[a[0]]).length}</b>/${all.length}</span>`; }).join('');
+  const nav = ACH_CATS.map(c => { const [all, got] = prog(c);
+    return `<button class="achchip ${got === all.length ? 'full' : ''}" data-act="achjump" data-v="${c[0]}">${icon(c[1])}<span>${esc(cn(c))}</span><em>${got}/${all.length}</em></button>`; }).join('');
+  const cats = ACH_CATS.map(c => { const [all, got] = prog(c), full = got === all.length;
+    return `<section class="achsec ${full ? 'full' : ''}" id="achsec-${c[0]}"><header><i class="achic">${icon(c[1])}</i><b>${esc(cn(c))}</b>${full ? `<span class="achdone">${t('ach_full')}</span>` : ''}<em>${got} / ${all.length}</em><span class="achbar"><i style="width:${(got / all.length * 100).toFixed(1)}%"></i></span></header>
+      <div class="achlist">${all.map(a => { const g2 = ACH[a[0]];
+        return `<div class="ach ${g2 ? 'got' : 'locked'} ${a[2] === 'legend' ? 'leg' : ''}">${medal(a[0])}<div class="achtx"><b>${esc(achTitle(a[0]))}</b><small>${esc(achDesc(a[0]))}</small>${g2 ? `<em>${esc(g2.y ? t('ach_got', g2.y, g2.f) : t('ach_done'))}</em>` : ''}</div><span class="achtag t-${a[2]}">${t('tier_' + a[2])}</span></div>`; }).join('')}</div></section>`; }).join('');
+  openModal(`<div class="m-head achhead"><div class="eyebrow">${t('ach_count', n, ACHS.length)}</div><h2>${t('ach_title')}</h2>
+    <div class="achprog"><span class="achbar big"><i style="width:${pct}%"></i></span><b>${pct} %</b></div><div class="achtiers">${tiers}</div></div>
+    <nav class="achnav">${nav}</nav>${cats}`);
+  $('#modal').classList.add('wide'); achOpen = true; music.setMode('fest');
 }
 const warPhrase = (w,p) => p.sex==='F' ? WARC[w][2] : WARC[w][1];
 /* Thème Nuit : les criminels deviennent des loups-garous */
@@ -3431,26 +3539,26 @@ const sfx = (() => {
     ach(){ [1046,1318,1568,2093].forEach((f,i) => { note(f,i*.08,.5,{vol:.06,type:'triangle'}); note(f*1.5,i*.08+.02,.3,{vol:.02}); }); bell(2093,.38); note(3136,.45,.9,{vol:.025}); },
     crime(){ note(196,0,1.2,{to:98,vol:.09,type:'sawtooth',glide:1.1}); note(207,.05,1.1,{to:103,vol:.05,type:'square',glide:1}); note(55,.3,1.4,{vol:.12,type:'triangle'}); note(1661,.6,.5,{to:830,vol:.02}); },
     war(){ note(110,0,.9,{to:82,vol:.12,type:'triangle'}); note(98,.35,1.1,{to:73,vol:.1,type:'triangle'}); note(147,.7,1,{vol:.05}); },
-    growl(){                                         // grognement de zombie : voix grave et rauque, avec un souffle
+    growl(){                                         // contamination : un accord grave et mystérieux qui frissonne, avec un souffle
       if(muted) return; const c = init(); if(!c) return;
-      const t = c.currentTime; if(t < lastGrowl + 1.4) return; lastGrowl = t;
-      const dur = 1.2 + Math.random()*.5, base = 62 + Math.random()*26;
-      const vca = c.createGain(), env = c.createGain(), flt = c.createBiquadFilter();
-      flt.type = 'lowpass'; flt.frequency.setValueAtTime(1100, t); flt.frequency.exponentialRampToValueAtTime(380, t + dur); flt.Q.value = 4;
-      vca.gain.value = .55; env.gain.setValueAtTime(.0001, t); env.gain.exponentialRampToValueAtTime(.32, t + .14);
-      env.gain.setValueAtTime(.32, t + dur*.55); env.gain.exponentialRampToValueAtTime(.0001, t + dur);
-      flt.connect(vca); vca.connect(env); env.connect(master);
-      const voice = (type, k) => { const o = c.createOscillator(); o.type = type;
-        o.frequency.setValueAtTime(base*k*1.3, t); o.frequency.linearRampToValueAtTime(base*k, t + dur*.35); o.frequency.linearRampToValueAtTime(base*k*.75, t + dur);
-        const lfo = c.createOscillator(), lg = c.createGain(); lfo.frequency.value = 6 + Math.random()*3; lg.gain.value = base*k*.06;
-        lfo.connect(lg); lg.connect(o.frequency); o.connect(flt); o.start(t); lfo.start(t); o.stop(t + dur + .05); lfo.stop(t + dur + .05); };
-      voice('sawtooth', 1); voice('square', .5); voice('sawtooth', 1.01);
-      const rasp = c.createOscillator(), rg = c.createGain(); rasp.type = 'square'; rasp.frequency.value = 24 + Math.random()*8; rg.gain.value = .45;   // le « rrrr » rauque
-      rasp.connect(rg); rg.connect(vca.gain); rasp.start(t); rasp.stop(t + dur + .05);
+      const t = c.currentTime; if(t < lastGrowl + 1.6) return; lastGrowl = t;
+      const dur = 2.8, root = 87.3 * Math.pow(2, [0, 2, 3][Math.floor(Math.random()*3)] / 12);
+      const flt = c.createBiquadFilter(), env = c.createGain();
+      flt.type = 'lowpass'; flt.Q.value = 5;
+      flt.frequency.setValueAtTime(260, t); flt.frequency.linearRampToValueAtTime(1300, t + dur*.45); flt.frequency.exponentialRampToValueAtTime(220, t + dur);
+      env.gain.setValueAtTime(.0001, t); env.gain.linearRampToValueAtTime(.26, t + dur*.42); env.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      flt.connect(env); env.connect(master);
+      [[1,'sine',.5],[1.0595,'triangle',.32],[1.498,'sine',.26],[2,'triangle',.14]].forEach(([k, type, v]) => {   // seconde mineure + quinte : ça frissonne
+        const o = c.createOscillator(), g = c.createGain(); o.type = type; o.detune.value = (Math.random() - .5) * 16;
+        o.frequency.setValueAtTime(root*k, t); o.frequency.linearRampToValueAtTime(root*k*.94, t + dur);
+        g.gain.value = v; o.connect(g); g.connect(flt); o.start(t); o.stop(t + dur + .05);
+      });
       const n = c.createBufferSource(), buf = c.createBuffer(1, Math.ceil(c.sampleRate*dur), c.sampleRate), d = buf.getChannelData(0);
       for(let i = 0; i < d.length; i++) d[i] = Math.random()*2 - 1;
-      const bp = c.createBiquadFilter(), ng = c.createGain(); bp.type = 'bandpass'; bp.frequency.value = 520; bp.Q.value = 1.2; ng.gain.value = .35;
-      n.buffer = buf; n.connect(bp); bp.connect(ng); ng.connect(flt); n.start(t); n.stop(t + dur);
+      const bp = c.createBiquadFilter(), ng = c.createGain(); bp.type = 'bandpass'; bp.Q.value = 2.5;
+      bp.frequency.setValueAtTime(220, t); bp.frequency.exponentialRampToValueAtTime(800, t + dur*.5); bp.frequency.exponentialRampToValueAtTime(260, t + dur);
+      ng.gain.setValueAtTime(.0001, t); ng.gain.linearRampToValueAtTime(.16, t + dur*.5); ng.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      n.buffer = buf; n.connect(bp); bp.connect(ng); ng.connect(master); n.start(t); n.stop(t + dur);
     },
     stab(){ note(1800,0,.12,{to:300,glide:.1,vol:.08,type:'sawtooth'}); note(140,.08,.35,{to:60,vol:.14,type:'triangle'}); note(90,.14,.5,{vol:.08}); },
     ctx(){ return init(); }
@@ -3463,6 +3571,9 @@ const music = (() => {
   let ctx = null, out = null, lp = null, timer = null, step = 0, next = 0, mode = 'calm', vol = .35, on = true;
   const CALM = {bpm:66, chords:[[48,55,64,71],[45,52,60,67],[41,48,57,64],[43,50,59,62]], mel:[72,74,76,79,81,84,86]};   // Do maj7 · La m7 · Fa maj7 · Sol
   const ZOMB = {bpm:118, chords:[[45,48,51,54],[44,47,50,53],[43,46,49,52],[46,49,52,55]], mel:[69,70,72,73,75,76,78]};   // accords diminués, inquiétants
+  const FEST = {bpm:126, chords:[[48,55,64,67],[43,50,59,67],[45,52,60,64],[41,48,57,65]], mel:[72,74,76,79,81,84]};   // Do · Sol · La m · Fa : la fête
+  const cfgOf = m => m === 'zombie' ? ZOMB : m === 'tense' ? TENSE : m === 'fest' ? FEST : CALM;
+  const volOf = m => m === 'calm' ? 1 : m === 'fest' ? 1.25 : TENSE_VOL;
   const TENSE = {bpm:92, chords:[[45,52,60,64],[41,48,57,60],[38,45,53,57],[40,47,56,59]], mel:[69,71,72,75,76,80,81]};  // La m · Fa · Ré m · Mi
   const mtof = m => 440 * Math.pow(2, (m-69)/12), TENSE_VOL = 1.7;   // la musique du criminel est plus forte
   function tone(f, t, dur, type, v, att){
@@ -3472,12 +3583,18 @@ const music = (() => {
     o.connect(gn); gn.connect(lp); o.start(t); o.stop(t + dur + .1);
   }
   function play(s, t){
-    const cfg = mode === 'zombie' ? ZOMB : mode === 'tense' ? TENSE : CALM, beat = 60/cfg.bpm/2, ch = cfg.chords[Math.floor(s/8) % 4];
+    const cfg = cfgOf(mode), beat = 60/cfg.bpm/2, ch = cfg.chords[Math.floor(s/8) % 4];
     if(s % 8 === 0) ch.forEach(m => { tone(mtof(m), t, beat*8.6, 'sine', .04, 1.2); tone(mtof(m)*1.004, t, beat*8.6, 'triangle', .016, 1.5); });
     if(mode === 'zombie'){
       if(s % 2 === 0) tone(55, t, beat*1.1, 'sine', .18, .004);                  // pulsation rapide
       if(s % 4 === 2) tone(mtof(ch[0]-24), t, beat*.8, 'sawtooth', .05, .004);
       tone(mtof(ch[(s>>1) % 4]-12), t, beat*.6, 'square', .018, .004);             // arpège grinçant (0.1.7a : plus de sifflement aigu)
+    } else if(mode === 'fest'){                       // menu des succès : basse qui rebondit, accords sur le contretemps, petite mélodie
+      if(s % 2 === 0) tone(mtof(ch[0] - 12), t, beat*.9, 'triangle', .1, .005);
+      else ch.slice(1).forEach(m => tone(mtof(m), t, beat*.45, 'square', .009, .004));
+      if(s % 4 === 2) tone(mtof(ch[0]), t, beat*.5, 'triangle', .04, .004);
+      if(Math.random() < .5) tone(mtof(pick(cfg.mel)), t, beat*1.4, 'triangle', .045, .005);
+      if(s % 16 === 0) [0, 1, 2].forEach(i => tone(mtof(ch[i] + 12), t + i*beat*.25, beat*2, 'sine', .03, .005));
     } else if(mode === 'tense'){
       if(s % 4 === 0){ tone(62, t, beat*1.4, 'sine', .16, .005); tone(mtof(ch[0]-24), t, beat*1.2, 'triangle', .06, .005); }   // battement de cœur
       tone(mtof(ch[0]-12), t, beat*.9, 'triangle', .07, .01);                       // basse qui martèle
@@ -3490,7 +3607,7 @@ const music = (() => {
   }
   function tick(){
     if(!ctx) return;
-    while(next < ctx.currentTime + .4){ play(step, next); next += 60/(mode === 'zombie' ? ZOMB : mode === 'tense' ? TENSE : CALM).bpm/2; step++; }
+    while(next < ctx.currentTime + .4){ play(step, next); next += 60/cfgOf(mode).bpm/2; step++; }
   }
   function stop(){ if(timer){ clearInterval(timer); timer = null; } }
   function ensure(){
@@ -3498,12 +3615,12 @@ const music = (() => {
     if(timer) return;
     ctx = sfx.ctx(); if(!ctx) return;
     if(!out){ out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200; lp.connect(out); out.connect(ctx.destination); }
-    out.gain.value = vol * (mode !== 'calm' ? TENSE_VOL : 1); next = ctx.currentTime + .15; timer = setInterval(tick, 120);
+    out.gain.value = vol * volOf(mode); next = ctx.currentTime + .15; timer = setInterval(tick, 120);
   }
   document.addEventListener('visibilitychange', () => { if(document.hidden) stop(); else if(ctx) ensure(); });
   return {
     ensure, stop,
-    setVolume(v){ vol = v; if(out) out.gain.value = v * (mode !== 'calm' ? TENSE_VOL : 1); if(ctx) ensure(); },
+    setVolume(v){ vol = v; if(out) out.gain.value = v * volOf(mode); if(ctx) ensure(); },
     setOn(b){ on = b; if(ctx) ensure(); },
     setMode(m){
       if(m === mode) return;
@@ -3511,9 +3628,9 @@ const music = (() => {
       if(!lp || !ctx) return;
       const old = lp, oldOut = out, now = ctx.currentTime;          // coupe net les notes en cours, puis repart tout de suite dans le nouveau mode
       oldOut.gain.setTargetAtTime(.0001, now, .08); setTimeout(() => { try{ old.disconnect(); oldOut.disconnect(); }catch(e){} }, 600);
-      out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = m === 'zombie' ? 1400 : m === 'tense' ? 1600 : 2200;
+      out = ctx.createGain(); lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = m === 'zombie' ? 1400 : m === 'tense' ? 1600 : m === 'fest' ? 2600 : 2200;
       lp.connect(out); out.connect(ctx.destination);
-      out.gain.setValueAtTime(.0001, now); out.gain.linearRampToValueAtTime(vol * (m !== 'calm' ? TENSE_VOL : 1), now + .35);
+      out.gain.setValueAtTime(.0001, now); out.gain.linearRampToValueAtTime(vol * volOf(m), now + .35);
       next = now + .2;
     }
   };
@@ -4079,8 +4196,8 @@ function zombify(p, day){                             // devient zombie (même s
 }
 const zProtTxt = p => p.vaccinated ? t('vaccinated', p) : t('zprot_until', p, yearOf(p.zvacUntil));
 const zProtected = (p, day = S.t) => !!(p.vaccinated || (p.zvacUntil != null && day < p.zvacUntil));   // vaccin ou antidote : 20 ans de protection
-function zombieSpread(day){                           // chaque mois : 2 % par an et par voisin généalogique (parents, enfants, conjoints), morts compris
-  const pr = 1 - Math.pow(1 - .02, 1/12), all = Object.values(S.people), kids = new Map();
+function zombieSpread(day){                           // chaque mois : 2 à 6,5 % par an (selon la difficulté) et par voisin généalogique (parents, enfants, conjoints), morts compris
+  const pr = 1 - Math.pow(1 - (S.zombie.rate || .02), 1/12), all = Object.values(S.people), kids = new Map();
   for(const c of all) if(c.parents) for(const i of c.parents){ if(!kids.has(i)) kids.set(i, []); kids.get(i).push(c); }
   const hit = new Set();
   for(const z of all){
@@ -4099,7 +4216,9 @@ function processDay(day){
   if(S.zombie && S.zombie.began && day % 30 === 0) zombieSpread(day);
   while(S.worldIdx >= 0 && S.worldIdx < WORLD.length && WORLD[S.worldIdx].day <= day){ log('world','world',[S.worldIdx], WORLD[S.worldIdx].day); S.worldIdx++; }
   if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100');
-    if(S.zombie && S.startYear === 1780 && !S.zombieLost && living().some(p => !p.zombie && inFamily(p))) unlock('z1780'); genRace(); S.end2100 = 1; log('world','y2100',[],day); }
+    if(S.zombie && S.startYear === 1780 && !S.zombieLost && living().some(p => !p.zombie && inFamily(p))) unlock('z1780');
+    if(S.zombie && S.zombie.diff && S.startYear <= 1780 && !S.zombieLost && living().some(p => !p.zombie && inFamily(p))) unlock('zd_' + S.zombie.diff);   // succès Zombie par difficulté
+    genRace(); S.end2100 = 1; log('world','y2100',[],day); }
   const wi = warIndexAt(day), prevWar = S.warIdx ?? -1;
   if(wi !== prevWar){
     if(prevWar >= 0) log('world','war_end',[prevWar],day);
@@ -4197,7 +4316,7 @@ function vsMakeAI(cfg, day, rule){                     // le premier personnage 
     planInterests(p, day); setupWork(p, day);
     S.activeId = S.founderId = p.id;
     log('info','start',[p.id, p.lastAge], day);
-    if(cfg.mode === 'zombie') S.zombie = {firstAt: day + Math.round(60*365.25), began:false};
+    if(cfg.mode === 'zombie') S.zombie = {firstAt: day + Math.round(60*365.25), began:false, diff: zDiff, rate: ZRATE[zDiff]};   // même difficulté que le joueur
     if(cfg.mode === 'royal'){ S.royal = {rule: rule === 'matri' ? 'both' : (rule || 'patri'), king:p.id, lost:false}; crown(p, day, true); }
     scheduleYear(p, p.lastAge, day);
     return S;
@@ -4316,6 +4435,7 @@ function openVsEnd(kind){                              // 2100 (ou l'IA élimin�
   V.done = true; V.result = res;
   const reward = res === 'win' ? (V.mode === 'zombie' ? VS_REWARD_Z : VS_REWARD[V.diff]) : 0;   // victoire : des Cyn selon la difficulté (900 en Zombie)
   if(reward){ CYN += reward; store.set(CYN_KEY, String(CYN)); cynPend += reward; cynShow(); V.reward = reward; a.cyn = CYN; }
+  if(res === 'win') unlock('vs_' + {normal:'n', royal:'r', zombie:'z'}[V.mode] + '_' + V.diff);   // succès Versus
   if(res === 'win'){ sfx.fame(); burst(['#ffd000','#ffffff','#74e600','#3fd0ff'], 60); } else if(res === 'lose') sfx.sad(); else sfx.pop();
   openModal(`<div class="m-head"><div class="eyebrow">${t('lab_vs')} · ${t('vs_g_' + V.goal)} · ${fmt(S.t)}</div><h2>${t('vs_res_' + res)}</h2><p>${esc(note)}</p>${reward ? `<span class="vsreward">${icon('dna')}${esc(t('vs_reward', cynFmt(reward)))}</span>` : ''}</div>
     ${vsTable(a, b, V)}
@@ -4351,7 +4471,6 @@ function aiApplyZoom(){
   aiPadX = Math.round(Math.max(240, sc.clientWidth * .75)); aiPadY = Math.round(Math.max(200, sc.clientHeight * .7));
   cv.style.transform = `scale(${aiZoom})`; cv.style.left = aiPadX + 'px'; cv.style.top = aiPadY + 'px';
   sz.style.width = (aiW * aiZoom + aiPadX * 2) + 'px'; sz.style.height = (aiH * aiZoom + aiPadY * 2) + 'px';
-  $('#aiZoomPct').textContent = Math.round(aiZoom * 100) + '%';
 }
 function setAiZoom(z, cx, cy){
   const sc = $('#aiScroll');
@@ -4413,7 +4532,7 @@ addEventListener('resize', () => { if(S && S.vs && !$('#game').hidden) renderAi(
 let lastTick = performance.now(), pointerHeld = false, musicTick = 0, renderGap = 180;
 setInterval(() => {                                // musique du criminel tant qu'un criminel révélé est libre (en prison, il n'est plus un danger)
   const on = S && !$('#game').hidden;
-  music.setMode(on && S.zombie && S.zombie.began ? 'zombie' : on && living().some(p => p.crim && p.crim.declared && !jailed(p)) ? 'tense' : 'calm');
+  music.setMode(achOpen ? 'fest' : on && S.zombie && S.zombie.began ? 'zombie' : on && living().some(p => p.crim && p.crim.declared && !jailed(p)) ? 'tense' : 'calm');
   if(on){ albumScan(); royalHeirWatch(); }
 }, 1000);
 document.addEventListener('pointerdown', () => { pointerHeld = true; }, true);
@@ -4467,7 +4586,7 @@ function zombieAmbiance(){                             // l'écran verdit et se 
   });
 }
 function zombieHud(){                                  // compte à rebours avant le premier zombie, puis zombies / humains
-  zombieAmbiance();
+  zombieAmbiance(); aiZombieHud();
   const box = $('#zBox'); if(!box) return;
   if(!S || !S.zombie){ box.hidden = true; return; }
   box.hidden = false;
@@ -4478,6 +4597,21 @@ function zombieHud(){                                  // compte à rebours avan
   } else {
     const fam = living().filter(p => inFamily(p)), z = fam.filter(p => p.zombie).length, h = fam.length - z;
     $('#zTxt').textContent = t('z_status', z, h); $('#zFill').style.width = (fam.length ? z / fam.length * 100 : 100).toFixed(1) + '%'; box.classList.add('out');
+  }
+}
+function aiZombieHud(){                               // Versus : le même compteur pour la famille de l'IA
+  const ab = $('#aiZBox'), A = S && S.vs && S.vs.ai;
+  if(!ab) return;
+  if(!A || !A.zombie){ ab.hidden = true; return; }
+  ab.hidden = false;
+  if(!A.zombie.began){
+    const rem = Math.max(0, (A.zombie.firstAt - S.t) / 365.25);
+    $('#aiZTxt').textContent = t('z_count', rem.toFixed(1).replace('.', LANG === 'fr' ? ',' : '.'));
+    $('#aiZFill').style.width = (rem / 60 * 100).toFixed(1) + '%'; ab.classList.remove('out');
+  } else {
+    const me = S; S = A; let z = 0, n = 0;
+    try{ for(const p of living()) if(inFamily(p)){ n++; if(p.zombie) z++; } } finally { S = me; }
+    $('#aiZTxt').textContent = t('z_status', z, n - z); $('#aiZFill').style.width = (n ? z / n * 100 : 100).toFixed(1) + '%'; ab.classList.add('out');
   }
 }
 function updateClock(){
@@ -4662,7 +4796,6 @@ function applyZoom(){
   padX = Math.round(Math.max(240, sc.clientWidth * .75)); padY = Math.round(Math.max(200, sc.clientHeight * .7));
   cv.style.transform = `scale(${zoom})`; cv.style.left = padX + 'px'; cv.style.top = padY + 'px';
   sz.style.width = (treeW*zoom + padX*2) + 'px'; sz.style.height = (treeH*zoom + padY*2) + 'px';
-  $('#zoomPct').textContent = Math.round(zoom*100) + '%';
 }
 function setZoom(z, cx, cy){
   const sc = $('#treeScroll');
@@ -4742,7 +4875,8 @@ function renderControls(){
   b.innerHTML = S.paused ? '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>' : '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
   b.setAttribute('aria-label', t(S.paused ? 'play' : 'pause'));
   b.classList.toggle('lime', S.paused);
-  $$('#speeds button').forEach(x => x.setAttribute('aria-pressed', String(+x.dataset.v === S.speed)));
+  if(S.vs && S.speed > 2) S.speed = 2;                // Versus : vitesse ×4 interdite
+  $$('#speeds button').forEach(x => { x.hidden = !!S.vs && +x.dataset.v > 2; x.setAttribute('aria-pressed', String(+x.dataset.v === S.speed)); });
   $('#speeds').setAttribute('aria-label', t('speed'));
   $$('#speeds button')[0].textContent = LANG==='fr' ? '×0,25' : '×0.25';
   $$('#speeds button')[1].textContent = LANG==='fr' ? '×0,5' : '×0.5';
@@ -4812,7 +4946,7 @@ function setView(v){
   const sw = $('#viewSw'); sw.hidden = !SET.map;
   sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === curView)));
   $('#treeScroll').hidden = curView !== 'tree'; $('#mapView').hidden = curView !== 'map';
-  $('.tree-head .zoomer').hidden = curView !== 'tree'; $('.tree-head [data-act="center"]').hidden = curView !== 'tree';
+  $('.tree-head [data-act="center"]').hidden = curView !== 'tree';
   if(curView === 'map') renderMap(); else if(S) renderTree();
 }
 function buildMap(){
@@ -4988,7 +5122,7 @@ function runFx(){
 
 /* ================= Modales ================= */
 function openModal(html, {locked=false, sound=true} = {}){
-  const m = $('#modal');
+  const m = $('#modal'); m.classList.remove('wide'); achOpen = false;
   m.innerHTML = (locked ? '' : '<button class="gel round ghost x" data-act="close" aria-label="×"><svg viewBox="0 0 24 24"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7l-1.4-1.4L9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>') + html;
   const wasOpen = modalOpen;
   $('#overlay').hidden = false; modalOpen = true; modalLocked = locked;
@@ -4997,7 +5131,7 @@ function openModal(html, {locked=false, sound=true} = {}){
 }
 function closeModal(force){
   if(modalLocked && !force) return;
-  $('#overlay').hidden = true; $('#modal').innerHTML = ''; modalOpen = false; modalLocked = false; namingId = null;
+  $('#overlay').hidden = true; $('#modal').innerHTML = ''; $('#modal').classList.remove('wide'); achOpen = false; modalOpen = false; modalLocked = false; namingId = null;
   if(S && dirty && !$('#game').hidden) render();
   updateClock();
 }
@@ -5487,7 +5621,7 @@ function openAutoWarn(){                              // avant d'activer le mode
     <span class="aw-ic">${icon('robot')}</span><h2>${t('aw_title')}</h2><p class="aw-lead">${t('aw_lead')}</p>
     <div class="aw-box"><span class="aw-cyn">${icon('dna')}</span><span><b>${t('aw_box_t')}</b><small>${t('aw_box')}</small></span></div>
     <label class="aw-check"><input type="checkbox" id="autoNoMore"><span>${t('aw_nomore')}</span></label>
-    <div class="aw-actions"><button class="gel ghost" data-act="close"><span>${t('aw_cancel')}</span></button><button class="gel lime" data-act="autook"><span>${t('aw_ok')}</span></button></div></div>`, {locked:true});
+    <div class="aw-actions"><button class="gel ghost" data-act="awcancel"><span>${t('aw_cancel')}</span></button><button class="gel lime" data-act="autook"><span>${t('aw_ok')}</span></button></div></div>`, {locked:true});
 }
 function openReigns(){                                // mode Royal : la liste de tous les monarques
   if(!S || !S.royal) return;
@@ -5592,7 +5726,7 @@ document.addEventListener('change', e => {        // âge préféré : nouvelles
 /* ================= Actions ================= */
 const ACT = {
   pause(){ S.paused = !S.paused; renderControls(); },
-  speed(d){ S.speed = +d.v; renderControls(); },
+  speed(d){ if(S.vs && +d.v > 2) return; S.speed = +d.v; renderControls(); },
   lang(d){ const wasOpen = modalOpen && $('#modal .setlist'); setLang(d.v); if(wasOpen) openSettings(true); },
   settings(){ openSettings(false); },
   custom(){ openCustom(false); },
@@ -5600,6 +5734,7 @@ const ACT = {
   legal(d){ R.legal = +d.v; saveRules(); dirty = true; openCustom(true); },
   resetrules(){ R = Object.assign({}, RULES_DEF); saveRules(); dirty = true; sfx.pop(); openCustom(true); },
   shop(){ openShop(false); },
+  zpick(d){ zDiff = d.v; zSetup(); },
   rulepick(d){ const s2 = $('#fRule'); s2.value = d.v; s2.dispatchEvent(new Event('change')); },
   tuto(d){ if(d.v === 'yes') startTuto(); else { store.set(TUTO_KEY, 'skip'); closeModal(true); } },
   tnext(){ const n = t('tuto_steps').length; if(tutoI >= n - 1) endTuto(); else tutoShow(tutoI + 1); },
@@ -5669,6 +5804,8 @@ const ACT = {
     closeModal(); render(); save();
   },
   fiche(d){ openFiche(+d.id); },
+  achjump(d){ const el = document.getElementById('achsec-' + d.v), m = $('#modal'), nav = $('#modal .achnav');   // défile dans la fenêtre seulement
+    if(el) m.scrollTo({top: el.offsetTop - (nav ? nav.offsetHeight : 0) - 8, behavior: reduced ? 'auto' : 'smooth'}); },
   vsmenu(){ vsDraft = Object.assign({mode:'normal', diff:'std', goal:'speed'}, VS_CFG || {}); openVsMenu(false); },
   vsset(d){ vsDraft[d.k] = d.v; if(d.k === 'mode' && !VS_GOALS[d.v].includes(vsDraft.goal)) vsDraft.goal = VS_GOALS[d.v][0]; openVsMenu(true); },
   vsok(){ VS_CFG = Object.assign({}, vsDraft); closeModal(true); vsSetup(); sfx.pop(); },
@@ -5730,6 +5867,7 @@ const ACT = {
   mtab(d){ setMobileTab(d.v); },
   mapzoom(d){ const v = +d.v; if(v === 0){ mz = {z:1, x:0, y:0}; applyMapZoom(); } else setMapZoom(mz.z * (v > 0 ? 1.5 : 1/1.5)); },
   auto(){ if(!S.auto && !store.get(AUTOWARN_KEY)) return openAutoWarn(); toggleAuto(); },
+  awcancel(){ closeModal(true); },
   autook(){ if($('#autoNoMore') && $('#autoNoMore').checked) store.set(AUTOWARN_KEY, '1'); closeModal(true); if(!S.auto) toggleAuto(); },
   reigns(){ openReigns(); },
   zoom(d){ const v = +d.v; if(v === 0) fitZoom(); else setZoom(zoom * (v > 0 ? 1.25 : 0.8)); },
@@ -5841,6 +5979,15 @@ function royalSetup(){                                // mode Royal : le premier
 $('#fRoyal').addEventListener('change', () => { if($('#fRoyal').checked && $('#fZombie').checked){ $('#fZombie').checked = false; } });   // un seul mode spécial à la fois
 $('#fZombie').addEventListener('change', () => { if($('#fZombie').checked && $('#fRoyal').checked){ $('#fRoyal').checked = false; royalSetup(); } });
 
+/* Mode Zombie : la difficulté règle la vitesse de propagation */
+const ZRATE = {easy:.02, med:.03, hard:.044, ext:.065};
+let zDiff = 'med';
+function zSetup(){
+  $('#fZBox').hidden = !$('#fZombie').checked;
+  $$('#fZBox [data-act="zpick"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === zDiff)));
+  $('#fZHint').textContent = t('zd_hint', String(Math.round(ZRATE[zDiff] * 1000) / 10).replace('.', LANG === 'fr' ? ',' : '.'));
+}
+$('#fZombie').addEventListener('change', zSetup); $('#fRoyal').addEventListener('change', zSetup);
 /* Versus : un menu pour le mode, la difficulté et l'objectif ; ensuite on crée son personnage comme d'habitude */
 let VS_CFG = null, vsDraft = null;
 function vsSetup(){                                   // 1780 imposé, mode imposé, pas de destin de départ
@@ -5849,7 +5996,7 @@ function vsSetup(){                                   // 1780 imposé, mode impo
   fStart.disabled = on; $('#fRoyal').disabled = on; $('#fZombie').disabled = on; $('#fDestiny').disabled = on;
   if(!on) return;
   if(+fStart.value !== 1780){ fStart.value = 1780; fStart.dispatchEvent(new Event('input')); }
-  $('#fRoyal').checked = VS_CFG.mode === 'royal'; $('#fZombie').checked = VS_CFG.mode === 'zombie';
+  $('#fRoyal').checked = VS_CFG.mode === 'royal'; $('#fZombie').checked = VS_CFG.mode === 'zombie'; zSetup();
   $('#fDestiny').value = 'none'; setupNote(); royalSetup();
   $('#fVsSum').textContent = t('vs_sum', t('vs_m_' + VS_CFG.mode), t('vs_d_' + VS_CFG.diff), t('vs_g_' + VS_CFG.goal));
 }
@@ -5861,7 +6008,7 @@ function openVsMenu(re){
       <span class="lab">${t('vs_mode')}</span>
       <div class="pills vsmodes" role="group">${['normal','royal','zombie'].map(m => `<button type="button" data-act="vsset" data-k="mode" data-v="${m}" aria-pressed="${d.mode === m}">${t('vs_m_' + m)}</button>`).join('')}</div>
       <span class="lab">${t('vs_diff')}</span>
-      <div class="vsopts">${['easy','std','hard','ext'].map(x => opt('diff', x, t('vs_d_' + x), t('vs_d_' + x + '_h'))).join('')}</div>
+      <div class="vsopts">${['easy','std','hard','ext'].map(x => opt('diff', x, t('vs_d_' + x), t('vs_d_' + x + '_h') + (d.mode !== 'zombie' ? ' ' + t('vs_win_cyn', cynFmt(VS_REWARD[x])) : ''))).join('')}</div>
       <span class="lab">${t('vs_goal')}</span>
       <div class="vsopts">${VS_GOALS[d.mode].map(x => opt('goal', x, t('vs_g_' + x), t('vs_g_' + x + '_h'))).join('')}</div>
       <p class="hint">${t('vs_1780')}</p>
@@ -5943,7 +6090,7 @@ $('#setupForm').addEventListener('submit', e => {
   S.activeId = S.founderId = p.id;
   S.familyAuto = $('#fFam').checked;
   log('info','start',[p.id, p.lastAge], day);
-  if($('#fZombie').checked) S.zombie = {firstAt: day + Math.round(60*365.25), began:false};   // mode Zombie : le premier zombie dans 60 ans
+  if($('#fZombie').checked) S.zombie = {firstAt: day + Math.round(60*365.25), began:false, diff: zDiff, rate: ZRATE[zDiff]};   // mode Zombie : le premier zombie dans 60 ans
   if($('#fRoyal').checked){                             // mode Royal
     S.royal = {rule: $('#fRule').value || 'patri', king: p.id, lost:false};
     if(S.royal.rule !== 'both') p.sex = S.royal.rule === 'patri' ? 'M' : 'F';
@@ -5964,7 +6111,7 @@ function showSetup(){
     box.innerHTML = `<p>${t('resume_txt', esc(f.maiden || f.last), fmt(saved.t), esc(a.first+' '+a.last))}</p><button class="gel lime" data-act="resume"><span>${t('resume')}</span></button>`;
     box.hidden = false;
   } else box.hidden = true;
-  vsSetup();
+  vsSetup(); zSetup();
 }
 function enterGame(){
   $('#setup').hidden = true; $('#game').hidden = false;

@@ -2,6 +2,25 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.7f — 13 novembre 2026
+
+- Mode Zombie : 4 difficultés au départ, comme le sexe dominant du mode Royal : Facile (2 % de propagation par an), Moyen (3 %, par défaut), Dur (4,4 %) et Extrême (6,5 %). En Versus Zombie, l'IA joue avec la même difficulté que toi.
+- Nouvelle catégorie de succès Zombie : finir une partie de 1780 à 2100 en Facile (bronze), Moyen (argent), Dur (or) et Extrême (platine).
+- Nouveau succès Légende « Maître du duel » : battre l'IA dans toutes les difficultés de tous les modes Versus.
+- 4 nouveaux centres d'intérêt : naturiste (depuis 1920), nudiste (depuis 1930), campeur (depuis 1910) et escaladeur (depuis 1890).
+- Correction : le bouton « Annuler » de la fenêtre du mode auto fonctionne.
+- Correction : le compteur de zombies de l'IA ne reste plus affiché dans un Versus Normal ou Royal après un Versus Zombie.
+- Succès : « Jeunes grands-parents » passe dans la catégorie Enfants.
+
+## v0.1.7e — 13 novembre 2026
+
+- 12 nouveaux succès Versus : gagner une partie en Normal, en Royal et en Zombie, à chaque difficulté (bronze, argent, or, platine). Ce sont les seuls succès possibles pendant un duel.
+- Menu des succès refait : progression globale, total par médaille, raccourcis vers chaque catégorie, catégories en cartes avec leur barre de progression, et succès en lignes plus lisibles. Et une musique de fête tant qu'il est ouvert !
+- Versus Zombie : les zombies de l'IA s'affichent enfin comme des zombies (ils existaient, mais leur bulle restait normale). Même correction pour les rois, reines, héritiers et nobles de l'IA.
+- Mode Zombie : nouveau son de contamination, plus mystérieux.
+- Versus : la vitesse ×4 est interdite. Dans le menu, la victoire à +900 Cyn est indiquée dans la Partie Classique.
+- Plus de boutons de zoom sur les arbres : la molette de la souris et le pincement des doigts suffisent.
+
 ## v0.1.7d — 13 novembre 2026
 
 - Versus : gagner en mode Zombie rapporte 900 Cyn, quelle que soit la difficulté.
