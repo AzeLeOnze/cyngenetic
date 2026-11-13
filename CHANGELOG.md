@@ -2,6 +2,15 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.0a — 13 novembre 2026
+
+- Nouveau : les voyageurs du temps ! Une particularité très rare (0,5 % des naissances, 20 % si un parent l'est). De 16 à 60 ans, une faille temporelle peut s'ouvrir chaque année : le voyageur disparaît dans le futur (de 8 à 90 ans plus tard) et réapparaît avec le même âge. Son couple prend fin, et il peut revenir plus jeune que ses propres petits-enfants.
+- Si c'est ton personnage, tu choisis : sauter ou rester. En sautant, le temps défile à toute vitesse pendant que la famille vit sa vie sans toi, puis tu découvres ce qui s'est passé pendant ton absence.
+- Boutique : la Montre temporelle (1 200 Cyn) fait de ton personnage un voyageur du temps. Depuis sa fiche, il peut sauter de 5 à 100 ans quand il le veut, une fois tous les 10 ans.
+- Dans l'arbre, les voyageurs ont un contour bleu en pointillés, et les personnes perdues dans le temps apparaissent en fantôme. Leur fiche indique leur date de retour.
+- 4 nouveaux succès dans la catégorie Voyage dans le temps : Premier saut, Plus jeune que ses petits-enfants, Bond de géant et Voyageur infatigable.
+- Mode Zombie : une personne perdue dans le temps ne peut pas être mordue. Les voyageurs n'existent pas en mode Royal, et la montre n'est pas disponible pendant un duel.
+
 ## v0.1.9d — 13 novembre 2026
 
 - Version PC : « Taille de l'interface » est remplacée par un choix de résolution (1280 × 720 à 3840 × 2160, selon ton écran). La fenêtre se redimensionne et se recentre, et garde ce réglage au prochain lancement. L'option n'apparaît pas sur téléphone ni dans le navigateur.

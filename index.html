@@ -1000,6 +1000,38 @@ body.zmode .treebox{position:relative}
 .journal time,.toast time{display:block;font:700 11px var(--font-display);color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .journal p,.toast p{margin:0;min-width:0}
 .k-birth{--dot:var(--lime)} .k-death{--dot:#5f7890} .k-love{--dot:var(--magenta)} .k-wed{--dot:var(--sun-deep)}
+.k-tt{--dot:#3fc6ff}
+.toast.k-tt{background:linear-gradient(180deg,#f0fcff,#b8ecff);border-color:#9fe2ff}
+:is(#treeCanvas,#aiCanvas) .node.chrono{outline:2px dashed rgba(40,170,255,.75);outline-offset:3px}
+:is(#treeCanvas,#aiCanvas) .node.tlost{opacity:.5;filter:saturate(.3) blur(.4px);outline:2px dotted rgba(40,170,255,.8);outline-offset:3px;animation:ttghost 3.2s ease-in-out infinite}
+@keyframes ttghost{50%{opacity:.32}}
+.ttline{color:#1677c9;font-weight:700}
+.ttbox{display:flex;align-items:center;gap:16px;margin:6px 0 14px}.ttbox p{margin:0;line-height:1.5}
+.tt-acts{display:grid;gap:10px}
+.ttwatch .reloc-row{display:flex;gap:8px;align-items:center}.ttwatch select{flex:1}.ttwatch .gel{flex:none;width:auto}
+.eyebrow.sect svg{width:14px;height:14px;vertical-align:-2px;fill:currentColor}
+#ttFx{position:fixed;inset:0;z-index:9000;display:grid;place-items:center;overflow:hidden;color:#fff;pointer-events:all;
+  background:radial-gradient(circle at 50% 50%,#effcff 0,#8fe6ff 14%,#2a9df0 40%,#0d3f9e 72%,#071a4d 100%);animation:ttin .5s ease both}
+#ttFx.out{animation:ttout .7s ease forwards}
+@keyframes ttin{from{opacity:0;transform:scale(1.08)}}
+@keyframes ttout{to{opacity:0;transform:scale(.92);filter:blur(6px)}}
+#ttFx .tt-rings i{position:absolute;left:50%;top:50%;width:60vmax;height:60vmax;margin:-30vmax 0 0 -30vmax;border-radius:50%;border:2px solid rgba(255,255,255,.55);
+  box-shadow:0 0 30px rgba(140,230,255,.6),inset 0 0 30px rgba(140,230,255,.4);animation:ttring 2.4s linear infinite;opacity:0}
+#ttFx .tt-rings i:nth-child(2){animation-delay:-.48s}#ttFx .tt-rings i:nth-child(3){animation-delay:-.96s}#ttFx .tt-rings i:nth-child(4){animation-delay:-1.44s}#ttFx .tt-rings i:nth-child(5){animation-delay:-1.92s}
+@keyframes ttring{0%{transform:scale(1.6);opacity:0}30%{opacity:.9}100%{transform:scale(.02);opacity:0}}
+#ttFx .tt-core{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:16px;max-width:560px}
+#ttFx .tt-clock{position:relative;width:150px;height:150px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),rgba(190,240,255,.55) 45%,rgba(60,160,240,.35) 70%);border:3px solid rgba(255,255,255,.85);
+  box-shadow:0 0 40px rgba(160,235,255,.9),inset 0 -10px 25px rgba(0,80,180,.35)}
+#ttFx .tt-clock .h,#ttFx .tt-clock .m{position:absolute;left:50%;bottom:50%;width:5px;margin-left:-2.5px;border-radius:3px;background:#0b4ea8;transform-origin:50% 100%;z-index:2}
+#ttFx .tt-clock .h{height:40px;animation:ttspin 2.2s linear infinite}#ttFx .tt-clock .m{height:60px;width:3px;margin-left:-1.5px;animation:ttspin .35s linear infinite}
+@keyframes ttspin{to{transform:rotate(360deg)}}
+#ttFx .tt-clock .orb{opacity:.55}
+#ttFx .tt-who{color:#e8fbff;text-shadow:0 1px 6px rgba(0,40,120,.6)}
+#ttFx .tt-year{font:800 clamp(56px,12vw,104px)/1 var(--font-display,sans-serif);letter-spacing:.02em;text-shadow:0 0 24px rgba(160,235,255,.95),0 4px 14px rgba(0,30,110,.6)}
+#ttFx .tt-bar{width:min(360px,80vw);height:10px;border-radius:6px;background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.6);overflow:hidden}
+#ttFx .tt-bar i{display:block;height:100%;background:linear-gradient(90deg,#e9fbff,#7fe3ff);box-shadow:0 0 12px #bff3ff}
+#ttFx .tt-log{min-height:2.8em;margin:4px 0 0;font-size:14px;color:#e8fbff;text-shadow:0 1px 4px rgba(0,30,110,.7)}
 .k-break{--dot:var(--violet)} .k-sad{--dot:#4a6cff} .k-world{--dot:var(--aqua)} .k-info{--dot:#9ab}
 .k-ill{--dot:var(--red)} .k-cure{--dot:#00d6a0} .k-star{--dot:#ffc400} .k-work{--dot:#62a8d8} .k-move{--dot:#7b9e3a}
 
@@ -1466,9 +1498,22 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.1.9d';
+const APP_VERSION = '0.2.0a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.0a', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
+   fr:['Nouveau : les voyageurs du temps ! Une particularité très rare (0,5 % des naissances, 20 % si un parent l\'est). De 16 à 60 ans, une faille temporelle peut s\'ouvrir chaque année : le voyageur disparaît dans le futur (de 8 à 90 ans plus tard) et réapparaît avec le même âge. Son couple prend fin, et il peut revenir plus jeune que ses propres petits-enfants.',
+       'Si c\'est ton personnage, tu choisis : sauter ou rester. En sautant, le temps défile à toute vitesse pendant que la famille vit sa vie sans toi, puis tu découvres ce qui s\'est passé pendant ton absence.',
+       'Boutique : la Montre temporelle (1 200 Cyn) fait de ton personnage un voyageur du temps. Depuis sa fiche, il peut sauter de 5 à 100 ans quand il le veut, une fois tous les 10 ans.',
+       'Dans l\'arbre, les voyageurs ont un contour bleu en pointillés, et les personnes perdues dans le temps apparaissent en fantôme. Leur fiche indique leur date de retour.',
+       '4 nouveaux succès dans la catégorie Voyage dans le temps : Premier saut, Plus jeune que ses petits-enfants, Bond de géant et Voyageur infatigable.',
+       'Mode Zombie : une personne perdue dans le temps ne peut pas être mordue. Les voyageurs n\'existent pas en mode Royal, et la montre n\'est pas disponible pendant un duel.'],
+   en:['New: time travellers! A very rare trait (0.5% of births, 20% if a parent has it). From 16 to 60, a time rift can open each year: the traveller vanishes into the future (8 to 90 years later) and reappears at the same age. Their relationship ends, and they can come back younger than their own grandchildren.',
+       'If it\'s your character, you choose: leap or stay. When you leap, time races by while the family lives on without you, then you find out what happened while you were gone.',
+       'Shop: the Time watch (1,200 Cyn) makes your character a time traveller. From their card, they can leap 5 to 100 years whenever they want, once every 10 years.',
+       'In the tree, travellers have a dotted blue outline, and people lost in time appear as ghosts. Their card shows when they\'ll be back.',
+       '4 new achievements in the Time travel category: First leap, Younger than the grandkids, Giant leap and Tireless traveller.',
+       'Zombie mode: someone lost in time can\'t be bitten. Time travellers don\'t exist in Royal mode, and the watch isn\'t available during a duel.']},
   {v:'0.1.9d', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
    fr:['Version PC : « Taille de l\'interface » est remplacée par un choix de résolution (1280 × 720 à 3840 × 2160, selon ton écran). La fenêtre se redimensionne et se recentre, et garde ce réglage au prochain lancement. L\'option n\'apparaît pas sur téléphone ni dans le navigateur.',
        'Le thème Dark demande maintenant 50 meurtres commis par des criminels (toutes parties confondues), avec le compteur affiché (par exemple 32/50).',
@@ -2286,7 +2331,7 @@ const CONDS = [
  ['maniaque','Maniaque','Maniaque','Fastidious','sparkle'],['borderline','Borderline','Borderline','Borderline','brain'],
  ['pmr','Personne à mobilité réduite','Personne à mobilité réduite','Reduced mobility','user'],['psychopathe','Psychopathe','Psychopathe','Psychopath','brain'],
  ['diogene','Syndrome de Diogène','Syndrome de Diogène','Diogenes syndrome','puzzle'],
- ['delirant','Trouble délirant','Trouble délirant','Delusional disorder','brain'],['oniomanie','Oniomanie','Oniomanie','Compulsive buying disorder','bag',1900],
+ ['delirant','Trouble délirant','Trouble délirant','Delusional disorder','brain'],['voyageur','Voyageur du temps','Voyageuse du temps','Time traveller','clock'],['oniomanie','Oniomanie','Oniomanie','Compulsive buying disorder','bag',1900],
  ['tdi','TDI','TDI','Dissociative identity disorder','user',1880],['alice',"Syndrome d'Alice au pays des merveilles","Syndrome d'Alice au pays des merveilles",'Alice in Wonderland syndrome','eyeoff',1955],
  ['cotard','Syndrome de Cotard','Syndrome de Cotard','Cotard syndrome','skull',1880],['capgras','Syndrome de Capgras','Syndrome de Capgras','Capgras syndrome','user',1923],
  ['peterpan','Syndrome de Peter Pan','Syndrome de Peter Pan','Peter Pan syndrome','rocket',1983],['persoprinc','Syndrome du personnage principal','Syndrome du personnage principal','Main character syndrome','film',2005]
@@ -2424,8 +2469,9 @@ const rollAddictions = (p, day) => { const a = rollAddiction(p, day), b = a ? ro
 /* 4 % de chances d'avoir une particularité ; 13 % d'hériter de celle d'un parent */
 function rollConds(parents, y){
   const out = [], inherited = new Set(parents.flatMap(p => p.conds || []));
-  for(const id of inherited) if(Math.random() < R.inherit/100) out.push(id);
-  if(!out.length && Math.random() < R.conds/100) out.push(pick(CONDS.filter(r => !r[5] || !y || y >= r[5]))[0]);   // certaines n'existent qu'à partir d'une année
+  for(const id of inherited) if(id !== 'voyageur' && Math.random() < R.inherit/100) out.push(id);
+  if(!out.length && Math.random() < R.conds/100) out.push(pick(CONDS.filter(r => r[0] !== 'voyageur' && (!r[5] || !y || y >= r[5])))[0]);   // certaines n'existent qu'à partir d'une année
+  if(!royalOn() && Math.random() < (inherited.has('voyageur') ? .2 : .005)) out.push('voyageur');   // 0.2.0a : voyageur du temps (0,5 % ; 20 % si un parent l'est)
   return out;
 }
 const inRange = (r,y) => y >= r[5] && y <= r[6];
@@ -2751,6 +2797,7 @@ const ICONS = {
   chip:'<path d="M8 8h8v8H8zM9 2h2v4H9zm4 0h2v4h-2zM9 18h2v4H9zm4 0h2v4h-2zM2 9h4v2H2zm0 4h4v2H2zm16-4h4v2h-4zm0 4h4v2h-4zM6 6h12v12H6z" opacity=".95"/>',
   leaf:'<path d="M20 4C9 4 4 9 4 16c0 1.5.3 2.8.8 4l1.7-1.7C8 13 11 10 16 8c-4 3-7 6-8.5 11.2.9.5 2.9.8 4.5.8 7 0 8-8 8-16z"/>',
   moon:'<path d="M15 3a9 9 0 1 0 6 15A8 8 0 0 1 15 3z"/>',
+  clock:'<path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 2.2a7.8 7.8 0 1 0 0 15.6 7.8 7.8 0 0 0 0-15.6zM11 6.5h2v5l3.6 2.1-1 1.7L11 12.6z"/>',
   robot:'<path fill-rule="evenodd" d="M11 2h2v3h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4zM9 9a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-6 5v1.5h6V14zM2 9h2v5H2zm18 0h2v5h-2zM8 19h3v3H8zm5 0h3v3h-3z"/>',
   wave:'<path d="M2 14c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2v3c-2.5 0-2.5-2-5-2s-2.5 2-5 2-2.5-2-5-2-2.5 2-5 2zm0-6c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2v3c-2.5 0-2.5-2-5-2s-2.5 2-5 2-2.5-2-5-2-2.5 2-5 2z"/>',
   planet:'<circle cx="12" cy="12" r="6"/><ellipse cx="12" cy="12" rx="11" ry="3.5" fill="none" stroke="#fff" stroke-width="1.8" transform="rotate(-20 12 12)"/>',
@@ -2907,6 +2954,26 @@ fr:{
   city_alive:(p,b,c)=> b===c ? `${g(p,'Né','Née')} à ${c}, y vit toujours` : `${g(p,'Né','Née')} à ${b}, vit à ${c}`,
   city_dead:(p,b,c)=> b===c ? `${g(p,'Né','Née')} et ${g(p,'mort','morte')} à ${c}` : `${g(p,'Né','Née')} à ${b}, ${g(p,'mort','morte')} à ${c}`,
   couple_life:'Vie de couple', ul_married:(q,d)=>`Mariage avec ${q} le ${d}`, ul_dating:(q,y)=>`En couple avec ${q} dès ${y}`,
+  act_lost:p=>g(p,'Perdu dans le temps','Perdue dans le temps'),
+  fiche_lost:(p,a,b)=>`⌛ ${g(p,'Perdu','Perdue')} dans le temps depuis ${a} · réapparaîtra en ${b}`,
+  fiche_tt:(n,tot)=>`⌛ ${n} saut${n>1?'s':''} dans le temps · ${tot} ans franchis`,
+  log_tt_go:(p,n,y)=>`⌛ ${nm(p)} disparaît dans une faille temporelle… ${g(p,'Il','Elle')} ne reviendra qu'en ${y}.`,
+  log_tt_back:(p,y)=>`⌛ ${nm(p)} réapparaît sans avoir vieilli d'un jour depuis ${y} !`,
+  log_tt_stay:p=>`${nm(p)} laisse la faille temporelle se refermer.`,
+  log_tt_watch:p=>`${nm(p)} reçoit une montre temporelle : ${g(p,'il','elle')} peut maintenant voyager dans le temps.`,
+  tt_ask_eye:'Faille temporelle', tt_ask_title:'Le temps se déchire…',
+  tt_ask_txt:(p,n,y)=>`Le sol vibre sous les pieds de ${p.first} : une faille s'ouvre vers ${y}, ${n} ans dans le futur. En sautant, ${g(p,'il','elle')} arrivera en ${y} avec le même âge. Son couple prendra fin, et la famille vivra ces années sans ${g(p,'lui','elle')} (les prénoms seront choisis tout seuls).`,
+  tt_go_btn:n=>`Sauter de ${n} ans`, tt_stay:'Rester ici',
+  tt_ff:p=>`${p.first} voyage dans le temps…`,
+  tt_land_title:y=>`Bienvenue en ${y} !`,
+  tt_land_txt:(p,n,b,d)=>`${p.first} réapparaît ${n} ans plus tard, avec le même âge. Pendant son absence : ${b} naissance${b>1?'s':''} et ${d} décès dans la famille.`,
+  tt_land_ok:'Découvrir le futur',
+  tt_watch:'Montre temporelle', tt_watch_btn:'Sauter', tt_yrs:n=>`${n} ans`,
+  tt_watch_note:'Ton couple prendra fin, tu garderas ton âge, et la famille vivra ces années sans toi.',
+  tt_watch_cool:y=>`La montre se recharge : prête en ${y}.`, tt_watch_no:'Impossible de sauter pour le moment.',
+  shop_montre:'Montre temporelle', shop_montre_d:"Ton personnage devient voyageur du temps : il peut sauter dans le futur depuis sa fiche (une fois tous les 10 ans). Ses enfants ont 20 % de chances d'hériter du don.",
+  shop_tt_have:p=>`${p.first} voyage déjà dans le temps.`, shop_tt_royal:'La couronne ne peut pas attendre : pas de voyage dans le temps en mode Royal.', shop_tt_vs:'Pas disponible pendant un duel.',
+  ul_time:y=>`faille temporelle en ${y}`,
   ul_widow:y=>`veuvage en ${y}`, ul_until:y=>`jusqu'en ${y}`, ul_divorce:y=>`divorce en ${y}`, ul_split:y=>`séparation en ${y}`,
   children_n:n=>`Enfants (${n})`, our_couple:'Votre couple', make_baby:'Faire un enfant', adopt:'Adopter un enfant',
   note_baby:'5 % de risque de fausse couche. Naissance 9 mois plus tard.', note_adopt:"L'enfant arrive au foyer 9 mois plus tard.",
@@ -3176,6 +3243,26 @@ en:{
   city_alive:(p,b,c)=> b===c ? `Born in ${c}, still lives there` : `Born in ${b}, lives in ${c}`,
   city_dead:(p,b,c)=> b===c ? `Born and died in ${c}` : `Born in ${b}, died in ${c}`,
   couple_life:'Relationships', ul_married:(q,d)=>`Married ${q} on ${d}`, ul_dating:(q,y)=>`With ${q} since ${y}`,
+  act_lost:'Lost in time',
+  fiche_lost:(p,a,b)=>`⌛ Lost in time since ${a} · will reappear in ${b}`,
+  fiche_tt:(n,tot)=>`⌛ ${n} leap${n>1?'s':''} through time · ${tot} years skipped`,
+  log_tt_go:(p,n,y)=>`⌛ ${nm(p)} vanishes into a time rift… and won't be back until ${y}.`,
+  log_tt_back:(p,y)=>`⌛ ${nm(p)} reappears without having aged a day since ${y}!`,
+  log_tt_stay:p=>`${nm(p)} lets the time rift close.`,
+  log_tt_watch:p=>`${nm(p)} gets a time watch and can now travel through time.`,
+  tt_ask_eye:'Time rift', tt_ask_title:'Time is tearing apart…',
+  tt_ask_txt:(p,n,y)=>`The ground shakes under ${p.first}'s feet: a rift opens to ${y}, ${n} years into the future. Leaping means arriving in ${y} at the same age. The relationship will end, and the family will live those years without ${g(p,'him','her')} (names will be picked automatically).`,
+  tt_go_btn:n=>`Leap ${n} years`, tt_stay:'Stay here',
+  tt_ff:p=>`${p.first} is travelling through time…`,
+  tt_land_title:y=>`Welcome to ${y}!`,
+  tt_land_txt:(p,n,b,d)=>`${p.first} reappears ${n} years later, at the same age. Meanwhile: ${b} birth${b===1?'':'s'} and ${d} death${d===1?'':'s'} in the family.`,
+  tt_land_ok:'Discover the future',
+  tt_watch:'Time watch', tt_watch_btn:'Leap', tt_yrs:n=>`${n} years`,
+  tt_watch_note:'Your relationship will end, you keep your age, and the family lives those years without you.',
+  tt_watch_cool:y=>`The watch is recharging: ready in ${y}.`, tt_watch_no:"You can't leap right now.",
+  shop_montre:'Time watch', shop_montre_d:'Your character becomes a time traveller and can leap into the future from their card (once every 10 years). Their children have a 20% chance of inheriting the gift.',
+  shop_tt_have:p=>`${p.first} already travels through time.`, shop_tt_royal:"The crown can't wait: no time travel in Royal mode.", shop_tt_vs:'Not available during a duel.',
+  ul_time:y=>`time rift in ${y}`,
   ul_widow:y=>`widowed in ${y}`, ul_until:y=>`until ${y}`, ul_divorce:y=>`divorced in ${y}`, ul_split:y=>`split up in ${y}`,
   children_n:n=>`Children (${n})`, our_couple:'Your relationship', make_baby:'Have a baby', adopt:'Adopt a child',
   note_baby:'5% risk of miscarriage. Birth 9 months later.', note_adopt:'The child arrives home 9 months later.',
@@ -3444,6 +3531,26 @@ TX.de = {
   city_alive:(p,b,c)=> b===c ? `Geboren in ${c}, lebt immer noch dort` : `Geboren in ${b}, lebt in ${c}`,
   city_dead:(p,b,c)=> b===c ? `Geboren und gestorben in ${c}` : `Geboren in ${b}, gestorben in ${c}`,
   couple_life:'Beziehungen', ul_married:(q,d)=>`Heiratet ${q} am ${d}`, ul_dating:(q,y)=>`Mit ${q} seit ${y}`,
+  act_lost:'In der Zeit verschollen',
+  fiche_lost:(p,a,b)=>`⌛ Seit ${a} in der Zeit verschollen · taucht ${b} wieder auf`,
+  fiche_tt:(n,tot)=>`⌛ ${n} ${n>1?'Zeitsprünge':'Zeitsprung'} · ${tot} Jahre übersprungen`,
+  log_tt_go:(p,n,y)=>`⌛ ${nm(p)} verschwindet in einem Zeitriss… und kehrt erst ${y} zurück.`,
+  log_tt_back:(p,y)=>`⌛ ${nm(p)} taucht wieder auf, ohne seit ${y} einen Tag gealtert zu sein!`,
+  log_tt_stay:p=>`${nm(p)} lässt den Zeitriss sich schließen.`,
+  log_tt_watch:p=>`${nm(p)} erhält eine Zeituhr und kann jetzt durch die Zeit reisen.`,
+  tt_ask_eye:'Zeitriss', tt_ask_title:'Die Zeit zerreißt…',
+  tt_ask_txt:(p,n,y)=>`Der Boden bebt unter den Füßen von ${p.first}: Ein Riss öffnet sich nach ${y}, ${n} Jahre in die Zukunft. Mit dem Sprung kommt ${g(p,'er','sie')} ${y} im selben Alter an. Die Beziehung endet, und die Familie lebt diese Jahre ohne ${g(p,'ihn','sie')} (Vornamen werden automatisch gewählt).`,
+  tt_go_btn:n=>`${n} Jahre springen`, tt_stay:'Hierbleiben',
+  tt_ff:p=>`${p.first} reist durch die Zeit…`,
+  tt_land_title:y=>`Willkommen im Jahr ${y}!`,
+  tt_land_txt:(p,n,b,d)=>`${p.first} taucht ${n} Jahre später im selben Alter wieder auf. In der Zwischenzeit: ${b} ${b===1?'Geburt':'Geburten'} und ${d} ${d===1?'Todesfall':'Todesfälle'} in der Familie.`,
+  tt_land_ok:'Die Zukunft entdecken',
+  tt_watch:'Zeituhr', tt_watch_btn:'Springen', tt_yrs:n=>`${n} Jahre`,
+  tt_watch_note:'Deine Beziehung endet, du behältst dein Alter, und die Familie lebt diese Jahre ohne dich.',
+  tt_watch_cool:y=>`Die Uhr lädt sich auf: bereit ${y}.`, tt_watch_no:'Ein Sprung ist gerade nicht möglich.',
+  shop_montre:'Zeituhr', shop_montre_d:'Deine Figur wird zum Zeitreisenden und kann von ihrer Karte aus in die Zukunft springen (einmal alle 10 Jahre). Ihre Kinder erben die Gabe mit 20 % Wahrscheinlichkeit.',
+  shop_tt_have:p=>`${p.first} reist bereits durch die Zeit.`, shop_tt_royal:'Die Krone kann nicht warten: keine Zeitreisen im Royal-Modus.', shop_tt_vs:'Während eines Duells nicht verfügbar.',
+  ul_time:y=>`Zeitriss ${y}`,
   ul_widow:y=>`verwitwet ${y}`, ul_until:y=>`bis ${y}`, ul_divorce:y=>`geschieden ${y}`, ul_split:y=>`getrennt ${y}`,
   children_n:n=>`Kinder (${n})`, our_couple:'Eure Beziehung', make_baby:'Ein Baby bekommen', adopt:'Ein Kind adoptieren',
   note_baby:'5 % Risiko einer Fehlgeburt. Geburt 9 Monate später.', note_adopt:'Das Kind kommt 9 Monate später nach Hause.',
@@ -3762,7 +3869,7 @@ DEx.int = Object.fromEntries(Object.entries({naturiste:['Naturist'], nudiste:['F
   opera:['Opernliebhaber'], gospel:['Gospelsänger'], mangaka:['Hobby-Mangaka','Hobby-Mangaka'], sabreur:['Säbelfechter'], ultraverte:['Pflanzenflüsterer'],
   fantaisiste:['Spaßvogel','Spaßvogel'], jdr:['Pen-&-Paper-Fan','Pen-&-Paper-Fan'], jodel:['Jodler'], schwingen:['Schwinger'], ski:['Skifahrer'], cordesalpes:['Alphornbläser'], jass:['Jasser']
 }).map(([k, v]) => [k, deMF(v[0], v[1])]));
-DEx.cond = Object.fromEntries(Object.entries({schizo:'Schizophrenie', bipolaire:'Bipolare Störung', tdah:'ADHS', autisme:'Autismus', autisme_nv:'Nonverbaler Autismus',
+DEx.cond = Object.fromEntries(Object.entries({voyageur:['Zeitreisender','Zeitreisende'], schizo:'Schizophrenie', bipolaire:'Bipolare Störung', tdah:'ADHS', autisme:'Autismus', autisme_nv:'Nonverbaler Autismus',
   toc:'Zwangsstörung', tourette:'Tourette-Syndrom', anxiete:'Angststörung', dyslexie:'Legasthenie', sourd:['Gehörlos','Gehörlos'], aveugle:['Blind','Blind'], muet:['Stumm','Stumm'],
   epilepsie:['Epileptiker','Epileptikerin'], daltonien:['Farbenblind','Farbenblind'], trisomie:'Down-Syndrom', nanisme:'Kleinwuchs', gigantisme:'Riesenwuchs', begaiement:'Stottern',
   hpi:'Hochbegabt', monochrom:'Monochromasie', deprchron:'Chronische Depression', tsa:'Autismus-Spektrum-Störung', anxsoc:'Soziale Angst', cyclothymie:'Zyklothymie',
@@ -3827,9 +3934,10 @@ DEx.mild = {gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheum
   tendinite:'Sehnenentzündung', gastrite:'Gastritis', conjonctivite:'Bindehautentzündung', urticaire:'Chronischer Nesselausschlag', prediabete:'Prädiabetes',
   polyarthrite:'Rheumatoide Arthritis', acouphenes:'Tinnitus', endometriose:'Endometriose', glaucome:'Grüner Star', cholesterol:'Hoher Cholesterinspiegel',
   allergiesynth:'Allergie gegen synthetisches Protein', fatiguevr:'VR-Müdigkeit', dysgravite:'Dysgravitation', rejetimplant:'Abstoßung eines Neuroimplantats', covid:'Covid-19'};
-DEx.achcat = {age:'Alter', kids:'Kinder', star:'Stars', conq:'Eroberungen', crim:'Verbrecher', kill:'Verbrechen', time:'Die Zeit vergeht', other:'Sonstiges', album:'Album',
+DEx.achcat = {tt:'Zeitreisen', age:'Alter', kids:'Kinder', star:'Stars', conq:'Eroberungen', crim:'Verbrecher', kill:'Verbrechen', time:'Die Zeit vergeht', other:'Sonstiges', album:'Album',
   royal:'Königlich', zomb:'Zombie', vsn:'Versus Normal', vsr:'Versus Königlich', vsz:'Versus Zombie', legend:'Legende'};
-DEx.ach = {age100:['Hundertjährig','Ein Familienmitglied wird 100'], age110:['Superhundertjährig','Ein Familienmitglied wird 110'], age115:['Lebende Legende','Ein Familienmitglied wird 115'],
+DEx.ach = {tt_first:['Erster Sprung','Ein Familienmitglied springt durch die Zeit'], tt_young:['Jünger als die Enkel','Ein Zeitreisender kehrt jünger zurück als eines seiner Enkelkinder'],
+  tt_75:['Riesensprung','75 Jahre oder mehr auf einmal in die Zukunft springen'], tt_4:['Unermüdlicher Reisender','Dieselbe Person springt 4-mal durch die Zeit'], age100:['Hundertjährig','Ein Familienmitglied wird 100'], age110:['Superhundertjährig','Ein Familienmitglied wird 110'], age115:['Lebende Legende','Ein Familienmitglied wird 115'],
   age120:['Unsterblich?','Ein Familienmitglied wird 120'], kids6:['Großfamilie','Eine Person hat 6 Kinder'], kids9:['Sippe','Eine Person hat 9 Kinder'], kids14:['Clan','Eine Person hat 14 Kinder'],
   kids22:['Dynastie','Eine Person hat 22 Kinder'], star1:['Im Rampenlicht','2 Stars in einem Spiel'], star2:['Sternenregen','4 Stars in einem Spiel'], star4:['Sternbild','8 Stars in einem Spiel'],
   star6:['Milchstraße','12 Stars in einem Spiel'], conq3:['Flatterhaftes Herz','Eine Person hatte 3 Partner'], conq6:['Herzensbrecher','Eine Person hatte 6 Partner'],
@@ -4069,13 +4177,17 @@ const ACHS = [
  ['vs_z_std','vsz','silver','Chasseur de zombies','Remporter une partie Versus Zombie en Standard','Zombie hunter','Win a Zombie Versus game on Standard'],
  ['vs_z_hard','vsz','gold','Dernier rempart','Remporter une partie Versus Zombie en Périple','Last bastion','Win a Zombie Versus game on Odyssey'],
  ['vs_z_ext','vsz','platinum','Apocalypse domptée','Remporter une partie Versus Zombie en Extrême','Apocalypse tamed','Win a Zombie Versus game on Extreme'],
+ ['tt_first','tt','bronze','Premier saut','Un membre de la famille saute dans le temps','First leap','A family member leaps through time'],
+ ['tt_young','tt','silver','Plus jeune que ses petits-enfants',"Un voyageur du temps revient plus jeune qu'un de ses petits-enfants",'Younger than the grandkids','A time traveller comes back younger than one of their grandchildren'],
+ ['tt_75','tt','gold','Bond de géant',"Sauter 75 ans ou plus dans le futur d'un seul coup",'Giant leap','Leap 75 years or more into the future in one go'],
+ ['tt_4','tt','platinum','Voyageur infatigable','Une même personne saute 4 fois dans le temps','Tireless traveller','The same person leaps through time 4 times'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
  ['vs_all','legend','legend','Maître du duel',"Battre l'IA dans toutes les difficultés de tous les modes Versus",'Duel master','Beat the AI at every difficulty in every Versus mode'],
  ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
 ];
 const ACHV = byId(ACHS);
-const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['royal','castle','Royal','Royal'],['zomb','brain','Zombie','Zombie'],['vsn','robot','Versus Normal','Versus Normal'],['vsr','crown','Versus Royal','Versus Royal'],['vsz','brain','Versus Zombie','Versus Zombie'],['legend','crown','Légende','Legend']];
+const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['tt','clock','Voyage dans le temps','Time travel'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['royal','castle','Royal','Royal'],['zomb','brain','Zombie','Zombie'],['vsn','robot','Versus Normal','Versus Normal'],['vsr','crown','Versus Royal','Versus Royal'],['vsz','brain','Versus Zombie','Versus Zombie'],['legend','crown','Légende','Legend']];
 // thème Or : débloqué dès qu'une catégorie entière de succès est complète
 const goldUnlocked = () => ACH_CATS.some(c => ACHS.filter(a => a[1]===c[0]).every(a => ACH[a[0]]));
 const ACH_KEY = 'lignee.ach.v1';
@@ -4241,6 +4353,10 @@ const sfx = (() => {
     multi(){ [784,988,1175,1568,1976,2349,2637].forEach((f,i) => note(f,.45+i*.06,.5,{vol:.05,type:'triangle'})); bell(1568,.95); bell(2093,1.1); bell(2637,1.25); },
     ach(){ [1046,1318,1568,2093].forEach((f,i) => { note(f,i*.08,.5,{vol:.06,type:'triangle'}); note(f*1.5,i*.08+.02,.3,{vol:.02}); }); bell(2093,.38); note(3136,.45,.9,{vol:.025}); },
     crime(){ note(196,0,1.2,{to:98,vol:.09,type:'sawtooth',glide:1.1}); note(207,.05,1.1,{to:103,vol:.05,type:'square',glide:1}); note(55,.3,1.4,{vol:.12,type:'triangle'}); note(1661,.6,.5,{to:830,vol:.02}); },
+    warp(){                                          // 0.2.0a : faille temporelle, un souffle qui monte puis des étincelles
+      note(140,0,1.3,{to:2200,glide:1.2,vol:.07,type:'triangle'}); note(147,.04,1.3,{to:2350,glide:1.2,vol:.035});
+      [3136,2637,2349,1976,1568,1318].forEach((f,i) => note(f,1.05+i*.06,.55,{vol:.028,type:'triangle'})); bell(1568,1.45);
+    },
     war(){ note(110,0,.9,{to:82,vol:.12,type:'triangle'}); note(98,.35,1.1,{to:73,vol:.1,type:'triangle'}); note(147,.7,1,{vol:.05}); },
     growl(){                                         // contamination : un accord grave et mystérieux qui frissonne, avec un souffle
       if(muted) return; const c = init(); if(!c) return;
@@ -4268,7 +4384,7 @@ const sfx = (() => {
   };
 })();
 
-Object.keys(sfx).forEach(k => { const fn = sfx[k]; if(typeof fn === 'function' && !['init','setMuted','setVolume','ctx'].includes(k)) sfx[k] = (...a) => VSH ? undefined : fn(...a); });
+Object.keys(sfx).forEach(k => { const fn = sfx[k]; if(typeof fn === 'function' && !['init','setMuted','setVolume','ctx'].includes(k)) sfx[k] = (...a) => VSH || (S && S.ttFF && k !== 'ach') ? undefined : fn(...a); });
 /* ================= Musique douce en boucle (devient tendue tant qu'un criminel est en vie) ================= */
 const music = (() => {
   let ctx = null, out = null, lp = null, timer = null, step = 0, next = 0, mode = 'calm', vol = .35, on = true;
@@ -4348,8 +4464,11 @@ const newState = start => ({v:2,t:fromYMD(start,0,1),startYear:start,people:{},u
   speed:1,paused:false,over:false,worldIdx:WORLD.findIndex(w => w.day >= fromYMD(start,0,1)),seek:null,nameQueue:[],end2100:start>=2100?2:0,
   auto:false,warIdx:-1});
 const active = () => P(S.activeId);
-const living = () => Object.values(S.people).filter(p => p.death==null);
-const age = p => ageAt(p, p.death!=null ? p.death : p.zombie ? p.zombie.ref : S.t);      // un zombie garde l'âge qu'il avait
+const living = () => Object.values(S.people).filter(p => p.death==null && !p.lost);   // 0.2.0a : un voyageur perdu dans le temps n'est plus là
+const alive = () => Object.values(S.people).filter(p => p.death==null);                // … mais il n'est pas mort
+const bornD = p => p.birthReal ?? p.birth;                                              // vraie date de naissance (un voyageur garde son âge)
+const isTT = p => !!(p && p.conds && p.conds.includes('voyageur'));
+const age = p => ageAt(p, p.death!=null ? p.death : p.zombie ? p.zombie.ref : p.lost ? p.lost.at : S.t);      // un zombie garde l'âge qu'il avait
 const today = () => Math.floor(S.t);
 const currentUnion = pid => S.unions.find(u => u.a===pid && u.end==null);
 const householdUnion = pid => S.unions.find(u => u.end==null && (u.a===pid || u.b===pid));
@@ -4358,7 +4477,7 @@ const unionsShown = pid => S.unions.filter(u => u.a===pid && (u.end==null || u.m
 // membre « visible » de la famille : sang, ou conjoint affiché dans l'arbre (pas un ex caché)
 const inFamily = p => p.blood || S.unions.some(u => u.b===p.id && (u.end==null || u.married || kidsOf(u).length));
 const needHeir = () => S && !S.over && active().death != null;
-const blocked = () => S.nameQueue.length > 0 || needHeir() || S.end2100 === 1;
+const blocked = () => S.nameQueue.length > 0 || needHeir() || S.end2100 === 1 || !!S.ttAsk || !!S.ttFF;
 function genOf(p){
   if(!p.blood){ const u = S.unions.find(u => u.b===p.id); return u ? genOf(P(u.a)) : 1; }
   return p.parents ? 1 + genOf(P(p.parents[0])) : 1;
@@ -4377,12 +4496,12 @@ function save(){ if(S && !S.headless){ store.set(SAVE_KEY, JSON.stringify(S)); l
 const saveSoon = () => { if(performance.now() - lastSave > 4000) save(); };
 document.addEventListener('visibilitychange', () => { if(document.hidden) save(); });
 addEventListener('pagehide', () => save());
-const TOAST_KINDS = new Set(['birth','death','love','wed','break','sad','world','ill','cure','star','crime']);
+const TOAST_KINDS = new Set(['birth','death','love','wed','break','sad','world','ill','cure','star','crime','tt']);
 function log(kind, k, a, d, forceToast){
   if((S.auto || S.familyAuto) && (kind === 'work' || kind === 'move' || kind === 'interest') && a && a[0] !== S.activeId) return;   // mode auto : journal centré sur l'essentiel
   const e = {d: d ?? today(), kind, k, a: a || []};
   S.log.push(e); if(S.log.length > 500) S.log.splice(0, S.log.length-500);
-  if(!VSH && ((TOAST_KINDS.has(kind) && forceToast !== false) || forceToast === true)) toast(e);
+  if(!VSH && !S.ttFF && ((TOAST_KINDS.has(kind) && forceToast !== false) || forceToast === true)) toast(e);
   dirty = true;
 }
 const logText = e => { try{ return t('log_'+e.k, ...e.a); }catch(err){ return ''; } };
@@ -4400,7 +4519,7 @@ function setupWork(p, day){             // pour un adulte qui arrive dans la par
 }
 /* Après le CM2 (11 ans, dès que l'école existe), 5 % des enfants sont déscolarisés jusqu'à leur premier travail */
 function dropout(p){
-  if(yearOf(p.birth) + 11 < 1881) return false;
+  if(yearOf(bornD(p)) + 11 < 1881) return false;
   p.school = p.school || {};
   if(p.school.drop == null) p.school.drop = Math.random() < .05;
   return p.school.drop;
@@ -4474,6 +4593,7 @@ function schoolLabel(p, A, y){
 }
 function activity(p, skipIll){
   if(p.zombie) return t('zombie_act', p);
+  if(p.lost) return t('act_lost', p);
   const d = p.death!=null ? p.death : S.t, A = ageAt(p, d), y = yearOf(d);
   if(p.death==null && p.ill && !skipIll) return dzName(p.ill.dz, p);
   if(p.star && p.star.famous) return jobName(p.star.job, p);
@@ -4801,6 +4921,7 @@ function move(p, day, target){
 }
 function onBirthday(p, A, day){
   dirty = true;
+  if(ttYear(p, A, day)) return;                        // 0.2.0a : parti dans le futur
   if(A >= 100 && inFamily(p)) checkTiers('age', A, [100,110,115,120]);
   if(A === R.legal) rollAddictions(p, day).forEach(id => log('addict','addict',[p.id, id], day, p.id===S.activeId));
   if(p.intAges) p.intAges.filter(a => a === A).forEach(() => gainInterest(p, day));
@@ -4907,12 +5028,119 @@ function zombieSpread(day){                           // chaque mois : 2 à 6,5 
   for(const z of all){
     if(!z.zombie) continue;
     const nb = [...(z.parents || []).map(P), ...(kids.get(z.id) || []), ...S.unions.filter(u => u.a === z.id || u.b === z.id).map(u => P(u.a === z.id ? u.b : u.a))];
-    for(const q of nb) if(q && !q.zombie && !zProtected(q, day) && !hit.has(q.id) && Math.random() < pr) hit.add(q.id);   // protégé : pas de contamination
+    for(const q of nb) if(q && !q.zombie && !q.lost && !zProtected(q, day) && !hit.has(q.id) && Math.random() < pr) hit.add(q.id);   // protégé : pas de contamination
   }
   hit.forEach(id => zombify(P(id), day));
-  if(!S.over && !living().some(p => !p.zombie && inFamily(p))) S.zombieLost = true;           // plus aucun humain : défaite
+  if(!S.over && !alive().some(p => !p.zombie && inFamily(p))) S.zombieLost = true;           // plus aucun humain : défaite
+}
+/* ================= 0.2.0a : voyageurs du temps ================= */
+const ttCan = (p, day) => !!p && p.death == null && !p.lost && !p.zombie && !royalOn() && !jailed(p) && !(p.crim && p.crim.declared)
+  && !p.ill && p.onset == null && p.deathAt == null && p.murderAt == null && !(S.headless && p.id === S.activeId)
+  && !S.unions.some(u => u.end == null && u.preg && (u.a === p.id || u.b === p.id));
+const ttMax = day => S.end2100 === 0 ? Math.floor((DAY2100 - 2 - day) / 365.25) : 120;   // le joueur ne saute pas par-dessus 2100
+function ttGo(p, day, years){                         // départ : la personne disparaît, son couple prend fin
+  const fam = inFamily(p);
+  if(p.birthReal == null) p.birthReal = p.birth;
+  p.lost = {at: day, back: day + Math.round(years * 365.25), y: years};
+  p.mild = []; p.onsetAddict = false; p.plan = null;
+  for(const u of S.unions) if(u.end == null && (u.a === p.id || u.b === p.id)){
+    u.end = day; u.endReason = 'temps';
+    if(u.b === p.id) P(u.a).plan = {will: Math.random() < PAIR_P, at: day + rnd(1, 5)*365};   // la personne laissée seule peut refaire sa vie
+  }
+  (S.ttLost = S.ttLost || []).push(p.id);
+  p.tt = p.tt || {n:0, tot:0, max:0}; p.tt.n++; p.tt.tot += years; p.tt.max = Math.max(p.tt.max, years);
+  if(fam){ unlock('tt_first'); if(years >= 75) unlock('tt_75'); if(p.tt.n >= 4) unlock('tt_4'); }
+  log('tt','tt_go',[p.id, years, yearOf(p.lost.back)], day, p.id === S.activeId ? false : undefined);
+  if(!S.ttFF) sfx.warp();
+  RH = undefined; dirty = true;
+}
+function ttBack(p, day){                              // retour : même âge qu'au départ, le monde a changé
+  const L = p.lost; if(!L) return;
+  const D = day - L.at;
+  p.lost = null; S.ttLost = (S.ttLost || []).filter(i => i !== p.id);
+  p.birth += D;                                       // l'âge ne bouge pas : la date de naissance « glisse »
+  if(p.star && !p.star.famous) p.star.day += D;
+  if(p.crim && !p.crim.declared) p.crim.day += D;
+  ['fameAt','presAt','zvacUntil','immuneUntil'].forEach(k => { if(p[k] != null) p[k] += D; });
+  if(p.work && p.work.until) p.work.until += D;
+  p.ttCool = day + Math.round(10 * 365.25);           // la montre se recharge pendant 10 ans
+  p.plan = {will: Math.random() < PAIR_P, at: day + rnd(0, 3)*365};
+  log('tt','tt_back',[p.id, yearOf(L.at)], day, S.ttFF ? false : undefined);
+  if(inFamily(p) || p.blood){
+    const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id));
+    if(Object.values(S.people).some(g => g.parents && g.death == null && g.birth < p.birth && kids.some(k => g.parents.includes(k.id)))) unlock('tt_young');
+  }
+  if(!S.ttFF) sfx.warp();
+  RH = undefined; dirty = true;
+}
+function ttYear(p, A, day){                           // chaque anniversaire, de 16 à 60 ans : 5 % de chances qu'une faille s'ouvre
+  if(!isTT(p) || A < 16 || A > 60 || Math.random() >= .05 || !ttCan(p, day)) return false;
+  let y = 8 + Math.floor(Math.pow(Math.random(), 1.6) * 83);          // de 8 à 90 ans, les petits sauts plus souvent
+  if(p.id === S.activeId && !S.headless){
+    y = Math.min(y, ttMax(day)); if(y < 5) return false;
+    if(S.auto){ ttStart(y, p, day); return true; }
+    S.ttAsk = {id: p.id, y}; return false;              // le joueur choisit
+  }
+  ttGo(p, day, y); return true;
+}
+function ttStart(years, p = active(), day = today()){  // le personnage joué saute : le temps défile jusqu'à son retour
+  S.ttAsk = null; ttGo(p, day, years);
+  S.ttFF = {id: p.id, from: day, back: p.lost.back, fam: !!S.familyAuto};
+  S.familyAuto = true;                                 // pendant l'absence, la famille vit sa vie
+  sfx.warp(); ttFx();
+}
+function ttStep(){                                     // avance rapide : environ 3 secondes, quelle que soit la durée du saut
+  const F = S.ttFF, p = P(F.id);
+  if(!p || !p.lost){ ttLand(); return; }
+  const per = Math.max(15, Math.ceil((F.back - F.from) / 64));
+  for(let i = 0; i < per; i++){
+    const d = Math.floor(S.t) + 1; S.t = d + .001;
+    processDay(d); if(S.vs && !S.vs.done) vsDay(d);
+    if(!p.lost){ ttLand(); return; }
+    if(S.royalEnd || S.zombieLost || vsAiOut() || p.death != null){ ttBack(p, d); ttLand(); return; }
+  }
+  ttFx();
+}
+let ttEl = null;
+function ttFx(off){                                    // l'écran du voyage : anneaux, horloge folle, années qui défilent
+  if(off){ if(ttEl){ const e = ttEl; ttEl = null; e.classList.add('out'); setTimeout(() => e.remove(), 700); } return; }
+  const F = S.ttFF; if(!F) return; const p = P(F.id);
+  if(!ttEl){
+    ttEl = document.createElement('div'); ttEl.id = 'ttFx'; ttEl.setAttribute('role', 'status');
+    ttEl.innerHTML = `<div class="tt-rings"><i></i><i></i><i></i><i></i><i></i></div><div class="tt-core"><div class="tt-clock"><i class="h"></i><i class="m"></i>${orb(p, 'xl')}</div>
+      <div class="eyebrow tt-who"></div><div class="tt-year"></div><div class="tt-bar"><i></i></div><p class="tt-log"></p></div>`;
+    document.body.appendChild(ttEl);
+  }
+  ttEl.querySelector('.tt-who').textContent = t('tt_ff', p);
+  ttEl.querySelector('.tt-year').textContent = yearOf(S.t);
+  ttEl.querySelector('.tt-bar i').style.width = Math.min(100, (S.t - F.from) / Math.max(1, F.back - F.from) * 100).toFixed(1) + '%';
+  const last = S.log[S.log.length - 1]; ttEl.querySelector('.tt-log').textContent = last && last.d > F.from ? logText(last) : '';
+}
+function ttLand(){                                     // arrivée : ce qui s'est passé pendant l'absence
+  const F = S.ttFF; if(!F) return;
+  S.ttFF = null; S.familyAuto = F.fam;
+  const p = P(F.id), day = today(), all = Object.values(S.people);
+  const b = all.filter(c => c.blood && c.id !== p.id && c.birth > F.from && c.birth <= day).length;
+  const dd = all.filter(c => c.death != null && c.death > F.from && c.death <= day && inFamily(c)).length;
+  ttFx(true); sfx.warp(); burst(['#7fe3ff','#ffffff','#3fa9ff','#c3a2ff','#e9fbff'], 60);
+  dirty = true; render(); centerOn(p.id, true); save();
+  if(S.auto || p.death != null) return;
+  openModal(`<div class="m-head"><div class="eyebrow">${t('tt_ask_eye')} · ${fmt(day)}</div><h2>${t('tt_land_title', yearOf(day))}</h2></div>
+    <div class="ttbox">${orb(p, 'xl')}<p>${esc(t('tt_land_txt', p, Math.round((day - F.from) / 365.25), b, dd))}</p></div>
+    <div class="acts"><button class="gel lime wide" data-act="ttland"><span>${t('tt_land_ok')}</span></button></div>`, {locked:true});
+}
+function openTT(){                                     // une faille s'ouvre pour le personnage joué : sauter ou rester ?
+  const A = S.ttAsk, p = P(A.id), day = today();
+  if(!p || p.id !== S.activeId || !ttCan(p, day)){ S.ttAsk = null; return; }
+  const y = Math.min(A.y, ttMax(day)); if(y < 5){ S.ttAsk = null; return; }
+  sfx.warp();
+  openModal(`<div class="m-head"><div class="eyebrow">${t('tt_ask_eye')} · ${fmt(day)}</div><h2>${t('tt_ask_title')}</h2></div>
+    <div class="ttbox ask">${orb(p, 'xl')}<p>${esc(t('tt_ask_txt', p, y, yearOf(day) + y))}</p></div>
+    <div class="acts tt-acts"><button class="gel wide" data-act="ttgo" data-v="${y}"><span>${esc(t('tt_go_btn', y))}</span></button>
+      <button class="gel pink wide" data-act="ttstay"><span>${t('tt_stay')}</span></button></div>`, {locked:true});
 }
 function processDay(day){
+  if(S.ttLost && S.ttLost.length) for(const id of S.ttLost.slice()){ const q = P(id); if(q && q.lost && day >= q.lost.back) ttBack(q, day); }
   if(S.zombie && !S.zombie.began && day >= S.zombie.firstAt){                // 60 ans après le départ : le premier zombie
     const c = living().filter(p => inFamily(p) && !zProtected(p, day));
     if(c.length){ const z = pick(c); zombify(z, day); S.zombie.began = true; log('crime','zombie_first',[z.id], day, true); sfx.crime(); burst(['#6aa82e','#2f5410','#d8ffb0','#000000'], 50); }
@@ -4920,8 +5148,8 @@ function processDay(day){
   if(S.zombie && S.zombie.began && day % 30 === 0) zombieSpread(day);
   while(S.worldIdx >= 0 && S.worldIdx < WORLD.length && WORLD[S.worldIdx].day <= day){ log('world','world',[S.worldIdx], WORLD[S.worldIdx].day); S.worldIdx++; }
   if(S.end2100 === 0 && day >= DAY2100){ if(royalOn()) unlock('r_2100');
-    if(S.zombie && S.startYear === 1780 && !S.zombieLost && living().some(p => !p.zombie && inFamily(p))) unlock('z1780');
-    if(S.zombie && S.zombie.diff && S.startYear <= 1780 && !S.zombieLost && living().some(p => !p.zombie && inFamily(p))) unlock('zd_' + S.zombie.diff);   // succès Zombie par difficulté
+    if(S.zombie && S.startYear === 1780 && !S.zombieLost && alive().some(p => !p.zombie && inFamily(p))) unlock('z1780');
+    if(S.zombie && S.zombie.diff && S.startYear <= 1780 && !S.zombieLost && alive().some(p => !p.zombie && inFamily(p))) unlock('zd_' + S.zombie.diff);   // succès Zombie par difficulté
     genRace(); S.end2100 = 1; log('world','y2100',[],day); }
   const wi = warIndexAt(day), prevWar = S.warIdx ?? -1;
   if(wi !== prevWar){
@@ -5245,6 +5473,10 @@ document.addEventListener('pointercancel', () => { pointerHeld = false; }, true)
 setInterval(() => {
   const now = performance.now(), dt = Math.min(250, now - lastTick); lastTick = now;
   if(!S || $('#game').hidden) return;
+  if(S.ttFF){                                         // 0.2.0a : voyage dans le temps en cours
+    if(S.over){ S.familyAuto = S.ttFF.fam; S.ttFF = null; ttFx(true); }
+    else { ttStep(); updateClock(); return; }
+  }
   if(!S.paused && !modalOpen && !S.over && !blocked()) advance(dt);
   updateClock();
   if(!modalOpen){
@@ -5252,6 +5484,7 @@ setInterval(() => {
     if(S.royalEnd && !S.over){ render(); gameOver(P(S.royalEnd), true); return; }
     if(S.zombieLost && !S.over){ render(); gameOver(active(), 'zombie'); return; }
     if(S.nameQueue.length){ render(); openNaming(S.nameQueue[0]); return; }
+    if(S.ttAsk){ render(); openTT(); return; }
     if(needHeir()){ if(S.auto) autoHeir(); else { render(); openHeir(); } return; }
     if(S.end2100 === 1){ render(); open2100(); return; }
   }
@@ -5386,6 +5619,7 @@ function nodeHTML(p, x, y){
   const cls = ['node'];
   if(p.death!=null) cls.push('dead');
   if(p.zombie) cls.push('zombie');
+  if(p.lost) cls.push('tlost'); else if(isTT(p) && p.death == null) cls.push('chrono');
   if(p.id===S.activeId) cls.push('active');
   if(!p.blood) cls.push('partner');
   if(p.star){ cls.push('star'); if(p.star.famous){ cls.push('famous'); if(p.death==null && S.t - p.star.at < 200) cls.push('fresh'); } }
@@ -5400,9 +5634,9 @@ function nodeHTML(p, x, y){
   if(isKing) cls.push('king'); else if(isHeir) cls.push('heirn');
   if(rtt) cls.push('titled');
   else if(royalOn() && p.blood && p.death == null){ const nr = nobleRank(p); if(nr === 'dechu') cls.push('dechu'); else if(nr) cls.push('noble'); }
-  const A = age(p), by = yearOf(p.birth), gone = p.cause && p.cause.vanished;
+  const A = age(p), by = yearOf(bornD(p)), gone = p.cause && p.cause.vanished;
   const years = p.zombie ? `${by} – ?` : p.death!=null ? `${by} – ${yearOf(p.death)}${gone ? ' ?' : ''}` : `${by} –`;
-  const ageL = p.zombie ? `☣ ${tA(A)}` : gone ? `${t('vanished_short', p)} · ${tA(A)}` : p.death!=null ? `✝ ${tA(A)}` : tA(A);
+  const ageL = p.zombie ? `☣ ${tA(A)}` : p.lost ? `⌛ ${tA(A)}` : gone ? `${t('vanished_short', p)} · ${tA(A)}` : p.death!=null ? `✝ ${tA(A)}` : tA(A);
   const rib = p.crim ? `<em class="rib cr${jail ? ' jail' : ''}">${jail ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p)}</em>`
     : pres ? `<em class="rib pr">${t('pres_rib', p)}</em>`
     : p.wasKing && p.death != null ? `<em class="rib exk">${t('ex_king', p)}</em>`
@@ -5557,7 +5791,7 @@ function renderSide(){
   const sideEl = $('#side'); sideEl.innerHTML = `${S.vs ? vsCard() : ''}
     <section class="glass card">
       <div class="eyebrow">${t('you_play')}</div>
-      <button class="me-head" data-act="fiche" data-id="${me.id}">${orb(me,'xl')}<span><h3>${esc(nm(me))}</h3><p>${esc(t('born_in', me, fmt(me.birth), cityName(me.birthCity)))}</p></span></button>
+      <button class="me-head" data-act="fiche" data-id="${me.id}">${orb(me,'xl')}<span><h3>${esc(nm(me))}</h3><p>${esc(t('born_in', me, fmt(bornD(me)), cityName(me.birthCity)))}</p></span></button>
       <dl class="facts">
         <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
         <div><dt>${t('f_gen')}</dt><dd>${genOf(me)}</dd></div>
@@ -6447,19 +6681,29 @@ function giveName(n){
   closeModal(true); render(); save();
 }
 
+function ttWatchHTML(me){                            // 0.2.0a : sauter dans le temps quand on veut (une fois tous les 10 ans)
+  const day = today(), cap = ttMax(day), cool = (me.ttCool || 0) > day, ok = ttCan(me, day) && !cool && cap >= 5;
+  const opts = [5,10,20,30,50,75,100].filter(n => n <= cap);
+  const note = cool ? t('tt_watch_cool', yearOf(me.ttCool)) : ok ? t('tt_watch_note') : t('tt_watch_no');
+  return `<div class="eyebrow sect">${icon('clock')} ${t('tt_watch')}</div><div class="acts ttwatch"><div class="reloc-row">
+    <select class="inp" id="ttSel" aria-label="${esc(t('tt_watch'))}" ${ok ? '' : 'disabled'}>${opts.map(n => `<option value="${n}" ${n === 20 ? 'selected' : ''}>${esc(t('tt_yrs', n))} → ${yearOf(day) + n}</option>`).join('')}</select>
+    <button class="gel wide" data-act="ttwatch" ${ok ? '' : 'disabled'}><span>${t('tt_watch_btn')}</span></button></div><p class="note">${esc(note)}</p></div>`;
+}
 function openFiche(id){
   const p = P(id), me = active(), u = currentUnion(me.id), isPartner = u && u.b===p.id, isMe = p.id===me.id;
   const a = age(p);
-  let sub = esc(fmt(p.birth));
-  if(p.death!=null) sub = `${esc(t('born_in', p, fmt(p.birth), cityName(p.birthCity)))}<br>${esc(t('died_on', p, fmt(p.death), causeText(p)))}`;
-  else sub = esc(t('city_alive', p, cityName(p.birthCity), cityName(p.city))) + ' · ' + esc(fmt(p.birth));
+  let sub = esc(fmt(bornD(p)));
+  if(p.death!=null) sub = `${esc(t('born_in', p, fmt(bornD(p)), cityName(p.birthCity)))}<br>${esc(t('died_on', p, fmt(p.death), causeText(p)))}`;
+  else sub = esc(t('city_alive', p, cityName(p.birthCity), cityName(p.city))) + ' · ' + esc(fmt(bornD(p)));
+  if(p.lost) sub += `<br><span class="ttline">${esc(t('fiche_lost', p, yearOf(p.lost.at), yearOf(p.lost.back)))}</span>`;
+  else if(p.tt) sub += `<br><span class="ttline">${esc(t('fiche_tt', p.tt.n, p.tt.tot))}</span>`;
   const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id)).sort((x,y) => x.birth-y.birth);
   const chips = list => `<div class="chips">${list.map(c => `<button class="chip ${c.death!=null?'dead':''}" data-act="fiche" data-id="${c.id}">${orb(c)}${esc(c.first||'…')}</button>`).join('')}</div>`;
   const pu = p.blood ? S.unions.filter(x => x.a===p.id) : S.unions.filter(x => x.b===p.id);
   const unionLines = pu.map(x => {
     const q = P(p.blood ? x.b : x.a);
     let s = x.married ? t('ul_married', nm(q), fmt(x.marriedAt)) : t('ul_dating', nm(q), yearOf(x.start));
-    if(x.end!=null) s += ' · ' + (x.endReason==='décès' ? (q.death!=null && q.death===x.end ? t('ul_widow', yearOf(x.end)) : t('ul_until', yearOf(x.end))) : t(x.endReason==='divorce' ? 'ul_divorce' : 'ul_split', yearOf(x.end)));
+    if(x.end!=null) s += ' · ' + (x.endReason==='décès' ? (q.death!=null && q.death===x.end ? t('ul_widow', yearOf(x.end)) : t('ul_until', yearOf(x.end))) : t(x.endReason==='divorce' ? 'ul_divorce' : x.endReason==='temps' ? 'ul_time' : 'ul_split', yearOf(x.end)));
     return `<li>${esc(s)}</li>`;
   }).join('');
   let actions = '';
@@ -6481,9 +6725,10 @@ function openFiche(id){
     </div>`;
   } else if(isMe){
     actions = `<div class="acts" style="margin-top:14px"><button class="gel pink wide" data-act="soulmate" ${a<R.legal||u||(jailed(me)||!!me.zombie)?'disabled':''}><span>${t('find')}</span></button></div>`;
-  } else if(p.blood && p.death==null){
+  } else if(p.blood && p.death==null && !p.lost){
     actions = `<div class="acts" style="margin-top:14px"><button class="gel wide" data-act="incarnate" data-id="${p.id}"><span>${esc(t('incarnate', p.first))}</span></button><p class="note">${t('note_incarnate')}</p></div>`;
   }
+  if(isMe && isTT(me) && !royalOn() && !S.headless) actions += ttWatchHTML(me);
   const par = p.parents ? p.parents.map(P) : null;
   const eyebrow = isMe ? t('f_you') : p.blood ? t('gen_n', genOf(p)) : isPartner ? t(u.married ? 'spouse' : 'partner', p) : t('inlaw', p);
   const deadCity = p.death!=null ? `<div class="span2"><dt>${t('f_city')}</dt><dd>${esc(t('city_dead', p, cityName(p.birthCity), cityName(p.deathCity || p.birthCity)))}</dd></div>` : '';
@@ -6710,7 +6955,7 @@ const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${dis
 const numTxt = (v, u) => (LANG!=='en' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG!=='en' ? ' %' : '%') : u);
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
-  ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
+  ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass'],['montre',1200,'clock']]],
   ['family', [['reveil',190,'bolt'],['decrim',310,'dove'],['potion',315,'potion'],['lueur',800,'sparkle']]],
   ['survie', [['vaccin',320,'pill'],['antidote',500,'potion']]],
   ['themes', [['orange',830,'sun'],['xp',2000,'computer'],['dark',5000,'moon']]]
@@ -6743,6 +6988,10 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'fertile' && S.nextMulti) return {dis:true, note:t('shop_pending')};
   if(id === 'immune' && immune(me, S.t)) return {dis:true, note:t('shop_immune_on', yearOf(me.immuneUntil))};
   if(id === 'midlife' && me.atout2) return {dis:true, note:t('shop_midlife_done', me.first)};
+  if(id === 'montre' && royalOn()) return {dis:true, note:t('shop_tt_royal')};
+  if(id === 'montre' && S.vs) return {dis:true, note:t('shop_tt_vs')};
+  if(id === 'montre' && isTT(me)) return {dis:true, note:t('shop_tt_have', me)};
+  if(id === 'montre' && (jailed(me) || !!me.zombie)) return {dis:true, note:t('hint_prison', me)};
   if(id === 'spouse' && (currentUnion(me.id) || (jailed(me)||!!me.zombie) || age(me) < R.legal)) return {dis:true, note:t((jailed(me)||!!me.zombie) ? 'hint_prison' : currentUnion(me.id) ? 'shop_spouse_taken' : 'shop_spouse_young', me)};
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
   if(id === 'reveil' && !reveilList().length) return {dis:true, note:t('shop_reveil_none', R.legal)};
@@ -7030,6 +7279,15 @@ const ACT = {
     store.del(TUTO_KEY); b.disabled = true; b.querySelector('span').textContent = t('tuto_planned');
   },
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
+  ttgo(d){ const A = S.ttAsk; closeModal(true); if(A && ttCan(active(), today())) ttStart(+d.v); else S.ttAsk = null; },
+  ttstay(){ const A = S.ttAsk; S.ttAsk = null; closeModal(true); if(A) log('tt','tt_stay',[A.id], today(), false); },
+  ttwatch(d, b){
+    const me = active(), day = today(), n = +($('#ttSel') || {}).value;
+    if(!n || n < 5 || n > ttMax(day) || !isTT(me) || !ttCan(me, day) || (me.ttCool || 0) > day) return;
+    if(!arm(b, t('shop_confirm'))) return;
+    closeModal(true); ttStart(n);
+  },
+  ttland(){ closeModal(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     if(d.v === 'reveil' || d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur' || d.v === 'vaccin' || d.v === 'antidote') return openPick(d.v);
@@ -7040,6 +7298,7 @@ const ACT = {
     if(SHOP_THEMES.includes(d.v)){ UNL[d.v] = true; store.set(UNL_KEY, JSON.stringify(UNL)); }
     else if(d.v === 'star' || d.v === 'crim') S.nextFate = d.v;
     else if(d.v === 'fertile') S.nextMulti = true;
+    else if(d.v === 'montre'){ me.conds = (me.conds || []).concat('voyageur'); me.ttCool = 0; log('tt','tt_watch',[me.id], day, true); sfx.warp(); }
     else if(d.v === 'immune'){
       me.immuneUntil = day + Math.round(50 * 365.25); me.onset = null; me.onsetAddict = false;
       log('cure','immune',[me.id, yearOf(me.immuneUntil)], day, true);
@@ -7171,7 +7430,7 @@ const ACT = {
     dirty = true; save(); openFiche(p.id);
   },
   incarnate(d){
-    const p = P(+d.id); if(!p || p.death!=null || !p.blood) return;
+    const p = P(+d.id); if(!p || p.death!=null || !p.blood || p.lost) return;
     S.activeId = p.id; log('info','incarnate',[p.id]);
     sfx.start(); closeModal(); render(); centerOn(p.id, true); save();
   },
@@ -7416,6 +7675,7 @@ function enterGame(){
   applyCountry(S.country || 'fr');                        // chaque partie garde son pays
   $('#setup').hidden = true; $('#game').hidden = false;
   S.nameQueue = S.nameQueue || [];
+  if(!S.ttFF) ttFx(true);                                   // 0.2.0a : pas d'écran de voyage resté d'une autre partie
   Object.values(S.people).forEach(p => { if(!p.atout) p.atout = pick(ATOUTS)[0]; });   // anciennes parties : chacun reçoit son atout
   if(!UNL.neon && Object.values(S.people).some(p => p.blood && genOf(p) >= 16)) unlockSkin('neon');
   albumScan(true); cynPend = 0; cynShow();
@@ -7494,7 +7754,7 @@ document.addEventListener('keydown', e => {
   else if(e.key === 'Enter' || e.key === 'ArrowRight'){ e.preventDefault(); ACT.tnext(); }
   else if(e.key === 'ArrowLeft' && tutoI > 0){ e.preventDefault(); tutoShow(tutoI - 1); }
 }, true);
-function newGame(){ document.body.classList.remove('zmode', 'vsmode'); S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
+function newGame(){ document.body.classList.remove('zmode', 'vsmode'); ttFx(true); S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
 
 /* ================= Démarrage ================= */
 (() => {
