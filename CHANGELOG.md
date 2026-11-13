@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.7g — 13 novembre 2026
+
+- Mode Zombie : description plus courte au départ (sans le « Conseillé : 1780 »).
+- Le burn-out (maladie bénigne, depuis 1975) dure maintenant entre 6 et 36 mois.
+- 3 nouveaux métiers : designer UX (depuis 2005), réparateur de smartphones (depuis 2008) et maître du jeu d'escape game (depuis 2013).
+
 ## v0.1.7f — 13 novembre 2026
 
 - Mode Zombie : 4 difficultés au départ, comme le sexe dominant du mode Royal : Facile (2 % de propagation par an), Moyen (3 %, par défaut), Dur (4,4 %) et Extrême (6,5 %). En Versus Zombie, l'IA joue avec la même difficulté que toi.

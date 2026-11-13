@@ -1424,9 +1424,16 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.7f';
+const APP_VERSION = '0.1.7g';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.7g', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Mode Zombie : description plus courte au départ (sans le « Conseillé : 1780 »).',
+       'Le burn-out (maladie bénigne, depuis 1975) dure maintenant entre 6 et 36 mois.',
+       '3 nouveaux métiers : designer UX (depuis 2005), réparateur de smartphones (depuis 2008) et maître du jeu d\'escape game (depuis 2013).'],
+   en:['Zombie mode: shorter description at the start (no more "Recommended: 1780").',
+       'Burnout (mild illness, since 1975) now lasts between 6 and 36 months.',
+       '3 new jobs: UX designer (since 2005), smartphone repairer (since 2008) and escape room game master (since 2013).']},
   {v:'0.1.7f', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Mode Zombie : 4 difficultés au départ, comme le sexe dominant du mode Royal : Facile (2 % de propagation par an), Moyen (3 %, par défaut), Dur (4,4 %) et Extrême (6,5 %). En Versus Zombie, l\'IA joue avec la même difficulté que toi.',
        'Nouvelle catégorie de succès Zombie : finir une partie de 1780 à 2100 en Facile (bronze), Moyen (argent), Dur (or) et Extrême (platine).',
@@ -2020,6 +2027,8 @@ const CITIES = ['Ajaccio','Albi','Amiens','Angers','Annecy','Arles','Avignon','B
 
 // [id, fr masc., fr fém., en masc., en fém., de, à]
 const JOBS = [
+ ['uxdesign','Designer UX','Designeuse UX','UX designer','UX designer',2005,2100],['repsmart','Réparateur de smartphones','Réparatrice de smartphones','Smartphone repairer','Smartphone repairer',2008,2100],
+ ['escapegm',"Maître du jeu d'escape game","Maîtresse du jeu d'escape game",'Escape room game master','Escape room game master',2013,2100],
  ['gardechasse','Garde-chasse','Garde-chasse','Gamekeeper','Gamekeeper',1500,2100],['eclusier','Éclusier','Éclusière','Lock keeper','Lock keeper',1600,2040],
  ['criminologue','Criminologue','Criminologue','Criminologist','Criminologist',1890,2100],['organiste','Organiste liturgique','Organiste liturgique','Church organist','Church organist',1500,2100],
  ['souffleur','Souffleur de verre','Souffleuse de verre','Glassblower','Glassblower',1500,2100],['maitreverrier','Maître verrier','Maîtresse verrière','Master glazier','Master glazier',1500,2100],
@@ -2342,7 +2351,7 @@ const MILDS = [
  ['migraine','Migraines chroniques','Chronic migraines',1500,2100,120,900,{minA:10}],['hepatitea','Hépatite A','Hepatitis A',1900,2100,60,180,{}],
  ['mono','Mononucléose','Mononucleosis',1920,2100,60,240,{minA:12,maxA:30}],['dos','Mal de dos chronique','Chronic back pain',1500,2100,120,1100,{minA:25}],
  ['rachitisme','Rachitisme','Rickets',1500,1930,180,1100,{maxA:14}],['acne','Acné sévère','Severe acne',1500,2100,180,1100,{minA:12,maxA:30}],
- ['burnout','Burn-out','Burnout',1975,2100,90,540,{minA:20,maxA:66}],['allergie','Rhume des foins','Hay fever',1850,2100,120,700,{}],
+ ['burnout','Burn-out','Burnout',1975,2100,183,1096,{minA:20,maxA:66}],['allergie','Rhume des foins','Hay fever',1850,2100,120,700,{}],
  ['fievrenum','Fièvre numérique','Digital fever',2031,2100,60,400,{}],['nanoderm','Nanodermite','Nanodermatitis',2035,2100,90,600,{}],
  ['grippemars','Grippe martienne','Martian flu',2045,2100,60,300,{}],['holosyndrome','Syndrome holographique','Hologram syndrome',2060,2100,120,900,{}],
  ['arthrose','Arthrose','Osteoarthritis',1500,2100,5475,10950,{minA:45}],['hypertension','Hypertension','High blood pressure',1500,2100,5475,10950,{minA:35}],
@@ -2942,7 +2951,7 @@ fr:{
   vs_t_fam:'Famille', vs_t_gen:'Générations', vs_t_live:'Vivants', vs_t_star:'Stars', vs_t_crime:'Meurtres', vs_t_noble:'Nobles',
   lab_zdiff:'Difficulté', zd_easy:'Facile', zd_med:'Moyen', zd_hard:'Dur', zd_ext:'Extrême',
   zd_hint:p=>`${p} % de risque de contamination par an, pour chaque parent, enfant ou conjoint d'un zombie.`,
-  lab_zombie:'Mode Zombie', zombie_hint:"Rien ne se passe pendant 60 ans… puis le premier zombie apparaît. Survis jusqu'en 2100 ! (Conseillé : 1780)",
+  lab_zombie:'Mode Zombie', zombie_hint:"Rien ne se passe pendant 60 ans… puis le premier zombie apparaît. Survis jusqu'en 2100 !",
   z_count:n=>`${n} ans avant le premier zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} humain${h>1?'s':''}`,
   zombie_act:p=>g(p,'Zombie','Zombie'), zombie_since:(p,y)=>`${g(p,'Zombie','Zombie')} depuis ${y}`, zombie_no_baby:"Un zombie ne peut pas avoir d'enfant.",
   log_zombie_first:p=>`☣ ${nm(p)} devient le premier zombie ! L'épidémie commence.`,
@@ -3201,7 +3210,7 @@ en:{
   vs_t_fam:'Family', vs_t_gen:'Generations', vs_t_live:'Alive', vs_t_star:'Stars', vs_t_crime:'Murders', vs_t_noble:'Nobles',
   lab_zdiff:'Difficulty', zd_easy:'Easy', zd_med:'Medium', zd_hard:'Hard', zd_ext:'Extreme',
   zd_hint:p=>`${p}% yearly infection risk for each parent, child or partner of a zombie.`,
-  lab_zombie:'Zombie mode', zombie_hint:'Nothing happens for 60 years… then the first zombie appears. Survive until 2100! (Recommended: 1780)',
+  lab_zombie:'Zombie mode', zombie_hint:'Nothing happens for 60 years… then the first zombie appears. Survive until 2100!',
   z_count:n=>`${n} years until the first zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} human${h>1?'s':''}`,
   zombie_act:()=>'Zombie', zombie_since:(p,y)=>`Zombie since ${y}`, zombie_no_baby:"A zombie can't have children.",
   log_zombie_first:p=>`☣ ${nm(p)} becomes the first zombie! The outbreak begins.`,
