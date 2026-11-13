@@ -2,6 +2,25 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.7d — 13 novembre 2026
+
+- Versus : gagner en mode Zombie rapporte 900 Cyn, quelle que soit la difficulté.
+- Versus : les succès sont désactivés pendant une partie contre l'IA.
+
+## v0.1.7c — 13 novembre 2026
+
+- Boutique : nouveau Réveil du destin (190 Cyn). Choisis une future star ou un futur criminel de la famille qui a l'âge légal : il devient star ou criminel tout de suite.
+- Boutique : la Potion de santé coûte maintenant 315 Cyn, et la Décriminalisation 310 Cyn.
+- Versus : l'IA utilise aussi le Réveil du destin en Partie de Star et en Partie de Crime.
+
+## v0.1.7b — 13 novembre 2026
+
+- Versus : battre l'IA en mode Normal ou Royal rapporte des Cyn : 500 (Promenade de santé), 650 (Standard), 800 (Périple) ou 1 000 (Extrême).
+- Versus : l'IA peut maintenant changer de personnage quand ça l'arrange (de temps en temps en Standard, souvent en Périple et en Extrême), comme un vrai joueur.
+- Versus : la bulle des Cyn de l'IA est grande comme celle du joueur, en miroir à droite.
+- Versus : on se déplace dans l'arbre de l'IA comme dans le sien (glisser, molette, pincer, zoom, Recentrer). La vue suit le personnage joué par l'IA, sauf si tu te déplaces dans son arbre.
+- Versus : dans le menu, chaque difficulté a sa couleur : bleu, vert, orange et rouge.
+
 ## v0.1.7a — 13 novembre 2026
 
 - Nouveau mode Versus : affronte une IA ! Au départ, choisis le mode (Normal, Royal ou Zombie), la difficulté (Promenade de santé, Standard, Périple ou Extrême) et l'objectif de victoire, puis crée ton personnage. La partie commence toujours en 1780.

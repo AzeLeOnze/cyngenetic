@@ -230,6 +230,7 @@ button{font:inherit;color:inherit}
 @media (max-width:520px){ .optsub{padding-left:6px} }
 :root:is([data-skin="dark"],[data-skin="goth"]) .switch.optrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
 .si-potion{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ff7ad8 55%,#9e0077)}
+.si-reveil{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#ffcf3a 50%,#9a4dff)}
 .si-decrim{background:radial-gradient(circle at 35% 30%,#fff 0 10%,#7fe3ff 55%,#0074dc)}
 .picklist{display:grid;gap:8px;max-height:min(60vh,520px);overflow:auto;padding:2px}
 .pickrow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;padding:10px 12px;border-radius:16px;border:1px solid #fff;background:rgba(255,255,255,.8);
@@ -1037,6 +1038,19 @@ body.vsmode .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px}
   border:1px solid rgba(0,150,100,.25);font:800 15px var(--font-display);color:#006b4f;font-variant-numeric:tabular-nums}
 .ai-cyn svg{width:26px;height:26px;padding:5px;border-radius:50%;fill:#fff;background:linear-gradient(180deg,#5ee08a,#00a35a)}
 .ai-cyn::after{content:"Cyn";font:800 11px var(--font-display);opacity:.7}
+.ai-cynb{cursor:default}
+.ai-cynb:hover{filter:none}
+@media (min-width:901px){ .tree-head .hud.ai-hud{left:auto;right:calc(16px + var(--sbw, 0px))} }   /* miroir de la bulle du joueur */
+.vsopt.d-easy{--dc:#0a74e8;--dbg:#e4f2ff;--dbg2:#bfe0ff;--dgl:rgba(10,116,232,.25)}
+.vsopt.d-std{--dc:#279a00;--dbg:#ebfbdc;--dbg2:#c9f3a4;--dgl:rgba(39,154,0,.25)}
+.vsopt.d-hard{--dc:#e07a00;--dbg:#fff4dc;--dbg2:#ffdc9a;--dgl:rgba(255,150,0,.3)}
+.vsopt.d-ext{--dc:#d8102a;--dbg:#ffe6e9;--dbg2:#ffbcc4;--dgl:rgba(216,16,42,.25)}
+.vsopt.dif{border-left:7px solid var(--dc);background:linear-gradient(180deg,#fff,var(--dbg))}
+.vsopt.dif b{color:var(--dc)}
+.vsopt.dif[aria-pressed="true"]{border-color:var(--dc);border-left-width:7px;background:linear-gradient(180deg,var(--dbg),var(--dbg2));box-shadow:0 0 0 3px var(--dgl)}
+.vsreward{display:inline-flex;align-items:center;gap:8px;margin:2px 0 4px;padding:8px 16px;border-radius:99px;font:800 16px var(--font-display);color:#7a4600;
+  background:linear-gradient(180deg,#fff6c8,#ffd64a);border:2px solid #fff;box-shadow:0 4px 12px rgba(200,140,0,.3)}
+.vsreward svg{width:22px;height:22px;fill:#00806a}
 .ai-out{padding:4px 10px;border-radius:99px;background:#5a6b7d;color:#fff;font:800 12px var(--font-display)}
 .ai-scroll{flex:1;min-height:0;overflow:auto;cursor:grab;border-top:1px solid rgba(255,255,255,.8);
   background:radial-gradient(ellipse at 50% 0%,rgba(255,220,230,.45),rgba(255,255,255,0) 70%)}
@@ -1325,16 +1339,17 @@ body.no-deco .gothfx .bat{display:none}
     </section>
     <section class="glass treebox aibox" id="aiBox" hidden>
       <div class="tree-head ai-head">
+        <div class="hud ai-hud"><span class="cyn ai-cynb" data-ta="vs_ai_cyn" data-tt="vs_ai_cyn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6 1-4.6 2.5-6.2z"/></svg><b id="aiCynVal">0</b></span></div>
         <span class="vs-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v2h4a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4zM8.5 9a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM8 14v2h8v-2zM1 9h2v5H1zm20 0h2v5h-2zM9 20h6v2H9z"/></svg><span data-t="vs_ai"></span></span>
         <h2 id="aiTitle"></h2>
         <span class="stats" id="aiStats"></span>
-        <span class="ai-cyn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6 1-4.6 2.5-6.2z"/></svg><b id="aiCynVal">0</b></span>
         <span class="ai-out" id="aiOut" data-t="vs_out" hidden></span>
         <div class="pills zoomer" role="group">
           <button data-act="aizoom" data-v="-1" data-ta="zoom_out" data-tt="zoom_out">−</button>
           <button data-act="aizoom" data-v="0" id="aiZoomPct" data-ta="zoom_fit" data-tt="zoom_fit">100%</button>
           <button data-act="aizoom" data-v="1" data-ta="zoom_in" data-tt="zoom_in">+</button>
         </div>
+        <button class="gel ghost" data-act="aicenter"><span data-t="center"></span></button>
       </div>
       <div id="aiScroll" class="ai-scroll"><div id="aiSizer" class="ai-sizer"><div id="aiCanvas" class="tree-canvas"></div></div></div>
     </section>
@@ -1367,9 +1382,32 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.7a';
+const APP_VERSION = '0.1.7d';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.7d', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Versus : gagner en mode Zombie rapporte 900 Cyn, quelle que soit la difficulté.',
+       'Versus : les succès sont désactivés pendant une partie contre l\'IA.'],
+   en:['Versus: winning in Zombie mode earns 900 Cyn, whatever the difficulty.',
+       'Versus: achievements are turned off during a game against the AI.']},
+  {v:'0.1.7c', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Boutique : nouveau Réveil du destin (190 Cyn). Choisis une future star ou un futur criminel de la famille qui a l\'âge légal : il devient star ou criminel tout de suite.',
+       'Boutique : la Potion de santé coûte maintenant 315 Cyn, et la Décriminalisation 310 Cyn.',
+       'Versus : l\'IA utilise aussi le Réveil du destin en Partie de Star et en Partie de Crime.'],
+   en:['Shop: new Destiny awakening (190 Cyn). Pick a future star or future criminal in the family who is of legal age: they become a star or a criminal right away.',
+       'Shop: the Health potion now costs 315 Cyn, and Decriminalisation 310 Cyn.',
+       'Versus: the AI also uses Destiny awakening in Star and Crime games.']},
+  {v:'0.1.7b', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Versus : battre l\'IA en mode Normal ou Royal rapporte des Cyn : 500 (Promenade de santé), 650 (Standard), 800 (Périple) ou 1 000 (Extrême).',
+       'Versus : l\'IA peut maintenant changer de personnage quand ça l\'arrange (de temps en temps en Standard, souvent en Périple et en Extrême), comme un vrai joueur.',
+       'Versus : la bulle des Cyn de l\'IA est grande comme celle du joueur, en miroir à droite.',
+       'Versus : on se déplace dans l\'arbre de l\'IA comme dans le sien (glisser, molette, pincer, zoom, Recentrer). La vue suit le personnage joué par l\'IA, sauf si tu te déplaces dans son arbre.',
+       'Versus : dans le menu, chaque difficulté a sa couleur : bleu, vert, orange et rouge.'],
+   en:['Versus: beating the AI in Normal or Royal mode earns Cyn: 500 (Walk in the park), 650 (Standard), 800 (Odyssey) or 1,000 (Extreme).',
+       'Versus: the AI can now switch character whenever it suits it (now and then on Standard, often on Odyssey and Extreme), like a real player.',
+       'Versus: the AI\'s Cyn bubble is as big as the player\'s, mirrored on the right.',
+       'Versus: you can move around the AI\'s tree like your own (drag, wheel, pinch, zoom, Re-center). The view follows the AI\'s character unless you move around its tree.',
+       'Versus: in the menu, each difficulty has its own colour: blue, green, orange and red.']},
   {v:'0.1.7a', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Nouveau mode Versus : affronte une IA ! Au départ, choisis le mode (Normal, Royal ou Zombie), la difficulté (Promenade de santé, Standard, Périple ou Extrême) et l\'objectif de victoire, puis crée ton personnage. La partie commence toujours en 1780.',
        'Objectifs du Versus : Partie de vitesse (le plus de générations), de lenteur (le moins de générations), de Star (le plus de stars) ou de Crime (le plus de meurtres). En mode Royal : vitesse, lenteur ou Partie de Noble (le plus de Nobles). En mode Zombie : Partie Classique (le plus de vivants en 2100).',
@@ -2807,8 +2845,8 @@ fr:{
   vs_title:"Affronte l'IA", vs_intro:"Deux familles démarrent en 1780 : la tienne à gauche, celle de l'IA à droite. L'IA joue toute seule, selon la difficulté choisie, et gagne ses propres Cyn. Si plus personne n'est en vie dans une famille, elle a perdu.",
   vs_mode:'Mode de jeu', vs_m_normal:'Normal', vs_m_royal:'Royal', vs_m_zombie:'Zombie',
   vs_diff:'Difficulté', vs_d_easy:'Promenade de santé', vs_d_std:'Standard', vs_d_hard:'Périple', vs_d_ext:'Extrême',
-  vs_d_easy_h:"L'IA joue sans stratégie, ne dépense jamais ses Cyn et en gagne moitié moins.", vs_d_std_h:"L'IA joue normalement et fait quelques achats.",
-  vs_d_hard_h:"L'IA vise l'objectif, choisit bien ses héritiers et dépense ses Cyn avec soin.", vs_d_ext_h:"L'IA joue à fond pour gagner, démarre avec 900 Cyn et en gagne presque deux fois plus.",
+  vs_d_easy_h:"L'IA joue sans stratégie et ne dépense jamais ses Cyn. Victoire : +500 Cyn (Zombie : +900).", vs_d_std_h:"L'IA joue normalement, fait quelques achats et change parfois de personnage. Victoire : +650 Cyn.",
+  vs_d_hard_h:"L'IA vise l'objectif, change souvent de personnage et dépense ses Cyn avec soin. Victoire : +800 Cyn.", vs_d_ext_h:"L'IA joue à fond, démarre avec 900 Cyn et en gagne presque deux fois plus. Victoire : +1 000 Cyn.",
   vs_goal:'Objectif de victoire',
   vs_g_speed:'Partie de vitesse', vs_g_speed_h:"Le plus de générations en 2100. En cas d'égalité, gagne la famille dont la personne la plus âgée de la dernière génération est née en premier.",
   vs_g_slow:'Partie de lenteur', vs_g_slow_h:"Le moins de générations en 2100. En cas d'égalité, gagne la famille dont la personne la plus jeune de la dernière génération est née en dernier.",
@@ -2816,9 +2854,9 @@ fr:{
   vs_g_crime:'Partie de Crime', vs_g_crime_h:'Le plus de meurtres en 2100. Égalité possible.',
   vs_g_noble:'Partie de Noble', vs_g_noble_h:'Le plus de Nobles en 2100, morts et vivants. Égalité possible.',
   vs_g_classic:'Partie Classique', vs_g_classic_h:'Le plus de membres de la famille vivants (et humains) en 2100. Égalité possible.',
-  vs_1780:"La partie commence obligatoirement en 1780. Le premier personnage de l'IA est un homme de 18 ans, tiré au hasard. Pas de destin de départ en Versus.",
+  vs_1780:"Victoire en mode Zombie : +900 Cyn, quelle que soit la difficulté. Les succès sont désactivés en Versus. La partie commence obligatoirement en 1780. Le premier personnage de l'IA est un homme de 18 ans, tiré au hasard. Pas de destin de départ en Versus.",
   vs_ok:'Valider', vs_cancel:'Annuler', vs_edit:'Modifier', vs_sum:(m,d,g)=>`Contre l'IA · ${m} · ${d} · ${g}`,
-  vs_ai:'IA', vs_you:'Toi', vs_played:"Personnage joué par l'IA", vs_out:'Éliminée', vs_ai_fam:"Famille de l'IA", m_ai:'IA', vs_keep:'Continuer seul',
+  vs_ai:'IA', vs_you:'Toi', vs_ai_cyn:"Cyn de l'IA", vs_reward:n=>`+${n} Cyn pour ta victoire !`, vs_played:"Personnage joué par l'IA", vs_out:'Éliminée', vs_ai_fam:"Famille de l'IA", m_ai:'IA', vs_keep:'Continuer seul',
   vs_u_gen:n=>n>1?'générations':'génération', vs_u_star:n=>n>1?'stars':'star', vs_u_crime:n=>n>1?'meurtres':'meurtre', vs_u_noble:n=>n>1?'nobles':'noble', vs_u_live:n=>n>1?'vivants':'vivant',
   vs_res_win:'Victoire !', vs_res_lose:'Défaite…', vs_res_tie:'Égalité !',
   vs_note:(a,b,ua,ub)=>`Toi : ${a} ${ua} · IA : ${b} ${ub}.`,
@@ -2848,6 +2886,8 @@ fr:{
   shop_fertile:'Fertilité', shop_fertile_d:'La prochaine naissance de ton personnage sera multiple : jumeaux (77 %), triplés (15 %) ou quadruplés (8 %).',
   shop_immune:'Immunité', shop_immune_d:'Ton personnage ne peut plus tomber malade ni avoir d\'accident pendant 50 ans.',
   shop_midlife:'Crise de la cinquantaine', shop_midlife_d:'Ton personnage cumule un deuxième atout, au choix.',
+  shop_reveil:'Réveil du destin', shop_reveil_d:"Choisis une future star ou un futur criminel de la famille qui a l'âge légal : son destin se révèle tout de suite.",
+  shop_reveil_none:a=>`Aucune future star ni aucun futur criminel de ${a} ans ou plus dans la famille.`, pick_reveil:()=>'Quel destin faut-il réveiller ?',
   shop_decrim:'Décriminalisation', shop_decrim_d:'Choisis un criminel ou un futur criminel de la famille : il redevient une personne normale.',
   shop_immune_on:y=>`Déjà immunisé jusqu'en ${y}.`, shop_midlife_done:n=>`${n} a déjà cumulé un deuxième atout.`, shop_decrim_none:'Aucun criminel dans la famille.',
   shop_pick:'Choisir', shop_back:'Retour à la boutique', pick_decrim:()=>'Qui doit redevenir quelqu\'un de normal ?', pick_midlife:n=>`Quel atout ${n} cumule-t-il ?`,
@@ -3061,8 +3101,8 @@ en:{
   vs_title:'Face the AI', vs_intro:"Two families start in 1780: yours on the left, the AI's on the right. The AI plays on its own, at the difficulty you pick, and earns its own Cyn. When nobody is left alive in a family, that family loses.",
   vs_mode:'Game mode', vs_m_normal:'Normal', vs_m_royal:'Royal', vs_m_zombie:'Zombie',
   vs_diff:'Difficulty', vs_d_easy:'Walk in the park', vs_d_std:'Standard', vs_d_hard:'Odyssey', vs_d_ext:'Extreme',
-  vs_d_easy_h:'The AI plays without a plan, never spends its Cyn and earns half as many.', vs_d_std_h:'The AI plays normally and buys a few things.',
-  vs_d_hard_h:'The AI aims for the goal, picks its heirs well and spends its Cyn wisely.', vs_d_ext_h:'The AI plays all-out to win, starts with 900 Cyn and earns almost twice as many.',
+  vs_d_easy_h:'The AI plays without a plan and never spends its Cyn. Win: +500 Cyn (Zombie: +900).', vs_d_std_h:'The AI plays normally, buys a few things and sometimes switches character. Win: +650 Cyn.',
+  vs_d_hard_h:'The AI aims for the goal, often switches character and spends its Cyn wisely. Win: +800 Cyn.', vs_d_ext_h:'The AI plays all-out, starts with 900 Cyn and earns almost twice as many. Win: +1,000 Cyn.',
   vs_goal:'Victory goal',
   vs_g_speed:'Speed game', vs_g_speed_h:'Most generations by 2100. On a tie, the family whose oldest member of the last generation was born first wins.',
   vs_g_slow:'Slow game', vs_g_slow_h:'Fewest generations by 2100. On a tie, the family whose youngest member of the last generation was born last wins.',
@@ -3070,9 +3110,9 @@ en:{
   vs_g_crime:'Crime game', vs_g_crime_h:'Most murders by 2100. Ties are possible.',
   vs_g_noble:'Noble game', vs_g_noble_h:'Most Nobles by 2100, dead or alive. Ties are possible.',
   vs_g_classic:'Classic game', vs_g_classic_h:'Most family members alive (and human) in 2100. Ties are possible.',
-  vs_1780:"The game always starts in 1780. The AI's first character is a random 18-year-old man. No starting destiny in Versus.",
+  vs_1780:"Winning in Zombie mode: +900 Cyn, whatever the difficulty. Achievements are turned off in Versus. The game always starts in 1780. The AI's first character is a random 18-year-old man. No starting destiny in Versus.",
   vs_ok:'Confirm', vs_cancel:'Cancel', vs_edit:'Change', vs_sum:(m,d,g)=>`Against the AI · ${m} · ${d} · ${g}`,
-  vs_ai:'AI', vs_you:'You', vs_played:'Played by the AI', vs_out:'Eliminated', vs_ai_fam:"AI's family", m_ai:'AI', vs_keep:'Keep playing alone',
+  vs_ai:'AI', vs_you:'You', vs_ai_cyn:"AI's Cyn", vs_reward:n=>`+${n} Cyn for your win!`, vs_played:'Played by the AI', vs_out:'Eliminated', vs_ai_fam:"AI's family", m_ai:'AI', vs_keep:'Keep playing alone',
   vs_u_gen:n=>n>1?'generations':'generation', vs_u_star:n=>n>1?'stars':'star', vs_u_crime:n=>n>1?'murders':'murder', vs_u_noble:n=>n>1?'nobles':'noble', vs_u_live:n=>n>1?'alive':'alive',
   vs_res_win:'Victory!', vs_res_lose:'Defeat…', vs_res_tie:"It's a tie!",
   vs_note:(a,b,ua,ub)=>`You: ${a} ${ua} · AI: ${b} ${ub}.`,
@@ -3102,6 +3142,8 @@ en:{
   shop_fertile:'Fertility', shop_fertile_d:"Your character's next birth will be multiple: twins (77%), triplets (15%) or quadruplets (8%).",
   shop_immune:'Immunity', shop_immune_d:"Your character can't fall ill or have an accident for 50 years.",
   shop_midlife:'Midlife crisis', shop_midlife_d:'Your character gets a second gift of your choice.',
+  shop_reveil:'Destiny awakening', shop_reveil_d:'Pick a future star or future criminal in the family who is of legal age: their destiny is revealed right away.',
+  shop_reveil_none:a=>`No future star or future criminal aged ${a} or over in the family.`, pick_reveil:()=>'Whose destiny should awaken?',
   shop_decrim:'Decriminalisation', shop_decrim_d:'Pick a criminal or future criminal in the family: they become a normal person again.',
   shop_immune_on:y=>`Already immune until ${y}.`, shop_midlife_done:n=>`${n} already has a second gift.`, shop_decrim_none:'No criminals in the family.',
   shop_pick:'Choose', shop_back:'Back to the shop', pick_decrim:()=>'Who should become a normal person again?', pick_midlife:n=>`Which gift does ${n} get?`,
@@ -3254,7 +3296,7 @@ const achTitle = id => LANG==='fr' ? ACHV[id][3] : ACHV[id][5];
 const achDesc = id => LANG==='fr' ? ACHV[id][4] : ACHV[id][6];
 const medal = (id, cls='') => `<span class="medal t-${ACHV[id][2]} ${cls}">${icon(ACH_CATS.find(c => c[0]===ACHV[id][1])[1])}</span>`;
 function unlock(id){
-  if(VSH || !R.ach || rulesTweaked() || (S && (S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
+  if(VSH || !R.ach || rulesTweaked() || (S && (S.vs || S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
   const hadGold = goldUnlocked();
   ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? familyName(P(S.founderId)) : ''};
   if(!hadGold && goldUnlocked()) setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k:'gold', a:[]}); sfx.fame(); }, 3600);
@@ -4127,8 +4169,9 @@ function advance(dt){
 }
 
 /* ================= Mode Versus : une IA joue sa propre famille, en même temps que le joueur ================= */
-const VS_DIFF = {easy:{cyn:0, gain:.5, shop:0, smart:0, keep:0}, std:{cyn:150, gain:1, shop:.5, smart:0, keep:4},    // keep : en dessous de ce nombre de
-  hard:{cyn:400, gain:1.3, shop:1, smart:1, keep:8}, ext:{cyn:900, gain:1.8, shop:1, smart:2, keep:12}};                      // descendants vivants, tous fondent une famille
+const VS_DIFF = {easy:{cyn:0, gain:.5, shop:0, smart:0, keep:0, swap:0}, std:{cyn:150, gain:1, shop:.5, smart:0, keep:4, swap:365},   // keep : en dessous de ce nombre de
+  hard:{cyn:400, gain:1.3, shop:1, smart:1, keep:8, swap:90}, ext:{cyn:900, gain:1.8, shop:1, smart:2, keep:12, swap:30}};           // descendants vivants, tous fondent une famille ; swap : tous les combien de jours l'IA peut changer de personnage
+const VS_REWARD = {easy:500, std:650, hard:800, ext:1000}, VS_REWARD_Z = 900;   // Cyn gagnés par le joueur s'il bat l'IA (Normal et Royal ; Zombie : 900)
 const VS_GOALS = {normal:['speed','slow','star','crime'], royal:['speed','slow','noble'], zombie:['classic']};
 const VS_KEY = {speed:'gens', slow:'gens', star:'stars', crime:'kills', noble:'nobles', classic:'alive'};
 const VS_UNIT = {speed:'gen', slow:'gen', star:'star', crime:'crime', noble:'noble', classic:'live'};
@@ -4168,11 +4211,28 @@ function vsHeir(dead){                                 // héritier de l'IA : le
   if(S.aiGoal === 'slow') return pool.slice().sort((a, b) => genOf(a) - genOf(b) || a.birth - b.birth)[0];
   return pool[0];
 }
+function vsVal(p, day){                               // intérêt de jouer ce personnage pour l'IA (null : impossible)
+  const A = ageAt(p, day);
+  if(!p.blood || p.death != null || p.zombie || jailed(p) || A < Math.max(12, R.legal - 6) || A > 42) return null;
+  const g = S.aiGoal, u = currentUnion(p.id), kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id)).length;
+  let v = g === 'speed' ? genOf(p) * 100 - A : g === 'slow' ? -genOf(p) * 100 : 0;      // vitesse : la génération la plus avancée ; lenteur : la moins avancée
+  if(u){ const m = [p, P(u.b)].find(x => x.sex === 'F'); v += m && fertile(m, day) ? 30 : -40; if(u.preg) v += 10; }
+  else v += A >= R.legal ? 20 : 5;
+  v -= kids * 6;
+  if(royalOn() && (p.id === S.royal.king || p.id === heirId())) v += 25;
+  return v;
+}
+function vsSwap(day){                                  // l'IA peut incarner un autre membre de sa famille quand ça l'arrange
+  const cur = active(), cv = vsVal(cur, day);
+  let best = null, bv = -Infinity;
+  for(const p of living()){ const v = vsVal(p, day); if(v != null && v > bv){ best = p; bv = v; } }
+  if(best && best.id !== cur.id && (cv == null || bv > cv + 15)){ S.activeId = best.id; log('info','incarnate',[best.id], day, false); }
+}
 function vsAiShop(day){                                // la boutique de l'IA, avec ses propres Cyn
   const D = VS_DIFF[S.aiDiff]; if(!D.shop || Math.random() > D.shop) return;
   const me = active(), y = yearOf(day), g = S.aiGoal, pay = n => S.cynAI >= n ? (S.cynAI -= n, true) : false;
   const sick = living().filter(p => p.blood && p.ill && !p.zombie && (p.id === me.id || D.smart > 1));
-  if(sick.length && S.cynAI >= 185 + (['star','crime','noble'].includes(g) ? 300 : 0) && pay(185)) cureAll(sick[0]);
+  if(sick.length && S.cynAI >= 315 + (['star','crime','noble'].includes(g) ? 300 : 0) && pay(315)) cureAll(sick[0]);
   if(S.zombie){
     if(!S.zombie.began || y > 2050) return;
     if(y >= S.startYear + 120){
@@ -4185,6 +4245,10 @@ function vsAiShop(day){                                // la boutique de l'IA, a
     return;
   }
   const king = royalOn() && me.id === S.royal.king;
+  if(g === 'star' || g === 'crime'){                   // réveil du destin : une future star (ou un futur criminel) se révèle tout de suite
+    const w = reveilList().find(p => g === 'star' ? p.star : p.crim);
+    if(w && pay(190)) reveil(w, day);
+  }
   if((g === 'star' || g === 'crime') && !S.nextFate && !king){ const fate = g === 'star' ? 'star' : 'crim'; if(pay(fate === 'star' ? 750 : 600)) S.nextFate = fate; }
   else if(g === 'noble'){ const l = lueurList(); if(l.length && pay(800)) ennoble(pick(l), day); }
   else if(g === 'speed' && D.smart && !S.nextMulti && pay(625)) S.nextMulti = true;
@@ -4203,6 +4267,8 @@ function vsDay(day){                                   // un jour dans la famill
         const hum = living().filter(p => p.blood && !p.zombie);
         if(hum.length) A.activeId = hum.sort((x, y) => Math.abs(ageAt(x, day) - 25) - Math.abs(ageAt(y, day) - 25))[0].id;
       }
+      const sw = VS_DIFF[A.aiDiff].swap;
+      if(!A.over && sw && day % sw === 0) vsSwap(day);
       if(!A.over && day % 7 === 0) vsAiShop(day);
     }
   } finally { S = me; RH = undefined; VSH = false; }
@@ -4248,13 +4314,15 @@ function openVsEnd(kind){                              // 2100 (ou l'IA élimin�
   if(kind === 'ai_out'){ res = 'win'; note = t('vs_ai_dead', b.name); }
   else ({res, note} = vsCompare(a, b, V.goal));
   V.done = true; V.result = res;
+  const reward = res === 'win' ? (V.mode === 'zombie' ? VS_REWARD_Z : VS_REWARD[V.diff]) : 0;   // victoire : des Cyn selon la difficulté (900 en Zombie)
+  if(reward){ CYN += reward; store.set(CYN_KEY, String(CYN)); cynPend += reward; cynShow(); V.reward = reward; a.cyn = CYN; }
   if(res === 'win'){ sfx.fame(); burst(['#ffd000','#ffffff','#74e600','#3fd0ff'], 60); } else if(res === 'lose') sfx.sad(); else sfx.pop();
-  openModal(`<div class="m-head"><div class="eyebrow">${t('lab_vs')} · ${t('vs_g_' + V.goal)} · ${fmt(S.t)}</div><h2>${t('vs_res_' + res)}</h2><p>${esc(note)}</p></div>
+  openModal(`<div class="m-head"><div class="eyebrow">${t('lab_vs')} · ${t('vs_g_' + V.goal)} · ${fmt(S.t)}</div><h2>${t('vs_res_' + res)}</h2><p>${esc(note)}</p>${reward ? `<span class="vsreward">${icon('dna')}${esc(t('vs_reward', cynFmt(reward)))}</span>` : ''}</div>
     ${vsTable(a, b, V)}
     <div class="m-actions"><button class="gel lime big" data-act="${kind === '2100' ? 'keep' : 'vskeep'}"><span>${t(kind === '2100' ? 'keep_playing' : 'vs_keep')}</span></button><button class="gel ghost big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
   save();
 }
-let aiZoom = null, aiFit = 1, aiW = 0, aiH = 0;
+let aiZoom = null, aiW = 0, aiH = 0, aiPadX = 0, aiPadY = 0, aiLayout = {}, aiNW = {}, aiFollow = true, aiFocusKey = '';
 function renderAi(){                                   // l'arbre de l'IA, à droite (onglet IA sur téléphone)
   const V = S && S.vs, box = $('#aiBox');
   document.body.classList.toggle('vsmode', !!V);
@@ -4263,31 +4331,79 @@ function renderAi(){                                   // l'arbre de l'IA, à dr
   const me = S, nw = nodeWidths; let r;
   S = V.ai; RH = undefined; VSH = true;
   try{
-    r = buildTree();
+    r = buildTree(); aiNW = nodeWidths;
     const all = Object.values(S.people);
     r.title = t('family', familyName(P(S.founderId))); r.stats = t('stats', all.length, living().length, Math.max(...all.filter(p => p.blood).map(genOf)));
   } finally { S = me; nodeWidths = nw; RH = undefined; VSH = false; }
   $('#aiTitle').textContent = r.title; $('#aiStats').textContent = r.stats;
   $('#aiCynVal').textContent = cynFmt(V.ai.cynAI || 0); $('#aiOut').hidden = !V.ai.over;
-  const sc = $('#aiScroll'), cv = $('#aiCanvas'), sz = $('#aiSizer');
+  const sc = $('#aiScroll'), cv = $('#aiCanvas');
+  box.style.setProperty('--sbw', (sc.offsetWidth - sc.clientWidth) + 'px');       // la bulle de Cyn évite la barre de défilement
   const html = r.html.split('data-act="fiche"').join('data-act="aifiche"').replace(`<em class="rib you">${t('you')}</em>`, `<em class="rib you ai">${t('vs_ai')}</em>`);
   cv.style.width = r.W + 'px'; cv.style.height = r.H + 'px';
   if(html !== cv._h){ cv._h = html; cv.innerHTML = html.split('@T@').join(animT()); }
-  aiW = r.W; aiH = r.H; aiFit = Math.max(.12, Math.min(1, (sc.clientWidth - 16) / r.W));
-  aiApplyZoom();
+  aiLayout = r.pos; aiW = r.W; aiH = r.H;
+  if(aiZoom == null) aiZoom = innerWidth < 700 ? .8 : 1;
+  aiApplyZoom(); aiFollowFocus();
 }
 function aiApplyZoom(){
-  const z = aiZoom ?? aiFit, cv = $('#aiCanvas'), sz = $('#aiSizer');
-  cv.style.transform = `scale(${z})`; sz.style.width = Math.ceil(aiW * z) + 'px'; sz.style.height = Math.ceil(aiH * z) + 'px';
-  $('#aiZoomPct').textContent = Math.round(z * 100) + '%';
+  const sc = $('#aiScroll'), sz = $('#aiSizer'), cv = $('#aiCanvas');
+  aiPadX = Math.round(Math.max(240, sc.clientWidth * .75)); aiPadY = Math.round(Math.max(200, sc.clientHeight * .7));
+  cv.style.transform = `scale(${aiZoom})`; cv.style.left = aiPadX + 'px'; cv.style.top = aiPadY + 'px';
+  sz.style.width = (aiW * aiZoom + aiPadX * 2) + 'px'; sz.style.height = (aiH * aiZoom + aiPadY * 2) + 'px';
+  $('#aiZoomPct').textContent = Math.round(aiZoom * 100) + '%';
 }
-(() => {   // glisser pour se déplacer dans l'arbre de l'IA (souris)
-  const sc = $('#aiScroll'); let drag = null;
+function setAiZoom(z, cx, cy){
+  const sc = $('#aiScroll');
+  z = Math.max(.06, Math.min(1.75, z));
+  if(cx == null){ cx = sc.clientWidth / 2; cy = sc.clientHeight / 2; }
+  const px = (sc.scrollLeft + cx - aiPadX) / aiZoom, py = (sc.scrollTop + cy - aiPadY) / aiZoom;
+  aiZoom = z; aiApplyZoom();
+  sc.scrollLeft = px * aiZoom + aiPadX - cx; sc.scrollTop = py * aiZoom + aiPadY - cy;
+}
+function aiFitZoom(){
+  const sc = $('#aiScroll');
+  setAiZoom(Math.min(1, (sc.clientWidth - 16) / aiW, (sc.clientHeight - 16) / aiH));
+  sc.scrollTo({left: aiPadX + aiW * aiZoom / 2 - sc.clientWidth / 2, top: aiPadY - 8});
+}
+function aiCenter(smooth){                             // centre la vue sur le personnage joué par l'IA
+  if(!S || !S.vs) return;
+  const id = S.vs.ai.activeId, p = aiLayout[id], sc = $('#aiScroll'); if(!p) return;
+  sc.scrollTo({left: aiPadX + (p.x + (aiNW[id] || NW) / 2) * aiZoom - sc.clientWidth / 2, top: aiPadY + (p.y + NH / 2) * aiZoom - sc.clientHeight / 2.4, behavior: smooth && !reduced ? 'smooth' : 'auto'});
+}
+function aiFollowFocus(){                              // suit le personnage de l'IA, sauf si le joueur se déplace dans son arbre
+  if(!aiFollow || !S || !S.vs) return;
+  const id = S.vs.ai.activeId; if(!aiLayout[id]) return;
+  if(aiFocusKey !== String(id)){ const first = aiFocusKey === ''; aiFocusKey = String(id); aiCenter(!first); return; }   // l'IA change de personnage : on recentre
+  const n = document.querySelector(`#aiCanvas [data-id="${id}"]`), sc = $('#aiScroll'); if(!n) return;
+  const r = n.getBoundingClientRect(), v = sc.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  if(cx < v.left + v.width * .2 || cx > v.right - v.width * .2 || cy < v.top + v.height * .2 || cy > v.bottom - v.height * .2) aiCenter(true);
+}
+(() => {   // l'arbre de l'IA : glisser, pincer, molette (comme l'arbre du joueur)
+  const sc = $('#aiScroll'); let drag = null, pinch = null;
   sc.addEventListener('pointerdown', e => {
+    if(!e.target.closest('.node')) aiFollow = false;              // le joueur se déplace : on arrête de suivre l'IA
     if(e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('.node')) return;
     drag = {x:e.clientX, y:e.clientY, l:sc.scrollLeft, t:sc.scrollTop}; sc.setPointerCapture(e.pointerId); sc.classList.add('grabbing');
   });
   sc.addEventListener('pointermove', e => { if(!drag) return; sc.scrollLeft = drag.l - (e.clientX - drag.x); sc.scrollTop = drag.t - (e.clientY - drag.y); });
+  sc.addEventListener('touchstart', e => {
+    if(e.touches.length === 2){ const [a, b] = e.touches; pinch = {d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), z: aiZoom}; }
+  }, {passive:true});
+  sc.addEventListener('touchmove', e => {
+    if(!pinch || e.touches.length !== 2) return;
+    e.preventDefault();
+    const [a, b] = e.touches, d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), r = sc.getBoundingClientRect();
+    setAiZoom(pinch.z * d / pinch.d, (a.clientX + b.clientX) / 2 - r.left, (a.clientY + b.clientY) / 2 - r.top);
+  }, {passive:false});
+  sc.addEventListener('touchend', e => { if(e.touches.length < 2) pinch = null; });
+  sc.addEventListener('wheel', e => {                 // molette : zoom (Maj + molette : défilement normal)
+    aiFollow = false;
+    if(e.shiftKey && !e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    const r = sc.getBoundingClientRect(), dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1);
+    setAiZoom(aiZoom * Math.exp(-Math.max(-150, Math.min(150, dy)) * .0018), e.clientX - r.left, e.clientY - r.top);
+  }, {passive:false});
   const end = () => { drag = null; sc.classList.remove('grabbing'); };
   sc.addEventListener('pointerup', end); sc.addEventListener('pointercancel', end);
 })();
@@ -5221,7 +5337,7 @@ const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v))
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
   ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
-  ['family', [['decrim',180,'dove'],['potion',185,'potion'],['lueur',800,'sparkle']]],
+  ['family', [['reveil',190,'bolt'],['decrim',310,'dove'],['potion',315,'potion'],['lueur',800,'sparkle']]],
   ['survie', [['vaccin',320,'pill'],['antidote',500,'potion']]],
   ['themes', [['orange',830,'sun'],['xp',2000,'computer'],['dark',5000,'moon']]]
 ];
@@ -5229,6 +5345,9 @@ const SHOP = SHOP_CATS.flatMap(c => c[1]);
 const SHOP_THEMES = ['orange','xp','dark'];
 let cynInfoOpen = false;
 const decrimList = () => S ? living().filter(p => p.crim && inFamily(p)) : [];
+// Réveil du destin : une future star ou un futur criminel de la famille, ayant l'âge légal, se révèle tout de suite
+const reveilList = () => S ? living().filter(p => inFamily(p) && !p.zombie && ageAt(p, S.t) >= R.legal && !royalImmune(p) && ((p.star && !p.star.famous) || (p.crim && !p.crim.declared))) : [];
+function reveil(p, day){ if(p.star && !p.star.famous){ p.star.day = day; becomeStar(p, day); } else if(p.crim && !p.crim.declared){ p.crim.day = day; declareCrim(p, day); } dirty = true; }
 const SHOP_ROYAL = ['lueur'];                       // achats qui n'existent qu'en mode Royal
 const SHOP_ZOMBIE = ['vaccin','antidote'];          // … ou qu'en mode Zombie
 const vaccinList = () => S && S.zombie ? living().filter(p => inFamily(p) && !p.zombie && !zProtected(p)) : [];
@@ -5252,6 +5371,7 @@ function shopState(id, price){                        // disponible ? sinon pour
   if(id === 'midlife' && me.atout2) return {dis:true, note:t('shop_midlife_done', me.first)};
   if(id === 'spouse' && (currentUnion(me.id) || (jailed(me)||!!me.zombie) || age(me) < R.legal)) return {dis:true, note:t((jailed(me)||!!me.zombie) ? 'hint_prison' : currentUnion(me.id) ? 'shop_spouse_taken' : 'shop_spouse_young', me)};
   if(id === 'decrim' && !decrimList().length) return {dis:true, note:t('shop_decrim_none')};
+  if(id === 'reveil' && !reveilList().length) return {dis:true, note:t('shop_reveil_none', R.legal)};
   if(id === 'potion' && !sickList().length) return {dis:true, note:t('shop_potion_none')};
   if(id === 'lueur' && !lueurList().length) return {dis:true, note:t('shop_lueur_none')};
   if((id === 'vaccin' || id === 'antidote') && yearOf(S.t) > 2050) return {dis:true, note:t('shop_z_late')};
@@ -5283,6 +5403,8 @@ function openPick(id){                                // décriminalisation / cr
     ? lueurList().map(p => `<button class="pickrow" data-act="pickdo" data-v="lueur" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(tA(age(p)) + ' · ' + activity(p))}</small></span><em>${t('shop_pick')}</em></button>`)
     : id === 'potion'
     ? sickList().map(p => `<button class="pickrow" data-act="pickdo" data-v="potion" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(sickTxt(p))}</small></span><em>${t('shop_pick')}</em></button>`)
+    : id === 'reveil'
+    ? reveilList().map(p => `<button class="pickrow" data-act="pickdo" data-v="reveil" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc((p.star ? t('future_star') : t('crim_future', p)) + ' · ' + tA(age(p)))}</small></span><em>${t('shop_pick')}</em></button>`)
     : id === 'decrim'
     ? decrimList().map(p => `<button class="pickrow" data-act="pickdo" data-v="decrim" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(jailed(p) ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p))}</small></span><em>${t('shop_pick')}</em></button>`)
     : ATOUTS.filter(a => a[0] !== me.atout).map(a => `<button class="pickrow" data-act="pickdo" data-v="midlife" data-id="${a[0]}"><i class="pickic">${icon(a[4])}</i><span><b>${esc(atoutName(a[0], me))}</b><small>${esc(a[LANG==='fr' ? 5 : 6])}</small></span><em>${t('shop_pick')}</em></button>`);
@@ -5490,7 +5612,7 @@ const ACT = {
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
-    if(d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur' || d.v === 'vaccin' || d.v === 'antidote') return openPick(d.v);
+    if(d.v === 'reveil' || d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur' || d.v === 'vaccin' || d.v === 'antidote') return openPick(d.v);
     if(d.v === 'spouse') return openSpouseForm();
     if(!arm(b, t('shop_confirm'))) return;
     payCyn(it[1]);
@@ -5513,7 +5635,8 @@ const ACT = {
     }
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     const me = active();
-    if(d.v === 'decrim'){ const p = P(+d.id); if(!p || !p.crim || p.death != null) return; payCyn(it[1]); decrim(p); sfx.cure(); burst(['#ffffff','#8cff1a','#3fd0ff'], 40); }
+    if(d.v === 'reveil'){ const p = P(+d.id); if(!p || !reveilList().includes(p)) return; payCyn(it[1]); reveil(p, today()); }
+    else if(d.v === 'decrim'){ const p = P(+d.id); if(!p || !p.crim || p.death != null) return; payCyn(it[1]); decrim(p); sfx.cure(); burst(['#ffffff','#8cff1a','#3fd0ff'], 40); }
     else if(d.v === 'vaccin'){ const p = P(+d.id); if(!p || p.death != null || p.zombie || zProtected(p)) return; payCyn(it[1]); p.zvacUntil = today() + Math.round(20*365.25); log('cure','vaccin',[p.id], today(), true); sfx.cure(); burst(['#8cff1a','#ffffff','#3fd0ff'], 40); }
     else if(d.v === 'antidote'){ const p = P(+d.id); if(!p || !p.zombie) return; payCyn(it[1]); unzombify(p, today()); sfx.cure(); burst(['#8cff1a','#ffffff','#7fe3ff','#ffd000'], 50); }
     else if(d.v === 'lueur'){ const p = P(+d.id); if(!p || p.death != null || p.noble === 'noble') return; payCyn(it[1]); ennoble(p, today()); sfx.fame(); burst(['#c9a8ff','#ffffff','#ffd23a','#7a2bd6'], 50); }
@@ -5551,7 +5674,8 @@ const ACT = {
   vsok(){ VS_CFG = Object.assign({}, vsDraft); closeModal(true); vsSetup(); sfx.pop(); },
   vscancel(){ closeModal(true); vsSetup(); },
   vskeep(){ closeModal(true); save(); },
-  aizoom(d){ const z = aiZoom ?? aiFit; aiZoom = +d.v === 0 ? null : Math.max(.08, Math.min(1.5, z * (+d.v > 0 ? 1.25 : .8))); aiApplyZoom(); },
+  aizoom(d){ const v = +d.v; if(v === 0){ aiFollow = false; aiFitZoom(); } else setAiZoom(aiZoom * (v > 0 ? 1.25 : .8)); },
+  aicenter(){ aiFollow = true; aiFocusKey = ''; renderAi(); aiCenter(true); },
   aifiche(d){                                          // fiche d'un membre de la famille de l'IA (lecture seule)
     if(!S || !S.vs) return;
     const me = S; S = S.vs.ai; RH = undefined; VSH = true;
@@ -5731,7 +5855,7 @@ function vsSetup(){                                   // 1780 imposé, mode impo
 }
 function openVsMenu(re){
   const d = vsDraft;
-  const opt = (k, v, title, hint) => `<button type="button" class="vsopt" data-act="vsset" data-k="${k}" data-v="${v}" aria-pressed="${d[k] === v}"><b>${title}</b><small>${hint}</small></button>`;
+  const opt = (k, v, title, hint) => `<button type="button" class="vsopt${k === 'diff' ? ' dif d-' + v : ''}" data-act="vsset" data-k="${k}" data-v="${v}" aria-pressed="${d[k] === v}"><b>${title}</b><small>${hint}</small></button>`;
   openModal(`<div class="m-head"><div class="eyebrow">${t('lab_vs')}</div><h2>${t('vs_title')}</h2><p class="hint">${t('vs_intro')}</p></div>
     <div class="vsmenu">
       <span class="lab">${t('vs_mode')}</span>
@@ -5850,6 +5974,7 @@ function enterGame(){
   albumScan(true); cynPend = 0; cynShow();
   if(modalOpen) closeModal(true);
   dirty = true; lastYear = null; lastDecade = null;
+  aiZoom = null; aiFollow = true; aiFocusKey = '';     // Versus : l'arbre de l'IA repart centré sur son personnage
   $('#mapView').innerHTML = ''; dotEls = new Map();
   if(innerWidth < 700) zoom = .8;                     // sur téléphone, l'arbre démarre un peu dézoomé
   seenLog = S.log.length; setMobileTab(mtab === 'map' && !SET.map ? 'tree' : mtab);
