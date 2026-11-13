@@ -672,6 +672,28 @@ body.zmode .treebox{position:relative}
 @keyframes pres{0%,100%{box-shadow:0 0 0 2px #1f3fbf,0 0 0 4px #fff,0 0 0 6px #e8203a,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(0,40,140,.3)}
   50%{box-shadow:0 0 0 2px #1f3fbf,0 0 0 4px #fff,0 0 0 6px #e8203a,0 0 40px 14px rgba(80,120,255,.55),0 8px 18px rgba(0,40,140,.3)}}
 .rib.pr{right:8px;color:#fff;background:linear-gradient(180deg,#5574ff,#1f3fbf);border:1px solid #fff;box-shadow:inset 0 -3px 0 #e8203a,0 0 10px rgba(255,205,0,.7)}
+/* 0.1.9b : bulles des politiques aux couleurs du pays (France par défaut) */
+:root[data-ctry="uk"] .node.pol,:root[data-ctry="uk"] .node.partner.pol{background:linear-gradient(135deg,transparent 45%,rgba(200,16,46,.16) 45% 55%,transparent 55%),linear-gradient(45deg,transparent 45%,rgba(200,16,46,.16) 45% 55%,transparent 55%),linear-gradient(160deg,#e4e9f7 0%,#ffffff 55%,#e4e9f7 100%);box-shadow:0 0 0 2px #012169,0 0 0 4px #fff,0 0 0 6px #c8102e,0 8px 18px rgba(1,33,105,.3)}
+:root[data-ctry="uk"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(1,33,105,.3) 44%,rgba(255,255,255,.95) 48%,rgba(200,16,46,.3) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
+:root[data-ctry="uk"] .node.pol .nt b,:root[data-ctry="uk"] .node.pol .nt span,:root[data-ctry="uk"] .node.pol .n-life,:root[data-ctry="uk"] .node.pol .n-city{color:#012169}
+:root[data-ctry="uk"] .node.pol .n-band{background:linear-gradient(90deg,#012169,#24408f 55%,#c8102e);text-shadow:0 1px 2px rgba(0,0,0,.55)}
+:root[data-ctry="uk"] .node.pres{animation-name:presUK}
+@keyframes presUK{0%,100%{box-shadow:0 0 0 2px #012169,0 0 0 4px #fff,0 0 0 6px #c8102e,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(1,33,105,.3)}50%{box-shadow:0 0 0 2px #012169,0 0 0 4px #fff,0 0 0 6px #c8102e,0 0 40px 14px rgba(200,16,46,.45),0 8px 18px rgba(1,33,105,.3)}}
+:root[data-ctry="uk"] .rib.pr{background:linear-gradient(180deg,#24408f,#012169);box-shadow:inset 0 -3px 0 #c8102e,0 0 10px rgba(255,205,0,.7)}
+:root[data-ctry="de"] .node.pol,:root[data-ctry="de"] .node.partner.pol{background:linear-gradient(180deg,#ececec 0%,#ffffff 30%,#ffe6e6 62%,#fff4cc 100%);box-shadow:0 0 0 2px #111,0 0 0 4px #dd0000,0 0 0 6px #ffce00,0 8px 18px rgba(60,0,0,.3)}
+:root[data-ctry="de"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(221,0,0,.28) 44%,rgba(255,255,255,.95) 48%,rgba(255,206,0,.4) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
+:root[data-ctry="de"] .node.pol .nt b,:root[data-ctry="de"] .node.pol .nt span,:root[data-ctry="de"] .node.pol .n-life,:root[data-ctry="de"] .node.pol .n-city{color:#2a1a00}
+:root[data-ctry="de"] .node.pol .n-band{background:linear-gradient(90deg,#111,#dd0000 50%,#d9a400);text-shadow:0 1px 2px rgba(0,0,0,.55)}
+:root[data-ctry="de"] .node.pres{animation-name:presDE}
+@keyframes presDE{0%,100%{box-shadow:0 0 0 2px #111,0 0 0 4px #dd0000,0 0 0 6px #ffce00,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(60,0,0,.3)}50%{box-shadow:0 0 0 2px #111,0 0 0 4px #dd0000,0 0 0 6px #ffce00,0 0 40px 14px rgba(221,0,0,.45),0 8px 18px rgba(60,0,0,.3)}}
+:root[data-ctry="de"] .rib.pr{background:linear-gradient(180deg,#3a3a3a,#000);box-shadow:inset 0 -3px 0 #dd0000,0 0 10px rgba(255,206,0,.8)}
+:root[data-ctry="ch"] .node.pol,:root[data-ctry="ch"] .node.partner.pol{background:linear-gradient(160deg,#ffecec 0%,#ffffff 50%,#ffe2e0 100%);box-shadow:0 0 0 2px #d52b1e,0 0 0 4px #fff,0 0 0 6px #d52b1e,0 8px 18px rgba(120,10,0,.28)}
+:root[data-ctry="ch"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(213,43,30,.3) 44%,rgba(255,255,255,.95) 48%,rgba(213,43,30,.3) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
+:root[data-ctry="ch"] .node.pol .nt b,:root[data-ctry="ch"] .node.pol .nt span,:root[data-ctry="ch"] .node.pol .n-life,:root[data-ctry="ch"] .node.pol .n-city{color:#6b0d07}
+:root[data-ctry="ch"] .node.pol .n-band{background:linear-gradient(90deg,#b81d12,#e8382b 50%,#b81d12);text-shadow:0 1px 2px rgba(0,0,0,.55)}
+:root[data-ctry="ch"] .node.pres{animation-name:presCH}
+@keyframes presCH{0%,100%{box-shadow:0 0 0 2px #d52b1e,0 0 0 4px #fff,0 0 0 6px #d52b1e,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(120,10,0,.28)}50%{box-shadow:0 0 0 2px #d52b1e,0 0 0 4px #fff,0 0 0 6px #d52b1e,0 0 40px 14px rgba(213,43,30,.45),0 8px 18px rgba(120,10,0,.28)}}
+:root[data-ctry="ch"] .rib.pr{background:linear-gradient(180deg,#e8382b,#b81d12);box-shadow:inset 0 -3px 0 #fff,0 0 10px rgba(255,205,0,.7)}
 .facts .atf{background:linear-gradient(180deg,#fffaf0,#ffeec4);border-color:#ffd98a;color:#7a4a00}
 .facts .atf dd{display:flex;gap:8px;align-items:flex-start;color:#7a4a00}
 .facts .atf dd svg{flex:none;width:20px;height:20px;fill:#e08a00;margin-top:1px}
@@ -1447,8 +1469,12 @@ const APP_VERSION = '0.1.9b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.1.9b', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
-   fr:['Les noms de villes suivent la langue du jeu : en français, London devient Londres et München devient Munich ; en anglais, Genève devient Geneva ; en allemand, Genève devient Genf et Strasbourg devient Straßburg. Les villes qui s\'écrivent pareil partout ne changent pas, et les sauvegardes ne sont pas touchées.'],
-   en:['Town names follow the game language: in French, London becomes Londres and München becomes Munich; in English, Genève becomes Geneva; in German, Genève becomes Genf and Strasbourg becomes Straßburg. Towns spelled the same everywhere don\'t change, and saves are untouched.']},
+   fr:['Les noms de villes suivent la langue du jeu : en français, London devient Londres et München devient Munich ; en anglais, Genève devient Geneva ; en allemand, Genève devient Genf et Strasbourg devient Straßburg. Les villes qui s\'écrivent pareil partout ne changent pas, et les sauvegardes ne sont pas touchées.',
+       'Les bulles des politiques prennent les couleurs du pays de la partie : bleu-blanc-rouge en France, Union Jack au Royaume-Uni, noir-rouge-or en Allemagne, rouge et blanc en Suisse.',
+       'Atout Ambition : 30 % de chances de faire carrière en politique (au lieu de 1,4 %).'],
+   en:['Town names follow the game language: in French, London becomes Londres and München becomes Munich; in English, Genève becomes Geneva; in German, Genève becomes Genf and Strasbourg becomes Straßburg. Towns spelled the same everywhere don\'t change, and saves are untouched.',
+       'Politicians\' bubbles take the colours of the game\'s country: blue-white-red in France, the Union Jack in the UK, black-red-gold in Germany, red and white in Switzerland.',
+       'Ambition gift: a 30% chance of going into politics (instead of 1.4%).']},
   {v:'0.1.9a', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
    fr:['Deux nouveaux pays de la lignée : l\'Allemagne et la Suisse. Chacun a ses prénoms selon l\'époque (en Suisse, un mélange de prénoms alémaniques, romands, italiens et romanches), ses noms de famille, ses villes et sa carte, ses événements, ses décennies, ses guerres, son école, ses métiers et ses centres d\'intérêt.',
        'Allemagne : la Réforme, la guerre de Trente Ans, Frédéric le Grand, l\'Empire, la république de Weimar, le miracle économique, le mur de Berlin, la réunification… Chancelier au lieu de Président, ramoneur, forestier, ouvrier de l\'automobile ; Schrebergarten, carnaval, Oktoberfest, skat…',
@@ -2260,7 +2286,7 @@ const ATOUTS = [
  ['fertile','Fertilité','Fertilité','Fertility','heart','Jumeaux, triplés et quadruplés 10 fois plus fréquents.','Twins, triplets and quadruplets 10 times more likely.'],
  ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse entre 80 et 105 ans.','10 times less likely to die of old age between 80 and 105.'],
  ['richesse','Riche','Riche','Wealth','sun','Gagne 2 fois plus de Cyn toute sa vie, y compris pour la naissance de ses enfants.','Earns twice as many Cyn for life, including for the births of their children.'],
- ['ambition','Ambitieux','Ambitieuse','Ambition','flag',"S'il fait carrière en politique, 33 % de chances de devenir président.",'If they go into politics, a 33% chance of becoming President.']
+ ['ambition','Ambitieux','Ambitieuse','Ambition','flag',"Fait souvent carrière en politique (30 % de chances) et, une fois élu, a 33 % de chances d'atteindre le plus haut poste du pays.","Often goes into politics (30% chance) and, once elected, has a 33% chance of reaching the country's top job."]
 ];
 const hasAtout = (p, id) => !!(p && (p.atout === id || p.atout2 === id));      // atout2 : crise de la cinquantaine (boutique)
 const immune = (p, day) => p.immuneUntil != null && day < p.immuneUntil;           // boutique : immunité 50 ans
@@ -2384,7 +2410,7 @@ function pickPol(y){
 }
 const pickJob = (y, p, noPol) => {
   y = dataYear(y);
-  if(!noPol && Math.random() < .02/1.4){ const j = pickPol(y); if(j) return j; }
+  if(!noPol && Math.random() < (p && hasAtout(p, 'ambition') ? .3 : .02/1.4)){ const j = pickPol(y); if(j) return j; }   // atout Ambition : 30 % en politique (sinon 1,4 %)
   return pick(JOBS.filter(r => inRange(r,y) && !isPol(r[0])))[0];
 };
 const pickStarJob = y => { y = dataYear(y); return pick(STARJOBS.filter(r => inRange(r,y)))[0]; };
@@ -3727,7 +3753,7 @@ DEx.atout = {intel:['Intelligenz','Intelligenz','Stirbt nie bei einem Haushalts-
   crea:['Kreativität','Kreativität','Mit einem künstlerischen Beruf wird man immer ein Star.'], ego:['Egoismus','Egoismus','12 % Risiko, ein Kind zu bekommen, das ein künftiger Verbrecher ist (statt 2 %).'],
   chance:['Glück','Glück','12 % Chance auf ein Kind, das ein künftiger Star ist (statt 2,5 %).'], sante:['Gesundheit','Gesundheit','Wird vor 60 nie krank.'],
   fertile:['Fruchtbarkeit','Fruchtbarkeit','Zwillinge, Drillinge und Vierlinge 10-mal häufiger.'], longevite:['Langlebigkeit','Langlebigkeit','Zwischen 80 und 105 zehnmal seltener Tod durch Altersschwäche.'],
-  richesse:['Reichtum','Reichtum','Verdient lebenslang doppelt so viele Cyn, auch bei der Geburt der eigenen Kinder.'], ambition:['Ehrgeiz','Ehrgeiz','Wer in die Politik geht, hat 33 % Chance, Präsident zu werden.']};
+  richesse:['Reichtum','Reichtum','Verdient lebenslang doppelt so viele Cyn, auch bei der Geburt der eigenen Kinder.'], ambition:['Ehrgeiz','Ehrgeiz','Geht oft in die Politik (30 % Chance) und hat dort 33 % Chance auf das höchste Amt des Landes.']};
 DEx.warc = {front:['an der Front gefallen','fällt an der Front'], canon:['von einer Kanonenkugel getötet','wird von einer Kanonenkugel getötet'], gaz:['in den Schützengräben vergast','wird in den Schützengräben vergast'],
   fusille:['erschossen','wird erschossen'], collabo:['als Kollaborateur hingerichtet','wird als Kollaborateur hingerichtet'], bombarde:['bei einem Bombenangriff getötet','kommt bei einem Bombenangriff ums Leben'],
   deporte:['in der Deportation gestorben','stirbt in der Deportation'], siege:['während einer Belagerung verhungert','verhungert während einer Belagerung'], massacre:['niedergemetzelt','wird niedergemetzelt'],
@@ -6081,7 +6107,7 @@ function setupCountryUI(){                              // écran de départ : l
 function applyCountry(c){                               // remplace les données du pays sur place ; renvoie vrai si le pays a changé
   c = COUNTRY[c] ? c : 'fr';
   if(c === CTRY) return false;
-  CTRY = c; const D = COUNTRY[c];
+  CTRY = c; const D = COUNTRY[c]; document.documentElement.dataset.ctry = c;   // couleurs des politiques selon le pays
   swapArr(NAMES, D.NAMES); BASIC_NAMES.M = D.BASIC.M; BASIC_NAMES.F = D.BASIC.F;
   swapArr(CITIES, D.CITIES); refill(CITY_POS, D.CITY_POS); swapArr(FR_OUTLINE, D.OUT1); swapArr(CORSE, D.OUT2);
   swapArr(WARS, D.WARS); swapArr(WARCAUSES, D.WARCAUSES); refill(WARC, Object.fromEntries(D.WARCAUSES.map(r => [r[0], r])));

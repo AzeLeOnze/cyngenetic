@@ -5,6 +5,8 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 ## v0.1.9b — 13 novembre 2026
 
 - Les noms de villes suivent la langue du jeu : en français, London devient Londres et München devient Munich ; en anglais, Genève devient Geneva ; en allemand, Genève devient Genf et Strasbourg devient Straßburg. Les villes qui s'écrivent pareil partout ne changent pas, et les sauvegardes ne sont pas touchées.
+- Les bulles des politiques prennent les couleurs du pays de la partie : bleu-blanc-rouge en France, Union Jack au Royaume-Uni, noir-rouge-or en Allemagne, rouge et blanc en Suisse.
+- Atout Ambition : 30 % de chances de faire carrière en politique (au lieu de 1,4 %).
 
 ## v0.1.9a — 13 novembre 2026
 
