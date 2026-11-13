@@ -2,6 +2,11 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.8a — 13 novembre 2026
+
+- Version PC (Windows) : Cyngenetic peut maintenant s'installer comme une vraie application, toujours à jour avec le site.
+- Discord : dans l'application PC, ton profil Discord affiche « Joue à Cyngenetic » avec ta famille, l'année et le mode de jeu.
+
 ## v0.1.7g — 13 novembre 2026
 
 - Mode Zombie : description plus courte au départ (sans le « Conseillé : 1780 »).

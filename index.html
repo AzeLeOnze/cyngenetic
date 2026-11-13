@@ -1424,9 +1424,14 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.7g';
+const APP_VERSION = '0.1.8a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.8a', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Version PC (Windows) : Cyngenetic peut maintenant s\'installer comme une vraie application, toujours à jour avec le site.',
+       'Discord : dans l\'application PC, ton profil Discord affiche « Joue à Cyngenetic » avec ta famille, l\'année et le mode de jeu.'],
+   en:['PC version (Windows): Cyngenetic can now be installed as a real app, always up to date with the website.',
+       'Discord: in the PC app, your Discord profile shows "Playing Cyngenetic" with your family, the year and the game mode.']},
   {v:'0.1.7g', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Mode Zombie : description plus courte au départ (sans le « Conseillé : 1780 »).',
        'Le burn-out (maladie bénigne, depuis 1975) dure maintenant entre 6 et 36 mois.',
@@ -5731,6 +5736,27 @@ document.addEventListener('change', e => {        // âge préféré : nouvelles
   if(e.target.id !== 'seekAge' || !S) return;
   S.seekAge = +e.target.value; cands = genCands(); sfx.pop(); openSoulmate(true);
 });
+
+/* ================= Version PC : statut Discord (Rich Presence) =================
+   Seulement dans l'application Windows (window.cyngeneticDesktop) : « Famille Martin · 1850 », mode de jeu, etc. */
+function desktopPresence(){
+  const fr = LANG === 'fr', gn = n => n > 1 ? (fr ? 'générations' : 'generations') : (fr ? 'génération' : 'generation');
+  if(!S || $('#game').hidden) return {details: fr ? 'Crée sa lignée' : 'Starting a bloodline', state: fr ? 'Écran de départ' : 'Start screen'};
+  const f = P(S.founderId), all = Object.values(S.people), gens = Math.max(1, ...all.filter(p => p.blood).map(genOf));
+  const fam = living().filter(p => inFamily(p)), details = (fr ? `Famille ${familyName(f)}` : `The ${familyName(f)} family`) + ' · ' + yearOf(S.t);
+  let state;
+  if(S.over) state = fr ? 'Partie terminée' : 'Game over';
+  else if(S.vs) state = `Versus ${t('vs_d_' + S.vs.diff)} · ${t('vs_g_' + S.vs.goal)}`;
+  else if(S.zombie){ const z = fam.filter(p => p.zombie).length, lvl = S.zombie.diff ? ` (${t('zd_' + S.zombie.diff)})` : '';
+    state = (fr ? 'Mode Zombie' : 'Zombie mode') + lvl + ' · ' + (S.zombie.began ? t('z_status', z, fam.length - z) : `${gens} ${gn(gens)}`); }
+  else if(S.royal) state = (fr ? 'Mode Royal' : 'Royal mode') + ` · ${gens} ${gn(gens)}`;
+  else state = `${gens} ${gn(gens)} · ${fam.length} ${fr ? 'en vie' : 'alive'}`;
+  return {details, state};
+}
+if(window.cyngeneticDesktop){
+  const sendPresence = () => { try{ window.cyngeneticDesktop.setPresence(desktopPresence()); }catch(e){} };
+  setTimeout(sendPresence, 1500); setInterval(sendPresence, 10000);
+}
 
 /* ================= Actions ================= */
 const ACT = {
