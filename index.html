@@ -1431,9 +1431,21 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.8b';
+let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
+const APP_VERSION = '0.1.8c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.8c', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Nouveau réglage « Pays de la lignée » (Paramètres, sous la langue) : France ou Royaume-Uni. Au Royaume-Uni, les prénoms (selon l\'époque) et les noms de famille sont anglais, gallois, écossais ou irlandais, avec les villes du pays et la carte du Royaume-Uni.',
+       'Royaume-Uni : ses propres événements (Armada, grand incendie de Londres, Trafalgar, Blitz, NHS, Brexit…), ses décennies (époque victorienne, Swinging Sixties, Britpop…), ses guerres (guerre civile, Crimée, Boers, Malouines…) et son école (Year 1 à Year 13, A-levels, BTEC).',
+       'Royaume-Uni : métiers adaptés (Premier ministre au lieu de Président, Chambre des lords, pub, marchand de journaux…), 6 métiers propres au pays (gardien de la Tour de Londres, ramoneur, docker, ouvrier de filature, majordome, laitier) et 6 centres d\'intérêt (cricket, fléchettes, quiz de pub, thé, trains, danse morris). L\'album suit le pays de la partie.',
+       'Chaque partie garde son pays : changer le réglage en cours de partie s\'applique à la partie suivante.',
+       'Le mode Versus n\'est plus proposé sur téléphone et tablette : il reste disponible sur ordinateur (navigateur et version PC).'],
+   en:['New "Bloodline country" setting (Settings, below the language): France or United Kingdom. In the UK, first names (by era) and surnames are English, Welsh, Scottish or Irish, with the country\'s towns and a map of the UK.',
+       'United Kingdom: its own events (the Armada, the Great Fire of London, Trafalgar, the Blitz, the NHS, Brexit…), decades (Victorian era, Swinging Sixties, Britpop…), wars (Civil War, Crimea, Boer War, Falklands…) and school system (Year 1 to Year 13, A-levels, BTEC).',
+       'United Kingdom: adapted jobs (Prime Minister instead of President, House of Lords, pub, newsagent…), 6 jobs of its own (Yeoman Warder, chimney sweep, docker, cotton mill worker, butler, milkman) and 6 interests (cricket, darts, pub quizzes, tea, trainspotting, morris dancing). The album follows the game\'s country.',
+       'Each game keeps its country: changing the setting during a game applies to the next one.',
+       'Versus mode is no longer offered on phones and tablets: it stays available on computers (browser and PC version).']},
   {v:'0.1.8b', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Paramètres en 3 onglets : Général, Son, et un nouvel onglet Vidéo et graphismes (plein écran, thème, verre dépoli, animations, et taille de l\'interface sur la version PC).',
        'Le bouton « Recommencer » devient « Retour au menu » : la partie est sauvegardée, on peut la reprendre depuis l\'écran de départ.',
@@ -1845,7 +1857,7 @@ const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return n
 const loadJSON = k => { try{ return JSON.parse(store.get(k)) || {}; }catch(e){ return {}; } };
 /* Paramètres (confort) et règles de jeu (personnalisation), gardés dans le navigateur */
 const SET_KEY = 'lignee.settings.v1', RULES_KEY = 'lignee.rules.v1';
-const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false, regnal:false, anim:true, blur:true, ui:100};
+const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false, regnal:false, anim:true, blur:true, ui:100, country:'fr'};
 const RULES_DEF = {evoNames:true, ach:true, sameSex:true, legal:18, oldAge:true, diseases:true,
   boys:50, twins:1.2, triplets:.9, quads:.5, illness:100, conds:4, inherit:13, star:2.5, crim:2, addict:8.8};
 let SET = Object.assign({}, SET_DEF, loadJSON(SET_KEY));
@@ -2037,6 +2049,7 @@ const SURNAMES_ADDED = ['Le Meunier','Dubois','Renard','Duval','Thomas','Sapin',
   'Da Vinci','Da Silva','Delaigue','Delporte','Norge','Vincet','Véga','Lebroke','Castelgan','Laudebrook','Lankweldan','Tarney','Jaude','Neidega','Kartney','Lesage','Suffort','Bourgenet','Richard',
   'Höll','Sanchez','Pollez','Droey','McGonagall','Loës','Bravat'];
 function pickSurname(y){
+  if(CTRY === 'uk') return pickSurnameUK(y);
   if(Math.random() < .18) return pick(SURNAMES_ADDED);
   const r = Math.random();
   if(r < .42) return pick(SURNAMES_RARE);
@@ -2885,6 +2898,8 @@ fr:{
   relocate_title:'Déménager', relocate_custom:'Ou une autre ville…', relocate_btn:'Déménager ensemble',
   relocate_note:c=>`Vous quittez ${c} avec votre conjoint et vos enfants mineurs.`,
   skin_gold:'Or', skin_locked:"Terminez une catégorie entière de succès pour débloquer ce thème.", gold_unlocked:'Thème Or débloqué !',
+  set_country:'Pays de la lignée', set_country_hint:'Prénoms, noms, villes, carte, métiers, écoles, événements et guerres du pays choisi.',
+  set_country_game:c=>`La partie en cours se passe ${c === 'uk' ? 'au Royaume-Uni' : 'en France'} : le changement s'appliquera à la prochaine partie.`, ctry_fr:'France', ctry_uk:'Royaume-Uni',
   set_tab_gen:'Général', set_tab_snd:'Son', set_tab_gfx:'Vidéo et graphismes', quit:'Quitter',
   set_full:'Plein écran', set_full_hint:'Le jeu occupe tout l\'écran (Échap pour en sortir).', set_full_hint_d:'Le jeu occupe tout l\'écran (touche F11).', set_full_on:'Activer', set_full_off:'Quitter le plein écran',
   set_ui:'Taille de l\'interface', set_ui_hint:'Agrandit ou réduit tout le jeu.',
@@ -3149,6 +3164,8 @@ en:{
   relocate_title:'Move', relocate_custom:'Or another town…', relocate_btn:'Move together',
   relocate_note:c=>`You leave ${c} with your partner and underage children.`,
   skin_gold:'Gold', skin_locked:'Complete a whole achievement category to unlock this theme.', gold_unlocked:'Gold theme unlocked!',
+  set_country:'Bloodline country', set_country_hint:'First names, surnames, towns, map, jobs, schools, events and wars of the chosen country.',
+  set_country_game:c=>`The current game takes place in ${c === 'uk' ? 'the United Kingdom' : 'France'}: the change will apply to your next game.`, ctry_fr:'France', ctry_uk:'United Kingdom',
   set_tab_gen:'General', set_tab_snd:'Sound', set_tab_gfx:'Video & graphics', quit:'Quit',
   set_full:'Full screen', set_full_hint:'The game fills the whole screen (Esc to leave).', set_full_hint_d:'The game fills the whole screen (F11 key).', set_full_on:'Turn on', set_full_off:'Leave full screen',
   set_ui:'Interface size', set_ui_hint:'Makes the whole game bigger or smaller.',
@@ -3523,7 +3540,8 @@ const TX_KID = {
 };
 function t(k, ...a){
   const n = isNight() ? TX_NIGHT[LANG][k] : isDark() ? TX_DARK[LANG][k] : isKid() ? TX_KID[LANG][k] : undefined;
-  const v = n !== undefined ? n : TX[LANG][k] !== undefined ? TX[LANG][k] : TX.fr[k];
+  const c = n === undefined && CTRY === 'uk' ? TX_UK[LANG][k] : undefined;          // textes propres au Royaume-Uni
+  const v = n !== undefined ? n : c !== undefined ? c : TX[LANG][k] !== undefined ? TX[LANG][k] : TX.fr[k];
   return typeof v === 'function' ? v(...a) : v;
 }
 const tA = n => t('ans', n);
@@ -4971,11 +4989,231 @@ const FR_OUTLINE = [[2.37,51.05],[2.55,51.09],[3.2,50.75],[4.15,50.35],[4.83,50.
   [-4.55,48.62],[-3.9,48.72],[-3.0,48.8],[-2.3,48.65],[-1.6,48.65],[-1.4,48.85],[-1.6,49.2],[-1.85,49.7],[-1.25,49.68],[-1.1,49.35],[-0.2,49.3],[0.2,49.5],
   [0.65,49.85],[1.4,50.1],[1.6,50.4],[1.58,50.85]];
 const CORSE = [[9.4,43.0],[9.55,42.6],[9.4,41.95],[9.2,41.37],[8.8,41.6],[8.6,41.95],[8.75,42.4],[9.2,42.75]];
-const proj = ([lon, lat]) => [Math.round(((lon + 5.2) * .688 * 50 + 14) * 10)/10, Math.round(((51.3 - lat) * 50 + 14) * 10)/10];
+const PJ = {lon:5.2, k:.688*50, lat:51.3, sy:50, x0:14, y0:14};                // projection de la carte (change avec le pays)
+const proj = ([lon, lat]) => [Math.round(((lon + PJ.lon) * PJ.k + PJ.x0) * 10)/10, Math.round(((PJ.lat - lat) * PJ.sy + PJ.y0) * 10)/10];
 const polyPath = pts => 'M' + pts.map(p => proj(p).join(' ')).join('L') + 'Z';
 let curView = 'tree', dotEls = new Map();
 /* Les villes inventées n'ont pas de place réelle : elles vont dans la zone « Lieux inconnus », en mer, en bas à gauche */
 const UNK = {x:14, y:420, w:128, h:96};
+
+/* ================= Pays de la lignée : France ou Royaume-Uni (0.1.8c) =================
+   Toutes les données propres à un pays (prénoms, noms, villes, carte, événements, guerres, métiers, écoles, centres d'intérêt)
+   sont remplacées sur place quand la partie se passe au Royaume-Uni. Chaque partie garde son pays (S.country). */
+const UK_NAMES = [
+ [1599,['John','Thomas','William','Richard','Robert','Henry','Edward','George','Nicholas','Walter','Hugh','Roger','Ralph','Christopher','Edmund','Francis','Humphrey','Gilbert'],
+       ['Elizabeth','Margaret','Joan','Alice','Agnes','Anne','Jane','Catherine','Mary','Isabel','Ellen','Dorothy','Margery','Cecily','Edith','Matilda','Bridget','Grace']],
+ [1699,['John','William','Thomas','Richard','Robert','James','Edward','Henry','George','Samuel','Francis','Joseph','Nicholas','Charles','Benjamin','Matthew','Daniel','Peter'],
+       ['Mary','Elizabeth','Anne','Sarah','Margaret','Jane','Alice','Hannah','Catherine','Susanna','Martha','Dorothy','Frances','Rebecca','Judith','Grace','Abigail','Prudence']],
+ [1779,['John','William','Thomas','James','Joseph','Richard','George','Robert','Samuel','Edward','Charles','Henry','Benjamin','Daniel','Francis','Isaac','Jonathan','Matthew'],
+       ['Mary','Elizabeth','Ann','Sarah','Jane','Margaret','Hannah','Martha','Susannah','Catherine','Alice','Frances','Esther','Rebecca','Betty','Eleanor','Lydia','Phoebe']],
+ [1820,['John','William','Thomas','James','George','Joseph','Richard','Henry','Robert','Charles','Samuel','Edward','Benjamin','Isaac','Daniel','Edmund','Josiah','Horatio'],
+       ['Mary','Elizabeth','Ann','Sarah','Jane','Hannah','Susan','Martha','Margaret','Charlotte','Harriet','Catherine','Maria','Lucy','Emma','Betsy','Frances','Phoebe']],
+ [1869,['William','John','George','Thomas','James','Henry','Charles','Joseph','Frederick','Robert','Edward','Alfred','Arthur','Albert','Walter','Samuel','Harry','Ernest'],
+       ['Mary','Elizabeth','Sarah','Ann','Emma','Eliza','Jane','Alice','Annie','Ellen','Emily','Martha','Hannah','Harriet','Florence','Louisa','Charlotte','Clara']],
+ [1904,['William','John','George','Thomas','James','Charles','Frederick','Arthur','Albert','Joseph','Ernest','Alfred','Harry','Henry','Walter','Herbert','Frank','Sidney'],
+       ['Mary','Florence','Annie','Elizabeth','Edith','Alice','Ellen','Emily','Lilian','Ada','Ethel','Sarah','Margaret','Elsie','Gladys','Dorothy','Rose','Mabel']],
+ [1924,['William','John','George','Thomas','James','Arthur','Frederick','Albert','Charles','Robert','Ernest','Leslie','Reginald','Stanley','Harold','Frank','Eric','Kenneth'],
+       ['Mary','Margaret','Doris','Dorothy','Joan','Kathleen','Florence','Elsie','Edith','Ivy','Winifred','Lilian','Gladys','Irene','Hilda','Vera','Phyllis','Marjorie']],
+ [1939,['John','Peter','Brian','Michael','David','Kenneth','Ronald','Derek','Dennis','Roy','Alan','Raymond','Anthony','Donald','Keith','Gordon','Colin','Leonard'],
+       ['Margaret','Jean','Joan','Joyce','Mary','Patricia','Sheila','Doreen','Barbara','Betty','Shirley','Audrey','Eileen','Brenda','Iris','Pauline','Sylvia','Maureen']],
+ [1954,['David','John','Michael','Peter','Robert','Anthony','Brian','Alan','Christopher','Richard','Barry','Graham','Terence','Keith','Roger','Malcolm','Trevor','Colin'],
+       ['Susan','Margaret','Patricia','Christine','Linda','Janet','Carol','Elizabeth','Ann','Mary','Jennifer','Valerie','Sandra','Gillian','Pamela','Maureen','Brenda','Jacqueline']],
+ [1964,['David','Paul','Andrew','Mark','John','Michael','Stephen','Ian','Robert','Richard','Christopher','Peter','Simon','Anthony','Kevin','Gary','Steven','Gareth'],
+       ['Susan','Julie','Karen','Jacqueline','Deborah','Tracey','Jane','Helen','Diane','Sharon','Alison','Elizabeth','Linda','Amanda','Sarah','Gillian','Lorraine','Fiona']],
+ [1974,['Paul','Mark','David','Andrew','Richard','Christopher','James','Simon','Michael','Matthew','Stephen','Lee','Darren','Jason','Craig','Neil','Wayne','Rhys'],
+       ['Sarah','Claire','Nicola','Emma','Lisa','Joanne','Michelle','Helen','Samantha','Karen','Amanda','Rachel','Louise','Julie','Kirsty','Rebecca','Kelly','Siân']],
+ [1984,['Christopher','James','David','Daniel','Michael','Matthew','Andrew','Richard','Paul','Mark','Thomas','Adam','Robert','John','Lee','Benjamin','Steven','Jonathan'],
+       ['Sarah','Laura','Gemma','Emma','Rebecca','Claire','Victoria','Samantha','Rachel','Amy','Jennifer','Nicola','Kelly','Natalie','Hayley','Lisa','Michelle','Stacey']],
+ [1994,['Daniel','Christopher','Michael','James','Matthew','Thomas','Adam','Ryan','David','Luke','Jamie','Robert','Andrew','Liam','Craig','Jordan','Ashley','Scott'],
+       ['Rebecca','Lauren','Jessica','Charlotte','Hannah','Sophie','Amy','Emily','Laura','Emma','Sarah','Danielle','Gemma','Chloe','Natalie','Stacey','Jade','Bethan']],
+ [2004,['Jack','Thomas','James','Joshua','Daniel','Harry','Samuel','Joseph','Matthew','Callum','Luke','Lewis','William','Ryan','Benjamin','Liam','Connor','George'],
+       ['Chloe','Emily','Megan','Jessica','Sophie','Charlotte','Hannah','Lauren','Rebecca','Lucy','Amy','Georgia','Katie','Bethany','Ellie','Olivia','Holly','Abigail']],
+ [2014,['Jack','Oliver','Thomas','Harry','Joshua','Alfie','Charlie','Daniel','James','William','Samuel','Max','George','Ethan','Mohammed','Dylan','Lewis','Jacob'],
+       ['Olivia','Ruby','Emily','Grace','Jessica','Sophie','Chloe','Lily','Mia','Amelia','Evie','Ella','Isabella','Isla','Ava','Poppy','Charlotte','Millie']],
+ [2024,['Muhammad','Noah','Oliver','George','Leo','Arthur','Oscar','Theodore','Freddie','Archie','Theo','Harry','Jack','Henry','Charlie','Luca','Alfie','Finley'],
+       ['Olivia','Amelia','Isla','Lily','Ivy','Freya','Florence','Ava','Mia','Willow','Rosie','Sophia','Isabella','Grace','Daisy','Sienna','Poppy','Elsie']],
+ [2039,['Theo','Arlo','Rowan','Jude','Ezra','Otis','Milo','Hugo','Albie','Rory','Bodhi','Finn','Ralph','Reggie','Teddy','Louie','Elijah','Kit'],
+       ['Ivy','Ottilie','Margot','Hallie','Esme','Aurelia','Mabel','Nova','Iris','Willow','Maeve','Clementine','Lyra','Delilah','Wren','Edie','Thea','Elodie']],
+ [2049,['Albert','Stanley','Walter','Alfred','Ernest','Herbert','Frank','Harold','Sidney','Clarence','Percy','Cecil','Wilfred','Arthur','Leonard','Bernard','Norman','Cyril'],
+       ['Edith','Dorothy','Mabel','Winifred','Ethel','Hilda','Beatrice','Agnes','Violet','Ada','Lilian','Gladys','Florence','Maud','Iris','Vera','Elsie','Marjorie']],
+ [2064,['Orion','Caspian','Zephyr','Atlas','Kairo','Lux','Ronan','Soren','Ezio','Jaxon','Cassius','Fenix','Idris','Nico','Rafe','Taran','Zain','Arlo'],
+       ['Nova','Lyra','Aria','Seraphina','Juno','Sienna','Isolde','Elara','Wren','Zara','Ophelia','Selene','Amara','Nyla','Persephone','Calla','Briar','Thalia']],
+ [2079,['Kai','Aero','Sol','Cove','Zen','Quill','Ash','Rhys','Atlas','Onyx','Vale','Orrin','Ezra','Lumen','Caelum','Reef','Storm','Jett'],
+       ['Luna','Vega','Lyric','Halo','Echo','Aurora','Skye','Rain','Ember','Haven','Starling','Iris','Celeste','Wren','Indigo','Opal','Sage','Lark']],
+ [2100,['Xael','Zyon','Kyron','Orrex','Vaelor','Thyx','Aeron','Nexo','Solan','Ixar','Kaelan','Orbis','Lyx','Vexen','Astrel','Quorin','Zephyron','Axiel'],
+       ['Zyra','Nyx','Aelys','Kaelia','Lunea','Xelia','Vaela','Orya','Astryd','Nebula','Isea','Myra','Zelyne','Quiara','Elyxa','Thalyss','Aurora','Ixya']]
+];
+const UK_BASIC = {M:['John','James','Thomas','William','George','Harry','Oliver','Jack','Charlie','Daniel','Henry','Samuel','Edward','Arthur','Alfie','Leo','Oscar','Noah'],
+  F:['Mary','Emma','Sarah','Emily','Charlotte','Sophie','Lucy','Grace','Olivia','Alice','Ruby','Amelia','Isla','Lily','Jessica','Hannah','Ella','Rose']};
+const UK_SN_PLAIN = ['Smith','Jones','Williams','Taylor','Brown','Davies','Evans','Wilson','Thomas','Johnson','Roberts','Robinson','Thompson','Wright','Walker','White',
+  'Edwards','Hughes','Green','Hall','Lewis','Harris','Clarke','Jackson','Wood','Turner','Cooper','Hill','Ward','Morris','Moore','King','Baker','Harrison','Morgan',
+  'Allen','James','Scott','Phillips','Watson','Parker','Price','Bennett','Young','Griffiths','Mitchell','Cook','Carter','Richardson','Bailey','Collins','Bell','Shaw',
+  'Cox','Marshall','Simpson','Ellis','Adams','Wilkinson','Foster','Chapman','Powell','Webb','Rogers','Gray','Mason','Hunt','Matthews','Owen','Palmer','Holmes',
+  'Barnes','Knight','Lloyd','Butler','Russell','Fisher','Stevens','Jenkins','Dixon','Harvey'];
+const UK_SN_RARE = ['MacLeod','MacDonald','McKenzie','Fraser','MacGregor','Cameron','Buchanan','Drummond','Ferguson','Munro','Sinclair','Gallagher','O\'Brien','O\'Connor',
+  'Fitzgerald','Quinn','McCarthy','Llewellyn','Pritchard','Prosser','Vaughan','Gwynne','Trelawney','Penrose','Tremayne','Pengelly','Nancarrow','Ashdown','Blackwood',
+  'Featherstonehaugh','Cholmondeley','Worthington','Hargreaves','Ormerod','Pickering','Postlethwaite','Fairweather','Goodfellow','Ravenscroft','Whitlock','Kettlewell'];
+const UK_SN_MODERN = ['Patel','Khan','Singh','Begum','Ali','Hussain','Ahmed','Kaur','Shah','Mahmood','Okafor','Adeyemi','Mensah','Nowak','Kowalski','Chen','Wong','Nguyen','Da Silva','Rossi'];
+const UK_SN_A = ['Ash','Black','Brad','Brook','Cald','Chester','Craw','Dun','Fair','Glad','Hal','Hart','Kings','Lang','Mar','Mid','Moor','North','Oak','Rad','Red','Ship','Stan','Stock','Thorn','War','West','Whit','Wood'];
+const UK_SN_B = ['ley','ford','well','worth','ham','ton','by','field','wood','combe','hurst','dale','more','bridge','stone','croft','wick','den','shaw','thorpe'];
+function pickSurnameUK(y){
+  const r = Math.random();
+  if(r < .2) return pick(UK_SN_RARE);
+  if(r < .4) return pick(UK_SN_A) + pick(UK_SN_B);
+  if(r < .55 && y >= 1950) return pick(UK_SN_MODERN);
+  return pick(UK_SN_PLAIN);
+}
+const UK_CITY_POS = {London:[-0.13,51.51],Birmingham:[-1.90,52.48],Manchester:[-2.24,53.48],Liverpool:[-2.98,53.41],Leeds:[-1.55,53.80],Sheffield:[-1.47,53.38],
+  Bristol:[-2.59,51.45],Newcastle:[-1.61,54.98],Nottingham:[-1.15,52.95],Leicester:[-1.13,52.64],Coventry:[-1.51,52.41],Bradford:[-1.75,53.80],Hull:[-0.33,53.74],
+  Plymouth:[-4.14,50.38],Southampton:[-1.40,50.91],Portsmouth:[-1.09,50.80],Brighton:[-0.14,50.82],Norwich:[1.30,52.63],Cambridge:[0.12,52.21],Oxford:[-1.26,51.75],
+  York:[-1.08,53.96],Bath:[-2.36,51.38],Exeter:[-3.53,50.72],Canterbury:[1.08,51.28],Dover:[1.31,51.13],Cardiff:[-3.18,51.48],Swansea:[-3.94,51.62],Bangor:[-4.13,53.23],
+  Aberystwyth:[-4.08,52.41],Edinburgh:[-3.19,55.95],Glasgow:[-4.25,55.86],Aberdeen:[-2.09,57.15],Dundee:[-2.97,56.46],Inverness:[-4.22,57.48],Stirling:[-3.94,56.12],
+  Perth:[-3.44,56.40],'Fort William':[-5.11,56.82],Belfast:[-5.93,54.60],Derry:[-7.31,55.00],Carlisle:[-2.93,54.89],Lancaster:[-2.80,54.05],Blackpool:[-3.05,53.82],
+  Chester:[-2.89,53.19],'Stoke-on-Trent':[-2.18,53.00],Lincoln:[-0.54,53.23],Ipswich:[1.16,52.06],Reading:[-0.97,51.45],Gloucester:[-2.24,51.86],Durham:[-1.58,54.78],
+  Sunderland:[-1.38,54.91],Penzance:[-5.54,50.12],Truro:[-5.05,50.26],Whitby:[-0.61,54.49],Windsor:[-0.61,51.48]};
+const UK_OUTLINE = [[-5.71,50.06],[-5.2,49.96],[-4.2,50.33],[-3.64,50.22],[-3.4,50.6],[-2.45,50.52],[-1.9,50.68],[-1.4,50.8],[-0.79,50.73],[-0.14,50.81],[0.25,50.73],
+  [0.97,50.91],[1.38,51.15],[1.45,51.38],[0.7,51.48],[0.9,51.53],[1.3,51.95],[1.6,52.1],[1.75,52.48],[1.3,52.93],[0.5,52.95],[0.2,52.8],[0.35,53.15],[0.12,53.58],
+  [-0.08,54.12],[-0.6,54.49],[-1.15,54.63],[-1.35,54.92],[-1.6,55.3],[-2.0,55.77],[-2.13,55.9],[-2.5,56.0],[-2.9,56.05],[-2.58,56.28],[-2.9,56.45],[-2.45,56.7],
+  [-2.05,57.15],[-1.78,57.5],[-2.0,57.69],[-3.0,57.7],[-4.2,57.5],[-3.8,57.85],[-3.6,58.0],[-3.1,58.45],[-3.03,58.64],[-3.37,58.67],[-5.0,58.62],[-5.3,58.3],
+  [-5.15,57.9],[-5.8,57.5],[-5.7,57.28],[-5.83,57.0],[-6.22,56.73],[-5.47,56.41],[-5.6,55.95],[-5.8,55.3],[-5.4,55.6],[-4.9,55.7],[-4.65,55.46],[-5.05,54.9],
+  [-4.86,54.64],[-4.3,54.85],[-3.6,54.9],[-3.55,54.64],[-3.64,54.49],[-3.25,54.1],[-2.9,54.07],[-3.05,53.82],[-3.05,53.45],[-3.2,53.35],[-4.0,53.3],[-4.65,53.31],
+  [-4.5,53.0],[-4.75,52.8],[-4.05,52.55],[-4.65,52.1],[-5.3,51.88],[-5.05,51.7],[-4.7,51.67],[-4.3,51.57],[-3.9,51.6],[-3.15,51.45],[-2.6,51.6],[-3.0,51.35],
+  [-3.5,51.2],[-4.5,51.02],[-4.95,50.55],[-5.48,50.21]];
+const UK_NI = [[-5.43,54.25],[-5.55,54.45],[-5.75,54.65],[-6.0,54.95],[-6.15,55.22],[-6.6,55.2],[-7.0,55.17],[-7.4,55.05],[-7.55,54.85],[-8.15,54.45],[-7.6,54.15],
+  [-6.9,54.3],[-6.3,54.1],[-5.9,54.2]];
+const UK_WARS = [[1542,7,24,1550,2,24,'Guerres anglo-écossaises','Anglo-Scottish Wars'],[1585,7,20,1604,7,18,'Guerre anglo-espagnole','Anglo-Spanish War'],
+ [1642,7,22,1651,8,3,'Guerres civiles anglaises','English Civil Wars'],[1665,2,4,1667,6,31,'Guerre anglo-néerlandaise','Anglo-Dutch War'],
+ [1689,4,7,1697,8,20,'Guerre de Neuf Ans',"Nine Years' War"],[1702,4,15,1714,2,7,"Guerre de Succession d'Espagne",'War of the Spanish Succession'],
+ [1756,4,17,1763,1,10,'Guerre de Sept Ans',"Seven Years' War"],[1775,3,19,1783,8,3,"Guerre d'indépendance américaine",'American War of Independence'],
+ [1793,1,1,1815,5,18,'Guerres napoléoniennes','French Revolutionary and Napoleonic Wars'],[1854,2,28,1856,2,30,'Guerre de Crimée','Crimean War'],
+ [1899,9,11,1902,4,31,'Seconde guerre des Boers','Second Boer War'],[1914,7,4,1918,10,11,'Grande Guerre','The Great War'],
+ [1939,8,3,1945,4,8,'Seconde Guerre mondiale','World War II'],[1950,7,29,1953,6,27,'Guerre de Corée','Korean War'],
+ [1982,3,2,1982,5,14,'Guerre des Malouines','Falklands War'],[2061,3,2,2064,8,30,"Guerre de l'eau",'The Water War']
+].map(w => ({a:fromYMD(w[0],w[1],w[2]), b:fromYMD(w[3],w[4],w[5]), fr:w[6], en:w[7]}));
+const UK_DECADES = [
+ [1500,1529,'crown','Les Tudor','The Tudors'],[1530,1557,'book','Réforme anglaise','The English Reformation'],[1558,1602,'palette',"Âge d'or élisabéthain",'The Elizabethan golden age'],
+ [1603,1641,'book','Shakespeare et les Stuart','Shakespeare and the Stuarts'],[1642,1659,'sword','Guerre civile et Cromwell','Civil War and Cromwell'],[1660,1687,'crown','La Restauration','The Restoration'],
+ [1688,1713,'flag','Glorieuse Révolution','The Glorious Revolution'],[1714,1759,'building','Époque géorgienne','The Georgian era'],[1760,1792,'bolt','Révolution industrielle','The Industrial Revolution'],
+ [1793,1814,'sword','Guerres napoléoniennes','The Napoleonic Wars'],[1815,1836,'train','Régence et chemins de fer','Regency and railways'],[1837,1869,'crown','Ère victorienne','The Victorian era'],
+ [1870,1900,'planet',"Apogée de l'Empire britannique",'The height of the British Empire'],[1901,1913,'sparkle','Époque édouardienne','The Edwardian era'],[1914,1919,'helmet','Grande Guerre','The Great War'],
+ [1920,1929,'music','Années folles et jazz','The Roaring Twenties'],[1930,1939,'leaf','Grande Dépression','The Great Depression'],[1940,1949,'dove','Blitz et victoire','The Blitz and victory'],
+ [1950,1959,'building','Reconstruction et NHS','Rebuilding and the NHS'],[1960,1969,'music','Swinging Sixties et Beatles','The Swinging Sixties'],[1970,1979,'disco','Punk et glam rock','Punk and glam rock'],
+ [1980,1989,'building','Années Thatcher','The Thatcher years'],[1990,1999,'headphones','Britpop','Britpop']
+];
+const UK_WORLD = [
+ [1509,3,22,'Henri VIII devient roi.','Henry VIII becomes king.'],[1534,10,3,"Acte de suprématie : naissance de l'Église d'Angleterre.",'Act of Supremacy: the Church of England is born.'],
+ [1558,10,17,'Élisabeth Ire monte sur le trône.','Elizabeth I comes to the throne.'],[1588,7,8,"Défaite de l'Invincible Armada espagnole.",'The Spanish Armada is defeated.'],
+ [1603,2,24,"Jacques VI d'Écosse devient roi d'Angleterre.",'James VI of Scotland becomes King of England.'],[1605,10,5,'Échec de la Conspiration des poudres.','The Gunpowder Plot is foiled.'],
+ [1649,0,30,'Exécution du roi Charles Ier.','King Charles I is executed.'],[1660,4,29,'La Restauration : Charles II monte sur le trône.','The Restoration: Charles II takes the throne.'],
+ [1665,5,1,'Grande peste de Londres.','The Great Plague of London.'],[1666,8,2,'Grand incendie de Londres.','The Great Fire of London.'],
+ [1689,1,13,'Guillaume III et Marie II montent sur le trône.','William III and Mary II take the throne.'],[1707,4,1,"Acte d'Union : naissance du royaume de Grande-Bretagne.",'Act of Union: the Kingdom of Great Britain is born.'],
+ [1714,7,1,'George Ier, premier roi de la maison de Hanovre.','George I, the first Hanoverian king.'],[1769,0,5,'James Watt brevète sa machine à vapeur.','James Watt patents his steam engine.'],
+ [1776,6,4,"Les colonies américaines proclament leur indépendance.",'The American colonies declare independence.'],[1801,0,1,'Naissance du Royaume-Uni de Grande-Bretagne et d\'Irlande.','The United Kingdom of Great Britain and Ireland is born.'],
+ [1805,9,21,'Victoire de Nelson à Trafalgar.',"Nelson's victory at Trafalgar."],[1815,5,18,'Victoire de Wellington à Waterloo.',"Wellington's victory at Waterloo."],
+ [1825,8,27,'Premier train de voyageurs entre Stockton et Darlington.','The first passenger railway opens between Stockton and Darlington.'],
+ [1833,7,28,"Abolition de l'esclavage dans l'Empire britannique.",'Slavery is abolished across the British Empire.'],[1837,5,20,'Victoria devient reine.','Victoria becomes queen.'],
+ [1851,4,1,'Grande Exposition au Crystal Palace.','The Great Exhibition opens at the Crystal Palace.'],[1863,0,10,'Premier métro du monde à Londres.',"The world's first underground railway opens in London."],
+ [1870,7,9,"Loi sur l'éducation : l'école pour tous les enfants.",'The Education Act brings school to every child.'],[1901,0,22,'Mort de la reine Victoria.','Queen Victoria dies.'],
+ [1914,7,4,"Le Royaume-Uni déclare la guerre à l'Allemagne : la Grande Guerre commence.",'Britain declares war on Germany: the Great War begins.'],
+ [1918,1,6,'Les femmes de plus de 30 ans obtiennent le droit de vote.','Women over 30 win the right to vote.'],[1918,10,11,"Signature de l'armistice : fin de la Grande Guerre.",'The Armistice is signed: the Great War is over.'],
+ [1928,6,2,'Les femmes votent enfin comme les hommes.','Women finally get equal voting rights.'],[1936,11,11,"Abdication du roi Édouard VIII.",'King Edward VIII abdicates.'],
+ [1939,8,3,"Le Royaume-Uni entre en guerre contre l'Allemagne.",'Britain goes to war with Germany.'],[1940,8,7,'Début du Blitz sur Londres.','The Blitz on London begins.'],
+ [1945,4,8,'VE Day : fin de la guerre en Europe.','VE Day: the war in Europe is over.'],[1948,6,5,'Création du NHS, la santé gratuite pour tous.','The NHS is founded: free healthcare for all.'],
+ [1953,5,2,"Couronnement d'Élisabeth II.",'Elizabeth II is crowned.'],[1966,6,30,"L'Angleterre gagne la Coupe du monde de football.",'England wins the football World Cup.'],
+ [1969,6,21,"Premiers pas de l'Homme sur la Lune.",'First steps on the Moon.'],[1973,0,1,'Le Royaume-Uni entre dans la CEE.','Britain joins the EEC.'],
+ [1979,4,4,'Margaret Thatcher devient Première ministre.','Margaret Thatcher becomes Prime Minister.'],[1989,10,9,'Chute du mur de Berlin.','The Berlin Wall falls.'],
+ [1994,4,6,'Ouverture du tunnel sous la Manche.','The Channel Tunnel opens.'],[1998,3,10,'Accord du Vendredi saint en Irlande du Nord.','The Good Friday Agreement brings peace to Northern Ireland.'],
+ [2012,6,27,'Jeux olympiques de Londres.','The London Olympics open.'],[2020,0,31,"Brexit : le Royaume-Uni quitte l'Union européenne.",'Brexit: Britain leaves the European Union.'],
+ [2020,2,23,'Confinement général contre la pandémie de Covid-19.','Nationwide lockdown against the Covid-19 pandemic.'],[2022,8,8,"Mort de la reine Élisabeth II.",'Queen Elizabeth II dies.'],
+ [2023,4,6,'Couronnement de Charles III.','Charles III is crowned.']
+].map(w => ({day:fromYMD(w[0],w[1],w[2]), fr:w[3], en:w[4]}));
+const UK_TRACKS = [['alevsci','A-levels sciences','A-levels · Sciences',1960,2100,'bac'],['alevhum','A-levels lettres','A-levels · Humanities',1960,2100,'bac'],
+ ['alevmath','A-levels maths','A-levels · Maths',1960,2100,'bac'],['alevart','A-levels arts','A-levels · Arts',1960,2100,'bac'],
+ ['btecbiz','BTEC Commerce','BTEC · Business',1984,2100,'cap'],['btecit','BTEC Informatique','BTEC · IT',1990,2100,'cap'],['btecelec','BTEC Électrotechnique','BTEC · Electrical engineering',1984,2100,'cap'],
+ ['nvqcook','NVQ Cuisine','NVQ · Catering',1987,2100,'cap'],['nvqhair','NVQ Coiffure','NVQ · Hairdressing',1987,2100,'cap'],['appcarp','Apprentissage menuiserie','Carpentry apprenticeship',1960,2100,'cap'],
+ ['cityguilds','City & Guilds mécanique','City & Guilds · Mechanics',1960,1990,'cap'],['capflemme','Diplôme de la Flemme','Certificate in Professional Slacking',1960,2100,'cap']];
+// métiers : [fr masc., fr fém., en masc., en fém., de, à] (null = inchangé) ; puis métiers retirés et métiers propres au Royaume-Uni
+const UK_JOB_EDIT = {
+  president:['Premier ministre','Première ministre','Prime Minister','Prime Minister',1721,2100],
+  premierministre:["Chancelier de l'Échiquier","Chancelière de l'Échiquier",'Chancellor of the Exchequer','Chancellor of the Exchequer',1500,2100],
+  senateur:['Lord (Chambre des lords)','Lady (Chambre des lords)','Member of the House of Lords','Member of the House of Lords',1500,2100],
+  depute:['Député (Chambre des communes)','Députée (Chambre des communes)','Member of Parliament','Member of Parliament',1500,2100],
+  maire:[null,null,null,null,1500,2100],
+  academicien:['Membre de la Royal Society','Membre de la Royal Society','Fellow of the Royal Society','Fellow of the Royal Society',1660,2100],
+  proviseur:["Directeur d'école","Directrice d'école",'Headteacher','Headteacher',1802,2100],
+  policier:[null,null,null,null,1829,2100], cheminot:[null,null,null,null,1825,1999], mineur:[null,null,null,null,1700,1994], bourreau:[null,null,null,null,1500,1964],
+  poinconneur:['Contrôleur de billets','Contrôleuse de billets','Ticket inspector','Ticket inspector',1863,1990],
+  vigneron:['Cultivateur de houblon','Cultivatrice de houblon','Hop farmer','Hop farmer',1500,2100],
+  tabagiste:['Marchand de journaux','Marchande de journaux','Newsagent','Newsagent',1800,2100],
+  cafetier:['Patron de pub','Patronne de pub','Publican','Publican',1500,2100],
+  charcutier:['Poissonnier','Poissonnière','Fishmonger','Fishmonger',1500,2100],
+  avocat:[null,null,'Barrister','Barrister',null,null]
+};
+const UK_JOB_OUT = new Set(['gendarme','cpe']);
+const UK_JOB_ADD = [['beefeater','Gardien de la Tour de Londres','Gardienne de la Tour de Londres','Yeoman Warder','Yeoman Warder',1500,2100],
+  ['ramoneur','Ramoneur','Ramoneuse','Chimney sweep','Chimney sweep',1600,1875],['docker','Docker','Docker','Docker','Docker',1800,1980],
+  ['filature','Ouvrier de filature','Ouvrière de filature','Cotton mill worker','Cotton mill worker',1780,1960],
+  ['majordome','Majordome','Gouvernante','Butler','Housekeeper',1500,2100],['laitier','Laitier','Laitière','Milkman','Milkwoman',1860,2010]];
+const UK_STAR_EDIT = {cycliste:['Star du cricket','Star du cricket','Cricket star','Cricket star',1850,2100]};
+const UK_INT_OUT = new Set(['tektonik']);
+const UK_INT_ADD = [['cricket','Joueur de cricket','Joueuse de cricket','Cricketer','Cricketer','trophy',1700,9999,true],
+  ['flechettes','Joueur de fléchettes','Joueuse de fléchettes','Darts player','Darts player','dice',1900,9999],
+  ['pubquiz','Accro aux quiz de pub','Accro aux quiz de pub','Pub quiz regular','Pub quiz regular','bulb',1975,9999],
+  ['the','Amateur de thé','Amatrice de thé','Tea connoisseur','Tea connoisseur','cup',1660,9999],
+  ['trainspot','Passionné de trains','Passionnée de trains','Trainspotter','Trainspotter','train',1940,9999],
+  ['morris','Danseur de morris','Danseuse de morris','Morris dancer','Morris dancer','music',1500,9999]];
+const editRows = (rows, edit, out, add) => rows.filter(r => !out.has(r[0])).map(r => {
+  const e = edit[r[0]]; if(!e) return r;
+  const c = r.slice(); e.forEach((v, i) => { if(v != null) c[i + 1] = v; }); return c;
+}).concat(add);
+// textes propres au Royaume-Uni (écoles, Premier ministre, carte)
+const TX_UK = {
+  fr:{mat:['Nursery','Reception','Year 1'], prim:['Year 2','Year 3','Year 4','Year 5','Year 6'], col:['Year 7','Year 8','Year 9','Year 10'], lyc:['Year 11','Year 12','Year 13'],
+    cours_sup:'École élémentaire · Standard VI', certif:'École élémentaire · Standard VII', old_lyc:['First form','Second form','Third form','Fourth form','Fifth form'],
+    lycee:'Grammar school', petite_ecole:'École de dame', alb_mat:'École primaire', alb_col:'École secondaire',
+    log_president:p=>`${nm(p)} devient ${g(P(p),'Premier ministre','Première ministre')} du Royaume-Uni !`, pres_rib:p=>`★ ${g(p,'Premier ministre','Première ministre')}`,
+    set_map:'Carte du Royaume-Uni', map_zoom_reset:'Tout le Royaume-Uni'},
+  en:{mat:['Nursery','Reception','Year 1'], prim:['Year 2','Year 3','Year 4','Year 5','Year 6'], col:['Year 7','Year 8','Year 9','Year 10'], lyc:['Year 11','Year 12','Year 13'],
+    cours_sup:'Elementary school · Standard VI', certif:'Elementary school · Standard VII', old_lyc:['First form','Second form','Third form','Fourth form','Fifth form'],
+    lycee:'Grammar school', petite_ecole:'Dame school', alb_mat:'Primary school', alb_col:'Secondary school',
+    log_president:p=>`${nm(p)} becomes Prime Minister of the United Kingdom!`, pres_rib:()=>'★ Prime Minister',
+    set_map:'Map of the UK', map_zoom_reset:'All of the UK'}
+};
+const swapArr = (arr, src) => { arr.length = 0; src.forEach(x => arr.push(x)); };
+const refill = (obj, src) => { Object.keys(obj).forEach(k => delete obj[k]); Object.assign(obj, src); };
+const COUNTRY = {
+  fr:{NAMES:NAMES.slice(), BASIC:{M:BASIC_NAMES.M, F:BASIC_NAMES.F}, CITIES:CITIES.slice(), CITY_POS:Object.assign({}, CITY_POS), OUT1:FR_OUTLINE.slice(), OUT2:CORSE.slice(),
+    WARS:WARS.slice(), WARCAUSES:WARCAUSES.slice(), DECADES:DECADES.slice(), WORLD:WORLD.slice(), TRACKS:TRACKS.slice(), JOBS:JOBS.slice(), STARJOBS:STARJOBS.slice(),
+    INTERESTS:INTERESTS.slice(), PJ:Object.assign({}, PJ), UNK:Object.assign({}, UNK)},
+  uk:{NAMES:UK_NAMES, BASIC:UK_BASIC, CITIES:Object.keys(UK_CITY_POS).sort((a, b) => a.localeCompare(b)), CITY_POS:UK_CITY_POS, OUT1:UK_OUTLINE, OUT2:UK_NI,
+    WARS:UK_WARS, WARCAUSES:WARCAUSES.filter(r => r[0] !== 'collabo' && r[0] !== 'deporte'), DECADES:UK_DECADES.concat(DECADES.filter(d => d[0] >= 2000)),
+    WORLD:UK_WORLD, TRACKS:UK_TRACKS, JOBS:editRows(JOBS, UK_JOB_EDIT, UK_JOB_OUT, UK_JOB_ADD), STARJOBS:editRows(STARJOBS, UK_STAR_EDIT, new Set(), []),
+    INTERESTS:editRows(INTERESTS, {}, UK_INT_OUT, UK_INT_ADD), PJ:{lon:8.4, k:.584*55, lat:58.8, sy:55, x0:100, y0:16}, UNK:{x:14, y:16, w:128, h:96}}
+};
+function applyCountry(c){                               // remplace les données du pays sur place ; renvoie vrai si le pays a changé
+  c = c === 'uk' ? 'uk' : 'fr';
+  if(c === CTRY) return false;
+  CTRY = c; const D = COUNTRY[c];
+  swapArr(NAMES, D.NAMES); BASIC_NAMES.M = D.BASIC.M; BASIC_NAMES.F = D.BASIC.F;
+  swapArr(CITIES, D.CITIES); refill(CITY_POS, D.CITY_POS); swapArr(FR_OUTLINE, D.OUT1); swapArr(CORSE, D.OUT2);
+  swapArr(WARS, D.WARS); swapArr(WARCAUSES, D.WARCAUSES); refill(WARC, Object.fromEntries(D.WARCAUSES.map(r => [r[0], r])));
+  swapArr(DECADES, D.DECADES); swapArr(WORLD, D.WORLD);
+  swapArr(TRACKS, D.TRACKS); refill(TRACK, byId(D.TRACKS));
+  swapArr(JOBS, D.JOBS); refill(JOB, byId(D.JOBS)); swapArr(STARJOBS, D.STARJOBS); refill(STARJOB, byId(D.STARJOBS));
+  swapArr(INTERESTS, D.INTERESTS); refill(INT, byId(D.INTERESTS));
+  Object.assign(PJ, D.PJ); Object.assign(UNK, D.UNK);
+  const mv = $('#mapView'); if(mv) mv.innerHTML = ''; dotEls = new Map(); lastDecade = null;
+  return true;
+}
+function refreshSetupCountry(changed){                   // écran de départ : villes du pays, et un fondateur du pays si le pays vient de changer
+  const keep = fCity.value; fCity.innerHTML = ''; CITIES.forEach(c => fCity.add(new Option(c, c)));
+  fCity.value = CITIES.includes(keep) ? keep : (CTRY === 'uk' ? 'London' : 'Paris');
+  if(changed){
+    const y = +fYear.value || 1760, s = startYear() || 1780;
+    $('#fFirst').value = wpick(namePool(y, fSex())); $('#fLast').value = pickSurname(s);
+    fCity.value = CTRY === 'uk' ? 'London' : 'Paris';
+  }
+}
 function cityXY(c){
   if(CITY_POS[c]) return proj(CITY_POS[c]);
   const i = ((S && S.customCities) || []).indexOf(c);
@@ -5722,6 +5960,7 @@ function openSettings(re){
     ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}`
   : `
     <div class="setrow"><b>${t('set_lang')}</b><div class="pills" role="group">${['fr','en'].map(l => `<button data-act="lang" data-v="${l}" aria-pressed="${LANG===l}">${l.toUpperCase()}</button>`).join('')}</div></div>
+    <div class="setrow"><span><b>${t('set_country')}</b><small>${S && !$('#game').hidden && (S.country || 'fr') !== SET.country ? t('set_country_game', S.country || 'fr') : t('set_country_hint')}</small></span><div class="pills" role="group">${['fr','uk'].map(c => `<button data-act="country" data-v="${c}" aria-pressed="${SET.country===c}">${t('ctry_' + c)}</button>`).join('')}</div></div>
     ${sw('data-set','toasts',SET.toasts,t('set_toasts'),t('set_toasts_hint'))}
     ${sw('data-set','map',SET.map,t('set_map'),t('set_map_hint'))}
     ${sw('data-set','regnal',SET.regnal,t('set_regnal'),t('set_regnal_hint'))}
@@ -5886,6 +6125,9 @@ const ACT = {
     closeModal(); render(); save();
   },
   fiche(d){ openFiche(+d.id); },
+  country(d){ SET.country = d.v === 'uk' ? 'uk' : 'fr'; saveSet();                // pays de la lignée : tout de suite sur l'écran de départ, sinon à la prochaine partie
+    if(!S || $('#game').hidden) refreshSetupCountry(applyCountry(SET.country));
+    sfx.pop(); openSettings(true); },
   quit(){ if(S) save(); const D = window.cyngeneticDesktop; if(D && D.quit) D.quit(); else window.close(); },
   settab(d){ setTab = d.v; openSettings(true); },
   fullscreen(){ const D = window.cyngeneticDesktop;
@@ -6078,6 +6320,8 @@ function zSetup(){
 $('#fZombie').addEventListener('change', zSetup); $('#fRoyal').addEventListener('change', zSetup);
 /* Versus : un menu pour le mode, la difficulté et l'objectif ; ensuite on crée son personnage comme d'habitude */
 let VS_CFG = null, vsDraft = null;
+// 0.1.8c : pas de Versus sur téléphone et tablette (écran tactile, petit côté de moins de 900 px) ; il reste sur ordinateur (web et PC)
+const vsNoHere = () => !window.cyngeneticDesktop && matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches && Math.min(screen.width, screen.height) < 900;
 function vsSetup(){                                   // 1780 imposé, mode imposé, pas de destin de départ
   const on = !!VS_CFG;
   $('#fVs').checked = on; $('#fVsBox').hidden = !on;
@@ -6162,7 +6406,7 @@ $('#setupForm').addEventListener('submit', e => {
   else if(fromYMD(y,m,d) > fromYMD(s,0,1)) msg = t('err_after', fmt(fromYMD(s,0,1)));
   if(msg){ err.textContent = msg; err.hidden = false; sfx.refuse(); return; }
   err.hidden = true;
-  S = newState(s);
+  S = newState(s); S.country = CTRY;
   const day = today(), city = fCity.value;
   const p = addPerson({first: cap(first), last: cap(last), sex:fSex(), birth:fromYMD(y,m,d), blood:true, city, birthCity:city});
   p.lastAge = ageAt(p, day);
@@ -6191,6 +6435,7 @@ $('#setupForm').addEventListener('submit', e => {
 
 function showSetup(){
   $('#game').hidden = true; $('#setup').hidden = false;
+  refreshSetupCountry(applyCountry(SET.country));        // l'écran de départ suit le pays choisi dans les paramètres
   if(modalOpen) closeModal(true);
   let saved = null; try{ saved = JSON.parse(store.get(SAVE_KEY)); }catch(e){}
   const box = $('#resumeBox');
@@ -6199,9 +6444,13 @@ function showSetup(){
     box.innerHTML = `<p>${t('resume_txt', esc(f.maiden || f.last), fmt(saved.t), esc(a.first+' '+a.last))}</p><button class="gel lime" data-act="resume"><span>${t('resume')}</span></button>`;
     box.hidden = false;
   } else box.hidden = true;
+  const vsRow = $('#fVs').closest('.optrow'), noVs = vsNoHere();      // Versus caché sur mobile
+  if(vsRow) vsRow.hidden = noVs;
+  if(noVs) VS_CFG = null;
   vsSetup(); zSetup();
 }
 function enterGame(){
+  applyCountry(S.country || 'fr');                        // chaque partie garde son pays
   $('#setup').hidden = true; $('#game').hidden = false;
   S.nameQueue = S.nameQueue || [];
   Object.values(S.people).forEach(p => { if(!p.atout) p.atout = pick(ATOUTS)[0]; });   // anciennes parties : chacun reçoit son atout

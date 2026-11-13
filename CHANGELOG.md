@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.8c — 13 novembre 2026
+
+- Nouveau réglage « Pays de la lignée » (Paramètres, sous la langue) : France ou Royaume-Uni. Au Royaume-Uni, les prénoms (selon l'époque) et les noms de famille sont anglais, gallois, écossais ou irlandais, avec les villes du pays et la carte du Royaume-Uni.
+- Royaume-Uni : ses propres événements (Armada, grand incendie de Londres, Trafalgar, Blitz, NHS, Brexit…), ses décennies (époque victorienne, Swinging Sixties, Britpop…), ses guerres (guerre civile, Crimée, Boers, Malouines…) et son école (Year 1 à Year 13, A-levels, BTEC).
+- Royaume-Uni : métiers adaptés (Premier ministre au lieu de Président, Chambre des lords, pub, marchand de journaux…), 6 métiers propres au pays (gardien de la Tour de Londres, ramoneur, docker, ouvrier de filature, majordome, laitier) et 6 centres d'intérêt (cricket, fléchettes, quiz de pub, thé, trains, danse morris). L'album suit le pays de la partie.
+- Chaque partie garde son pays : changer le réglage en cours de partie s'applique à la partie suivante.
+- Le mode Versus n'est plus proposé sur téléphone et tablette : il reste disponible sur ordinateur (navigateur et version PC).
+
 ## v0.1.8b — 13 novembre 2026
 
 - Paramètres en 3 onglets : Général, Son, et un nouvel onglet Vidéo et graphismes (plein écran, thème, verre dépoli, animations, et taille de l'interface sur la version PC).
