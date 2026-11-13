@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.8b — 13 novembre 2026
+
+- Paramètres en 3 onglets : Général, Son, et un nouvel onglet Vidéo et graphismes (plein écran, thème, verre dépoli, animations, et taille de l'interface sur la version PC).
+- Le bouton « Recommencer » devient « Retour au menu » : la partie est sauvegardée, on peut la reprendre depuis l'écran de départ.
+- Version PC : bouton « Quitter » sur l'écran de départ, et la partie est sauvegardée à la fermeture de la fenêtre (elle pouvait disparaître).
+- Bulles de l'arbre : les longues formations et les longs métiers ne dépassent plus, la bulle s'élargit. Le texte reste centré sur la version PC.
+
 ## v0.1.8a — 13 novembre 2026
 
 - Version PC (Windows) : Cyngenetic peut maintenant s'installer comme une vraie application, toujours à jour avec le site.

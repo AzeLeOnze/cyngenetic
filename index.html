@@ -226,6 +226,11 @@ button{font:inherit;color:inherit}
 .optrow .opt-txt small{display:block;font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
 .optsub{display:grid;gap:6px;padding:4px 6px 4px 58px}
 .rulepills{display:flex}
+.settabs{display:flex;margin:-4px 0 12px}
+.settabs button{flex:1;min-height:36px}
+:root.noanim *,:root.noanim *::before,:root.noanim *::after{animation-duration:0s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:0s!important}
+:root.noblur .glass,:root.noblur .overlay{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+:root.noblur .modal.glass{background:linear-gradient(180deg,rgba(255,255,255,.97) 0%,rgba(246,252,255,.96) 50%,rgba(232,247,255,.95) 100%)}
 .rulepills button{flex:1;font-size:13px}
 .zpills [data-v="easy"]{color:#0a74e8}.zpills [data-v="med"]{color:#279a00}.zpills [data-v="hard"]{color:#e07a00}.zpills [data-v="ext"]{color:#d8102a}
 .zpills button[aria-pressed="true"]{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
@@ -864,6 +869,7 @@ body.zmode .treebox{position:relative}
 .node{position:absolute;width:172px;height:140px;display:flex;flex-direction:column;gap:3px;padding:10px 10px 8px;border-radius:22px;text-align:center;cursor:pointer;
   border:1px solid #fff;background:linear-gradient(180deg,#ffffff 0%,#f2fbff 50%,#e2f4ff 100%);
   box-shadow:0 7px 16px rgba(0,70,160,.24),inset 0 1px 0 #fff,inset 0 -4px 10px rgba(0,150,255,.10);transition:transform .15s}
+.node{align-items:stretch}                              /* 0.1.8b : le contenu des bulles reste centré (version PC) */
 .node:hover{transform:translateY(-2px) scale(1.03)}
 .node.partner{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(235,248,255,.78))}
 .n-top{display:flex;align-items:center;justify-content:center;gap:8px;text-align:left;min-width:0;max-width:100%}
@@ -1266,6 +1272,7 @@ body.no-deco .gothfx .bat{display:none}
 <section id="setup" class="setup">
   <div class="setup-inner">
     <div class="setup-top">
+      <button class="gel ghost quitb" data-act="quit" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v10h-2zM5.6 5.6 7 7a7 7 0 1 0 10 0l1.4-1.4A9 9 0 1 1 5.6 5.6z"/></svg><span data-t="quit"></span></button>
       <button class="gel gold" data-act="achs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg><span data-t="ach_title"></span></button>
       <button class="gel shopb" data-act="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-4 0v1zM4.2 8h15.6l-1.1 12.2A2 2 0 0 1 16.7 22H7.3a2 2 0 0 1-2-1.8z"/></svg><span data-t="shop"></span></button>
       <button class="gel ghost" data-act="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg><span data-t="custom"></span></button>
@@ -1424,9 +1431,18 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.8a';
+const APP_VERSION = '0.1.8b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.8b', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Paramètres en 3 onglets : Général, Son, et un nouvel onglet Vidéo et graphismes (plein écran, thème, verre dépoli, animations, et taille de l\'interface sur la version PC).',
+       'Le bouton « Recommencer » devient « Retour au menu » : la partie est sauvegardée, on peut la reprendre depuis l\'écran de départ.',
+       'Version PC : bouton « Quitter » sur l\'écran de départ, et la partie est sauvegardée à la fermeture de la fenêtre (elle pouvait disparaître).',
+       'Bulles de l\'arbre : les longues formations et les longs métiers ne dépassent plus, la bulle s\'élargit. Le texte reste centré sur la version PC.'],
+   en:['Settings in 3 tabs: General, Sound, and a new Video & graphics tab (full screen, theme, frosted glass, animations, and interface size in the PC version).',
+       'The "Restart" button becomes "Back to menu": the game is saved and can be resumed from the start screen.',
+       'PC version: "Quit" button on the start screen, and the game is saved when the window closes (it could disappear).',
+       'Tree bubbles: long studies and long job names no longer overflow, the bubble gets wider. Text stays centred in the PC version.']},
   {v:'0.1.8a', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Version PC (Windows) : Cyngenetic peut maintenant s\'installer comme une vraie application, toujours à jour avec le site.',
        'Discord : dans l\'application PC, ton profil Discord affiche « Joue à Cyngenetic » avec ta famille, l\'année et le mode de jeu.'],
@@ -1829,7 +1845,7 @@ const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return n
 const loadJSON = k => { try{ return JSON.parse(store.get(k)) || {}; }catch(e){ return {}; } };
 /* Paramètres (confort) et règles de jeu (personnalisation), gardés dans le navigateur */
 const SET_KEY = 'lignee.settings.v1', RULES_KEY = 'lignee.rules.v1';
-const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false, regnal:false};
+const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false, regnal:false, anim:true, blur:true, ui:100};
 const RULES_DEF = {evoNames:true, ach:true, sameSex:true, legal:18, oldAge:true, diseases:true,
   boys:50, twins:1.2, triplets:.9, quads:.5, illness:100, conds:4, inherit:13, star:2.5, crim:2, addict:8.8};
 let SET = Object.assign({}, SET_DEF, loadJSON(SET_KEY));
@@ -2771,7 +2787,7 @@ fr:{
   err_year:(a,b)=>`L'année de naissance doit être comprise entre ${a} et ${b}.`, err_days:(m,y,n)=>`Le mois de ${m} ${y} n'a que ${n} jours.`,
   err_after:d=>`La partie commence le ${d} : la naissance doit avoir lieu ce jour-là au plus tard.`,
   resume_txt:(f,d,w)=>`Partie en cours : <b>famille ${f}</b>, ${d}<br><span class="hint">Vous incarnez ${w}.</span>`, resume:'Reprendre',
-  pause:'Pause', play:'Reprendre', mute:'Couper le son', unmute:'Activer le son', restart:'Recommencer', confirm:'Confirmer ?', speed:'Vitesse',
+  pause:'Pause', play:'Reprendre', mute:'Couper le son', unmute:'Activer le son', restart:'Retour au menu', confirm:'Confirmer ?', speed:'Vitesse',
   rate:s=>`1 an = ${String(s).replace('.',',')} s`, paused:'En pause', decade:y=>`Années ${y}`,
   family:l=>`Famille ${l}`, center:'Recentrer', stats:(n,v,k)=>`${n} membre${n>1?'s':''} · ${v} en vie · ${k} génération${k>1?'s':''}`,
   you:'Vous', future_star:'★ Future star', star:'★ Star',
@@ -2869,6 +2885,11 @@ fr:{
   relocate_title:'Déménager', relocate_custom:'Ou une autre ville…', relocate_btn:'Déménager ensemble',
   relocate_note:c=>`Vous quittez ${c} avec votre conjoint et vos enfants mineurs.`,
   skin_gold:'Or', skin_locked:"Terminez une catégorie entière de succès pour débloquer ce thème.", gold_unlocked:'Thème Or débloqué !',
+  set_tab_gen:'Général', set_tab_snd:'Son', set_tab_gfx:'Vidéo et graphismes', quit:'Quitter',
+  set_full:'Plein écran', set_full_hint:'Le jeu occupe tout l\'écran (Échap pour en sortir).', set_full_hint_d:'Le jeu occupe tout l\'écran (touche F11).', set_full_on:'Activer', set_full_off:'Quitter le plein écran',
+  set_ui:'Taille de l\'interface', set_ui_hint:'Agrandit ou réduit tout le jeu.',
+  set_blur:'Verre dépoli', set_blur_hint:'Le flou derrière les fenêtres. À couper si le jeu rame.',
+  set_anim:'Animations', set_anim_hint:'Reflets, lueurs et transitions. À couper si le jeu rame.',
   settings:'Paramètres', custom:'Personnalisation', set_eyebrow:'Confort de jeu', set_lang:'Langue', set_sound:'Son', set_sound_hint:'Bruitages et petites musiques.',
   set_volume:'Volume', set_theme:'Thème', skin_aqua:'Aqua (bleu)', skin_orange:'Orange', skin_vapor:'Néon', skin_kid:'Enfantin', skin_xp:'Windows XP', shop_xp:'Thème Windows XP', shop_xp_d:'Débloque le thème Windows XP pour toujours : colline verte, ciel bleu et fenêtres d\'époque.', skin_locked_xp:"S'achète dans la boutique pour 2 000 Cyn.",
   set_toasts:'Notifications', set_toasts_hint:"Bulles en bas de l'écran pour les naissances, décès, etc.", set_deco:'Animations décoratives', set_deco_hint:'Bulles qui flottent et confettis.',
@@ -3032,7 +3053,7 @@ en:{
   err_year:(a,b)=>`The birth year must be between ${a} and ${b}.`, err_days:(m,y,n)=>`${m} ${y} only has ${n} days.`,
   err_after:d=>`The game starts on ${d}: the birth must be on or before that day.`,
   resume_txt:(f,d,w)=>`Game in progress: <b>the ${f} family</b>, ${d}<br><span class="hint">You are playing ${w}.</span>`, resume:'Resume',
-  pause:'Pause', play:'Resume', mute:'Mute', unmute:'Unmute', restart:'Restart', confirm:'Confirm?', speed:'Speed',
+  pause:'Pause', play:'Resume', mute:'Mute', unmute:'Unmute', restart:'Back to menu', confirm:'Confirm?', speed:'Speed',
   rate:s=>`1 year = ${s}s`, paused:'Paused', decade:y=>`The ${y}s`,
   family:l=>`The ${l} family`, center:'Recenter', stats:(n,v,k)=>`${n} member${n>1?'s':''} · ${v} alive · ${k} generation${k>1?'s':''}`,
   you:'You', future_star:'★ Future star', star:'★ Star',
@@ -3128,6 +3149,11 @@ en:{
   relocate_title:'Move', relocate_custom:'Or another town…', relocate_btn:'Move together',
   relocate_note:c=>`You leave ${c} with your partner and underage children.`,
   skin_gold:'Gold', skin_locked:'Complete a whole achievement category to unlock this theme.', gold_unlocked:'Gold theme unlocked!',
+  set_tab_gen:'General', set_tab_snd:'Sound', set_tab_gfx:'Video & graphics', quit:'Quit',
+  set_full:'Full screen', set_full_hint:'The game fills the whole screen (Esc to leave).', set_full_hint_d:'The game fills the whole screen (F11 key).', set_full_on:'Turn on', set_full_off:'Leave full screen',
+  set_ui:'Interface size', set_ui_hint:'Makes the whole game bigger or smaller.',
+  set_blur:'Frosted glass', set_blur_hint:'The blur behind windows. Turn it off if the game lags.',
+  set_anim:'Animations', set_anim_hint:'Shines, glows and transitions. Turn them off if the game lags.',
   settings:'Settings', custom:'Customization', set_eyebrow:'Comfort', set_lang:'Language', set_sound:'Sound', set_sound_hint:'Sound effects and jingles.',
   set_volume:'Volume', set_theme:'Theme', skin_aqua:'Aqua (blue)', skin_orange:'Orange', skin_vapor:'Neon', skin_kid:'Kiddy', skin_xp:'Windows XP', shop_xp:'Windows XP theme', shop_xp_d:'Unlocks the Windows XP theme for good: green hill, blue sky and old-school windows.', skin_locked_xp:'Buy it in the shop for 2,000 Cyn.',
   set_toasts:'Notifications', set_toasts_hint:'Pop-ups at the bottom for births, deaths and more.', set_deco:'Decorative animations', set_deco_hint:'Floating bubbles and confetti.',
@@ -4674,7 +4700,9 @@ function nodeWidthOf(p, fd){
   if(tt){ measureCtx.font = `800 9px ${fd}`; line1 += measureCtx.measureText(tt.replace(' consort', '').toUpperCase()).width + tt.length * .4 + 4; }
   measureCtx.font = `400 12px ${fd}`;
   const line2 = measureCtx.measureText(p.last || '').width;
-  return Math.min(NW_MAX, Math.max(NW, Math.ceil(20 + 40 + 8 + Math.max(line1, line2) + 8)));   // marges + photo + espace + texte
+  measureCtx.font = `700 11.5px ${fd}`;
+  const band = measureCtx.measureText(activity(p)).width + 16 + 24;                    // 0.1.8b : la bande (métier, formation) tient dans la bulle
+  return Math.min(NW_MAX, Math.max(NW, Math.ceil(20 + 40 + 8 + Math.max(line1, line2) + 8), Math.ceil(band)));   // marges + photo + espace + texte
 }
 const CROWN_SVG = '<svg viewBox="0 0 64 40"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6c2"/><stop offset=".45" stop-color="#ffd23a"/><stop offset="1" stop-color="#c98a00"/></linearGradient></defs><path d="M6 34 3 10l14 11L32 3l15 18 14-11-3 24z" fill="url(#cg)" stroke="#8a5a00" stroke-width="2" stroke-linejoin="round"/><rect x="6" y="31" width="52" height="7" rx="2" fill="url(#cg)" stroke="#8a5a00" stroke-width="2"/><circle cx="32" cy="23" r="4" fill="#e8203a" stroke="#fff" stroke-width="1.2"/><circle cx="17" cy="26" r="3" fill="#2f6bff" stroke="#fff" stroke-width="1"/><circle cx="47" cy="26" r="3" fill="#2fbf5a" stroke="#fff" stroke-width="1"/><circle cx="3" cy="10" r="2.6" fill="#fff3a0"/><circle cx="32" cy="3" r="2.8" fill="#fff3a0"/><circle cx="61" cy="10" r="2.6" fill="#fff3a0"/></svg>';
 const ICON_BABY = '<svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-8.6C1 9.3 2.7 5.5 6.3 5.5c2.1 0 3.4 1.2 4.2 2.4h3c.8-1.2 2.1-2.4 4.2-2.4 3.6 0 5.3 3.8 3.6 6.9C19 16.6 12 21 12 21z"/></svg>';
@@ -4725,7 +4753,7 @@ function nodeHTML(p, x, y){
     <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b class="${rtt ? 'tt' : ''}">${rtt ? `<small class="rtt">${esc(rtt.replace(' consort', ''))}</small>` : ''}${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
     <span class="n-life"><span>${years}</span><b>${ageL}</b></span>
     <span class="n-city">${icon('pin')}<span>${esc(cityLine(p))}</span></span>
-    <span class="n-band">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
+    <span class="n-band" title="${esc(activity(p))}">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
     ${cu && p.sex==='F' ? `<span class="badge">${ICON_BABY}</span>` : ''}</button>`;
 }
 function buildTree(){
@@ -5479,6 +5507,10 @@ function applySettings(){
   $('#mnavMap').hidden = !SET.map;
   if(S && !$('#game').hidden){ if(!SET.map && mtab === 'map') setMobileTab('tree'); setView(curView); renderSide(); }
   document.body.classList.toggle('no-deco', !SET.deco);
+  document.documentElement.classList.toggle('noanim', !SET.anim);     // Vidéo et graphismes : animations coupées
+  document.documentElement.classList.toggle('noblur', !SET.blur);     // … et verre dépoli coupé (plus léger pour la carte graphique)
+  const D = window.cyngeneticDesktop; if(D && D.setZoom) D.setZoom((SET.ui || 100) / 100);   // version PC : taille de l'interface
+  const qb = $('.quitb'); if(qb) qb.hidden = !(D && D.quit);
 }
 const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${disabled?'is-off':''}"><input type="checkbox" ${attr}="${key}" ${on?'checked':''} ${disabled?'disabled':''}><span class="sw"></span><span><b>${label}</b>${hint?`<small>${hint}</small>`:''}</span></label>`;
 const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG==='fr' ? ' %' : '%') : u);
@@ -5668,26 +5700,41 @@ function wipeAll(){                                   // remise à zéro totale 
     location.reload();
   }, 1800);
 }
+let setTab = 'gen';                                    // onglet des paramètres : Général, Son, Vidéo et graphismes
+const isDesk = () => !!window.cyngeneticDesktop;
+const isFull = () => !!document.fullscreenElement || (Math.abs(innerWidth - screen.width) < 2 && Math.abs(innerHeight - screen.height) < 2);
 function openSettings(re){
-  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('settings')}</h2></div>
-  <div class="setlist">
-    <div class="setrow"><b>${t('set_lang')}</b><div class="pills" role="group">${['fr','en'].map(l => `<button data-act="lang" data-v="${l}" aria-pressed="${LANG===l}">${l.toUpperCase()}</button>`).join('')}</div></div>
+  const keep = re ? $('#modal').scrollTop : 0;
+  const tabs = [['gen','set_tab_gen'],['snd','set_tab_snd'],['gfx','set_tab_gfx']].map(([k, l]) => `<button data-act="settab" data-v="${k}" aria-pressed="${setTab === k}">${t(l)}</button>`).join('');
+  const range = (key, min, max, step, unit, label, hint) => `<div class="setrow col"><div class="rowhead"><b>${label}</b><output>${numTxt(SET[key], unit)}</output></div><input type="range" min="${min}" max="${max}" step="${step}" value="${SET[key]}" data-set="${key}" data-unit="${unit}" aria-label="${label}">${hint ? `<small>${hint}</small>` : ''}</div>`;
+  const rows = setTab === 'snd' ? `
     ${sw('data-set','sound',SET.sound,t('set_sound'),t('set_sound_hint'))}
-    <div class="setrow col"><div class="rowhead"><b>${t('set_volume')}</b><output>${numTxt(SET.volume,'%')}</output></div><input type="range" min="0" max="100" step="5" value="${SET.volume}" data-set="volume" data-unit="%" aria-label="${t('set_volume')}"></div>
-    <div class="setrow col"><div class="rowhead"><b>${t('set_music')}</b><output>${numTxt(SET.music,'%')}</output></div><input type="range" min="0" max="100" step="5" value="${SET.music}" data-set="music" data-unit="%" aria-label="${t('set_music')}"><small>${t('set_music_hint')}</small></div>
+    ${range('volume', 0, 100, 5, '%', t('set_volume'))}
+    ${range('music', 0, 100, 5, '%', t('set_music'), t('set_music_hint'))}`
+  : setTab === 'gfx' ? `
+    <div class="setrow"><span><b>${t('set_full')}</b><small>${t(isDesk() ? 'set_full_hint_d' : 'set_full_hint')}</small></span><button class="gel ghost" data-act="fullscreen"><span>${t(isFull() ? 'set_full_off' : 'set_full_on')}</span></button></div>
+    ${isDesk() ? range('ui', 70, 150, 10, '%', t('set_ui'), t('set_ui_hint')) : ''}
     <div class="setrow col"><b>${t('set_theme')}</b><div class="skins">${SKINS.map(s => { const lock = skinLocked(s);
       return `<button class="skin sk-${s} ${lock?'locked':''}" data-act="skin" data-v="${s}" aria-pressed="${SET.skin===s && !lock}"><i>${lock?icon('lock'):''}</i><span>${t('skin_'+s)}</span></button>`; }).join('')}</div>
       <p class="skinhint" id="skinHint" hidden></p></div>
+    ${sw('data-set','blur',SET.blur,t('set_blur'),t('set_blur_hint'))}
+    ${sw('data-set','anim',SET.anim,t('set_anim'),t('set_anim_hint'))}
+    ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}`
+  : `
+    <div class="setrow"><b>${t('set_lang')}</b><div class="pills" role="group">${['fr','en'].map(l => `<button data-act="lang" data-v="${l}" aria-pressed="${LANG===l}">${l.toUpperCase()}</button>`).join('')}</div></div>
     ${sw('data-set','toasts',SET.toasts,t('set_toasts'),t('set_toasts_hint'))}
-    ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}
     ${sw('data-set','map',SET.map,t('set_map'),t('set_map_hint'))}
     ${sw('data-set','regnal',SET.regnal,t('set_regnal'),t('set_regnal_hint'))}
     <div class="setrow"><span><b>${t('set_reset_ach')}</b><small>${t('set_reset_ach_hint')}</small></span><button class="gel ghost" data-act="resetach"><span>${t('reset')}</span></button></div>
     <div class="setrow"><span><b>${t('pn_title')}</b><small>${t('pn_hint', APP_VERSION)}</small></span><button class="gel ghost" data-act="patchnotes"><span>${t('pn_open')}</span></button></div>
     <div class="setrow"><span><b>${t('tuto_set')}</b><small>${t('tuto_set_hint')}</small></span><button class="gel ghost" data-act="tutostart"><span>${t('tuto_set_btn')}</span></button></div>
-    <div class="setrow wiperow"><span><b>${t('set_wipe')}</b><small>${t('set_wipe_hint')}</small></span><button class="gel danger" data-act="wipe" data-step="0"><span>${t('wipe_btn')}</span></button></div>
+    <div class="setrow wiperow"><span><b>${t('set_wipe')}</b><small>${t('set_wipe_hint')}</small></span><button class="gel danger" data-act="wipe" data-step="0"><span>${t('wipe_btn')}</span></button></div>`;
+  openModal(`<div class="m-head"><div class="eyebrow">${t('set_eyebrow')}</div><h2>${t('settings')}</h2></div>
+  <div class="pills settabs" role="tablist">${tabs}</div>
+  <div class="setlist">${rows}
     <p class="ver">Cyngenetic v${APP_VERSION}</p>
   </div>`, {sound: !re});
+  if(re) $('#modal').scrollTop = keep;
 }
 const SLIDERS = [['boys',0,100,1,'%'],['twins',0,20,.1,'%'],['triplets',0,10,.1,'%'],['quads',0,5,.1,'%'],['illness',0,300,5,'%'],
   ['conds',0,30,.5,'%'],['inherit',0,100,1,'%'],['addict',0,50,.2,'%'],['star',0,20,.5,'%'],['crim',0,20,.5,'%']];
@@ -5839,6 +5886,12 @@ const ACT = {
     closeModal(); render(); save();
   },
   fiche(d){ openFiche(+d.id); },
+  quit(){ if(S) save(); const D = window.cyngeneticDesktop; if(D && D.quit) D.quit(); else window.close(); },
+  settab(d){ setTab = d.v; openSettings(true); },
+  fullscreen(){ const D = window.cyngeneticDesktop;
+    if(D && D.toggleFullscreen) D.toggleFullscreen();
+    else if(document.fullscreenElement) document.exitFullscreen(); else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
+    setTimeout(() => { if(modalOpen && $('#modal .settabs')) openSettings(true); }, 400); },
   achjump(d){ const el = document.getElementById('achsec-' + d.v), m = $('#modal'), nav = $('#modal .achnav');   // défile dans la fenêtre seulement
     if(el) m.scrollTo({top: el.offsetTop - (nav ? nav.offsetHeight : 0) - 8, behavior: reduced ? 'auto' : 'smooth'}); },
   vsmenu(){ vsDraft = Object.assign({mode:'normal', diff:'std', goal:'speed'}, VS_CFG || {}); openVsMenu(false); },
@@ -5926,7 +5979,7 @@ const ACT = {
   keep(){ if(S.end2100 !== 1) return; S.end2100 = 2; closeModal(true); save(); },
   close(){ closeModal(); },
   center(){ followActive = true; lastFocusKey = ''; centerOn(S.activeId, true); },
-  restart(d, b){ if(!arm(b, t('confirm'))) return; newGame(); },
+  restart(){ if(S) save(); document.body.classList.remove('zmode', 'vsmode'); S = null; cands = []; showSetup(); window.scrollTo(0, 0); },   // retour au menu : on peut reprendre
   newgame(){ newGame(); },
   resume(){ try{ S = JSON.parse(store.get(SAVE_KEY)); }catch(e){ S = null; } if(S) enterGame(); },
   random(){ randomFounder(); }
