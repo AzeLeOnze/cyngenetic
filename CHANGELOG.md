@@ -2,6 +2,15 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.7a — 13 novembre 2026
+
+- Nouveau mode Versus : affronte une IA ! Au départ, choisis le mode (Normal, Royal ou Zombie), la difficulté (Promenade de santé, Standard, Périple ou Extrême) et l'objectif de victoire, puis crée ton personnage. La partie commence toujours en 1780.
+- Objectifs du Versus : Partie de vitesse (le plus de générations), de lenteur (le moins de générations), de Star (le plus de stars) ou de Crime (le plus de meurtres). En mode Royal : vitesse, lenteur ou Partie de Noble (le plus de Nobles). En mode Zombie : Partie Classique (le plus de vivants en 2100).
+- Sur ordinateur, l'écran est partagé : ta famille à gauche, celle de l'IA à droite, avec ses Cyn, son arbre et le score en direct. Sur téléphone, l'IA a son propre onglet. Si plus personne n'est en vie dans une famille, elle a perdu.
+- Le nouveau logo devient l'icône du jeu : onglet du navigateur et application installée.
+- Correction : les succès de meurtres (Double peine, etc.) se débloquent de nouveau, avec l'effet du meurtre sur l'arbre.
+- Mode Zombie : plus de sifflement aigu dans la musique, et un grognement de zombie retentit à chaque nouvelle infection.
+
 ## v0.1.6a — 13 novembre 2026
 
 - Mode Zombie : l'Antidote ne s'achète qu'à partir de la 120e année de jeu (1900 pour une partie commencée en 1780).

@@ -10,8 +10,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Cyngenetic">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg?v=2">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=2">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 <title>Cyngenetic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1022,6 +1023,52 @@ body.zmode .treebox{position:relative}
   .topbar .ctrls{padding-bottom:6px}
 }
 @media (max-width:520px){ .topbar .brand.small .logo{display:none} }
+/* ---------- Mode Versus : l'arbre de l'IA à droite de celui du joueur ---------- */
+.opt-ic.vs{background:linear-gradient(160deg,#ff9ab0,#ff2f6a 55%,#8a5cff)}
+.optsub.vsbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.vsbox #fVsSum{flex:1;min-width:180px;font:700 13.5px var(--font-display);color:var(--ink)}
+.vsbox .gel{min-height:34px;padding:6px 14px;font-size:13px}
+body.vsmode .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px}
+.aibox .ai-head{gap:10px}
+.vs-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 8px;border-radius:99px;font:800 13px var(--font-display);color:#fff;
+  background:linear-gradient(180deg,#ff7d9b,#e0234a);box-shadow:0 2px 6px rgba(160,0,40,.3),inset 0 1px 0 rgba(255,255,255,.5)}
+.vs-tag svg{width:18px;height:18px;fill:currentColor}
+.ai-cyn{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 4px;border-radius:99px;background:linear-gradient(180deg,#fff,#e6fff4);
+  border:1px solid rgba(0,150,100,.25);font:800 15px var(--font-display);color:#006b4f;font-variant-numeric:tabular-nums}
+.ai-cyn svg{width:26px;height:26px;padding:5px;border-radius:50%;fill:#fff;background:linear-gradient(180deg,#5ee08a,#00a35a)}
+.ai-cyn::after{content:"Cyn";font:800 11px var(--font-display);opacity:.7}
+.ai-out{padding:4px 10px;border-radius:99px;background:#5a6b7d;color:#fff;font:800 12px var(--font-display)}
+.ai-scroll{flex:1;min-height:0;overflow:auto;cursor:grab;border-top:1px solid rgba(255,255,255,.8);
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,220,230,.45),rgba(255,255,255,0) 70%)}
+.ai-scroll.grabbing{cursor:grabbing}
+.ai-sizer{position:relative}
+.rib.you.ai{background:linear-gradient(180deg,#ff7d9b,#e0234a)!important}
+.vscard .vsgoal{display:block;font:800 18px var(--font-display);margin:2px 0 10px}
+.vsrow{display:flex;align-items:stretch;gap:8px}
+.vsrow>i{align-self:center;font:800 14px var(--font-display);color:var(--ink-faint);font-style:normal}
+.vsside{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 6px;border-radius:16px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);text-align:center}
+.vsside b{font:800 26px/1.1 var(--font-display);font-variant-numeric:tabular-nums}
+.vsside small{font:800 11px var(--font-display);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+.vsside span{font-size:12px;color:var(--ink-soft)}
+.vsside.lead{background:linear-gradient(180deg,#f2ffe0,#d2ffa0);border-color:#9ad84a}
+.vsside.out{opacity:.5}
+.vsmenu .lab{display:block;margin:14px 0 6px}
+.vsmodes{display:flex;flex-wrap:wrap}
+.vsopts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.vsopt{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:10px 14px;border-radius:16px;border:2px solid rgba(0,100,200,.14);
+  background:rgba(255,255,255,.78);cursor:pointer;text-align:left;font:inherit;color:var(--ink)}
+.vsopt b{font:800 15px var(--font-display)}
+.vsopt small{font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
+.vsopt:hover{box-shadow:0 4px 14px rgba(0,70,160,.14)}
+.vsopt[aria-pressed="true"]{border-color:var(--g3);background:linear-gradient(180deg,#eaf8ff,#c6eaff);box-shadow:0 0 0 3px rgba(0,150,255,.2)}
+.vsres{font:800 15px var(--font-display);padding:8px 12px;border-radius:12px}
+.vsres.lose{background:#ffe3e8;color:#a3002a}
+.vstable{width:100%;border-collapse:collapse;margin:6px 0 14px;font-size:14px;font-variant-numeric:tabular-nums}
+.vstable th,.vstable td{padding:7px 10px;text-align:center;border-bottom:1px solid rgba(0,80,160,.12)}
+.vstable th{font:800 13px var(--font-display);color:var(--ink-soft)}
+.vstable td:first-child{text-align:left;color:var(--ink-soft)}
+.vstable tr.goal td{font-weight:800;color:var(--ink);background:rgba(255,214,40,.2)}
+.vstable td.best{color:#1f8a00}
 /* ---------- Téléphone : un écran à la fois, barre de navigation en bas ---------- */
 .mnav{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;gap:4px;border-radius:22px 22px 0 0;
   padding:6px max(10px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
@@ -1042,6 +1089,10 @@ body.zmode .treebox{position:relative}
   body[data-mtab="me"] .treebox,body[data-mtab="journal"] .treebox{display:none}
   body[data-mtab="me"] .side .journal{display:none}
   body[data-mtab="journal"] .side>section:not(.journal){display:none}
+  .aibox{display:none}
+  body[data-mtab="ai"] .aibox{display:flex}
+  body[data-mtab="ai"] .treebox:not(.aibox),body[data-mtab="ai"] .side{display:none}
+  .tree-head.ai-head .zoomer{display:inline-flex!important}
   .tree-head #viewSw{display:none}
   .topbar .achb,.topbar .albb{display:none}
   .glass,.overlay{-webkit-backdrop-filter:none;backdrop-filter:none}
@@ -1198,6 +1249,9 @@ body.no-deco .gothfx .bat{display:none}
       <p id="fAtoutNote" class="setnote"></p>
       <div class="optcard">
         <div class="lab" data-t="opt_title"></div>
+        <label class="switch optrow"><span class="opt-ic vs"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4.5 4.5l10 10M11.5 17.5l6-6M15 15l4.5 4.5M19.5 4.5l-10 10M6.5 11.5l6 6M9 15l-4.5 4.5"/></g></svg></span>
+          <span class="opt-txt"><b data-t="lab_vs"></b><small data-t="vs_hint"></small></span><input type="checkbox" id="fVs"><span class="sw"></span></label>
+        <div class="optsub vsbox" id="fVsBox" hidden><span id="fVsSum"></span><button type="button" class="gel ghost" data-act="vsmenu"><span data-t="vs_edit"></span></button></div>
         <label class="switch optrow"><span class="opt-ic royal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v2H3zm0-2 1.5-9 4.5 4 3-6 3 6 4.5-4L21 16z"/></svg></span>
           <span class="opt-txt"><b data-t="lab_royal"></b><small data-t="royal_hint"></small></span><input type="checkbox" id="fRoyal"><span class="sw"></span></label>
         <div class="optsub" id="fRuleBox" hidden><span class="lab" data-t="lab_rule"></span>
@@ -1269,6 +1323,21 @@ body.no-deco .gothfx .bat{display:none}
       <div id="mapView" class="mapview" hidden></div>
       <div class="zcracks" id="zTreeCracks" aria-hidden="true"></div>
     </section>
+    <section class="glass treebox aibox" id="aiBox" hidden>
+      <div class="tree-head ai-head">
+        <span class="vs-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2h2v2h4a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4zM8.5 9a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM8 14v2h8v-2zM1 9h2v5H1zm20 0h2v5h-2zM9 20h6v2H9z"/></svg><span data-t="vs_ai"></span></span>
+        <h2 id="aiTitle"></h2>
+        <span class="stats" id="aiStats"></span>
+        <span class="ai-cyn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6 1-4.6 2.5-6.2z"/></svg><b id="aiCynVal">0</b></span>
+        <span class="ai-out" id="aiOut" data-t="vs_out" hidden></span>
+        <div class="pills zoomer" role="group">
+          <button data-act="aizoom" data-v="-1" data-ta="zoom_out" data-tt="zoom_out">−</button>
+          <button data-act="aizoom" data-v="0" id="aiZoomPct" data-ta="zoom_fit" data-tt="zoom_fit">100%</button>
+          <button data-act="aizoom" data-v="1" data-ta="zoom_in" data-tt="zoom_in">+</button>
+        </div>
+      </div>
+      <div id="aiScroll" class="ai-scroll"><div id="aiSizer" class="ai-sizer"><div id="aiCanvas" class="tree-canvas"></div></div></div>
+    </section>
     <aside id="side" class="side"></aside>
   </main>
   <nav class="mnav glass" id="mnav" aria-label="Navigation">
@@ -1277,6 +1346,7 @@ body.no-deco .gothfx .bat{display:none}
     <button data-act="mtab" data-v="me" data-icon="user" aria-pressed="false"><span data-t="m_me"></span></button>
     <button class="mnav-ach" data-act="achs" data-icon="trophy" aria-pressed="false"><span data-t="m_ach"></span></button>
     <button class="mnav-alb" data-act="album" data-icon="album" aria-pressed="false"><span data-t="m_album"></span></button>
+    <button data-act="mtab" data-v="ai" data-icon="robot" id="mnavAi" aria-pressed="false" hidden><span data-t="m_ai"></span></button>
     <button data-act="mtab" data-v="journal" data-icon="book" aria-pressed="false"><span data-t="m_journal"></span><b class="mbadge" id="mBadge" hidden></b></button>
   </nav>
 </section>
@@ -1297,9 +1367,22 @@ const pick = a => a[Math.floor(Math.random()*a.length)];
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '0.1.6a';
+const APP_VERSION = '0.1.7a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.7a', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
+   fr:['Nouveau mode Versus : affronte une IA ! Au départ, choisis le mode (Normal, Royal ou Zombie), la difficulté (Promenade de santé, Standard, Périple ou Extrême) et l\'objectif de victoire, puis crée ton personnage. La partie commence toujours en 1780.',
+       'Objectifs du Versus : Partie de vitesse (le plus de générations), de lenteur (le moins de générations), de Star (le plus de stars) ou de Crime (le plus de meurtres). En mode Royal : vitesse, lenteur ou Partie de Noble (le plus de Nobles). En mode Zombie : Partie Classique (le plus de vivants en 2100).',
+       'Sur ordinateur, l\'écran est partagé : ta famille à gauche, celle de l\'IA à droite, avec ses Cyn, son arbre et le score en direct. Sur téléphone, l\'IA a son propre onglet. Si plus personne n\'est en vie dans une famille, elle a perdu.',
+       'Le nouveau logo devient l\'icône du jeu : onglet du navigateur et application installée.',
+       'Correction : les succès de meurtres (Double peine, etc.) se débloquent de nouveau, avec l\'effet du meurtre sur l\'arbre.',
+       'Mode Zombie : plus de sifflement aigu dans la musique, et un grognement de zombie retentit à chaque nouvelle infection.'],
+   en:['New Versus mode: face an AI! At the start, pick the mode (Normal, Royal or Zombie), the difficulty (Walk in the park, Standard, Odyssey or Extreme) and the victory goal, then create your character. The game always starts in 1780.',
+       'Versus goals: Speed game (most generations), Slow game (fewest generations), Star game (most stars) or Crime game (most murders). In Royal mode: speed, slow or Noble game (most Nobles). In Zombie mode: Classic game (most family members alive in 2100).',
+       'On computers the screen is split: your family on the left, the AI\'s on the right, with its Cyn, its tree and the live score. On phones the AI has its own tab. When nobody is left alive in a family, it loses.',
+       'The new logo is now the game\'s icon: browser tab and installed app.',
+       'Fix: the murder achievements (Double trouble, etc.) unlock again, with the murder effect on the tree.',
+       'Zombie mode: no more high-pitched whistle in the music, and a zombie growl sounds with every new infection.']},
   {v:'0.1.6a', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Mode Zombie : l\'Antidote ne s\'achète qu\'à partir de la 120e année de jeu (1900 pour une partie commencée en 1780).',
        'Nouveau logo, beaucoup plus épuré : un « C » blanc sur fond bleu, avec trois points verts comme trois générations.',
@@ -1640,6 +1723,7 @@ let CYN = Math.max(0, +store.get(CYN_KEY) || 0), cynPend = 0;
 const cynFx = new Map();                              // gains à afficher au-dessus de la bulle concernée
 function cyn(n, pid){
   if(S && (S.over || S.end2100 >= 1)) return;          // partie terminée : plus de Cyn
+  if(S && S.headless){ S.cynAI = (S.cynAI || 0) + Math.max(1, Math.round(n * VS_DIFF[S.aiDiff].gain)); return; }   // Versus : les Cyn de l'IA
   if(S && S.auto) n = Math.max(1, Math.round(n * .25)); // mode auto : 25 % des gains
   CYN += n; cynPend += n; store.set(CYN_KEY, String(CYN));
   if(pid != null){ const e = cynFx.get(pid) || {n:0, tries:0}; e.n += n; cynFx.set(pid, e); }
@@ -2719,6 +2803,30 @@ fr:{
   sp_intro:n=>`Choisis tout de la future âme sœur de ${n}.`, sp_job:'Métier', sp_int:"Centre d'intérêt", sp_add:'Addiction', sp_cond:'Particularité',
   sp_none:'Aucun', sp_none_f:'Aucune', sp_go:'Faire la rencontre', sp_age:a=>`Âge : ${a} ans`, sp_err_age:n=>`L'âge doit être entre ${n} et 100 ans.`,
   cg_crown:'Un couronnement (mode Royal)',
+  lab_vs:'Mode Versus', vs_hint:"Affronte une IA : deux familles, un objectif, de 1780 à 2100.",
+  vs_title:"Affronte l'IA", vs_intro:"Deux familles démarrent en 1780 : la tienne à gauche, celle de l'IA à droite. L'IA joue toute seule, selon la difficulté choisie, et gagne ses propres Cyn. Si plus personne n'est en vie dans une famille, elle a perdu.",
+  vs_mode:'Mode de jeu', vs_m_normal:'Normal', vs_m_royal:'Royal', vs_m_zombie:'Zombie',
+  vs_diff:'Difficulté', vs_d_easy:'Promenade de santé', vs_d_std:'Standard', vs_d_hard:'Périple', vs_d_ext:'Extrême',
+  vs_d_easy_h:"L'IA joue sans stratégie, ne dépense jamais ses Cyn et en gagne moitié moins.", vs_d_std_h:"L'IA joue normalement et fait quelques achats.",
+  vs_d_hard_h:"L'IA vise l'objectif, choisit bien ses héritiers et dépense ses Cyn avec soin.", vs_d_ext_h:"L'IA joue à fond pour gagner, démarre avec 900 Cyn et en gagne presque deux fois plus.",
+  vs_goal:'Objectif de victoire',
+  vs_g_speed:'Partie de vitesse', vs_g_speed_h:"Le plus de générations en 2100. En cas d'égalité, gagne la famille dont la personne la plus âgée de la dernière génération est née en premier.",
+  vs_g_slow:'Partie de lenteur', vs_g_slow_h:"Le moins de générations en 2100. En cas d'égalité, gagne la famille dont la personne la plus jeune de la dernière génération est née en dernier.",
+  vs_g_star:'Partie de Star', vs_g_star_h:'Le plus de stars en 2100. Égalité possible.',
+  vs_g_crime:'Partie de Crime', vs_g_crime_h:'Le plus de meurtres en 2100. Égalité possible.',
+  vs_g_noble:'Partie de Noble', vs_g_noble_h:'Le plus de Nobles en 2100, morts et vivants. Égalité possible.',
+  vs_g_classic:'Partie Classique', vs_g_classic_h:'Le plus de membres de la famille vivants (et humains) en 2100. Égalité possible.',
+  vs_1780:"La partie commence obligatoirement en 1780. Le premier personnage de l'IA est un homme de 18 ans, tiré au hasard. Pas de destin de départ en Versus.",
+  vs_ok:'Valider', vs_cancel:'Annuler', vs_edit:'Modifier', vs_sum:(m,d,g)=>`Contre l'IA · ${m} · ${d} · ${g}`,
+  vs_ai:'IA', vs_you:'Toi', vs_played:"Personnage joué par l'IA", vs_out:'Éliminée', vs_ai_fam:"Famille de l'IA", m_ai:'IA', vs_keep:'Continuer seul',
+  vs_u_gen:n=>n>1?'générations':'génération', vs_u_star:n=>n>1?'stars':'star', vs_u_crime:n=>n>1?'meurtres':'meurtre', vs_u_noble:n=>n>1?'nobles':'noble', vs_u_live:n=>n>1?'vivants':'vivant',
+  vs_res_win:'Victoire !', vs_res_lose:'Défaite…', vs_res_tie:'Égalité !',
+  vs_note:(a,b,ua,ub)=>`Toi : ${a} ${ua} · IA : ${b} ${ub}.`,
+  vs_tb_old:(g,a,b)=>`Égalité à ${g} générations. Ta personne la plus âgée de la ${g}e génération est née le ${a}, celle de l'IA le ${b}.`,
+  vs_tb_young:(g,a,b)=>`Égalité à ${g} générations. Ta personne la plus jeune de la ${g}e génération est née le ${a}, celle de l'IA le ${b}.`,
+  vs_ai_dead:f=>`La famille ${f} de l'IA s'est éteinte : tu remportes le duel !`, vs_over_lose:"Ta famille s'est éteinte : l'IA remporte le duel.",
+  log_vs_ai_out:()=>"La famille de l'IA s'est éteinte.",
+  vs_t_fam:'Famille', vs_t_gen:'Générations', vs_t_live:'Vivants', vs_t_star:'Stars', vs_t_crime:'Meurtres', vs_t_noble:'Nobles',
   lab_zombie:'Mode Zombie', zombie_hint:"Rien ne se passe pendant 60 ans… puis le premier zombie apparaît. Survis jusqu'en 2100 ! (Conseillé : 1780)",
   z_count:n=>`${n} ans avant le premier zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} humain${h>1?'s':''}`,
   zombie_act:p=>g(p,'Zombie','Zombie'), zombie_since:(p,y)=>`${g(p,'Zombie','Zombie')} depuis ${y}`, zombie_no_baby:"Un zombie ne peut pas avoir d'enfant.",
@@ -2949,6 +3057,30 @@ en:{
   sp_intro:n=>`Choose everything about ${n}'s future soulmate.`, sp_job:'Job', sp_int:'Interest', sp_add:'Addiction', sp_cond:'Trait',
   sp_none:'None', sp_none_f:'None', sp_go:'Meet them', sp_age:a=>`Age: ${a}`, sp_err_age:n=>`Age must be between ${n} and 100.`,
   cg_crown:'A coronation (Royal mode)',
+  lab_vs:'Versus mode', vs_hint:'Face an AI: two families, one goal, from 1780 to 2100.',
+  vs_title:'Face the AI', vs_intro:"Two families start in 1780: yours on the left, the AI's on the right. The AI plays on its own, at the difficulty you pick, and earns its own Cyn. When nobody is left alive in a family, that family loses.",
+  vs_mode:'Game mode', vs_m_normal:'Normal', vs_m_royal:'Royal', vs_m_zombie:'Zombie',
+  vs_diff:'Difficulty', vs_d_easy:'Walk in the park', vs_d_std:'Standard', vs_d_hard:'Odyssey', vs_d_ext:'Extreme',
+  vs_d_easy_h:'The AI plays without a plan, never spends its Cyn and earns half as many.', vs_d_std_h:'The AI plays normally and buys a few things.',
+  vs_d_hard_h:'The AI aims for the goal, picks its heirs well and spends its Cyn wisely.', vs_d_ext_h:'The AI plays all-out to win, starts with 900 Cyn and earns almost twice as many.',
+  vs_goal:'Victory goal',
+  vs_g_speed:'Speed game', vs_g_speed_h:'Most generations by 2100. On a tie, the family whose oldest member of the last generation was born first wins.',
+  vs_g_slow:'Slow game', vs_g_slow_h:'Fewest generations by 2100. On a tie, the family whose youngest member of the last generation was born last wins.',
+  vs_g_star:'Star game', vs_g_star_h:'Most stars by 2100. Ties are possible.',
+  vs_g_crime:'Crime game', vs_g_crime_h:'Most murders by 2100. Ties are possible.',
+  vs_g_noble:'Noble game', vs_g_noble_h:'Most Nobles by 2100, dead or alive. Ties are possible.',
+  vs_g_classic:'Classic game', vs_g_classic_h:'Most family members alive (and human) in 2100. Ties are possible.',
+  vs_1780:"The game always starts in 1780. The AI's first character is a random 18-year-old man. No starting destiny in Versus.",
+  vs_ok:'Confirm', vs_cancel:'Cancel', vs_edit:'Change', vs_sum:(m,d,g)=>`Against the AI · ${m} · ${d} · ${g}`,
+  vs_ai:'AI', vs_you:'You', vs_played:'Played by the AI', vs_out:'Eliminated', vs_ai_fam:"AI's family", m_ai:'AI', vs_keep:'Keep playing alone',
+  vs_u_gen:n=>n>1?'generations':'generation', vs_u_star:n=>n>1?'stars':'star', vs_u_crime:n=>n>1?'murders':'murder', vs_u_noble:n=>n>1?'nobles':'noble', vs_u_live:n=>n>1?'alive':'alive',
+  vs_res_win:'Victory!', vs_res_lose:'Defeat…', vs_res_tie:"It's a tie!",
+  vs_note:(a,b,ua,ub)=>`You: ${a} ${ua} · AI: ${b} ${ub}.`,
+  vs_tb_old:(g,a,b)=>`Tied at ${g} generations. Your oldest member of generation ${g} was born on ${a}, the AI's on ${b}.`,
+  vs_tb_young:(g,a,b)=>`Tied at ${g} generations. Your youngest member of generation ${g} was born on ${a}, the AI's on ${b}.`,
+  vs_ai_dead:f=>`The AI's ${f} family has died out: you win the duel!`, vs_over_lose:'Your family has died out: the AI wins the duel.',
+  log_vs_ai_out:()=>"The AI's family has died out.",
+  vs_t_fam:'Family', vs_t_gen:'Generations', vs_t_live:'Alive', vs_t_star:'Stars', vs_t_crime:'Murders', vs_t_noble:'Nobles',
   lab_zombie:'Zombie mode', zombie_hint:'Nothing happens for 60 years… then the first zombie appears. Survive until 2100! (Recommended: 1780)',
   z_count:n=>`${n} years until the first zombie`, z_status:(z,h)=>`${z} zombie${z>1?'s':''} · ${h} human${h>1?'s':''}`,
   zombie_act:()=>'Zombie', zombie_since:(p,y)=>`Zombie since ${y}`, zombie_no_baby:"A zombie can't have children.",
@@ -3122,7 +3254,7 @@ const achTitle = id => LANG==='fr' ? ACHV[id][3] : ACHV[id][5];
 const achDesc = id => LANG==='fr' ? ACHV[id][4] : ACHV[id][6];
 const medal = (id, cls='') => `<span class="medal t-${ACHV[id][2]} ${cls}">${icon(ACH_CATS.find(c => c[0]===ACHV[id][1])[1])}</span>`;
 function unlock(id){
-  if(!R.ach || rulesTweaked() || (S && (S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
+  if(VSH || !R.ach || rulesTweaked() || (S && (S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
   const hadGold = goldUnlocked();
   ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? familyName(P(S.founderId)) : ''};
   if(!hadGold && goldUnlocked()) setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k:'gold', a:[]}); sfx.fame(); }, 3600);
@@ -3210,8 +3342,9 @@ function fmtMonth(d){ const x=toDate(d); return t('monthYear', t('months')[x.get
 const pctTxt = r => { const s = (r*100).toFixed(r<.01 ? 2 : 1); return (LANG==='fr' ? s.replace('.',',') + ' %' : s + '%'); };
 
 /* ================= Sons (Web Audio, synthétisés) ================= */
+let VSH = false;                                       // Versus : vrai pendant que la famille de l'IA joue (aucun son, aucun effet)
 const sfx = (() => {
-  let ctx=null, master=null, muted=false, vol=1;
+  let ctx=null, master=null, muted=false, vol=1, lastGrowl=-9;
   function init(){
     if(ctx){ if(ctx.state==='suspended') ctx.resume(); return ctx; }
     const AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null;
@@ -3256,11 +3389,33 @@ const sfx = (() => {
     ach(){ [1046,1318,1568,2093].forEach((f,i) => { note(f,i*.08,.5,{vol:.06,type:'triangle'}); note(f*1.5,i*.08+.02,.3,{vol:.02}); }); bell(2093,.38); note(3136,.45,.9,{vol:.025}); },
     crime(){ note(196,0,1.2,{to:98,vol:.09,type:'sawtooth',glide:1.1}); note(207,.05,1.1,{to:103,vol:.05,type:'square',glide:1}); note(55,.3,1.4,{vol:.12,type:'triangle'}); note(1661,.6,.5,{to:830,vol:.02}); },
     war(){ note(110,0,.9,{to:82,vol:.12,type:'triangle'}); note(98,.35,1.1,{to:73,vol:.1,type:'triangle'}); note(147,.7,1,{vol:.05}); },
+    growl(){                                         // grognement de zombie : voix grave et rauque, avec un souffle
+      if(muted) return; const c = init(); if(!c) return;
+      const t = c.currentTime; if(t < lastGrowl + 1.4) return; lastGrowl = t;
+      const dur = 1.2 + Math.random()*.5, base = 62 + Math.random()*26;
+      const vca = c.createGain(), env = c.createGain(), flt = c.createBiquadFilter();
+      flt.type = 'lowpass'; flt.frequency.setValueAtTime(1100, t); flt.frequency.exponentialRampToValueAtTime(380, t + dur); flt.Q.value = 4;
+      vca.gain.value = .55; env.gain.setValueAtTime(.0001, t); env.gain.exponentialRampToValueAtTime(.32, t + .14);
+      env.gain.setValueAtTime(.32, t + dur*.55); env.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      flt.connect(vca); vca.connect(env); env.connect(master);
+      const voice = (type, k) => { const o = c.createOscillator(); o.type = type;
+        o.frequency.setValueAtTime(base*k*1.3, t); o.frequency.linearRampToValueAtTime(base*k, t + dur*.35); o.frequency.linearRampToValueAtTime(base*k*.75, t + dur);
+        const lfo = c.createOscillator(), lg = c.createGain(); lfo.frequency.value = 6 + Math.random()*3; lg.gain.value = base*k*.06;
+        lfo.connect(lg); lg.connect(o.frequency); o.connect(flt); o.start(t); lfo.start(t); o.stop(t + dur + .05); lfo.stop(t + dur + .05); };
+      voice('sawtooth', 1); voice('square', .5); voice('sawtooth', 1.01);
+      const rasp = c.createOscillator(), rg = c.createGain(); rasp.type = 'square'; rasp.frequency.value = 24 + Math.random()*8; rg.gain.value = .45;   // le « rrrr » rauque
+      rasp.connect(rg); rg.connect(vca.gain); rasp.start(t); rasp.stop(t + dur + .05);
+      const n = c.createBufferSource(), buf = c.createBuffer(1, Math.ceil(c.sampleRate*dur), c.sampleRate), d = buf.getChannelData(0);
+      for(let i = 0; i < d.length; i++) d[i] = Math.random()*2 - 1;
+      const bp = c.createBiquadFilter(), ng = c.createGain(); bp.type = 'bandpass'; bp.frequency.value = 520; bp.Q.value = 1.2; ng.gain.value = .35;
+      n.buffer = buf; n.connect(bp); bp.connect(ng); ng.connect(flt); n.start(t); n.stop(t + dur);
+    },
     stab(){ note(1800,0,.12,{to:300,glide:.1,vol:.08,type:'sawtooth'}); note(140,.08,.35,{to:60,vol:.14,type:'triangle'}); note(90,.14,.5,{vol:.08}); },
     ctx(){ return init(); }
   };
 })();
 
+Object.keys(sfx).forEach(k => { const fn = sfx[k]; if(typeof fn === 'function' && !['init','setMuted','setVolume','ctx'].includes(k)) sfx[k] = (...a) => VSH ? undefined : fn(...a); });
 /* ================= Musique douce en boucle (devient tendue tant qu'un criminel est en vie) ================= */
 const music = (() => {
   let ctx = null, out = null, lp = null, timer = null, step = 0, next = 0, mode = 'calm', vol = .35, on = true;
@@ -3280,11 +3435,7 @@ const music = (() => {
     if(mode === 'zombie'){
       if(s % 2 === 0) tone(55, t, beat*1.1, 'sine', .18, .004);                  // pulsation rapide
       if(s % 4 === 2) tone(mtof(ch[0]-24), t, beat*.8, 'sawtooth', .05, .004);
-      tone(mtof(ch[(s>>1) % 4]-12), t, beat*.6, 'square', .018, .004);             // arpège grinçant
-      if(Math.random() < .18){ const f0 = mtof(pick(cfg.mel)+12); const o = ctx.createOscillator(), gn = ctx.createGain();   // plainte qui glisse
-        o.type = 'sine'; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f0*.7, t + beat*4);
-        gn.gain.setValueAtTime(.0001, t); gn.gain.linearRampToValueAtTime(.035, t + .2); gn.gain.exponentialRampToValueAtTime(.0001, t + beat*4);
-        o.connect(gn); gn.connect(lp); o.start(t); o.stop(t + beat*4 + .1); }
+      tone(mtof(ch[(s>>1) % 4]-12), t, beat*.6, 'square', .018, .004);             // arpège grinçant (0.1.7a : plus de sifflement aigu)
     } else if(mode === 'tense'){
       if(s % 4 === 0){ tone(62, t, beat*1.4, 'sine', .16, .005); tone(mtof(ch[0]-24), t, beat*1.2, 'triangle', .06, .005); }   // battement de cœur
       tone(mtof(ch[0]-12), t, beat*.9, 'triangle', .07, .01);                       // basse qui martèle
@@ -3360,7 +3511,7 @@ function addPerson(o){
   S.people[p.id] = p; return p;
 }
 let lastSave = 0;
-function save(){ if(S){ store.set(SAVE_KEY, JSON.stringify(S)); lastSave = performance.now(); } }
+function save(){ if(S && !S.headless){ store.set(SAVE_KEY, JSON.stringify(S)); lastSave = performance.now(); } }
 const saveSoon = () => { if(performance.now() - lastSave > 4000) save(); };
 document.addEventListener('visibilitychange', () => { if(document.hidden) save(); });
 addEventListener('pagehide', () => save());
@@ -3369,7 +3520,7 @@ function log(kind, k, a, d, forceToast){
   if((S.auto || S.familyAuto) && (kind === 'work' || kind === 'move' || kind === 'interest') && a && a[0] !== S.activeId) return;   // mode auto : journal centré sur l'essentiel
   const e = {d: d ?? today(), kind, k, a: a || []};
   S.log.push(e); if(S.log.length > 500) S.log.splice(0, S.log.length-500);
-  if((TOAST_KINDS.has(kind) && forceToast !== false) || forceToast === true) toast(e);
+  if(!VSH && ((TOAST_KINDS.has(kind) && forceToast !== false) || forceToast === true)) toast(e);
   dirty = true;
 }
 const logText = e => { try{ return t('log_'+e.k, ...e.a); }catch(err){ return ''; } };
@@ -3527,9 +3678,11 @@ function die(p, day, cause){
   if(cause.murder){
     if(wasHeir) unlock('r_heirkill');                   // succès : un héritier assassiné
     const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50 * (hasAtout(k,'richesse') ? 2 : 1), p.id);
-    UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 10) unlockSkin('goth');   // thème Dark : 10 meurtres [[4,'kill2'],[8,'kill4'],[12,'kill6'],[16,'kill8']].forEach(([n, id]) => { if(k.kills >= n) unlock(id); }); pendingFx.push(p.id); dirty = true;
+    S.nKills = (S.nKills || 0) + 1;                     // Versus : nombre de meurtres
+    if(!VSH){ UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 10) unlockSkin('goth'); pendingFx.push(p.id); }   // thème Dark : 10 meurtres
+    [[4,'kill2'],[8,'kill4'],[12,'kill6'],[16,'kill8']].forEach(([n, id]) => { if(k.kills >= n) unlock(id); }); dirty = true;
     if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
-    if(!UNL.night){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
+    if(!UNL.night && !VSH){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
   }
   p.ill = null;
   for(const u of S.unions){
@@ -3559,7 +3712,10 @@ const PAIR_P = .72, LEAVE_P = .08, KIDS_P = [.80,.62,.30,.16,.05,.03,.01];   // 
 function newUnionPlan(day){
   const r = Math.random(); let target = 0;
   for(const th of KIDS_P) if(r < th) target++;
-  return {target, next: day + rnd(120, 3*365),
+  const ag = aiSmart() ? S.aiGoal : null;                        // Versus : l'IA adapte ses familles à l'objectif
+  if(ag === 'speed') target = Math.max(target, 2);
+  if(ag === 'slow') target = Math.min(Math.max(target, 1), 2);
+  return {target, next: day + (ag === 'speed' ? rnd(30, 200) : ag === 'slow' ? rnd(500, 3*365) : rnd(120, 3*365)),
     leaveAt: Math.random() < LEAVE_P ? day + rnd(1,25)*365 + rnd(0,364) : null,
     marryAt: Math.random() < .6 ? day + rnd(1,6)*365 + rnd(0,364) : null};
 }
@@ -3590,12 +3746,15 @@ function autoDay(day){
   const crowd = living().length;                                  // plus de 20 vivants : les probabilités chutent
   const skip = S.auto ? null : S.activeId;                        // « famille autonome » : tout le monde sauf vous
   // 0.1.4k : le personnage joué en mode auto, le monarque et l'héritier cherchent toujours l'âme sœur et veulent au moins 2 enfants
-  const must = p => (S.auto && p.id === S.activeId) || (royalOn() && (p.id === S.royal.king || p.id === heirId()));
+  const aiN = S.headless ? VS_DIFF[S.aiDiff].keep : 0, aiLow = aiN > 0 && living().filter(p => p.blood && !p.zombie).length < aiN;   // Versus : l'IA protège sa lignée tant qu'elle est petite
+  const must = p => (S.auto && p.id === S.activeId) || (royalOn() && (p.id === S.royal.king || p.id === heirId())) || (aiLow && p.blood);
   for(const p of living()){
     if(!p.blood || p.zombie || p.id === skip || ageAt(p, day) < R.legal || currentUnion(p.id) || (p.work && p.work.s === 'prison')) continue;
-    if(!p.plan) p.plan = {will: Math.random() < PAIR_P, at: Math.max(day, p.birth + Math.round(rnd(18,35)*365.25) + rnd(0,364))};
+    if(!p.plan) p.plan = {will: Math.random() < PAIR_P, at: Math.max(day, p.birth + Math.round(rnd(...(aiPairAge() || [18,35]))*365.25) + rnd(0,364))};
     const mp = must(p);
-    if(mp){ p.plan.will = true; p.plan.at = Math.min(p.plan.at, Math.max(day, p.birth + Math.round(rnd(20,28)*365.25))); }
+    const ap = mp && aiPairAge();
+    if(ap){ p.plan.will = true; if(!p.plan.ai){ p.plan.ai = 1; p.plan.at = Math.max(day, p.birth + Math.round(rnd(ap[0], ap[1])*365.25)); } }
+    else if(mp){ p.plan.will = true; p.plan.at = Math.min(p.plan.at, Math.max(day, p.birth + Math.round(rnd(20,28)*365.25))); }
     if(!p.plan.will || day < p.plan.at) continue;
     if(ageAt(p, day) > 75){ p.plan.will = false; continue; }
     if(!mp && (crowd > 35 || (crowd > 20 && Math.random() > .2))){ p.plan.at = day + rnd(1,3)*365; continue; }
@@ -3702,6 +3861,7 @@ function polTick(p, day){
 function becomeStar(p, day, hint){
   const y = yearOf(day), h = hint && STARJOBS.find(r => r[0] === hint && y >= r[5] && y <= r[6]);
   const j = h ? h[0] : pickStarJob(y);
+  S.nStars = (S.nStars || 0) + 1;                      // Versus : nombre de stars
   p.star.famous = true; p.star.at = day; p.star.job = j; p.work = {s:'star', job:j}; cyn(200 * (hasAtout(p,'richesse') ? 2 : 1), p.id);
   log('star','star',[p.id, j], day); sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 40);
   const ns = Object.values(S.people).filter(q => q.star && q.star.famous).length;            // 0.1.2a : exigences ×2
@@ -3837,7 +3997,7 @@ function birthChild(u, day){
   if(S.auto || (S.familyAuto && !mine)){            // mode auto / famille autonome : les prénoms sont choisis tout seuls
     if(n > 1){ log('birth','multi',[A.id, B.id, n], day); sfx.multi(); burst(['#8cff1a','#ffffff','#3fd0ff','#ff6cc0','#ffe14d'], 60); }
     ids.forEach(id => { const c = P(id); c.first = nameFor(c); regnalize(c); log('birth', c.adopted ? 'adopt' : 'birth', [c.id], day, n > 1 ? false : undefined); });
-    if(n > 1){                                      // grande annonce au centre, avec les bébés qui sautillent
+    if(n > 1 && !VSH){                              // grande annonce au centre, avec les bébés qui sautillent
       const kids = ids.map(P);
       achQueue.push({html: `<span class="multi">${kids.map(k => orb(k)).join('')}</span><div><div class="eyebrow">${fmt(day)} · ${esc(city)}</div>
         <b>${t('multi_title', n, kids.every(k => k.sex==='F'))}</b><small>${esc(t('multi_pop', A.first, B.first, kids.map(k => k.first).join(', ')))}</small></div>`});
@@ -3871,7 +4031,7 @@ function zombify(p, day){                             // devient zombie (même s
   p.ill = null; p.onset = null; p.deathAt = null; p.murderAt = null; p.mild = []; p.fameAt = null;
   if(p.crim) for(const q of living()) if(q.murderBy === p.id){ q.murderAt = null; q.murderBy = null; }
   p.star = null; p.crim = null; p.starKid = false;            // un zombie n'est plus ni star ni criminel
-  p.work = {s:'zombie'};
+  p.work = {s:'zombie'}; sfx.growl();                   // grognement à chaque nouvelle infection
   for(const u of S.unions) if(u.end == null && (u.a === p.id || u.b === p.id)) u.preg = null;   // plus d'enfant
   log('crime', wasDead ? 'zombie_rise' : 'zombie_bite', [p.id], day, false); dirty = true;
 }
@@ -3906,7 +4066,7 @@ function processDay(day){
   }
   if(R.diseases && Math.random() < .0005/365.25){            // chute d'astéroïde : 0,05 % de chances par an, sur un membre de la famille
     const ok = living().filter(p => inFamily(p) && !immune(p, day));
-    if(ok.length){ const v = pick(ok); die(v, day, {dz:'asteroide'}); unlock('asteroid'); pendingAst.push(v.id); dirty = true; }
+    if(ok.length){ const v = pick(ok); die(v, day, {dz:'asteroide'}); unlock('asteroid'); if(!VSH) pendingAst.push(v.id); dirty = true; }
   }
   for(const p of living()){
     if(p.zombie) continue;                                   // un zombie ne vieillit plus, ne tombe plus malade, ne meurt plus
@@ -3961,9 +4121,177 @@ function advance(dt){
   const d0 = Math.floor(before), d1 = Math.floor(S.t);
   for(let d = d0+1; d <= d1; d++){
     processDay(d);
-    if(blocked() || S.royalEnd || S.zombieLost){ S.t = d + .001; break; }
+    if(S.vs && !S.vs.done) vsDay(d);
+    if(blocked() || S.royalEnd || S.zombieLost || vsAiOut()){ S.t = d + .001; break; }
   }
 }
+
+/* ================= Mode Versus : une IA joue sa propre famille, en même temps que le joueur ================= */
+const VS_DIFF = {easy:{cyn:0, gain:.5, shop:0, smart:0, keep:0}, std:{cyn:150, gain:1, shop:.5, smart:0, keep:4},    // keep : en dessous de ce nombre de
+  hard:{cyn:400, gain:1.3, shop:1, smart:1, keep:8}, ext:{cyn:900, gain:1.8, shop:1, smart:2, keep:12}};                      // descendants vivants, tous fondent une famille
+const VS_GOALS = {normal:['speed','slow','star','crime'], royal:['speed','slow','noble'], zombie:['classic']};
+const VS_KEY = {speed:'gens', slow:'gens', star:'stars', crime:'kills', noble:'nobles', classic:'alive'};
+const VS_UNIT = {speed:'gen', slow:'gen', star:'star', crime:'crime', noble:'noble', classic:'live'};
+const vsUnit = (goal, n) => t('vs_u_' + VS_UNIT[goal], n);
+const vsAiOut = () => !!(S && S.vs && !S.vs.done && S.vs.ai.over);
+const aiSmart = () => (S && S.headless && VS_DIFF[S.aiDiff]) ? VS_DIFF[S.aiDiff].smart : 0;
+function aiPairAge(){                                  // vitesse : en couple dès l'âge légal ; lenteur : le plus tard possible
+  const sm = aiSmart(); if(!sm) return null;
+  if(S.aiGoal === 'speed') return [R.legal, R.legal + (sm > 1 ? 1 : 3)];
+  if(S.aiGoal === 'slow') return living().filter(p => p.blood && !p.zombie).length < 3 ? [24, 30] : sm > 1 ? [37, 41] : [33, 38];   // lignée fragile : pas de risque
+  return null;
+}
+const zNb = p => [...(p.parents || []).map(P), ...Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id)),
+  ...S.unions.filter(u => u.a === p.id || u.b === p.id).map(u => P(u.a === p.id ? u.b : u.a))].filter(Boolean);
+function vsMakeAI(cfg, day, rule){                     // le premier personnage de l'IA : un homme de 18 ans, tiré au hasard
+  const me = S; S = newState(1780); VSH = true;
+  try{
+    Object.assign(S, {auto:true, headless:true, aiDiff:cfg.diff, aiGoal:cfg.goal, cynAI:VS_DIFF[cfg.diff].cyn});
+    const city = pick(CITIES), birth = fromYMD(1761, rnd(0, 11), rnd(2, 28));
+    const p = addPerson({first: wpick(namePool(1761, 'M')), last: pickSurname(1780), sex:'M', birth, blood:true, city, birthCity:city});
+    p.lastAge = ageAt(p, day); p.conds = rollConds([], 1780);
+    if(p.lastAge >= R.legal) rollAddictions(p, day);
+    planInterests(p, day); setupWork(p, day);
+    S.activeId = S.founderId = p.id;
+    log('info','start',[p.id, p.lastAge], day);
+    if(cfg.mode === 'zombie') S.zombie = {firstAt: day + Math.round(60*365.25), began:false};
+    if(cfg.mode === 'royal'){ S.royal = {rule: rule === 'matri' ? 'both' : (rule || 'patri'), king:p.id, lost:false}; crown(p, day, true); }
+    scheduleYear(p, p.lastAge, day);
+    return S;
+  } finally { S = me; RH = undefined; VSH = false; }
+}
+function vsHeir(dead){                                 // héritier de l'IA : le plus proche, ou le plus utile pour l'objectif
+  const h = heirList(dead).map(x => x.p); if(!h.length) return null;
+  if(!aiSmart()) return h[0];
+  const hum = h.filter(p => !p.zombie), pool = hum.length ? hum : h;
+  if(S.aiGoal === 'speed') return pool.slice().sort((a, b) => genOf(b) - genOf(a) || a.birth - b.birth)[0];
+  if(S.aiGoal === 'slow') return pool.slice().sort((a, b) => genOf(a) - genOf(b) || a.birth - b.birth)[0];
+  return pool[0];
+}
+function vsAiShop(day){                                // la boutique de l'IA, avec ses propres Cyn
+  const D = VS_DIFF[S.aiDiff]; if(!D.shop || Math.random() > D.shop) return;
+  const me = active(), y = yearOf(day), g = S.aiGoal, pay = n => S.cynAI >= n ? (S.cynAI -= n, true) : false;
+  const sick = living().filter(p => p.blood && p.ill && !p.zombie && (p.id === me.id || D.smart > 1));
+  if(sick.length && S.cynAI >= 185 + (['star','crime','noble'].includes(g) ? 300 : 0) && pay(185)) cureAll(sick[0]);
+  if(S.zombie){
+    if(!S.zombie.began || y > 2050) return;
+    if(y >= S.startYear + 120){
+      const z = antidoteList().map(p => [p, zNb(p).filter(q => q.death == null && !q.zombie && !zProtected(q, day)).length]).sort((a, b) => b[1] - a[1])[0];
+      if(z && (z[1] > 0 || D.smart > 1) && pay(500)){ unzombify(z[0], day); return; }
+    }
+    const risk = vaccinList().filter(p => zNb(p).some(q => q.zombie)).sort((a, b) => b.birth - a.birth);
+    const v = risk[0] || (D.smart && !me.zombie && me.death == null && !zProtected(me, day) ? me : null);
+    if(v && pay(320)){ v.zvacUntil = day + Math.round(20*365.25); log('cure','vaccin',[v.id], day, false); }
+    return;
+  }
+  const king = royalOn() && me.id === S.royal.king;
+  if((g === 'star' || g === 'crime') && !S.nextFate && !king){ const fate = g === 'star' ? 'star' : 'crim'; if(pay(fate === 'star' ? 750 : 600)) S.nextFate = fate; }
+  else if(g === 'noble'){ const l = lueurList(); if(l.length && pay(800)) ennoble(pick(l), day); }
+  else if(g === 'speed' && D.smart && !S.nextMulti && pay(625)) S.nextMulti = true;
+}
+function vsDay(day){                                   // un jour dans la famille de l'IA
+  const A = S.vs.ai; if(A.over) return;
+  const me = S; S = A; RH = undefined; VSH = true;
+  try{
+    A.t = day; processDay(day);
+    if(A.zombieLost || A.royalEnd) A.over = true;
+    else {
+      let cur = active();
+      if(cur.death != null){ const h = vsHeir(cur); if(h){ A.activeId = h.id; log('info','heir',[h.id, cur.id], day); } else A.over = true; }
+      cur = active();
+      if(!A.over && cur.zombie && (aiSmart() || Math.random() < .01)){   // le personnage de l'IA est devenu zombie : elle en change
+        const hum = living().filter(p => p.blood && !p.zombie);
+        if(hum.length) A.activeId = hum.sort((x, y) => Math.abs(ageAt(x, day) - 25) - Math.abs(ageAt(y, day) - 25))[0].id;
+      }
+      if(!A.over && day % 7 === 0) vsAiShop(day);
+    }
+  } finally { S = me; RH = undefined; VSH = false; }
+  if(A.over){ A.overAt = day; log('world','vs_ai_out',[], day, true); dirty = true; }
+}
+function vsScore(St){                                  // tout ce qui compte pour le duel, pour une famille
+  const me = S, swap = St !== S; if(swap){ S = St; RH = undefined; }
+  try{
+    const all = Object.values(S.people), blood = all.filter(p => p.blood), G = new Map(blood.map(p => [p.id, genOf(p)]));
+    const gens = blood.length ? Math.max(...G.values()) : 0, deep = blood.filter(p => G.get(p.id) === gens).map(p => p.birth);
+    return {name: familyName(P(S.founderId)), gens, old: Math.min(...deep), young: Math.max(...deep), stars: S.nStars || 0, kills: S.nKills || 0,
+      nobles: all.filter(p => p.noble === 'noble').length, alive: living().filter(p => !p.zombie && inFamily(p)).length,
+      cyn: S.headless ? (S.cynAI || 0) : CYN};
+  } finally { if(swap){ S = me; RH = undefined; } }
+}
+function vsCompare(a, b, goal){                        // gagné, perdu ou égalité (avec départage pour vitesse et lenteur)
+  const k = VS_KEY[goal]; let c = goal === 'slow' ? b[k] - a[k] : a[k] - b[k];
+  let note = t('vs_note', a[k], b[k], vsUnit(goal, a[k]), vsUnit(goal, b[k]));
+  if(c === 0 && goal === 'speed'){ c = b.old - a.old; note = t('vs_tb_old', a.gens, fmt(a.old), fmt(b.old)); }
+  if(c === 0 && goal === 'slow'){ c = a.young - b.young; note = t('vs_tb_young', a.gens, fmt(a.young), fmt(b.young)); }
+  return {res: c > 0 ? 'win' : c < 0 ? 'lose' : 'tie', note};
+}
+function vsTable(a, b, V){
+  const rows = [['gens','vs_t_gen'], ['alive','vs_t_live'], ['stars','vs_t_star'], ['kills','vs_t_crime']].concat(V.mode === 'royal' ? [['nobles','vs_t_noble']] : []).concat([['cyn', null]]);
+  const lowBest = V.goal === 'slow';
+  return `<table class="vstable"><thead><tr><th></th><th>${t('vs_you')}</th><th>${t('vs_ai')}</th></tr></thead><tbody>
+    <tr><td>${t('vs_t_fam')}</td><td>${esc(a.name)}</td><td>${esc(b.name)}</td></tr>
+    ${rows.map(([k, l]) => { const goal = VS_KEY[V.goal] === k, best = goal && a[k] !== b[k] ? ((lowBest ? a[k] < b[k] : a[k] > b[k]) ? 0 : 1) : -1;
+      return `<tr class="${goal ? 'goal' : ''}"><td>${l ? t(l) : 'Cyn'}</td><td class="${best === 0 ? 'best' : ''}">${cynFmt(a[k])}</td><td class="${best === 1 ? 'best' : ''}">${cynFmt(b[k])}</td></tr>`; }).join('')}
+    </tbody></table>`;
+}
+function vsCard(){                                     // panneau de droite : le score du duel en direct
+  const V = S.vs, a = vsScore(S), b = vsScore(V.ai), k = VS_KEY[V.goal];
+  const lead = a[k] === b[k] ? 0 : ((V.goal === 'slow' ? a[k] < b[k] : a[k] > b[k]) ? 1 : -1);
+  return `<section class="glass card vscard"><div class="eyebrow">${t('lab_vs')} · ${t('vs_d_' + V.diff)}${V.mode !== 'normal' ? ' · ' + t('vs_m_' + V.mode) : ''}</div>
+    <b class="vsgoal">${t('vs_g_' + V.goal)}</b>
+    <div class="vsrow"><div class="vsside ${lead > 0 ? 'lead' : ''}"><small>${t('vs_you')}</small><b>${a[k]}</b><span>${vsUnit(V.goal, a[k])}</span></div><i>VS</i>
+      <div class="vsside ${lead < 0 && !V.ai.over ? 'lead' : ''} ${V.ai.over ? 'out' : ''}"><small>${t('vs_ai')}</small><b>${b[k]}</b><span>${V.ai.over ? t('vs_out') : vsUnit(V.goal, b[k])}</span></div></div></section>`;
+}
+function openVsEnd(kind){                              // 2100 (ou l'IA éliminée) : le résultat du duel
+  const V = S.vs, a = vsScore(S), b = vsScore(V.ai);
+  let res, note;
+  if(kind === 'ai_out'){ res = 'win'; note = t('vs_ai_dead', b.name); }
+  else ({res, note} = vsCompare(a, b, V.goal));
+  V.done = true; V.result = res;
+  if(res === 'win'){ sfx.fame(); burst(['#ffd000','#ffffff','#74e600','#3fd0ff'], 60); } else if(res === 'lose') sfx.sad(); else sfx.pop();
+  openModal(`<div class="m-head"><div class="eyebrow">${t('lab_vs')} · ${t('vs_g_' + V.goal)} · ${fmt(S.t)}</div><h2>${t('vs_res_' + res)}</h2><p>${esc(note)}</p></div>
+    ${vsTable(a, b, V)}
+    <div class="m-actions"><button class="gel lime big" data-act="${kind === '2100' ? 'keep' : 'vskeep'}"><span>${t(kind === '2100' ? 'keep_playing' : 'vs_keep')}</span></button><button class="gel ghost big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
+  save();
+}
+let aiZoom = null, aiFit = 1, aiW = 0, aiH = 0;
+function renderAi(){                                   // l'arbre de l'IA, à droite (onglet IA sur téléphone)
+  const V = S && S.vs, box = $('#aiBox');
+  document.body.classList.toggle('vsmode', !!V);
+  if(!box) return; box.hidden = !V;
+  if(!V || !box.offsetParent) return;
+  const me = S, nw = nodeWidths; let r;
+  S = V.ai; RH = undefined; VSH = true;
+  try{
+    r = buildTree();
+    const all = Object.values(S.people);
+    r.title = t('family', familyName(P(S.founderId))); r.stats = t('stats', all.length, living().length, Math.max(...all.filter(p => p.blood).map(genOf)));
+  } finally { S = me; nodeWidths = nw; RH = undefined; VSH = false; }
+  $('#aiTitle').textContent = r.title; $('#aiStats').textContent = r.stats;
+  $('#aiCynVal').textContent = cynFmt(V.ai.cynAI || 0); $('#aiOut').hidden = !V.ai.over;
+  const sc = $('#aiScroll'), cv = $('#aiCanvas'), sz = $('#aiSizer');
+  const html = r.html.split('data-act="fiche"').join('data-act="aifiche"').replace(`<em class="rib you">${t('you')}</em>`, `<em class="rib you ai">${t('vs_ai')}</em>`);
+  cv.style.width = r.W + 'px'; cv.style.height = r.H + 'px';
+  if(html !== cv._h){ cv._h = html; cv.innerHTML = html.split('@T@').join(animT()); }
+  aiW = r.W; aiH = r.H; aiFit = Math.max(.12, Math.min(1, (sc.clientWidth - 16) / r.W));
+  aiApplyZoom();
+}
+function aiApplyZoom(){
+  const z = aiZoom ?? aiFit, cv = $('#aiCanvas'), sz = $('#aiSizer');
+  cv.style.transform = `scale(${z})`; sz.style.width = Math.ceil(aiW * z) + 'px'; sz.style.height = Math.ceil(aiH * z) + 'px';
+  $('#aiZoomPct').textContent = Math.round(z * 100) + '%';
+}
+(() => {   // glisser pour se déplacer dans l'arbre de l'IA (souris)
+  const sc = $('#aiScroll'); let drag = null;
+  sc.addEventListener('pointerdown', e => {
+    if(e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('.node')) return;
+    drag = {x:e.clientX, y:e.clientY, l:sc.scrollLeft, t:sc.scrollTop}; sc.setPointerCapture(e.pointerId); sc.classList.add('grabbing');
+  });
+  sc.addEventListener('pointermove', e => { if(!drag) return; sc.scrollLeft = drag.l - (e.clientX - drag.x); sc.scrollTop = drag.t - (e.clientY - drag.y); });
+  const end = () => { drag = null; sc.classList.remove('grabbing'); };
+  sc.addEventListener('pointerup', end); sc.addEventListener('pointercancel', end);
+})();
+addEventListener('resize', () => { if(S && S.vs && !$('#game').hidden) renderAi(); });
 
 /* ================= Boucle ================= */
 let lastTick = performance.now(), pointerHeld = false, musicTick = 0, renderGap = 180;
@@ -3981,6 +4309,7 @@ setInterval(() => {
   if(!S.paused && !modalOpen && !S.over && !blocked()) advance(dt);
   updateClock();
   if(!modalOpen){
+    if(vsAiOut() && !S.over){ render(); openVsEnd('ai_out'); return; }
     if(S.royalEnd && !S.over){ render(); gameOver(P(S.royalEnd), true); return; }
     if(S.zombieLost && !S.over){ render(); gameOver(active(), 'zombie'); return; }
     if(S.nameQueue.length){ render(); openNaming(S.nameQueue[0]); return; }
@@ -4135,7 +4464,7 @@ function nodeHTML(p, x, y){
     <span class="n-band">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
     ${cu && p.sex==='F' ? `<span class="badge">${ICON_BABY}</span>` : ''}</button>`;
 }
-function renderTree(){
+function buildTree(){
   const memo = {}, pos = {}, unionsD = [], links = [];
   const fd = getComputedStyle(document.documentElement).getPropertyValue('--font-display') || 'sans-serif';
   nodeWidths = {};
@@ -4184,9 +4513,11 @@ function renderTree(){
   }
   let nodes = '';
   for(const id in pos) nodes += nodeHTML(P(id), pos[id].x, pos[id].y);
-  const cv = $('#treeCanvas');
+  return {html: `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}`, W, H, pos};
+}
+function renderTree(){
+  const {html, W, H, pos} = buildTree(), cv = $('#treeCanvas');
   cv.style.width = W+'px'; cv.style.height = H+'px';
-  const html = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}`;
   if(html !== cv._h){ cv._h = html; cv.innerHTML = html.split('@T@').join(animT()); }
   layout = pos; treeW = W; treeH = H; applyZoom();
   const f = P(S.founderId), all = Object.values(S.people), gens = Math.max(...all.filter(p => p.blood).map(genOf));
@@ -4268,7 +4599,7 @@ function renderSide(){
   }
   const journal = S.log.slice(-150).reverse().map(e => `<li class="k-${e.kind}"><i></i><div><time>${fmt(e.d)}</time><p>${esc(logText(e))}</p></div></li>`).join('');
   const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(me.id)).length;
-  const sideEl = $('#side'); sideEl.innerHTML = `
+  const sideEl = $('#side'); sideEl.innerHTML = `${S.vs ? vsCard() : ''}
     <section class="glass card">
       <div class="eyebrow">${t('you_play')}</div>
       <button class="me-head" data-act="fiche" data-id="${me.id}">${orb(me,'xl')}<span><h3>${esc(nm(me))}</h3><p>${esc(t('born_in', me, fmt(me.birth), me.birthCity))}</p></span></button>
@@ -4302,15 +4633,18 @@ function renderControls(){
   const ab = $('#btnAuto');
   ab.innerHTML = `${icon('robot')}<span>${t('auto')}</span>`;
   ab.classList.toggle('on', !!S.auto); ab.setAttribute('aria-pressed', String(!!S.auto)); ab.title = t('auto_title');
-  $('#btnReigns').hidden = !S.royal;                  // la liste des règnes n'existe qu'en mode Royal
+  $('#btnReigns').hidden = !S.royal;
+  $('#mnavAi').hidden = !S.vs;                         // onglet de l'IA (téléphone), seulement en Versus                  // la liste des règnes n'existe qu'en mode Royal
   updateClock();
 }
-function render(){ RH = undefined; renderTree(); followFocus(); renderSide(); if(curView === 'map') renderMap(); dirty = false; runFx(); updateBadge(); }
+function render(){ RH = undefined; renderTree(); followFocus(); renderSide(); renderAi(); if(curView === 'map') renderMap(); dirty = false; runFx(); updateBadge(); }
 
 /* ================= Téléphone : onglets du bas ================= */
 let mtab = 'tree', seenLog = 0;
 function setMobileTab(v){
   if(v === 'map' && !SET.map) v = 'tree';
+  if(v === 'ai' && !(S && S.vs)) v = 'tree';
+  if(v === 'ai') requestAnimationFrame(renderAi);
   mtab = v; document.body.dataset.mtab = v;
   $$('#mnav button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
   if(v === 'tree' || v === 'map') setView(v);
@@ -4721,13 +5055,14 @@ function statsBlock(){
   return `<div class="bigstats"><div><b>${yearOf(S.t)-S.startYear}</b><span>${t('years')}</span></div><div><b>${all.length}</b><span>${t('members')}</span></div><div><b>${gens}</b><span>${t('gens', gens)}</span></div></div>`;
 }
 function gameOver(d, royal){
-  S.over = true; save();
+  S.over = true; const vsLost = S.vs && !S.vs.done; if(vsLost){ S.vs.done = true; S.vs.result = 'lose'; } save();
   const f = P(S.founderId);
   openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${esc(royal === 'zombie' ? t('over_zombie_title') : royal ? t('over_royal_title', familyName(f)) : t('over_title', familyName(f)))}</h2>
-      <p>${esc(royal === 'zombie' ? t('over_zombie_txt', familyName(f), yearOf(S.t)) : royal ? t('over_royal_txt', d) : t('over_txt', d, f, S.startYear))}</p><p class="endnote">${t('end_note_over')}</p></div>${statsBlock()}
+      <p>${esc(royal === 'zombie' ? t('over_zombie_txt', familyName(f), yearOf(S.t)) : royal ? t('over_royal_txt', d) : t('over_txt', d, f, S.startYear))}</p>${vsLost ? `<p class="vsres lose">${t('vs_over_lose')}</p>` : ''}<p class="endnote">${t('end_note_over')}</p></div>${statsBlock()}
     <div class="m-actions"><button class="gel lime big" data-act="newgame"><span>${t('new_line')}</span></button></div>`, {locked:true, sound:false});
 }
 function open2100(){
+  if(S.vs && !S.vs.done){ openVsEnd('2100'); return; }      // Versus : le résultat du duel
   const f = P(S.founderId);
   sfx.fame(); burst(['#ffd000','#ffffff','#3fd0ff','#ff2f9c'], 40);
   openModal(`<div class="m-head"><div class="eyebrow">${fmt(S.t)}</div><h2>${S.zombie ? t('z_win_title') : t('end_title')}</h2><p>${esc(S.zombie ? t('z_win_txt', familyName(f), living().filter(p => !p.zombie && inFamily(p)).length) : t('end_txt', familyName(f), yearOf(S.t)-S.startYear))}</p><p class="endnote">${t('end_note_2100')}</p></div>${statsBlock()}
@@ -4736,7 +5071,7 @@ function open2100(){
 
 /* ================= Effets ================= */
 function burst(colors, n=26){
-  if(reduced || !SET.deco) return;
+  if(reduced || !SET.deco || VSH) return;
   for(let i=0;i<n;i++){
     const s = document.createElement('i'), size = rnd(8,22), c = pick(colors);
     s.className = 'spark';
@@ -4748,7 +5083,7 @@ function burst(colors, n=26){
   }
 }
 function toast(e){
-  const txt = logText(e); if(!txt || !SET.toasts) return;
+  const txt = logText(e); if(!txt || !SET.toasts || VSH) return;
   const box = $('#toasts'), el = document.createElement('div');
   el.className = `toast glass k-${e.kind}`;
   el.innerHTML = `<i></i><div><time>${fmt(e.d)}</time><p>${esc(txt)}</p></div>`;
@@ -4869,7 +5204,7 @@ function skinHint(v){                                 // thème bloqué : on exp
 }
 const skinLocked = s => (s === 'xp' && !UNL.xp) || (s === 'goth' && !UNL.goth) || (s === 'dark' && !UNL.dark) || (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
 function unlockSkin(key){                            // Néon (16 générations), Enfantin (quadruplés)
-  if(UNL[key]) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
+  if(UNL[key] || VSH) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
   setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k: key + '_skin', a:[]}); sfx.ach(); }, 1500);
 }
 if(ACH.quads && !UNL.kid){ UNL.kid = true; store.set(UNL_KEY, JSON.stringify(UNL)); }   // déjà eu des quadruplés avant la 0.1.3a
@@ -5211,6 +5546,20 @@ const ACT = {
     closeModal(); render(); save();
   },
   fiche(d){ openFiche(+d.id); },
+  vsmenu(){ vsDraft = Object.assign({mode:'normal', diff:'std', goal:'speed'}, VS_CFG || {}); openVsMenu(false); },
+  vsset(d){ vsDraft[d.k] = d.v; if(d.k === 'mode' && !VS_GOALS[d.v].includes(vsDraft.goal)) vsDraft.goal = VS_GOALS[d.v][0]; openVsMenu(true); },
+  vsok(){ VS_CFG = Object.assign({}, vsDraft); closeModal(true); vsSetup(); sfx.pop(); },
+  vscancel(){ closeModal(true); vsSetup(); },
+  vskeep(){ closeModal(true); save(); },
+  aizoom(d){ const z = aiZoom ?? aiFit; aiZoom = +d.v === 0 ? null : Math.max(.08, Math.min(1.5, z * (+d.v > 0 ? 1.25 : .8))); aiApplyZoom(); },
+  aifiche(d){                                          // fiche d'un membre de la famille de l'IA (lecture seule)
+    if(!S || !S.vs) return;
+    const me = S; S = S.vs.ai; RH = undefined; VSH = true;
+    try{ openFiche(+d.id); } finally { S = me; RH = undefined; VSH = false; }
+    $$('#modal .acts, #modal .pen, #modal details').forEach(x => x.remove());
+    $$('#modal [data-act]').forEach(b => { if(b.dataset.act === 'fiche') b.dataset.act = 'aifiche'; else if(b.dataset.act !== 'close') b.removeAttribute('data-act'); });
+    const eb = $('#modal .eyebrow'); if(eb) eb.textContent = eb.textContent === t('f_you') ? t('vs_ai_fam') + ' · ' + t('vs_played') : t('vs_ai_fam') + ' · ' + eb.textContent;
+  },
   name(d){ giveName(d.n); },
   leave(d, b){
     const me = active(), u = currentUnion(me.id), p = P(+d.id); if(!u || u.b !== p.id) return;
@@ -5367,6 +5716,38 @@ function royalSetup(){                                // mode Royal : le premier
 ['#fRoyal','#fRule'].forEach(id => $(id).addEventListener('change', royalSetup));
 $('#fRoyal').addEventListener('change', () => { if($('#fRoyal').checked && $('#fZombie').checked){ $('#fZombie').checked = false; } });   // un seul mode spécial à la fois
 $('#fZombie').addEventListener('change', () => { if($('#fZombie').checked && $('#fRoyal').checked){ $('#fRoyal').checked = false; royalSetup(); } });
+
+/* Versus : un menu pour le mode, la difficulté et l'objectif ; ensuite on crée son personnage comme d'habitude */
+let VS_CFG = null, vsDraft = null;
+function vsSetup(){                                   // 1780 imposé, mode imposé, pas de destin de départ
+  const on = !!VS_CFG;
+  $('#fVs').checked = on; $('#fVsBox').hidden = !on;
+  fStart.disabled = on; $('#fRoyal').disabled = on; $('#fZombie').disabled = on; $('#fDestiny').disabled = on;
+  if(!on) return;
+  if(+fStart.value !== 1780){ fStart.value = 1780; fStart.dispatchEvent(new Event('input')); }
+  $('#fRoyal').checked = VS_CFG.mode === 'royal'; $('#fZombie').checked = VS_CFG.mode === 'zombie';
+  $('#fDestiny').value = 'none'; setupNote(); royalSetup();
+  $('#fVsSum').textContent = t('vs_sum', t('vs_m_' + VS_CFG.mode), t('vs_d_' + VS_CFG.diff), t('vs_g_' + VS_CFG.goal));
+}
+function openVsMenu(re){
+  const d = vsDraft;
+  const opt = (k, v, title, hint) => `<button type="button" class="vsopt" data-act="vsset" data-k="${k}" data-v="${v}" aria-pressed="${d[k] === v}"><b>${title}</b><small>${hint}</small></button>`;
+  openModal(`<div class="m-head"><div class="eyebrow">${t('lab_vs')}</div><h2>${t('vs_title')}</h2><p class="hint">${t('vs_intro')}</p></div>
+    <div class="vsmenu">
+      <span class="lab">${t('vs_mode')}</span>
+      <div class="pills vsmodes" role="group">${['normal','royal','zombie'].map(m => `<button type="button" data-act="vsset" data-k="mode" data-v="${m}" aria-pressed="${d.mode === m}">${t('vs_m_' + m)}</button>`).join('')}</div>
+      <span class="lab">${t('vs_diff')}</span>
+      <div class="vsopts">${['easy','std','hard','ext'].map(x => opt('diff', x, t('vs_d_' + x), t('vs_d_' + x + '_h'))).join('')}</div>
+      <span class="lab">${t('vs_goal')}</span>
+      <div class="vsopts">${VS_GOALS[d.mode].map(x => opt('goal', x, t('vs_g_' + x), t('vs_g_' + x + '_h'))).join('')}</div>
+      <p class="hint">${t('vs_1780')}</p>
+    </div>
+    <div class="m-actions"><button class="gel lime big" data-act="vsok"><span>${t('vs_ok')}</span></button><button class="gel ghost big" data-act="vscancel"><span>${t('vs_cancel')}</span></button></div>`, {locked:true, sound:!re});
+}
+$('#fVs').addEventListener('change', () => {
+  if($('#fVs').checked){ vsDraft = Object.assign({mode:'normal', diff:'std', goal:'speed'}, VS_CFG || {}); openVsMenu(false); }
+  else { VS_CFG = null; vsSetup(); }
+});
 function setLang(l){
   LANG = l === 'en' ? 'en' : 'fr'; store.set(LANG_KEY, LANG);
   $('#mapView').innerHTML = ''; dotEls = new Map();                    // la carte se redessine dans la nouvelle langue
@@ -5428,7 +5809,7 @@ $('#setupForm').addEventListener('submit', e => {
   p.lastAge = ageAt(p, day);
   p.conds = rollConds([], S.startYear);
   p.atout = $('#fAtout').value || pick(ATOUTS)[0];                         // atout choisi (ou au hasard)
-  const dest = $('#fDestiny').value, adult = Math.max(day, p.birth + Math.round(18*365.25));
+  const dest = VS_CFG ? 'none' : $('#fDestiny').value, adult = Math.max(day, p.birth + Math.round(18*365.25));
   if(dest === 'crim') p.crim = {day: adult, declared:false, fate:null};   // commencer en criminel…
   if(dest === 'star') p.star = {day: adult, famous:false};                // … ou en star
   S.noAch = dest === 'crim' || dest === 'star';                          // succès coupés pour cette partie
@@ -5444,8 +5825,9 @@ $('#setupForm').addEventListener('submit', e => {
     if(S.royal.rule !== 'both') p.sex = S.royal.rule === 'patri' ? 'M' : 'F';
     crown(p, day, true);
   }
+  if(VS_CFG) S.vs = Object.assign({}, VS_CFG, {ai: vsMakeAI(VS_CFG, day, S.royal && S.royal.rule), done:false, result:null});   // Versus : la famille de l'IA
   scheduleYear(p, p.lastAge, day);
-  sfx.start(); store.del(SAVE_KEY); enterGame(); save();
+  sfx.start(); store.del(SAVE_KEY); aiZoom = null; enterGame(); save();
 });
 
 function showSetup(){
@@ -5458,6 +5840,7 @@ function showSetup(){
     box.innerHTML = `<p>${t('resume_txt', esc(f.maiden || f.last), fmt(saved.t), esc(a.first+' '+a.last))}</p><button class="gel lime" data-act="resume"><span>${t('resume')}</span></button>`;
     box.hidden = false;
   } else box.hidden = true;
+  vsSetup();
 }
 function enterGame(){
   $('#setup').hidden = true; $('#game').hidden = false;
@@ -5539,7 +5922,7 @@ document.addEventListener('keydown', e => {
   else if(e.key === 'Enter' || e.key === 'ArrowRight'){ e.preventDefault(); ACT.tnext(); }
   else if(e.key === 'ArrowLeft' && tutoI > 0){ e.preventDefault(); tutoShow(tutoI - 1); }
 }, true);
-function newGame(){ document.body.classList.remove('zmode'); S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
+function newGame(){ document.body.classList.remove('zmode', 'vsmode'); S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
 
 /* ================= Démarrage ================= */
 (() => {

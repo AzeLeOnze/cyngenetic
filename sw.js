@@ -1,8 +1,8 @@
-// Cyngenetic : cache hors ligne. Version 20261113-001318 (change à chaque fabrication, pour que les mises à jour arrivent).
-const VERSION = 'cyngenetic-20261113-001318';
+// Cyngenetic : cache hors ligne. Version 20261113-015742 (change à chaque fabrication, pour que les mises à jour arrivent).
+const VERSION = 'cyngenetic-20261113-015742';
 const FONTS = 'cyngenetic-fonts';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png',
-  './icons/icon-maskable-512.png', './icons/apple-touch-icon.png'];
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png?v=2', './icons/icon-512.png?v=2',
+  './icons/icon-maskable-512.png?v=2', './icons/apple-touch-icon.png?v=2', './icons/favicon.svg?v=2'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });
