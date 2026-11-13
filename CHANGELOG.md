@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.9d — 13 novembre 2026
+
+- Version PC : « Taille de l'interface » est remplacée par un choix de résolution (1280 × 720 à 3840 × 2160, selon ton écran). La fenêtre se redimensionne et se recentre, et garde ce réglage au prochain lancement. L'option n'apparaît pas sur téléphone ni dans le navigateur.
+- Le thème Dark demande maintenant 50 meurtres commis par des criminels (toutes parties confondues), avec le compteur affiché (par exemple 32/50).
+- Choisir un thème déjà débloqué affiche maintenant comment il a été débloqué.
+
 ## v0.1.9c — 13 novembre 2026
 
 - 11 nouveaux centres d'intérêt : gothique (depuis 1980), métalleux (depuis 1970), punk (depuis 1976), religieux (très courant autrefois, de plus en plus rare, insolite après 2030), amateur d'opéra, chanteur de gospel (depuis 1930), mangaka (depuis 1990), sabreur, main ultra verte, fantaisiste et fan de JDR (depuis 1974).

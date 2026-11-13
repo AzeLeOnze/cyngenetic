@@ -226,6 +226,7 @@ button{font:inherit;color:inherit}
 .optrow .opt-txt small{display:block;font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
 .optsub{display:grid;gap:6px;padding:4px 6px 4px 58px}
 .rulepills{display:flex}
+.resel{width:auto;min-width:170px;flex:none}
 .ctrys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .ctry{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px 8px;border-radius:16px;border:2px solid rgba(0,100,200,.15);
   background:rgba(255,255,255,.8);cursor:pointer;font:700 13px var(--font-display);color:var(--ink);text-align:center}
@@ -1465,9 +1466,16 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.1.9c';
+const APP_VERSION = '0.1.9d';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.9d', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
+   fr:['Version PC : « Taille de l\'interface » est remplacée par un choix de résolution (1280 × 720 à 3840 × 2160, selon ton écran). La fenêtre se redimensionne et se recentre, et garde ce réglage au prochain lancement. L\'option n\'apparaît pas sur téléphone ni dans le navigateur.',
+       'Le thème Dark demande maintenant 50 meurtres commis par des criminels (toutes parties confondues), avec le compteur affiché (par exemple 32/50).',
+       'Choisir un thème déjà débloqué affiche maintenant comment il a été débloqué.'],
+   en:['PC version: "Interface size" is replaced by a resolution choice (1280 × 720 to 3840 × 2160, depending on your screen). The window resizes and recentres, and keeps the setting next time. The option doesn\'t appear on phones or in the browser.',
+       'The Dark theme now takes 50 murders committed by criminals (across all games), with a counter (for example 32/50).',
+       'Picking an unlocked theme now shows how it was unlocked.']},
   {v:'0.1.9c', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
    fr:['11 nouveaux centres d\'intérêt : gothique (depuis 1980), métalleux (depuis 1970), punk (depuis 1976), religieux (très courant autrefois, de plus en plus rare, insolite après 2030), amateur d\'opéra, chanteur de gospel (depuis 1930), mangaka (depuis 1990), sabreur, main ultra verte, fantaisiste et fan de JDR (depuis 1974).',
        '2 nouvelles particularités : syndrome de Peter Pan (depuis 1983) et syndrome du personnage principal (depuis 2005).',
@@ -1921,7 +1929,8 @@ const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return n
 const loadJSON = k => { try{ return JSON.parse(store.get(k)) || {}; }catch(e){ return {}; } };
 /* Paramètres (confort) et règles de jeu (personnalisation), gardés dans le navigateur */
 const SET_KEY = 'lignee.settings.v1', RULES_KEY = 'lignee.rules.v1';
-const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false, regnal:false, anim:true, blur:true, ui:100, country:'fr'};
+const SET_DEF = {sound:true, volume:70, music:35, skin:'aqua', toasts:true, deco:true, map:false, regnal:false, anim:true, blur:true, ui:100, country:'fr', res:''};
+const RESOLUTIONS = [[1280,720],[1366,768],[1440,900],[1600,900],[1920,1080],[2560,1440],[3840,2160]];   // version PC : tailles de fenêtre proposées
 const RULES_DEF = {evoNames:true, ach:true, sameSex:true, legal:18, oldAge:true, diseases:true,
   boys:50, twins:1.2, triplets:.9, quads:.5, illness:100, conds:4, inherit:13, star:2.5, crim:2, addict:8.8};
 let SET = Object.assign({}, SET_DEF, loadJSON(SET_KEY));
@@ -2980,7 +2989,7 @@ fr:{
   set_country_game:c=>`La partie en cours se passe ${c === 'uk' ? 'au Royaume-Uni' : 'en France'} : le changement s'appliquera à la prochaine partie.`, ctry_fr:'France', ctry_uk:'Royaume-Uni',
   set_tab_gen:'Général', set_tab_snd:'Son', set_tab_gfx:'Vidéo et graphismes', quit:'Quitter',
   set_full:'Plein écran', set_full_hint:'Le jeu occupe tout l\'écran (Échap pour en sortir).', set_full_hint_d:'Le jeu occupe tout l\'écran (touche F11).', set_full_on:'Activer', set_full_off:'Quitter le plein écran',
-  set_ui:'Taille de l\'interface', set_ui_hint:'Agrandit ou réduit tout le jeu.',
+  set_res:'Résolution', set_res_hint:'Taille de la fenêtre du jeu.', set_res_pick:'Choisir…',
   set_blur:'Verre dépoli', set_blur_hint:'Le flou derrière les fenêtres. À couper si le jeu rame.',
   set_anim:'Animations', set_anim_hint:'Reflets, lueurs et transitions. À couper si le jeu rame.',
   settings:'Paramètres', custom:'Personnalisation', set_eyebrow:'Confort de jeu', set_lang:'Langue', set_sound:'Son', set_sound_hint:'Bruitages et petites musiques.',
@@ -3037,8 +3046,9 @@ fr:{
   log_dechu:p=>`${P(p).first} ${P(p).last} renonce à la vie royale et ${g(P(p),'devient un déchu','devient une déchue')}.`,
   end_note_over:'La partie est terminée : les Cyn et les succès ne peuvent plus être gagnés dans cette partie.',
   end_note_2100:'Si tu continues à jouer, tu ne gagneras plus ni Cyn ni succès dans cette partie.',
-  skin_goth:'Dark', skin_locked_goth:"Se débloque après 10 meurtres commis par des criminels (toutes parties confondues).",
-  log_goth_skin:()=>'10 meurtres… Le thème Dark est débloqué dans les Paramètres.',
+  skin_how_aqua:'Thème de base, disponible dès le départ.', skin_how_orange:'A été débloqué en l\'achetant dans la boutique (830 Cyn).', skin_how_xp:'A été débloqué en l\'achetant dans la boutique (2 000 Cyn).', skin_how_dark:'A été débloqué en l\'achetant dans la boutique (5 000 Cyn).', skin_how_vapor:'A été débloqué quand une famille a atteint 16 générations.', skin_how_kid:'A été débloqué à la naissance de quadruplés.', skin_how_night:'A été débloqué quand un criminel a fait sa première victime.', skin_how_goth:'A été débloqué grâce aux meurtres commis par des criminels.', skin_how_gold:'A été débloqué en complétant une catégorie entière de succès.',
+  skin_goth:'Dark', skin_locked_goth:()=>`Se débloque après 50 meurtres commis par des criminels (toutes parties confondues) : ${Math.min(50, UNL.kills || 0)}/50.`,
+  log_goth_skin:()=>'50 meurtres… Le thème Dark est débloqué dans les Paramètres.',
   shop_spouse:'Conjoint sur mesure', shop_spouse_d:"Crée l'âme sœur parfaite de ton personnage : nom, âge, métier, atout, centre d'intérêt, addiction, destin…",
   shop_spouse_taken:p=>`${p.first} est déjà en couple.`, shop_spouse_young:p=>`${p.first} est encore trop jeune.`,
   sp_intro:n=>`Choisis tout de la future âme sœur de ${n}.`, sp_job:'Métier', sp_int:"Centre d'intérêt", sp_add:'Addiction', sp_cond:'Particularité',
@@ -3246,7 +3256,7 @@ en:{
   set_country_game:c=>`The current game takes place in ${c === 'uk' ? 'the United Kingdom' : 'France'}: the change will apply to your next game.`, ctry_fr:'France', ctry_uk:'United Kingdom',
   set_tab_gen:'General', set_tab_snd:'Sound', set_tab_gfx:'Video & graphics', quit:'Quit',
   set_full:'Full screen', set_full_hint:'The game fills the whole screen (Esc to leave).', set_full_hint_d:'The game fills the whole screen (F11 key).', set_full_on:'Turn on', set_full_off:'Leave full screen',
-  set_ui:'Interface size', set_ui_hint:'Makes the whole game bigger or smaller.',
+  set_res:'Resolution', set_res_hint:'Size of the game window.', set_res_pick:'Choose…',
   set_blur:'Frosted glass', set_blur_hint:'The blur behind windows. Turn it off if the game lags.',
   set_anim:'Animations', set_anim_hint:'Shines, glows and transitions. Turn them off if the game lags.',
   settings:'Settings', custom:'Customization', set_eyebrow:'Comfort', set_lang:'Language', set_sound:'Sound', set_sound_hint:'Sound effects and jingles.',
@@ -3303,8 +3313,9 @@ en:{
   log_dechu:p=>`${P(p).first} ${P(p).last} gives up royal life and becomes one of the fallen.`,
   end_note_over:'The game is over: Cyn and achievements can no longer be earned in this game.',
   end_note_2100:"If you keep playing, you won't earn any more Cyn or achievements in this game.",
-  skin_goth:'Dark', skin_locked_goth:'Unlocks after 10 murders committed by criminals (across all games).',
-  log_goth_skin:()=>'10 murders… The Dark theme is now available in Settings.',
+  skin_how_aqua:'Base theme, available from the start.', skin_how_orange:'Unlocked by buying it in the shop (830 Cyn).', skin_how_xp:'Unlocked by buying it in the shop (2,000 Cyn).', skin_how_dark:'Unlocked by buying it in the shop (5,000 Cyn).', skin_how_vapor:'Unlocked when a family reached 16 generations.', skin_how_kid:'Unlocked when quadruplets were born.', skin_how_night:'Unlocked when a criminal claimed their first victim.', skin_how_goth:'Unlocked through murders committed by criminals.', skin_how_gold:'Unlocked by completing a whole achievement category.',
+  skin_goth:'Dark', skin_locked_goth:()=>`Unlocks after 50 murders committed by criminals (across all games): ${Math.min(50, UNL.kills || 0)}/50.`,
+  log_goth_skin:()=>'50 murders… The Dark theme is now available in Settings.',
   shop_spouse:'Custom partner', shop_spouse_d:"Create your character's perfect soulmate: name, age, job, gift, interest, addiction, destiny…",
   shop_spouse_taken:p=>`${p.first} is already in a relationship.`, shop_spouse_young:p=>`${p.first} is still too young.`,
   sp_intro:n=>`Choose everything about ${n}'s future soulmate.`, sp_job:'Job', sp_int:'Interest', sp_add:'Addiction', sp_cond:'Trait',
@@ -3513,7 +3524,7 @@ TX.de = {
   ctry_fr:'Frankreich', ctry_uk:'Vereinigtes Königreich', ctry_de:'Deutschland', ctry_ch:'Schweiz', set_country:'Land der Blutlinie',
   set_tab_gen:'Allgemein', set_tab_snd:'Ton', set_tab_gfx:'Video & Grafik', quit:'Beenden',
   set_full:'Vollbild', set_full_hint:'Das Spiel füllt den ganzen Bildschirm (Esc zum Verlassen).', set_full_hint_d:'Das Spiel füllt den ganzen Bildschirm (Taste F11).', set_full_on:'Einschalten', set_full_off:'Vollbild verlassen',
-  set_ui:'Größe der Oberfläche', set_ui_hint:'Macht das ganze Spiel größer oder kleiner.',
+  set_res:'Auflösung', set_res_hint:'Größe des Spielfensters.', set_res_pick:'Wählen…',
   set_blur:'Milchglas', set_blur_hint:'Die Unschärfe hinter Fenstern. Ausschalten, wenn das Spiel ruckelt.',
   set_anim:'Animationen', set_anim_hint:'Glanz, Leuchten und Übergänge. Ausschalten, wenn das Spiel ruckelt.',
   settings:'Einstellungen', custom:'Anpassung', set_eyebrow:'Spielkomfort', set_lang:'Sprache', set_sound:'Ton', set_sound_hint:'Soundeffekte und kleine Melodien.',
@@ -3570,8 +3581,9 @@ TX.de = {
   log_dechu:p=>`${P(p).first} ${P(p).last} gibt das höfische Leben auf und verliert ${g(P(p),'seinen','ihren')} Titel.`,
   end_note_over:'Das Spiel ist vorbei: In diesem Spiel gibt es keine Cyn und keine Erfolge mehr.',
   end_note_2100:'Wenn du weiterspielst, verdienst du in diesem Spiel keine Cyn und keine Erfolge mehr.',
-  skin_goth:'Dark', skin_locked_goth:'Wird nach 10 Morden durch Verbrecher freigeschaltet (über alle Spiele).',
-  log_goth_skin:()=>'10 Morde… Das Dark-Design ist jetzt in den Einstellungen verfügbar.',
+  skin_how_aqua:'Grunddesign, von Anfang an verfügbar.', skin_how_orange:'Freigeschaltet durch Kauf im Shop (830 Cyn).', skin_how_xp:'Freigeschaltet durch Kauf im Shop (2.000 Cyn).', skin_how_dark:'Freigeschaltet durch Kauf im Shop (5.000 Cyn).', skin_how_vapor:'Freigeschaltet, als eine Familie 16 Generationen erreichte.', skin_how_kid:'Freigeschaltet bei der Geburt von Vierlingen.', skin_how_night:'Freigeschaltet, als ein Verbrecher sein erstes Opfer forderte.', skin_how_goth:'Freigeschaltet durch Morde von Verbrechern.', skin_how_gold:'Freigeschaltet durch das Abschließen einer ganzen Erfolgskategorie.',
+  skin_goth:'Dark', skin_locked_goth:()=>`Wird nach 50 Morden durch Verbrecher freigeschaltet (über alle Spiele): ${Math.min(50, UNL.kills || 0)}/50.`,
+  log_goth_skin:()=>'50 Morde… Das Dark-Design ist jetzt in den Einstellungen verfügbar.',
   shop_spouse:'Partner nach Maß', shop_spouse_d:'Erschaffe den perfekten Seelenverwandten deiner Figur: Name, Alter, Beruf, Gabe, Hobby, Sucht, Schicksal…',
   shop_spouse_taken:p=>`${p.first} ist schon in einer Beziehung.`, shop_spouse_young:p=>`${p.first} ist noch zu jung.`,
   sp_intro:n=>`Bestimme alles über den künftigen Seelenverwandten von ${n}.`, sp_job:'Beruf', sp_int:'Hobby', sp_add:'Sucht', sp_cond:'Besonderheit',
@@ -4530,7 +4542,7 @@ function die(p, day, cause){
     if(wasHeir) unlock('r_heirkill');                   // succès : un héritier assassiné
     const k = P(cause.murder); k.kills = (k.kills || 0) + 1; cyn(50 * (hasAtout(k,'richesse') ? 2 : 1), p.id);
     S.nKills = (S.nKills || 0) + 1;                     // Versus : nombre de meurtres
-    if(!VSH){ UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 10) unlockSkin('goth'); pendingFx.push(p.id); }   // thème Dark : 10 meurtres
+    if(!VSH){ UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 50) unlockSkin('goth'); pendingFx.push(p.id); }   // thème Dark : 50 meurtres (0.1.9d)
     [[4,'kill2'],[8,'kill4'],[12,'kill6'],[16,'kill8']].forEach(([n, id]) => { if(k.kills >= n) unlock(id); }); dirty = true;
     if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
     if(!UNL.night && !VSH){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
@@ -6671,6 +6683,11 @@ function skinHint(v){                                 // thème bloqué : on exp
   h.innerHTML = `${icon('lock')}<span><b>${esc(t('skin_' + v))}</b> · ${esc(t(SKIN_LOCK[v]))}</span>`; h.hidden = false;
   h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop');
 }
+function skinGot(v){                                  // thème débloqué choisi : comment il a été débloqué
+  const h = $('#skinHint'); if(!h) return;
+  h.innerHTML = `${icon('trophy')}<span><b>${esc(t('skin_' + v))}</b> · ${esc(t('skin_how_' + v))}</span>`; h.hidden = false;
+  h.classList.remove('pop'); void h.offsetWidth; h.classList.add('pop');
+}
 const skinLocked = s => (s === 'xp' && !UNL.xp) || (s === 'goth' && !UNL.goth) || (s === 'dark' && !UNL.dark) || (s === 'orange' && !UNL.orange) || (s === 'gold' && !goldUnlocked()) || (s === 'night' && !UNL.night) || (s === 'vapor' && !UNL.neon) || (s === 'kid' && !UNL.kid);
 function unlockSkin(key){                            // Néon (16 générations), Enfantin (quadruplés)
   if(UNL[key] || VSH) return; UNL[key] = true; store.set(UNL_KEY, JSON.stringify(UNL));
@@ -6686,7 +6703,7 @@ function applySettings(){
   document.body.classList.toggle('no-deco', !SET.deco);
   document.documentElement.classList.toggle('noanim', !SET.anim);     // Vidéo et graphismes : animations coupées
   document.documentElement.classList.toggle('noblur', !SET.blur);     // … et verre dépoli coupé (plus léger pour la carte graphique)
-  const D = window.cyngeneticDesktop; if(D && D.setZoom) D.setZoom((SET.ui || 100) / 100);   // version PC : taille de l'interface
+  const D = window.cyngeneticDesktop; if(D && D.setZoom) D.setZoom(1);   // 0.1.9d : plus de « taille de l'interface » (remplacée par la résolution)
   const qb = $('.quitb'); if(qb) qb.hidden = !(D && D.quit);
 }
 const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${disabled?'is-off':''}"><input type="checkbox" ${attr}="${key}" ${on?'checked':''} ${disabled?'disabled':''}><span class="sw"></span><span><b>${label}</b>${hint?`<small>${hint}</small>`:''}</span></label>`;
@@ -6890,7 +6907,8 @@ function openSettings(re){
     ${range('music', 0, 100, 5, '%', t('set_music'), t('set_music_hint'))}`
   : setTab === 'gfx' ? `
     <div class="setrow"><span><b>${t('set_full')}</b><small>${t(isDesk() ? 'set_full_hint_d' : 'set_full_hint')}</small></span><button class="gel ghost" data-act="fullscreen"><span>${t(isFull() ? 'set_full_off' : 'set_full_on')}</span></button></div>
-    ${isDesk() ? range('ui', 70, 150, 10, '%', t('set_ui'), t('set_ui_hint')) : ''}
+    ${isDesk() && window.cyngeneticDesktop.setResolution ? `<div class="setrow"><span><b>${t('set_res')}</b><small>${t('set_res_hint')}</small></span><select class="inp resel" id="resSel" aria-label="${t('set_res')}">
+      <option value="" disabled ${SET.res ? '' : 'selected'}>${t('set_res_pick')}</option>${RESOLUTIONS.filter(([w, h], i) => i === 0 || (w <= screen.width && h <= screen.height)).map(([w, h]) => `<option value="${w}x${h}" ${SET.res === w + 'x' + h ? 'selected' : ''}>${w} × ${h}</option>`).join('')}</select></div>` : ''}
     <div class="setrow col"><b>${t('set_theme')}</b><div class="skins">${SKINS.map(s => { const lock = skinLocked(s);
       return `<button class="skin sk-${s} ${lock?'locked':''}" data-act="skin" data-v="${s}" aria-pressed="${SET.skin===s && !lock}"><i>${lock?icon('lock'):''}</i><span>${t('skin_'+s)}</span></button>`; }).join('')}</div>
       <p class="skinhint" id="skinHint" hidden></p></div>
@@ -6956,6 +6974,14 @@ document.addEventListener('input', e => {
   if(out) out.textContent = numTxt(val, el.dataset.unit || '');
   if(el.type === 'checkbox'){ sfx.init(); sfx.click(); }
 });
+document.addEventListener('change', e => {        // version PC : résolution de la fenêtre
+  if(e.target.id !== 'resSel') return;
+  SET.res = e.target.value; saveSet(); applyResolution(); sfx.click();
+});
+function applyResolution(){
+  const D = window.cyngeneticDesktop; if(!SET.res || !D || !D.setResolution) return;
+  const [w, h] = SET.res.split('x').map(Number); if(w && h) D.setResolution(w, h);
+}
 document.addEventListener('change', e => {        // âge préféré : nouvelles propositions quand on relâche le curseur
   if(e.target.id !== 'seekAge' || !S) return;
   S.seekAge = +e.target.value; cands = genCands(); sfx.pop(); openSoulmate(true);
@@ -6989,7 +7015,7 @@ const ACT = {
   lang(d){ const wasOpen = modalOpen && $('#modal .setlist'); setLang(d.v); if(wasOpen) openSettings(true); },
   settings(){ openSettings(false); },
   custom(){ openCustom(false); },
-  skin(d){ if(skinLocked(d.v)){ skinHint(d.v); return; } SET.skin = d.v; saveSet(); applySettings(); if(d.v === 'gold'){ sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 50); } openSettings(true); },
+  skin(d){ if(skinLocked(d.v)){ skinHint(d.v); return; } SET.skin = d.v; saveSet(); applySettings(); if(d.v === 'gold'){ sfx.fame(); burst(['#ffd000','#ffffff','#ffb300','#fff3a0'], 50); } openSettings(true); skinGot(d.v); },
   legal(d){ R.legal = +d.v; saveRules(); dirty = true; openCustom(true); },
   resetrules(){ R = Object.assign({}, RULES_DEF); saveRules(); dirty = true; sfx.pop(); openCustom(true); },
   shop(){ openShop(false); },
@@ -7504,6 +7530,7 @@ function newGame(){ document.body.classList.remove('zmode', 'vsmode'); S = null;
     gfx2.appendChild(b); }
   $$('.brand-slot').forEach((el,i) => { el.innerHTML = emblem('emb' + i); });
   $$('[data-flag]').forEach(el => { el.innerHTML = FLAGS[el.dataset.flag] || ''; });   // drapeaux du choix du pays
+  applyResolution();                                   // version PC : la fenêtre reprend la résolution choisie
   $$('#mnav [data-icon]').forEach(b => b.insertAdjacentHTML('afterbegin', icon(b.dataset.icon)));   // icônes de la barre du bas
   try{ if(sessionStorage.getItem('lignee.wiped')){                     // après une remise à zéro : on revient du noir
     sessionStorage.removeItem('lignee.wiped');
