@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.9c — 13 novembre 2026
+
+- 11 nouveaux centres d'intérêt : gothique (depuis 1980), métalleux (depuis 1970), punk (depuis 1976), religieux (très courant autrefois, de plus en plus rare, insolite après 2030), amateur d'opéra, chanteur de gospel (depuis 1930), mangaka (depuis 1990), sabreur, main ultra verte, fantaisiste et fan de JDR (depuis 1974).
+- 2 nouvelles particularités : syndrome de Peter Pan (depuis 1983) et syndrome du personnage principal (depuis 2005).
+- Nouvelle addiction : dépendant affectif (+0,85 % de risque de mourir chaque année, ×2 après 60 ans, ×4 après 70 ans). Peut causer : solitude, enseulé, syndrome du cœur brisé.
+- Les déménagements sont 1,29 fois plus rares, et les changements de métier 1,15 fois plus rares.
+
 ## v0.1.9b — 13 novembre 2026
 
 - Les noms de villes suivent la langue du jeu : en français, London devient Londres et München devient Munich ; en anglais, Genève devient Geneva ; en allemand, Genève devient Genf et Strasbourg devient Straßburg. Les villes qui s'écrivent pareil partout ne changent pas, et les sauvegardes ne sont pas touchées.

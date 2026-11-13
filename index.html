@@ -1465,9 +1465,18 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.1.9b';
+const APP_VERSION = '0.1.9c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.9c', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
+   fr:['11 nouveaux centres d\'intérêt : gothique (depuis 1980), métalleux (depuis 1970), punk (depuis 1976), religieux (très courant autrefois, de plus en plus rare, insolite après 2030), amateur d\'opéra, chanteur de gospel (depuis 1930), mangaka (depuis 1990), sabreur, main ultra verte, fantaisiste et fan de JDR (depuis 1974).',
+       '2 nouvelles particularités : syndrome de Peter Pan (depuis 1983) et syndrome du personnage principal (depuis 2005).',
+       'Nouvelle addiction : dépendant affectif (+0,85 % de risque de mourir chaque année, ×2 après 60 ans, ×4 après 70 ans). Peut causer : solitude, enseulé, syndrome du cœur brisé.',
+       'Les déménagements sont 1,29 fois plus rares, et les changements de métier 1,15 fois plus rares.'],
+   en:['11 new interests: goth (since 1980), metalhead (since 1970), punk (since 1976), devout (very common in the past, rarer and rarer, unusual after 2030), opera lover, gospel singer (since 1930), mangaka (since 1990), swordsman, super green thumb, whimsical soul and tabletop RPG fan (since 1974).',
+       '2 new traits: Peter Pan syndrome (since 1983) and main character syndrome (since 2005).',
+       'New addiction: emotional dependency (+0.85% risk of dying each year, ×2 after 60, ×4 after 70). Can cause loneliness, deep isolation and broken heart syndrome.',
+       'Moving house is 1.29 times rarer, and changing jobs 1.15 times rarer.']},
   {v:'0.1.9b', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
    fr:['Les noms de villes suivent la langue du jeu : en français, London devient Londres et München devient Munich ; en anglais, Genève devient Geneva ; en allemand, Genève devient Genf et Strasbourg devient Straßburg. Les villes qui s\'écrivent pareil partout ne changent pas, et les sauvegardes ne sont pas touchées.',
        'Les bulles des politiques prennent les couleurs du pays de la partie : bleu-blanc-rouge en France, Union Jack au Royaume-Uni, noir-rouge-or en Allemagne, rouge et blanc en Suisse.',
@@ -2270,7 +2279,8 @@ const CONDS = [
  ['diogene','Syndrome de Diogène','Syndrome de Diogène','Diogenes syndrome','puzzle'],
  ['delirant','Trouble délirant','Trouble délirant','Delusional disorder','brain'],['oniomanie','Oniomanie','Oniomanie','Compulsive buying disorder','bag',1900],
  ['tdi','TDI','TDI','Dissociative identity disorder','user',1880],['alice',"Syndrome d'Alice au pays des merveilles","Syndrome d'Alice au pays des merveilles",'Alice in Wonderland syndrome','eyeoff',1955],
- ['cotard','Syndrome de Cotard','Syndrome de Cotard','Cotard syndrome','skull',1880],['capgras','Syndrome de Capgras','Syndrome de Capgras','Capgras syndrome','user',1923]
+ ['cotard','Syndrome de Cotard','Syndrome de Cotard','Cotard syndrome','skull',1880],['capgras','Syndrome de Capgras','Syndrome de Capgras','Capgras syndrome','user',1923],
+ ['peterpan','Syndrome de Peter Pan','Syndrome de Peter Pan','Peter Pan syndrome','rocket',1983],['persoprinc','Syndrome du personnage principal','Syndrome du personnage principal','Main character syndrome','film',2005]
 ];
 /* Atouts (0.1.2a) : un seul par personne, reçu à la naissance par tout le monde, visible seulement dans la fiche.
    [id, fr masc., fr fém., en, icône, effet fr, effet en] */
@@ -2307,13 +2317,20 @@ const ADDICTIONS = [
  ['casino','Accro au casino','Accro au casino','Gambling addiction','dice',.002,1800,"l'addiction au casino",'a gambling addiction'],
  ['cyngen','Cyngenetisme','Cyngenetisme','Cyngenetism','atom',.01,2000,'le Cyngenetisme','Cyngenetism'],
  ['ecstasy','Ecstasy','Ecstasy','Ecstasy','pill',.022,1985,"l'ecstasy",'an ecstasy habit'],
- ['sexe','Hypersexuel','Nymphomane','Sex addiction','heart',.01,1500,"l'addiction au sexe",'a sex addiction']
+ ['sexe','Hypersexuel','Nymphomane','Sex addiction','heart',.01,1500,"l'addiction au sexe",'a sex addiction'],
+ ['affectif','Dépendant affectif','Dépendante affective','Emotional dependency','heart',.0085,1500,'la dépendance affective','an emotional dependency']
 ];
 const addictsOf = p => p.addicts || (p.addict ? [p.addict] : []);                       // jusqu'à 2 addictions
 const addRisk = (id, A) => ADDICTIONS.find(a => a[0]===id)[5] * (A >= 70 ? 4 : A >= 60 ? 2 : 1);   // ×2 après 60 ans, ×4 après 70
 // centres d'intérêt (sans effet, sauf les sportifs : risque de maladie divisé par 2) :
 // [id, fr masc., fr fém., en masc., en fém., icône, de, à, sportif]
 const INTERESTS = [
+ ['gothique','Gothique','Gothique','Goth','Goth','moon',1980,9999],['metalleux','Métalleux','Métalleuse','Metalhead','Metalhead','bolt',1970,9999],
+ ['punk','Punk','Punk','Punk','Punk','bolt',1976,9999],['religieux','Religieux','Religieuse','Devout','Devout','dove',1500,9999],
+ ['opera',"Amateur d'opéra","Amatrice d'opéra",'Opera lover','Opera lover','music',1600,9999],['gospel','Chanteur de gospel','Chanteuse de gospel','Gospel singer','Gospel singer','music',1930,9999],
+ ['mangaka','Mangaka amateur','Mangaka amatrice','Amateur mangaka','Amateur mangaka','pencil',1990,9999],['sabreur','Sabreur','Sabreuse','Swordsman','Swordswoman','sword',1500,9999,true],
+ ['ultraverte','Main ultra verte','Main ultra verte','Super green thumb','Super green thumb','leaf',1500,9999],['fantaisiste','Fantaisiste','Fantaisiste','Whimsical soul','Whimsical soul','sparkle',1500,9999],
+ ['jdr','Fan de JDR','Fan de JDR','Tabletop RPG fan','Tabletop RPG fan','dice',1974,9999],
  ['naturiste','Naturiste','Naturiste','Naturist','Naturist','leaf',1920,9999],
  ['nudiste','Nudiste','Nudiste','Nudist','Nudist','sun',1930,9999],
  ['campeur','Campeur','Campeuse','Camper','Camper','tree',1910,9999],
@@ -2368,7 +2385,10 @@ function gainInterest(p, day, silent){
   const y = yearOf(day), have = interestsOf(p), ok = INTERESTS.filter(r => r[0] !== 'fanof' && y >= r[6] && y <= r[7]);
   if(have.length || !ok.length) return null;
   const stars = S ? Object.values(S.people).filter(q => q.id !== p.id && q.star && q.star.famous && inFamily(q)) : [];
-  let id = pick(ok)[0];
+  const relW = y < 1800 ? 12 : y < 1900 ? 6 : y < 1970 ? 3 : y < 2030 ? 1 : .25;      // 0.1.9c : « Religieux » selon l'époque
+  const wOf = r => r[0] === 'religieux' ? relW : 1;
+  let rr = Math.random() * ok.reduce((a, r) => a + wOf(r), 0), id = ok[ok.length - 1][0];
+  for(const r of ok){ rr -= wOf(r); if(rr <= 0){ id = r[0]; break; } }
   if(stars.length && Math.random() < .2){ id = 'fanof'; p.fanOf = pick(stars).id; }   // fan d'une star (passée ou actuelle) de la famille
   p.interests = have.concat(id);
   if(!silent) log('interest','interest',[p.id, id], day, p.id === S.activeId);
@@ -2641,6 +2661,8 @@ const DISEASES = [
  ['serotonine',"Syndrome sérotoninergique dû à l'ecstasy","d'un syndrome sérotoninergique dû à l'ecstasy",'ecstasy-induced serotonin syndrome',1500,2100,1,10,.04,{addict:'ecstasy'}],
  ['hyperthermie',"Hyperthermie sévère due à l'ecstasy","d'une hyperthermie sévère due à l'ecstasy",'severe ecstasy-induced hyperthermia',1500,2100,1,5,.04,{addict:'ecstasy'}],
  ['mst','MST',"d'une MST",'an STD',1500,2100,90,1800,.06,{addict:'sexe'}],['ist','IST',"d'une IST",'an STI',1500,2100,60,1200,.07,{addict:'sexe'}],
+ ['solitude','Solitude','de solitude','loneliness',1500,2100,180,1800,.05,{addict:'affectif'}],['enseule','Enseulé',"d'un profond enseulement",'deep isolation',1500,2100,120,1500,.05,{addict:'affectif'}],
+ ['coeurbrise','Syndrome du cœur brisé','du syndrome du cœur brisé','broken heart syndrome',1500,2100,3,60,.1,{addict:'affectif'}],
  // nouvelles maladies (0.1.1a)
  ['meningite','Méningite','de la méningite','meningitis',1500,2100,3,20,.3],['tetanos','Tétanos','du tétanos','tetanus',1500,1990,5,30,.2],
  ['noyade','Noyade',"d'une noyade",'drowning',1500,2100,1,1,0,{minA:3}],['asteroide',"Chute d'astéroïde","d'une chute d'astéroïde",'a falling asteroid',1500,2100,1,1,0,{special:true}],
@@ -3724,7 +3746,9 @@ DEx.int = Object.fromEntries(Object.entries({naturiste:['Naturist'], nudiste:['F
   fanof:['Fan eines Familienstars','Fan eines Familienstars'], comics:['Comic-Fan','Comic-Fan'], streamex:['Extraplanetarer Streamer','Extraplanetare Streamerin'], tiktok:['TikToker'], neotiktok:['Neo-TikToker'],
   cricket:['Cricketspieler'], flechettes:['Dartspieler'], pubquiz:['Pub-Quiz-Stammgast','Pub-Quiz-Stammgast'], the:['Teekenner'], trainspot:['Trainspotter'], morris:['Morristänzer'],
   schrebergarten:['Schrebergärtner'], karneval:['Karnevalist'], oktoberfest:['Oktoberfest-Stammgast','Oktoberfest-Stammgast'], modelleisenbahn:['Modelleisenbahner'],
-  skat:['Skatspieler'], jodel:['Jodler'], schwingen:['Schwinger'], ski:['Skifahrer'], cordesalpes:['Alphornbläser'], jass:['Jasser']
+  skat:['Skatspieler'], gothique:['Grufti','Grufti'], metalleux:['Metalhead','Metalhead'], punk:['Punk','Punk'], religieux:['Gläubiger','Gläubige'],
+  opera:['Opernliebhaber'], gospel:['Gospelsänger'], mangaka:['Hobby-Mangaka','Hobby-Mangaka'], sabreur:['Säbelfechter'], ultraverte:['Pflanzenflüsterer'],
+  fantaisiste:['Spaßvogel','Spaßvogel'], jdr:['Pen-&-Paper-Fan','Pen-&-Paper-Fan'], jodel:['Jodler'], schwingen:['Schwinger'], ski:['Skifahrer'], cordesalpes:['Alphornbläser'], jass:['Jasser']
 }).map(([k, v]) => [k, deMF(v[0], v[1])]));
 DEx.cond = Object.fromEntries(Object.entries({schizo:'Schizophrenie', bipolaire:'Bipolare Störung', tdah:'ADHS', autisme:'Autismus', autisme_nv:'Nonverbaler Autismus',
   toc:'Zwangsstörung', tourette:'Tourette-Syndrom', anxiete:'Angststörung', dyslexie:'Legasthenie', sourd:['Gehörlos','Gehörlos'], aveugle:['Blind','Blind'], muet:['Stumm','Stumm'],
@@ -3732,12 +3756,12 @@ DEx.cond = Object.fromEntries(Object.entries({schizo:'Schizophrenie', bipolaire:
   hpi:'Hochbegabt', monochrom:'Monochromasie', deprchron:'Chronische Depression', tsa:'Autismus-Spektrum-Störung', anxsoc:'Soziale Angst', cyclothymie:'Zyklothymie',
   definte:'Geistige Behinderung', boulimie:['Bulimiker','Bulimikerin'], insomnie:['Schlaflos','Schlaflos'], narcolepsie:['Narkoleptiker','Narkoleptikerin'], anxchron:'Chronische Angst',
   maniaque:['Pedant','Pedantin'], borderline:'Borderline', pmr:'Eingeschränkte Mobilität', psychopathe:['Psychopath','Psychopathin'], diogene:'Diogenes-Syndrom',
-  delirant:'Wahnhafte Störung', oniomanie:'Kaufsucht', tdi:'Dissoziative Identitätsstörung', alice:'Alice-im-Wunderland-Syndrom', cotard:'Cotard-Syndrom', capgras:'Capgras-Syndrom'
+  delirant:'Wahnhafte Störung', oniomanie:'Kaufsucht', tdi:'Dissoziative Identitätsstörung', alice:'Alice-im-Wunderland-Syndrom', cotard:'Cotard-Syndrom', capgras:'Capgras-Syndrom', peterpan:'Peter-Pan-Syndrom', persoprinc:'Hauptfigur-Syndrom'
 }).map(([k, v]) => [k, Array.isArray(v) ? v : [v, v]]));
 DEx.add = {tabac:['Raucher','Raucherin','dem Rauchen'], alcool:['Alkoholiker','Alkoholikerin','dem Alkohol'], cafe:['Kaffeesüchtig','Kaffeesüchtig','der Kaffeesucht'],
   jeux:['Videospielsüchtig','Videospielsüchtig','der Videospielsucht'], cannabis:['Cannabiskonsument','Cannabiskonsumentin','dem Cannabis'], lsd:['LSD-Konsument','LSD-Konsumentin','dem LSD'],
   casino:['Spielsüchtig','Spielsüchtig','der Spielsucht'], cyngen:['Cyngenetiker','Cyngenetikerin','dem Cyngenetismus'], ecstasy:['Ecstasy-Konsument','Ecstasy-Konsumentin','dem Ecstasy'],
-  sexe:['Sexsüchtig','Sexsüchtig','der Sexsucht']};
+  sexe:['Sexsüchtig','Sexsüchtig','der Sexsucht'], affectif:['Emotional abhängig','Emotional abhängig','der emotionalen Abhängigkeit']};
 DEx.field = {med:'Medizin', droit:'Jura', lettres:'Literatur', arts:'Kunst', sciences:'Naturwissenschaften', pharma:'Pharmazie', eco:'Wirtschaft', journal:'Journalismus', info:'Informatik'};
 DEx.track = {bacphilo:'Bac Philosophie', bacsci:'Bac Naturwissenschaften', baca:'Bac A (Literatur)', bacc:'Bac C (Mathematik)', bacgen:'Bac général', bactech:'Bac technologique',
   bacprocom:'Bac Pro Handel', bacproelec:'Bac Pro Elektrotechnik', bacprorobot:'Bac Pro Robotik', capcuisine:'CAP Küche', capcoif:'CAP Friseurhandwerk', capmenu:'CAP Tischlerei',
@@ -3782,7 +3806,7 @@ DEx.dz = {peste:['Pest','der Pest'], variole:['Pocken','den Pocken'], dysenterie
   mst:['Geschlechtskrankheit','einer Geschlechtskrankheit'], ist:['Sexuell übertragbare Infektion','einer sexuell übertragbaren Infektion'], meningite:['Hirnhautentzündung','einer Hirnhautentzündung'],
   tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], disparu:['Verschwinden','Verschwinden'],
   mortcerebrale:['Hirntod','Hirntod'], necrose:['Nekrose','einer Nekrose'], diabete:['Diabetes','Diabetes'], embolie:['Lungenembolie','einer Lungenembolie'], paludisme:['Malaria','Malaria'],
-  grippeaviaire:['Vogelgrippe','der Vogelgrippe'], bpco:['COPD','COPD'], rage:['Tollwut','Tollwut']};
+  grippeaviaire:['Vogelgrippe','der Vogelgrippe'], bpco:['COPD','COPD'], rage:['Tollwut','Tollwut'], solitude:['Einsamkeit','Einsamkeit'], enseule:['Vereinsamung','Vereinsamung'], coeurbrise:['Broken-Heart-Syndrom','dem Broken-Heart-Syndrom']};
 DEx.mild = {gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheuma', teigne:'Scherpilzflechte', bronchite:'Chronische Bronchitis', zona:'Gürtelrose', eczema:'Ekzem',
   psoriasis:'Schuppenflechte', asthme:'Asthma', migraine:'Chronische Migräne', hepatitea:'Hepatitis A', mono:'Pfeiffersches Drüsenfieber', dos:'Chronische Rückenschmerzen',
   rachitisme:'Rachitis', acne:'Schwere Akne', burnout:'Burn-out', allergie:'Heuschnupfen', fievrenum:'Digitalfieber', nanoderm:'Nanodermatitis', grippemars:'Marsgrippe',
@@ -4403,8 +4427,9 @@ function workYear(p, A, day){
   if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
   if(w.s==='job' && w.job !== 'president'){
     const r = Math.random();
-    if(r < .04){ const j = pickJob(yearOf(day), p); if(j !== w.job){ p.work = {s:'job', job:j}; log('work','job_change',[p.id,j],day); } }   // 0.1.2a : changements de métier 20 % plus rares
-    else if(r < .08 && !p.star){ p.work = {s:'unemp', until: day + rnd(60,730)}; log('work','unemployed',[p.id],day); }   // 2 ans de chômage maximum
+    const jc = .04 / 1.15;                                // 0.1.9c : changements de métier 1,15× plus rares
+    if(r < jc){ const j = pickJob(yearOf(day), p); if(j !== w.job){ p.work = {s:'job', job:j}; log('work','job_change',[p.id,j],day); } }   // 0.1.2a : changements de métier 20 % plus rares
+    else if(r < jc + .04 && !p.star){ p.work = {s:'unemp', until: day + rnd(60,730)}; log('work','unemployed',[p.id],day); }   // 2 ans de chômage maximum
   }
 }
 function schoolLabel(p, A, y){
@@ -4769,7 +4794,7 @@ function onBirthday(p, A, day){
   if(p.intAges) p.intAges.filter(a => a === A).forEach(() => gainInterest(p, day));
   if(A === 18 && !p.work) onAdult(p, day);
   else if(A > 18) workYear(p, A, day);
-  if(A >= 18 && Math.random() < 1 - Math.pow(1 - p.moveP, .1)) move(p, day);
+  if(A >= 18 && Math.random() < 1 - Math.pow(1 - p.moveP / 1.29, .1)) move(p, day);   // 0.1.9c : déménagements 1,29× plus rares
   scheduleYear(p, A, day);
 }
 function genRace(){                                  // « Course des générations » : moyenne d'années par génération en 2100
