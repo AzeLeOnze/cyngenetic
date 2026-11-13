@@ -1443,9 +1443,12 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.1.9a';
+const APP_VERSION = '0.1.9b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.9b', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
+   fr:['Les noms de villes suivent la langue du jeu : en français, London devient Londres et München devient Munich ; en anglais, Genève devient Geneva ; en allemand, Genève devient Genf et Strasbourg devient Straßburg. Les villes qui s\'écrivent pareil partout ne changent pas, et les sauvegardes ne sont pas touchées.'],
+   en:['Town names follow the game language: in French, London becomes Londres and München becomes Munich; in English, Genève becomes Geneva; in German, Genève becomes Genf and Strasbourg becomes Straßburg. Towns spelled the same everywhere don\'t change, and saves are untouched.']},
   {v:'0.1.9a', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
    fr:['Deux nouveaux pays de la lignée : l\'Allemagne et la Suisse. Chacun a ses prénoms selon l\'époque (en Suisse, un mélange de prénoms alémaniques, romands, italiens et romanches), ses noms de famille, ses villes et sa carte, ses événements, ses décennies, ses guerres, son école, ses métiers et ses centres d\'intérêt.',
        'Allemagne : la Réforme, la guerre de Trente Ans, Frédéric le Grand, l\'Empire, la république de Weimar, le miracle économique, le mur de Berlin, la réunification… Chancelier au lieu de Président, ramoneur, forestier, ouvrier de l\'automobile ; Schrebergarten, carnaval, Oktoberfest, skat…',
@@ -2841,7 +2844,7 @@ fr:{
   st_married:(p,q)=>`${g(p,'Marié','Mariée')} à ${q}`, st_dating:q=>`En couple avec ${q}`, st_widow:p=>g(p,'Veuf','Veuve'), st_single:'Célibataire',
   st_mourning:'Célibataire (en deuil)', st_divorced:p=>g(p,'Divorcé','Divorcée'),
   meet:y=>`Rencontres · ${y}`, soul_title:"Trouver l'âme sœur", soul_intro:(n,a,k)=>`${k > 3 ? "Six" : "Trois"} célibataires des environs pour ${n}, ${a}.`, seeks:n=>`${n} cherche`,
-  a_woman:'une femme', a_man:'un homme', choose:'Choisir', refresh:'Actualiser les propositions', lives_in:c=>`Vit à ${c}`,
+  a_woman:'une femme', a_man:'un homme', choose:'Choisir', refresh:'Actualiser les propositions', lives_in:c=>`Vit à ${cityName(c)}`,
   f_you:'Vous', gen_n:n=>`Génération ${n}`, spouse:p=>g(p,'Votre époux','Votre épouse'), partner:p=>g(p,'Votre compagnon','Votre compagne'), inlaw:p=>g(p,'Conjoint','Conjointe'),
   died_on:(p,d,c)=>`${g(p,'Décédé','Décédée')} le ${d}, ${c}`, cause_old:'de vieillesse', cause_dz:id=>dzOf(id),
   city_alive:(p,b,c)=> b===c ? `${g(p,'Né','Née')} à ${c}, y vit toujours` : `${g(p,'Né','Née')} à ${b}, vit à ${c}`,
@@ -2887,13 +2890,13 @@ fr:{
   log_adopt_start:(a,b,d)=>`${fn(a)} et ${fn(b)} lancent une adoption. Arrivée prévue en ${fmtMonth(d)}.`,
   log_wed:(a,b)=>`Mariage de ${nm(a)} et ${nm(b)} !`, log_refuse:(b,a)=>`${fn(b)} a refusé la demande en mariage de ${fn(a)}.`,
   log_divorce:(a,b)=>`${fn(a)} et ${fn(b)} divorcent.`, log_leave:(a,b)=>`${fn(a)} quitte ${fn(b)}.`,
-  log_birth:c=>{ const p=P(c), [a,b]=kinOf(p); return `Naissance de ${nm(p)}, ${g(p,'fils','fille')} de ${fn(a)} et ${fn(b)}, à ${p.birthCity}.${p.star?' Une future star est née !':''}`; },
+  log_birth:c=>{ const p=P(c), [a,b]=kinOf(p); return `Naissance de ${nm(p)}, ${g(p,'fils','fille')} de ${fn(a)} et ${fn(b)}, à ${cityName(p.birthCity)}.${p.star?' Une future star est née !':''}`; },
   log_adopt:c=>{ const p=P(c), [a,b]=kinOf(p); return `${fn(a)} et ${fn(b)} accueillent ${fn(p)}, ${g(p,'leur fils adoptif','leur fille adoptive')}.${p.star?' Une future star !':''}`; },
   log_miscarriage:m=>`Fausse couche : ${fn(m)} a perdu l'enfant qu'elle attendait.`, log_lost_baby:m=>`L'enfant que ${fn(m)} attendait ne verra pas le jour.`,
   log_ill:(p,dz)=> dz === 'disparu' ? `${nm(p)} est ${g(P(p),'porté disparu','portée disparue')}…` : EVENTS.has(dz) ? `${nm(p)} est victime ${dzOf(dz)}.` : `${nm(p)} est ${g(P(p),'atteint','atteinte')} ${dzOf(dz)}.`,
   log_cured:(p,dz)=> dz === 'disparu' ? `${nm(p)} est ${g(P(p),'retrouvé','retrouvée')} sain et sauf !` : EVENTS.has(dz) ? `Contre toute attente, ${nm(p)} se remet ${dzOf(dz)} !` : `Contre toute attente, ${nm(p)} guérit ${dzOf(dz)} !`,
   log_death_dz:(p,dz,a)=>`${nm(p)} meurt ${dzOf(dz)} à ${TX.fr.ans(a)}.`, log_death_old:(p,a)=>`${nm(p)} s'éteint de vieillesse à ${TX.fr.ans(a)}.`,
-  log_move:(p,c,n)=> n>0 ? `${nm(p)} déménage à ${c} avec sa famille.` : `${nm(p)} déménage à ${c}.`,
+  log_move:(p,c,n)=> n>0 ? `${nm(p)} déménage à ${cityName(c)} avec sa famille.` : `${nm(p)} déménage à ${cityName(c)}.`,
   log_first_job:(p,j)=>`${nm(p)} décroche son premier emploi : ${lc(jobName(j,P(p)))}.`,
   log_graduate:(p,f,j)=>`${nm(p)} termine ses études (${lc(fieldName(f))}) et devient ${lc(jobName(j,P(p)))}.`,
   log_job_change:(p,j)=>`${nm(p)} change de métier et devient ${lc(jobName(j,P(p)))}.`,
@@ -3109,7 +3112,7 @@ en:{
   st_married:(p,q)=>`Married to ${q}`, st_dating:q=>`Dating ${q}`, st_widow:p=>g(p,'Widower','Widow'), st_single:'Single',
   st_mourning:'Single (in mourning)', st_divorced:()=>'Divorced',
   meet:y=>`Dating · ${y}`, soul_title:'Find a soulmate', soul_intro:(n,a,k)=>`${k > 3 ? "Six" : "Three"} local singles for ${n}, ${a}.`, seeks:n=>`${n} is looking for`,
-  a_woman:'a woman', a_man:'a man', choose:'Choose', refresh:'New suggestions', lives_in:c=>`Lives in ${c}`,
+  a_woman:'a woman', a_man:'a man', choose:'Choose', refresh:'New suggestions', lives_in:c=>`Lives in ${cityName(c)}`,
   f_you:'You', gen_n:n=>`Generation ${n}`, spouse:p=>g(p,'Your husband','Your wife'), partner:p=>g(p,'Your boyfriend','Your girlfriend'), inlaw:()=>'Spouse',
   died_on:(p,d,c)=>`Died ${d}, ${c}`, cause_old:'of old age', cause_dz:id=>`of ${dzOf(id)}`,
   city_alive:(p,b,c)=> b===c ? `Born in ${c}, still lives there` : `Born in ${b}, lives in ${c}`,
@@ -3154,12 +3157,12 @@ en:{
   log_adopt_start:(a,b,d)=>`${fn(a)} and ${fn(b)} start an adoption. Arrival expected in ${fmtMonth(d)}.`,
   log_wed:(a,b)=>`${nm(a)} and ${nm(b)} get married!`, log_refuse:(b,a)=>`${fn(b)} turned down ${fn(a)}'s proposal.`,
   log_divorce:(a,b)=>`${fn(a)} and ${fn(b)} get divorced.`, log_leave:(a,b)=>`${fn(a)} breaks up with ${fn(b)}.`,
-  log_birth:c=>{ const p=P(c), [a,b]=kinOf(p); return `${nm(p)} is born in ${p.birthCity}, ${g(p,'son','daughter')} of ${fn(a)} and ${fn(b)}.${p.star?' A future star is born!':''}`; },
+  log_birth:c=>{ const p=P(c), [a,b]=kinOf(p); return `${nm(p)} is born in ${cityName(p.birthCity)}, ${g(p,'son','daughter')} of ${fn(a)} and ${fn(b)}.${p.star?' A future star is born!':''}`; },
   log_adopt:c=>{ const p=P(c), [a,b]=kinOf(p); return `${fn(a)} and ${fn(b)} welcome ${fn(p)}, their adopted ${g(p,'son','daughter')}.${p.star?' A future star!':''}`; },
   log_miscarriage:m=>`Miscarriage: ${fn(m)} lost the baby she was expecting.`, log_lost_baby:m=>`The baby ${fn(m)} was expecting will never be born.`,
   log_ill:(p,dz)=> dz === 'disparu' ? `${nm(p)} has gone missing…` : EVENTS.has(dz) ? `${nm(p)} suffers ${dzOf(dz)}.` : `${nm(p)} has been diagnosed with ${dzOf(dz)}.`, log_cured:(p,dz)=> dz === 'disparu' ? `${nm(p)} has been found safe and sound!` : `Against all odds, ${nm(p)} recovers from ${dzOf(dz)}!`,
   log_death_dz:(p,dz,a)=>`${nm(p)} dies of ${dzOf(dz)} at age ${a}.`, log_death_old:(p,a)=>`${nm(p)} passes away of old age at ${a}.`,
-  log_move:(p,c,n)=> n>0 ? `${nm(p)} moves to ${c} with the family.` : `${nm(p)} moves to ${c}.`,
+  log_move:(p,c,n)=> n>0 ? `${nm(p)} moves to ${cityName(c)} with the family.` : `${nm(p)} moves to ${cityName(c)}.`,
   log_first_job:(p,j)=>`${nm(p)} lands a first job as ${art(lc(jobName(j,P(p))))}.`,
   log_graduate:(p,f,j)=>`${nm(p)} graduates (${lc(fieldName(f))}) and becomes ${art(lc(jobName(j,P(p))))}.`,
   log_job_change:(p,j)=>`${nm(p)} changes careers and becomes ${art(lc(jobName(j,P(p))))}.`,
@@ -3376,7 +3379,7 @@ TX.de = {
   st_married:(p,q)=>`Verheiratet mit ${q}`, st_dating:q=>`Zusammen mit ${q}`, st_widow:p=>g(p,'Verwitwet','Verwitwet'), st_single:'Single',
   st_mourning:'Single (in Trauer)', st_divorced:()=>'Geschieden',
   meet:y=>`Zusammen · ${y}`, soul_title:'Die große Liebe finden', soul_intro:(n,a,k)=>`${k > 3 ? 'Sechs' : 'Drei'} Singles aus der Gegend für ${n}, ${a}.`, seeks:n=>`${n} sucht`,
-  a_woman:'eine Frau', a_man:'einen Mann', choose:'Wählen', refresh:'Neue Vorschläge', lives_in:c=>`Wohnt in ${c}`,
+  a_woman:'eine Frau', a_man:'einen Mann', choose:'Wählen', refresh:'Neue Vorschläge', lives_in:c=>`Wohnt in ${cityName(c)}`,
   f_you:'Du', gen_n:n=>`Generation ${n}`, spouse:p=>g(p,'Dein Ehemann','Deine Ehefrau'), partner:p=>g(p,'Dein Freund','Deine Freundin'), inlaw:()=>'Ehepartner',
   died_on:(p,d,c)=>`Gestorben am ${d}, ${c}`, cause_old:'an Altersschwäche', cause_dz:id=>`an ${dzDat(id)}`,
   city_alive:(p,b,c)=> b===c ? `Geboren in ${c}, lebt immer noch dort` : `Geboren in ${b}, lebt in ${c}`,
@@ -3421,13 +3424,13 @@ TX.de = {
   log_adopt_start:(a,b,d)=>`${fn(a)} und ${fn(b)} beginnen eine Adoption. Ankunft erwartet im ${fmtMonth(d)}.`,
   log_wed:(a,b)=>`${nm(a)} und ${nm(b)} heiraten!`, log_refuse:(b,a)=>`${fn(b)} hat den Antrag von ${fn(a)} abgelehnt.`,
   log_divorce:(a,b)=>`${fn(a)} und ${fn(b)} lassen sich scheiden.`, log_leave:(a,b)=>`${fn(a)} trennt sich von ${fn(b)}.`,
-  log_birth:c=>{ const p=P(c), [a,b]=kinOf(p); return `${nm(p)} wird in ${p.birthCity} geboren, ${g(p,'Sohn','Tochter')} von ${fn(a)} und ${fn(b)}.${p.star?' Ein künftiger Star ist geboren!':''}`; },
+  log_birth:c=>{ const p=P(c), [a,b]=kinOf(p); return `${nm(p)} wird in ${cityName(p.birthCity)} geboren, ${g(p,'Sohn','Tochter')} von ${fn(a)} und ${fn(b)}.${p.star?' Ein künftiger Star ist geboren!':''}`; },
   log_adopt:c=>{ const p=P(c), [a,b]=kinOf(p); return `${fn(a)} und ${fn(b)} begrüßen ${fn(p)}, ${g(p,'ihren Adoptivsohn','ihre Adoptivtochter')}.${p.star?' Ein künftiger Star!':''}`; },
   log_miscarriage:m=>`Fehlgeburt: ${fn(m)} hat das erwartete Baby verloren.`, log_lost_baby:m=>`Das Baby, das ${fn(m)} erwartete, wird nie geboren.`,
   log_ill:(p,dz)=> dz === 'disparu' ? `${nm(p)} wird vermisst…` : EVENTS.has(dz) ? `Schicksalsschlag für ${nm(p)}: ${dzNom(dz)}.` : `Bei ${nm(p)} wurde ${dzNom(dz)} festgestellt.`,
   log_cured:(p,dz)=> dz === 'disparu' ? `${nm(p)} wurde wohlbehalten gefunden!` : `Allen Widrigkeiten zum Trotz übersteht ${nm(p)} die Krankheit (${dzNom(dz)})!`,
   log_death_dz:(p,dz,a)=>`${nm(p)} stirbt mit ${a} Jahren an ${dzDat(dz)}.`, log_death_old:(p,a)=>`${nm(p)} stirbt mit ${a} Jahren an Altersschwäche.`,
-  log_move:(p,c,n)=> n>0 ? `${nm(p)} zieht mit der Familie nach ${c}.` : `${nm(p)} zieht nach ${c}.`,
+  log_move:(p,c,n)=> n>0 ? `${nm(p)} zieht mit der Familie nach ${cityName(c)}.` : `${nm(p)} zieht nach ${cityName(c)}.`,
   log_first_job:(p,j)=>`${nm(p)} findet eine erste Stelle als ${jobName(j,P(p))}.`,
   log_graduate:(p,f,j)=>`${nm(p)} schließt das Studium ab (${fieldName(f)}) und wird ${jobName(j,P(p))}.`,
   log_job_change:(p,j)=>`${nm(p)} wechselt den Beruf und wird ${jobName(j,P(p))}.`,
@@ -4796,7 +4799,7 @@ function birthChild(u, day){
     ids.forEach(id => { const c = P(id); c.first = nameFor(c); regnalize(c); log('birth', c.adopted ? 'adopt' : 'birth', [c.id], day, n > 1 ? false : undefined); });
     if(n > 1 && !VSH){                              // grande annonce au centre, avec les bébés qui sautillent
       const kids = ids.map(P);
-      achQueue.push({html: `<span class="multi">${kids.map(k => orb(k)).join('')}</span><div><div class="eyebrow">${fmt(day)} · ${esc(city)}</div>
+      achQueue.push({html: `<span class="multi">${kids.map(k => orb(k)).join('')}</span><div><div class="eyebrow">${fmt(day)} · ${esc(cityName(city))}</div>
         <b>${t('multi_title', n, kids.every(k => k.sex==='F'))}</b><small>${esc(t('multi_pop', A.first, B.first, kids.map(k => k.first).join(', ')))}</small></div>`});
       if(!achBusy) nextAch();
     }
@@ -5310,8 +5313,8 @@ function avatar(p){
 }
 const orb = (p, cls='') => `<span class="orb ${p.sex==='F'?'f':''} ${p.star?'gold':''} ${cls}">${avatar(p)}</span>`;
 function cityLine(p){
-  if(p.death != null) return p.deathCity && p.deathCity !== p.birthCity ? `${p.birthCity} → ${p.deathCity}` : p.birthCity;
-  return p.city;
+  if(p.death != null) return p.deathCity && p.deathCity !== p.birthCity ? `${cityName(p.birthCity)} → ${cityName(p.deathCity)}` : cityName(p.birthCity);
+  return cityName(p.city);
 }
 // Les animations en boucle (reflets, lueurs) gardent leur rythme même quand l'arbre est redessiné :
 // chaque bulle démarre avec un retard négatif calé sur une horloge commune.
@@ -5491,13 +5494,13 @@ function renderSide(){
   const sideEl = $('#side'); sideEl.innerHTML = `${S.vs ? vsCard() : ''}
     <section class="glass card">
       <div class="eyebrow">${t('you_play')}</div>
-      <button class="me-head" data-act="fiche" data-id="${me.id}">${orb(me,'xl')}<span><h3>${esc(nm(me))}</h3><p>${esc(t('born_in', me, fmt(me.birth), me.birthCity))}</p></span></button>
+      <button class="me-head" data-act="fiche" data-id="${me.id}">${orb(me,'xl')}<span><h3>${esc(nm(me))}</h3><p>${esc(t('born_in', me, fmt(me.birth), cityName(me.birthCity)))}</p></span></button>
       <dl class="facts">
         <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
         <div><dt>${t('f_gen')}</dt><dd>${genOf(me)}</dd></div>
         ${riskTile(me)}${mildTile(me)}
         <div><dt>${t('f_kids')}</dt><dd>${kids}</dd></div>
-        <div><dt>${t('f_city')}</dt><dd>${esc(me.city)}</dd></div>
+        <div><dt>${t('f_city')}</dt><dd>${esc(cityName(me.city))}</dd></div>
         <div class="${me.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(me, true))}</dd></div>
         ${condTile(me)}${intTile(me)}
         <div class="span2"><dt>${t('f_status')}</dt><dd>${esc(statusOf(me))}</dd></div>
@@ -5550,6 +5553,18 @@ function updateBadge(){
   b.hidden = n === 0; b.textContent = n > 99 ? '99+' : String(n);
 }
 
+const CITY_TX = {                                       // 0.1.9b : nom des villes selon la langue (affichage seulement)
+  fr:{London:'Londres', Edinburgh:'Édimbourg', Dover:'Douvres', Canterbury:'Cantorbéry', 'München':'Munich', 'Köln':'Cologne', 'Nürnberg':'Nuremberg',
+    Aachen:'Aix-la-Chapelle', Mainz:'Mayence', Trier:'Trèves', Koblenz:'Coblence', 'Saarbrücken':'Sarrebruck', Regensburg:'Ratisbonne', Konstanz:'Constance',
+    Freiburg:'Fribourg-en-Brisgau', Hannover:'Hanovre', Frankfurt:'Francfort', Dresden:'Dresde', Hamburg:'Hambourg', Bremen:'Brême', Augsburg:'Augsbourg',
+    'Würzburg':'Wurtzbourg', Magdeburg:'Magdebourg', Oldenburg:'Oldenbourg', Flensburg:'Flensbourg', 'Zürich':'Zurich', Basel:'Bâle', Bern:'Berne', Luzern:'Lucerne',
+    'St. Gallen':'Saint-Gall', Schaffhausen:'Schaffhouse', Solothurn:'Soleure', Chur:'Coire', Thun:'Thoune', Zug:'Zoug', Glarus:'Glaris', Brig:'Brigue',
+    'St. Moritz':'Saint-Moritz', Bellinzona:'Bellinzone', 'Biel/Bienne':'Bienne'},
+  en:{Dunkerque:'Dunkirk', 'München':'Munich', 'Köln':'Cologne', 'Nürnberg':'Nuremberg', Hannover:'Hanover', 'Genève':'Geneva', 'Zürich':'Zurich', Luzern:'Lucerne'},
+  de:{Strasbourg:'Straßburg', Nice:'Nizza', Dunkerque:'Dünkirchen', Mulhouse:'Mülhausen', 'Genève':'Genf', 'Neuchâtel':'Neuenburg', Fribourg:'Freiburg',
+    Sion:'Sitten', 'Delémont':'Delsberg', Martigny:'Martinach', 'Biel/Bienne':'Biel'}
+};
+const cityName = c => (c && CITY_TX[LANG] && CITY_TX[LANG][c]) || c;
 const allCities = () => CITIES.concat((S && S.customCities) || []).sort((a,b) => a.localeCompare(b, 'fr'));
 /* ================= Carte de France (option) ================= */
 const CITY_POS = {Ajaccio:[8.74,41.93],Albi:[2.15,43.93],Amiens:[2.30,49.89],Angers:[-0.55,47.47],Annecy:[6.13,45.90],Arles:[4.63,43.68],Avignon:[4.81,43.95],
@@ -6079,7 +6094,7 @@ function applyCountry(c){                               // remplace les données
   return true;
 }
 function refreshSetupCountry(changed){                   // écran de départ : villes du pays, et un fondateur du pays si le pays vient de changer
-  const keep = fCity.value; fCity.innerHTML = ''; CITIES.forEach(c => fCity.add(new Option(c, c)));
+  const keep = fCity.value; fCity.innerHTML = ''; CITIES.forEach(c => fCity.add(new Option(cityName(c), c)));
   fCity.value = CITIES.includes(keep) ? keep : CAPITAL[CTRY];
   if(changed){
     const y = +fYear.value || 1760, s = startYear() || 1780;
@@ -6106,7 +6121,7 @@ function buildMap(){
   const fr = polyPath(FR_OUTLINE), co = polyPath(CORSE);
   const waves = [90,170,250,330,410,490].map((y,i) => `<path d="M${-20 + i*8} ${y}q30 -12 60 0t60 0t60 0" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2.5" stroke-linecap="round"/>`).join('')
     + [60,200,340,470].map((y,i) => `<path d="M${-260 + i*14} ${y}q30 -12 60 0t60 0t60 0" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2.5" stroke-linecap="round"/><path d="M${600 + i*10} ${y + 40}q30 -12 60 0t60 0t60 0" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2.5" stroke-linecap="round"/>`).join('');
-  const towns = Object.keys(CITY_POS).map(c => { const [x,y] = proj(CITY_POS[c]); return `<circle cx="${x}" cy="${y}" r="2" fill="#fff" opacity=".55"><title>${esc(c)}</title></circle>`; }).join('');
+  const towns = Object.keys(CITY_POS).map(c => { const [x,y] = proj(CITY_POS[c]); return `<circle cx="${x}" cy="${y}" r="2" fill="#fff" opacity=".55"><title>${esc(cityName(c))}</title></circle>`; }).join('');
   $('#mapView').innerHTML = `<div class="mapwrap"><svg class="francemap" viewBox="0 0 540 530" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(t('view_map'))}">
     <defs>
       <radialGradient id="mSea" gradientUnits="userSpaceOnUse" cx="270" cy="185" r="560"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset=".35" style="stop-color:var(--sky-low)"/><stop offset="1" style="stop-color:var(--sky-mid)"/></radialGradient>
@@ -6207,7 +6222,7 @@ function renderMap(){
     const names = ppl.slice(0, 8).map(p => nm(p)).join(', ') + (n > 8 ? '…' : '');
     const inner = `<g class="mdot-in ${mine?'mine':''}">${mine ? `<circle r="${r+6}" class="mring"/>` : ''}<circle r="${r}" fill="url(#mDot)" stroke="#fff" stroke-width="2.5"/>
       <ellipse cx="${-r*.25}" cy="${-r*.4}" rx="${r*.5}" ry="${r*.28}" fill="#fff" opacity=".75"/>${n > 1 ? `<text class="mn" y="4">${n}</text>` : ''}
-      <text class="mlab" y="${r + 14}">${esc(city)}</text><title>${esc(t('map_dot', city, n))} — ${esc(names)}</title></g>`;
+      <text class="mlab" y="${r + 14}">${esc(cityName(city))}</text><title>${esc(t('map_dot', cityName(city), n))} — ${esc(names)}</title></g>`;
     let el = dotEls.get(city);
     const wrapped = `<g class="msc" transform="scale(${1/mz.z})">${inner}</g>`;
     if(!el){ el = document.createElementNS('http://www.w3.org/2000/svg', 'g'); el.setAttribute('transform', `translate(${xy[0]} ${xy[1]})`); el.setAttribute('data-city', city); layer.appendChild(el); dotEls.set(city, el); el.innerHTML = wrapped; el.querySelector('.mdot-in').classList.add('pop'); }
@@ -6315,9 +6330,9 @@ function openSoulmate(rerender){
       <p class="cage">${tA(ageAt(c,S.t))}</p><p class="cjob">${esc(activity(c))}</p>
       ${hasCond(c) ? `<p class="ccond">${condBadges(c)}${esc(condList(c))}</p>` : ''}
       ${interestsOf(c).length ? `<p class="ccond cint"><span class="cbadges">${interestsOf(c).map(id => intBadge(id,c)).join('')}</span>${esc(intList(c))}</p>` : ''}
-      <p class="cborn">${esc(t('born_in', c, fmt(c.birth), c.birthCity))}</p>
+      <p class="cborn">${esc(t('born_in', c, fmt(c.birth), cityName(c.birthCity)))}</p>
       <button class="gel pink" data-act="choose" data-i="${i}"><span>${t('choose')}</span></button></article>`).join('');
-  openModal(`<div class="m-head"><div class="eyebrow">${t('meet', yearOf(S.t))} · ${esc(me.city)}</div><h2>${t('soul_title')}</h2>
+  openModal(`<div class="m-head"><div class="eyebrow">${t('meet', yearOf(S.t))} · ${esc(cityName(me.city))}</div><h2>${t('soul_title')}</h2>
       <p>${esc(t('soul_intro', me.first, tA(age(me)), cands.length))}</p></div>
     <div class="seekrow"><span class="lab">${esc(t('seeks', me.first))}</span>
       <div class="pills" role="group">
@@ -6344,8 +6359,8 @@ function openNaming(id){
   if(mu && mu.i === 1){ sfx.multi(); burst(['#ff6cc0','#ffffff','#3fd0ff','#8cff1a','#ffe14d'], 70); }
   const pic = mu ? `<span class="multi">${group.map(x => orb(x, 'lg' + (x.id===c.id ? ' cur' : ''))).join('')}</span>` : orb(c,'xl');
   const title = mu ? t('multi_title', mu.n, group.every(x => x.sex==='F')) : t(c.adopted ? 'adopt_title' : 'birth_title', c);
-  const txt = mu ? t('multi_txt', mu.i, mu.n, c) : t('birth_txt', a.first, b.first, fmt(c.birth), c.birthCity);
-  openModal(`<div class="cradle ${mu?'is-multi':''}">${pic}<div><div class="eyebrow">${fmt(c.birth)} · ${esc(c.birthCity)}</div>
+  const txt = mu ? t('multi_txt', mu.i, mu.n, c) : t('birth_txt', a.first, b.first, fmt(c.birth), cityName(c.birthCity));
+  openModal(`<div class="cradle ${mu?'is-multi':''}">${pic}<div><div class="eyebrow">${fmt(c.birth)} · ${esc(cityName(c.birthCity))}</div>
       <h2>${title}</h2><p>${esc(txt)}</p></div></div>
     ${c.star ? `<p class="starnote">★ ${t('star_baby')}</p>` : ''}
     ${c.conds && c.conds.length ? `<p class="condnote">${condBadges(c)}${esc(t('cond_birth', condList(c)))}</p>` : ''}
@@ -6373,8 +6388,8 @@ function openFiche(id){
   const p = P(id), me = active(), u = currentUnion(me.id), isPartner = u && u.b===p.id, isMe = p.id===me.id;
   const a = age(p);
   let sub = esc(fmt(p.birth));
-  if(p.death!=null) sub = `${esc(t('born_in', p, fmt(p.birth), p.birthCity))}<br>${esc(t('died_on', p, fmt(p.death), causeText(p)))}`;
-  else sub = esc(t('city_alive', p, p.birthCity, p.city)) + ' · ' + esc(fmt(p.birth));
+  if(p.death!=null) sub = `${esc(t('born_in', p, fmt(p.birth), cityName(p.birthCity)))}<br>${esc(t('died_on', p, fmt(p.death), causeText(p)))}`;
+  else sub = esc(t('city_alive', p, cityName(p.birthCity), cityName(p.city))) + ' · ' + esc(fmt(p.birth));
   const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id)).sort((x,y) => x.birth-y.birth);
   const chips = list => `<div class="chips">${list.map(c => `<button class="chip ${c.death!=null?'dead':''}" data-act="fiche" data-id="${c.id}">${orb(c)}${esc(c.first||'…')}</button>`).join('')}</div>`;
   const pu = p.blood ? S.unions.filter(x => x.a===p.id) : S.unions.filter(x => x.b===p.id);
@@ -6397,9 +6412,9 @@ function openFiche(id){
       <div class="act"><button class="gel gold wide" data-act="marry" data-id="${p.id}" ${u.married||u.noMarry?'disabled':''}><span>${t(u.married?'married_already':u.noMarry?'marry_refused':'marry')}</span></button><p class="note">${esc(u.married ? t('married_on', fmt(u.marriedAt)) : u.noMarry ? t('refused_note', p.first) : hasAtout(me,'charisme') ? t('sure_yes', p.first) : t('may_refuse', p.first))}</p></div>
       <div class="act full"><button class="gel pink wide" data-act="leave" data-id="${p.id}"><span>${esc(t('leave', p.first))}</span></button><p class="note">${t(u.married?'note_divorce':'note_single')}</p></div>
       <details class="act relocate full"><summary class="lab">${t('relocate_title')}</summary>
-        <div class="reloc-row"><select class="inp" id="relocSel" aria-label="${t('relocate_title')}">${allCities().filter(c => c !== me.city).map(c => `<option>${esc(c)}</option>`).join('')}</select>
+        <div class="reloc-row"><select class="inp" id="relocSel" aria-label="${t('relocate_title')}">${allCities().filter(c => c !== me.city).map(c => `<option value="${esc(c)}">${esc(cityName(c))}</option>`).join('')}</select>
           <input class="inp" id="relocNew" maxlength="28" autocomplete="off" placeholder="${esc(t('relocate_custom'))}" aria-label="${esc(t('relocate_custom'))}"></div>
-        <button class="gel wide" data-act="relocate"><span>${t('relocate_btn')}</span></button><p class="note">${esc(t('relocate_note', me.city))}</p></details>
+        <button class="gel wide" data-act="relocate"><span>${t('relocate_btn')}</span></button><p class="note">${esc(t('relocate_note', cityName(me.city)))}</p></details>
     </div>`;
   } else if(isMe){
     actions = `<div class="acts" style="margin-top:14px"><button class="gel pink wide" data-act="soulmate" ${a<R.legal||u||(jailed(me)||!!me.zombie)?'disabled':''}><span>${t('find')}</span></button></div>`;
@@ -6408,7 +6423,7 @@ function openFiche(id){
   }
   const par = p.parents ? p.parents.map(P) : null;
   const eyebrow = isMe ? t('f_you') : p.blood ? t('gen_n', genOf(p)) : isPartner ? t(u.married ? 'spouse' : 'partner', p) : t('inlaw', p);
-  const deadCity = p.death!=null ? `<div class="span2"><dt>${t('f_city')}</dt><dd>${esc(t('city_dead', p, p.birthCity, p.deathCity || p.birthCity))}</dd></div>` : '';
+  const deadCity = p.death!=null ? `<div class="span2"><dt>${t('f_city')}</dt><dd>${esc(t('city_dead', p, cityName(p.birthCity), cityName(p.deathCity || p.birthCity)))}</dd></div>` : '';
   const fame = p.star ? `<div class="goldf span2"><dt>${t('f_fame')}</dt><dd>★ ${p.star.famous ? t('fame_now') : t('fame_future')}</dd></div>`
     : p.starKid ? `<div class="skf span2"><dt>${t('f_starkid')}</dt><dd>★ ${t('starkid_val')}</dd></div>` : '';
   const crime = p.crim ? `<div class="crf span2"><dt>${t('f_crime')}</dt><dd>☠ ${esc(!p.crim.declared ? t('crime_future', p) : p.crim.fate === 'prison' ? t('crime_fate_prison', p) : t('crime_now', p))}</dd></div>` : '';
@@ -6728,7 +6743,7 @@ function openSpouseForm(){                            // conjoint(e) entièremen
         <label class="field"><span class="lab">${t('sp_add')}</span><select class="inp" id="spAdd">${opt('', t('sp_none_f'))}${adds.map(([l, v]) => opt(v, l)).join('')}</select></label></div>
       <div class="row2"><label class="field"><span class="lab">${t('sp_cond')}</span><select class="inp" id="spCond">${opt('', t('sp_none_f'))}${conds.map(([l, v]) => opt(v, l)).join('')}</select></label>
         <label class="field"><span class="lab">${t('lab_destiny')}</span><select class="inp" id="spDest">${[['none','dest_none'],['crim','dest_crim'],['star','dest_star']].map(([v, k]) => opt(v, t(k))).join('')}</select></label></div>
-      <label class="field"><span class="lab">${t('lab_city')}</span><select class="inp" id="spCity">${allCities().map(c => opt(c, c, c === me.city)).join('')}</select></label>
+      <label class="field"><span class="lab">${t('lab_city')}</span><select class="inp" id="spCity">${allCities().map(c => opt(c, cityName(c), c === me.city)).join('')}</select></label>
       <p class="err" id="spErr" hidden></p>
       <div class="m-actions"><button type="button" class="gel ghost" data-act="shop"><span>← ${t('shop_back')}</span></button>
         <button type="submit" class="gel pink big" id="spGo"><span>${t('sp_go')} · ${cynFmt(1100)} Cyn</span></button></div>
@@ -7233,7 +7248,7 @@ function setLang(l){
 /* ================= Écran de départ ================= */
 const fDay = $('#fDay'), fMonth = $('#fMonth'), fYear = $('#fYear'), fRange = $('#fAgeRange'), fStart = $('#fStart'), fCity = $('#fCity');
 for(let i=1;i<=31;i++) fDay.add(new Option(String(i), i));
-CITIES.forEach(c => fCity.add(new Option(c, c)));
+CITIES.forEach(c => fCity.add(new Option(cityName(c), c)));
 const fSex = () => document.querySelector('input[name=sex]:checked').value;
 const startYear = () => { const v = Math.round(+fStart.value); return v >= 1500 && v <= 2050 ? v : null; };
 function setupAge(){

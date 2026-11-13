@@ -2,6 +2,10 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.9b — 13 novembre 2026
+
+- Les noms de villes suivent la langue du jeu : en français, London devient Londres et München devient Munich ; en anglais, Genève devient Geneva ; en allemand, Genève devient Genf et Strasbourg devient Straßburg. Les villes qui s'écrivent pareil partout ne changent pas, et les sauvegardes ne sont pas touchées.
+
 ## v0.1.9a — 13 novembre 2026
 
 - Deux nouveaux pays de la lignée : l'Allemagne et la Suisse. Chacun a ses prénoms selon l'époque (en Suisse, un mélange de prénoms alémaniques, romands, italiens et romanches), ses noms de famille, ses villes et sa carte, ses événements, ses décennies, ses guerres, son école, ses métiers et ses centres d'intérêt.
