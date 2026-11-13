@@ -226,6 +226,15 @@ button{font:inherit;color:inherit}
 .optrow .opt-txt small{display:block;font-size:12.5px;line-height:1.35;color:var(--ink-soft)}
 .optsub{display:grid;gap:6px;padding:4px 6px 4px 58px}
 .rulepills{display:flex}
+.ctrys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ctry{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px 8px;border-radius:16px;border:2px solid rgba(0,100,200,.15);
+  background:rgba(255,255,255,.8);cursor:pointer;font:700 13px var(--font-display);color:var(--ink);text-align:center}
+.ctry:hover{box-shadow:0 4px 12px rgba(0,70,160,.15)}
+.ctry .flag{display:grid;place-items:center;height:28px}
+.ctry svg{height:26px;width:auto;max-width:40px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.ctry[aria-pressed="true"]{border-color:var(--g3);background:linear-gradient(180deg,#eaf8ff,#c6eaff);box-shadow:0 0 0 3px rgba(0,150,255,.2)}
+.tree-scroll,.ai-scroll{scrollbar-width:none;-ms-overflow-style:none}               /* 0.1.9a : pas de barres de défilement (molette, glisser, pincer) */
+.tree-scroll::-webkit-scrollbar,.ai-scroll::-webkit-scrollbar{display:none}
 .settabs{display:flex;margin:-4px 0 12px}
 .settabs button{flex:1;min-height:36px}
 :root.noanim *,:root.noanim *::before,:root.noanim *::after{animation-duration:0s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:0s!important}
@@ -1285,6 +1294,8 @@ body.no-deco .gothfx .bat{display:none}
     <div id="resumeBox" class="glass card resume" hidden></div>
     <form id="setupForm" class="glass card form" novalidate>
       <h2 data-t="first_ancestor"></h2>
+      <fieldset class="field ctryfield"><legend class="lab" data-t="set_country"></legend>
+        <div class="ctrys" role="group"><button type="button" class="ctry" data-act="country" data-v="fr" aria-pressed="false"><i class="flag" data-flag="fr"></i><span data-t="ctry_fr"></span></button><button type="button" class="ctry" data-act="country" data-v="uk" aria-pressed="false"><i class="flag" data-flag="uk"></i><span data-t="ctry_uk"></span></button><button type="button" class="ctry" data-act="country" data-v="de" aria-pressed="false"><i class="flag" data-flag="de"></i><span data-t="ctry_de"></span></button><button type="button" class="ctry" data-act="country" data-v="ch" aria-pressed="false"><i class="flag" data-flag="ch"></i><span data-t="ctry_ch"></span></button></div></fieldset>
       <div class="row2">
         <label class="field"><span class="lab" data-t="lab_first"></span><input id="fFirst" class="inp" maxlength="20" autocomplete="off" required></label>
         <label class="field"><span class="lab" data-t="lab_last"></span><input id="fLast" class="inp" maxlength="26" autocomplete="off" required></label>
@@ -1432,9 +1443,24 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.1.8c';
+const APP_VERSION = '0.1.9a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.1.9a', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
+   fr:['Deux nouveaux pays de la lignée : l\'Allemagne et la Suisse. Chacun a ses prénoms selon l\'époque (en Suisse, un mélange de prénoms alémaniques, romands, italiens et romanches), ses noms de famille, ses villes et sa carte, ses événements, ses décennies, ses guerres, son école, ses métiers et ses centres d\'intérêt.',
+       'Allemagne : la Réforme, la guerre de Trente Ans, Frédéric le Grand, l\'Empire, la république de Weimar, le miracle économique, le mur de Berlin, la réunification… Chancelier au lieu de Président, ramoneur, forestier, ouvrier de l\'automobile ; Schrebergarten, carnaval, Oktoberfest, skat…',
+       'Suisse : Zwingli et Calvin, la neutralité, l\'État fédéral, la Croix-Rouge, le Gothard, le droit de vote des femmes… La Suisse reste neutre pendant les guerres mondiales (mobilisation, pas de guerre). Président de la Confédération, conseillers fédéraux, garde suisse, fromager, guide de montagne ; jodel, lutte suisse, cor des Alpes, jass…',
+       'Le pays de la lignée se choisit maintenant sur l\'écran de départ, avec les drapeaux, et non plus dans les paramètres.',
+       'Nouvelle langue : allemand (Paramètres → Langue → DE), pour toute l\'interface et tout le contenu du jeu.',
+       'Royaume-Uni : nouveaux noms de famille (Martens, Christmann, Beck, Kullmann et des « Mc », vrais et inventés).',
+       'Plus de barres de défilement dans les arbres généalogiques : on se déplace en glissant, avec la molette ou en pinçant.'],
+   en:['Two new bloodline countries: Germany and Switzerland. Each has its own first names by era (in Switzerland, a mix of Swiss German, French, Italian and Romansh names), surnames, towns and map, events, decades, wars, school system, jobs and interests.',
+       'Germany: the Reformation, the Thirty Years\' War, Frederick the Great, the Empire, the Weimar Republic, the economic miracle, the Berlin Wall, reunification… Chancellor instead of President, chimney sweep, forester, car factory worker; allotment gardens, carnival, Oktoberfest, skat…',
+       'Switzerland: Zwingli and Calvin, neutrality, the federal state, the Red Cross, the Gotthard, women\'s suffrage… Switzerland stays neutral in the world wars (mobilisation, no war). President of the Confederation, Federal Councillors, Swiss Guard, cheesemaker, mountain guide; yodelling, Swiss wrestling, alphorn, jass…',
+       'The bloodline country is now chosen on the start screen, with flags, instead of in the settings.',
+       'New language: German (Settings → Language → DE), for the whole interface and all game content.',
+       'United Kingdom: new surnames (Martens, Christmann, Beck, Kullmann and some "Mc" names, real and invented).',
+       'No more scrollbars in the family trees: move around by dragging, with the mouse wheel or by pinching.']},
   {v:'0.1.8c', date:{fr:'13 novembre 2026', en:'November 13, 2026'},
    fr:['Nouveau réglage « Pays de la lignée » (Paramètres, sous la langue) : France ou Royaume-Uni. Au Royaume-Uni, les prénoms (selon l\'époque) et les noms de famille sont anglais, gallois, écossais ou irlandais, avec les villes du pays et la carte du Royaume-Uni.',
        'Royaume-Uni : ses propres événements (Armada, grand incendie de Londres, Trafalgar, Blitz, NHS, Brexit…), ses décennies (époque victorienne, Swinging Sixties, Britpop…), ses guerres (guerre civile, Crimée, Boers, Malouines…) et son école (Year 1 à Year 13, A-levels, BTEC).',
@@ -1895,7 +1921,7 @@ function cynFxTick(){                                 // « +10 [ADN] » qui mon
   }
 }
 setInterval(cynFxTick, 250);
-const cynFmt = n => n.toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US');
+const cynFmt = n => n.toLocaleString(LANG === 'fr' ? 'fr-FR' : LANG === 'de' ? 'de-DE' : 'en-US');
 function cynShow(){                                   // compteur + petite animation à chaque gain
   const box = $('#cynBox'); if(!box) return;
   $('#cynVal').textContent = cynFmt(CYN);
@@ -2049,7 +2075,7 @@ const SURNAMES_ADDED = ['Le Meunier','Dubois','Renard','Duval','Thomas','Sapin',
   'Da Vinci','Da Silva','Delaigue','Delporte','Norge','Vincet','Véga','Lebroke','Castelgan','Laudebrook','Lankweldan','Tarney','Jaude','Neidega','Kartney','Lesage','Suffort','Bourgenet','Richard',
   'Höll','Sanchez','Pollez','Droey','McGonagall','Loës','Bravat'];
 function pickSurname(y){
-  if(CTRY === 'uk') return pickSurnameUK(y);
+  if(CTRY !== 'fr') return (CTRY === 'uk' ? pickSurnameUK : CTRY === 'de' ? pickSurnameDE : pickSurnameCH)(y);
   if(Math.random() < .18) return pick(SURNAMES_ADDED);
   const r = Math.random();
   if(r < .42) return pick(SURNAMES_RARE);
@@ -2418,7 +2444,7 @@ function actPick(list, day, cur){                     // activité de l'époque,
   const pool = ok.length ? ok : list, other = pool.filter(r => r[0] !== cur);
   return pick(other.length ? other : pool)[0];
 }
-const royalActName = id => ROYAL[id] ? (LANG === 'fr' ? ROYAL[id][1] : ROYAL[id][2]) : '';
+const royalActName = id => ROYAL[id] ? (LANG === 'fr' ? ROYAL[id][1] : LANG === 'de' && DEx.royal[id] ? DEx.royal[id] : ROYAL[id][2]) : '';
 let RH;                                                // héritier en cache (recalculé à chaque rendu / naissance / décès)
 const royalOn = () => !!(S && S.royal && !S.royal.lost);
 function findHeir(k){                                // 1) descendants du roi (aîné d'abord), 2) sinon un de ses frères, 3) sinon personne
@@ -2475,16 +2501,16 @@ function royalHeirWatch(){                           // succès « Miracle tardi
 const royalImmune = p => royalOn() && (p.id === S.royal.king || p.id === heirId());   // ni star ni criminel
 function royalTitle(p){
   if(!royalOn() || !p || p.id == null || p.death != null) return '';
-  const fr = LANG === 'fr', F = p.sex === 'F';
-  if(p.id === S.royal.king) return fr ? (F ? 'Reine' : 'Roi') : (F ? 'Queen' : 'King');
-  if(p.id === heirId()) return fr ? (F ? 'Princesse' : 'Prince') : (F ? 'Princess' : 'Prince');
+  const fr = LANG === 'fr', F = p.sex === 'F', L3 = (a, b, c) => fr ? a : LANG === 'de' ? c : b;
+  if(p.id === S.royal.king) return L3(F ? 'Reine' : 'Roi', F ? 'Queen' : 'King', F ? 'Königin' : 'König');
+  if(p.id === heirId()) return L3(F ? 'Princesse' : 'Prince', F ? 'Princess' : 'Prince', F ? 'Prinzessin' : 'Prinz');
   const u = S.unions.find(x => x.end == null && ((x.a === S.royal.king && x.b === p.id) || (x.b === S.royal.king && x.a === p.id)));
-  if(u) return F ? (fr ? 'Reine' : 'Queen') : (fr ? 'Prince consort' : 'Prince consort');
+  if(u) return F ? L3('Reine', 'Queen', 'Königin') : L3('Prince consort', 'Prince consort', 'Prinzgemahl');
   const rank = nobleRank(p);
-  if(rank === 'dechu') return fr ? (F ? 'Déchue' : 'Déchu') : 'Fallen';
-  if(rank === 'duc') return fr ? (F ? 'Duchesse' : 'Duc') : (F ? 'Duchess' : 'Duke');
-  if(rank === 'comte') return fr ? (F ? 'Comtesse' : 'Comte') : (F ? 'Countess' : 'Count');
-  if(rank === 'noble') return 'Noble';
+  if(rank === 'dechu') return L3(F ? 'Déchue' : 'Déchu', 'Fallen', F ? 'Entthronte' : 'Entthronter');
+  if(rank === 'duc') return L3(F ? 'Duchesse' : 'Duc', F ? 'Duchess' : 'Duke', F ? 'Herzogin' : 'Herzog');
+  if(rank === 'comte') return L3(F ? 'Comtesse' : 'Comte', F ? 'Countess' : 'Count', F ? 'Gräfin' : 'Graf');
+  if(rank === 'noble') return L3('Noble', 'Noble', F ? 'Adlige' : 'Adliger');
   return '';
 }
 function crown(p, day, silent){
@@ -2508,7 +2534,7 @@ function royalYear(p, A, day){                        // chaque année, 40 % de 
   const a = actPick(ROYAL_ACTS, day, p.work.act);
   p.work.act = a; log('star','royal_act',[p.id, a], day, false);
 }
-const mildName = id => MILD[id] ? (LANG === 'fr' ? MILD[id][1] : MILD[id][2]) : id;
+const mildName = id => MILD[id] ? (LANG === 'fr' ? MILD[id][1] : LANG === 'de' && DEx.mild[id] ? DEx.mild[id] : MILD[id][2]) : id;
 const mildOn = (p, day = S.t) => (p.mild || []).filter(m => day >= m.start && day < m.end);
 const COVID_A = fromYMD(2019, 11, 1), COVID_B = fromYMD(2024, 11, 31);
 function catchMild(p, id, day){
@@ -2771,19 +2797,20 @@ function yearlyRisk(a, p){
 }
 
 /* ================= Langue ================= */
-let LANG = store.get(LANG_KEY) === 'en' ? 'en' : 'fr';
+let LANG = ['en','de'].includes(store.get(LANG_KEY)) ? store.get(LANG_KEY) : 'fr';
 const g = (p,m,f) => p.sex==='F' ? f : m;
 const P = id => S.people[id];
 const per = x => typeof x === 'object' ? x : P(x);
 const fn = x => per(x).first || '…';
 const nm = x => { const p = per(x), tt = royalTitle(p); return `${tt ? tt + ' ' : ''}${p.first || '…'} ${p.last}`; };
 const art = s => /^[aeiouAEIOU]/.test(s) ? 'an ' + s : 'a ' + s;
-const jobName = (id, p) => { const r = JOB[id] || STARJOB[id]; if(!r) return ''; return LANG==='fr' ? (p.sex==='F'?r[2]:r[1]) : (p.sex==='F'?r[4]:r[3]); };
-const dzName = (id, p) => { const d = DZ[id]; if(id === 'disparu' && p && p.sex === 'F' && LANG==='fr') return 'Portée disparue'; return LANG==='fr' ? d[1] : cap(d[3].replace(/^(the|a|an) /,'')); };
-const dzOf = id => { const d = DZ[id]; return LANG==='fr' ? d[2] : d[3]; };     // « de la tuberculose » / « tuberculosis »
-const fieldName = id => { const f = FIELD[id]; return LANG==='fr' ? f[1] : f[2]; };
-const trackName = id => { const r = TRACK[id]; return LANG==='fr' ? r[1] : r[2]; };
-const worldTxt = i => WORLD[i][LANG];
+const jobName = (id, p) => { const r = JOB[id] || STARJOB[id]; if(!r) return '';
+  if(LANG === 'de'){ const d = (DEx.jobc[CTRY] && DEx.jobc[CTRY][id]) || (DEx.starc[CTRY] && DEx.starc[CTRY][id]) || (JOB[id] ? DEx.job[id] : DEx.star[id]); if(d) return deSex(d, p); } return LANG==='fr' ? (p.sex==='F'?r[2]:r[1]) : (p.sex==='F'?r[4]:r[3]); };
+const dzName = (id, p) => { if(LANG === 'de' && DEx.dz[id]) return DEx.dz[id][0]; const d = DZ[id]; if(id === 'disparu' && p && p.sex === 'F' && LANG==='fr') return 'Portée disparue'; return LANG==='fr' ? d[1] : cap(d[3].replace(/^(the|a|an) /,'')); };
+const dzOf = id => { const d = DZ[id]; return LANG==='fr' ? d[2] : LANG==='de' ? dzDat(id) : d[3]; };     // « de la tuberculose » / « tuberculosis »
+const fieldName = id => { const f = FIELD[id]; return LANG==='fr' ? f[1] : LANG==='de' && DEx.field[id] ? DEx.field[id] : f[2]; };
+const trackName = id => { const r = TRACK[id]; return LANG==='fr' ? r[1] : LANG==='de' && DEx.track[id] ? DEx.track[id] : r[2]; };
+const worldTxt = i => { const w = WORLD[i]; return LANG === 'de' ? (w.de || DEx.worldn[w.fr] || w.en) : w[LANG]; };
 const kinOf = c => { const [a,b] = c.parents.map(P); return [a,b]; };
 
 const TX = {
@@ -2898,7 +2925,7 @@ fr:{
   relocate_title:'Déménager', relocate_custom:'Ou une autre ville…', relocate_btn:'Déménager ensemble',
   relocate_note:c=>`Vous quittez ${c} avec votre conjoint et vos enfants mineurs.`,
   skin_gold:'Or', skin_locked:"Terminez une catégorie entière de succès pour débloquer ce thème.", gold_unlocked:'Thème Or débloqué !',
-  set_country:'Pays de la lignée', set_country_hint:'Prénoms, noms, villes, carte, métiers, écoles, événements et guerres du pays choisi.',
+  ctry_de:'Allemagne', ctry_ch:'Suisse', set_country:'Pays de la lignée', set_country_hint:'Prénoms, noms, villes, carte, métiers, écoles, événements et guerres du pays choisi.',
   set_country_game:c=>`La partie en cours se passe ${c === 'uk' ? 'au Royaume-Uni' : 'en France'} : le changement s'appliquera à la prochaine partie.`, ctry_fr:'France', ctry_uk:'Royaume-Uni',
   set_tab_gen:'Général', set_tab_snd:'Son', set_tab_gfx:'Vidéo et graphismes', quit:'Quitter',
   set_full:'Plein écran', set_full_hint:'Le jeu occupe tout l\'écran (Échap pour en sortir).', set_full_hint_d:'Le jeu occupe tout l\'écran (touche F11).', set_full_on:'Activer', set_full_off:'Quitter le plein écran',
@@ -3164,7 +3191,7 @@ en:{
   relocate_title:'Move', relocate_custom:'Or another town…', relocate_btn:'Move together',
   relocate_note:c=>`You leave ${c} with your partner and underage children.`,
   skin_gold:'Gold', skin_locked:'Complete a whole achievement category to unlock this theme.', gold_unlocked:'Gold theme unlocked!',
-  set_country:'Bloodline country', set_country_hint:'First names, surnames, towns, map, jobs, schools, events and wars of the chosen country.',
+  ctry_de:'Germany', ctry_ch:'Switzerland', set_country:'Bloodline country', set_country_hint:'First names, surnames, towns, map, jobs, schools, events and wars of the chosen country.',
   set_country_game:c=>`The current game takes place in ${c === 'uk' ? 'the United Kingdom' : 'France'}: the change will apply to your next game.`, ctry_fr:'France', ctry_uk:'United Kingdom',
   set_tab_gen:'General', set_tab_snd:'Sound', set_tab_gfx:'Video & graphics', quit:'Quit',
   set_full:'Full screen', set_full_hint:'The game fills the whole screen (Esc to leave).', set_full_hint_d:'The game fills the whole screen (F11 key).', set_full_on:'Turn on', set_full_off:'Leave full screen',
@@ -3321,8 +3348,548 @@ en:{
   log_vanished:p=>`${nm(p)} vanishes without a trace.`,
   log_death_suicide:(p,a)=>`Haunted by ${g(P(p),'his','her')} crimes, ${nm(p)} takes ${g(P(p),'his','her')} own life at ${a}.`
 }};
-const condName = (id, p) => { const r = COND[id]; return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : r[3]; };
-const addName = (id, p) => { const r = ADD[id]; return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : r[3]; };
+/* ================= Deutsch (0.1.9a) : textes de l'interface en allemand ================= */
+TX.de = {
+  months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+  date:(j,m,y)=>`${j}. ${m} ${y}`, monthYear:(m,y)=>`${m} ${y}`,
+  ans:n=>`${n} Jahr${n===1?'':'e'}`, ageNum:n=>`${n}`,
+  tagline:'Eine Blutlinie, tausend Geschichten.', opt_title:'Spieloptionen',
+  first_ancestor:'Dein erster Vorfahre', lab_first:'Vorname', lab_last:'Nachname', lab_sex:'Geschlecht', female:'Frau', male:'Mann',
+  lab_dob:'Geburtsdatum', lab_city:'Geburtsort', lab_start:'Startjahr', lab_day:'Tag', lab_month:'Monat', lab_year:'Jahr',
+  age_on:d=>`Alter am ${d}`, not_born:'noch nicht geboren', random:'Zufällig', start_btn:y=>`Start im Jahr ${y}`, choose_age:'Alter wählen',
+  setup_hint:'Alle 4 Sekunden vergeht ein Jahr. Finde die große Liebe, gründe eine Familie und gib die Fackel an deine Kinder weiter. Das Spiel endet 2100, aber du kannst weiterspielen.',
+  err_name:'Gib einen Vor- und Nachnamen ein.', err_start:'Das Startjahr muss zwischen 1500 und 2050 liegen.',
+  err_year:(a,b)=>`Das Geburtsjahr muss zwischen ${a} und ${b} liegen.`, err_days:(m,y,n)=>`Der ${m} ${y} hat nur ${n} Tage.`,
+  err_after:d=>`Das Spiel beginnt am ${d}: Die Geburt muss an oder vor diesem Tag liegen.`,
+  resume_txt:(f,d,w)=>`Laufendes Spiel: <b>Familie ${f}</b>, ${d}<br><span class="hint">Du spielst ${w}.</span>`, resume:'Fortsetzen',
+  pause:'Pause', play:'Weiter', mute:'Ton aus', unmute:'Ton an', restart:'Zurück zum Menü', confirm:'Bestätigen?', speed:'Tempo',
+  rate:s=>`1 Jahr = ${s} s`, paused:'Pausiert', decade:y=>`${y}er-Jahre`,
+  family:l=>`Familie ${l}`, center:'Zentrieren', stats:(n,v,k)=>`${n} Mitglied${n>1?'er':''} · ${v} am Leben · ${k} Generation${k>1?'en':''}`,
+  you:'Du', future_star:'★ Künftiger Star', star:'★ Star',
+  you_play:'Du spielst', born_in:(p,d,c)=>`Geboren am ${d} in ${c}`,
+  f_age:'Alter', f_gen:'Generation', f_risk:'Sterberisiko dieses Jahr', f_risk_short:'Risiko / Jahr', f_kids:'Kinder', f_city:'Stadt',
+  f_activity:'Tätigkeit', f_status:'Status', f_illness:'Lebensgefährlich', f_parents:'Kind von', f_adopted:()=>'Adoptiert von', f_fame:'Ruhm',
+  deceased:p=>g(p,'Verstorben','Verstorben'), sick:'Krank', fame_future:'Künftiger Star', fame_now:'Gefeierter Star',
+  find:'Die große Liebe finden', hint_age:(L,n)=>`Ab ${L} möglich (in ${TX.de.ans(n)}).`, hint_couple:n=>`Verlasse ${n}, um jemand anderen zu suchen.`,
+  couple:'Paar', marriage:'Ehe', open_couple:'Optionen fürs Paar', baby_way:'Ein Baby ist unterwegs', adoption_way:'Adoption läuft', due:m=>`erwartet ${m}`,
+  journal:'Familienchronik',
+  st_married:(p,q)=>`Verheiratet mit ${q}`, st_dating:q=>`Zusammen mit ${q}`, st_widow:p=>g(p,'Verwitwet','Verwitwet'), st_single:'Single',
+  st_mourning:'Single (in Trauer)', st_divorced:()=>'Geschieden',
+  meet:y=>`Zusammen · ${y}`, soul_title:'Die große Liebe finden', soul_intro:(n,a,k)=>`${k > 3 ? 'Sechs' : 'Drei'} Singles aus der Gegend für ${n}, ${a}.`, seeks:n=>`${n} sucht`,
+  a_woman:'eine Frau', a_man:'einen Mann', choose:'Wählen', refresh:'Neue Vorschläge', lives_in:c=>`Wohnt in ${c}`,
+  f_you:'Du', gen_n:n=>`Generation ${n}`, spouse:p=>g(p,'Dein Ehemann','Deine Ehefrau'), partner:p=>g(p,'Dein Freund','Deine Freundin'), inlaw:()=>'Ehepartner',
+  died_on:(p,d,c)=>`Gestorben am ${d}, ${c}`, cause_old:'an Altersschwäche', cause_dz:id=>`an ${dzDat(id)}`,
+  city_alive:(p,b,c)=> b===c ? `Geboren in ${c}, lebt immer noch dort` : `Geboren in ${b}, lebt in ${c}`,
+  city_dead:(p,b,c)=> b===c ? `Geboren und gestorben in ${c}` : `Geboren in ${b}, gestorben in ${c}`,
+  couple_life:'Beziehungen', ul_married:(q,d)=>`Heiratet ${q} am ${d}`, ul_dating:(q,y)=>`Mit ${q} seit ${y}`,
+  ul_widow:y=>`verwitwet ${y}`, ul_until:y=>`bis ${y}`, ul_divorce:y=>`geschieden ${y}`, ul_split:y=>`getrennt ${y}`,
+  children_n:n=>`Kinder (${n})`, our_couple:'Eure Beziehung', make_baby:'Ein Baby bekommen', adopt:'Ein Kind adoptieren',
+  note_baby:'5 % Risiko einer Fehlgeburt. Geburt 9 Monate später.', note_adopt:'Das Kind kommt 9 Monate später nach Hause.',
+  note_adopting:m=>`Adoption läuft, Ankunft erwartet ${m}.`, note_pregnant:(n,m)=>`${n} ist schwanger, Geburt erwartet ${m}.`,
+  note_too_old:(n,a)=>`${n} ist ${a}: zu alt für ein Baby.`,
+  marry:'Heiraten', married_already:'Bereits verheiratet', married_on:d=>`Verheiratet am ${d}.`, may_refuse:n=>`${n} könnte Nein sagen (5 % Chance).`, marry_refused:'Antrag abgelehnt', sure_yes:n=>`Dank deines Charismas sagt ${n} Ja.`, refused_note:n=>`${n} hat Nein gesagt: Eine Heirat kommt nicht mehr infrage.`,
+  hint_prison:()=>`Lebenslang hinter Gittern: keine große Liebe und keine Kinder mehr.`,
+  leave:n=>`${n} verlassen`, confirm_leave:n=>`Bestätigen: ${n} verlassen`, note_divorce:'Die Ehe endet mit einer Scheidung.', note_single:'Du bist wieder Single.',
+  incarnate:n=>`Als ${n} spielen`, note_incarnate:'Du spielst ab jetzt dieses Familienmitglied.',
+  ill_prog:()=>'Ungewisse Prognose',
+  left_us:n=>`${n} ist von uns gegangen`, who_next:'Wer führt die Familie weiter?',
+  death_sentence:(p,a)=>{ const c = p.cause, n = nm(p);
+    if(c.old) return `${n} ist mit ${a} Jahren an Altersschwäche gestorben.`;
+    if(c.war) return `${n} starb mit ${a} Jahren: ${DEx.warc[c.war] ? DEx.warc[c.war][0] : WARC[c.war][3]}.`;
+    if(c.murder) return `${n} wurde mit ${a} Jahren von ${nm(c.murder)} ermordet.`;
+    if(c.vanished) return `${n} ist mit ${a} Jahren spurlos verschwunden.`;
+    if(c.suicide) return `${n} hat sich mit ${a} Jahren das Leben genommen.`;
+    if(c.legend) return `${n} ist mit 33 Jahren in die Legende eingegangen.`;
+    return `${n} ist mit ${a} Jahren an ${dzDat(c.dz)} gestorben.`; },
+  rel_child:p=>g(p,'Sohn','Tochter'), rel_grand:p=>g(p,'Enkel','Enkelin'), rel_ggrand:p=>g(p,'Urenkel','Urenkelin'),
+  rel_sib:p=>g(p,'Bruder','Schwester'), rel_parent:p=>g(p,'Vater','Mutter'), rel_family:'Familie',
+  over_title:l=>`Die Linie ${l} endet hier`, over_txt:(d,f,y)=>`${nm(d)} war das letzte lebende Mitglied der Familie. Die Linie wurde ${y} von ${nm(f)} gegründet.`,
+  years:'Jahre', members:'Mitglieder', gens:n=>`Generation${n>1?'en':''}`, new_line:'Eine neue Linie gründen',
+  end_title:'Das Jahr 2100!', end_txt:(l,n)=>`Das Spiel endet hier: Die Familie ${l} hat ${n} Jahre Geschichte erlebt. Du kannst weiterspielen, aber das Spiel kennt nichts nach 2100: Berufe und Jahrzehnte bleiben, wie sie sind. Nur die Vornamen entwickeln sich weiter…`,
+  keep_playing:'Weiterspielen',
+  birth_title:c=>g(c,'Es ist ein Junge!','Es ist ein Mädchen!'), adopt_title:c=>g(c,'Ein kleiner Junge kommt nach Hause!','Ein kleines Mädchen kommt nach Hause!'),
+  birth_txt:(a,b,d,c)=>`${a} und ${b} begrüßen ihr Kind am ${d} in ${c}. Wähle einen Namen:`,
+  name_other:'Ein anderer Name…', validate:'Bestätigen', rename:f=>`${f || ''} umbenennen`.trim(), star_baby:'Ein Stern leuchtet über der Wiege: Dieses Kind wird ein Star.',
+  baby:'Säugling', child:'Kind', mat:['Petite section (Vorschule)','Moyenne section (Vorschule)','Grande section (Vorschule)'], prim:['CP','CE1','CE2','CM1','CM2'], col:['6e','5e','4e','3e'],
+  lyc:['Seconde','Première','Terminale'], capy:['1. Jahr','2. Jahr','Abgeschlossen'], capfl:['1. Jahr, letzte Reihe an der Heizung','2. Jahr (wiederholt)','Abschluss ohne Anstrengung'], cours_sup:'Cours supérieur', certif:"Certificat d'études",
+  old_lyc:['4e','3e','Seconde','Première','Terminale'], lycee:'Lycée', petite_ecole:'Dorfschule', betes:'Hütet die Tiere',
+  apprentice:(p,j)=>`${g(p,'Lehrling','Lehrling')} · ${j}`, odd:'Gelegenheitsjobs', student:(p,f)=>`${g(p,'Student','Studentin')} · ${f}`, unemployed:'Arbeitslos', retired:p=>g(p,'Im Ruhestand','Im Ruhestand'),
+  log_start:(id,a)=>`${nm(id)}, ${a} Jahre alt, schlägt das erste Kapitel der Familie ${P(id).last} auf.`,
+  log_world:i=>worldTxt(i), log_y2100:()=>'Das Jahr 2100! Die Familie tritt in eine unbekannte Zukunft.',
+  log_couple:(a,b)=>`${fn(a)} und ${nm(b)} sind jetzt ein Paar.`,
+  log_preg:(m,d)=>`${fn(m)} ist schwanger! Geburt erwartet im ${fmtMonth(d)}.`,
+  log_adopt_start:(a,b,d)=>`${fn(a)} und ${fn(b)} beginnen eine Adoption. Ankunft erwartet im ${fmtMonth(d)}.`,
+  log_wed:(a,b)=>`${nm(a)} und ${nm(b)} heiraten!`, log_refuse:(b,a)=>`${fn(b)} hat den Antrag von ${fn(a)} abgelehnt.`,
+  log_divorce:(a,b)=>`${fn(a)} und ${fn(b)} lassen sich scheiden.`, log_leave:(a,b)=>`${fn(a)} trennt sich von ${fn(b)}.`,
+  log_birth:c=>{ const p=P(c), [a,b]=kinOf(p); return `${nm(p)} wird in ${p.birthCity} geboren, ${g(p,'Sohn','Tochter')} von ${fn(a)} und ${fn(b)}.${p.star?' Ein künftiger Star ist geboren!':''}`; },
+  log_adopt:c=>{ const p=P(c), [a,b]=kinOf(p); return `${fn(a)} und ${fn(b)} begrüßen ${fn(p)}, ${g(p,'ihren Adoptivsohn','ihre Adoptivtochter')}.${p.star?' Ein künftiger Star!':''}`; },
+  log_miscarriage:m=>`Fehlgeburt: ${fn(m)} hat das erwartete Baby verloren.`, log_lost_baby:m=>`Das Baby, das ${fn(m)} erwartete, wird nie geboren.`,
+  log_ill:(p,dz)=> dz === 'disparu' ? `${nm(p)} wird vermisst…` : EVENTS.has(dz) ? `Schicksalsschlag für ${nm(p)}: ${dzNom(dz)}.` : `Bei ${nm(p)} wurde ${dzNom(dz)} festgestellt.`,
+  log_cured:(p,dz)=> dz === 'disparu' ? `${nm(p)} wurde wohlbehalten gefunden!` : `Allen Widrigkeiten zum Trotz übersteht ${nm(p)} die Krankheit (${dzNom(dz)})!`,
+  log_death_dz:(p,dz,a)=>`${nm(p)} stirbt mit ${a} Jahren an ${dzDat(dz)}.`, log_death_old:(p,a)=>`${nm(p)} stirbt mit ${a} Jahren an Altersschwäche.`,
+  log_move:(p,c,n)=> n>0 ? `${nm(p)} zieht mit der Familie nach ${c}.` : `${nm(p)} zieht nach ${c}.`,
+  log_first_job:(p,j)=>`${nm(p)} findet eine erste Stelle als ${jobName(j,P(p))}.`,
+  log_graduate:(p,f,j)=>`${nm(p)} schließt das Studium ab (${fieldName(f)}) und wird ${jobName(j,P(p))}.`,
+  log_job_change:(p,j)=>`${nm(p)} wechselt den Beruf und wird ${jobName(j,P(p))}.`,
+  log_unemployed:p=>`${nm(p)} verliert die Arbeit.`, log_back_to_work:(p,j)=>`${nm(p)} findet wieder Arbeit als ${jobName(j,P(p))}.`,
+  log_retired:p=>`${nm(p)} geht in den Ruhestand.`, log_capflemme:p=>`🛋️ ${nm(p)} erhält das Faulenzer-Diplom mit dem Vermerk „hätte sich mehr anstrengen können". Das Sofa wartet.`, log_uni:(p,f)=>`${nm(p)} beginnt ein Studium (${fieldName(f)}).`,
+  log_president:p=>`${nm(p)} wird ${g(P(p),'zum Präsidenten','zur Präsidentin')} der Republik gewählt!`, pres_rib:p=>`★ ${g(p,'Präsident','Präsidentin')}`,
+  f_atout:'Gabe', lab_atout:'Startgabe', lab_destiny:'Schicksal', atout_none:'Zufällig', dest_none:'Normal', dest_crim:'Verbrecher', dest_star:'Star',
+  dest_note:'In diesem Spiel gibt es keine Erfolge.',
+  log_star:(p,j)=>`${nm(p)} wird ein Star! Im ganzen Land verehrt als ${jobName(j,P(p))}.`,
+  log_incarnate:p=>`Du spielst jetzt ${nm(p)}.`, log_heir:(p,o)=>`${nm(p)} führt die Familie nach dem Tod von ${fn(o)} weiter.`,
+  auto:'Auto', auto_title:'Automodus: Die Familie lernt sich kennen, heiratet und bekommt Kinder ganz von allein',
+  log_auto_on:()=>'Automodus an: Die Familie lebt ihr Leben allein.', log_auto_off:()=>'Automodus aus: Du hast wieder die Kontrolle.',
+  zoom_in:'Vergrößern', zoom_out:'Verkleinern', zoom_fit:'Übersicht (Mausrad zum Zoomen)',
+  menopause:n=>`${n} ist in den Wechseljahren: keine Kinder mehr.`,
+  multi_title:n=> n===2 ? 'Zwillinge!' : n===3 ? 'Drillinge!' : 'Vierlinge!',
+  multi_txt:(i,n,c)=>`Baby ${i} von ${n}: ${g(c,'ein Junge','ein Mädchen')}. Wähle einen Namen:`,
+  log_multi:(a,b,n)=>`${fn(a)} und ${fn(b)} begrüßen ${n===2?'Zwillinge':n===3?'Drillinge':'Vierlinge'}!`,
+  war_badge:i=>warName(i),
+  log_war_start:i=>`${warName(i)} bricht aus: Die ganze Familie ist in größerer Gefahr.`, log_war_end:i=>`${warName(i)} ist vorbei.`,
+  log_death_war:(p,w,a)=>`${nm(p)} ${DEx.warc[w] ? DEx.warc[w][1] : WARC[w][4]}, mit ${a} Jahren.`, cause_war:w=>DEx.warc[w] ? DEx.warc[w][0] : WARC[w][3],
+  f_cond:'Besonderheit', cond_birth:n=>`Bei der Geburt festgestellte Besonderheit: ${n}.`,
+  fam_auto:'Selbstständige Familie', fam_auto_hint:'Familienmitglieder, die du nicht spielst, lernen sich kennen, heiraten und bekommen Kinder ganz allein.',
+  fam_auto_inauto:'Im Automodus bereits enthalten.', dropout:()=>'Schulabbruch',
+  set_music:'Musik', set_music_hint:'Sanfte Musik in Dauerschleife, die angespannt wird, solange ein Verbrecher lebt.',
+  set_map:'Frankreichkarte', set_map_hint:'Fügt eine „Karte" hinzu, auf der jeder Punkt eine Stadt zeigt, in der die Familie lebt.',
+  skin_night:'Nacht', skin_dark:'Obsidian', view_tree:'Stammbaum', view_map:'Karte',
+  map_legend:(c,n)=>`${n} lebende${n>1?'':'s'} Mitglied${n>1?'er':''} in ${c} Stadt${c>1?'en':''}`, map_dot:(city,n)=>`${city}: ${n} ${n>1?'Personen':'Person'}`,
+  seek_age:'Bevorzugtes Alter', any_age:'Egal', around:a=>`um ${a}`,
+  relocate_title:'Umziehen', relocate_custom:'Oder eine andere Stadt…', relocate_btn:'Gemeinsam umziehen',
+  relocate_note:c=>`Du verlässt ${c} mit deinem Partner und den minderjährigen Kindern.`,
+  skin_gold:'Gold', skin_locked:'Schließe eine ganze Erfolgskategorie ab, um dieses Design freizuschalten.', gold_unlocked:'Gold-Design freigeschaltet!',
+  ctry_fr:'Frankreich', ctry_uk:'Vereinigtes Königreich', ctry_de:'Deutschland', ctry_ch:'Schweiz', set_country:'Land der Blutlinie',
+  set_tab_gen:'Allgemein', set_tab_snd:'Ton', set_tab_gfx:'Video & Grafik', quit:'Beenden',
+  set_full:'Vollbild', set_full_hint:'Das Spiel füllt den ganzen Bildschirm (Esc zum Verlassen).', set_full_hint_d:'Das Spiel füllt den ganzen Bildschirm (Taste F11).', set_full_on:'Einschalten', set_full_off:'Vollbild verlassen',
+  set_ui:'Größe der Oberfläche', set_ui_hint:'Macht das ganze Spiel größer oder kleiner.',
+  set_blur:'Milchglas', set_blur_hint:'Die Unschärfe hinter Fenstern. Ausschalten, wenn das Spiel ruckelt.',
+  set_anim:'Animationen', set_anim_hint:'Glanz, Leuchten und Übergänge. Ausschalten, wenn das Spiel ruckelt.',
+  settings:'Einstellungen', custom:'Anpassung', set_eyebrow:'Spielkomfort', set_lang:'Sprache', set_sound:'Ton', set_sound_hint:'Soundeffekte und kleine Melodien.',
+  set_volume:'Lautstärke', set_theme:'Design', skin_aqua:'Aqua (blau)', skin_orange:'Orange', skin_vapor:'Neon', skin_kid:'Kindlich', skin_xp:'Windows XP', shop_xp:'Design Windows XP', shop_xp_d:'Schaltet das Design Windows XP dauerhaft frei: grüner Hügel, blauer Himmel und Fenster von damals.', skin_locked_xp:'Im Shop für 2.000 Cyn erhältlich.',
+  set_toasts:'Benachrichtigungen', set_toasts_hint:'Meldungen unten für Geburten, Todesfälle usw.', set_deco:'Dekorative Animationen', set_deco_hint:'Schwebende Blasen und Konfetti.',
+  set_reset_ach:'Erfolge zurücksetzen', set_reset_ach_hint:'Löscht alle freigeschalteten Erfolge.', reset:'Zurücksetzen',
+  cust_eyebrow:'Spielregeln', cust_intro:'Änderungen gelten sofort, auch für das laufende Spiel.', cust_rules:'Regeln', cust_probs:'Wahrscheinlichkeiten',
+  r_evoNames:'Vornamen im Wandel der Zeit', r_evoNames_hint:'Aus: einfache Vornamen, in jeder Epoche gleich.',
+  r_ach:'Erfolge', r_ach_hint:'Aus: Es wird kein Erfolg mehr freigeschaltet.', r_ach_locked:'Aus, solange die Regler, „Krankheiten und Unfälle" oder „Tod durch Alter" nicht auf Standard stehen.',
+  r_sameSex:'Gleichgeschlechtliche Paare', r_sameSex_hint:'Erlaubt gleichgeschlechtliche Beziehungen und Adoption.',
+  r_oldAge:'Tod durch Alter', r_oldAge_hint:'Aus: Niemand stirbt an Altersschwäche; das Leben endet spätestens mit 150.',
+  r_diseases:'Krankheiten und Unfälle', r_diseases_hint:'Aus: keine Krankheiten oder Unfälle mehr (Süchte gelten weiter).',
+  r_legend:'Legendenmodus', r_legend_hint:'Nur „Ein Baby bekommen" ist erlaubt: keine Heirat, keine Trennung, und alle gehen mit 33.',
+  r_legal:'Volljährigkeit', r_legal_hint:'Für Beziehungen, Heirat, Geburten und Süchte.',
+  r_boys:'Jungengeburten', r_twins:'Zwillinge', r_triplets:'Drillinge', r_quads:'Vierlinge', r_illness:'Krankheitshäufigkeit',
+  r_conds:'Besonderheiten bei der Geburt', r_inherit:'Vererbung der Besonderheiten', r_addict:'Süchte', r_star:'Stars', r_crim:'Verbrecher',
+  r_reset:'Standard wiederherstellen', legend_note:'Legendenmodus: keine Heirat, keine Trennung.', legend_badge:'Legendenmodus',
+  cause_legend:()=>'in die Legende eingegangen', log_death_legend:p=>`${nm(p)} geht mit 33 Jahren in die Legende ein.`,
+  ach_full:'Komplett!', ach_done:'Freigeschaltet',
+  ach_title:'Erfolge', ach_unlocked:'Erfolg freigeschaltet!', ach_locked:'Gesperrt', ach_got:(y,f)=>`Freigeschaltet ${y} · Familie ${f}`,
+  ach_count:(n,m)=>`${n} / ${m} freigeschaltet`, tier_bronze:'Bronze', tier_silver:'Silber', tier_gold:'Gold', tier_platinum:'Platin', tier_special:'Spezial', tier_legend:'Regenbogen',
+  log_ach:id=>`Erfolg freigeschaltet: ${achTitle(id)}!`, log_gold:()=>'Erfolgskategorie komplett: Das Gold-Design ist jetzt in den Einstellungen verfügbar!',
+  log_night:()=>'Ein erstes Opfer… Das Nacht-Design ist jetzt in den Einstellungen verfügbar.',
+  maiden_line:n=>`Geburtsname: ${n}`,
+  set_regnal:'Dynastische Nummern', set_regnal_hint:'Ein Kind mit genau dem Namen eines Eltern- oder Großelternteils erhält eine römische Zahl: Johann, Johann II., Johann III.…',
+  regnal_pick:'Einen Familiennamen weiterführen:',
+  pn_title:'Versionshinweise', pn_hint:v=>`Neuigkeiten der Version ${v} und davor.`, pn_open:'Ansehen',
+  multi_pop:(a,b,names)=>`${a} und ${b} begrüßen ${names}.`, m_me:'Ich', m_journal:'Chronik', m_ach:'Erfolge', m_album:'Album', album:'Album',
+  start_hint:'Empfohlen: 1780', lab_royal:'Königsmodus', royal_hint:'Deine Figur wird zum König (oder zur Königin) gekrönt. Stirbt sie ohne Erben und ohne Bruder, endet das Spiel.',
+  lab_rule:'Herrschendes Geschlecht', rule_patri:'Patriarchal', rule_matri:'Matriarchal', rule_both:'Beide',
+  regency:'Regiert unter Regentschaft', heir_act:p=>g(p,'Kronprinz','Kronprinzessin'), ex_king:p=>g(p,'Ehemaliger König','Ehemalige Königin'),
+  royal_names:'Dynastischer Name empfohlen', alb_royal:'Königlich', alb_royal_d:'Königsmodus',
+  log_crowned:p=>`${nm(p)} besteigt den Thron! Lang lebe ${g(P(p),'der König','die Königin')}!`,
+  log_royal_act:(p,a)=>`${nm(p)} ${lc(royalActName(a))}.`,
+  log_royal_lost:()=>'Kein Erbe und kein Bruder, um die Krone zu übernehmen: Die Dynastie erlischt.',
+  over_royal_title:l=>`Ende der Dynastie ${l}`, over_royal_txt:d=>`${P(d.id || d).first} ${P(d.id || d).last} starb ohne Erben und ohne Bruder als Nachfolger. Die Krone erlischt mit ${g(P(d.id || d),'ihm','ihr')}.`,
+  alb_prince_d:'Kronprinz oder Kronprinzessin',
+  shop_royal_no:p=>g(p,'Für einen König nicht möglich.','Für eine Königin nicht möglich.'),
+  name_sib_taken:n=>`Ein Bruder oder eine Schwester heißt schon ${n}.`,
+  aw_title:'Automodus', aw_lead:'Deine Familie lebt ihr Leben ganz allein.', aw_box_t:'Cyn ×0,25', aw_box:'Solange der Automodus an ist, verdienst du viermal weniger Cyn. Spiel selbst, um mehr zu verdienen!',
+  aw_nomore:'Nicht mehr anzeigen', aw_ok:'Automodus einschalten', aw_cancel:'Abbrechen', cg_auto:'Im Automodus: 25 % der Gewinne',
+  rg_title:'Herrschaften', rg_now:'laufend', rg_y:n=>`${n} Jahr${n>1?'e':''}`, rg_now_y:n=>`${n} Jahr${n>1?'e':''}, laufend`, rg_lost:'Die Krone hat die Familie verlassen: Die Dynastie ist zu Ende.', f_reign:'Herrschaft', span_ym:(y,m)=>`${y} Jahr${y>1?'e':''}, ${m} Monat${m>1?'e':''}`,
+  reign_done:(a,b,d)=>`Herrschte vom ${a} bis ${b} (${d})`, reign_now:(a,d)=>`Herrscht seit ${a} (${d})`,
+  log_reign_end:p=>`${P(p).first} ${P(p).last}: ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd))}.`,
+  shopc_survie:'Überleben', shop_vaccin:'Impfstoff', shop_vaccin_d:'Schützt ein Familienmitglied 20 Jahre lang vor der Zombie-Infektion.',
+  shop_antidote:'Gegenmittel', shop_antidote_d:'Heilt einen Zombie der Familie: Er wird wieder ein Mensch und bleibt 20 Jahre geschützt.',
+  shop_antidote_none:'Kein Zombie zu heilen.', shop_antidote_wait:y=>`Erhältlich ab ${y} (120 Jahre nach Spielbeginn).`, pick_antidote:()=>'Welcher Zombie soll geheilt werden?', shop_z_late:'Nach 2050 nicht mehr erhältlich.',
+  zprot_until:(p,y)=>`Bis ${y} vor Zombies geschützt`,
+  log_zcured:p=>`💉 ${P(p).first} ${P(p).last} erhält das Gegenmittel und ist wieder ein Mensch!`, shop_vaccin_none:'Niemand mehr zu impfen.', pick_vaccin:()=>'Wer soll geimpft werden?',
+  f_vaccin:'Impfstoff', vaccinated:()=>'Gegen Zombies geimpft',
+  log_vaccin:p=>`💉 ${nm(p)} ist geimpft: 20 Jahre vor Zombies geschützt.`,
+  shop_lueur:'Adelsglanz', shop_lueur_d:'Adelt das Familienmitglied deiner Wahl (Königsmodus).', shop_lueur_none:'Niemand mehr zu adeln.', pick_lueur:()=>'Wer soll geadelt werden?', alb_noble_d:'Herzog, Herzogin, Graf oder Gräfin', alb_nobility_d:'Adlige',
+  log_ennobled:p=>`${P(p).first} ${P(p).last} wird geadelt und bringt alle 2 Jahre 5 Cyn ein.`,
+  log_dechu:p=>`${P(p).first} ${P(p).last} gibt das höfische Leben auf und verliert ${g(P(p),'seinen','ihren')} Titel.`,
+  end_note_over:'Das Spiel ist vorbei: In diesem Spiel gibt es keine Cyn und keine Erfolge mehr.',
+  end_note_2100:'Wenn du weiterspielst, verdienst du in diesem Spiel keine Cyn und keine Erfolge mehr.',
+  skin_goth:'Dark', skin_locked_goth:'Wird nach 10 Morden durch Verbrecher freigeschaltet (über alle Spiele).',
+  log_goth_skin:()=>'10 Morde… Das Dark-Design ist jetzt in den Einstellungen verfügbar.',
+  shop_spouse:'Partner nach Maß', shop_spouse_d:'Erschaffe den perfekten Seelenverwandten deiner Figur: Name, Alter, Beruf, Gabe, Hobby, Sucht, Schicksal…',
+  shop_spouse_taken:p=>`${p.first} ist schon in einer Beziehung.`, shop_spouse_young:p=>`${p.first} ist noch zu jung.`,
+  sp_intro:n=>`Bestimme alles über den künftigen Seelenverwandten von ${n}.`, sp_job:'Beruf', sp_int:'Hobby', sp_add:'Sucht', sp_cond:'Besonderheit',
+  sp_none:'Keiner', sp_none_f:'Keine', sp_go:'Kennenlernen', sp_age:a=>`Alter: ${a}`, sp_err_age:n=>`Das Alter muss zwischen ${n} und 100 liegen.`,
+  cg_crown:'Eine Krönung (Königsmodus)',
+  lab_vs:'Versus-Modus', vs_hint:'Tritt gegen eine KI an: zwei Familien, ein Ziel, von 1780 bis 2100.',
+  vs_title:'Tritt gegen die KI an', vs_intro:'Zwei Familien starten 1780: deine links, die der KI rechts. Die KI spielt allein, auf dem gewählten Schwierigkeitsgrad, und verdient eigene Cyn. Lebt in einer Familie niemand mehr, hat sie verloren.',
+  vs_mode:'Spielmodus', vs_m_normal:'Normal', vs_m_royal:'Königlich', vs_m_zombie:'Zombie',
+  vs_diff:'Schwierigkeit', vs_d_easy:'Spaziergang', vs_d_std:'Standard', vs_d_hard:'Abenteuer', vs_d_ext:'Extrem',
+  vs_d_easy_h:'Die KI spielt planlos und gibt nie ihre Cyn aus.', vs_d_std_h:'Die KI spielt normal, kauft ein paar Dinge und wechselt manchmal die Figur.',
+  vs_d_hard_h:'Die KI verfolgt das Ziel, wechselt oft die Figur und gibt ihre Cyn klug aus.', vs_d_ext_h:'Die KI gibt alles, startet mit 900 Cyn und verdient fast doppelt so viele.',
+  vs_goal:'Siegziel',
+  vs_g_speed:'Tempospiel', vs_g_speed_h:'Die meisten Generationen im Jahr 2100. Bei Gleichstand gewinnt die Familie, deren ältestes Mitglied der letzten Generation zuerst geboren wurde.',
+  vs_g_slow:'Langsamspiel', vs_g_slow_h:'Die wenigsten Generationen im Jahr 2100. Bei Gleichstand gewinnt die Familie, deren jüngstes Mitglied der letzten Generation zuletzt geboren wurde.',
+  vs_g_star:'Starspiel', vs_g_star_h:'Die meisten Stars im Jahr 2100. Gleichstand möglich.',
+  vs_g_crime:'Verbrechensspiel', vs_g_crime_h:'Die meisten Morde im Jahr 2100. Gleichstand möglich.',
+  vs_g_noble:'Adelsspiel', vs_g_noble_h:'Die meisten Adligen im Jahr 2100, tot oder lebendig. Gleichstand möglich.',
+  vs_g_classic:'Klassisches Spiel', vs_g_classic_h:'Die meisten lebenden (und menschlichen) Familienmitglieder im Jahr 2100. Gleichstand möglich. Sieg: +900 Cyn, egal auf welchem Schwierigkeitsgrad.', vs_win_cyn:n=>`Sieg: +${n} Cyn.`,
+  vs_1780:'Während eines Duells lassen sich nur Versus-Erfolge freischalten. Das Spiel beginnt immer 1780. Die erste Figur der KI ist ein zufälliger 18-jähriger Mann. Kein Startschicksal im Versus.',
+  vs_ok:'Bestätigen', vs_cancel:'Abbrechen', vs_edit:'Ändern', vs_sum:(m,d,g)=>`Gegen die KI · ${m} · ${d} · ${g}`,
+  vs_ai:'KI', vs_you:'Du', vs_ai_cyn:'Cyn der KI', vs_reward:n=>`+${n} Cyn für deinen Sieg!`, vs_played:'Von der KI gespielt', vs_out:'Ausgeschieden', vs_ai_fam:'Familie der KI', m_ai:'KI', vs_keep:'Allein weiterspielen',
+  vs_u_gen:n=>n>1?'Generationen':'Generation', vs_u_star:n=>n>1?'Stars':'Star', vs_u_crime:n=>n>1?'Morde':'Mord', vs_u_noble:n=>n>1?'Adlige':'Adliger', vs_u_live:()=>'am Leben',
+  vs_res_win:'Sieg!', vs_res_lose:'Niederlage…', vs_res_tie:'Unentschieden!',
+  vs_note:(a,b,ua,ub)=>`Du: ${a} ${ua} · KI: ${b} ${ub}.`,
+  vs_tb_old:(g,a,b)=>`Gleichstand bei ${g} Generationen. Dein ältestes Mitglied der ${g}. Generation wurde am ${a} geboren, das der KI am ${b}.`,
+  vs_tb_young:(g,a,b)=>`Gleichstand bei ${g} Generationen. Dein jüngstes Mitglied der ${g}. Generation wurde am ${a} geboren, das der KI am ${b}.`,
+  vs_ai_dead:f=>`Die Familie ${f} der KI ist ausgestorben: Du gewinnst das Duell!`, vs_over_lose:'Deine Familie ist ausgestorben: Die KI gewinnt das Duell.',
+  log_vs_ai_out:()=>'Die Familie der KI ist ausgestorben.',
+  vs_t_fam:'Familie', vs_t_gen:'Generationen', vs_t_live:'Am Leben', vs_t_star:'Stars', vs_t_crime:'Morde', vs_t_noble:'Adlige',
+  lab_zdiff:'Schwierigkeit', zd_easy:'Leicht', zd_med:'Mittel', zd_hard:'Schwer', zd_ext:'Extrem',
+  zd_hint:p=>`${p} % Ansteckungsrisiko pro Jahr für jedes Elternteil, Kind oder jeden Partner eines Zombies.`,
+  lab_zombie:'Zombiemodus', zombie_hint:'60 Jahre lang passiert nichts… dann taucht der erste Zombie auf. Überlebe bis 2100!',
+  z_count:n=>`${n} Jahre bis zum ersten Zombie`, z_status:(z,h)=>`${z} Zombie${z>1?'s':''} · ${h} Mensch${h>1?'en':''}`,
+  zombie_act:()=>'Zombie', zombie_since:(p,y)=>`Zombie seit ${y}`, zombie_no_baby:'Ein Zombie kann keine Kinder bekommen.',
+  log_zombie_first:p=>`☣ ${nm(p)} wird der erste Zombie! Die Seuche beginnt.`,
+  log_zombie_bite:p=>`☣ ${nm(p)} wurde angesteckt und wird zum Zombie.`,
+  log_zombie_rise:p=>`☣ ${nm(p)} steigt aus dem Grab… als Zombie!`,
+  over_zombie_title:'Die Zombies haben gewonnen', over_zombie_txt:(l,y)=>`Im Jahr ${y} ist kein Mitglied der Familie ${l} mehr ein Mensch.`,
+  z_win_title:'Sieg, die Familie hat überlebt!', z_win_txt:(l,n)=>`Die Familie ${l} hat den Zombies bis 2100 standgehalten, mit ${n} Überlebenden.`,
+  tuto_offer_e:'Neu hier?', tuto_offer_t:'Willkommen!', tuto_offer:'Neu bei Cyngenetic? Ein kurzes Tutorial (etwa 2 Minuten) zeigt dir die Grundlagen.',
+  tuto_yes:'Ja, zeig es mir', tuto_no:'Nein danke, ich komme klar', tuto_next:'Weiter', tuto_prev:'Zurück', tuto_skip:'Überspringen', tuto_end:'Los geht\'s!',
+  tuto_set:'Tutorial', tuto_set_hint:'Die Grundlagen noch einmal ansehen.', tuto_set_btn:'Starten', tuto_planned:'Zu Beginn des nächsten Spiels',
+  tuto_steps:[['Willkommen bei Cyngenetic','Du spielst eine Person. Dein Ziel: ihre Blutlinie so lange wie möglich fortführen, Generation um Generation.'],['Die Zeit vergeht','Das Datum läuft von selbst: Ein Jahr dauert 4 Sekunden. Deine Figur wächst auf, lernt, arbeitet und wird älter.'],['Tempo und Pause','Beschleunige, verlangsame oder pausiere das Spiel, wann immer du nachdenken willst.'],['Deine Figur','Das bist du! Tippe auf eine Blase im Stammbaum, um ihre Karte zu öffnen: Alter, Beruf, Gesundheit, Gabe… Zum Zoomen zwei Finger oder das Mausrad benutzen.'],['Die große Liebe','Ab 18 findest du hier (oder über deine Karte) die große Liebe. Als Paar könnt ihr heiraten und Kinder bekommen.'],['Weitermachen','Niemand lebt ewig: Stirbt deine Figur, spielst du mit einem ihrer Nachkommen weiter. Ohne Erben endet die Blutlinie.'],['Cyn','Geburten, Stars, Verbrecher… Ereignisse bringen dir Cyn. Tippe auf den Zähler, um den Shop zu öffnen.'],['Der Shop','Gib deine Cyn aus: Star-Baby, Fruchtbarkeit, Immunität, Heiltrank, neue Designs…'],['Das Album','Alles, was du entdeckst (Berufe, Krankheiten, Schulen…), bleibt hier für immer gespeichert, von Spiel zu Spiel.'],['Erfolge','Herausforderungen über alle deine Spiele hinweg. Manche schalten Designs frei.'],['Die Chronik','Geburten, Hochzeiten, Krankheiten, Todesfälle: Alles, was deiner Familie passiert, wird hier erzählt.'],['Automodus','Willst du nur zuschauen? Der Automodus spielt für dich.'],['Einstellungen','Einstellungen (Ton, Design, Sprache) und Anpassung (Spielregeln) findest du genau hier.'],['Jetzt du!','Du kannst dieses Tutorial jederzeit in den Einstellungen erneut starten. Viel Glück mit deiner Blutlinie!']],
+  shop_eyebrow:'Gib deine Cyn aus', shop_potion:'Heiltrank', shop_potion_d:'Heilt alle Krankheiten eines Familienmitglieds deiner Wahl, selbst die schwersten.',
+  shop_potion_none:'Niemand in der Familie ist krank.', pick_potion:()=>'Wer soll den Trank trinken?', sick_soon:'Wird bald krank',
+  f_mild:'Leichte Krankheiten', sick_rib:()=>'Krank', alb_mild:'Krankheiten', until_y:y=>`bis ${y}`,
+  log_mild:(p,id)=>`${nm(p)} ist krank: ${mildName(id)} (leicht).`,
+  log_potion:p=>`${nm(p)} trinkt einen Heiltrank: keine Krankheit mehr!`,
+  alb_school:'Schulen & Ausbildungen', alb_mat:'Vorschule', alb_col:'Collège', alb_uni:'Studium', alb_appr:'Lehrling', alb_dropout:'Schulabbruch', shopc_births:'Geburten', shopc_self:'Deine Figur', shopc_family:'Familie', shopc_themes:'Designs',
+  shop_fertile:'Fruchtbarkeit', shop_fertile_d:'Die nächste Geburt deiner Figur wird eine Mehrlingsgeburt: Zwillinge (77 %), Drillinge (15 %) oder Vierlinge (8 %).',
+  shop_immune:'Immunität', shop_immune_d:'Deine Figur kann 50 Jahre lang weder krank werden noch einen Unfall haben.',
+  shop_midlife:'Midlife-Crisis', shop_midlife_d:'Deine Figur erhält eine zweite Gabe deiner Wahl.',
+  shop_reveil:'Schicksalserwachen', shop_reveil_d:'Wähle einen künftigen Star oder Verbrecher der Familie im volljährigen Alter: Sein Schicksal zeigt sich sofort.',
+  shop_reveil_none:a=>`Kein künftiger Star und kein künftiger Verbrecher ab ${a} Jahren in der Familie.`, pick_reveil:()=>'Wessen Schicksal soll erwachen?',
+  shop_decrim:'Entkriminalisierung', shop_decrim_d:'Wähle einen Verbrecher oder künftigen Verbrecher der Familie: Er wird wieder ein normaler Mensch.',
+  shop_immune_on:y=>`Bereits bis ${y} immun.`, shop_midlife_done:n=>`${n} hat bereits eine zweite Gabe.`, shop_decrim_none:'Keine Verbrecher in der Familie.',
+  shop_pick:'Wählen', shop_back:'Zurück zum Shop', pick_decrim:()=>'Wer soll wieder ein normaler Mensch werden?', pick_midlife:n=>`Welche Gabe erhält ${n}?`,
+  f_atout2:'Zweite Gabe', f_immune:'Immunität', immune_until:y=>`Keine Krankheit und kein Unfall bis ${y}`,
+  log_decrim:p=>`${nm(p)} ist kein Verbrecher mehr und wird wieder ein normaler Mensch.`,
+  log_midlife:(p,a)=>`Midlife-Crisis: ${nm(p)} erhält die Gabe ${atoutName(a, P(p))}!`,
+  log_immune:(p,y)=>`${nm(p)} ist bis ${y} gegen Krankheiten und Unfälle immun.`, shop_dark:'Design Obsidian', shop_dark_d:'Schaltet das Design Obsidian dauerhaft frei.',
+  skin_locked_dark:'Im Shop für 5.000 Cyn erhältlich.',
+  cg_title:'Wie verdiene ich Cyn?', cg_hide:'Ausblenden', cg_birth:'Eine Geburt', cg_starkid:'Ein Starkind wird geboren', cg_star:'Ein Star wird berühmt',
+  cg_crim:'Ein Verbrecher wird enttarnt', cg_murder:'Ein Mord',
+  alb_sort:'Sortieren', alb_s_az:'A bis Z', alb_s_year:'Jahr des Erscheinens', alb_s_found:'Zuerst freigeschaltet', alb_s_order:'Reihenfolge der Entdeckung',
+  shop:'Shop', shop_star:'Nächstes Baby wird ein Star', shop_star_d:'Die nächste Geburt deiner Figur wird ein künftiger Star.',
+  shop_crim:'Nächstes Baby wird ein Verbrecher', shop_crim_d:'Die nächste Geburt deiner Figur wird ein künftiger Verbrecher.',
+  shop_orange:'Design Orange', shop_orange_d:'Schaltet das Design Orange dauerhaft frei.', shop_owned:'Gekauft', shop_confirm:'Bestätigen?',
+  shop_need_game:'Starte ein Spiel, um das zu kaufen.', shop_pending:'Bestellt: Die nächste Geburt ist reserviert.', shop_other_pending:'Eine andere Geburt ist bereits bestellt.',
+  shop_missing:n=>`Es fehlen ${n} Cyn.`, shop_hint:'Cyn verdienst du beim Spielen: 10 pro Geburt, 25 für ein Starkind, 200, wenn ein Star berühmt wird, 100, wenn ein Verbrecher enttarnt wird, und 50 pro Mord.',
+  skin_locked_orange:'Im Shop für 830 Cyn erhältlich.',
+  set_wipe:'Alles zurücksetzen', set_wipe_hint:'Löscht wirklich alles: Cyn, Erfolge, Spiele, Album, freigeschaltete Designs und Einstellungen.', wipe_btn:'Alles löschen',
+  wipe_steps:['Bestätigt?','Wirklich?','Sicher?','Okay!!'],
+  alb_count:(n,m)=>`${n} / ${m} entdeckt`, alb_int:'Hobbys', alb_cond:'Besonderheiten', alb_job:'Berufe', alb_death:'Todesarten', alb_addict:'Süchte',
+  alb_always:'Jede Epoche', alb_from:a=>`Ab ${a}`, alb_until:b=>`Bis ${b}`, alb_range:(a,b)=>`${a} bis ${b}`,
+  alb_d_old:'Altersschwäche', alb_d_murder:'Mord', alb_d_suicide:'Suizid', alb_d_vanished:'Verschwunden', alb_d_legend:'In die Legende eingegangen',
+  alb_add:(r,dz)=>`+${r} Sterberisiko pro Jahr (×2 ab 60, ×4 ab 70).` + (dz.length ? ` Kann führen zu: ${dz.join(', ')}.` : ''),
+  alb_hint:'Alles, was in deinen Spielen auftaucht, wird hier für immer entdeckt.',
+  f_interests:'Hobbys', log_interest:(p,id)=>`${nm(p)} entdeckt eine neue Leidenschaft: ${intName(id, P(p))}.`,
+  skin_locked_night:'Das Nacht-Design wird freigeschaltet, wenn ein Verbrecher sein erstes Opfer fordert.',
+  skin_locked_neon:'Das Neon-Design wird freigeschaltet, wenn eine Familie 16 Generationen erreicht.', skin_locked_kid:'Das Design Kindlich wird bei der Geburt von Vierlingen freigeschaltet.',
+  log_neon_skin:()=>'16 Generationen! Das Neon-Design ist jetzt in den Einstellungen verfügbar.', log_kid_skin:()=>'Vierlinge! Das Design Kindlich ist jetzt in den Einstellungen verfügbar.',
+  unknown_places:'Unbekannte Orte', map_zoom_in:'Karte vergrößern', map_zoom_out:'Karte verkleinern', map_zoom_reset:'Ganz Frankreich', log_addict:(p,a)=>`${nm(p)} verfällt ${DEx.add[a] ? DEx.add[a][2] : ADD[a][8]}.`,
+  crim_future:p=>`☠ ${g(p,'Künftiger Verbrecher','Künftige Verbrecherin')}`, crim_now:p=>`☠ ${g(p,'Verbrecher','Verbrecherin')}`, crim_jail:()=>'⛓ Im Gefängnis', star_kid:'★ Starkind',
+  prison:'Im Gefängnis', vanished_short:()=>'Verschwunden', f_crime:'Vorstrafen',
+  crime_future:p=>g(p,'Künftiger Verbrecher','Künftige Verbrecherin'), crime_now:p=>g(p,'Berüchtigter Verbrecher','Berüchtigte Verbrecherin'), crime_fate_prison:p=>g(p,'Berüchtigter Verbrecher, im Gefängnis','Berüchtigte Verbrecherin, im Gefängnis'),
+  f_starkid:'Starkind', starkid_val:'Im Rampenlicht aufgewachsen',
+  cause_murder:(p,k)=>`ermordet von ${nm(k)}`, cause_vanished:()=>'spurlos verschwunden', cause_suicide:'Suizid',
+  log_crim_declared:p=>`${nm(p)} wird ${g(P(p),'ein berüchtigter Verbrecher','eine berüchtigte Verbrecherin')}! Die nahen Angehörigen sind in Gefahr.`,
+  log_crim_prison:p=>`${nm(p)} wird verhaftet und ins Gefängnis gesteckt.`,
+  log_death_murder:(p,k,a)=>`${nm(p)} wird mit ${a} Jahren von ${nm(k)} ermordet.`,
+  log_vanished:p=>`${nm(p)} verschwindet spurlos.`,
+  log_death_suicide:(p,a)=>`Von den eigenen Verbrechen verfolgt, nimmt sich ${nm(p)} mit ${a} Jahren das Leben.`
+};
+
+/* ================= Deutsch : noms des données du jeu (métiers, centres d'intérêt, maladies, succès…) ================= */
+const DEx = {};
+const deMF = (m, f) => [m, f === undefined ? (m.endsWith('e') ? m.slice(0, -1) + 'in' : m + 'in') : f];
+DEx.job = Object.fromEntries(Object.entries({
+  uxdesign:['UX-Designer'], repsmart:['Smartphone-Reparateur'], escapegm:['Escape-Room-Spielleiter'], gardechasse:['Wildhüter'], eclusier:['Schleusenwärter'],
+  criminologue:['Kriminologe','Kriminologin'], organiste:['Kirchenorganist'], souffleur:['Glasbläser'], maitreverrier:['Glasermeister'], kungfu:['Kung-Fu-Lehrer'],
+  taxidermiste:['Tierpräparator'], laboureur:['Ackerknecht','Ackermagd'], tisserand:['Weber'], forgeron:['Schmied'], meunier:['Müller'], cordonnier:['Schuster'],
+  tonnelier:['Böttcher'], charpentier:['Zimmermann','Zimmerin'], marchand:['Händler'], aubergiste:['Gastwirt'], boulanger:['Bäcker'], lavandiere:['Wäscher'],
+  fileuse:['Spinner'], sagefemme:['Bader','Hebamme'], domestique:['Diener','Magd'], berger:['Schäfer'], vigneron:['Winzer'], notaire:['Notar'], apothicaire:['Apotheker'],
+  soldat:['Soldat'], macon:['Maurer'], pecheur:['Fischer'], imprimeur:['Drucker'], medecin:['Arzt','Ärztin'], avocat:['Anwalt','Anwältin'], architecte:['Architekt'],
+  professeur:['Lehrer'], cuisinier:['Koch','Köchin'], boucher:['Metzger'], couturier:['Schneider'], horloger:['Uhrmacher'], epicier:['Krämer'], ingenieur:['Ingenieur'],
+  modiste:['Hutmacher'], cultivateur:['Bauer','Bäuerin'], pharmacien:['Apotheker'], cafetier:['Cafébesitzer'], gendarme:['Gendarm'], comptable:['Buchhalter'],
+  ouvrier:['Fabrikarbeiter'], mineur:['Bergmann','Bergarbeiterin'], instituteur:['Volksschullehrer'], facteur:['Briefträger'], journaliste:['Journalist'], cheminot:['Eisenbahner'],
+  photographe:['Fotograf'], telegraphiste:['Telegrafist'], veterinaire:['Tierarzt','Tierärztin'], employe:['Büroangestellter','Büroangestellte'], infirmier:['Krankenpfleger','Krankenschwester'],
+  mecanicien:['Mechaniker'], dactylo:['Schreibkraft','Schreibkraft'], commercant:['Ladenbesitzer'], coiffeur:['Friseur','Friseurin'], banquier:['Bankangestellter','Bankangestellte'],
+  policier:['Polizist'], electricien:['Elektriker'], secretaire:['Sekretär'], standardiste:['Telefonist'], chauffeurbus:['Busfahrer'], agriculteur:['Landwirt'],
+  routier:['Lkw-Fahrer'], aidesoignant:['Pflegehelfer'], informaticien:['Informatiker'], graphiste:['Grafiker'], chefprojet:['Projektleiter'], developpeur:['Entwickler'],
+  eolien:['Windkrafttechniker'], livreur:['Fahrradkurier'], community:['Community-Manager'], datascientist:['Datenwissenschaftler'], dentiste:['Zahnarzt','Zahnärztin'],
+  orthophoniste:['Logopäde','Logopädin'], psychologue:['Psychologe','Psychologin'], zoologiste:['Zoologe','Zoologin'], explorateurj:['Entdecker'], cartographe:['Kartograf'],
+  academicien:['Akademiemitglied','Akademiemitglied'], plombier:['Klempner'], interimaire:['Zeitarbeiter'], astrophysicien:['Astrophysiker'], conseiller:['Berater'],
+  brocanteur:['Trödler'], esportpro:['E-Sportler'], radio:['Radiomoderator'], tele:['Fernsehmoderator'], thanato:['Thanatopraktiker'], kine:['Physiotherapeut'],
+  sexologue:['Sexualtherapeut'], enqueteur:['Ermittler'], hote:['Empfangsmitarbeiter'], commis:['Gehilfe','Gehilfin'], patissier:['Konditor'], chirurgien:['Chirurg'],
+  educateur:['Erzieher'], nounou:['Kindermädchen','Kindermädchen'], influenceur:['Influencer'], meteorologue:['Meteorologe','Meteorologin'], tabagiste:['Tabakhändler'],
+  batisseur:['Baumeister'], endocrino:['Endokrinologe','Endokrinologin'], psychiatre:['Psychiater'], puericulteur:['Säuglingspfleger'], ostreiculteur:['Austernzüchter'],
+  horticulteur:['Gärtnermeister'], biologiste:['Biologe','Biologin'], jardinier:['Gärtner'], agentsurface:['Reinigungskraft','Reinigungskraft'], entrepreneur:['Unternehmer'],
+  barbier:['Barbier'], caviste:['Weinhändler'], militaire:['Berufssoldat'], dresseuria:['KI-Trainer'], progamer:['Profi-Gamer'], vrgamer:['VR-Profi-Gamer'],
+  dodologiste:['Dodologe','Dodologin'], biomedecin:['Biomediziner'], spatial:['Mitarbeiter im Raumfahrtdienst','Mitarbeiterin im Raumfahrtdienst'], terraformeur:['Terraformer'], cybertech:['Cybertechniker'],
+  novaphysiste:['Novaphysiker'], aetra:['Aetra-Reiniger'], tatoueur:['Tätowierer'], clown:['Clown'], barista:['Barista','Barista'], barman:['Barkeeper'],
+  robotique:['Robotiktechniker'], mondes:['Architekt virtueller Welten','Architektin virtueller Welten'], reparateur:['Reparaturhandwerker'], dronepilote:['Drohnenpilot'],
+  vertical:['Vertikallandwirt'], genetique:['Gentherapeut'], fusion:['Fusionsingenieur'], orbite:['Orbitalrecycler'], guidespatial:['Weltraumführer'], artnum:['Digitalkünstler'],
+  decorateur:['Dekorateur'], tapissier:['Polsterer'], inventeur:['Erfinder'], speedrunner:['Speedrunner'], bucheron:['Holzfäller'], investisseur:['Investor'],
+  tradercrypto:['Krypto-Trader'], anim3d:['3D-Animator'], anim2d:['2D-Animator'], dessinateur:['Zeichner'], illustrateur:['Illustrator'], storyboarder:['Storyboarder'],
+  eboueur:['Müllwerker'], municipal:['Gemeindeangestellter','Gemeindeangestellte'], neurologue:['Neurologe','Neurologin'], geologue:['Geologe','Geologin'],
+  archeologue:['Archäologe','Archäologin'], gamedesigner:['Gamedesigner'], infographiste:['Infografiker'], devjeu:['Spieleentwickler'], programmeur:['Programmierer'],
+  sculpteurj:['Bildhauer'], youtubeurj:['YouTuber'], doubleur:['Synchronsprecher'], commercial:['Vertriebsmitarbeiter'], assureur:['Versicherungsvertreter'],
+  tailleurpierre:['Steinmetz'], bijoutier:['Schmuckhändler'], soudeur:['Schweißer'], livreur2:['Auslieferer'], taxi:['Taxifahrer'], surveillant:['Schulaufsicht','Schulaufsicht'],
+  cpe:['Schulberater'], joaillier:['Juwelier'], historien:['Historiker'], detective:['Privatdetektiv'], botaniste:['Botaniker'], charcutier:['Wurstmacher'],
+  archiviste:['Archivar'], maire:['Bürgermeister'], depute:['Abgeordneter','Abgeordnete'], senateur:['Senator'], ministre:['Minister'], premierministre:['Premierminister'],
+  president:['Präsident der Republik','Präsidentin der Republik'], pizzaiolo:['Pizzabäcker'], artisterue:['Straßenkünstler'], mendiant:['Bettler'], agentsecret:['Geheimagent'],
+  espion:['Spion'], pretre:['Priester','Ordensschwester'], astromeca:['Astro-Mechaniker'], proviseur:['Schulleiter'], moniteurae:['Fahrlehrer'], mathematicien:['Mathematiker'],
+  projectionniste:['Filmvorführer'], receptionniste:['Rezeptionist'], ambassadeur:['Botschafter'], calineur:['Kuschler'], createurespece:['Artenschöpfer'],
+  paleontologue:['Paläontologe','Paläontologin'], egyptologue:['Ägyptologe','Ägyptologin'], brasseur:['Bierbrauer'], tavernier:['Schankwirt'], bourreau:['Henker'],
+  concierge:['Hausmeister'], gardienprison:['Gefängniswärter'], therapeuteia:['KI-Therapeut'], pilotetaxidrone:['Drohnentaxi-Pilot'], nettoyeurorbital:['Orbitalreiniger'],
+  fermier:['Bauer','Bäuerin'], chasseur:['Jäger'], chocolatier:['Chocolatier'], vigile:['Wachmann','Wachfrau'], gardecorps:['Leibwächter'], voyant:['Hellseher'],
+  allumeur:['Laternenanzünder'], porteureau:['Wasserträger'], poinconneur:['Fahrkartenknipser'],
+  beefeater:['Wärter des Tower of London','Wärterin des Tower of London'], ramoneur:['Schornsteinfeger'], docker:['Hafenarbeiter'], filature:['Baumwollspinner'],
+  majordome:['Butler','Haushälterin'], laitier:['Milchmann','Milchfrau'], forestier:['Förster'], ouvrierauto:['Automobilarbeiter'], lebkuchen:['Lebkuchenbäcker'],
+  gardesuisse:['Schweizergardist','Schweizergardistin'], fromager:['Käser'], guide:['Bergführer'], moniteurski:['Skilehrer'], armailli:['Senn','Sennerin'], banquierprive:['Privatbankier']
+}).map(([k, v]) => [k, deMF(v[0], v[1])]));
+DEx.jobc = {   // métiers renommés selon le pays de la partie
+  uk:{president:['Premierminister','Premierministerin'], premierministre:['Schatzkanzler','Schatzkanzlerin'], senateur:['Mitglied des Oberhauses','Mitglied des Oberhauses'],
+    depute:['Unterhausabgeordneter','Unterhausabgeordnete'], academicien:['Mitglied der Royal Society','Mitglied der Royal Society'], proviseur:['Schulleiter','Schulleiterin'],
+    poinconneur:['Fahrkartenkontrolleur','Fahrkartenkontrolleurin'], vigneron:['Hopfenbauer','Hopfenbäuerin'], tabagiste:['Zeitungshändler','Zeitungshändlerin'],
+    cafetier:['Pubwirt','Pubwirtin'], charcutier:['Fischhändler','Fischhändlerin'], avocat:['Barrister','Barrister']},
+  de:{president:['Bundeskanzler','Bundeskanzlerin'], premierministre:['Ministerpräsident','Ministerpräsidentin'], senateur:['Mitglied des Bundesrats','Mitglied des Bundesrats'],
+    depute:['Bundestagsabgeordneter','Bundestagsabgeordnete'], maire:['Bürgermeister','Bürgermeisterin'], academicien:['Akademiemitglied','Akademiemitglied'], cafetier:['Wirt','Wirtin']},
+  ch:{president:['Bundespräsident','Bundespräsidentin'], premierministre:['Bundesrat','Bundesrätin'], senateur:['Ständerat','Ständerätin'], depute:['Nationalrat','Nationalrätin'],
+    ministre:['Regierungsrat','Regierungsrätin'], maire:['Gemeindepräsident','Gemeindepräsidentin']}
+};
+DEx.star = Object.fromEntries(Object.entries({peintre:['Maler'], ecrivain:['Schriftsteller'], comedien:['Schauspieler'], sculpteur:['Bildhauer'], explorateur:['Entdecker'],
+  compositeur:['Komponist'], opera:['Opernsänger'], chanteur:['Sänger'], cycliste:['Radsportstar','Radsportstar'], hautecouture:['Modeschöpfer'], aviateur:['Flieger'], acteur:['Filmschauspieler'],
+  footballeur:['Fußballer'], chef:['Sternekoch','Sterneköchin'], pilotef1:['Formel-1-Fahrer'], astronaute:['Astronaut'], youtubeur:['YouTuber'], esport:['E-Sport-Champion'],
+  holo:['Holovisionsstar','Holovisionsstar'], streamstar:['Streamingstar','Streamingstar'], speedstar:['Legendärer Speedrunner','Legendäre Speedrunnerin']}).map(([k, v]) => [k, deMF(v[0], v[1])]));
+DEx.starc = {uk:{cycliste:['Cricketstar','Cricketstar']}};
+DEx.int = Object.fromEntries(Object.entries({naturiste:['Naturist'], nudiste:['FKK-Anhänger'], campeur:['Camper'], escalade:['Kletterer'], urbex:['Urbex-Fan','Urbex-Fan'],
+  langmortes:['Liebhaber toter Sprachen','Liebhaberin toter Sprachen'], radioam:['Funkamateur','Funkamateurin'], paintball:['Paintballspieler'], airsoft:['Airsoftspieler'], geek:['Geek','Geek'],
+  furry:['Furry-Fan','Furry-Fan'], kpop:['K-Pop-Stan','K-Pop-Stan'], auto:['Autonarr','Autonärrin'], otaku:['Otaku','Otaku'], sorcier:['Zauberer','Hexe'], globe:['Weltenbummler'],
+  peintre:['Kunstmaler'], musicien:['Musiker'], chanteur:['Sänger'], athletique:['Athletisch','Athletisch'], sportif:['Sportler'], bodybuilder:['Bodybuilder'], comedien:['Schauspieler'],
+  techno:['Techno-Fan','Techno-Fan'], tektonik:['Tecktonik-Fan','Tecktonik-Fan'], trance:['Trance-Fan','Trance-Fan'], beatmaker:['Beatmaker'], breakdance:['Breakdancer'],
+  lecture:['Bücherwurm','Bücherwurm'], jardin:['Hobbygärtner'], astro:['Hobbyastronom'], gourmet:['Feinschmecker'], photo:['Hobbyfotograf'], bal:['Gesellschaftstänzer'],
+  echecs:['Schachspieler'], cheval:['Reiter'], poesie:['Dichter'], skate:['Skater'], cosplay:['Cosplayer'], streamer:['Streamer'], metavers:['Metaverse-Entdecker'],
+  holo:['Hologramm-Fan','Hologramm-Fan'], golf:['Golfer'], informatique:['Computerfan','Computerfan'], crypto:['Krypto-Fan','Krypto-Fan'], cuisine:['Hobbykoch','Hobbyköchin'],
+  peche:['Angler'], randonnee:['Wanderer','Wanderin'], gamer:['Gamer'], timbres:['Briefmarkensammler'], cinephile:['Cineast'], ornitho:['Hobby-Ornithologe','Hobby-Ornithologin'],
+  orages:['Sturmjäger'], spatial:['Weltraumtourist'], robots:['Roboterdresseur','Roboterdresseurin'], zerog:['Schwerelosigkeitssportler'], reves:['Traumreisender','Traumreisende'],
+  faucon:['Falkner'], duel:['Duellant'], paume:['Jeu-de-Paume-Spieler'], alchimie:['Hobbyalchemist'], vaporwave:['Vaporwave-Fan','Vaporwave-Fan'], rap:['Rap-Fan','Rap-Fan'],
+  gangster:['Gangster'], dealeur:['Dealer'], collecjeux:['Spielesammler'], retrogamer:['Retro-Gamer'], graffeur:['Sprayer'], starwars:['Serienjunkie','Serienjunkie'],
+  fanof:['Fan eines Familienstars','Fan eines Familienstars'], comics:['Comic-Fan','Comic-Fan'], streamex:['Extraplanetarer Streamer','Extraplanetare Streamerin'], tiktok:['TikToker'], neotiktok:['Neo-TikToker'],
+  cricket:['Cricketspieler'], flechettes:['Dartspieler'], pubquiz:['Pub-Quiz-Stammgast','Pub-Quiz-Stammgast'], the:['Teekenner'], trainspot:['Trainspotter'], morris:['Morristänzer'],
+  schrebergarten:['Schrebergärtner'], karneval:['Karnevalist'], oktoberfest:['Oktoberfest-Stammgast','Oktoberfest-Stammgast'], modelleisenbahn:['Modelleisenbahner'],
+  skat:['Skatspieler'], jodel:['Jodler'], schwingen:['Schwinger'], ski:['Skifahrer'], cordesalpes:['Alphornbläser'], jass:['Jasser']
+}).map(([k, v]) => [k, deMF(v[0], v[1])]));
+DEx.cond = Object.fromEntries(Object.entries({schizo:'Schizophrenie', bipolaire:'Bipolare Störung', tdah:'ADHS', autisme:'Autismus', autisme_nv:'Nonverbaler Autismus',
+  toc:'Zwangsstörung', tourette:'Tourette-Syndrom', anxiete:'Angststörung', dyslexie:'Legasthenie', sourd:['Gehörlos','Gehörlos'], aveugle:['Blind','Blind'], muet:['Stumm','Stumm'],
+  epilepsie:['Epileptiker','Epileptikerin'], daltonien:['Farbenblind','Farbenblind'], trisomie:'Down-Syndrom', nanisme:'Kleinwuchs', gigantisme:'Riesenwuchs', begaiement:'Stottern',
+  hpi:'Hochbegabt', monochrom:'Monochromasie', deprchron:'Chronische Depression', tsa:'Autismus-Spektrum-Störung', anxsoc:'Soziale Angst', cyclothymie:'Zyklothymie',
+  definte:'Geistige Behinderung', boulimie:['Bulimiker','Bulimikerin'], insomnie:['Schlaflos','Schlaflos'], narcolepsie:['Narkoleptiker','Narkoleptikerin'], anxchron:'Chronische Angst',
+  maniaque:['Pedant','Pedantin'], borderline:'Borderline', pmr:'Eingeschränkte Mobilität', psychopathe:['Psychopath','Psychopathin'], diogene:'Diogenes-Syndrom',
+  delirant:'Wahnhafte Störung', oniomanie:'Kaufsucht', tdi:'Dissoziative Identitätsstörung', alice:'Alice-im-Wunderland-Syndrom', cotard:'Cotard-Syndrom', capgras:'Capgras-Syndrom'
+}).map(([k, v]) => [k, Array.isArray(v) ? v : [v, v]]));
+DEx.add = {tabac:['Raucher','Raucherin','dem Rauchen'], alcool:['Alkoholiker','Alkoholikerin','dem Alkohol'], cafe:['Kaffeesüchtig','Kaffeesüchtig','der Kaffeesucht'],
+  jeux:['Videospielsüchtig','Videospielsüchtig','der Videospielsucht'], cannabis:['Cannabiskonsument','Cannabiskonsumentin','dem Cannabis'], lsd:['LSD-Konsument','LSD-Konsumentin','dem LSD'],
+  casino:['Spielsüchtig','Spielsüchtig','der Spielsucht'], cyngen:['Cyngenetiker','Cyngenetikerin','dem Cyngenetismus'], ecstasy:['Ecstasy-Konsument','Ecstasy-Konsumentin','dem Ecstasy'],
+  sexe:['Sexsüchtig','Sexsüchtig','der Sexsucht']};
+DEx.field = {med:'Medizin', droit:'Jura', lettres:'Literatur', arts:'Kunst', sciences:'Naturwissenschaften', pharma:'Pharmazie', eco:'Wirtschaft', journal:'Journalismus', info:'Informatik'};
+DEx.track = {bacphilo:'Bac Philosophie', bacsci:'Bac Naturwissenschaften', baca:'Bac A (Literatur)', bacc:'Bac C (Mathematik)', bacgen:'Bac général', bactech:'Bac technologique',
+  bacprocom:'Bac Pro Handel', bacproelec:'Bac Pro Elektrotechnik', bacprorobot:'Bac Pro Robotik', capcuisine:'CAP Küche', capcoif:'CAP Friseurhandwerk', capmenu:'CAP Tischlerei',
+  bma:'BMA Kunsttischlerei', bep:'BEP Buchhaltung', capflemme:'Faulenzer-Diplom',
+  alevsci:'A-Levels Naturwissenschaften', alevhum:'A-Levels Geisteswissenschaften', alevmath:'A-Levels Mathematik', alevart:'A-Levels Kunst', btecbiz:'BTEC Wirtschaft', btecit:'BTEC IT',
+  btecelec:'BTEC Elektrotechnik', nvqcook:'NVQ Gastronomie', nvqhair:'NVQ Friseurhandwerk', appcarp:'Tischlerlehre', cityguilds:'City & Guilds Mechanik',
+  abinat:'Abitur Naturwissenschaften', abisprach:'Abitur Sprachen', abimath:'Abitur Mathematik', abikunst:'Abitur Kunst', ausbkfz:'Ausbildung Kfz-Mechatroniker',
+  ausbbuero:'Ausbildung Bürokaufmann', ausbelek:'Ausbildung Elektriker', ausbkoch:'Ausbildung Koch', ausbfriseur:'Ausbildung Friseur', ausbbank:'Ausbildung Bankkaufmann',
+  matsci:'Matura Naturwissenschaften', matlang:'Matura Sprachen', mateco:'Matura Wirtschaft', cfcpoly:'EFZ Polymechaniker', cfccom:'EFZ Kaufmann', cfchorlo:'EFZ Uhrmacher',
+  cfcinfo:'EFZ Informatiker', cfccuis:'EFZ Koch'};
+DEx.atout = {intel:['Intelligenz','Intelligenz','Stirbt nie bei einem Haushalts- oder Verkehrsunfall.'], charisme:['Charisma','Charisma','Der Heiratsantrag wird immer angenommen.'],
+  social:['Geselligkeit','Geselligkeit','6 statt 3 Vorschläge bei der Suche nach der großen Liebe.'], courage:['Mut','Mut','Kein Verbrecher kann ihm oder ihr das Leben nehmen.'],
+  crea:['Kreativität','Kreativität','Mit einem künstlerischen Beruf wird man immer ein Star.'], ego:['Egoismus','Egoismus','12 % Risiko, ein Kind zu bekommen, das ein künftiger Verbrecher ist (statt 2 %).'],
+  chance:['Glück','Glück','12 % Chance auf ein Kind, das ein künftiger Star ist (statt 2,5 %).'], sante:['Gesundheit','Gesundheit','Wird vor 60 nie krank.'],
+  fertile:['Fruchtbarkeit','Fruchtbarkeit','Zwillinge, Drillinge und Vierlinge 10-mal häufiger.'], longevite:['Langlebigkeit','Langlebigkeit','Zwischen 80 und 105 zehnmal seltener Tod durch Altersschwäche.'],
+  richesse:['Reichtum','Reichtum','Verdient lebenslang doppelt so viele Cyn, auch bei der Geburt der eigenen Kinder.'], ambition:['Ehrgeiz','Ehrgeiz','Wer in die Politik geht, hat 33 % Chance, Präsident zu werden.']};
+DEx.warc = {front:['an der Front gefallen','fällt an der Front'], canon:['von einer Kanonenkugel getötet','wird von einer Kanonenkugel getötet'], gaz:['in den Schützengräben vergast','wird in den Schützengräben vergast'],
+  fusille:['erschossen','wird erschossen'], collabo:['als Kollaborateur hingerichtet','wird als Kollaborateur hingerichtet'], bombarde:['bei einem Bombenangriff getötet','kommt bei einem Bombenangriff ums Leben'],
+  deporte:['in der Deportation gestorben','stirbt in der Deportation'], siege:['während einer Belagerung verhungert','verhungert während einer Belagerung'], massacre:['niedergemetzelt','wird niedergemetzelt'],
+  embuscade:['in einem Hinterhalt getötet','wird in einem Hinterhalt getötet'], drone:['durch einen Drohnenangriff getötet','wird durch einen Drohnenangriff getötet']};
+
+DEx.dz = {peste:['Pest','der Pest'], variole:['Pocken','den Pocken'], dysenterie:['Ruhr','der Ruhr'], typhus:['Fleckfieber','Fleckfieber'], tuberculose:['Tuberkulose','Tuberkulose'],
+  cholera:['Cholera','der Cholera'], typhoide:['Typhus','Typhus'], diphterie:['Diphtherie','Diphtherie'], rougeole:['Masern','den Masern'], puerperale:['Kindbettfieber','Kindbettfieber'],
+  grippe:['Spanische Grippe','der Spanischen Grippe'], pneumonie:['Lungenentzündung','einer Lungenentzündung'], polio:['Kinderlähmung','Kinderlähmung'], cancer:['Krebs','Krebs'],
+  cancerpoumon:['Lungenkrebs','Lungenkrebs'], cancersein:['Brustkrebs','Brustkrebs'], leucemie:['Leukämie','Leukämie'], coeur:['Herzkrankheit','einer Herzkrankheit'],
+  avc:['Schlaganfall','einem Schlaganfall'], sida:['Aids','Aids'], covid:['Covid-19','Covid-19'], alzheimer:['Alzheimer','Alzheimer'], neodengue:['Neo-Dengue','Neo-Dengue'],
+  helios:['Helios-Virus','dem Helios-Virus'], depression:['Suizidale Depression','einer suizidalen Depression'], domestique:['Haushaltsunfall','einem Haushaltsunfall'],
+  charrette:['Kutschenunfall','einem Kutschenunfall'], route:['Verkehrsunfall','einem Verkehrsunfall'], route2:['Verkehrsunfall','einem Verkehrsunfall'],
+  spatial:['Weltraumunfall','einem Weltraumunfall'], neurolink:['Defekter Neurolink','einem defekten Neurolink'], nanorobots:['Nanobot-Überdosis','einer Nanobot-Überdosis'],
+  cyber:['Defektes kybernetisches Implantat','einem defekten kybernetischen Implantat'], avc_tabac:['Schlaganfall durch Rauchen','einem Schlaganfall durch Rauchen'],
+  infarctus_tabac:['Herzinfarkt durch Rauchen','einem Herzinfarkt durch Rauchen'], poumon_tabac:['Lungenkrebs durch Rauchen','Lungenkrebs durch Rauchen'],
+  cirrhose:['Alkoholbedingte Leberzirrhose','einer alkoholbedingten Leberzirrhose'], accident_alcool:['Unfall unter Alkohol','einem Unfall unter Alkohol'],
+  avc_alcool:['Alkoholbedingter Schlaganfall','einem alkoholbedingten Schlaganfall'], anxiete_cafe:['Schwere Koffein-Angststörung','einer schweren Koffein-Angststörung'],
+  arret_cafe:['Herzstillstand durch Kaffee','einem Herzstillstand durch Kaffee'], rage_jeux:['Gaming-Wutanfall','einem Gaming-Wutanfall'], hygiene:['Schwere Verwahrlosung','schwerer Verwahrlosung'],
+  realite:['Realitätskrise','einer Realitätskrise'], avc_cannabis:['Schlaganfall durch Cannabis','einem Schlaganfall durch Cannabis'],
+  infarctus_cannabis:['Herzinfarkt durch Cannabis','einem Herzinfarkt durch Cannabis'], poumon_cannabis:['Lungenkrebs durch Cannabis','Lungenkrebs durch Cannabis'],
+  overdose_lsd:['LSD-Überdosis','einer LSD-Überdosis'], complic_lsd:['LSD-Komplikationen','LSD-Komplikationen'], badtrip:['Tödlicher Horrortrip','einem tödlichen Horrortrip'],
+  bagarre_casino:['Casino-Schlägerei','einer Casino-Schlägerei'], dettes_casino:['Tödliche Spielschulden','tödlichen Spielschulden'], rapt_casino:['Entführung im Casino','einer Entführung im Casino'],
+  cyn_liquefaction:['Gehirnverflüssigung durch Cyngenetik','einer Gehirnverflüssigung durch Cyngenetik'], cyn_paralysie:['Tödliche Cyngenetik-Lähmung','einer tödlichen Cyngenetik-Lähmung'],
+  cyn_fusion:['Verschmelzung mit Cyngenetik','einer Verschmelzung mit Cyngenetik'], overdose_ecstasy:['Ecstasy-Überdosis','einer Ecstasy-Überdosis'],
+  serotonine:['Serotoninsyndrom durch Ecstasy','einem Serotoninsyndrom durch Ecstasy'], hyperthermie:['Schwere Hyperthermie durch Ecstasy','einer schweren Hyperthermie durch Ecstasy'],
+  mst:['Geschlechtskrankheit','einer Geschlechtskrankheit'], ist:['Sexuell übertragbare Infektion','einer sexuell übertragbaren Infektion'], meningite:['Hirnhautentzündung','einer Hirnhautentzündung'],
+  tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], disparu:['Verschwinden','Verschwinden'],
+  mortcerebrale:['Hirntod','Hirntod'], necrose:['Nekrose','einer Nekrose'], diabete:['Diabetes','Diabetes'], embolie:['Lungenembolie','einer Lungenembolie'], paludisme:['Malaria','Malaria'],
+  grippeaviaire:['Vogelgrippe','der Vogelgrippe'], bpco:['COPD','COPD'], rage:['Tollwut','Tollwut']};
+DEx.mild = {gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheuma', teigne:'Scherpilzflechte', bronchite:'Chronische Bronchitis', zona:'Gürtelrose', eczema:'Ekzem',
+  psoriasis:'Schuppenflechte', asthme:'Asthma', migraine:'Chronische Migräne', hepatitea:'Hepatitis A', mono:'Pfeiffersches Drüsenfieber', dos:'Chronische Rückenschmerzen',
+  rachitisme:'Rachitis', acne:'Schwere Akne', burnout:'Burn-out', allergie:'Heuschnupfen', fievrenum:'Digitalfieber', nanoderm:'Nanodermatitis', grippemars:'Marsgrippe',
+  holosyndrome:'Hologramm-Syndrom', arthrose:'Arthrose', hypertension:'Bluthochdruck', hypothyroidie:'Schilddrüsenunterfunktion', angine:'Wiederkehrende Mandelentzündung',
+  sinusite:'Chronische Nebenhöhlenentzündung', anemie:'Blutarmut', varicelle:'Windpocken', otite:'Chronische Ohrenentzündung', cystite:'Wiederkehrende Blasenentzündung',
+  tendinite:'Sehnenentzündung', gastrite:'Gastritis', conjonctivite:'Bindehautentzündung', urticaire:'Chronischer Nesselausschlag', prediabete:'Prädiabetes',
+  polyarthrite:'Rheumatoide Arthritis', acouphenes:'Tinnitus', endometriose:'Endometriose', glaucome:'Grüner Star', cholesterol:'Hoher Cholesterinspiegel',
+  allergiesynth:'Allergie gegen synthetisches Protein', fatiguevr:'VR-Müdigkeit', dysgravite:'Dysgravitation', rejetimplant:'Abstoßung eines Neuroimplantats', covid:'Covid-19'};
+DEx.achcat = {age:'Alter', kids:'Kinder', star:'Stars', conq:'Eroberungen', crim:'Verbrecher', kill:'Verbrechen', time:'Die Zeit vergeht', other:'Sonstiges', album:'Album',
+  royal:'Königlich', zomb:'Zombie', vsn:'Versus Normal', vsr:'Versus Königlich', vsz:'Versus Zombie', legend:'Legende'};
+DEx.ach = {age100:['Hundertjährig','Ein Familienmitglied wird 100'], age110:['Superhundertjährig','Ein Familienmitglied wird 110'], age115:['Lebende Legende','Ein Familienmitglied wird 115'],
+  age120:['Unsterblich?','Ein Familienmitglied wird 120'], kids6:['Großfamilie','Eine Person hat 6 Kinder'], kids9:['Sippe','Eine Person hat 9 Kinder'], kids14:['Clan','Eine Person hat 14 Kinder'],
+  kids22:['Dynastie','Eine Person hat 22 Kinder'], star1:['Im Rampenlicht','2 Stars in einem Spiel'], star2:['Sternenregen','4 Stars in einem Spiel'], star4:['Sternbild','8 Stars in einem Spiel'],
+  star6:['Milchstraße','12 Stars in einem Spiel'], conq3:['Flatterhaftes Herz','Eine Person hatte 3 Partner'], conq6:['Herzensbrecher','Eine Person hatte 6 Partner'],
+  conq10:['Casanova','Eine Person hatte 10 Partner'], conq15:['Liebeslegende','Eine Person hatte 15 Partner'], crim1:['Schwarzes Schaf','2 Verbrecher in einem Spiel'],
+  crim2:['Schlechte Saat','4 Verbrecher in einem Spiel'], crim4:['Verbrecherfamilie','8 Verbrecher in einem Spiel'], crim6:['Familienkartell','12 Verbrecher in einem Spiel'],
+  kill2:['Doppelte Strafe','Ein Verbrecher begeht 4 Morde'], kill4:['Mordserie','Ein Verbrecher begeht 8 Morde'], kill6:['Serienmörder','Ein Verbrecher begeht 12 Morde'],
+  kill8:['Verbrecherlegende','Ein Verbrecher begeht 16 Morde'], time100:['Ein Jahrhundert','100 Jahre in einem Spiel'], time250:['Zweieinhalb Jahrhunderte','250 Jahre in einem Spiel'],
+  time500:['Ein halbes Jahrtausend','500 Jahre in einem Spiel'], time1000:['Jahrtausend','1.000 Jahre in einem Spiel'], quads:['Vier auf einmal','Vierlinge bekommen'],
+  grand40:['Junge Großeltern','Mit 40 oder jünger Großeltern werden'], sib50:['Generationenkluft','Geschwister mit 50 Jahren Abstand (Halbgeschwister zählen mit)'],
+  xmas:['Weihnachtsgeschenk','Am 25. Dezember geboren werden'], parent90:['Nie zu spät','Nach 90 Eltern werden'], maxage:['Bis zum Ende','Im Höchstalter (121) sterben'],
+  young:['Zu früh','Vor dem 10. Lebensjahr sterben'], boys5:['Nur Jungen','5 Söhne und keine Tochter haben'], girls5:['Nur Mädchen','5 Töchter und keinen Sohn haben'],
+  cured3:['Unverwüstlich','Dreimal im Leben eine tödliche Krankheit überstehen'], twins2:['Und noch einmal','Zweimal Zwillinge (oder mehr) mit demselben Partner'],
+  alb_i:['Hobby-Sammler','Die Kategorie Hobbys im Album vervollständigen'], alb_c:['Einzigartig','Die Kategorie Besonderheiten im Album vervollständigen'],
+  alb_r:['Mustergültige Herrschaft','Den königlichen Bereich des Albums vervollständigen'], alb_m:['Krankenakte','Den Bereich Krankheiten des Albums vervollständigen'],
+  alb_e:['Klassenbester','Den Bereich Schulen & Ausbildungen des Albums vervollständigen'], alb_j:['Alleskönner','Die Kategorie Berufe im Album vervollständigen'],
+  alb_d:['Tausendundein Tod','Die Kategorie Todesarten im Album vervollständigen'], alb_a:['Alle Versuchungen','Die Kategorie Süchte im Album vervollständigen'],
+  r_2100:['Ewige Herrschaft','Im Königsmodus 2100 erreichen, die Krone noch in der Familie'], r_nobles5:['Adelshof','5 Adlige in einem Spiel'],
+  r_heirkill:['Schatten über der Krone','Ein Thronfolger wird ermordet'], r_grandheir:['Staffelübergabe','Ein Enkelkind des Monarchen besteigt den Thron'],
+  r_nobleking:['Vom Wappen zur Krone','Ein Adliger wird König (oder Königin)'], r_lateheir:['Spätes Wunder','Ein König ohne Erben bekommt nach 80 einen neuen'],
+  ggp_fast:['Express-Urgroßeltern','Mit 58 oder jünger Urgroßeltern werden (52 bei Volljährigkeit mit 16, 68 mit 21)'],
+  gen25:['Generationenrennen','1780 starten und 2100 mit durchschnittlich 25 Jahren oder weniger pro Generation erreichen'],
+  gen22:['Express-Staffel','1780 starten und 2100 mit durchschnittlich 22 Jahren oder weniger pro Generation erreichen'],
+  gen20:['Stammbaum-Sprint','1780 starten und 2100 mit durchschnittlich 20 Jahren oder weniger pro Generation erreichen'],
+  gen19:['Allzeitrekord','1780 starten und 2100 mit durchschnittlich 19 Jahren oder weniger pro Generation erreichen'],
+  z1780:['Überlebender','Den Zombiemodus von 1780 bis 2100 beenden'], zd_easy:['Davongekommen','Ein Spiel im Zombiemodus auf Leicht beenden (1780 bis 2100)'],
+  zd_med:['Widerstandskämpfer','Ein Spiel im Zombiemodus auf Mittel beenden (1780 bis 2100)'], zd_hard:['Unverwüstlich','Ein Spiel im Zombiemodus auf Schwer beenden (1780 bis 2100)'],
+  zd_ext:['Weltuntergang','Ein Spiel im Zombiemodus auf Extrem beenden (1780 bis 2100)'],
+  vs_n_easy:['Erstes Duell','Ein normales Versus-Spiel auf Spaziergang gewinnen'], vs_n_std:['Duellant','Ein normales Versus-Spiel auf Standard gewinnen'],
+  vs_n_hard:['Große Odyssee','Ein normales Versus-Spiel auf Abenteuer gewinnen'], vs_n_ext:['Unschlagbar','Ein normales Versus-Spiel auf Extrem gewinnen'],
+  vs_r_easy:['Kleiner Prinz','Ein königliches Versus-Spiel auf Spaziergang gewinnen'], vs_r_std:['Thronanwärter','Ein königliches Versus-Spiel auf Standard gewinnen'],
+  vs_r_hard:['Krönung','Ein königliches Versus-Spiel auf Abenteuer gewinnen'], vs_r_ext:['Kaiser','Ein königliches Versus-Spiel auf Extrem gewinnen'],
+  vs_z_easy:['Spaziergang der Toten','Ein Zombie-Versus-Spiel auf Spaziergang gewinnen'], vs_z_std:['Zombiejäger','Ein Zombie-Versus-Spiel auf Standard gewinnen'],
+  vs_z_hard:['Letzte Bastion','Ein Zombie-Versus-Spiel auf Abenteuer gewinnen'], vs_z_ext:['Gezähmte Apokalypse','Ein Zombie-Versus-Spiel auf Extrem gewinnen'],
+  asteroid:['Vom Himmel getroffen','Ein Familienmitglied wird von einem Asteroiden getötet'], vs_all:['Meister des Duells','Die KI auf jedem Schwierigkeitsgrad in jedem Versus-Modus besiegen'],
+  leg_all:['Lebende Legende','Alle anderen Erfolge freischalten'], leg_album:['Volles Album','Alle Kategorien des Albums vervollständigen']};
+DEx.royal = {paix:'Unterzeichnet einen Friedensvertrag', guerre:'Erklärt den Krieg', chateau:'Lässt ein Schloss bauen', bal:'Gibt einen großen Ball', impot:'Führt eine neue Steuer ein',
+  baisse:'Senkt die Steuern', chasse:'Geht auf königliche Jagd', justice:'Spricht Recht', grace:'Begnadigt einen Gefangenen', academie:'Gründet eine Akademie',
+  portrait:'Sitzt für ein offizielles Porträt', ambassade:'Empfängt einen Botschafter', tournee:'Bereist die Provinzen', cathedrale:'Lässt eine Kathedrale bauen',
+  arts:'Fördert die Künste', armee:'Reformiert die Armee', pain:'Verteilt Brot an das Volk', canal:'Lässt einen Kanal graben', jardin:'Eröffnet einen königlichen Garten',
+  conseil:'Leitet den Kronrat', tournoi:'Veranstaltet ein Turnier', monnaie:'Lässt eine neue Münze prägen', expedition:'Schickt eine ferne Expedition los',
+  memoires:'Schreibt Memoiren', audience:'Gewährt dem Volk eine Audienz', flotte:'Lässt eine Flotte bauen', opera:'Gründet eine königliche Oper', festin:'Gibt ein großes Festmahl',
+  alliance:'Handelt ein Bündnis aus', route:'Lässt eine Königsstraße bauen', hopital:'Gründet ein Krankenhaus', feu:'Veranstaltet ein Feuerwerk', discours:'Hält eine Fernsehansprache',
+  visite:'Macht einen Staatsbesuch', fondation:'Leitet eine Wohltätigkeitsstiftung', reseaux:'Postet in sozialen Netzwerken', climat:'Startet einen großen Klimaplan',
+  ia:'Unterzeichnet einen Vertrag mit einer KI', hologramme:'Regiert per Hologramm', lune:'Eröffnet eine Mondbasis',
+  p_escrime:'Nimmt Fechtstunden', p_equitation:'Lernt reiten', p_precepteur:'Lernt bei einem Hauslehrer', p_bal:'Debütiert auf einem Ball', p_voyage:'Macht eine diplomatische Reise',
+  p_regiment:'Befehligt ein Regiment', p_chasse:'Nimmt an der königlichen Jagd teil', p_conseil:'Sitzt im Kronrat', p_mecene:'Fördert einen jungen Maler', p_pont:'Weiht eine neue Brücke ein',
+  p_charite:'Besucht ein Waisenhaus', p_clavecin:'Lernt Cembalo', p_portrait:'Sitzt für ein Porträt', p_langues:'Lernt Fremdsprachen', p_fete:'Gibt ein Fest im Palast',
+  p_attente:'Wartet darauf, regieren zu dürfen', p_ong:'Engagiert sich bei einer NGO', p_helico:'Hubschrauberpilot der Armee', p_marathon:'Läuft einen Benefizmarathon',
+  p_influence:'Königlicher Influencer', p_metavers:'Botschafter im Metaverse', p_drone:'Drohnenrennen-Champion', p_mars:'Fliegt auf Mission zum Mars', p_ocean:'Erkundet Unterwasserstädte',
+  n_domaine:'Verwaltet die eigenen Ländereien', n_ambassade:'Botschafter der Krone', n_gouverneur:'Provinzgouverneur', n_officier:'Offizier der Königlichen Garde',
+  n_chambellan:'Großkämmerer', n_mecene:'Kunstmäzen', n_ecuyer:'Oberstallmeister', n_veneur:'Oberjägermeister', n_orbital:'Gouverneur einer Orbitalstation', n_terraform:'Leitet das Terraforming',
+  nb_rentier:'Lebt von den eigenen Einkünften', nb_salon:'Führt einen literarischen Salon', nb_collection:'Kunstsammler', nb_vignoble:'Weingutsbesitzer', nb_haras:'Rennpferdezüchter',
+  nb_magistrat:'Richter', nb_diplomate:'Diplomat', nb_banquier:'Bankier', nb_theatre:'Mäzen eines Theaters', nb_chateau:'Restauriert das eigene Schloss', nb_philanthrope:'Philanthrop',
+  nb_seigneur:'Dorfherr', nb_mousquetaire:'Musketier des Königs', nb_courtisan:'Höfling', nb_spatial:'Investor in Raumfahrt-Start-ups', nb_robots:'Besitzer eines Roboterrennstalls',
+  nb_clones:'Züchter geklonter Pferde', nb_ile:'Besitzer einer schwimmenden Insel'};
+DEx.decn = {'Renaissance':'Renaissance','Châteaux de la Loire':'Schlösser der Loire',"L'imprimerie se répand":'Der Buchdruck verbreitet sich','Guerres de Religion':'Religionskriege',
+  'Henri IV et Louis XIII':'Heinrich IV. und Ludwig XIII.','La Fronde':'Die Fronde','Siècle de Louis XIV':'Zeitalter Ludwigs XIV.','Régence et salons':'Régence und Salons',
+  'Siècle des Lumières':'Zeitalter der Aufklärung','Révolution française':'Französische Revolution','Empire napoléonien':'Napoleonisches Kaiserreich','Restauration':'Restauration',
+  'Révolution industrielle':'Industrielle Revolution','Second Empire et Haussmann':'Zweites Kaiserreich und Haussmann','École gratuite et obligatoire':'Kostenlose Schulpflicht',
+  'Naissance du cinéma':'Geburt des Kinos','Belle Époque':'Belle Époque','Grande Guerre':'Erster Weltkrieg','Années folles et jazz':'Goldene Zwanziger und Jazz',
+  'Crise et congés payés':'Krise und bezahlter Urlaub','Guerre et Libération':'Krieg und Befreiung','Trente Glorieuses':'Die glorreichen Dreißig','Yé-yé et conquête spatiale':'Yé-yé und Raumfahrt',
+  'Décennie du disco':'Das Disco-Jahrzehnt','Walkman et synthés':'Walkman und Synthesizer','Décennie du hip-hop':'Das Hip-Hop-Jahrzehnt',"Décennie d'Internet":'Das Internet-Jahrzehnt',
+  'Smartphones et réseaux sociaux':'Smartphones und soziale Netzwerke','Intelligence artificielle':'Künstliche Intelligenz','Transition énergétique':'Energiewende',
+  'Voitures autonomes partout':'Überall selbstfahrende Autos','Robots domestiques':'Haushaltsroboter','Villes flottantes':'Schwimmende Städte','Premières colonies lunaires':'Erste Mondkolonien',
+  'Âge de la fusion':'Zeitalter der Kernfusion','Cap sur Mars':'Kurs auf den Mars',
+  'Les Tudor':'Die Tudors','Réforme anglaise':'Englische Reformation',"Âge d'or élisabéthain":'Elisabethanisches Zeitalter','Shakespeare et les Stuart':'Shakespeare und die Stuarts',
+  'Guerre civile et Cromwell':'Bürgerkrieg und Cromwell','La Restauration':'Die Restauration','Glorieuse Révolution':'Glorreiche Revolution','Époque géorgienne':'Georgianische Zeit',
+  'Guerres napoléoniennes':'Napoleonische Kriege','Régence et chemins de fer':'Regency und Eisenbahn','Ère victorienne':'Viktorianisches Zeitalter',
+  "Apogée de l'Empire britannique":'Höhepunkt des Britischen Empire','Époque édouardienne':'Edwardianische Zeit','Grande Dépression':'Große Depression','Blitz et victoire':'Blitz und Sieg',
+  'Reconstruction et NHS':'Wiederaufbau und NHS','Swinging Sixties et Beatles':'Swinging Sixties und Beatles','Punk et glam rock':'Punk und Glam-Rock','Années Thatcher':'Die Thatcher-Jahre','Britpop':'Britpop'};
+DEx.warn = {"Guerres d'Italie":'Italienkriege','Guerres de Religion':'Hugenottenkriege','Guerre de Trente Ans':'Dreißigjähriger Krieg','Guerre de Hollande':'Holländischer Krieg',
+  "Guerre de la Ligue d'Augsbourg":'Pfälzischer Erbfolgekrieg',"Guerre de Succession d'Espagne":'Spanischer Erbfolgekrieg','Guerre de Sept Ans':'Siebenjähriger Krieg',
+  "Guerres de la Révolution et de l'Empire":'Revolutions- und Napoleonische Kriege','Guerre franco-prussienne':'Deutsch-Französischer Krieg','Grande Guerre':'Erster Weltkrieg',
+  'Seconde Guerre mondiale':'Zweiter Weltkrieg',"Guerre d'Algérie":'Algerienkrieg',"Guerre de l'eau":'Der Wasserkrieg','Guerres anglo-écossaises':'Englisch-Schottische Kriege',
+  'Guerre anglo-espagnole':'Englisch-Spanischer Krieg','Guerres civiles anglaises':'Englische Bürgerkriege','Guerre anglo-néerlandaise':'Englisch-Niederländischer Krieg',
+  'Guerre de Neuf Ans':'Neunjähriger Krieg',"Guerre d'indépendance américaine":'Amerikanischer Unabhängigkeitskrieg','Guerres napoléoniennes':'Napoleonische Kriege',
+  'Guerre de Crimée':'Krimkrieg','Seconde guerre des Boers':'Zweiter Burenkrieg','Guerre de Corée':'Koreakrieg','Guerre des Malouines':'Falklandkrieg'};
+DEx.worldn = {
+  'Victoire de François Ier à Marignan.':'Sieg Franz I. bei Marignano.','Jacques Cartier atteint le Canada.':'Jacques Cartier erreicht Kanada.',
+  'Massacre de la Saint-Barthélemy.':'Bartholomäusnacht.',"L'édit de Nantes met fin aux guerres de Religion.":'Das Edikt von Nantes beendet die Religionskriege.',
+  'Assassinat du roi Henri IV.':'König Heinrich IV. wird ermordet.','Louis XIV devient roi à 4 ans.':'Ludwig XIV. wird mit 4 Jahren König.',
+  "La cour s'installe à Versailles.":'Der Hof zieht nach Versailles.','Mort de Louis XIV.':'Tod Ludwigs XIV.',
+  "Parution du premier tome de l'Encyclopédie.":'Der erste Band der Encyclopédie erscheint.','Premier vol habité en montgolfière.':'Erste bemannte Ballonfahrt.',
+  'Prise de la Bastille.':'Sturm auf die Bastille.','Proclamation de la République.':'Die Republik wird ausgerufen.','Sacre de Napoléon Ier.':'Napoleon wird zum Kaiser gekrönt.',
+  'Défaite de Napoléon à Waterloo.':'Napoleons Niederlage bei Waterloo.','Les Trois Glorieuses renversent Charles X.':'Die Julirevolution stürzt Karl X.',
+  'Naissance de la IIe République.':'Die Zweite Republik entsteht.','Proclamation de la IIIe République.':'Die Dritte Republik wird ausgerufen.',
+  "Lois Jules Ferry : l'école devient obligatoire.":'Gesetze von Jules Ferry: Die Schule wird Pflicht.','Inauguration de la tour Eiffel.':'Der Eiffelturm wird eingeweiht.',
+  'Première projection du cinématographe Lumière.':'Erste öffentliche Filmvorführung der Brüder Lumière.',"Ouverture de l'Exposition universelle de Paris.":'Die Weltausstellung in Paris öffnet.',
+  'Départ du tout premier Tour de France.':'Die allererste Tour de France startet.',"L'Allemagne déclare la guerre à la France : la Grande Guerre commence.":'Deutschland erklärt Frankreich den Krieg: Der Erste Weltkrieg beginnt.',
+  "Signature de l'armistice : fin de la Grande Guerre.":'Der Waffenstillstand beendet den Ersten Weltkrieg.','Vote de la loi sur les congés payés.':'Der bezahlte Urlaub wird Gesetz.',
+  "La France entre en guerre contre l'Allemagne.":'Frankreich tritt in den Krieg gegen Deutschland ein.','Les femmes obtiennent le droit de vote en France.':'Frauen erhalten in Frankreich das Wahlrecht.',
+  'Libération de Paris.':'Befreiung von Paris.','Capitulation allemande : fin de la guerre en Europe.':'Deutsche Kapitulation: Der Krieg in Europa ist vorbei.',
+  'Naissance de la Ve République.':'Die Fünfte Republik entsteht.','Mai 68 : grève générale dans tout le pays.':'Mai 68: Generalstreik im ganzen Land.',
+  "Premiers pas de l'Homme sur la Lune.":'Der erste Mensch betritt den Mond.','Le TGV relie Paris à Lyon.':'Der TGV verbindet Paris und Lyon.','Chute du mur de Berlin.':'Die Berliner Mauer fällt.',
+  "L'euro remplace le franc.":'Der Euro ersetzt den Franc.','Confinement général contre la pandémie de Covid-19.':'Landesweiter Lockdown gegen die Covid-19-Pandemie.',
+  'Henri VIII devient roi.':'Heinrich VIII. wird König.',"Acte de suprématie : naissance de l'Église d'Angleterre.":'Suprematsakte: Die Kirche von England entsteht.',
+  'Élisabeth Ire monte sur le trône.':'Elisabeth I. besteigt den Thron.',"Défaite de l'Invincible Armada espagnole.":'Die spanische Armada wird besiegt.',
+  "Jacques VI d'Écosse devient roi d'Angleterre.":'Jakob VI. von Schottland wird König von England.','Échec de la Conspiration des poudres.':'Die Schießpulververschwörung scheitert.',
+  'Exécution du roi Charles Ier.':'König Karl I. wird hingerichtet.','La Restauration : Charles II monte sur le trône.':'Die Restauration: Karl II. besteigt den Thron.',
+  'Grande peste de London.':'Große Pest von London.','Grande peste de Londres.':'Große Pest von London.','Grand incendie de Londres.':'Großer Brand von London.',
+  'Guillaume III et Marie II montent sur le trône.':'Wilhelm III. und Maria II. besteigen den Thron.',"Acte d'Union : naissance du royaume de Grande-Bretagne.":'Unionsakte: Das Königreich Großbritannien entsteht.',
+  'George Ier, premier roi de la maison de Hanovre.':'Georg I., der erste König aus dem Haus Hannover.','James Watt brevète sa machine à vapeur.':'James Watt lässt seine Dampfmaschine patentieren.',
+  'Les colonies américaines proclament leur indépendance.':'Die amerikanischen Kolonien erklären ihre Unabhängigkeit.',"Naissance du Royaume-Uni de Grande-Bretagne et d'Irlande.":'Das Vereinigte Königreich Großbritannien und Irland entsteht.',
+  'Victoire de Nelson à Trafalgar.':'Nelsons Sieg bei Trafalgar.','Victoire de Wellington à Waterloo.':'Wellingtons Sieg bei Waterloo.',
+  'Premier train de voyageurs entre Stockton et Darlington.':'Der erste Personenzug fährt zwischen Stockton und Darlington.',
+  "Abolition de l'esclavage dans l'Empire britannique.":'Die Sklaverei wird im Britischen Empire abgeschafft.','Victoria devient reine.':'Victoria wird Königin.',
+  'Grande Exposition au Crystal Palace.':'Die Weltausstellung im Crystal Palace öffnet.','Premier métro du monde à Londres.':'Die erste U-Bahn der Welt fährt in London.',
+  "Loi sur l'éducation : l'école pour tous les enfants.":'Bildungsgesetz: Schule für alle Kinder.','Mort de la reine Victoria.':'Königin Victoria stirbt.',
+  "Le Royaume-Uni déclare la guerre à l'Allemagne : la Grande Guerre commence.":'Großbritannien erklärt Deutschland den Krieg: Der Erste Weltkrieg beginnt.',
+  'Les femmes de plus de 30 ans obtiennent le droit de vote.':'Frauen über 30 erhalten das Wahlrecht.','Les femmes votent enfin comme les hommes.':'Frauen wählen endlich gleichberechtigt.',
+  'Abdication du roi Édouard VIII.':'König Eduard VIII. dankt ab.',"Le Royaume-Uni entre en guerre contre l'Allemagne.":'Großbritannien tritt in den Krieg gegen Deutschland ein.',
+  'Début du Blitz sur Londres.':'Der Blitz auf London beginnt.','VE Day : fin de la guerre en Europe.':'VE Day: Der Krieg in Europa ist vorbei.',
+  'Création du NHS, la santé gratuite pour tous.':'Der NHS entsteht: kostenlose Gesundheitsversorgung für alle.',"Couronnement d'Élisabeth II.":'Krönung Elisabeths II.',
+  "L'Angleterre gagne la Coupe du monde de football.":'England gewinnt die Fußball-WM.','Le Royaume-Uni entre dans la CEE.':'Großbritannien tritt der EWG bei.',
+  'Margaret Thatcher devient Première ministre.':'Margaret Thatcher wird Premierministerin.','Ouverture du tunnel sous la Manche.':'Der Eurotunnel wird eröffnet.',
+  'Accord du Vendredi saint en Irlande du Nord.':'Das Karfreitagsabkommen bringt Frieden nach Nordirland.','Jeux olympiques de Londres.':'Die Olympischen Spiele in London beginnen.',
+  "Brexit : le Royaume-Uni quitte l'Union européenne.":'Brexit: Großbritannien verlässt die Europäische Union.','Mort de la reine Élisabeth II.':'Königin Elisabeth II. stirbt.',
+  'Couronnement de Charles III.':'Krönung Karls III.'};
+// accès aux noms allemands
+const dzNom = id => DEx.dz[id] ? DEx.dz[id][0] : id, dzDat = id => DEx.dz[id] ? DEx.dz[id][1] : id;
+const deSex = (pair, p) => pair ? (p && p.sex === 'F' ? pair[1] : pair[0]) : null;
+const warName = i => { const w = WARS[i]; return LANG === 'fr' ? w.fr : LANG === 'de' ? (w.de || DEx.warn[w.fr] || w.en) : w.en; };
+
+const condName = (id, p) => { const r = COND[id]; if(LANG === 'de' && DEx.cond[id]) return deSex(DEx.cond[id], p); return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : r[3]; };
+const addName = (id, p) => { const r = ADD[id]; if(LANG === 'de' && DEx.add[id]) return deSex(DEx.add[id], p); return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : r[3]; };
 const hasCond = p => (p.conds && p.conds.length) || addictsOf(p).length;
 const condList = p => (p.conds || []).map(id => condName(id, p)).concat(addictsOf(p).map(id => addName(id, p))).join(', ');
 const condBadges = p => {
@@ -3332,7 +3899,8 @@ const condBadges = p => {
 };
 const intName = (id, p) => { const r = INT[id];
   if(id === 'fanof'){ if(S && p.fanOf == null){ const st = famStars(p); if(st.length) p.fanOf = pick(st).id; }   // ancien conjoint sur mesure : on lui trouve son idole
-    const s2 = S && p.fanOf != null && P(p.fanOf); if(s2) return LANG === 'fr' ? `Fan de ${s2.first} ${s2.last}` : `${s2.first} ${s2.last} fan`; } return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : (p.sex==='F' ? r[4] : r[3]); };
+    const s2 = S && p.fanOf != null && P(p.fanOf); if(s2) return LANG === 'fr' ? `Fan de ${s2.first} ${s2.last}` : LANG === 'de' ? `Fan von ${s2.first} ${s2.last}` : `${s2.first} ${s2.last} fan`; }
+  if(LANG === 'de' && DEx.int[id]) return deSex(DEx.int[id], p); return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : (p.sex==='F' ? r[4] : r[3]); };
 const intBadge = (id, p) => `<span class="cb int" title="${esc(intName(id,p))}">${icon(INT[id][5])}</span>`;
 const intList = p => interestsOf(p).filter(id => INT[id]).map(id => intName(id, p)).join(', ');
 const intTile = p => interestsOf(p).length ? `<div class="span2 intf"><dt>${t('f_interests')}</dt><dd><span class="cbadges">${interestsOf(p).filter(id => INT[id]).map(id => intBadge(id,p)).join('')}</span>${esc(intList(p))}</dd></div>` : '';
@@ -3343,8 +3911,9 @@ const nodeBadges = p => {
     .concat(interestsOf(p).filter(id => INT[id]).map(id => intBadge(id, p)));
   return items.length ? `<span class="cbadges">${items.slice(0, 4).join('')}</span>` : '';
 };
-const atoutName = (id, p) => { const r = ATOUT[id]; return LANG==='fr' ? (p && p.sex==='F' ? r[2] : r[1]) : r[3]; };
-const atoutTile2 = p => p.atout2 && ATOUT[p.atout2] ? `<div class="span2 atf"><dt>${t('f_atout2')}</dt><dd>${icon(ATOUT[p.atout2][4])}<span><b>${esc(atoutName(p.atout2, p))}</b><small>${esc(ATOUT[p.atout2][LANG==='fr' ? 5 : 6])}</small></span></dd></div>` : '';
+const atoutDesc = id => LANG === 'de' && DEx.atout[id] ? DEx.atout[id][2] : ATOUT[id][LANG === 'fr' ? 5 : 6];
+const atoutName = (id, p) => { const r = ATOUT[id]; if(LANG === 'de' && DEx.atout[id]) return deSex(DEx.atout[id], p); return LANG==='fr' ? (p && p.sex==='F' ? r[2] : r[1]) : r[3]; };
+const atoutTile2 = p => p.atout2 && ATOUT[p.atout2] ? `<div class="span2 atf"><dt>${t('f_atout2')}</dt><dd>${icon(ATOUT[p.atout2][4])}<span><b>${esc(atoutName(p.atout2, p))}</b><small>${esc(atoutDesc(p.atout2))}</small></span></dd></div>` : '';
 function spanTxt(a, b){                               // durée entre deux jours : « 52 ans, 2 mois »
   const x = toDate(a), y = toDate(b);
   let m = (y.getUTCFullYear() - x.getUTCFullYear())*12 + (y.getUTCMonth() - x.getUTCMonth()) - (y.getUTCDate() < x.getUTCDate() ? 1 : 0);
@@ -3354,7 +3923,7 @@ const reignTxt = p => p.reignStart == null ? '' : p.reignEnd != null ? t('reign_
   : t('reign_now', fmt(p.reignStart), spanTxt(p.reignStart, S.t));
 const reignTile = p => p.reignStart != null ? `<div class="span2 rgf"><dt>${t('f_reign')}</dt><dd>${esc(reignTxt(p))}</dd></div>` : '';
 const immTile = p => p.death == null && S && immune(p, S.t) ? `<div class="span2 imf"><dt>${t('f_immune')}</dt><dd>${icon('pill')}<span>${esc(t('immune_until', yearOf(p.immuneUntil)))}</span></dd></div>` : '';
-const atoutTile = p => p.atout && ATOUT[p.atout] ? `<div class="span2 atf"><dt>${t('f_atout')}</dt><dd>${icon(ATOUT[p.atout][4])}<span><b>${esc(atoutName(p.atout, p))}</b><small>${esc(ATOUT[p.atout][LANG==='fr' ? 5 : 6])}</small></span></dd></div>` : '';
+const atoutTile = p => p.atout && ATOUT[p.atout] ? `<div class="span2 atf"><dt>${t('f_atout')}</dt><dd>${icon(ATOUT[p.atout][4])}<span><b>${esc(atoutName(p.atout, p))}</b><small>${esc(atoutDesc(p.atout))}</small></span></dd></div>` : '';
 const condTile = p => hasCond(p) ? `<div class="span2 condf"><dt>${t('f_cond')}</dt><dd>${condBadges(p)}${esc(condList(p))}</dd></div>` : '';
 
 /* ================= Succès ================= */
@@ -3446,8 +4015,8 @@ const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children
 const goldUnlocked = () => ACH_CATS.some(c => ACHS.filter(a => a[1]===c[0]).every(a => ACH[a[0]]));
 const ACH_KEY = 'lignee.ach.v1';
 let ACH = {}; try{ ACH = JSON.parse(store.get(ACH_KEY)) || {}; }catch(e){ ACH = {}; }
-const achTitle = id => LANG==='fr' ? ACHV[id][3] : ACHV[id][5];
-const achDesc = id => LANG==='fr' ? ACHV[id][4] : ACHV[id][6];
+const achTitle = id => LANG==='fr' ? ACHV[id][3] : LANG==='de' && DEx.ach[id] ? DEx.ach[id][0] : ACHV[id][5];
+const achDesc = id => LANG==='fr' ? ACHV[id][4] : LANG==='de' && DEx.ach[id] ? DEx.ach[id][1] : ACHV[id][6];
 const medal = (id, cls='') => `<span class="medal t-${ACHV[id][2]} ${cls}">${icon(ACH_CATS.find(c => c[0]===ACHV[id][1])[1])}</span>`;
 function unlock(id){
   const vsA = id.startsWith('vs_');                    // succès Versus : seuls succès possibles pendant un duel, même en 2100
@@ -3485,11 +4054,11 @@ function nextAch(){
 }
 function openPatchnotes(){
   openModal(`<div class="m-head"><div class="eyebrow">Cyngenetic v${APP_VERSION}</div><h2>${t('pn_title')}</h2></div>
-    ${PATCHNOTES.map(n => `<section class="pn"><h3>v${esc(n.v)} <small>${esc(n.date[LANG])}</small></h3><ul>${n[LANG].map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}`);
+    ${PATCHNOTES.map(n => `<section class="pn"><h3>v${esc(n.v)} <small>${esc(n.date[LANG] || n.date.en)}</small></h3><ul>${(n[LANG] || n.en).map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}`);
 }
 let achOpen = false;                                   // menu des succès ouvert : musique de fête
 function openAchievements(){
-  const n = ACHS.filter(a => ACH[a[0]]).length, pct = Math.round(n / ACHS.length * 100), cn = c => LANG === 'fr' ? c[2] : c[3];
+  const n = ACHS.filter(a => ACH[a[0]]).length, pct = Math.round(n / ACHS.length * 100), cn = c => LANG === 'fr' ? c[2] : LANG === 'de' ? (DEx.achcat[c[0]] || c[3]) : c[3];
   const prog = c => { const all = ACHS.filter(a => a[1] === c[0]); return [all, all.filter(a => ACH[a[0]]).length]; };
   const tiers = ['bronze','silver','gold','platinum'].map(tr => { const all = ACHS.filter(a => a[2] === tr);
     return `<span class="achtier" title="${t('tier_' + tr)}"><span class="medal mini t-${tr}">${icon('trophy')}</span><b>${all.filter(a => ACH[a[0]]).length}</b>/${all.length}</span>`; }).join('');
@@ -3540,14 +4109,25 @@ const TX_KID = {
 };
 function t(k, ...a){
   const n = isNight() ? TX_NIGHT[LANG][k] : isDark() ? TX_DARK[LANG][k] : isKid() ? TX_KID[LANG][k] : undefined;
-  const c = n === undefined && CTRY === 'uk' ? TX_UK[LANG][k] : undefined;          // textes propres au Royaume-Uni
-  const v = n !== undefined ? n : c !== undefined ? c : TX[LANG][k] !== undefined ? TX[LANG][k] : TX.fr[k];
+  const c = n === undefined && CTRY !== 'fr' && TXC[CTRY] && TXC[CTRY][LANG] ? TXC[CTRY][LANG][k] : undefined;   // textes propres au pays de la partie
+  const v = n !== undefined ? n : c !== undefined ? c : TX[LANG][k] !== undefined ? TX[LANG][k] : LANG === 'de' && TX.en[k] !== undefined ? TX.en[k] : TX.fr[k];
   return typeof v === 'function' ? v(...a) : v;
 }
+TX_NIGHT.de = { crim_future:p=>`☾ ${g(p,'Künftiger Werwolf','Künftige Werwölfin')}`, crim_now:p=>`☾ ${g(p,'Werwolf','Werwölfin')}`, crim_jail:()=>'⛓ Im Käfig',
+  crime_future:p=>g(p,'Künftiger Werwolf','Künftige Werwölfin'), crime_now:p=>g(p,'Werwolf','Werwölfin'), crime_fate_prison:p=>g(p,'Werwolf, im Käfig','Werwölfin, im Käfig'),
+  f_crime:'Lykanthropie', cause_murder:(p,k)=>`von ${nm(k)} verschlungen`,
+  log_crim_declared:p=>`${nm(p)} verwandelt sich in ${g(P(p),'einen Werwolf','eine Werwölfin')}! Die nahen Angehörigen sind in Gefahr.`,
+  log_crim_prison:p=>`${nm(p)} wird gefangen und in einen Käfig gesperrt.`, log_death_murder:(p,k,a)=>`${nm(p)} wird mit ${a} Jahren von ${nm(k)} verschlungen.` };
+TX_DARK.de = { crim_future:p=>`☠ ${g(p,'Künftiger Vampir','Künftige Vampirin')}`, crim_now:p=>`☠ ${g(p,'Vampir','Vampirin')}`, crime_future:p=>g(p,'Künftiger Vampir','Künftige Vampirin'),
+  crime_now:p=>g(p,'Vampir','Vampirin'), crime_fate_prison:p=>g(p,'Vampir, im Gefängnis','Vampirin, im Gefängnis'), dest_crim:'Vampir',
+  log_crim_declared:p=>`${nm(p)} wird ${g(P(p),'ein Vampir','eine Vampirin')}! Die nahen Angehörigen sind in Gefahr.` };
+TX_KID.de = { crim_future:p=>`☠ ${g(p,'Künftiger Bösewicht','Künftige Bösewichtin')}`, crim_now:p=>`☠ ${g(p,'Bösewicht','Bösewichtin')}`, crime_future:p=>g(p,'Künftiger Bösewicht','Künftige Bösewichtin'),
+  crime_now:p=>g(p,'Großer Bösewicht','Große Bösewichtin'), crime_fate_prison:p=>g(p,'Großer Bösewicht, im Gefängnis','Große Bösewichtin, im Gefängnis'), dest_crim:'Bösewicht',
+  log_crim_declared:p=>`${nm(p)} wird ${g(P(p),'ein großer Bösewicht','eine große Bösewichtin')}! Die nahen Angehörigen sind in Gefahr.` };
 const tA = n => t('ans', n);
 function fmt(d){ const x=toDate(d); return t('date', x.getUTCDate(), t('months')[x.getUTCMonth()], x.getUTCFullYear()); }
 function fmtMonth(d){ const x=toDate(d); return t('monthYear', t('months')[x.getUTCMonth()], x.getUTCFullYear()); }
-const pctTxt = r => { const s = (r*100).toFixed(r<.01 ? 2 : 1); return (LANG==='fr' ? s.replace('.',',') + ' %' : s + '%'); };
+const pctTxt = r => { const s = (r*100).toFixed(r<.01 ? 2 : 1); return (LANG!=='en' ? s.replace('.',',') + ' %' : s + '%'); };
 
 /* ================= Sons (Web Audio, synthétisés) ================= */
 let VSH = false;                                       // Versus : vrai pendant que la famille de l'IA joue (aucun son, aucun effet)
@@ -4650,7 +5230,7 @@ function zombieHud(){                                  // compte à rebours avan
   box.hidden = false;
   if(!S.zombie.began){
     const rem = Math.max(0, (S.zombie.firstAt - S.t) / 365.25);
-    $('#zTxt').textContent = t('z_count', rem.toFixed(1).replace('.', LANG === 'fr' ? ',' : '.'));
+    $('#zTxt').textContent = t('z_count', rem.toFixed(1).replace('.', LANG !== 'en' ? ',' : '.'));
     $('#zFill').style.width = (rem / 60 * 100).toFixed(1) + '%'; box.classList.remove('out');
   } else {
     const fam = living().filter(p => inFamily(p)), z = fam.filter(p => p.zombie).length, h = fam.length - z;
@@ -4664,7 +5244,7 @@ function aiZombieHud(){                               // Versus : le même compt
   ab.hidden = false;
   if(!A.zombie.began){
     const rem = Math.max(0, (A.zombie.firstAt - S.t) / 365.25);
-    $('#aiZTxt').textContent = t('z_count', rem.toFixed(1).replace('.', LANG === 'fr' ? ',' : '.'));
+    $('#aiZTxt').textContent = t('z_count', rem.toFixed(1).replace('.', LANG !== 'en' ? ',' : '.'));
     $('#aiZFill').style.width = (rem / 60 * 100).toFixed(1) + '%'; ab.classList.remove('out');
   } else {
     const me = S; S = A; let z = 0, n = 0;
@@ -4700,9 +5280,9 @@ function renderDecade(y, force){
   if(key === lastDecade && !force) return;
   const wb = $('#warb');
   wb.hidden = wi < 0;
-  if(wi >= 0) wb.innerHTML = `${icon('sword')}<span>${esc(t('war_badge', wi))} · ${LANG==='fr' ? '+35 %' : '+35%'}</span>`;
+  if(wi >= 0) wb.innerHTML = `${icon('sword')}<span>${esc(t('war_badge', wi))} · ${LANG!=='en' ? '+35 %' : '+35%'}</span>`;
   const el = $('#decade');
-  el.innerHTML = `<span class="di">${icon(row[2])}</span><span>${t('decade', Math.floor(dy/10)*10)} · <b>${esc(LANG==='fr'?row[3]:row[4])}</b></span>`;
+  el.innerHTML = `<span class="di">${icon(row[2])}</span><span>${t('decade', Math.floor(dy/10)*10)} · <b>${esc(LANG==='fr' ? row[3] : LANG==='de' ? (row[5] || DEx.decn[row[3]] || row[4]) : row[4])}</b></span>`;
   if(lastDecade !== null){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
   lastDecade = key;
 }
@@ -4938,8 +5518,8 @@ function renderControls(){
   if(S.vs && S.speed > 2) S.speed = 2;                // Versus : vitesse ×4 interdite
   $$('#speeds button').forEach(x => { x.hidden = !!S.vs && +x.dataset.v > 2; x.setAttribute('aria-pressed', String(+x.dataset.v === S.speed)); });
   $('#speeds').setAttribute('aria-label', t('speed'));
-  $$('#speeds button')[0].textContent = LANG==='fr' ? '×0,25' : '×0.25';
-  $$('#speeds button')[1].textContent = LANG==='fr' ? '×0,5' : '×0.5';
+  $$('#speeds button')[0].textContent = LANG!=='en' ? '×0,25' : '×0.25';
+  $$('#speeds button')[1].textContent = LANG!=='en' ? '×0,5' : '×0.5';
   const ab = $('#btnAuto');
   ab.innerHTML = `${icon('robot')}<span>${t('auto')}</span>`;
   ab.classList.toggle('on', !!S.auto); ab.setAttribute('aria-pressed', String(!!S.auto)); ab.title = t('auto_title');
@@ -4991,7 +5571,7 @@ const FR_OUTLINE = [[2.37,51.05],[2.55,51.09],[3.2,50.75],[4.15,50.35],[4.83,50.
 const CORSE = [[9.4,43.0],[9.55,42.6],[9.4,41.95],[9.2,41.37],[8.8,41.6],[8.6,41.95],[8.75,42.4],[9.2,42.75]];
 const PJ = {lon:5.2, k:.688*50, lat:51.3, sy:50, x0:14, y0:14};                // projection de la carte (change avec le pays)
 const proj = ([lon, lat]) => [Math.round(((lon + PJ.lon) * PJ.k + PJ.x0) * 10)/10, Math.round(((PJ.lat - lat) * PJ.sy + PJ.y0) * 10)/10];
-const polyPath = pts => 'M' + pts.map(p => proj(p).join(' ')).join('L') + 'Z';
+const polyPath = pts => pts.length ? 'M' + pts.map(p => proj(p).join(' ')).join('L') + 'Z' : '';
 let curView = 'tree', dotEls = new Map();
 /* Les villes inventées n'ont pas de place réelle : elles vont dans la zone « Lieux inconnus », en mer, en bas à gauche */
 const UNK = {x:14, y:420, w:128, h:96};
@@ -5057,6 +5637,7 @@ const UK_SN_MODERN = ['Patel','Khan','Singh','Begum','Ali','Hussain','Ahmed','Ka
 const UK_SN_A = ['Ash','Black','Brad','Brook','Cald','Chester','Craw','Dun','Fair','Glad','Hal','Hart','Kings','Lang','Mar','Mid','Moor','North','Oak','Rad','Red','Ship','Stan','Stock','Thorn','War','West','Whit','Wood'];
 const UK_SN_B = ['ley','ford','well','worth','ham','ton','by','field','wood','combe','hurst','dale','more','bridge','stone','croft','wick','den','shaw','thorpe'];
 function pickSurnameUK(y){
+  if(Math.random() < .12) return pick(UK_SN_ADDED);        // 0.1.9a : Martens, Christmann, Beck, Kullmann et des « Mc »
   const r = Math.random();
   if(r < .2) return pick(UK_SN_RARE);
   if(r < .4) return pick(UK_SN_A) + pick(UK_SN_B);
@@ -5179,6 +5760,283 @@ const TX_UK = {
     log_president:p=>`${nm(p)} becomes Prime Minister of the United Kingdom!`, pres_rib:()=>'★ Prime Minister',
     set_map:'Map of the UK', map_zoom_reset:'All of the UK'}
 };
+/* ---------- Allemagne (0.1.9a) ---------- */
+const DE_NAMES = [
+ [1599,['Hans','Peter','Jakob','Heinrich','Johann','Michael','Georg','Konrad','Nikolaus','Christoph','Caspar','Matthias','Martin','Wolfgang','Lorenz','Sebastian','Ulrich','Andreas'],
+       ['Anna','Margaretha','Barbara','Katharina','Elisabeth','Maria','Ursula','Magdalena','Agnes','Dorothea','Apollonia','Walburga','Christina','Gertrud','Elsa','Kunigunde','Sophia','Veronika']],
+ [1699,['Johann','Hans','Georg','Jacob','Andreas','Michael','Christoph','Matthias','Martin','Peter','Heinrich','Paul','Caspar','Friedrich','Joachim','Christian','Daniel','Tobias'],
+       ['Anna','Maria','Catharina','Margaretha','Elisabeth','Barbara','Magdalena','Sophia','Dorothea','Christina','Regina','Susanna','Ursula','Rosina','Eva','Juliana','Helena','Sabina']],
+ [1779,['Johann','Georg','Johann Georg','Friedrich','Christian','Johann Friedrich','Andreas','Michael','Philipp','Jacob','Gottfried','Carl','Christoph','Heinrich','Wilhelm','Gottlieb','Ernst','Peter'],
+       ['Anna Maria','Maria','Catharina','Elisabetha','Margaretha','Christina','Sophia','Johanna','Dorothea','Rosina','Barbara','Friederike','Regina','Susanna','Eva','Louise','Charlotte','Wilhelmine']],
+ [1820,['Johann','Friedrich','Wilhelm','Carl','Heinrich','Christian','Georg','August','Ludwig','Gottlieb','Ferdinand','Jakob','Philipp','Franz','Joseph','Ernst','Adam','Gottfried'],
+       ['Maria','Anna','Catharina','Elisabeth','Johanna','Christiane','Wilhelmine','Friederike','Sophie','Caroline','Louise','Charlotte','Henriette','Margaretha','Dorothea','Amalie','Rosine','Juliane']],
+ [1869,['Wilhelm','Friedrich','Carl','Heinrich','August','Hermann','Johann','Otto','Ludwig','Franz','Joseph','Gustav','Ernst','Albert','Paul','Robert','Julius','Emil'],
+       ['Maria','Anna','Emma','Bertha','Louise','Auguste','Wilhelmine','Elisabeth','Martha','Clara','Minna','Ida','Marie','Pauline','Emilie','Caroline','Johanna','Friederike']],
+ [1904,['Wilhelm','Karl','Friedrich','Otto','Hermann','Heinrich','Paul','Max','Ernst','Walter','Richard','Hans','Fritz','Kurt','Willi','Georg','Franz','Alfred'],
+       ['Anna','Martha','Frieda','Emma','Margarethe','Gertrud','Elisabeth','Erna','Käthe','Hedwig','Marie','Helene','Luise','Else','Charlotte','Johanna','Klara','Ida']],
+ [1924,['Hans','Karl','Heinz','Werner','Kurt','Walter','Günter','Herbert','Helmut','Gerhard','Fritz','Willi','Ernst','Paul','Rudolf','Otto','Alfred','Erich'],
+       ['Gertrud','Ilse','Hildegard','Erna','Elisabeth','Ursula','Charlotte','Irmgard','Käthe','Margarete','Lieselotte','Gerda','Herta','Edith','Anneliese','Ruth','Inge','Elfriede']],
+ [1939,['Günter','Hans','Klaus','Horst','Heinz','Werner','Gerhard','Dieter','Manfred','Helmut','Rolf','Karl-Heinz','Wolfgang','Peter','Jürgen','Kurt','Rudolf','Joachim'],
+       ['Ursula','Ingrid','Gisela','Helga','Renate','Inge','Brigitte','Karin','Christa','Hannelore','Erika','Waltraud','Edith','Anneliese','Gudrun','Marianne','Elke','Rosemarie']],
+ [1954,['Peter','Wolfgang','Klaus','Jürgen','Michael','Hans','Manfred','Uwe','Dieter','Bernd','Rainer','Gerhard','Thomas','Detlef','Horst','Norbert','Harald','Ulrich'],
+       ['Karin','Monika','Renate','Ursula','Gabriele','Brigitte','Christa','Elke','Barbara','Sigrid','Marion','Petra','Angelika','Heike','Bärbel','Doris','Christel','Helga']],
+ [1964,['Thomas','Michael','Andreas','Frank','Stefan','Peter','Klaus','Uwe','Jörg','Martin','Ralf','Matthias','Jürgen','Bernd','Dirk','Thorsten','Holger','Rainer'],
+       ['Sabine','Susanne','Petra','Andrea','Birgit','Gabriele','Claudia','Martina','Ute','Kerstin','Heike','Monika','Karin','Angelika','Anja','Silke','Bettina','Kirsten']],
+ [1974,['Stefan','Michael','Christian','Andreas','Thomas','Frank','Markus','Sven','Jan','Tobias','Oliver','Daniel','Alexander','Matthias','Dirk','Carsten','Torsten','Marc'],
+       ['Nicole','Stefanie','Anja','Sandra','Claudia','Katrin','Susanne','Andrea','Kerstin','Melanie','Tanja','Christina','Daniela','Silke','Nadine','Sabine','Martina','Simone']],
+ [1984,['Christian','Michael','Daniel','Sebastian','Stefan','Jan','Alexander','Tobias','Dennis','Patrick','Florian','Martin','Markus','Christoph','Philipp','Benjamin','Matthias','David'],
+       ['Julia','Katharina','Christina','Sarah','Sandra','Stefanie','Melanie','Nadine','Jennifer','Nicole','Jessica','Anna','Laura','Lisa','Kathrin','Vanessa','Sabrina','Jana']],
+ [1994,['Alexander','Daniel','Lukas','Jan','Philipp','Maximilian','Kevin','Tobias','Florian','Michael','Marcel','Niklas','Patrick','Dominik','Sebastian','Fabian','Tim','Christian'],
+       ['Julia','Lisa','Laura','Sarah','Katharina','Anna','Jennifer','Vanessa','Lena','Jessica','Christina','Michelle','Sabrina','Jana','Nina','Lea','Franziska','Annika']],
+ [2004,['Lukas','Leon','Maximilian','Jonas','Tim','Luca','Niklas','Paul','Felix','Jan','Finn','Moritz','Ben','Philipp','Julian','Noah','Tom','Fabian'],
+       ['Marie','Sophie','Anna','Laura','Lea','Lena','Leonie','Julia','Hannah','Sarah','Lara','Lisa','Johanna','Emily','Michelle','Celina','Jana','Vanessa']],
+ [2014,['Ben','Luca','Paul','Jonas','Finn','Leon','Luis','Lukas','Maximilian','Felix','Noah','Elias','Julian','Max','Tim','Moritz','Henry','Niklas'],
+       ['Mia','Emma','Hannah','Sofia','Anna','Emilia','Lea','Marie','Lena','Leonie','Emily','Lina','Amelie','Sophie','Lilly','Luisa','Johanna','Laura']],
+ [2024,['Noah','Matteo','Leon','Paul','Elias','Emil','Luca','Finn','Theo','Henry','Felix','Ben','Jonas','Luis','Leo','Anton','Oskar','Liam'],
+       ['Emilia','Sophia','Emma','Mia','Hannah','Lina','Mila','Ella','Leni','Clara','Marie','Lea','Ida','Frieda','Mathilda','Lia','Lotta','Lena']],
+ [2039,['Theo','Mats','Milo','Bruno','Karl','Jakob','Ole','Fritz','Malte','Levi','Hugo','Mattis','Arthur','Carl','Jaro','Juno','Lio','Fiete'],
+       ['Ida','Frieda','Romy','Ella','Mila','Lotta','Thea','Jella','Merle','Pauline','Greta','Liv','Malia','Elif','Nala','Zoe','Maja','Juna']],
+ [2049,['Friedrich','Wilhelm','Otto','Hermann','Gustav','Heinrich','Ludwig','August','Konrad','Emil','Albert','Ernst','Walter','Alfred','Kurt','Fritz','Erich','Rudolf'],
+       ['Hedwig','Gertrud','Frieda','Mathilde','Margarete','Luise','Wilhelmine','Auguste','Elsa','Erna','Hildegard','Käthe','Irmgard','Klara','Martha','Ilse','Herta','Agathe']],
+ [2064,['Orion','Kian','Nevio','Ilian','Taro','Elio','Zeno','Lennox','Aurel','Yaron','Severin','Cassian','Liron','Joris','Tamo','Neo','Kaspar','Valentin'],
+       ['Nova','Lyra','Aurelia','Selin','Ilvy','Juna','Mayla','Zelia','Liana','Ronja','Elin','Amaya','Kiara','Lumi','Thalea','Svea','Nele','Vida']],
+ [2079,['Kai','Sol','Ari','Lux','Jaro','Nox','Eno','Taio','Rune','Vito','Ilo','Teo','Arvid','Zeno','Bo','Lasse','Fynn','Ole'],
+       ['Luna','Vega','Ylvi','Ava','Nyla','Juna','Ilvy','Lia','Mira','Aura','Elva','Smilla','Runa','Yuna','Fenja','Liv','Malu','Kaja']],
+ UK_NAMES[UK_NAMES.length - 1]
+];
+const DE_BASIC = {M:['Hans','Peter','Paul','Karl','Thomas','Michael','Lukas','Felix','Max','Jonas','Leon','Ben','Stefan','Andreas','Jan','Tim','Moritz','Fritz'],
+  F:['Anna','Maria','Lena','Lea','Laura','Julia','Sophie','Hannah','Emma','Mia','Clara','Paula','Greta','Lisa','Katharina','Sabine','Ida','Frieda']};
+const DE_SN_PLAIN = ['Müller','Schmidt','Schneider','Fischer','Weber','Meyer','Wagner','Becker','Schulz','Hoffmann','Schäfer','Koch','Bauer','Richter','Klein','Wolf',
+  'Schröder','Neumann','Schwarz','Zimmermann','Braun','Krüger','Hofmann','Hartmann','Lange','Schmitt','Werner','Schmitz','Krause','Meier','Lehmann','Schmid','Schulze',
+  'Maier','Köhler','Herrmann','König','Walter','Mayer','Huber','Kaiser','Fuchs','Peters','Lang','Scholz','Möller','Weiß','Jung','Hahn','Schubert','Vogel','Friedrich',
+  'Keller','Günther','Frank','Berger','Winkler','Roth','Beck','Lorenz','Baumann','Franke','Albrecht','Schuster','Simon','Ludwig','Böhm','Winter','Kraus','Schumacher',
+  'Krämer','Vogt','Stein','Jäger','Otto','Sommer','Groß','Seidel','Brandt','Haas','Schreiber','Graf','Dietrich','Ziegler','Kuhn','Pohl','Engel','Horn','Busch','Bergmann'];
+const DE_SN_RARE = ['von Bülow','von Arnim','von Stein','von Hagen','zu Eltz','Janssen','Harms','Eilers','Ommen','Obermaier','Kreuzpaintner','Pfisterer','Wendisch','Schimanski',
+  'Dziedzic','Bräuninger','Häberle','Achterberg','Tiedemann','Rüdesheimer','Wolkenstein','Grünewald','Eichendorff','Habicht','Trautmann'];
+const DE_SN_MODERN = ['Yılmaz','Kaya','Demir','Şahin','Çelik','Öztürk','Popović','Nguyen','Kowalski','Nowak','Rossi','Ivanov','Petrov','Haddad','Ahmadi','Morina'];
+const DE_SN_A = ['Stein','Berg','Wald','Hof','Brück','Feld','Lin','Kirch','Rosen','Ober','Unter','Neu','Alt','Gold','Eisen','Wein','Mühl','Holz','Schön','Sonnen','Grün','Bach','Lind','Hirsch','Fels'];
+const DE_SN_B = ['mann','er','berger','hauser','feld','bach','meier','huber','ner','dorf','hof','stein','brunner','müller','reuther','hardt','wieser','thaler'];
+function pickSurnameDE(y){
+  const r = Math.random();
+  if(r < .15) return pick(DE_SN_RARE);
+  if(r < .38) return pick(DE_SN_A) + pick(DE_SN_B);
+  if(r < .5 && y >= 1960) return pick(DE_SN_MODERN);
+  return pick(DE_SN_PLAIN);
+}
+const DE_CITY_POS = {Berlin:[13.40,52.52],Hamburg:[9.99,53.55],'München':[11.58,48.14],'Köln':[6.96,50.94],Frankfurt:[8.68,50.11],Stuttgart:[9.18,48.78],'Düsseldorf':[6.78,51.23],
+  Leipzig:[12.37,51.34],Dortmund:[7.47,51.51],Essen:[7.01,51.46],Bremen:[8.81,53.08],Dresden:[13.74,51.05],Hannover:[9.73,52.37],'Nürnberg':[11.08,49.45],Duisburg:[6.76,51.43],
+  Bochum:[7.22,51.48],Wuppertal:[7.15,51.26],Bielefeld:[8.53,52.02],Bonn:[7.10,50.73],'Münster':[7.63,51.96],Mannheim:[8.47,49.49],Karlsruhe:[8.40,49.01],Augsburg:[10.90,48.37],
+  Wiesbaden:[8.24,50.08],Mainz:[8.27,50.00],Aachen:[6.08,50.78],Kiel:[10.12,54.32],'Lübeck':[10.69,53.87],Rostock:[12.10,54.09],Magdeburg:[11.63,52.13],Freiburg:[7.85,47.99],
+  Erfurt:[11.03,50.98],Halle:[11.97,51.48],Kassel:[9.48,51.31],Potsdam:[13.06,52.39],'Saarbrücken':[7.00,49.23],Regensburg:[12.10,49.01],'Würzburg':[9.95,49.79],
+  Heidelberg:[8.69,49.40],Trier:[6.64,49.75],Koblenz:[7.59,50.36],Ulm:[9.99,48.40],Passau:[13.43,48.57],Bamberg:[10.89,49.89],Weimar:[11.33,50.98],'Göttingen':[9.93,51.54],
+  Oldenburg:[8.21,53.14],'Osnabrück':[8.05,52.28],Schwerin:[11.42,53.63],Cottbus:[14.33,51.76],Chemnitz:[12.92,50.83],Konstanz:[9.18,47.66],Flensburg:[9.44,54.79],
+  'Garmisch-Partenkirchen':[11.10,47.49],Stralsund:[13.09,54.31]};
+const DE_OUTLINE = [[6.9,53.4],[7.2,53.7],[8.0,53.7],[8.6,53.9],[9.0,54.0],[8.6,54.4],[8.9,54.9],[9.6,54.85],[10.0,54.7],[10.9,54.4],[11.1,54.0],[11.9,54.2],[12.4,54.4],
+  [13.4,54.7],[14.2,53.9],[14.4,53.3],[14.1,52.8],[14.6,52.6],[14.7,51.6],[15.0,51.1],[14.3,50.9],[13.5,50.65],[12.3,50.2],[12.1,50.3],[12.6,49.7],[13.4,49.1],[13.8,48.7],
+  [13.0,48.2],[12.9,47.7],[12.2,47.6],[11.2,47.4],[10.4,47.3],[9.6,47.55],[8.6,47.6],[7.6,47.55],[7.6,48.1],[8.2,49.0],[7.0,49.15],[6.4,49.5],[6.1,50.1],[6.0,50.75],
+  [6.1,51.8],[7.0,52.2],[7.1,52.6],[7.2,53.2]];
+const DE_WARS = [[1524,5,1,1525,6,1,'Guerre des Paysans',"German Peasants' War",'Deutscher Bauernkrieg'],[1546,6,10,1547,4,19,'Guerre de Smalkalde','Schmalkaldic War','Schmalkaldischer Krieg'],
+ [1618,4,23,1648,9,24,'Guerre de Trente Ans',"Thirty Years' War",'Dreißigjähriger Krieg'],[1701,6,9,1714,2,7,"Guerre de Succession d'Espagne",'War of the Spanish Succession','Spanischer Erbfolgekrieg'],
+ [1740,11,16,1745,11,25,'Guerres de Silésie','Silesian Wars','Schlesische Kriege'],[1756,7,29,1763,1,15,'Guerre de Sept Ans',"Seven Years' War",'Siebenjähriger Krieg'],
+ [1806,9,9,1815,5,18,'Guerres napoléoniennes','Napoleonic Wars','Napoleonische Kriege'],[1866,5,14,1866,7,23,'Guerre austro-prussienne','Austro-Prussian War','Deutscher Krieg'],
+ [1870,6,19,1871,0,28,'Guerre franco-allemande','Franco-Prussian War','Deutsch-Französischer Krieg'],[1914,7,1,1918,10,11,'Grande Guerre','The Great War','Erster Weltkrieg'],
+ [1939,8,1,1945,4,8,'Seconde Guerre mondiale','World War II','Zweiter Weltkrieg'],[2061,3,2,2064,8,30,"Guerre de l'eau",'The Water War','Der Wasserkrieg']
+].map(w => ({a:fromYMD(w[0],w[1],w[2]), b:fromYMD(w[3],w[4],w[5]), fr:w[6], en:w[7], de:w[8]}));
+const DE_DECADES = [
+ [1500,1516,'palette','Renaissance allemande (Dürer)','The German Renaissance','Deutsche Renaissance (Dürer)'],[1517,1554,'book','La Réforme de Luther',"Luther's Reformation",'Luthers Reformation'],
+ [1555,1617,'castle',"Après la paix d'Augsbourg",'After the Peace of Augsburg','Nach dem Augsburger Frieden'],[1618,1648,'sword','Guerre de Trente Ans',"The Thirty Years' War",'Dreißigjähriger Krieg'],
+ [1649,1700,'music','Baroque','The Baroque age','Barock'],[1701,1739,'crown','Royaume de Prusse','The Kingdom of Prussia','Königreich Preußen'],
+ [1740,1785,'crown','Frédéric le Grand','Frederick the Great','Friedrich der Große'],[1786,1805,'book','Goethe et Schiller','Goethe and Schiller','Goethe und Schiller'],
+ [1806,1814,'sword','Guerres napoléoniennes','The Napoleonic Wars','Napoleonische Kriege'],[1815,1847,'sun','Biedermeier','The Biedermeier era','Biedermeier'],
+ [1848,1870,'train','Révolution et chemins de fer','Revolution and railways','Revolution und Eisenbahn'],[1871,1890,'crown','Empire allemand (Bismarck)','The German Empire (Bismarck)','Kaiserreich (Bismarck)'],
+ [1891,1913,'building','Époque wilhelmienne','The Wilhelmine era','Wilhelminische Zeit'],[1914,1918,'helmet','Grande Guerre','The Great War','Erster Weltkrieg'],
+ [1919,1932,'music','République de Weimar','The Weimar Republic','Weimarer Republik'],[1933,1945,'dove','Dictature et guerre','Dictatorship and war','Diktatur und Krieg'],
+ [1946,1960,'car','Miracle économique','The economic miracle','Wirtschaftswunder'],[1961,1969,'building','Le mur de Berlin','The Berlin Wall','Die Berliner Mauer'],
+ [1970,1979,'disco','Disco et Krautrock','Disco and Krautrock','Disco und Krautrock'],[1980,1989,'headphones','Neue Deutsche Welle','Neue Deutsche Welle','Neue Deutsche Welle'],
+ [1990,1999,'flag','Réunification','Reunification','Wiedervereinigung']
+];
+const DE_WORLD = [
+ [1517,9,31,'Luther publie ses 95 thèses.','Luther publishes his 95 theses.','Luther veröffentlicht seine 95 Thesen.'],
+ [1525,4,15,'Les paysans révoltés sont écrasés à Frankenhausen.','The rebel peasants are crushed at Frankenhausen.','Die aufständischen Bauern werden bei Frankenhausen geschlagen.'],
+ [1555,8,25,"Paix d'Augsbourg entre catholiques et protestants.",'The Peace of Augsburg between Catholics and Protestants.','Der Augsburger Religionsfriede zwischen Katholiken und Protestanten.'],
+ [1618,4,23,'Défenestration de Prague : la guerre de Trente Ans commence.',"The Defenestration of Prague starts the Thirty Years' War.",'Der Prager Fenstersturz löst den Dreißigjährigen Krieg aus.'],
+ [1648,9,24,'Traités de Westphalie : fin de la guerre de Trente Ans.',"The Peace of Westphalia ends the Thirty Years' War.",'Der Westfälische Friede beendet den Dreißigjährigen Krieg.'],
+ [1701,0,18,'Naissance du royaume de Prusse.','The Kingdom of Prussia is born.','Das Königreich Preußen entsteht.'],
+ [1740,4,31,'Frédéric le Grand devient roi de Prusse.','Frederick the Great becomes King of Prussia.','Friedrich der Große wird König von Preußen.'],
+ [1770,11,16,'Naissance de Beethoven à Bonn.','Beethoven is born in Bonn.','Beethoven wird in Bonn geboren.'],
+ [1806,7,6,'Fin du Saint-Empire romain germanique.','The Holy Roman Empire comes to an end.','Das Heilige Römische Reich endet.'],
+ [1813,9,19,'Napoléon est battu à la bataille de Leipzig.','Napoleon is defeated at the Battle of Leipzig.','Napoleon wird in der Völkerschlacht bei Leipzig besiegt.'],
+ [1835,11,7,'Premier train allemand entre Nuremberg et Fürth.','The first German railway runs from Nuremberg to Fürth.','Die erste deutsche Eisenbahn fährt von Nürnberg nach Fürth.'],
+ [1848,2,18,'La révolution de mars éclate à Berlin.','The March Revolution breaks out in Berlin.','Die Märzrevolution bricht in Berlin aus.'],
+ [1871,0,18,"Proclamation de l'Empire allemand.",'The German Empire is proclaimed.','Das Deutsche Kaiserreich wird ausgerufen.'],
+ [1886,0,29,'Carl Benz brevète la première automobile.','Carl Benz patents the first car.','Carl Benz meldet das erste Automobil zum Patent an.'],
+ [1914,7,1,"L'Allemagne entre en guerre : la Grande Guerre commence.",'Germany goes to war: the Great War begins.','Deutschland zieht in den Krieg: Der Erste Weltkrieg beginnt.'],
+ [1918,10,9,'Proclamation de la République.','The Republic is proclaimed.','Die Republik wird ausgerufen.'],
+ [1918,10,11,"Signature de l'armistice : fin de la Grande Guerre.",'The Armistice is signed: the Great War is over.','Der Waffenstillstand beendet den Ersten Weltkrieg.'],
+ [1918,10,12,'Les femmes obtiennent le droit de vote.','Women win the right to vote.','Frauen erhalten das Wahlrecht.'],
+ [1923,10,15,"L'hyperinflation prend fin avec le Rentenmark.",'Hyperinflation ends with the Rentenmark.','Die Hyperinflation endet mit der Rentenmark.'],
+ [1933,0,30,'Hitler arrive au pouvoir : la dictature commence.','Hitler takes power: the dictatorship begins.','Hitler kommt an die Macht: Die Diktatur beginnt.'],
+ [1939,8,1,"L'Allemagne envahit la Pologne : la Seconde Guerre mondiale commence.",'Germany invades Poland: World War II begins.','Deutschland überfällt Polen: Der Zweite Weltkrieg beginnt.'],
+ [1945,4,8,'Capitulation : fin de la guerre en Europe.','Surrender: the war in Europe is over.','Kapitulation: Der Krieg in Europa ist vorbei.'],
+ [1949,4,23,"Naissance de la République fédérale d'Allemagne.",'The Federal Republic of Germany is founded.','Die Bundesrepublik Deutschland wird gegründet.'],
+ [1954,6,4,"« Miracle de Berne » : l'Allemagne championne du monde de football.",'The "Miracle of Bern": West Germany wins the World Cup.','Das „Wunder von Bern": Deutschland wird Fußballweltmeister.'],
+ [1961,7,13,'Construction du mur de Berlin.','The Berlin Wall goes up.','Der Bau der Berliner Mauer beginnt.'],
+ [1969,6,21,"Premiers pas de l'Homme sur la Lune.",'First steps on the Moon.','Der erste Mensch betritt den Mond.'],
+ [1972,7,26,'Ouverture des Jeux olympiques de Munich.','The Munich Olympics open.','Die Olympischen Spiele in München beginnen.'],
+ [1989,10,9,'Chute du mur de Berlin.','The Berlin Wall falls.','Die Berliner Mauer fällt.'],
+ [1990,9,3,"Réunification de l'Allemagne.",'Germany is reunified.','Die Deutsche Wiedervereinigung.'],
+ [2002,0,1,"L'euro remplace le mark.",'The euro replaces the mark.','Der Euro ersetzt die D-Mark.'],
+ [2005,10,22,'Angela Merkel devient chancelière.','Angela Merkel becomes chancellor.','Angela Merkel wird Bundeskanzlerin.'],
+ [2014,6,13,"L'Allemagne championne du monde de football.",'Germany wins the World Cup.','Deutschland wird Fußballweltmeister.'],
+ [2020,2,22,'Confinement contre la pandémie de Covid-19.','Lockdown against the Covid-19 pandemic.','Lockdown gegen die Covid-19-Pandemie.']
+].map(w => ({day:fromYMD(w[0],w[1],w[2]), fr:w[3], en:w[4], de:w[5]}));
+const DE_TRACKS = [['abinat','Abitur sciences','Abitur · Sciences',1960,2100,'bac'],['abisprach','Abitur langues','Abitur · Languages',1960,2100,'bac'],
+ ['abimath','Abitur maths','Abitur · Maths',1960,2100,'bac'],['abikunst','Abitur arts','Abitur · Arts',1960,2100,'bac'],
+ ['ausbkfz','Apprentissage mécatronique auto','Car mechatronics apprenticeship',1960,2100,'cap'],['ausbbuero','Apprentissage employé de bureau','Office clerk apprenticeship',1960,2100,'cap'],
+ ['ausbelek','Apprentissage électricien','Electrician apprenticeship',1960,2100,'cap'],['ausbkoch','Apprentissage cuisinier','Cook apprenticeship',1960,2100,'cap'],
+ ['ausbfriseur','Apprentissage coiffeur','Hairdresser apprenticeship',1960,2100,'cap'],['ausbbank','Apprentissage banque','Bank clerk apprenticeship',1960,2100,'cap'],
+ ['capflemme','Diplôme de la Flemme','Certificate in Professional Slacking',1960,2100,'cap']];
+const DE_JOB_EDIT = {
+  president:['Chancelier','Chancelière','Chancellor','Chancellor',1871,2100], premierministre:['Ministre-président','Ministre-présidente','Minister-President','Minister-President',1919,2100],
+  senateur:['Membre du Bundesrat','Membre du Bundesrat','Member of the Bundesrat','Member of the Bundesrat',1871,2100],
+  depute:['Député au Bundestag','Députée au Bundestag','Member of the Bundestag','Member of the Bundestag',1848,2100],
+  maire:['Bourgmestre','Bourgmestre','Mayor','Mayor',1500,2100],
+  academicien:["Membre de l'Académie des sciences","Membre de l'Académie des sciences",'Academy of Sciences member','Academy of Sciences member',1700,2100],
+  cafetier:['Patron de Gasthaus','Patronne de Gasthaus','Gasthaus landlord','Gasthaus landlady',1500,2100]
+};
+const DE_JOB_ADD = [['ramoneur','Ramoneur','Ramoneuse','Chimney sweep','Chimney sweep',1500,2100],['forestier','Forestier','Forestière','Forester','Forester',1700,2100],
+  ['ouvrierauto',"Ouvrier de l'automobile","Ouvrière de l'automobile",'Car factory worker','Car factory worker',1900,2100],
+  ['lebkuchen',"Pâtissier de pain d'épices","Pâtissière de pain d'épices",'Gingerbread baker','Gingerbread baker',1500,2100]];
+const DE_INT_ADD = [['schrebergarten','Jardinier ouvrier (Schrebergarten)','Jardinière ouvrière (Schrebergarten)','Allotment gardener','Allotment gardener','leaf',1864,9999],
+  ['karneval','Carnavaliste','Carnavaliste','Carnival lover','Carnival lover','music',1823,9999],
+  ['oktoberfest',"Habitué de l'Oktoberfest","Habituée de l'Oktoberfest",'Oktoberfest regular','Oktoberfest regular','cup',1810,9999],
+  ['modelleisenbahn','Modéliste ferroviaire','Modéliste ferroviaire','Model railway fan','Model railway fan','train',1900,9999],
+  ['skat','Joueur de skat','Joueuse de skat','Skat player','Skat player','dice',1813,9999]];
+
+/* ---------- Suisse (0.1.9a) ---------- */
+const mixRows = (main, other, extra) => main.map(([y, m, f]) => {
+  const o = other.find(r => y <= r[0]) || other[other.length - 1], ex = extra(y);
+  const mix = (a, b, e) => { const out = []; a.forEach((n, i) => { out.push(n); if(i % 2 === 1 && b[i >> 1]) out.push(b[i >> 1]); }); e.forEach((n, i) => out.splice(Math.min(out.length, 2 + i * 3), 0, n)); return out.filter((n, i, all) => all.indexOf(n) === i); };
+  return [y, mix(m, o[1], ex.M), mix(f, o[2], ex.F)];
+});
+const CH_EXTRA = y => y >= 1939 && y <= 1974 ? {M:['Urs','Beat','Ueli','Jürg','Reto','Gian'], F:['Vreni','Heidi','Regula','Ladina','Corina','Annemarie']}
+  : y > 1974 && y <= 2039 ? {M:['Luca','Mattia','Gian','Flurin','Dario','Nils'], F:['Chiara','Giulia','Seraina','Ladina','Annina','Nadja']} : {M:[], F:[]};
+const CH_SN_PLAIN = ['Müller','Meier','Schmid','Keller','Weber','Huber','Schneider','Meyer','Steiner','Fischer','Gerber','Brunner','Baumann','Frei','Zimmermann','Moser',
+  'Widmer','Wyss','Graf','Roth','Bühler','Ammann','Hug','Lüthi','Studer','Sutter','Favre','Rochat','Bonvin','Pittet','Rey','Morand','Perret','Jaquet','Bernasconi',
+  'Fontana','Ferrari','Bianchi','Rossi','Egli','Kunz','Marti','Schär','Zbinden','Wenger'];
+const CH_SN_RARE = ['Aebischer','Zürcher','Kälin','Gisler','Rüegg','Tschudi','Zgraggen','Hürlimann','Grünenfelder','Imhof','Zurbriggen','Gattlen','Caflisch','Planta',
+  'von Salis','Mettler','Nägeli','Bärtschi','Iselin','de Pury','de Meuron','Tschümperlin','Bodenmann','Indermühle'];
+const CH_SN_MODERN = ['Berisha','Krasniqi','Gashi','Da Silva','Pereira','Ferreira','Yılmaz','Nguyen','Popović','Hoxha','Ramadani','Fernandes'];
+const CH_SN_B = ['mann','er','egger','li','berger','matter','hauser','bühler','mattli','wyler','acher','tschi'];
+function pickSurnameCH(y){
+  const r = Math.random();
+  if(r < .18) return pick(CH_SN_RARE);
+  if(r < .36) return pick(DE_SN_A) + pick(CH_SN_B);
+  if(r < .46 && y >= 1960) return pick(CH_SN_MODERN);
+  return pick(CH_SN_PLAIN);
+}
+const CH_CITY_POS = {'Zürich':[8.54,47.38],'Genève':[6.14,46.20],Basel:[7.59,47.56],Bern:[7.45,46.95],Lausanne:[6.63,46.52],Winterthur:[8.72,47.50],Luzern:[8.31,47.05],
+  'St. Gallen':[9.38,47.42],Lugano:[8.95,46.00],'Biel/Bienne':[7.25,47.14],Thun:[7.63,46.76],Fribourg:[7.16,46.81],'Neuchâtel':[6.93,46.99],Sion:[7.36,46.23],Chur:[9.53,46.85],
+  Schaffhausen:[8.63,47.70],Zug:[8.52,47.17],Bellinzona:[9.02,46.19],Locarno:[8.80,46.17],Montreux:[6.91,46.43],Vevey:[6.84,46.46],Aarau:[8.04,47.39],Solothurn:[7.54,47.21],
+  'La Chaux-de-Fonds':[6.83,47.10],'Yverdon-les-Bains':[6.64,46.78],Davos:[9.84,46.80],'St. Moritz':[9.84,46.50],Zermatt:[7.75,46.02],Interlaken:[7.86,46.69],
+  Grindelwald:[8.03,46.62],Appenzell:[9.41,47.33],Glarus:[9.07,47.04],Altdorf:[8.64,46.88],Schwyz:[8.65,47.02],Sarnen:[8.25,46.90],Stans:[8.37,46.96],Frauenfeld:[8.90,47.56],
+  Herisau:[9.28,47.39],Brig:[7.99,46.32],Martigny:[7.07,46.10],'Delémont':[7.34,47.36],Liestal:[7.73,47.48],Rapperswil:[8.82,47.23]};
+const CH_OUTLINE = [[5.97,46.15],[6.12,46.58],[6.5,46.95],[6.95,47.25],[7.0,47.45],[7.6,47.58],[8.2,47.6],[8.6,47.8],[9.0,47.65],[9.6,47.5],[9.55,47.25],[9.6,47.05],
+  [9.9,46.95],[10.5,46.85],[10.45,46.55],[10.1,46.4],[9.65,46.3],[9.3,46.5],[9.15,46.2],[9.0,45.85],[8.8,46.05],[8.7,46.1],[8.45,46.3],[8.4,46.45],[7.9,45.95],
+  [7.55,45.98],[7.0,45.9],[6.8,46.15],[6.8,46.4],[6.2,46.3]];
+const CH_WARS = [[1500,0,1,1515,8,14,"Guerres d'Italie",'Italian Wars','Italienkriege'],[1531,9,11,1531,10,24,'Guerre de Kappel','Kappel War','Zweiter Kappelerkrieg'],
+ [1656,0,7,1656,0,24,'Première guerre de Villmergen','First War of Villmergen','Erster Villmergerkrieg'],[1712,3,12,1712,7,11,'Seconde guerre de Villmergen','Second War of Villmergen','Zweiter Villmergerkrieg'],
+ [1798,0,28,1799,11,31,'Invasion française et guerre de la Deuxième Coalition','French invasion and the War of the Second Coalition','Franzoseneinfall und Zweiter Koalitionskrieg'],
+ [1847,10,3,1847,10,29,'Guerre du Sonderbund','Sonderbund War','Sonderbundskrieg'],[2061,3,2,2064,8,30,"Guerre de l'eau",'The Water War','Der Wasserkrieg']
+].map(w => ({a:fromYMD(w[0],w[1],w[2]), b:fromYMD(w[3],w[4],w[5]), fr:w[6], en:w[7], de:w[8]}));
+const CH_DECADES = [
+ [1500,1515,'sword','Mercenaires suisses','Swiss mercenaries','Schweizer Söldner'],[1516,1530,'book','Réforme de Zwingli',"Zwingli's Reformation",'Reformation Zwinglis'],
+ [1531,1563,'book','Calvin à Genève','Calvin in Geneva','Calvin in Genf'],[1564,1647,'castle','Confédération des treize cantons','The Thirteen Cantons','Die dreizehn Orte'],
+ [1648,1711,'flag','Indépendance reconnue','Independence recognised','Anerkannte Unabhängigkeit'],[1712,1759,'bulb','Siècle des Lumières','The Enlightenment','Aufklärung'],
+ [1760,1797,'hourglass',"Âge d'or de l'horlogerie",'The golden age of watchmaking','Blütezeit der Uhrmacherei'],[1798,1802,'flag','République helvétique','The Helvetic Republic','Helvetische Republik'],
+ [1803,1814,'book','Acte de médiation','The Act of Mediation','Mediationszeit'],[1815,1847,'dove','Neutralité perpétuelle','Perpetual neutrality','Immerwährende Neutralität'],
+ [1848,1869,'building',"Naissance de l'État fédéral",'The birth of the federal state','Gründung des Bundesstaates'],[1870,1913,'train','Tunnels et tourisme alpin','Tunnels and Alpine tourism','Tunnelbau und Alpentourismus'],
+ [1914,1918,'helmet','Mobilisation (Grande Guerre)','Mobilisation (the Great War)','Grenzbesetzung (Erster Weltkrieg)'],[1919,1938,'leaf','Entre-deux-guerres','The interwar years','Zwischenkriegszeit'],
+ [1939,1945,'helmet','Mobilisation générale','General mobilisation','Aktivdienst'],[1946,1970,'car','Haute conjoncture','The post-war boom','Hochkonjunktur'],
+ [1971,1989,'flag','Droit de vote des femmes',"Women's suffrage",'Frauenstimmrecht'],[1990,1999,'chip','Swatch et Internet','Swatch and the Internet','Swatch und Internet']
+];
+const CH_WORLD = [
+ [1515,8,14,'Défaite de Marignan : fin des conquêtes suisses.','Defeat at Marignano ends Swiss expansion.','Die Niederlage bei Marignano beendet die Expansion.'],
+ [1519,0,1,'Zwingli commence à prêcher à Zurich.','Zwingli begins preaching in Zurich.','Zwingli beginnt in Zürich zu predigen.'],
+ [1536,4,21,'Genève adopte la Réforme.','Geneva adopts the Reformation.','Genf nimmt die Reformation an.'],
+ [1602,11,12,"L'Escalade : Genève repousse la Savoie.",'The Escalade: Geneva repels Savoy.','Die Escalade: Genf wehrt Savoyen ab.'],
+ [1648,9,24,'Traités de Westphalie : indépendance suisse reconnue.','The Peace of Westphalia recognises Swiss independence.','Westfälischer Friede: Die Unabhängigkeit der Schweiz wird anerkannt.'],
+ [1798,3,12,'Proclamation de la République helvétique.','The Helvetic Republic is proclaimed.','Die Helvetische Republik wird ausgerufen.'],
+ [1815,10,20,'Le congrès de Vienne reconnaît la neutralité suisse.','The Congress of Vienna recognises Swiss neutrality.','Der Wiener Kongress anerkennt die Schweizer Neutralität.'],
+ [1847,10,29,'Fin de la guerre du Sonderbund.','The Sonderbund War ends.','Der Sonderbundskrieg endet.'],
+ [1848,8,12,'Constitution fédérale : naissance de la Suisse moderne.','The federal constitution creates modern Switzerland.','Die Bundesverfassung schafft die moderne Schweiz.'],
+ [1863,1,17,'Henry Dunant fonde la Croix-Rouge à Genève.','Henry Dunant founds the Red Cross in Geneva.','Henry Dunant gründet in Genf das Rote Kreuz.'],
+ [1882,4,22,'Ouverture du tunnel ferroviaire du Gothard.','The Gotthard rail tunnel opens.','Der Gotthard-Eisenbahntunnel wird eröffnet.'],
+ [1914,7,1,"Mobilisation générale de l'armée suisse.",'The Swiss army mobilises.','Die Schweizer Armee mobilisiert.'],
+ [1918,10,12,'Grève générale dans tout le pays.','A nationwide general strike.','Landesstreik in der ganzen Schweiz.'],
+ [1939,8,1,'Mobilisation générale : la Suisse reste neutre.','General mobilisation: Switzerland stays neutral.','Generalmobilmachung: Die Schweiz bleibt neutral.'],
+ [1945,4,8,'Fin de la guerre en Europe.','The war in Europe is over.','Der Krieg in Europa ist vorbei.'],
+ [1948,0,1,"Création de l'AVS, la retraite pour tous.",'The state pension (AVS) begins.','Die AHV tritt in Kraft.'],
+ [1954,5,16,'La Suisse accueille la Coupe du monde de football.','Switzerland hosts the football World Cup.','Die Schweiz richtet die Fußball-WM aus.'],
+ [1969,6,21,"Premiers pas de l'Homme sur la Lune.",'First steps on the Moon.','Der erste Mensch betritt den Mond.'],
+ [1971,1,7,'Les femmes obtiennent le droit de vote fédéral.','Women win the federal vote.','Frauen erhalten das eidgenössische Stimmrecht.'],
+ [1979,0,1,'Naissance du canton du Jura.','The canton of Jura is born.','Der Kanton Jura entsteht.'],
+ [1983,2,1,'Lancement de la montre Swatch.','The Swatch watch is launched.','Die Swatch kommt auf den Markt.'],
+ [1991,7,1,'La Confédération fête ses 700 ans.','Switzerland celebrates 700 years.','Die Eidgenossenschaft feiert 700 Jahre.'],
+ [2002,8,10,"La Suisse entre à l'ONU.",'Switzerland joins the United Nations.','Die Schweiz tritt der UNO bei.'],
+ [2016,5,1,'Ouverture du tunnel de base du Gothard.','The Gotthard Base Tunnel opens.','Der Gotthard-Basistunnel wird eröffnet.'],
+ [2020,2,16,'Situation extraordinaire contre la pandémie de Covid-19.','Emergency measures against the Covid-19 pandemic.','Ausserordentliche Lage gegen die Covid-19-Pandemie.']
+].map(w => ({day:fromYMD(w[0],w[1],w[2]), fr:w[3], en:w[4], de:w[5]}));
+const CH_TRACKS = [['matsci','Maturité scientifique','Matura · Sciences',1960,2100,'bac'],['matlang','Maturité langues','Matura · Languages',1960,2100,'bac'],
+ ['mateco','Maturité économie','Matura · Economics',1960,2100,'bac'],['cfcpoly','CFC polymécanicien','Polymechanic apprenticeship (CFC)',1960,2100,'cap'],
+ ['cfccom','CFC employé de commerce','Commercial apprenticeship (CFC)',1960,2100,'cap'],['cfchorlo','CFC horloger','Watchmaker apprenticeship (CFC)',1960,2100,'cap'],
+ ['cfcinfo','CFC informaticien','IT apprenticeship (CFC)',1990,2100,'cap'],['cfccuis','CFC cuisinier','Cook apprenticeship (CFC)',1960,2100,'cap'],
+ ['capflemme','Diplôme de la Flemme','Certificate in Professional Slacking',1960,2100,'cap']];
+const CH_JOB_EDIT = {
+  president:['Président de la Confédération','Présidente de la Confédération','President of the Confederation','President of the Confederation',1848,2100],
+  premierministre:['Conseiller fédéral','Conseillère fédérale','Federal Councillor','Federal Councillor',1848,2100],
+  senateur:['Conseiller aux États','Conseillère aux États','Member of the Council of States','Member of the Council of States',1848,2100],
+  depute:['Conseiller national','Conseillère nationale','National Councillor','National Councillor',1848,2100],
+  ministre:["Conseiller d'État","Conseillère d'État",'Cantonal minister','Cantonal minister',1803,2100],
+  maire:['Syndic','Syndique','Mayor','Mayor',1500,2100]
+};
+const CH_JOB_ADD = [['gardesuisse','Garde suisse pontifical','Garde suisse pontificale','Swiss Guard','Swiss Guard',1506,2100],['fromager','Fromager','Fromagère','Cheesemaker','Cheesemaker',1500,2100],
+  ['guide','Guide de montagne','Guide de montagne','Mountain guide','Mountain guide',1800,2100],['moniteurski','Moniteur de ski','Monitrice de ski','Ski instructor','Ski instructor',1900,2100],
+  ['armailli',"Armailli (vacher d'alpage)","Armaillie (vachère d'alpage)",'Alpine herder','Alpine herder',1500,2100],['banquierprive','Banquier privé','Banquière privée','Private banker','Private banker',1700,2100]];
+const CH_INT_ADD = [['jodel','Jodleur','Jodleuse','Yodeller','Yodeller','music',1500,9999],['schwingen','Lutteur suisse','Lutteuse suisse','Swiss wrestler','Swiss wrestler','trophy',1500,9999,true],
+  ['ski','Skieur','Skieuse','Skier','Skier','flag',1890,9999,true],['cordesalpes','Joueur de cor des Alpes','Joueuse de cor des Alpes','Alphorn player','Alphorn player','music',1500,9999],
+  ['jass','Joueur de jass','Joueuse de jass','Jass player','Jass player','dice',1796,9999]];
+const UK_SN_ADDED = ['Martens','Christmann','Beck','Kullmann','McAllister','McBride','McIntyre','McLaughlin','McThornbury','McFarrowdale','McGlenwick','McBrannoch'];
+// textes propres à chaque pays (écoles, chef du gouvernement, carte) — en français, anglais et allemand
+const SCHOOL_DE = {mat:['Kindergarten','Kindergarten','Vorschule'], prim:['Klasse 1','Klasse 2','Klasse 3','Klasse 4','Klasse 5'], col:['Klasse 6','Klasse 7','Klasse 8','Klasse 9'],
+  lyc:['Klasse 10','Klasse 11','Klasse 12'], old_lyc:['Quarta','Untertertia','Obertertia','Untersekunda','Obersekunda'], lycee:'Gymnasium'};
+const SCHOOL_CH = {fr:{mat:['Crèche','1P (école enfantine)','2P (école enfantine)'], prim:['3P','4P','5P','6P','7P'], col:['8P','9e','10e','11e'], lyc:['1re année','2e année','3e année']},
+  en:{mat:['Nursery','1P (kindergarten)','2P (kindergarten)'], prim:['3P','4P','5P','6P','7P'], col:['8P','Year 9','Year 10','Year 11'], lyc:['Year 1','Year 2','Year 3']},
+  de:{mat:['Kita','Kindergarten 1','Kindergarten 2'], prim:['3. Klasse','4. Klasse','5. Klasse','6. Klasse','7. Klasse'], col:['8. Klasse','9. Klasse','10. Klasse','11. Klasse'], lyc:['1. Jahr','2. Jahr','3. Jahr']}};
+const TXC = {
+  uk:Object.assign(TX_UK, {de:Object.assign({}, TX_UK.en, {cours_sup:'Elementary school · Standard VI', certif:'Elementary school · Standard VII', petite_ecole:'Dame school',
+    alb_mat:'Grundschule', alb_col:'Weiterführende Schule', log_president:p=>`${nm(p)} wird ${g(P(p),'Premierminister','Premierministerin')} des Vereinigten Königreichs!`,
+    pres_rib:p=>`★ ${g(p,'Premierminister','Premierministerin')}`, set_map:'Karte des Vereinigten Königreichs', map_zoom_reset:'Das ganze Vereinigte Königreich'})}),
+  de:{fr:Object.assign({}, SCHOOL_DE, {cours_sup:'Volksschule · 7e année', certif:'Volksschule · fin d\'études', petite_ecole:'École du village', alb_mat:'Maternelle et primaire', alb_col:'École secondaire',
+      log_president:p=>`${nm(p)} devient ${g(P(p),'chancelier','chancelière')} d'Allemagne !`, pres_rib:p=>`★ ${g(p,'Chancelier','Chancelière')}`, set_map:"Carte de l'Allemagne", map_zoom_reset:"Toute l'Allemagne"}),
+    en:Object.assign({}, SCHOOL_DE, {cours_sup:'Volksschule · Year 7', certif:'Volksschule · leaving certificate', petite_ecole:'Village school', alb_mat:'Nursery and primary', alb_col:'Secondary school',
+      log_president:p=>`${nm(p)} becomes Chancellor of Germany!`, pres_rib:()=>'★ Chancellor', set_map:'Map of Germany', map_zoom_reset:'All of Germany'}),
+    de:Object.assign({}, SCHOOL_DE, {cours_sup:'Volksschule · 7. Klasse', certif:'Volksschule · Abschluss', petite_ecole:'Dorfschule', alb_mat:'Kindergarten', alb_col:'Weiterführende Schule',
+      log_president:p=>`${nm(p)} wird ${g(P(p),'Bundeskanzler','Bundeskanzlerin')}!`, pres_rib:p=>`★ ${g(p,'Kanzler','Kanzlerin')}`, set_map:'Deutschlandkarte', map_zoom_reset:'Ganz Deutschland'})},
+  ch:{fr:Object.assign({}, SCHOOL_CH.fr, {cours_sup:'École primaire · dernière année', certif:"Certificat d'études", lycee:'Collège (gymnase)', old_lyc:['1re','2e','3e','4e','5e'], petite_ecole:'École du village',
+      alb_mat:'École enfantine', alb_col:'Secondaire', log_president:p=>`${nm(p)} devient ${g(P(p),'président','présidente')} de la Confédération !`, pres_rib:p=>`★ ${g(p,'Président','Présidente')}`,
+      set_map:'Carte de la Suisse', map_zoom_reset:'Toute la Suisse'}),
+    en:Object.assign({}, SCHOOL_CH.en, {cours_sup:'Primary school · last year', certif:'School certificate', lycee:'Gymnasium', old_lyc:['Year 1','Year 2','Year 3','Year 4','Year 5'], petite_ecole:'Village school',
+      alb_mat:'Kindergarten', alb_col:'Secondary school', log_president:p=>`${nm(p)} becomes President of the Swiss Confederation!`, pres_rib:()=>'★ President', set_map:'Map of Switzerland', map_zoom_reset:'All of Switzerland'}),
+    de:Object.assign({}, SCHOOL_CH.de, {cours_sup:'Primarschule · letztes Jahr', certif:'Schulabschluss', lycee:'Gymnasium', old_lyc:['1. Klasse','2. Klasse','3. Klasse','4. Klasse','5. Klasse'], petite_ecole:'Dorfschule',
+      alb_mat:'Kindergarten', alb_col:'Oberstufe', log_president:p=>`${nm(p)} wird ${g(P(p),'Bundespräsident','Bundespräsidentin')}!`, pres_rib:p=>`★ ${g(p,'Bundespräsident','Bundespräsidentin')}`,
+      set_map:'Schweizkarte', map_zoom_reset:'Die ganze Schweiz'})}
+};
+const CAPITAL = {fr:'Paris', uk:'London', de:'Berlin', ch:'Bern'};
+const FLAGS = {fr:'<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#0055a4"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ef4135"/></svg>',
+  uk:'<svg viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" stroke="#C8102E" stroke-width="2"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg>',
+  de:'<svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg>',
+  ch:'<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D52B1E"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg>'};
 const swapArr = (arr, src) => { arr.length = 0; src.forEach(x => arr.push(x)); };
 const refill = (obj, src) => { Object.keys(obj).forEach(k => delete obj[k]); Object.assign(obj, src); };
 const COUNTRY = {
@@ -5190,8 +6048,23 @@ const COUNTRY = {
     WORLD:UK_WORLD, TRACKS:UK_TRACKS, JOBS:editRows(JOBS, UK_JOB_EDIT, UK_JOB_OUT, UK_JOB_ADD), STARJOBS:editRows(STARJOBS, UK_STAR_EDIT, new Set(), []),
     INTERESTS:editRows(INTERESTS, {}, UK_INT_OUT, UK_INT_ADD), PJ:{lon:8.4, k:.584*55, lat:58.8, sy:55, x0:100, y0:16}, UNK:{x:14, y:16, w:128, h:96}}
 };
+const FR_2000 = COUNTRY.fr.DECADES.filter(d => d[0] >= 2000), byName = (a, b) => a.localeCompare(b);
+COUNTRY.de = {NAMES:DE_NAMES, BASIC:DE_BASIC, CITIES:Object.keys(DE_CITY_POS).sort(byName), CITY_POS:DE_CITY_POS, OUT1:DE_OUTLINE,
+  OUT2:[[13.15,54.6],[13.4,54.68],[13.65,54.55],[13.4,54.25],[13.2,54.35]], WARS:DE_WARS, WARCAUSES:COUNTRY.fr.WARCAUSES.filter(r => r[0] !== 'collabo'),
+  DECADES:DE_DECADES.concat(FR_2000), WORLD:DE_WORLD, TRACKS:DE_TRACKS, JOBS:editRows(COUNTRY.fr.JOBS, DE_JOB_EDIT, new Set(['cpe']), DE_JOB_ADD),
+  STARJOBS:COUNTRY.fr.STARJOBS, INTERESTS:editRows(COUNTRY.fr.INTERESTS, {}, new Set(['tektonik']), DE_INT_ADD),
+  PJ:{lon:-5.8, k:.629*55, lat:55.1, sy:55, x0:109, y0:47}, UNK:{x:14, y:16, w:128, h:96}};
+COUNTRY.ch = {NAMES:mixRows(DE_NAMES, COUNTRY.fr.NAMES, CH_EXTRA), BASIC:{M:DE_BASIC.M.concat(['Luca','Gian','Urs','Louis','Nicolas']), F:DE_BASIC.F.concat(['Chiara','Ladina','Léa','Camille'])},
+  CITIES:Object.keys(CH_CITY_POS).sort(byName), CITY_POS:CH_CITY_POS, OUT1:CH_OUTLINE, OUT2:[], WARS:CH_WARS,
+  WARCAUSES:COUNTRY.fr.WARCAUSES.filter(r => !['collabo','deporte','gaz'].includes(r[0])), DECADES:CH_DECADES.concat(FR_2000), WORLD:CH_WORLD, TRACKS:CH_TRACKS,
+  JOBS:editRows(COUNTRY.fr.JOBS, CH_JOB_EDIT, new Set(['cpe','academicien']), CH_JOB_ADD), STARJOBS:COUNTRY.fr.STARJOBS,
+  INTERESTS:editRows(COUNTRY.fr.INTERESTS, {}, new Set(['tektonik']), CH_INT_ADD),
+  PJ:{lon:-5.95, k:.685*105, lat:47.85, sy:105, x0:106, y0:157}, UNK:{x:14, y:16, w:128, h:96}};
+function setupCountryUI(){                              // écran de départ : le drapeau du pays choisi est enfoncé
+  $$('#setupForm [data-act="country"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === SET.country)));
+}
 function applyCountry(c){                               // remplace les données du pays sur place ; renvoie vrai si le pays a changé
-  c = c === 'uk' ? 'uk' : 'fr';
+  c = COUNTRY[c] ? c : 'fr';
   if(c === CTRY) return false;
   CTRY = c; const D = COUNTRY[c];
   swapArr(NAMES, D.NAMES); BASIC_NAMES.M = D.BASIC.M; BASIC_NAMES.F = D.BASIC.F;
@@ -5207,11 +6080,11 @@ function applyCountry(c){                               // remplace les données
 }
 function refreshSetupCountry(changed){                   // écran de départ : villes du pays, et un fondateur du pays si le pays vient de changer
   const keep = fCity.value; fCity.innerHTML = ''; CITIES.forEach(c => fCity.add(new Option(c, c)));
-  fCity.value = CITIES.includes(keep) ? keep : (CTRY === 'uk' ? 'London' : 'Paris');
+  fCity.value = CITIES.includes(keep) ? keep : CAPITAL[CTRY];
   if(changed){
     const y = +fYear.value || 1760, s = startYear() || 1780;
     $('#fFirst').value = wpick(namePool(y, fSex())); $('#fLast').value = pickSurname(s);
-    fCity.value = CTRY === 'uk' ? 'London' : 'Paris';
+    fCity.value = CAPITAL[CTRY];
   }
 }
 function cityXY(c){
@@ -5679,26 +6552,26 @@ function schoolItems(){
     ...t('col').map((n, i) => it('col' + i, `${t('alb_col')} · ${n}`, 'book', 1960, 2100)),
     it('lyc_old', t('lycee'), 'bulb', 1881, 1959),
     ...TRACKS.map(r => it('tr_' + r[0], trackName(r[0]), r[5] === 'bac' ? 'bulb' : 'shirt', r[3], r[4])),
-    ...FIELDS.map(r => it('f_' + r[0], `${t('alb_uni')} · ${fr ? r[1] : r[2]}`, 'atom', r[3], 2100)),
+    ...FIELDS.map(r => it('f_' + r[0], `${t('alb_uni')} · ${fieldName(r[0])}`, 'atom', r[3], 2100)),
     it('petite_ecole', t('petite_ecole'), 'book', 1500, 1880), it('betes', t('betes'), 'paw', 1500, 1880),
     it('appr', t('alb_appr'), 'shirt', 1500, 1959), it('dropout', t('alb_dropout'), 'eyeoff', 1881, 2100)];
 }
 function albItems(k){
   const fr = LANG === 'fr', seen = new Set(), uniq = x => !seen.has(x.id) && seen.add(x.id);
-  if(k === 'i') return INTERESTS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[5], y:r[6], desc: albYears(r[6], r[7])}));
-  if(k === 'c') return CONDS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], ...(r[5] ? {y:r[5], desc: albYears(r[5], 2100)} : {})}));
-  if(k === 'j') return JOBS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic: isPol(r[0]) ? 'flag' : 'shirt', y:r[5], desc: albYears(r[5], r[6])}))
-    .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + (fr ? r[1] : r[3]), ic:'sparkle', y:r[5], desc: albYears(r[5], r[6])}))).filter(uniq);
+  if(k === 'i') return INTERESTS.map(r => ({id:r[0], name: LANG === 'de' && DEx.int[r[0]] ? DEx.int[r[0]][0] : fr ? r[1] : r[3], ic:r[5], y:r[6], desc: albYears(r[6], r[7])}));
+  if(k === 'c') return CONDS.map(r => ({id:r[0], name: condName(r[0], {sex:'M'}), ic:r[4], ...(r[5] ? {y:r[5], desc: albYears(r[5], 2100)} : {})}));
+  if(k === 'j') return JOBS.map(r => ({id:r[0], name: jobName(r[0], {sex:'M'}), ic: isPol(r[0]) ? 'flag' : 'shirt', y:r[5], desc: albYears(r[5], r[6])}))
+    .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + jobName(r[0], {sex:'M'}), ic:'sparkle', y:r[5], desc: albYears(r[5], r[6])}))).filter(uniq);
   if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, y:1500, name: t('alb_d_' + id)}))
-    .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
+    .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(LANG === 'de' && DEx.warc[r[0]] ? DEx.warc[r[0]][0] : fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
     .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
   if(k === 'e') return schoolItems();
   if(k === 'r'){
-    const one = d => r => ({id:r[0], name: fr ? r[1] : r[2], ic:r[3], y: r[4] || 1500, desc: t(d) + (r[4] ? ' · ' + albYears(r[4], r[5] || 2100) : '')});
+    const one = d => r => ({id:r[0], name: royalActName(r[0]), ic:r[3], y: r[4] || 1500, desc: t(d) + (r[4] ? ' · ' + albYears(r[4], r[5] || 2100) : '')});
     return ROYAL_ACTS.map(one('alb_royal_d')).concat(PRINCE_ACTS.map(one('alb_prince_d')), NOBLE_ACTS.map(one('alb_noble_d')), NOBILITY_ACTS.map(one('alb_nobility_d')));
   }
-  if(k === 'm') return MILDS.map(r => ({id:r[0], name: fr ? r[1] : r[2], ic:'pill', y:r[3], desc: albYears(r[3], r[4]), secret:true}));
-  return ADDICTIONS.map(r => ({id:r[0], name: fr ? r[1] : r[3], ic:r[4], y:r[6], secret:true,
+  if(k === 'm') return MILDS.map(r => ({id:r[0], name: mildName(r[0]), ic:'pill', y:r[3], desc: albYears(r[3], r[4]), secret:true}));
+  return ADDICTIONS.map(r => ({id:r[0], name: addName(r[0], {sex:'M'}), ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
 }
 let albCat = 'i';
@@ -5751,7 +6624,7 @@ function applySettings(){
   const qb = $('.quitb'); if(qb) qb.hidden = !(D && D.quit);
 }
 const sw = (attr, key, on, label, hint, disabled) => `<label class="switch ${disabled?'is-off':''}"><input type="checkbox" ${attr}="${key}" ${on?'checked':''} ${disabled?'disabled':''}><span class="sw"></span><span><b>${label}</b>${hint?`<small>${hint}</small>`:''}</span></label>`;
-const numTxt = (v, u) => (LANG==='fr' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG==='fr' ? ' %' : '%') : u);
+const numTxt = (v, u) => (LANG!=='en' ? String(v).replace('.', ',') : String(v)) + (u === '%' ? (LANG!=='en' ? ' %' : '%') : u);
 const SHOP_CATS = [
   ['births', [['star',750,'sparkle'],['crim',600,'skull'],['fertile',625,'heart']]],
   ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass']]],
@@ -5825,7 +6698,7 @@ function openPick(id){                                // décriminalisation / cr
     ? reveilList().map(p => `<button class="pickrow" data-act="pickdo" data-v="reveil" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc((p.star ? t('future_star') : t('crim_future', p)) + ' · ' + tA(age(p)))}</small></span><em>${t('shop_pick')}</em></button>`)
     : id === 'decrim'
     ? decrimList().map(p => `<button class="pickrow" data-act="pickdo" data-v="decrim" data-id="${p.id}">${orb(p)}<span><b>${esc(nm(p))}</b><small>${esc(jailed(p) ? t('crim_jail', p) : p.crim.declared ? t('crim_now', p) : t('crim_future', p))}</small></span><em>${t('shop_pick')}</em></button>`)
-    : ATOUTS.filter(a => a[0] !== me.atout).map(a => `<button class="pickrow" data-act="pickdo" data-v="midlife" data-id="${a[0]}"><i class="pickic">${icon(a[4])}</i><span><b>${esc(atoutName(a[0], me))}</b><small>${esc(a[LANG==='fr' ? 5 : 6])}</small></span><em>${t('shop_pick')}</em></button>`);
+    : ATOUTS.filter(a => a[0] !== me.atout).map(a => `<button class="pickrow" data-act="pickdo" data-v="midlife" data-id="${a[0]}"><i class="pickic">${icon(a[4])}</i><span><b>${esc(atoutName(a[0], me))}</b><small>${esc(atoutDesc(a[0]))}</small></span><em>${t('shop_pick')}</em></button>`);
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop')} · ${cynFmt(price)} Cyn</div><h2>${t('shop_' + id)}</h2><p class="hint">${esc(t('pick_' + id, me.first))}</p></div>
     <div class="picklist">${rows.join('')}</div><button class="gel ghost pickback" data-act="shop"><span>← ${t('shop_back')}</span></button>`, {sound:false});
 }
@@ -5837,10 +6710,10 @@ function openSpouseForm(){                            // conjoint(e) entièremen
   const def = Math.max(lo, Math.min(hi, me.birth));
   const byName = (a, b) => a[0].localeCompare(b[0], LANG);
   const opt = (v, l, sel) => `<option value="${esc(v)}" ${sel ? 'selected' : ''}>${esc(l)}</option>`;
-  const jobs = JOBS.filter(r => inRange(r, dy) && r[0] !== 'president').map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
-  const ints = INTERESTS.filter(r => dy >= r[6] && dy <= r[7] && (r[0] !== 'fanof' || famStars({id:-1}).length)).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
-  const adds = ADDICTIONS.filter(r => dy >= r[6]).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
-  const conds = CONDS.filter(r => !r[5] || dy >= r[5]).map(r => [LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const jobs = JOBS.filter(r => inRange(r, dy) && r[0] !== 'president').map(r => [jobName(r[0], {sex:'M'}), r[0]]).sort(byName);
+  const ints = INTERESTS.filter(r => dy >= r[6] && dy <= r[7] && (r[0] !== 'fanof' || famStars({id:-1}).length)).map(r => [LANG === 'de' && DEx.int[r[0]] ? DEx.int[r[0]][0] : LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
+  const adds = ADDICTIONS.filter(r => dy >= r[6]).map(r => [addName(r[0], {sex:'M'}), r[0]]).sort(byName);
+  const conds = CONDS.filter(r => !r[5] || dy >= r[5]).map(r => [condName(r[0], {sex:'M'}), r[0]]).sort(byName);
   const sexes = (R.sameSex ? ['F','M'] : [opp]);
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop')} · ${cynFmt(1100)} Cyn</div><h2>${t('shop_spouse')}</h2><p class="hint">${esc(t('sp_intro', me.first))}</p></div>
     <form id="spForm" class="spform" novalidate>
@@ -5913,7 +6786,7 @@ function openReigns(){                                // mode Royal : la liste d
   const rows = ks.map(p => {
     const end = p.reignEnd != null ? p.reignEnd : (royalOn() && p.id === S.royal.king ? null : (p.death ?? S.t));
     const yrs = Math.floor(((end ?? S.t) - p.reignStart) / 365.25);
-    const title = LANG === 'fr' ? (p.sex === 'F' ? 'Reine' : 'Roi') : (p.sex === 'F' ? 'Queen' : 'King');
+    const title = LANG === 'fr' ? (p.sex === 'F' ? 'Reine' : 'Roi') : LANG === 'de' ? (p.sex === 'F' ? 'Königin' : 'König') : (p.sex === 'F' ? 'Queen' : 'King');
     return `<li class="${end == null ? 'now' : ''}">${orb(p)}<span><b>${esc(title)} ${esc(p.first || '…')}</b><small>${esc(p.last)}</small></span>
       <em>${yearOf(p.reignStart)} – ${end == null ? t('rg_now') : yearOf(end)} <i>(${end == null ? (yrs >= 1 ? t('rg_now_y', yrs) : t('rg_now')) : t('rg_y', yrs)})</i></em></li>`;
   }).join('');
@@ -5959,8 +6832,7 @@ function openSettings(re){
     ${sw('data-set','anim',SET.anim,t('set_anim'),t('set_anim_hint'))}
     ${sw('data-set','deco',SET.deco,t('set_deco'),t('set_deco_hint'))}`
   : `
-    <div class="setrow"><b>${t('set_lang')}</b><div class="pills" role="group">${['fr','en'].map(l => `<button data-act="lang" data-v="${l}" aria-pressed="${LANG===l}">${l.toUpperCase()}</button>`).join('')}</div></div>
-    <div class="setrow"><span><b>${t('set_country')}</b><small>${S && !$('#game').hidden && (S.country || 'fr') !== SET.country ? t('set_country_game', S.country || 'fr') : t('set_country_hint')}</small></span><div class="pills" role="group">${['fr','uk'].map(c => `<button data-act="country" data-v="${c}" aria-pressed="${SET.country===c}">${t('ctry_' + c)}</button>`).join('')}</div></div>
+    <div class="setrow"><b>${t('set_lang')}</b><div class="pills" role="group">${['fr','en','de'].map(l => `<button data-act="lang" data-v="${l}" aria-pressed="${LANG===l}">${l.toUpperCase()}</button>`).join('')}</div></div>
     ${sw('data-set','toasts',SET.toasts,t('set_toasts'),t('set_toasts_hint'))}
     ${sw('data-set','map',SET.map,t('set_map'),t('set_map_hint'))}
     ${sw('data-set','regnal',SET.regnal,t('set_regnal'),t('set_regnal_hint'))}
@@ -6026,17 +6898,17 @@ document.addEventListener('change', e => {        // âge préféré : nouvelles
 /* ================= Version PC : statut Discord (Rich Presence) =================
    Seulement dans l'application Windows (window.cyngeneticDesktop) : « Famille Martin · 1850 », mode de jeu, etc. */
 function desktopPresence(){
-  const fr = LANG === 'fr', gn = n => n > 1 ? (fr ? 'générations' : 'generations') : (fr ? 'génération' : 'generation');
-  if(!S || $('#game').hidden) return {details: fr ? 'Crée sa lignée' : 'Starting a bloodline', state: fr ? 'Écran de départ' : 'Start screen'};
+  const fr = LANG === 'fr', de = LANG === 'de', L3 = (a, b, c) => fr ? a : de ? c : b, gn = n => n > 1 ? L3('générations', 'generations', 'Generationen') : L3('génération', 'generation', 'Generation');
+  if(!S || $('#game').hidden) return {details: L3('Crée sa lignée', 'Starting a bloodline', 'Gründet eine Blutlinie'), state: L3('Écran de départ', 'Start screen', 'Startbildschirm')};
   const f = P(S.founderId), all = Object.values(S.people), gens = Math.max(1, ...all.filter(p => p.blood).map(genOf));
-  const fam = living().filter(p => inFamily(p)), details = (fr ? `Famille ${familyName(f)}` : `The ${familyName(f)} family`) + ' · ' + yearOf(S.t);
+  const fam = living().filter(p => inFamily(p)), details = L3(`Famille ${familyName(f)}`, `The ${familyName(f)} family`, `Familie ${familyName(f)}`) + ' · ' + yearOf(S.t);
   let state;
-  if(S.over) state = fr ? 'Partie terminée' : 'Game over';
+  if(S.over) state = L3('Partie terminée', 'Game over', 'Spiel vorbei');
   else if(S.vs) state = `Versus ${t('vs_d_' + S.vs.diff)} · ${t('vs_g_' + S.vs.goal)}`;
   else if(S.zombie){ const z = fam.filter(p => p.zombie).length, lvl = S.zombie.diff ? ` (${t('zd_' + S.zombie.diff)})` : '';
-    state = (fr ? 'Mode Zombie' : 'Zombie mode') + lvl + ' · ' + (S.zombie.began ? t('z_status', z, fam.length - z) : `${gens} ${gn(gens)}`); }
-  else if(S.royal) state = (fr ? 'Mode Royal' : 'Royal mode') + ` · ${gens} ${gn(gens)}`;
-  else state = `${gens} ${gn(gens)} · ${fam.length} ${fr ? 'en vie' : 'alive'}`;
+    state = L3('Mode Zombie', 'Zombie mode', 'Zombiemodus') + lvl + ' · ' + (S.zombie.began ? t('z_status', z, fam.length - z) : `${gens} ${gn(gens)}`); }
+  else if(S.royal) state = L3('Mode Royal', 'Royal mode', 'Königsmodus') + ` · ${gens} ${gn(gens)}`;
+  else state = `${gens} ${gn(gens)} · ${fam.length} ${L3('en vie', 'alive', 'am Leben')}`;
   return {details, state};
 }
 if(window.cyngeneticDesktop){
@@ -6125,9 +6997,8 @@ const ACT = {
     closeModal(); render(); save();
   },
   fiche(d){ openFiche(+d.id); },
-  country(d){ SET.country = d.v === 'uk' ? 'uk' : 'fr'; saveSet();                // pays de la lignée : tout de suite sur l'écran de départ, sinon à la prochaine partie
-    if(!S || $('#game').hidden) refreshSetupCountry(applyCountry(SET.country));
-    sfx.pop(); openSettings(true); },
+  country(d){ SET.country = COUNTRY[d.v] ? d.v : 'fr'; saveSet();                // pays de la lignée (écran de départ)
+    refreshSetupCountry(applyCountry(SET.country)); setupCountryUI(); sfx.pop(); },
   quit(){ if(S) save(); const D = window.cyngeneticDesktop; if(D && D.quit) D.quit(); else window.close(); },
   settab(d){ setTab = d.v; openSettings(true); },
   fullscreen(){ const D = window.cyngeneticDesktop;
@@ -6290,7 +7161,7 @@ function applyStatic(){
 }
 function setupNote(){
   const a = $('#fAtout').value, d = $('#fDestiny').value;
-  $('#fAtoutNote').textContent = [a && ATOUT[a] ? ATOUT[a][LANG==='fr' ? 5 : 6] : '', d && d !== 'none' ? t('dest_note') : ''].filter(Boolean).join(' ');
+  $('#fAtoutNote').textContent = [a && ATOUT[a] ? atoutDesc(a) : '', d && d !== 'none' ? t('dest_note') : ''].filter(Boolean).join(' ');
 }
 ['#fAtout','#fDestiny'].forEach(id => $(id).addEventListener('change', setupNote));
 function royalSetup(){                                // mode Royal : le premier personnage est forcément roi (ou reine)
@@ -6315,7 +7186,7 @@ let zDiff = 'med';
 function zSetup(){
   $('#fZBox').hidden = !$('#fZombie').checked;
   $$('#fZBox [data-act="zpick"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === zDiff)));
-  $('#fZHint').textContent = t('zd_hint', String(Math.round(ZRATE[zDiff] * 1000) / 10).replace('.', LANG === 'fr' ? ',' : '.'));
+  $('#fZHint').textContent = t('zd_hint', String(Math.round(ZRATE[zDiff] * 1000) / 10).replace('.', LANG !== 'en' ? ',' : '.'));
 }
 $('#fZombie').addEventListener('change', zSetup); $('#fRoyal').addEventListener('change', zSetup);
 /* Versus : un menu pour le mode, la difficulté et l'objectif ; ensuite on crée son personnage comme d'habitude */
@@ -6352,7 +7223,7 @@ $('#fVs').addEventListener('change', () => {
   else { VS_CFG = null; vsSetup(); }
 });
 function setLang(l){
-  LANG = l === 'en' ? 'en' : 'fr'; store.set(LANG_KEY, LANG);
+  LANG = l === 'en' || l === 'de' ? l : 'fr'; store.set(LANG_KEY, LANG);
   $('#mapView').innerHTML = ''; dotEls = new Map();                    // la carte se redessine dans la nouvelle langue
   applyStatic();
   if(S && !$('#game').hidden){ lastDecade = null; renderControls(); render(); }
@@ -6435,7 +7306,7 @@ $('#setupForm').addEventListener('submit', e => {
 
 function showSetup(){
   $('#game').hidden = true; $('#setup').hidden = false;
-  refreshSetupCountry(applyCountry(SET.country));        // l'écran de départ suit le pays choisi dans les paramètres
+  refreshSetupCountry(applyCountry(SET.country)); setupCountryUI();   // l'écran de départ suit le pays choisi (drapeaux)
   if(modalOpen) closeModal(true);
   let saved = null; try{ saved = JSON.parse(store.get(SAVE_KEY)); }catch(e){}
   const box = $('#resumeBox');
@@ -6566,6 +7437,7 @@ function newGame(){ document.body.classList.remove('zmode', 'vsmode'); S = null;
     b.innerHTML = '<svg viewBox="0 0 64 30"><path d="M32 9c1.6-3 3.4-5 3.4-5s.9 2.6.2 5.2C41 6 49 3.6 60 6c-4.6 2-7 6-7 11-3.4-3.4-8-3.6-11.4-.4-.4-2.6-2-4-4.2-4.2C35 12.6 33.4 14 32 16c-1.4-2-3-3.4-5.4-3.6-2.2.2-3.8 1.6-4.2 4.2-3.4-3.2-8-3-11.4.4 0-5-2.4-9-7-11C15 3.6 23 6 28.4 9.2c-.7-2.6.2-5.2.2-5.2S30.4 6 32 9z"/></svg>';
     gfx2.appendChild(b); }
   $$('.brand-slot').forEach((el,i) => { el.innerHTML = emblem('emb' + i); });
+  $$('[data-flag]').forEach(el => { el.innerHTML = FLAGS[el.dataset.flag] || ''; });   // drapeaux du choix du pays
   $$('#mnav [data-icon]').forEach(b => b.insertAdjacentHTML('afterbegin', icon(b.dataset.icon)));   // icônes de la barre du bas
   try{ if(sessionStorage.getItem('lignee.wiped')){                     // après une remise à zéro : on revient du noir
     sessionStorage.removeItem('lignee.wiped');

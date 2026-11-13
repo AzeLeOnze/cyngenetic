@@ -2,6 +2,16 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.1.9a — 13 novembre 2026
+
+- Deux nouveaux pays de la lignée : l'Allemagne et la Suisse. Chacun a ses prénoms selon l'époque (en Suisse, un mélange de prénoms alémaniques, romands, italiens et romanches), ses noms de famille, ses villes et sa carte, ses événements, ses décennies, ses guerres, son école, ses métiers et ses centres d'intérêt.
+- Allemagne : la Réforme, la guerre de Trente Ans, Frédéric le Grand, l'Empire, la république de Weimar, le miracle économique, le mur de Berlin, la réunification… Chancelier au lieu de Président, ramoneur, forestier, ouvrier de l'automobile ; Schrebergarten, carnaval, Oktoberfest, skat…
+- Suisse : Zwingli et Calvin, la neutralité, l'État fédéral, la Croix-Rouge, le Gothard, le droit de vote des femmes… La Suisse reste neutre pendant les guerres mondiales (mobilisation, pas de guerre). Président de la Confédération, conseillers fédéraux, garde suisse, fromager, guide de montagne ; jodel, lutte suisse, cor des Alpes, jass…
+- Le pays de la lignée se choisit maintenant sur l'écran de départ, avec les drapeaux, et non plus dans les paramètres.
+- Nouvelle langue : allemand (Paramètres → Langue → DE), pour toute l'interface et tout le contenu du jeu.
+- Royaume-Uni : nouveaux noms de famille (Martens, Christmann, Beck, Kullmann et des « Mc », vrais et inventés).
+- Plus de barres de défilement dans les arbres généalogiques : on se déplace en glissant, avec la molette ou en pinçant.
+
 ## v0.1.8c — 13 novembre 2026
 
 - Nouveau réglage « Pays de la lignée » (Paramètres, sous la langue) : France ou Royaume-Uni. Au Royaume-Uni, les prénoms (selon l'époque) et les noms de famille sont anglais, gallois, écossais ou irlandais, avec les villes du pays et la carte du Royaume-Uni.
