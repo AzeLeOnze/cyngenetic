@@ -2,14 +2,23 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
-## v0.2.0a — 13 novembre 2026
+## v0.2.0a — 14 novembre 2026
 
-- Nouveau : les voyageurs du temps ! Une particularité très rare (0,5 % des naissances, 20 % si un parent l'est). De 16 à 60 ans, une faille temporelle peut s'ouvrir chaque année : le voyageur disparaît dans le futur (de 8 à 90 ans plus tard) et réapparaît avec le même âge. Son couple prend fin, et il peut revenir plus jeune que ses propres petits-enfants.
+- Nouveau : les voyageurs du temps (en mode normal) ! Une particularité très rare (0,5 % des naissances, 20 % si un parent l'est). De 16 à 60 ans, une faille temporelle peut s'ouvrir chaque année : le voyageur disparaît dans le futur (de 8 à 90 ans plus tard) et réapparaît avec le même âge, parfois plus jeune que ses propres petits-enfants.
 - Si c'est ton personnage, tu choisis : sauter ou rester. En sautant, le temps défile à toute vitesse pendant que la famille vit sa vie sans toi, puis tu découvres ce qui s'est passé pendant ton absence.
+- Retrouvailles : au retour, l'ancien amour du voyageur l'a peut-être attendu, s'il est encore en vie et seul. Plus le saut est court, plus c'est probable. Le couple reprend, avec 60 Cyn en cadeau.
+- Déboussolement : au retour, le voyageur est déboussolé pendant un an (six mois s'il retrouve son amour), avec un état différent pour chacune des 33 décennies de 1780 à 2100. Son risque de mourir augmente un peu, et si son métier n'existe plus, il se retrouve au chômage. Les 33 états se collectionnent dans la nouvelle catégorie Chocs temporels de l'album.
 - Boutique : la Montre temporelle (1 200 Cyn) fait de ton personnage un voyageur du temps. Depuis sa fiche, il peut sauter de 5 à 100 ans quand il le veut, une fois tous les 10 ans.
 - Dans l'arbre, les voyageurs ont un contour bleu en pointillés, et les personnes perdues dans le temps apparaissent en fantôme. Leur fiche indique leur date de retour.
-- 4 nouveaux succès dans la catégorie Voyage dans le temps : Premier saut, Plus jeune que ses petits-enfants, Bond de géant et Voyageur infatigable.
-- Mode Zombie : une personne perdue dans le temps ne peut pas être mordue. Les voyageurs n'existent pas en mode Royal, et la montre n'est pas disponible pendant un duel.
+- 6 nouveaux succès : Premier saut, Plus jeune que ses petits-enfants, Je t'ai attendu, Bond de géant, Voyageur infatigable et Choc des époques.
+- Chaque succès rapporte maintenant des Cyn : Bronze 75, Argent 150, Or 300, Platine 500, Spécial 400, Légendaire 1 000. Le rang Multicolore s'appelle désormais Légendaire.
+- Objets légendaires : 7 centres d'intérêt, 4 particularités, 7 métiers, 3 formations, 4 maladies, 4 morts (dont la chute d'astéroïde) et 1 addiction, à 0,025 % de chances chacun. Ils brillent aux couleurs de l'arc-en-ciel dans l'arbre, la fiche et l'album, et chaque découverte est annoncée en grand.
+- 3 nouvelles addictions : accro au sport (protège des maladies comme un loisir sportif, mais peut causer un arrêt cardiaque à l'effort, une rhabdomyolyse ou une blessure de surentraînement), accro à la nourriture (obésité morbide, diabète sévère, étouffement en mangeant) et accro au travail (retraite 5 à 8 ans plus tard, mais karōshi, infarctus dû au stress ou épuisement professionnel sévère).
+- 11 nouvelles causes de mort : électrocution, hydrocution, déshydratation, gangrène, incendie, empoisonnement, chute fatale, commotion cérébrale, septicémie, infarctus et faim. Nouvelle maladie bénigne : le syndrome de Paris.
+- Les succès obtenus pendant un voyage dans le temps s'annoncent maintenant à l'arrivée (avant, l'écran du voyage les cachait). Un voyageur qui revient grand-parent à 40 ans ou moins débloque aussi les succès correspondants.
+- Menu des succès : les rangs Spécial et Légendaire sont comptés en haut, les catégories s'affichent sur plusieurs lignes, et il n'y a plus de barres de défilement dans les fenêtres.
+- Écran de départ : les drapeaux remplissent bien leur cadre. Royaume-Uni : la croix qui apparaissait sur la bulle des politiques est retirée.
+- Les voyageurs du temps n'existent qu'en mode normal (pas en Royal, en Zombie ni en Versus).
 
 ## v0.1.9d — 13 novembre 2026
 

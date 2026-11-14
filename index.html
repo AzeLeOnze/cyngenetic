@@ -232,7 +232,8 @@ button{font:inherit;color:inherit}
   background:rgba(255,255,255,.8);cursor:pointer;font:700 13px var(--font-display);color:var(--ink);text-align:center}
 .ctry:hover{box-shadow:0 4px 12px rgba(0,70,160,.15)}
 .ctry .flag{display:grid;place-items:center;height:28px}
-.ctry svg{height:26px;width:auto;max-width:40px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.ctry svg{display:block;height:26px;width:39px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.ctry [data-flag="ch"] svg{width:26px}
 .ctry[aria-pressed="true"]{border-color:var(--g3);background:linear-gradient(180deg,#eaf8ff,#c6eaff);box-shadow:0 0 0 3px rgba(0,150,255,.2)}
 .tree-scroll,.ai-scroll{scrollbar-width:none;-ms-overflow-style:none}               /* 0.1.9a : pas de barres de défilement (molette, glisser, pincer) */
 .tree-scroll::-webkit-scrollbar,.ai-scroll::-webkit-scrollbar{display:none}
@@ -674,7 +675,7 @@ body.zmode .treebox{position:relative}
   50%{box-shadow:0 0 0 2px #1f3fbf,0 0 0 4px #fff,0 0 0 6px #e8203a,0 0 40px 14px rgba(80,120,255,.55),0 8px 18px rgba(0,40,140,.3)}}
 .rib.pr{right:8px;color:#fff;background:linear-gradient(180deg,#5574ff,#1f3fbf);border:1px solid #fff;box-shadow:inset 0 -3px 0 #e8203a,0 0 10px rgba(255,205,0,.7)}
 /* 0.1.9b : bulles des politiques aux couleurs du pays (France par défaut) */
-:root[data-ctry="uk"] .node.pol,:root[data-ctry="uk"] .node.partner.pol{background:linear-gradient(135deg,transparent 45%,rgba(200,16,46,.16) 45% 55%,transparent 55%),linear-gradient(45deg,transparent 45%,rgba(200,16,46,.16) 45% 55%,transparent 55%),linear-gradient(160deg,#e4e9f7 0%,#ffffff 55%,#e4e9f7 100%);box-shadow:0 0 0 2px #012169,0 0 0 4px #fff,0 0 0 6px #c8102e,0 8px 18px rgba(1,33,105,.3)}
+:root[data-ctry="uk"] .node.pol,:root[data-ctry="uk"] .node.partner.pol{background:linear-gradient(160deg,#e4e9f7 0%,#ffffff 55%,#e4e9f7 100%);box-shadow:0 0 0 2px #012169,0 0 0 4px #fff,0 0 0 6px #c8102e,0 8px 18px rgba(1,33,105,.3)}
 :root[data-ctry="uk"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(1,33,105,.3) 44%,rgba(255,255,255,.95) 48%,rgba(200,16,46,.3) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
 :root[data-ctry="uk"] .node.pol .nt b,:root[data-ctry="uk"] .node.pol .nt span,:root[data-ctry="uk"] .node.pol .n-life,:root[data-ctry="uk"] .node.pol .n-city{color:#012169}
 :root[data-ctry="uk"] .node.pol .n-band{background:linear-gradient(90deg,#012169,#24408f 55%,#c8102e);text-shadow:0 1px 2px rgba(0,0,0,.55)}
@@ -722,6 +723,14 @@ body.zmode .treebox{position:relative}
 .achcat{margin-top:4px}
 /* 0.1.7e : menu des succès refait */
 .modal.wide{width:min(900px,100%)}
+.modal::-webkit-scrollbar{display:none}
+.devcon .devsec{margin:0 0 12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.7);border:1px solid #fff;box-shadow:0 3px 8px rgba(0,70,160,.08)}
+.devcon .devsec>b{display:block;margin-bottom:8px;font:800 14px var(--font-display)}
+.devcon .devcyn{display:block;margin:-4px 0 8px;font:800 20px var(--font-display);color:#0a8f6a}
+.devcon .devrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.devcon .devrow .gel{flex:1 1 auto;min-height:36px;padding:0 12px}
+.devcon .devrow .inp{flex:1 1 160px;min-width:0}
+.devmsg{margin:0 0 12px;padding:8px 12px;border-radius:12px;background:#e6ffe9;border:1px solid #9be3a6;color:#167a2a;font-weight:700}
 .achprog{display:flex;align-items:center;gap:10px;margin:8px 0 10px}
 .achprog b{font:800 15px var(--font-display);color:var(--ink);font-variant-numeric:tabular-nums}
 .achbar{flex:1;display:block;height:8px;border-radius:99px;background:rgba(0,80,160,.12);overflow:hidden}
@@ -733,9 +742,9 @@ body.zmode .treebox{position:relative}
 .achtier b{color:var(--ink)}
 .medal.mini{width:26px;height:26px;border-width:1.5px}
 .medal.mini svg{width:14px;height:14px}
-.achnav{position:sticky;top:-22px;z-index:3;display:flex;gap:6px;overflow-x:auto;margin:12px -22px 4px;padding:10px 22px;
+.achnav{position:sticky;top:-22px;z-index:3;display:flex;flex-wrap:wrap;justify-content:center;gap:5px;overflow:visible;margin:12px -22px 4px;padding:8px 22px;
   background:linear-gradient(180deg,rgba(242,251,255,.98),rgba(236,248,255,.94));border-bottom:1px solid rgba(0,80,160,.1);scrollbar-width:thin}
-.achchip{flex:none;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid rgba(0,100,200,.18);background:#fff;
+.achchip{flex:none;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;font-size:12.5px;border-radius:99px;border:1px solid rgba(0,100,200,.18);background:#fff;
   cursor:pointer;font:700 12.5px var(--font-display);color:var(--ink)}
 .achchip:hover{box-shadow:0 3px 10px rgba(0,70,160,.16)}
 .achchip svg{width:16px;height:16px;fill:var(--g3)}
@@ -1001,6 +1010,28 @@ body.zmode .treebox{position:relative}
 .journal p,.toast p{margin:0;min-width:0}
 .k-birth{--dot:var(--lime)} .k-death{--dot:#5f7890} .k-love{--dot:var(--magenta)} .k-wed{--dot:var(--sun-deep)}
 .k-tt{--dot:#3fc6ff}
+.rib.dazed{top:auto;bottom:-10px;left:auto;right:8px;color:#1677c9;background:linear-gradient(180deg,#f0fcff,#c8f0ff);border:1px solid #9fe2ff;font-size:9px}
+.ttmet{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:10px 12px;border-radius:14px;background:linear-gradient(180deg,#fff5fa,#ffe0ef);border:1px solid #ffc2dc;color:#b0246a;font-weight:700}
+.ttdz{margin:0 0 12px;padding:10px 12px;border-radius:14px;background:linear-gradient(180deg,#f0fcff,#d4f3ff);border:1px solid #a8e4ff;color:#14609e}
+.achrw{display:inline-flex;align-items:center;justify-content:center;gap:3px;font:800 11px var(--font-display);color:#0a8f6a;font-style:normal}
+.achrw svg{width:12px;height:12px;fill:currentColor}
+.achpop .achrw{margin-top:4px;justify-content:flex-start}
+@keyframes lgflow{to{background-position:200% 50%}}
+@keyframes lgsweep{0%{background-position:140% 0}60%,100%{background-position:-40% 0}}
+.cb.lg{background:linear-gradient(90deg,#ff4f6d,#ff9a2e,#ffe14d,#3fd46b,#3fa9ff,#8f6bff,#ff4f6d)!important;background-size:200% 100%!important;animation:lgflow 2s linear infinite;box-shadow:0 0 7px 1px rgba(255,190,90,.95)!important}
+.n-band.lgband{background:linear-gradient(90deg,#ff4f6d,#ff9a2e,#ffe14d,#3fd46b,#3fa9ff,#8f6bff,#ff4f6d)!important;background-size:200% 100%!important;animation:lgflow 3s linear infinite;color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.5);border-color:#fff!important}
+.albc.leg{position:relative;overflow:hidden;border:2px solid transparent;background:linear-gradient(rgba(255,255,255,.93),rgba(255,255,255,.93)) padding-box,linear-gradient(90deg,#ff4f6d,#ff9a2e,#ffe14d,#3fd46b,#3fa9ff,#8f6bff,#ff4f6d) border-box;
+  background-size:100% 100%,200% 100%;animation:lgflow 3s linear infinite;box-shadow:0 0 16px rgba(255,150,220,.75),0 3px 8px rgba(0,70,160,.1)}
+.albc.leg::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.9) 50%,transparent 65%);background-size:250% 100%;animation:lgsweep 3.2s ease-in-out infinite}
+.albc.leg:not(.unk)>i{background:conic-gradient(#ff4f6d,#ff9a2e,#ffe14d,#3fd46b,#3fa9ff,#8f6bff,#ff4f6d);animation:legspin 4s linear infinite;box-shadow:0 0 12px rgba(255,200,90,.9)}
+.albc.leg:not(.unk)>i svg{animation:legspin 4s linear infinite reverse}
+.albc.leg:not(.unk) b{background:linear-gradient(90deg,#e0245e,#ff7a00,#c99a00,#1fa64d,#1f7fe0,#7a4bff,#e0245e);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:lgflow 4s linear infinite}
+.albc.leg.unk{opacity:.8;filter:saturate(.5)}
+.albleg{display:inline-block;margin-top:4px;padding:1px 8px;border-radius:8px;font:800 9.5px var(--font-display);letter-spacing:.08em;text-transform:uppercase;font-style:normal;color:#fff;
+  background:linear-gradient(90deg,#ff4f6d,#ff9a2e,#3fa9ff,#8f6bff,#ff4f6d);background-size:200% 100%;animation:lgflow 3s linear infinite;text-shadow:0 1px 1px rgba(0,0,0,.3)}
+.facts .legf{border:2px solid transparent!important;background:linear-gradient(#fffdf6,#fffdf6) padding-box,linear-gradient(90deg,#ff4f6d,#ff9a2e,#ffe14d,#3fd46b,#3fa9ff,#8f6bff,#ff4f6d) border-box!important;background-size:100% 100%,200% 100%!important;animation:lgflow 3s linear infinite}
+.facts .legf dd{font-weight:800;color:#8a3fd6}
+.facts .ttf{background:linear-gradient(180deg,#f0fcff,#d4f3ff)!important;border-color:#a8e4ff!important}.facts .ttf dd{color:#14609e}
 .toast.k-tt{background:linear-gradient(180deg,#f0fcff,#b8ecff);border-color:#9fe2ff}
 :is(#treeCanvas,#aiCanvas) .node.chrono{outline:2px dashed rgba(40,170,255,.75);outline-offset:3px}
 :is(#treeCanvas,#aiCanvas) .node.tlost{opacity:.5;filter:saturate(.3) blur(.4px);outline:2px dotted rgba(40,170,255,.8);outline-offset:3px;animation:ttghost 3.2s ease-in-out infinite}
@@ -1038,7 +1069,7 @@ body.zmode .treebox{position:relative}
 /* Modales */
 .overlay{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgba(0,70,170,.28);
   -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
-.modal{width:min(640px,100%);max-height:calc(100% - 8px);overflow:auto;padding:22px;outline:none;animation:pop .32s cubic-bezier(.2,1.4,.4,1)}
+.modal{width:min(640px,100%);max-height:calc(100% - 8px);overflow:auto;scrollbar-width:none;padding:22px;outline:none;animation:pop .32s cubic-bezier(.2,1.4,.4,1)}
 @keyframes pop{from{transform:scale(.86);opacity:0}to{transform:none;opacity:1}}
 /* La croix reste en haut de la fenêtre quand on fait défiler */
 .modal>.x{position:sticky;top:0;float:right;z-index:6;width:46px;min-height:46px;margin:-8px -8px 4px 10px;
@@ -1501,19 +1532,37 @@ let CTRY = 'fr';                                        // pays de la partie : '
 const APP_VERSION = '0.2.0a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
-  {v:'0.2.0a', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
-   fr:['Nouveau : les voyageurs du temps ! Une particularité très rare (0,5 % des naissances, 20 % si un parent l\'est). De 16 à 60 ans, une faille temporelle peut s\'ouvrir chaque année : le voyageur disparaît dans le futur (de 8 à 90 ans plus tard) et réapparaît avec le même âge. Son couple prend fin, et il peut revenir plus jeune que ses propres petits-enfants.',
+  {v:'0.2.0a', date:{fr:'14 novembre 2026', en:'November 14, 2026', de:'14. November 2026'},
+   fr:['Nouveau : les voyageurs du temps (en mode normal) ! Une particularité très rare (0,5 % des naissances, 20 % si un parent l\'est). De 16 à 60 ans, une faille temporelle peut s\'ouvrir chaque année : le voyageur disparaît dans le futur (de 8 à 90 ans plus tard) et réapparaît avec le même âge, parfois plus jeune que ses propres petits-enfants.',
        'Si c\'est ton personnage, tu choisis : sauter ou rester. En sautant, le temps défile à toute vitesse pendant que la famille vit sa vie sans toi, puis tu découvres ce qui s\'est passé pendant ton absence.',
+       'Retrouvailles : au retour, l\'ancien amour du voyageur l\'a peut-être attendu, s\'il est encore en vie et seul. Plus le saut est court, plus c\'est probable. Le couple reprend, avec 60 Cyn en cadeau.',
+       'Déboussolement : au retour, le voyageur est déboussolé pendant un an (six mois s\'il retrouve son amour), avec un état différent pour chacune des 33 décennies de 1780 à 2100. Son risque de mourir augmente un peu, et si son métier n\'existe plus, il se retrouve au chômage. Les 33 états se collectionnent dans la nouvelle catégorie Chocs temporels de l\'album.',
        'Boutique : la Montre temporelle (1 200 Cyn) fait de ton personnage un voyageur du temps. Depuis sa fiche, il peut sauter de 5 à 100 ans quand il le veut, une fois tous les 10 ans.',
        'Dans l\'arbre, les voyageurs ont un contour bleu en pointillés, et les personnes perdues dans le temps apparaissent en fantôme. Leur fiche indique leur date de retour.',
-       '4 nouveaux succès dans la catégorie Voyage dans le temps : Premier saut, Plus jeune que ses petits-enfants, Bond de géant et Voyageur infatigable.',
-       'Mode Zombie : une personne perdue dans le temps ne peut pas être mordue. Les voyageurs n\'existent pas en mode Royal, et la montre n\'est pas disponible pendant un duel.'],
-   en:['New: time travellers! A very rare trait (0.5% of births, 20% if a parent has it). From 16 to 60, a time rift can open each year: the traveller vanishes into the future (8 to 90 years later) and reappears at the same age. Their relationship ends, and they can come back younger than their own grandchildren.',
+       '6 nouveaux succès : Premier saut, Plus jeune que ses petits-enfants, Je t\'ai attendu, Bond de géant, Voyageur infatigable et Choc des époques.',
+       'Chaque succès rapporte maintenant des Cyn : Bronze 75, Argent 150, Or 300, Platine 500, Spécial 400, Légendaire 1 000. Le rang Multicolore s\'appelle désormais Légendaire.',
+       'Objets légendaires : 7 centres d\'intérêt, 4 particularités, 7 métiers, 3 formations, 4 maladies, 4 morts (dont la chute d\'astéroïde) et 1 addiction, à 0,025 % de chances chacun. Ils brillent aux couleurs de l\'arc-en-ciel dans l\'arbre, la fiche et l\'album, et chaque découverte est annoncée en grand.',
+       '3 nouvelles addictions : accro au sport (protège des maladies comme un loisir sportif, mais peut causer un arrêt cardiaque à l\'effort, une rhabdomyolyse ou une blessure de surentraînement), accro à la nourriture (obésité morbide, diabète sévère, étouffement en mangeant) et accro au travail (retraite 5 à 8 ans plus tard, mais karōshi, infarctus dû au stress ou épuisement professionnel sévère).',
+       '11 nouvelles causes de mort : électrocution, hydrocution, déshydratation, gangrène, incendie, empoisonnement, chute fatale, commotion cérébrale, septicémie, infarctus et faim. Nouvelle maladie bénigne : le syndrome de Paris.',
+       'Les succès obtenus pendant un voyage dans le temps s\'annoncent maintenant à l\'arrivée (avant, l\'écran du voyage les cachait). Un voyageur qui revient grand-parent à 40 ans ou moins débloque aussi les succès correspondants.',
+       'Menu des succès : les rangs Spécial et Légendaire sont comptés en haut, les catégories s\'affichent sur plusieurs lignes, et il n\'y a plus de barres de défilement dans les fenêtres.',
+       'Écran de départ : les drapeaux remplissent bien leur cadre. Royaume-Uni : la croix qui apparaissait sur la bulle des politiques est retirée.',
+       'Les voyageurs du temps n\'existent qu\'en mode normal (pas en Royal, en Zombie ni en Versus).'],
+   en:['New: time travellers (in normal mode)! A very rare trait (0.5% of births, 20% if a parent has it). From 16 to 60, a time rift can open each year: the traveller vanishes into the future (8 to 90 years later) and reappears at the same age, sometimes younger than their own grandchildren.',
        'If it\'s your character, you choose: leap or stay. When you leap, time races by while the family lives on without you, then you find out what happened while you were gone.',
+       'Reunions: when the traveller comes back, their old love may have waited, if still alive and single. The shorter the leap, the likelier it is. The couple gets back together, with 60 Cyn as a gift.',
+       'Disorientation: back from a leap, the traveller is disoriented for a year (six months if reunited with their love), with a different state for each of the 33 decades from 1780 to 2100. Their risk of dying goes up a little, and if their job no longer exists, they\'re out of work. The 33 states can be collected in the new Time shocks album category.',
        'Shop: the Time watch (1,200 Cyn) makes your character a time traveller. From their card, they can leap 5 to 100 years whenever they want, once every 10 years.',
        'In the tree, travellers have a dotted blue outline, and people lost in time appear as ghosts. Their card shows when they\'ll be back.',
-       '4 new achievements in the Time travel category: First leap, Younger than the grandkids, Giant leap and Tireless traveller.',
-       'Zombie mode: someone lost in time can\'t be bitten. Time travellers don\'t exist in Royal mode, and the watch isn\'t available during a duel.']},
+       '6 new achievements: First leap, Younger than the grandkids, I waited for you, Giant leap, Tireless traveller and Culture shock.',
+       'Every achievement now earns Cyn: Bronze 75, Silver 150, Gold 300, Platinum 500, Special 400, Legendary 1,000. The Rainbow tier is now called Legendary.',
+       'Legendary items: 7 interests, 4 traits, 7 jobs, 3 schools, 4 illnesses, 4 deaths (including the falling asteroid) and 1 addiction, each with a 0.025% chance. They shine in rainbow colours in the tree, the card and the album, and every discovery gets a big announcement.',
+       '3 new addictions: exercise addiction (protects from illness like a sporty hobby, but can cause a cardiac arrest while exercising, rhabdomyolysis or an overtraining injury), food addiction (morbid obesity, severe diabetes, choking while eating) and workaholism (retirement 5 to 8 years later, but karōshi, a stress-related heart attack or severe burnout).',
+       '11 new causes of death: electrocution, cold water shock, dehydration, gangrene, fire, poisoning, fatal fall, concussion, sepsis, heart attack and starvation. New mild illness: Paris syndrome.',
+       'Achievements earned during a time leap are now announced on arrival (the travel screen used to hide them). A traveller who comes back as a grandparent aged 40 or under also unlocks the matching achievements.',
+       'Achievements menu: the Special and Legendary tiers are counted at the top, categories wrap onto several lines, and windows no longer show scroll bars.',
+       'Start screen: flags now fill their frame. United Kingdom: the cross on politicians\' bubbles is gone.',
+       'Time travellers only exist in normal mode (not in Royal, Zombie or Versus).']},
   {v:'0.1.9d', date:{fr:'13 novembre 2026', en:'November 13, 2026', de:'13. November 2026'},
    fr:['Version PC : « Taille de l\'interface » est remplacée par un choix de résolution (1280 × 720 à 3840 × 2160, selon ton écran). La fenêtre se redimensionne et se recentre, et garde ce réglage au prochain lancement. L\'option n\'apparaît pas sur téléphone ni dans le navigateur.',
        'Le thème Dark demande maintenant 50 meurtres commis par des criminels (toutes parties confondues), avec le compteur affiché (par exemple 32/50).',
@@ -2179,6 +2228,9 @@ const CITIES = ['Ajaccio','Albi','Amiens','Angers','Annecy','Arles','Avignon','B
 
 // [id, fr masc., fr fém., en masc., en fém., de, à]
 const JOBS = [
+ ['chuchoteur','Chuchoteur de chevaux','Chuchoteuse de chevaux','Horse whisperer','Horse whisperer',1500,2100],["dresseurours","Dresseur d'ours","Dresseuse d'ours",'Bear tamer','Bear tamer',1500,1950],
+ ['polaire','Explorateur polaire','Exploratrice polaire','Polar explorer','Polar explorer',1820,2100],['gouteurglace','Goûteur de glaces','Goûteuse de glaces','Ice cream taster','Ice cream taster',1920,2100],
+ ['tornades','Chasseur de tornades','Chasseuse de tornades','Storm chaser','Storm chaser',1970,2100],['lunaire','Marcheur lunaire','Marcheuse lunaire','Moonwalker','Moonwalker',1969,2100],['pilotejet','Pilote de jet privé','Pilote de jet privé','Private jet pilot','Private jet pilot',1965,2100],
  ['uxdesign','Designer UX','Designeuse UX','UX designer','UX designer',2005,2100],['repsmart','Réparateur de smartphones','Réparatrice de smartphones','Smartphone repairer','Smartphone repairer',2008,2100],
  ['escapegm',"Maître du jeu d'escape game","Maîtresse du jeu d'escape game",'Escape room game master','Escape room game master',2013,2100],
  ['gardechasse','Garde-chasse','Garde-chasse','Gamekeeper','Gamekeeper',1500,2100],['eclusier','Éclusier','Éclusière','Lock keeper','Lock keeper',1600,2040],
@@ -2331,7 +2383,8 @@ const CONDS = [
  ['maniaque','Maniaque','Maniaque','Fastidious','sparkle'],['borderline','Borderline','Borderline','Borderline','brain'],
  ['pmr','Personne à mobilité réduite','Personne à mobilité réduite','Reduced mobility','user'],['psychopathe','Psychopathe','Psychopathe','Psychopath','brain'],
  ['diogene','Syndrome de Diogène','Syndrome de Diogène','Diogenes syndrome','puzzle'],
- ['delirant','Trouble délirant','Trouble délirant','Delusional disorder','brain'],['voyageur','Voyageur du temps','Voyageuse du temps','Time traveller','clock'],['oniomanie','Oniomanie','Oniomanie','Compulsive buying disorder','bag',1900],
+ ['delirant','Trouble délirant','Trouble délirant','Delusional disorder','brain'],['voyageur','Voyageur du temps','Voyageuse du temps','Time traveller','clock'],['vairons','Yeux vairons','Yeux vairons','Heterochromia','palette'],
+ ['memoire','Mémoire absolue','Mémoire absolue','Perfect memory','brain'],['etoile','Né sous une bonne étoile','Née sous une bonne étoile','Born under a lucky star','sparkle'],['bulle','Enfant bulle','Enfant bulle','Bubble child','pill'],['oniomanie','Oniomanie','Oniomanie','Compulsive buying disorder','bag',1900],
  ['tdi','TDI','TDI','Dissociative identity disorder','user',1880],['alice',"Syndrome d'Alice au pays des merveilles","Syndrome d'Alice au pays des merveilles",'Alice in Wonderland syndrome','eyeoff',1955],
  ['cotard','Syndrome de Cotard','Syndrome de Cotard','Cotard syndrome','skull',1880],['capgras','Syndrome de Capgras','Syndrome de Capgras','Capgras syndrome','user',1923],
  ['peterpan','Syndrome de Peter Pan','Syndrome de Peter Pan','Peter Pan syndrome','rocket',1983],['persoprinc','Syndrome du personnage principal','Syndrome du personnage principal','Main character syndrome','film',2005]
@@ -2362,6 +2415,10 @@ const ARTJOBS = {artnum:'peintre', decorateur:null, tapissier:null, dessinateur:
 const FAME_SRC = [['int','streamer',.2,'streamstar'],['job','esportpro',.2,'esport'],['job','youtubeurj',.07,'youtubeur'],['job','speedrunner',.05,'speedstar']];
 // addictions (8,8 % à 18 ans) : [id, fr masc., fr fém., en, icône, risque de décès annuel en plus, depuis, « tombe dans … », « develops … »]
 const ADDICTIONS = [
+ ['addsport','Accro au sport','Accro au sport','Exercise addiction','dumbbell',.006,1850,"l'addiction au sport",'an exercise addiction'],
+ ['addfood','Accro à la nourriture','Accro à la nourriture','Food addiction','apple',.01,1500,"l'addiction à la nourriture",'a food addiction'],
+ ['addwork','Accro au travail','Accro au travail','Workaholism','building',.008,1850,"l'addiction au travail",'workaholism'],
+ ['montagnesrusses','Accro aux montagnes russes','Accro aux montagnes russes','Roller coaster addiction','bolt',.003,1885,"l'addiction aux montagnes russes",'a roller coaster addiction'],
  ['tabac','Tabagisme','Tabagisme','Smoking','cig',.02,1560,'le tabagisme','a smoking habit'],
  ['alcool','Alcoolisme','Alcoolisme','Alcoholism','glass',.017,1500,"l'alcoolisme",'alcoholism'],
  ['cafe','Accro au café','Accro au café','Coffee addiction','cup',.005,1670,"l'addiction au café",'a coffee addiction'],
@@ -2379,6 +2436,9 @@ const addRisk = (id, A) => ADDICTIONS.find(a => a[0]===id)[5] * (A >= 70 ? 4 : A
 // centres d'intérêt (sans effet, sauf les sportifs : risque de maladie divisé par 2) :
 // [id, fr masc., fr fém., en masc., en fém., icône, de, à, sportif]
 const INTERESTS = [
+ ['tresors','Chasseur de trésors','Chasseuse de trésors','Treasure hunter','Treasure hunter','trophy',1500,2100],['sourcier','Sourcier','Sourcière','Water diviner','Water diviner','bulb',1500,2100],
+ ['fantomes','Chasseur de fantômes','Chasseuse de fantômes','Ghost hunter','Ghost hunter','moon',1500,2100],['cryptozoo','Cryptozoologue','Cryptozoologue','Cryptozoologist','Cryptozoologist','paw',1500,2100],
+ ['meteorites','Collectionneur de météorites','Collectionneuse de météorites','Meteorite collector','Meteorite collector','sparkle',1500,2100],['funambule','Funambule','Funambule','Tightrope walker','Tightrope walker','user',1500,2100,1],['exorciste','Exorciste','Exorciste','Exorcist','Exorcist','dove',1500,2100],
  ['gothique','Gothique','Gothique','Goth','Goth','moon',1980,9999],['metalleux','Métalleux','Métalleuse','Metalhead','Metalhead','bolt',1970,9999],
  ['punk','Punk','Punk','Punk','Punk','bolt',1976,9999],['religieux','Religieux','Religieuse','Devout','Devout','dove',1500,9999],
  ['opera',"Amateur d'opéra","Amatrice d'opéra",'Opera lover','Opera lover','music',1600,9999],['gospel','Chanteur de gospel','Chanteuse de gospel','Gospel singer','Gospel singer','music',1930,9999],
@@ -2434,9 +2494,9 @@ const byId = list => Object.fromEntries(list.map(r => [r[0], r]));
 const INT = byId(INTERESTS);
 const interestsOf = p => (p.interests || []).slice(0, 1);                  // un seul centre d'intérêt par personne
 const famStars = p => S ? Object.values(S.people).filter(q => q.id !== p.id && q.star && q.star.famous && inFamily(q)) : [];   // stars de la famille, vivantes ou mortes
-const sporty = p => interestsOf(p).some(id => INT[id] && INT[id][8]);
+const sporty = p => interestsOf(p).some(id => INT[id] && INT[id][8]) || addictsOf(p).includes('addsport');   // accro au sport : protégé comme un sportif
 function gainInterest(p, day, silent){
-  const y = yearOf(day), have = interestsOf(p), ok = INTERESTS.filter(r => r[0] !== 'fanof' && y >= r[6] && y <= r[7]);
+  const y = yearOf(day), have = interestsOf(p), ok = INTERESTS.filter(r => r[0] !== 'fanof' && !LEGS.i.has(r[0]) && y >= r[6] && y <= r[7]);
   if(have.length || !ok.length) return null;
   const stars = S ? Object.values(S.people).filter(q => q.id !== p.id && q.star && q.star.famous && inFamily(q)) : [];
   const relW = y < 1800 ? 12 : y < 1900 ? 6 : y < 1970 ? 3 : y < 2030 ? 1 : .25;      // 0.1.9c : « Religieux » selon l'époque
@@ -2444,6 +2504,8 @@ function gainInterest(p, day, silent){
   let rr = Math.random() * ok.reduce((a, r) => a + wOf(r), 0), id = ok[ok.length - 1][0];
   for(const r of ok){ rr -= wOf(r); if(rr <= 0){ id = r[0]; break; } }
   if(stars.length && Math.random() < .2){ id = 'fanof'; p.fanOf = pick(stars).id; }   // fan d'une star (passée ou actuelle) de la famille
+  const lgI = INTERESTS.filter(r => LEGS.i.has(r[0]) && y >= r[6] && y <= r[7] && Math.random() < LEG_P);   // légendaire
+  if(lgI.length){ id = lgI[0][0]; delete p.fanOf; }
   p.interests = have.concat(id);
   if(!silent) log('interest','interest',[p.id, id], day, p.id === S.activeId);
   return id;
@@ -2456,22 +2518,31 @@ function planInterests(p, day){              // 70 % des gens ont un centre d'in
   if(a <= A) gainInterest(p, day, true); else p.intAges.push(a);
 }
 const JOB = byId(JOBS), STARJOB = byId(STARJOBS), COND = byId(CONDS), ADD = byId(ADDICTIONS), ATOUT = byId(ATOUTS);
+// 0.2.0a : objets légendaires, 0,025 % de chances chacun, qui brillent dans l'album
+const LEGS = {i:new Set(['tresors','sourcier','fantomes','cryptozoo','meteorites','funambule','exorciste']), c:new Set(['vairons','memoire','etoile','bulle']),
+  j:new Set(['chuchoteur','dresseurours','polaire','gouteurglace','tornades','lunaire','pilotejet']), e:new Set(['f_cirque','f_polar','f_spatiale']),
+  m:new Set(['hoquet','fourire','accent','teteexplose']), d:new Set(['asteroide','mortderire','cocotier','orgorge']), a:new Set(['montagnesrusses'])};
+const LEG_P = .00025;                                   // 0,025 % de chances chacun
 function rollAddiction(p, day){
   const have = addictsOf(p);
+  const lgA = have.length < 2 && ADDICTIONS.find(a => LEGS.a.has(a[0]) && yearOf(day) >= a[6] && !have.includes(a[0]) && Math.random() < LEG_P);   // addiction légendaire
+  if(lgA){ p.addicts = have.concat(lgA[0]); delete p.addict; return lgA[0]; }
   if(have.length >= 2 || Math.random() >= R.addict/100) return null;
-  const y = yearOf(day), ok = ADDICTIONS.filter(a => y >= a[6] && !have.includes(a[0]));
+  const y = yearOf(day), ok = ADDICTIONS.filter(a => y >= a[6] && !have.includes(a[0]) && !LEGS.a.has(a[0]));
   if(!ok.length) return null;
   const id = pick(ok)[0];
   p.addicts = have.concat(id); delete p.addict;
+  if(id === 'addwork') p.retireAge = (p.retireAge || 62) + rnd(5, 8);   // accro au travail : la retraite 5 à 8 ans plus tard
   return id;
 }
 const rollAddictions = (p, day) => { const a = rollAddiction(p, day), b = a ? rollAddiction(p, day) : null; return [a, b].filter(Boolean); };
 /* 4 % de chances d'avoir une particularité ; 13 % d'hériter de celle d'un parent */
 function rollConds(parents, y){
   const out = [], inherited = new Set(parents.flatMap(p => p.conds || []));
-  for(const id of inherited) if(id !== 'voyageur' && Math.random() < R.inherit/100) out.push(id);
-  if(!out.length && Math.random() < R.conds/100) out.push(pick(CONDS.filter(r => r[0] !== 'voyageur' && (!r[5] || !y || y >= r[5])))[0]);   // certaines n'existent qu'à partir d'une année
-  if(!royalOn() && Math.random() < (inherited.has('voyageur') ? .2 : .005)) out.push('voyageur');   // 0.2.0a : voyageur du temps (0,5 % ; 20 % si un parent l'est)
+  for(const id of inherited) if(id !== 'voyageur' && !LEGS.c.has(id) && Math.random() < R.inherit/100) out.push(id);
+  if(!out.length && Math.random() < R.conds/100) out.push(pick(CONDS.filter(r => r[0] !== 'voyageur' && !LEGS.c.has(r[0]) && (!r[5] || !y || y >= r[5])))[0]);
+  for(const id of LEGS.c) if(Math.random() < LEG_P) out.push(id);   // particularités légendaires   // certaines n'existent qu'à partir d'une année
+  if(!royalOn() && !(S && (S.zombie || S.vs || S.headless)) && Math.random() < (inherited.has('voyageur') ? .2 : .005)) out.push('voyageur');   // mode normal seulement   // 0.2.0a : voyageur du temps (0,5 % ; 20 % si un parent l'est)
   return out;
 }
 const inRange = (r,y) => y >= r[5] && y <= r[6];
@@ -2486,15 +2557,17 @@ function pickPol(y){
 const pickJob = (y, p, noPol) => {
   y = dataYear(y);
   if(!noPol && Math.random() < (p && hasAtout(p, 'ambition') ? .3 : .02/1.4)){ const j = pickPol(y); if(j) return j; }   // atout Ambition : 30 % en politique (sinon 1,4 %)
-  return pick(JOBS.filter(r => inRange(r,y) && !isPol(r[0])))[0];
+  if(!noPol){ const lg = JOBS.filter(r => LEGS.j.has(r[0]) && inRange(r,y) && Math.random() < LEG_P); if(lg.length) return lg[0][0]; }   // métiers légendaires
+  return pick(JOBS.filter(r => inRange(r,y) && !isPol(r[0]) && !LEGS.j.has(r[0])))[0];
 };
 const pickStarJob = y => { y = dataYear(y); return pick(STARJOBS.filter(r => inRange(r,y)))[0]; };
 // [id, fr, en, depuis, métier visé]
-const FIELDS = [['med','Médecine','Medicine',1500,'medecin'],['droit','Droit','Law',1500,'avocat'],['lettres','Lettres','Literature',1500,'professeur'],
+const FIELDS = [['cirque','École du cirque','Circus school',1780,'dresseurours'],['polar',"Académie d'exploration polaire",'Polar exploration academy',1830,'polaire'],
+ ['spatiale','Académie spatiale','Space academy',1960,'lunaire'],['med','Médecine','Medicine',1500,'medecin'],['droit','Droit','Law',1500,'avocat'],['lettres','Lettres','Literature',1500,'professeur'],
  ['arts','Beaux-Arts','Fine arts',1650,'architecte'],['sciences','Sciences','Science',1750,'ingenieur'],['pharma','Pharmacie','Pharmacy',1800,'pharmacien'],
  ['eco','Économie','Economics',1850,'comptable'],['journal','Journalisme','Journalism',1900,'journaliste'],['info','Informatique','Computer science',1970,'developpeur']];
 const FIELD = byId(FIELDS);
-const pickField = y => pick(FIELDS.filter(f => dataYear(y) >= f[3]));
+const pickField = y => FIELDS.find(f => LEGS.e.has('f_' + f[0]) && dataYear(y) >= f[3] && Math.random() < LEG_P) || pick(FIELDS.filter(f => dataYear(y) >= f[3] && !LEGS.e.has('f_' + f[0])));
 // filières du lycée : [id, fr, en, de, à, type]
 const TRACKS = [['bacphilo','Bac philosophie','Bac · Philosophy',1960,1967,'bac'],['bacsci','Bac sciences expérimentales','Bac · Sciences',1960,1967,'bac'],
  ['baca','Bac A (littéraire)','Bac A · Literature',1968,1994,'bac'],['bacc','Bac C (scientifique)','Bac C · Science',1968,1994,'bac'],
@@ -2507,6 +2580,9 @@ const TRACKS = [['bacphilo','Bac philosophie','Bac · Philosophy',1960,1967,'bac
 const TRACK = byId(TRACKS);
 // maladies bénignes : [id, fr, en, de, à, durée min (jours), durée max, filtre] — elles ne tuent pas, mais doublent le risque de maladie grave
 const MILDS = [
+ ['synparis','Syndrome de Paris','Paris syndrome',1960,2100,7,60,{minA:16}],
+ ['hoquet','Hoquet éternel','Endless hiccups',1500,2100,180,1500,{}],['fourire','Fou rire chronique','Chronic giggles',1500,2100,30,365,{}],
+ ['accent',"Syndrome de l'accent étranger",'Foreign accent syndrome',1500,2100,90,900,{}],['teteexplose','Syndrome de la tête qui explose','Exploding head syndrome',1500,2100,60,700,{}],
  ['gale','Gale','Scabies',1500,2100,60,200,{}],['goutte','Goutte','Gout',1500,2100,120,900,{minA:30}],
  ['scorbut','Scorbut','Scurvy',1500,1850,60,300,{}],['rhumatisme','Rhumatismes','Rheumatism',1500,2100,180,1500,{minA:40}],
  ['teigne','Teigne','Ringworm',1500,1950,60,300,{}],['bronchite','Bronchite chronique','Chronic bronchitis',1500,2100,90,720,{}],
@@ -2655,8 +2731,8 @@ function mildYear(p, A, day){                         // une fois par an : peut-
   }
   const era = yearOf(day) < 1900 ? 1.17 : yearOf(day) > 2010 ? .9 : 1;           // 0.1.4j : plus fréquentes avant 1900, moins après 2010
   if(Math.random() < .06/1.29 * era * R.illness/100){                // 0.1.3g : fréquence ÷ 1,29
-    const y = dataYear(yearOf(day)), ok = MILDS.filter(r => !r[7].special && y >= r[3] && y <= r[4] && (r[7].sex == null || p.sex === r[7].sex) && (r[7].minA == null || A >= r[7].minA) && (r[7].maxA == null || A <= r[7].maxA));
-    if(ok.length) catchMild(p, pick(ok)[0], day);
+    const y = dataYear(yearOf(day)), ok = MILDS.filter(r => !r[7].special && !LEGS.m.has(r[0]) && y >= r[3] && y <= r[4] && (r[7].sex == null || p.sex === r[7].sex) && (r[7].minA == null || A >= r[7].minA) && (r[7].maxA == null || A <= r[7].maxA));
+    if(ok.length){ const lg = MILDS.filter(r => LEGS.m.has(r[0]) && y >= r[3] && y <= r[4] && Math.random() < LEG_P); catchMild(p, lg.length ? lg[0][0] : pick(ok)[0], day); }
   }
 }
 function cureAll(p){                                  // potion de santé : plus aucune maladie, même grave
@@ -2718,9 +2794,24 @@ const DISEASES = [
  ['mst','MST',"d'une MST",'an STD',1500,2100,90,1800,.06,{addict:'sexe'}],['ist','IST',"d'une IST",'an STI',1500,2100,60,1200,.07,{addict:'sexe'}],
  ['solitude','Solitude','de solitude','loneliness',1500,2100,180,1800,.05,{addict:'affectif'}],['enseule','Enseulé',"d'un profond enseulement",'deep isolation',1500,2100,120,1500,.05,{addict:'affectif'}],
  ['coeurbrise','Syndrome du cœur brisé','du syndrome du cœur brisé','broken heart syndrome',1500,2100,3,60,.1,{addict:'affectif'}],
+ ['arret_sport',"Arrêt cardiaque à l'effort","d'un arrêt cardiaque à l'effort",'a cardiac arrest while exercising',1500,2100,1,3,.05,{addict:'addsport'}],
+ ['rhabdo','Rhabdomyolyse','de rhabdomyolyse','rhabdomyolysis',1500,2100,7,60,.3,{addict:'addsport'}],['blessure_sport','Blessure de surentraînement',"d'une blessure de surentraînement",'an overtraining injury',1500,2100,30,300,.4,{addict:'addsport'}],
+ ['obesite','Obésité morbide',"d'obésité morbide",'morbid obesity',1500,2100,180,1800,.04,{addict:'addfood'}],['diabete_food','Diabète sévère','de diabète sévère','severe diabetes',1500,2100,90,1200,.06,{addict:'addfood'}],
+ ['etouffement','Étouffement en mangeant',"d'un étouffement en mangeant",'choking while eating',1500,2100,1,1,0,{addict:'addfood'}],
+ ['karoshi','Karōshi (mort par excès de travail)','de karōshi (mort par excès de travail)','karōshi (death from overwork)',1500,2100,1,30,.03,{addict:'addwork'}],
+ ['infarctus_travail','Infarctus dû au stress',"d'un infarctus dû au stress",'a stress-related heart attack',1500,2100,1,30,.05,{addict:'addwork'}],
+ ['epuisement','Épuisement professionnel sévère',"d'un épuisement professionnel sévère",'severe burnout',1850,2100,60,600,.2,{addict:'addwork'}],
  // nouvelles maladies (0.1.1a)
  ['meningite','Méningite','de la méningite','meningitis',1500,2100,3,20,.3],['tetanos','Tétanos','du tétanos','tetanus',1500,1990,5,30,.2],
  ['noyade','Noyade',"d'une noyade",'drowning',1500,2100,1,1,0,{minA:3}],['asteroide',"Chute d'astéroïde","d'une chute d'astéroïde",'a falling asteroid',1500,2100,1,1,0,{special:true}],
+ ['electrocution','Électrocution',"d'une électrocution",'electrocution',1880,2100,1,1,0,{minA:4}],['hydrocution','Hydrocution',"d'une hydrocution",'cold water shock',1500,2100,1,1,0,{minA:6}],
+ ['deshydratation','Déshydratation','de déshydratation','dehydration',1500,2100,2,10,.4],['gangrene','Gangrène','de la gangrène','gangrene',1500,2100,10,90,.25],
+ ['incendie','Incendie','dans un incendie','a fire',1500,2100,1,1,0],['empoisonnement','Empoisonnement',"d'un empoisonnement",'poisoning',1500,2100,1,10,.3],
+ ['chutefatale','Chute fatale',"d'une chute fatale",'a fatal fall',1500,2100,1,1,0],['commotion','Commotion cérébrale',"d'une commotion cérébrale",'a concussion',1500,2100,1,14,.5],
+ ['septicemie','Septicémie',"d'une septicémie",'sepsis',1500,2100,3,30,.3],['infarctus','Infarctus',"d'un infarctus",'a heart attack',1500,2100,1,7,.15,{minA:35}],
+ ['faim','Faim','de faim','starvation',1500,1950,20,120,.3],
+ ['orgorge',"Étouffement avec de l'or","en s'étouffant avec de l'or",'choking on gold',1500,2100,1,1,0,{special:true}],
+ ['mortderire','Mort de rire',"d'un fou rire",'laughing too hard',1500,2100,1,1,0,{special:true}],['cocotier','Chute de noix de coco',"d'une noix de coco tombée sur la tête",'a coconut falling on their head',1500,2100,1,1,0,{special:true}],
  ['disparu','Porté disparu','de sa disparition','disappearance',1500,2100,365,730,.2],   // 0.1.4a : 12 à 24 mois, 20 % retrouvés
  ['mortcerebrale','Mort cérébrale',"d'une mort cérébrale",'brain death',1500,2100,1,30,.01],
  ['necrose','Nécrose',"d'une nécrose",'necrosis',1500,2100,7,120,.06],
@@ -2772,7 +2863,7 @@ function pickWarCause(p, day){
 }
 const DZ = byId(DISEASES);
 // accidents et événements soudains : on en est « victime », on n'en est pas « atteint »
-const EVENTS = new Set(['noyade','asteroide','spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
+const EVENTS = new Set(['noyade','asteroide','mortderire','cocotier','orgorge','electrocution','hydrocution','incendie','chutefatale','etouffement','spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
   'overdose_ecstasy','nanorobots','rage_jeux','cyn_fusion','arret_cafe','infarctus_tabac','infarctus_cannabis','avc','avc_tabac','avc_alcool','avc_cannabis']);
 function pickDisease(p, day){
   const y = dataYear(yearOf(day)), A = ageAt(p, day);
@@ -2827,6 +2918,7 @@ const ICONS = {
   cup:'<path d="M3 8h14v5a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6zm14 1h1.5a2.5 2.5 0 0 1 0 5H17v-2h1.5a.5.5 0 0 0 0-1H17zM6 2h2v4H6zm4 0h2v4h-2z"/>',
   gamepad:'<path fill-rule="evenodd" d="M7 7h10a5 5 0 0 1 4.9 6l-.8 4a2.5 2.5 0 0 1-4.3 1.2L14.5 16h-5l-2.3 2.2A2.5 2.5 0 0 1 2.9 17l-.8-4A5 5 0 0 1 7 7zm0 3v1.5H5.5v2H7V15h2v-1.5h1.5v-2H9V10zm9 .5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zm2.5 2a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/>',
   paw:'<path d="M12 12.5c3 0 6 3 6 6 0 1.5-1.4 2.2-3 2.2-1 0-2-.6-3-.6s-2 .6-3 .6c-1.6 0-3-.7-3-2.2 0-3 3-6 6-6zM5.2 7.8a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2zm13.6 0a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2zM9 3.5a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2zm6 0a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2z"/>',
+  apple:'<path d="M12 7c1.5-1.4 3.5-2 5-1.2 2.6 1.4 3.2 5.4 1.6 9.2C17.4 18 15.5 21 13.5 21c-.7 0-1-.4-1.5-.4s-.8.4-1.5.4C8.5 21 6.6 18 5.4 15 3.8 11.2 4.4 7.2 7 5.8 8.5 5 10.5 5.6 12 7zm-.6-1.6C11 3.8 12 2.3 13.8 2c.2 1.8-.8 3.3-2.4 3.4z"/>',
   dumbbell:'<path d="M1.5 10h2V7.5h3v9h-3V14h-2zm21 0h-2V7.5h-3v9h3V14h2zM7.5 6h2v12h-2zm7 0h2v12h-2zM9.5 11h5v2h-5z"/>',
   dice:'<path fill-rule="evenodd" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2.5 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM12 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM7.5 15a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>',
   pill:'<path fill-rule="evenodd" d="M8.5 3.5a5 5 0 0 1 7 0l5 5a5 5 0 0 1-7 7l-5-5a5 5 0 0 1 0-7zm1.4 1.4a3 3 0 0 0 0 4.2l2.5 2.5 4.2-4.2-2.5-2.5a3 3 0 0 0-4.2 0z"/>',
@@ -2954,6 +3046,14 @@ fr:{
   city_alive:(p,b,c)=> b===c ? `${g(p,'Né','Née')} à ${c}, y vit toujours` : `${g(p,'Né','Née')} à ${b}, vit à ${c}`,
   city_dead:(p,b,c)=> b===c ? `${g(p,'Né','Née')} et ${g(p,'mort','morte')} à ${c}` : `${g(p,'Né','Née')} à ${b}, ${g(p,'mort','morte')} à ${c}`,
   couple_life:'Vie de couple', ul_married:(q,d)=>`Mariage avec ${q} le ${d}`, ul_dating:(q,y)=>`En couple avec ${q} dès ${y}`,
+  daze:["Ne comprend pas pourquoi tout le monde porte une perruque poudrée", "Entend parler de révolution partout et ne sait plus qui gouverne", "Ne comprend rien aux nouvelles unités : mètres, litres, kilos…", "Se demande qui est empereur cette semaine", "S'étonne de voir les rues éclairées au gaz", "Prend le premier train pour un monstre qui crache de la fumée", "Fuit les photographes de peur qu'ils lui volent son âme", "Croit que le télégraphe électrique est de la sorcellerie", "Se perd dans les grands boulevards tout neufs", "N'ose pas toucher au téléphone qui vient d'être inventé", "Ne comprend pas pourquoi l'école est devenue obligatoire", "Se cache sous son siège quand le train arrive sur l'écran du cinéma", "Court après les automobiles en criant « au cheval fou ! »", "Cherche désespérément un fiacre, mais il n'y a que des taxis", "Ne comprend rien au charleston ni aux cheveux courts", "Parle à la radio en espérant qu'elle réponde", "Ne sait pas à quoi servent les tickets de rationnement", "Regarde la télévision de près pour voir les petits bonshommes dedans", "Croit que la minijupe est un accident de couture", "Ne sait pas quoi faire d'un pantalon pattes d'éléphant", "Tape sur le clavier de l'ordinateur comme sur une machine à écrire", "Se demande pourquoi l'ordinateur chante en se connectant à Internet", "Se demande ce qu'est ce « bug de l'an 2000 » dont tout le monde parle", "Parle à son smartphone comme à un vieil ami", "Demande à tout le monde pourquoi on parle à des intelligences artificielles", "Salue poliment les robots livreurs", "Essaie d'ouvrir les portes à la main alors qu'elles s'ouvrent toutes seules", "Cherche le volant dans les voitures sans conducteur", "A le mal de mer dans les taxis volants", "Ne comprend pas pourquoi son frigo lui fait la morale", "Réserve ses vacances sur la Lune par erreur", "Se dispute avec son propre hologramme", "Cherche le bouton pour revenir en arrière"],
+  dazed_rib:p=>g(p,'Déboussolé','Déboussolée'), f_dazed:p=>g(p,'Déboussolé','Déboussolée'),
+  alb_tt:'Chocs temporels', alb_daze_dec:y=>`Arriver dans les années ${y}`, alb_daze_2100:'Arriver en 2100 ou après',
+  tt_land_reunion:(p,q)=>`Surprise : ${q.first} ${g(p,"t'a attendu","t'a attendue")} toutes ces années ! Vous êtes de nouveau ensemble.`,
+  tt_land_dazed:(p,x)=>`Un peu ${g(p,'déboussolé','déboussolée')} pendant quelque temps : ${(x=>x.charAt(0).toLowerCase()+x.slice(1))(x)}.`,
+  log_tt_reunion:(p,q,n)=>`💞 ${nm(q)} a attendu ${nm(p)} pendant ${n} ans : les voilà de nouveau ensemble !`,
+  ul_reunited:y=>`retrouvailles en ${y}`, leg_found:'Légendaire !',
+  log_leg:(p,k,id)=>`✦ Légendaire ! ${nm(p)} : ${legName(k, id, P(p))}`,
   act_lost:p=>g(p,'Perdu dans le temps','Perdue dans le temps'),
   fiche_lost:(p,a,b)=>`⌛ ${g(p,'Perdu','Perdue')} dans le temps depuis ${a} · réapparaîtra en ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} saut${n>1?'s':''} dans le temps · ${tot} ans franchis`,
@@ -3077,7 +3177,7 @@ fr:{
   cause_legend:p=>`${g(p,'entré','entrée')} dans la légende`, log_death_legend:p=>`${nm(p)} entre dans la légende à 33 ans.`,
   ach_full:'Complet !', ach_done:'Débloqué',
   ach_title:'Succès', ach_unlocked:'Succès débloqué !', ach_locked:'Verrouillé', ach_got:(y,f)=>`Débloqué en ${y} · famille ${f}`,
-  ach_count:(n,m)=>`${n} / ${m} débloqués`, tier_bronze:'Bronze', tier_silver:'Argent', tier_gold:'Or', tier_platinum:'Platine', tier_special:'Spécial', tier_legend:'Multicolore',
+  ach_count:(n,m)=>`${n} / ${m} débloqués`, tier_bronze:'Bronze', tier_silver:'Argent', tier_gold:'Or', tier_platinum:'Platine', tier_special:'Spécial', tier_legend:'Légendaire',
   log_ach:id=>`Succès débloqué : ${achTitle(id)} !`, log_gold:()=>'Catégorie de succès complète : le thème Or est débloqué dans les Paramètres !',
   log_night:()=>'Une première victime… Le thème Nuit est débloqué dans les Paramètres.',
   maiden_line:n=>`Nom de jeune fille : ${n}`,
@@ -3243,6 +3343,14 @@ en:{
   city_alive:(p,b,c)=> b===c ? `Born in ${c}, still lives there` : `Born in ${b}, lives in ${c}`,
   city_dead:(p,b,c)=> b===c ? `Born and died in ${c}` : `Born in ${b}, died in ${c}`,
   couple_life:'Relationships', ul_married:(q,d)=>`Married ${q} on ${d}`, ul_dating:(q,y)=>`With ${q} since ${y}`,
+  daze:["Doesn't get why everyone wears a powdered wig", "Hears talk of revolution everywhere and no longer knows who's in charge", "Can't make sense of the new units: metres, litres, kilos…", "Wonders who's emperor this week", "Is amazed to see the streets lit by gas", "Mistakes the first train for a smoke-breathing monster", "Runs from photographers for fear they'll steal their soul", "Thinks the electric telegraph is witchcraft", "Gets lost in the brand-new boulevards", "Doesn't dare touch the newly invented telephone", "Doesn't understand why school is now compulsory", "Ducks under the seat when the train arrives on the cinema screen", "Chases cars shouting “runaway horse!”", "Looks desperately for a horse cab, but there are only taxis", "Can't make sense of the Charleston or short hair", "Talks to the radio hoping it will answer", "Doesn't know what ration coupons are for", "Peers at the television to see the little people inside", "Thinks the miniskirt is a sewing accident", "Has no idea what to do with flared trousers", "Bangs on the computer keyboard like a typewriter", "Wonders why the computer sings when it connects to the internet", "Wonders what this “millennium bug” everyone talks about is", "Talks to their smartphone like an old friend", "Asks everyone why people talk to artificial intelligences", "Politely greets delivery robots", "Tries to open doors by hand when they open by themselves", "Looks for the steering wheel in driverless cars", "Gets seasick in flying taxis", "Doesn't get why their fridge lectures them", "Books a holiday on the Moon by mistake", "Argues with their own hologram", "Looks for the button to go back in time"],
+  dazed_rib:()=>'Disoriented', f_dazed:()=>'Disoriented',
+  alb_tt:'Time shocks', alb_daze_dec:y=>`Arrive in the ${y}s`, alb_daze_2100:'Arrive in 2100 or later',
+  tt_land_reunion:(p,q)=>`Surprise: ${q.first} waited for you all these years! You're together again.`,
+  tt_land_dazed:(p,x)=>`A bit disoriented for a while: ${(x=>x.charAt(0).toLowerCase()+x.slice(1))(x)}.`,
+  log_tt_reunion:(p,q,n)=>`💞 ${nm(q)} waited ${n} years for ${nm(p)}: they're together again!`,
+  ul_reunited:y=>`reunited in ${y}`, leg_found:'Legendary!',
+  log_leg:(p,k,id)=>`✦ Legendary! ${nm(p)}: ${legName(k, id, P(p))}`,
   act_lost:'Lost in time',
   fiche_lost:(p,a,b)=>`⌛ Lost in time since ${a} · will reappear in ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} leap${n>1?'s':''} through time · ${tot} years skipped`,
@@ -3364,7 +3472,7 @@ en:{
   cause_legend:()=>'passed into legend', log_death_legend:p=>`${nm(p)} passes into legend at 33.`,
   ach_full:'Complete!', ach_done:'Unlocked',
   ach_title:'Achievements', ach_unlocked:'Achievement unlocked!', ach_locked:'Locked', ach_got:(y,f)=>`Unlocked in ${y} · ${f} family`,
-  ach_count:(n,m)=>`${n} / ${m} unlocked`, tier_bronze:'Bronze', tier_silver:'Silver', tier_gold:'Gold', tier_platinum:'Platinum', tier_special:'Special', tier_legend:'Rainbow',
+  ach_count:(n,m)=>`${n} / ${m} unlocked`, tier_bronze:'Bronze', tier_silver:'Silver', tier_gold:'Gold', tier_platinum:'Platinum', tier_special:'Special', tier_legend:'Legendary',
   log_ach:id=>`Achievement unlocked: ${achTitle(id)}!`, log_gold:()=>'Achievement category complete: the Gold theme is now available in Settings!',
   log_night:()=>'A first victim… The Night theme is now available in Settings.',
   maiden_line:n=>`Maiden name: ${n}`,
@@ -3531,6 +3639,14 @@ TX.de = {
   city_alive:(p,b,c)=> b===c ? `Geboren in ${c}, lebt immer noch dort` : `Geboren in ${b}, lebt in ${c}`,
   city_dead:(p,b,c)=> b===c ? `Geboren und gestorben in ${c}` : `Geboren in ${b}, gestorben in ${c}`,
   couple_life:'Beziehungen', ul_married:(q,d)=>`Heiratet ${q} am ${d}`, ul_dating:(q,y)=>`Mit ${q} seit ${y}`,
+  daze:["Versteht nicht, warum alle eine gepuderte Perücke tragen", "Hört überall von Revolution und weiß nicht mehr, wer regiert", "Versteht die neuen Einheiten nicht: Meter, Liter, Kilo…", "Fragt sich, wer diese Woche Kaiser ist", "Staunt über die gasbeleuchteten Straßen", "Hält die erste Eisenbahn für ein rauchspeiendes Ungeheuer", "Flieht vor Fotografen aus Angst um die eigene Seele", "Hält den elektrischen Telegrafen für Hexerei", "Verläuft sich auf den nagelneuen Boulevards", "Traut sich nicht, das neu erfundene Telefon anzufassen", "Versteht nicht, warum die Schule jetzt Pflicht ist", "Duckt sich unter den Sitz, wenn der Zug auf der Kinoleinwand ankommt", "Rennt Automobilen hinterher und ruft „Durchgegangenes Pferd!“", "Sucht verzweifelt eine Pferdedroschke, aber es gibt nur Taxis", "Versteht weder den Charleston noch die kurzen Haare", "Spricht mit dem Radio und hofft auf eine Antwort", "Weiß nicht, wozu Lebensmittelmarken gut sind", "Schaut ganz nah in den Fernseher, um die kleinen Leute darin zu sehen", "Hält den Minirock für einen Nähunfall", "Weiß nichts mit einer Schlaghose anzufangen", "Hämmert auf die Computertastatur wie auf eine Schreibmaschine", "Fragt sich, warum der Computer beim Einwählen ins Internet singt", "Fragt sich, was dieser „Millennium-Bug“ ist, von dem alle reden", "Spricht mit dem Smartphone wie mit einem alten Freund", "Fragt alle, warum man mit künstlichen Intelligenzen spricht", "Grüßt höflich die Lieferroboter", "Will Türen von Hand öffnen, obwohl sie von selbst aufgehen", "Sucht das Lenkrad in fahrerlosen Autos", "Wird in fliegenden Taxis seekrank", "Versteht nicht, warum der Kühlschrank Moralpredigten hält", "Bucht aus Versehen Urlaub auf dem Mond", "Streitet mit dem eigenen Hologramm", "Sucht den Knopf, um zurückzuspulen"],
+  dazed_rib:()=>'Verwirrt', f_dazed:()=>'Verwirrt',
+  alb_tt:'Zeitschocks', alb_daze_dec:y=>`In den ${y}er-Jahren ankommen`, alb_daze_2100:'Im Jahr 2100 oder später ankommen',
+  tt_land_reunion:(p,q)=>`Überraschung: ${q.first} hat all die Jahre auf dich gewartet! Ihr seid wieder zusammen.`,
+  tt_land_dazed:(p,x)=>`Eine Weile etwas verwirrt: ${(x=>x.charAt(0).toLowerCase()+x.slice(1))(x)}.`,
+  log_tt_reunion:(p,q,n)=>`💞 ${nm(q)} hat ${n} Jahre auf ${nm(p)} gewartet: Sie sind wieder zusammen!`,
+  ul_reunited:y=>`wieder vereint ${y}`, leg_found:'Legendär!',
+  log_leg:(p,k,id)=>`✦ Legendär! ${nm(p)}: ${legName(k, id, P(p))}`,
   act_lost:'In der Zeit verschollen',
   fiche_lost:(p,a,b)=>`⌛ Seit ${a} in der Zeit verschollen · taucht ${b} wieder auf`,
   fiche_tt:(n,tot)=>`⌛ ${n} ${n>1?'Zeitsprünge':'Zeitsprung'} · ${tot} Jahre übersprungen`,
@@ -3652,7 +3768,7 @@ TX.de = {
   cause_legend:()=>'in die Legende eingegangen', log_death_legend:p=>`${nm(p)} geht mit 33 Jahren in die Legende ein.`,
   ach_full:'Komplett!', ach_done:'Freigeschaltet',
   ach_title:'Erfolge', ach_unlocked:'Erfolg freigeschaltet!', ach_locked:'Gesperrt', ach_got:(y,f)=>`Freigeschaltet ${y} · Familie ${f}`,
-  ach_count:(n,m)=>`${n} / ${m} freigeschaltet`, tier_bronze:'Bronze', tier_silver:'Silber', tier_gold:'Gold', tier_platinum:'Platin', tier_special:'Spezial', tier_legend:'Regenbogen',
+  ach_count:(n,m)=>`${n} / ${m} freigeschaltet`, tier_bronze:'Bronze', tier_silver:'Silber', tier_gold:'Gold', tier_platinum:'Platin', tier_special:'Spezial', tier_legend:'Legendär',
   log_ach:id=>`Erfolg freigeschaltet: ${achTitle(id)}!`, log_gold:()=>'Erfolgskategorie komplett: Das Gold-Design ist jetzt in den Einstellungen verfügbar!',
   log_night:()=>'Ein erstes Opfer… Das Nacht-Design ist jetzt in den Einstellungen verfügbar.',
   maiden_line:n=>`Geburtsname: ${n}`,
@@ -3790,6 +3906,8 @@ TX.de = {
 const DEx = {};
 const deMF = (m, f) => [m, f === undefined ? (m.endsWith('e') ? m.slice(0, -1) + 'in' : m + 'in') : f];
 DEx.job = Object.fromEntries(Object.entries({
+  chuchoteur:['Pferdeflüsterer','Pferdeflüsterin'], dresseurours:['Bärenbändiger','Bärenbändigerin'], polaire:['Polarforscher','Polarforscherin'],
+  gouteurglace:['Speiseeis-Verkoster','Speiseeis-Verkosterin'], tornades:['Sturmjäger','Sturmjägerin'], lunaire:['Mondspaziergänger','Mondspaziergängerin'], pilotejet:['Privatjet-Pilot','Privatjet-Pilotin'],
   uxdesign:['UX-Designer'], repsmart:['Smartphone-Reparateur'], escapegm:['Escape-Room-Spielleiter'], gardechasse:['Wildhüter'], eclusier:['Schleusenwärter'],
   criminologue:['Kriminologe','Kriminologin'], organiste:['Kirchenorganist'], souffleur:['Glasbläser'], maitreverrier:['Glasermeister'], kungfu:['Kung-Fu-Lehrer'],
   taxidermiste:['Tierpräparator'], laboureur:['Ackerknecht','Ackermagd'], tisserand:['Weber'], forgeron:['Schmied'], meunier:['Müller'], cordonnier:['Schuster'],
@@ -3850,7 +3968,8 @@ DEx.star = Object.fromEntries(Object.entries({peintre:['Maler'], ecrivain:['Schr
   footballeur:['Fußballer'], chef:['Sternekoch','Sterneköchin'], pilotef1:['Formel-1-Fahrer'], astronaute:['Astronaut'], youtubeur:['YouTuber'], esport:['E-Sport-Champion'],
   holo:['Holovisionsstar','Holovisionsstar'], streamstar:['Streamingstar','Streamingstar'], speedstar:['Legendärer Speedrunner','Legendäre Speedrunnerin']}).map(([k, v]) => [k, deMF(v[0], v[1])]));
 DEx.starc = {uk:{cycliste:['Cricketstar','Cricketstar']}};
-DEx.int = Object.fromEntries(Object.entries({naturiste:['Naturist'], nudiste:['FKK-Anhänger'], campeur:['Camper'], escalade:['Kletterer'], urbex:['Urbex-Fan','Urbex-Fan'],
+DEx.int = Object.fromEntries(Object.entries({tresors:['Schatzjäger','Schatzjägerin'], sourcier:['Wünschelrutengänger','Wünschelrutengängerin'], fantomes:['Geisterjäger','Geisterjägerin'],
+  cryptozoo:['Kryptozoologe','Kryptozoologin'], meteorites:['Meteoritensammler','Meteoritensammlerin'], funambule:['Seiltänzer','Seiltänzerin'], exorciste:['Exorzist','Exorzistin'], naturiste:['Naturist'], nudiste:['FKK-Anhänger'], campeur:['Camper'], escalade:['Kletterer'], urbex:['Urbex-Fan','Urbex-Fan'],
   langmortes:['Liebhaber toter Sprachen','Liebhaberin toter Sprachen'], radioam:['Funkamateur','Funkamateurin'], paintball:['Paintballspieler'], airsoft:['Airsoftspieler'], geek:['Geek','Geek'],
   furry:['Furry-Fan','Furry-Fan'], kpop:['K-Pop-Stan','K-Pop-Stan'], auto:['Autonarr','Autonärrin'], otaku:['Otaku','Otaku'], sorcier:['Zauberer','Hexe'], globe:['Weltenbummler'],
   peintre:['Kunstmaler'], musicien:['Musiker'], chanteur:['Sänger'], athletique:['Athletisch','Athletisch'], sportif:['Sportler'], bodybuilder:['Bodybuilder'], comedien:['Schauspieler'],
@@ -3869,7 +3988,8 @@ DEx.int = Object.fromEntries(Object.entries({naturiste:['Naturist'], nudiste:['F
   opera:['Opernliebhaber'], gospel:['Gospelsänger'], mangaka:['Hobby-Mangaka','Hobby-Mangaka'], sabreur:['Säbelfechter'], ultraverte:['Pflanzenflüsterer'],
   fantaisiste:['Spaßvogel','Spaßvogel'], jdr:['Pen-&-Paper-Fan','Pen-&-Paper-Fan'], jodel:['Jodler'], schwingen:['Schwinger'], ski:['Skifahrer'], cordesalpes:['Alphornbläser'], jass:['Jasser']
 }).map(([k, v]) => [k, deMF(v[0], v[1])]));
-DEx.cond = Object.fromEntries(Object.entries({voyageur:['Zeitreisender','Zeitreisende'], schizo:'Schizophrenie', bipolaire:'Bipolare Störung', tdah:'ADHS', autisme:'Autismus', autisme_nv:'Nonverbaler Autismus',
+DEx.cond = Object.fromEntries(Object.entries({vairons:['Zweifarbige Augen','Zweifarbige Augen'], memoire:'Absolutes Gedächtnis',
+  etoile:['Unter einem Glücksstern geboren','Unter einem Glücksstern geboren'], bulle:['Kind in der Plastikblase','Kind in der Plastikblase'], voyageur:['Zeitreisender','Zeitreisende'], schizo:'Schizophrenie', bipolaire:'Bipolare Störung', tdah:'ADHS', autisme:'Autismus', autisme_nv:'Nonverbaler Autismus',
   toc:'Zwangsstörung', tourette:'Tourette-Syndrom', anxiete:'Angststörung', dyslexie:'Legasthenie', sourd:['Gehörlos','Gehörlos'], aveugle:['Blind','Blind'], muet:['Stumm','Stumm'],
   epilepsie:['Epileptiker','Epileptikerin'], daltonien:['Farbenblind','Farbenblind'], trisomie:'Down-Syndrom', nanisme:'Kleinwuchs', gigantisme:'Riesenwuchs', begaiement:'Stottern',
   hpi:'Hochbegabt', monochrom:'Monochromasie', deprchron:'Chronische Depression', tsa:'Autismus-Spektrum-Störung', anxsoc:'Soziale Angst', cyclothymie:'Zyklothymie',
@@ -3877,11 +3997,11 @@ DEx.cond = Object.fromEntries(Object.entries({voyageur:['Zeitreisender','Zeitrei
   maniaque:['Pedant','Pedantin'], borderline:'Borderline', pmr:'Eingeschränkte Mobilität', psychopathe:['Psychopath','Psychopathin'], diogene:'Diogenes-Syndrom',
   delirant:'Wahnhafte Störung', oniomanie:'Kaufsucht', tdi:'Dissoziative Identitätsstörung', alice:'Alice-im-Wunderland-Syndrom', cotard:'Cotard-Syndrom', capgras:'Capgras-Syndrom', peterpan:'Peter-Pan-Syndrom', persoprinc:'Hauptfigur-Syndrom'
 }).map(([k, v]) => [k, Array.isArray(v) ? v : [v, v]]));
-DEx.add = {tabac:['Raucher','Raucherin','dem Rauchen'], alcool:['Alkoholiker','Alkoholikerin','dem Alkohol'], cafe:['Kaffeesüchtig','Kaffeesüchtig','der Kaffeesucht'],
+DEx.add = {addsport:['Sportsüchtig','Sportsüchtig','der Sportsucht'], addfood:['Esssüchtig','Esssüchtig','der Esssucht'], addwork:['Arbeitssüchtig','Arbeitssüchtig','der Arbeitssucht'], montagnesrusses:['Achterbahnsüchtig','Achterbahnsüchtig','der Achterbahnsucht'], tabac:['Raucher','Raucherin','dem Rauchen'], alcool:['Alkoholiker','Alkoholikerin','dem Alkohol'], cafe:['Kaffeesüchtig','Kaffeesüchtig','der Kaffeesucht'],
   jeux:['Videospielsüchtig','Videospielsüchtig','der Videospielsucht'], cannabis:['Cannabiskonsument','Cannabiskonsumentin','dem Cannabis'], lsd:['LSD-Konsument','LSD-Konsumentin','dem LSD'],
   casino:['Spielsüchtig','Spielsüchtig','der Spielsucht'], cyngen:['Cyngenetiker','Cyngenetikerin','dem Cyngenetismus'], ecstasy:['Ecstasy-Konsument','Ecstasy-Konsumentin','dem Ecstasy'],
   sexe:['Sexsüchtig','Sexsüchtig','der Sexsucht'], affectif:['Emotional abhängig','Emotional abhängig','der emotionalen Abhängigkeit']};
-DEx.field = {med:'Medizin', droit:'Jura', lettres:'Literatur', arts:'Kunst', sciences:'Naturwissenschaften', pharma:'Pharmazie', eco:'Wirtschaft', journal:'Journalismus', info:'Informatik'};
+DEx.field = {cirque:'Zirkusschule', polar:'Akademie für Polarforschung', spatiale:'Raumfahrtakademie', med:'Medizin', droit:'Jura', lettres:'Literatur', arts:'Kunst', sciences:'Naturwissenschaften', pharma:'Pharmazie', eco:'Wirtschaft', journal:'Journalismus', info:'Informatik'};
 DEx.track = {bacphilo:'Bac Philosophie', bacsci:'Bac Naturwissenschaften', baca:'Bac A (Literatur)', bacc:'Bac C (Mathematik)', bacgen:'Bac général', bactech:'Bac technologique',
   bacprocom:'Bac Pro Handel', bacproelec:'Bac Pro Elektrotechnik', bacprorobot:'Bac Pro Robotik', capcuisine:'CAP Küche', capcoif:'CAP Friseurhandwerk', capmenu:'CAP Tischlerei',
   bma:'BMA Kunsttischlerei', bep:'BEP Buchhaltung', capflemme:'Faulenzer-Diplom',
@@ -3923,10 +4043,17 @@ DEx.dz = {peste:['Pest','der Pest'], variole:['Pocken','den Pocken'], dysenterie
   cyn_fusion:['Verschmelzung mit Cyngenetik','einer Verschmelzung mit Cyngenetik'], overdose_ecstasy:['Ecstasy-Überdosis','einer Ecstasy-Überdosis'],
   serotonine:['Serotoninsyndrom durch Ecstasy','einem Serotoninsyndrom durch Ecstasy'], hyperthermie:['Schwere Hyperthermie durch Ecstasy','einer schweren Hyperthermie durch Ecstasy'],
   mst:['Geschlechtskrankheit','einer Geschlechtskrankheit'], ist:['Sexuell übertragbare Infektion','einer sexuell übertragbaren Infektion'], meningite:['Hirnhautentzündung','einer Hirnhautentzündung'],
-  tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], disparu:['Verschwinden','Verschwinden'],
+  tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], mortderire:['Lachtod','einem tödlichen Lachanfall'], orgorge:['Goldersticken','Ersticken an Gold'],
+  electrocution:['Stromschlag','einem Stromschlag'], hydrocution:['Kälteschock im Wasser','einem Kälteschock im Wasser'], deshydratation:['Austrocknung','Austrocknung'],
+  gangrene:['Wundbrand','Wundbrand'], incendie:['Brand','einem Brand'], empoisonnement:['Vergiftung','einer Vergiftung'], chutefatale:['Tödlicher Sturz','einem tödlichen Sturz'],
+  commotion:['Gehirnerschütterung','einer Gehirnerschütterung'], septicemie:['Blutvergiftung','einer Blutvergiftung'], infarctus:['Herzinfarkt','einem Herzinfarkt'], faim:['Hunger','Hunger'],
+  arret_sport:['Herzstillstand beim Sport','einem Herzstillstand beim Sport'], rhabdo:['Rhabdomyolyse','Rhabdomyolyse'], blessure_sport:['Übertrainingsverletzung','einer Übertrainingsverletzung'],
+  obesite:['Krankhafte Fettleibigkeit','krankhafter Fettleibigkeit'], diabete_food:['Schwerer Diabetes','schwerem Diabetes'], etouffement:['Ersticken beim Essen','Ersticken beim Essen'],
+  karoshi:['Karōshi (Tod durch Überarbeitung)','Karōshi (Tod durch Überarbeitung)'], infarctus_travail:['Stressbedingter Herzinfarkt','einem stressbedingten Herzinfarkt'],
+  epuisement:['Schweres Burn-out','einem schweren Burn-out'], cocotier:['Kokosnuss-Unfall','einer herabfallenden Kokosnuss'], disparu:['Verschwinden','Verschwinden'],
   mortcerebrale:['Hirntod','Hirntod'], necrose:['Nekrose','einer Nekrose'], diabete:['Diabetes','Diabetes'], embolie:['Lungenembolie','einer Lungenembolie'], paludisme:['Malaria','Malaria'],
   grippeaviaire:['Vogelgrippe','der Vogelgrippe'], bpco:['COPD','COPD'], rage:['Tollwut','Tollwut'], solitude:['Einsamkeit','Einsamkeit'], enseule:['Vereinsamung','Vereinsamung'], coeurbrise:['Broken-Heart-Syndrom','dem Broken-Heart-Syndrom']};
-DEx.mild = {gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheuma', teigne:'Scherpilzflechte', bronchite:'Chronische Bronchitis', zona:'Gürtelrose', eczema:'Ekzem',
+DEx.mild = {synparis:'Paris-Syndrom', hoquet:'Ewiger Schluckauf', fourire:'Chronischer Lachanfall', accent:'Fremdakzent-Syndrom', teteexplose:'Exploding-Head-Syndrom', gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheuma', teigne:'Scherpilzflechte', bronchite:'Chronische Bronchitis', zona:'Gürtelrose', eczema:'Ekzem',
   psoriasis:'Schuppenflechte', asthme:'Asthma', migraine:'Chronische Migräne', hepatitea:'Hepatitis A', mono:'Pfeiffersches Drüsenfieber', dos:'Chronische Rückenschmerzen',
   rachitisme:'Rachitis', acne:'Schwere Akne', burnout:'Burn-out', allergie:'Heuschnupfen', fievrenum:'Digitalfieber', nanoderm:'Nanodermatitis', grippemars:'Marsgrippe',
   holosyndrome:'Hologramm-Syndrom', arthrose:'Arthrose', hypertension:'Bluthochdruck', hypothyroidie:'Schilddrüsenunterfunktion', angine:'Wiederkehrende Mandelentzündung',
@@ -3936,7 +4063,8 @@ DEx.mild = {gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheum
   allergiesynth:'Allergie gegen synthetisches Protein', fatiguevr:'VR-Müdigkeit', dysgravite:'Dysgravitation', rejetimplant:'Abstoßung eines Neuroimplantats', covid:'Covid-19'};
 DEx.achcat = {tt:'Zeitreisen', age:'Alter', kids:'Kinder', star:'Stars', conq:'Eroberungen', crim:'Verbrecher', kill:'Verbrechen', time:'Die Zeit vergeht', other:'Sonstiges', album:'Album',
   royal:'Königlich', zomb:'Zombie', vsn:'Versus Normal', vsr:'Versus Königlich', vsz:'Versus Zombie', legend:'Legende'};
-DEx.ach = {tt_first:['Erster Sprung','Ein Familienmitglied springt durch die Zeit'], tt_young:['Jünger als die Enkel','Ein Zeitreisender kehrt jünger zurück als eines seiner Enkelkinder'],
+DEx.ach = {tt_reunion:['Ich habe auf dich gewartet','Nach einem Sprung von 30 Jahren oder mehr wieder mit der großen Liebe vereint sein'],
+  alb_t:['Epochenschock','Die Kategorie Zeitschocks im Album vervollständigen'], tt_first:['Erster Sprung','Ein Familienmitglied springt durch die Zeit'], tt_young:['Jünger als die Enkel','Ein Zeitreisender kehrt jünger zurück als eines seiner Enkelkinder'],
   tt_75:['Riesensprung','75 Jahre oder mehr auf einmal in die Zukunft springen'], tt_4:['Unermüdlicher Reisender','Dieselbe Person springt 4-mal durch die Zeit'], age100:['Hundertjährig','Ein Familienmitglied wird 100'], age110:['Superhundertjährig','Ein Familienmitglied wird 110'], age115:['Lebende Legende','Ein Familienmitglied wird 115'],
   age120:['Unsterblich?','Ein Familienmitglied wird 120'], kids6:['Großfamilie','Eine Person hat 6 Kinder'], kids9:['Sippe','Eine Person hat 9 Kinder'], kids14:['Clan','Eine Person hat 14 Kinder'],
   kids22:['Dynastie','Eine Person hat 22 Kinder'], star1:['Im Rampenlicht','2 Stars in einem Spiel'], star2:['Sternenregen','4 Stars in einem Spiel'], star4:['Sternbild','8 Stars in einem Spiel'],
@@ -4066,22 +4194,23 @@ const addName = (id, p) => { const r = ADD[id]; if(LANG === 'de' && DEx.add[id])
 const hasCond = p => (p.conds && p.conds.length) || addictsOf(p).length;
 const condList = p => (p.conds || []).map(id => condName(id, p)).concat(addictsOf(p).map(id => addName(id, p))).join(', ');
 const condBadges = p => {
-  const items = (p.conds || []).map(id => `<span class="cb" title="${esc(condName(id,p))}">${icon(COND[id][4])}</span>`);
-  addictsOf(p).forEach(id => items.push(`<span class="cb add" title="${esc(addName(id,p))}">${icon(ADD[id][4])}</span>`));
+  const items = (p.conds || []).map(id => `<span class="cb${LEGS.c.has(id) ? ' lg' : ''}" title="${esc(condName(id,p))}">${icon(COND[id][4])}</span>`);
+  addictsOf(p).forEach(id => items.push(`<span class="cb add${LEGS.a.has(id) ? ' lg' : ''}" title="${esc(addName(id,p))}">${icon(ADD[id][4])}</span>`));
   return items.length ? `<span class="cbadges">${items.join('')}</span>` : '';
 };
 const intName = (id, p) => { const r = INT[id];
   if(id === 'fanof'){ if(S && p.fanOf == null){ const st = famStars(p); if(st.length) p.fanOf = pick(st).id; }   // ancien conjoint sur mesure : on lui trouve son idole
     const s2 = S && p.fanOf != null && P(p.fanOf); if(s2) return LANG === 'fr' ? `Fan de ${s2.first} ${s2.last}` : LANG === 'de' ? `Fan von ${s2.first} ${s2.last}` : `${s2.first} ${s2.last} fan`; }
   if(LANG === 'de' && DEx.int[id]) return deSex(DEx.int[id], p); return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : (p.sex==='F' ? r[4] : r[3]); };
-const intBadge = (id, p) => `<span class="cb int" title="${esc(intName(id,p))}">${icon(INT[id][5])}</span>`;
+const intBadge = (id, p) => `<span class="cb int${LEGS.i.has(id) ? ' lg' : ''}" title="${esc(intName(id,p))}">${icon(INT[id][5])}</span>`;
 const intList = p => interestsOf(p).filter(id => INT[id]).map(id => intName(id, p)).join(', ');
 const intTile = p => interestsOf(p).length ? `<div class="span2 intf"><dt>${t('f_interests')}</dt><dd><span class="cbadges">${interestsOf(p).filter(id => INT[id]).map(id => intBadge(id,p)).join('')}</span>${esc(intList(p))}</dd></div>` : '';
 /* Sur la bulle de l'arbre : particularités, addictions puis centres d'intérêt, 4 pastilles au maximum */
 const nodeBadges = p => {
-  const items = (p.conds || []).map(id => `<span class="cb" title="${esc(condName(id,p))}">${icon(COND[id][4])}</span>`)
-    .concat(addictsOf(p).map(id => `<span class="cb add" title="${esc(addName(id,p))}">${icon(ADD[id][4])}</span>`))
+  const items = (p.conds || []).map(id => `<span class="cb${LEGS.c.has(id) ? ' lg' : ''}" title="${esc(condName(id,p))}">${icon(COND[id][4])}</span>`)
+    .concat(addictsOf(p).map(id => `<span class="cb add${LEGS.a.has(id) ? ' lg' : ''}" title="${esc(addName(id,p))}">${icon(ADD[id][4])}</span>`))
     .concat(interestsOf(p).filter(id => INT[id]).map(id => intBadge(id, p)));
+  items.sort((a, b) => / lg"/.test(b) - / lg"/.test(a));   // le légendaire d'abord
   return items.length ? `<span class="cbadges">${items.slice(0, 4).join('')}</span>` : '';
 };
 const atoutDesc = id => LANG === 'de' && DEx.atout[id] ? DEx.atout[id][2] : ATOUT[id][LANG === 'fr' ? 5 : 6];
@@ -4148,6 +4277,7 @@ const ACHS = [
  ['alb_e','album','gold','Premier de la classe',"Compléter la catégorie Écoles & formations de l'album",'Top of the class','Complete the Schools & training section of the album'],
  ['alb_j','album','platinum','Touche-à-tout',"Compléter la catégorie Métiers de l'album",'Jack of all trades','Complete the Jobs category of the album'],
  ['alb_d','album','platinum','Mille et une morts',"Compléter la catégorie Morts de l'album",'A thousand and one deaths','Complete the Deaths category of the album'],
+ ['alb_t','album','platinum','Choc des époques',"Compléter la catégorie Chocs temporels de l'album",'Culture shock','Complete the Time shocks section of the album'],
  ['alb_a','album','silver','Toutes les tentations',"Compléter la catégorie Addictions de l'album",'Every temptation','Complete the Addictions category of the album'],
  ['r_2100','royal','platinum','Règne éternel','Arriver en 2100 en mode Royal, la couronne toujours dans la famille','Eternal reign','Reach 2100 in Royal mode with the crown still in the family'],
  ['r_nobles5','royal','gold','Cour de nobles','Avoir 5 nobles dans une même partie','Court of nobles','Have 5 nobles in a single game'],
@@ -4180,6 +4310,7 @@ const ACHS = [
  ['tt_first','tt','bronze','Premier saut','Un membre de la famille saute dans le temps','First leap','A family member leaps through time'],
  ['tt_young','tt','silver','Plus jeune que ses petits-enfants',"Un voyageur du temps revient plus jeune qu'un de ses petits-enfants",'Younger than the grandkids','A time traveller comes back younger than one of their grandchildren'],
  ['tt_75','tt','gold','Bond de géant',"Sauter 75 ans ou plus dans le futur d'un seul coup",'Giant leap','Leap 75 years or more into the future in one go'],
+ ['tt_reunion','tt','silver',"Je t'ai attendu","Retrouver son amour après un saut de 30 ans ou plus",'I waited for you','Be reunited with your love after a leap of 30 years or more'],
  ['tt_4','tt','platinum','Voyageur infatigable','Une même personne saute 4 fois dans le temps','Tireless traveller','The same person leaps through time 4 times'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
  ['vs_all','legend','legend','Maître du duel',"Battre l'IA dans toutes les difficultés de tous les modes Versus",'Duel master','Beat the AI at every difficulty in every Versus mode'],
@@ -4187,6 +4318,7 @@ const ACHS = [
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
 ];
 const ACHV = byId(ACHS);
+const ACH_CYN = {bronze:75, silver:150, gold:300, platinum:500, special:400, legend:1000};   // 0.2.0a : chaque succès rapporte des Cyn
 const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['tt','clock','Voyage dans le temps','Time travel'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['royal','castle','Royal','Royal'],['zomb','brain','Zombie','Zombie'],['vsn','robot','Versus Normal','Versus Normal'],['vsr','crown','Versus Royal','Versus Royal'],['vsz','brain','Versus Zombie','Versus Zombie'],['legend','crown','Légende','Legend']];
 // thème Or : débloqué dès qu'une catégorie entière de succès est complète
 const goldUnlocked = () => ACH_CATS.some(c => ACHS.filter(a => a[1]===c[0]).every(a => ACH[a[0]]));
@@ -4200,6 +4332,7 @@ function unlock(id){
   if(VSH || !R.ach || rulesTweaked() || (!vsA && S && (S.vs || S.noAch || S.over || S.end2100 >= 1)) || ACH[id] || !ACHV[id]) return;
   const hadGold = goldUnlocked();
   ACH[id] = {y: S ? yearOf(S.t) : null, f: S ? familyName(P(S.founderId)) : ''};
+  const rw = ACH_CYN[ACHV[id][2]] || 0; if(rw) setTimeout(() => payCyn(-rw), 0);
   if(!hadGold && goldUnlocked()) setTimeout(() => { toast({d: S ? today() : 0, kind:'star', k:'gold', a:[]}); sfx.fame(); }, 3600);
   store.set(ACH_KEY, JSON.stringify(ACH));
   if(S) log('ach','ach',[id], undefined, false);
@@ -4209,19 +4342,22 @@ function unlock(id){
 }
 const checkTiers = (prefix, value, steps) => steps.forEach(s => { if(value >= s) unlock(prefix + s); });
 const achQueue = []; let achBusy = false;
+let achWait = 0;
 function nextAch(){
+  if(S && S.ttFF){ achBusy = false; clearTimeout(achWait); achWait = setTimeout(() => { if(!achBusy && achQueue.length) nextAch(); }, 400); return; }   // voyage dans le temps : les annonces attendent l'arrivée
   const id = achQueue.shift();
   if(!id){ achBusy = false; return; }
   achBusy = true;
   if(typeof id === 'object'){                      // annonce au centre (naissances multiples sans fenêtre de prénom)
     const el = $('#achPop');
-    el.className = 'achpop glass t-special'; el.innerHTML = id.html; el.hidden = false;
+    el.className = 'achpop glass ' + (id.cls || 't-special'); el.innerHTML = id.html; el.hidden = false;
+    if(id.fx){ sfx.ach(); burst(['#ff4f6d','#ff9a2e','#ffe14d','#3fd46b','#3fa9ff','#8f6bff','#ffffff'], 80); }
     setTimeout(() => { el.classList.add('out'); setTimeout(() => { el.hidden = true; nextAch(); }, 420); }, 3600);
     return;
   }
   const el = $('#achPop'), tier = ACHV[id][2];
   el.className = 'achpop glass t-' + tier;
-  el.innerHTML = `${medal(id)}<div><div class="eyebrow">${t('ach_unlocked')} · ${t('tier_' + tier)}</div><b>${esc(achTitle(id))}</b><small>${esc(achDesc(id))}</small></div>`;
+  el.innerHTML = `${medal(id)}<div><div class="eyebrow">${t('ach_unlocked')} · ${t('tier_' + tier)}</div><b>${esc(achTitle(id))}</b><small>${esc(achDesc(id))}</small><em class="achrw">+${ACH_CYN[tier] || 0} ${icon('dna')}</em></div>`;
   el.hidden = false;
   sfx.ach();
   const colors = {bronze:['#e7a35c','#ffffff','#8a4b14'], silver:['#e9eef3','#ffffff','#8a96a3'], gold:['#ffe066','#ffffff','#ffb300'], platinum:['#dff9ff','#ffffff','#5fb8d6','#c3a2ff'], special:['#c3a2ff','#ffffff','#5a2ee0'],
@@ -4237,14 +4373,14 @@ let achOpen = false;                                   // menu des succès ouver
 function openAchievements(){
   const n = ACHS.filter(a => ACH[a[0]]).length, pct = Math.round(n / ACHS.length * 100), cn = c => LANG === 'fr' ? c[2] : LANG === 'de' ? (DEx.achcat[c[0]] || c[3]) : c[3];
   const prog = c => { const all = ACHS.filter(a => a[1] === c[0]); return [all, all.filter(a => ACH[a[0]]).length]; };
-  const tiers = ['bronze','silver','gold','platinum'].map(tr => { const all = ACHS.filter(a => a[2] === tr);
+  const tiers = ['bronze','silver','gold','platinum','special','legend'].map(tr => { const all = ACHS.filter(a => a[2] === tr);
     return `<span class="achtier" title="${t('tier_' + tr)}"><span class="medal mini t-${tr}">${icon('trophy')}</span><b>${all.filter(a => ACH[a[0]]).length}</b>/${all.length}</span>`; }).join('');
   const nav = ACH_CATS.map(c => { const [all, got] = prog(c);
     return `<button class="achchip ${got === all.length ? 'full' : ''}" data-act="achjump" data-v="${c[0]}">${icon(c[1])}<span>${esc(cn(c))}</span><em>${got}/${all.length}</em></button>`; }).join('');
   const cats = ACH_CATS.map(c => { const [all, got] = prog(c), full = got === all.length;
     return `<section class="achsec ${full ? 'full' : ''}" id="achsec-${c[0]}"><header><i class="achic">${icon(c[1])}</i><b>${esc(cn(c))}</b>${full ? `<span class="achdone">${t('ach_full')}</span>` : ''}<em>${got} / ${all.length}</em><span class="achbar"><i style="width:${(got / all.length * 100).toFixed(1)}%"></i></span></header>
       <div class="achlist">${all.map(a => { const g2 = ACH[a[0]];
-        return `<div class="ach ${g2 ? 'got' : 'locked'} ${a[2] === 'legend' ? 'leg' : ''}">${medal(a[0])}<div class="achtx"><b>${esc(achTitle(a[0]))}</b><small>${esc(achDesc(a[0]))}</small>${g2 ? `<em>${esc(g2.y ? t('ach_got', g2.y, g2.f) : t('ach_done'))}</em>` : ''}</div><span class="achtag t-${a[2]}">${t('tier_' + a[2])}</span></div>`; }).join('')}</div></section>`; }).join('');
+        return `<div class="ach ${g2 ? 'got' : 'locked'} ${a[2] === 'legend' ? 'leg' : ''}">${medal(a[0])}<div class="achtx"><b>${esc(achTitle(a[0]))}</b><small>${esc(achDesc(a[0]))}</small><span class="achrw">+${ACH_CYN[a[2]] || 0} ${icon('dna')}</span>${g2 ? `<em>${esc(g2.y ? t('ach_got', g2.y, g2.f) : t('ach_done'))}</em>` : ''}</div><span class="achtag t-${a[2]}">${t('tier_' + a[2])}</span></div>`; }).join('')}</div></section>`; }).join('');
   openModal(`<div class="m-head achhead"><div class="eyebrow">${t('ach_count', n, ACHS.length)}</div><h2>${t('ach_title')}</h2>
     <div class="achprog"><span class="achbar big"><i style="width:${pct}%"></i></span><b>${pct} %</b></div><div class="achtiers">${tiers}</div></div>
     <nav class="achnav">${nav}</nav>${cats}`);
@@ -4636,7 +4772,7 @@ function baseRisk(p, A, day = S.t){
     return Math.min(1, yearlyRisk(A, p) * era / (hasAtout(p,'longevite') && A < 105 ? 10 : 1));   // après 105 ans : risque normal
   }
   if(!R.diseases) return 0;
-  return yearlyRisk(A > 80 ? 78 : A, p) * R.illness/100 * 1.15 * (sporty(p) ? .5 : 1) * (mildOn(p, day).length ? 2 : 1);   // maladie bénigne : ×2   // ×1,15 depuis la 0.1.1a   // curseur « maladies » ; sportifs : risque ÷ 2
+  return yearlyRisk(A > 80 ? 78 : A, p) * R.illness/100 * 1.15 * (sporty(p) ? .5 : 1) * (mildOn(p, day).length ? 2 : 1) * (p.dazed && day < p.dazed.until ? 1.5 : 1);   // maladie bénigne : ×2   // ×1,15 depuis la 0.1.1a   // curseur « maladies » ; sportifs : risque ÷ 2
 }
 const riskOf = p => { const A = age(p); return Math.min(1, baseRisk(p, A) + (A >= R.legal ? addictsOf(p).reduce((s,id) => s + addRisk(id, A), 0) : 0)); };
 function contract(p, day){
@@ -4652,6 +4788,9 @@ function contract(p, day){
 }
 function die(p, day, cause){
   if(p.death != null) return;
+  if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide'){   // morts légendaires (0,025 % chacune)
+    const lr = Math.random(); if(lr < LEG_P * 3) cause = {dz: lr < LEG_P ? 'mortderire' : lr < LEG_P * 2 ? 'cocotier' : 'orgorge'};
+  }
   const wasHeir = royalOn() && p.id === heirId();
   const A = ageAt(p, day);
   p.death = day; p.deathAt = null; p.onset = null; p.warDeath = false; p.murderAt = null; p.deathCity = p.city;
@@ -4954,7 +5093,8 @@ function birthChild(u, day){
     const r = Math.random()*100, q = R.quads*k, tr = q + R.triplets*k, tw = tr + R.twins*k;
     n = r < q ? 4 : r < tr ? 3 : r < tw ? 2 : 1;
   }
-  if(!adopt && S.nextMulti && u.a === S.activeId){           // boutique « Fertilité » : jumeaux 77 %, triplés 15 %, quadruplés 8 %
+  if(!adopt && S.devQuads && u.a === S.activeId){ S.devQuads = false; n = 4; }   // console de développement
+  else if(!adopt && S.nextMulti && u.a === S.activeId){           // boutique « Fertilité » : jumeaux 77 %, triplés 15 %, quadruplés 8 %
     S.nextMulti = false; const r2 = Math.random(); n = r2 < .77 ? 2 : r2 < .92 ? 3 : 4;
   }
   const ids = [];
@@ -5034,7 +5174,7 @@ function zombieSpread(day){                           // chaque mois : 2 à 6,5 
   if(!S.over && !alive().some(p => !p.zombie && inFamily(p))) S.zombieLost = true;           // plus aucun humain : défaite
 }
 /* ================= 0.2.0a : voyageurs du temps ================= */
-const ttCan = (p, day) => !!p && p.death == null && !p.lost && !p.zombie && !royalOn() && !jailed(p) && !(p.crim && p.crim.declared)
+const ttCan = (p, day) => !!p && p.death == null && !p.lost && !p.zombie && !royalOn() && !S.zombie && !S.vs && !S.headless && !jailed(p) && !(p.crim && p.crim.declared)
   && !p.ill && p.onset == null && p.deathAt == null && p.murderAt == null && !(S.headless && p.id === S.activeId)
   && !S.unions.some(u => u.end == null && u.preg && (u.a === p.id || u.b === p.id));
 const ttMax = day => S.end2100 === 0 ? Math.floor((DAY2100 - 2 - day) / 365.25) : 120;   // le joueur ne saute pas par-dessus 2100
@@ -5064,8 +5204,30 @@ function ttBack(p, day){                              // retour : même âge qu'
   ['fameAt','presAt','zvacUntil','immuneUntil'].forEach(k => { if(p[k] != null) p[k] += D; });
   if(p.work && p.work.until) p.work.until += D;
   p.ttCool = day + Math.round(10 * 365.25);           // la montre se recharge pendant 10 ans
-  p.plan = {will: Math.random() < PAIR_P, at: day + rnd(0, 3)*365};
   log('tt','tt_back',[p.id, yearOf(L.at)], day, S.ttFF ? false : undefined);
+  if(inFamily(p) || p.blood){                         // de retour avec le même âge : grand-parent (ou arrière-grand-parent) très jeune ?
+    const kidsOf1 = id => Object.values(S.people).filter(c => c.parents && c.parents.includes(id));
+    const k2 = kidsOf1(p.id).flatMap(k => kidsOf1(k.id)), k3 = k2.flatMap(k => kidsOf1(k.id)), A = ageAt(p, day);
+    if(k2.length && A <= 40) unlock('grand40');
+    if(k3.length && A <= Math.round(58 * R.legal / 18)) unlock('ggp_fast');
+  }
+  // retrouvailles : l'ancien amour, s'il est vivant et seul, a peut-être attendu (moins le saut est long, plus c'est probable)
+  const ou = S.unions.find(x => x.endReason === 'temps' && x.end === L.at && (x.a === p.id || x.b === p.id));
+  let met = null;
+  if(ou){
+    const q = P(ou.a === p.id ? ou.b : ou.a);
+    const free = q && q.death == null && !q.lost && !q.zombie && !jailed(q) && !S.unions.some(x => x.end == null && (x.a === q.id || x.b === q.id));
+    if(free && Math.random() < Math.max(.15, 1 - L.y / 60)){ ou.end = null; ou.endReason = null; ou.reunited = day; ou.plan = newUnionPlan(day); met = q; }
+  }
+  if(!met) p.plan = {will: Math.random() < PAIR_P, at: day + rnd(0, 3)*365};
+  // déboussolement : un an (six mois avec l'être aimé à ses côtés), selon la décennie d'arrivée
+  p.dazed = {until: day + Math.round((met ? .5 : 1) * 365.25), dec: dazeIdx(yearOf(day)), met: met ? met.id : null};
+  if(p.work && p.work.s === 'job' && JOB[p.work.job] && !inRange(JOB[p.work.job], dataYear(yearOf(day)))) p.work = {s:'unemp', until: p.dazed.until};   // son métier n'existe plus
+  if(met){
+    log('love','tt_reunion',[p.id, met.id, L.y], day, S.ttFF ? false : undefined); cyn(60, p.id);
+    if(!S.ttFF) sfx.wedding();
+    if(L.y >= 30 && (inFamily(p) || inFamily(met))) unlock('tt_reunion');
+  }
   if(inFamily(p) || p.blood){
     const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id));
     if(Object.values(S.people).some(g => g.parents && g.death == null && g.birth < p.birth && kids.some(k => g.parents.includes(k.id)))) unlock('tt_young');
@@ -5073,6 +5235,9 @@ function ttBack(p, day){                              // retour : même âge qu'
   if(!S.ttFF) sfx.warp();
   RH = undefined; dirty = true;
 }
+const dazeIdx = y => Math.max(0, Math.min(32, Math.floor((y - 1780) / 10)));   // 33 décennies, de 1780 à 2100
+const dazedOn = p => !!(p.dazed && p.death == null && S.t < p.dazed.until);
+const dazeTile = p => dazedOn(p) ? `<div class="span2 ttf"><dt>${t('f_dazed', p)}</dt><dd>⌛ ${esc(t('daze')[p.dazed.dec])} · ${esc(t('until_y', yearOf(p.dazed.until)))}</dd></div>` : '';
 function ttYear(p, A, day){                           // chaque anniversaire, de 16 à 60 ans : 5 % de chances qu'une faille s'ouvre
   if(!isTT(p) || A < 16 || A > 60 || Math.random() >= .05 || !ttCan(p, day)) return false;
   let y = 8 + Math.floor(Math.pow(Math.random(), 1.6) * 83);          // de 8 à 90 ans, les petits sauts plus souvent
@@ -5125,8 +5290,11 @@ function ttLand(){                                     // arrivée : ce qui s'es
   ttFx(true); sfx.warp(); burst(['#7fe3ff','#ffffff','#3fa9ff','#c3a2ff','#e9fbff'], 60);
   dirty = true; render(); centerOn(p.id, true); save();
   if(S.auto || p.death != null) return;
+  const dz = p.dazed, met = dz && dz.met != null ? P(dz.met) : null;
   openModal(`<div class="m-head"><div class="eyebrow">${t('tt_ask_eye')} · ${fmt(day)}</div><h2>${t('tt_land_title', yearOf(day))}</h2></div>
     <div class="ttbox">${orb(p, 'xl')}<p>${esc(t('tt_land_txt', p, Math.round((day - F.from) / 365.25), b, dd))}</p></div>
+    ${met ? `<p class="ttmet">${orb(met)}<span>${esc(t('tt_land_reunion', p, met))}</span></p>` : ''}
+    ${dz ? `<p class="ttdz">⌛ ${esc(t('tt_land_dazed', p, t('daze')[dz.dec]))}</p>` : ''}
     <div class="acts"><button class="gel lime wide" data-act="ttland"><span>${t('tt_land_ok')}</span></button></div>`, {locked:true});
 }
 function openTT(){                                     // une faille s'ouvre pour le personnage joué : sauter ou rester ?
@@ -5646,12 +5814,12 @@ function nodeHTML(p, x, y){
   const sparkles = p.star ? '<i class="tw" style="left:8px;top:46px"></i><i class="tw" style="right:10px;top:30px;animation-delay:calc(var(--t,0s) + .6s)"></i><i class="tw" style="right:22px;bottom:30px;animation-delay:calc(var(--t,0s) + 1.1s)"></i>' : '';
   const flames = p.crim && p.crim.declared && p.death == null && !jail ? `<span class="flames" style="left:${x-12}px;top:${y-50}px"></span>` : '';
   return `${flames}<button class="${cls.join(' ')}" style="left:${x}px;top:${y}px;width:${nodeWidths[p.id] || NW}px;--t:@T@" data-act="fiche" data-id="${p.id}" aria-label="${esc(nm(p))}">
-    ${p.id===S.activeId?`<em class="rib you">${t('you')}</em>`:''}${rib}${sparkles}${!p.ill && p.death==null && mildOn(p).length ? `<em class="rib sick">${t('sick_rib', p)}</em>` : ''}
+    ${p.id===S.activeId?`<em class="rib you">${t('you')}</em>`:''}${rib}${sparkles}${!p.ill && p.death==null && mildOn(p).length ? `<em class="rib sick">${t('sick_rib', p)}</em>` : ''}${dazedOn(p) ? `<em class="rib dazed">${t('dazed_rib', p)}</em>` : ''}
     ${isKing || isHeir ? `<i class="crownfx ${isHeir ? 'small' : ''}">${CROWN_SVG}</i>` : ''}
     <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b class="${rtt ? 'tt' : ''}">${rtt ? `<small class="rtt">${esc(rtt.replace(' consort', ''))}</small>` : ''}${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
     <span class="n-life"><span>${years}</span><b>${ageL}</b></span>
     <span class="n-city">${icon('pin')}<span>${esc(cityLine(p))}</span></span>
-    <span class="n-band" title="${esc(activity(p))}">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
+    <span class="n-band${p.work && p.work.s === 'job' && LEGS.j.has(p.work.job) ? ' lgband' : ''}" title="${esc(activity(p))}">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
     ${cu && p.sex==='F' ? `<span class="badge">${ICON_BABY}</span>` : ''}</button>`;
 }
 function buildTree(){
@@ -6345,9 +6513,9 @@ const TXC = {
       set_map:'Schweizkarte', map_zoom_reset:'Die ganze Schweiz'})}
 };
 const CAPITAL = {fr:'Paris', uk:'London', de:'Berlin', ch:'Bern'};
-const FLAGS = {fr:'<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#0055a4"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ef4135"/></svg>',
-  uk:'<svg viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" stroke="#C8102E" stroke-width="2"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg>',
-  de:'<svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg>',
+const FLAGS = {fr:'<svg viewBox="0 0 30 20" preserveAspectRatio="none" aria-hidden="true"><rect width="10" height="20" fill="#0055a4"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ef4135"/></svg>',
+  uk:'<svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" stroke="#C8102E" stroke-width="2"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg>',
+  de:'<svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg>',
   ch:'<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D52B1E"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg>'};
 const swapArr = (arr, src) => { arr.length = 0; src.forEach(x => arr.push(x)); };
 const refill = (obj, src) => { Object.keys(obj).forEach(k => delete obj[k]); Object.assign(obj, src); };
@@ -6587,7 +6755,7 @@ function runFx(){
 
 /* ================= Modales ================= */
 function openModal(html, {locked=false, sound=true} = {}){
-  const m = $('#modal'); m.classList.remove('wide'); achOpen = false;
+  const m = $('#modal'); m.classList.remove('wide', 'devcon'); achOpen = false;
   m.innerHTML = (locked ? '' : '<button class="gel round ghost x" data-act="close" aria-label="×"><svg viewBox="0 0 24 24"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7l-1.4-1.4L9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>') + html;
   const wasOpen = modalOpen;
   $('#overlay').hidden = false; modalOpen = true; modalLocked = locked;
@@ -6596,7 +6764,7 @@ function openModal(html, {locked=false, sound=true} = {}){
 }
 function closeModal(force){
   if(modalLocked && !force) return;
-  $('#overlay').hidden = true; $('#modal').innerHTML = ''; $('#modal').classList.remove('wide'); achOpen = false; modalOpen = false; modalLocked = false; namingId = null;
+  $('#overlay').hidden = true; $('#modal').innerHTML = ''; $('#modal').classList.remove('wide', 'devcon'); achOpen = false; modalOpen = false; modalLocked = false; namingId = null;
   if(S && dirty && !$('#game').hidden) render();
   updateClock();
 }
@@ -6703,6 +6871,7 @@ function openFiche(id){
   const unionLines = pu.map(x => {
     const q = P(p.blood ? x.b : x.a);
     let s = x.married ? t('ul_married', nm(q), fmt(x.marriedAt)) : t('ul_dating', nm(q), yearOf(x.start));
+    if(x.reunited) s += ' · ' + t('ul_reunited', yearOf(x.reunited));
     if(x.end!=null) s += ' · ' + (x.endReason==='décès' ? (q.death!=null && q.death===x.end ? t('ul_widow', yearOf(x.end)) : t('ul_until', yearOf(x.end))) : t(x.endReason==='divorce' ? 'ul_divorce' : x.endReason==='temps' ? 'ul_time' : 'ul_split', yearOf(x.end)));
     return `<li>${esc(s)}</li>`;
   }).join('');
@@ -6728,7 +6897,7 @@ function openFiche(id){
   } else if(p.blood && p.death==null && !p.lost){
     actions = `<div class="acts" style="margin-top:14px"><button class="gel wide" data-act="incarnate" data-id="${p.id}"><span>${esc(t('incarnate', p.first))}</span></button><p class="note">${t('note_incarnate')}</p></div>`;
   }
-  if(isMe && isTT(me) && !royalOn() && !S.headless) actions += ttWatchHTML(me);
+  if(isMe && isTT(me) && !royalOn() && !S.headless && !S.zombie && !S.vs) actions += ttWatchHTML(me);
   const par = p.parents ? p.parents.map(P) : null;
   const eyebrow = isMe ? t('f_you') : p.blood ? t('gen_n', genOf(p)) : isPartner ? t(u.married ? 'spouse' : 'partner', p) : t('inlaw', p);
   const deadCity = p.death!=null ? `<div class="span2"><dt>${t('f_city')}</dt><dd>${esc(t('city_dead', p, cityName(p.birthCity), cityName(p.deathCity || p.birthCity)))}</dd></div>` : '';
@@ -6740,7 +6909,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
+      ${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>
@@ -6827,7 +6996,33 @@ function arm(b, label){
 
 /* ================= Album : tout ce qui a déjà été vu dans une partie (gardé d'une partie à l'autre) ================= */
 const ALB_KEY = 'lignee.album.v1';
-const ALB = loadJSON(ALB_KEY); ['i','c','j','e','m','d','a','r'].forEach(k => { ALB[k] = ALB[k] || {}; });
+const ALB = loadJSON(ALB_KEY); ['i','c','j','e','m','d','a','r','t'].forEach(k => { ALB[k] = ALB[k] || {}; });
+function legKeys(p){                                 // 0.2.0a : ce qu'une personne a de légendaire
+  const out = [], w = p.work;
+  interestsOf(p).forEach(id => { if(LEGS.i.has(id)) out.push(['i', id]); });
+  (p.conds || []).forEach(id => { if(LEGS.c.has(id)) out.push(['c', id]); });
+  if(w && w.s === 'job' && LEGS.j.has(w.job)) out.push(['j', w.job]);
+  if(w && w.s === 'uni' && LEGS.e.has('f_' + w.field)) out.push(['e', 'f_' + w.field]);
+  (p.mild || []).forEach(m => { if(LEGS.m.has(m.dz)) out.push(['m', m.dz]); });
+  addictsOf(p).forEach(id => { if(LEGS.a.has(id)) out.push(['a', id]); });
+  const dk = p.death != null ? deathKey(p) : null; if(dk && LEGS.d.has(dk)) out.push(['d', dk]);
+  return out;
+}
+const legName = (k, id, p) => k === 'i' ? intName(id, p) : k === 'c' ? condName(id, p) : k === 'j' ? jobName(id, p) : k === 'e' ? fieldName(id.slice(2))
+  : k === 'm' ? mildName(id) : k === 'd' ? dzName(id, p) : addName(id, p);
+const legIcon = (k, id) => k === 'i' ? INT[id][5] : k === 'c' ? COND[id][4] : k === 'a' ? ADD[id][4] : {j:'sparkle', e:'atom', m:'pill', d:'bolt'}[k];
+const legTile = p => { const L = legKeys(p); return L.length ? `<div class="span2 legf"><dt>✦ ${t('tier_legend')}</dt><dd>${esc(L.map(([k, id]) => legName(k, id, p)).join(' · '))}</dd></div>` : ''; };
+function legNotice(p){                                // grande annonce quand quelqu'un obtient quelque chose de légendaire
+  for(const [k, id] of legKeys(p)){
+    const key = k + ':' + id; p.legSeen = p.legSeen || [];
+    if(p.legSeen.includes(key)) continue;
+    p.legSeen.push(key);
+    if(k === 'd' && S.t - p.death > 400) continue;      // vieilles parties : pas d'annonce pour une mort ancienne
+    log('star','leg',[p.id, k, id], undefined, false);
+    achQueue.push({cls:'t-legend', fx:true, html:`<span class="medal t-legend">${icon(legIcon(k, id))}</span><div><div class="eyebrow">✦ ${t('leg_found')} · ${t(ALB_CATS.find(c => c[0] === k)[1])}</div><b>${esc(legName(k, id, p))}</b><small>${esc(nm(p))}</small></div>`});
+    if(!achBusy) nextAch();
+  }
+}
 const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 'w_' + c.war : c.murder ? 'murder' : c.vanished ? 'vanished' : c.suicide ? 'suicide' : c.legend ? 'legend' : c.dz || null; };
 function albumScan(force){
   if(!S) return;
@@ -6843,6 +7038,8 @@ function albumScan(force){
     if(p.work && (p.work.s === 'job' || p.work.s === 'star')) mark('j', p.work.job);
     addictsOf(p).forEach(id => mark('a', id));
     if(p.death != null) mark('d', deathKey(p)); else schoolKeys(p).forEach(id => mark('e', id));
+    if(p.dazed) mark('t', 'dz' + p.dazed.dec);           // 0.2.0a : chocs temporels
+    if(!VSH) legNotice(p);                               // 0.2.0a : objets légendaires
   }
   if(ch) store.set(ALB_KEY, JSON.stringify(ALB));
   if(ch || force) albumCheck();
@@ -6853,7 +7050,7 @@ function albumCheck(){                              // succès Album : une caté
   if(all) unlock('leg_album');
 }
 const albYears = (a, b) => b >= 2100 ? (a <= 1500 ? t('alb_always') : t('alb_from', a)) : a <= 1500 ? t('alb_until', b) : t('alb_range', a, b);
-const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['e','alb_school'],['m','alb_mild'],['d','alb_death'],['a','alb_addict'],['r','alb_royal']];
+const ALB_CATS = [['i','alb_int'],['c','alb_cond'],['j','alb_job'],['e','alb_school'],['m','alb_mild'],['d','alb_death'],['a','alb_addict'],['t','alb_tt'],['r','alb_royal']];
 function schoolKeys(p){                               // où en est la scolarité de quelqu'un (pour l'album)
   const A = ageAt(p, S.t), y = yearOf(S.t), sc = p.school || {}, w = p.work;
   if(w && w.s === 'uni') return ['f_' + w.field];
@@ -6893,6 +7090,7 @@ function albItems(k){
     const one = d => r => ({id:r[0], name: royalActName(r[0]), ic:r[3], y: r[4] || 1500, desc: t(d) + (r[4] ? ' · ' + albYears(r[4], r[5] || 2100) : '')});
     return ROYAL_ACTS.map(one('alb_royal_d')).concat(PRINCE_ACTS.map(one('alb_prince_d')), NOBLE_ACTS.map(one('alb_noble_d')), NOBILITY_ACTS.map(one('alb_nobility_d')));
   }
+  if(k === 't') return t('daze').map((n, i) => ({id:'dz' + i, name:n, ic:'clock', y:1780 + i*10, desc: i === 32 ? t('alb_daze_2100') : t('alb_daze_dec', 1780 + i*10)}));
   if(k === 'm') return MILDS.map(r => ({id:r[0], name: mildName(r[0]), ic:'pill', y:r[3], desc: albYears(r[3], r[4]), secret:true}));
   return ADDICTIONS.map(r => ({id:r[0], name: addName(r[0], {sex:'M'}), ic:r[4], y:r[6], secret:true,
     desc: t('alb_add', pctTxt(r[5]), DISEASES.filter(d => d[9] && d[9].addict === r[0]).map(d => dzName(d[0])))}));
@@ -6914,7 +7112,8 @@ function openAlbum(k, re){
     <div class="pills albtabs" role="group">${all.map(([c, it, n]) => `<button data-act="albcat" data-v="${c}" aria-pressed="${c === albCat}">${t(ALB_CATS.find(x => x[0] === c)[1])}<small>${n}/${it.length}</small></button>`).join('')}</div>
     <div class="albsort"><label for="albSort">${t('alb_sort')}</label><select class="inp" id="albSort">${SORTS.map(([v, l]) => `<option value="${v}" ${v === mode ? 'selected' : ''}>${t(l)}</option>`).join('')}</select></div>
     <div class="albgrid">${items.map(x => { const ok = !!ALB[albCat][x.id];
-      return `<div class="albc ${ok ? '' : 'unk'}"><i>${icon(ok ? x.ic : 'lock')}</i><div><b>${ok ? esc(x.name) : '???????'}</b>${x.desc && (ok || !x.secret) ? `<small>${esc(x.desc)}</small>` : ''}</div></div>`; }).join('')}</div>`, {sound: !re});
+      const lg = LEGS[albCat] && LEGS[albCat].has(x.id);
+      return `<div class="albc ${ok ? '' : 'unk'} ${lg ? 'leg' : ''}"><i>${icon(ok ? x.ic : 'lock')}</i><div><b>${ok ? esc(x.name) : '???????'}</b>${x.desc && (ok || !x.secret) ? `<small>${esc(x.desc)}</small>` : ''}${lg ? `<em class="albleg">✦ ${t('tier_legend')}</em>` : ''}</div></div>`; }).join('')}</div>`, {sound: !re});
   $('#albSort').addEventListener('change', e => {
     ALB.sort = ALB.sort || {}; ALB.sort[albCat] = e.target.value; store.set(ALB_KEY, JSON.stringify(ALB)); sfx.click(); openAlbum(null, true);
   });
@@ -7006,7 +7205,7 @@ function shopState(id, price){                        // disponible ? sinon pour
 }
 function openShop(re){
   const gains = [['heart','cg_birth',10],['sparkle','cg_starkid',25],['disco','cg_star',200],['skull','cg_crim',100],['knife','cg_murder',50],['crown','cg_crown',100]];
-  const secs = SHOP_CATS.map(([cat, items]) => [cat, items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie)))]).filter(([, items]) => items.length).map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie))).map(([id, price, ic]) => {
+  const secs = SHOP_CATS.map(([cat, items]) => [cat, items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie)) && (id !== 'montre' || !S || (!royalOn() && !S.zombie && !S.vs)))]).filter(([, items]) => items.length).map(([cat, items]) => `<section class="shopsec"><div class="eyebrow sect">${t('shopc_' + cat)}</div><div class="shopgrid">${items.filter(([id]) => (!SHOP_ROYAL.includes(id) || royalOn()) && (!SHOP_ZOMBIE.includes(id) || (S && S.zombie))).map(([id, price, ic]) => {
     const st = shopState(id, price);
     return `<div class="shopit ${st.owned ? 'owned' : ''}"><i class="si-${id}">${icon(ic)}</i><div><b>${t('shop_' + id)}</b><small>${t('shop_' + id + '_d')}</small>${st.note ? `<em>${esc(st.note)}</em>` : ''}</div>
       <button class="gel gold" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : cynFmt(price)}</span>${st.owned ? '' : icon('dna')}</button></div>`; }).join('')}</div></section>`).join('');
@@ -7042,7 +7241,7 @@ function openSpouseForm(){                            // conjoint(e) entièremen
   const def = Math.max(lo, Math.min(hi, me.birth));
   const byName = (a, b) => a[0].localeCompare(b[0], LANG);
   const opt = (v, l, sel) => `<option value="${esc(v)}" ${sel ? 'selected' : ''}>${esc(l)}</option>`;
-  const jobs = JOBS.filter(r => inRange(r, dy) && r[0] !== 'president').map(r => [jobName(r[0], {sex:'M'}), r[0]]).sort(byName);
+  const jobs = JOBS.filter(r => inRange(r, dy) && r[0] !== 'president' && !LEGS.j.has(r[0])).map(r => [jobName(r[0], {sex:'M'}), r[0]]).sort(byName);
   const ints = INTERESTS.filter(r => dy >= r[6] && dy <= r[7] && (r[0] !== 'fanof' || famStars({id:-1}).length)).map(r => [LANG === 'de' && DEx.int[r[0]] ? DEx.int[r[0]][0] : LANG==='fr' ? r[1] : r[3], r[0]]).sort(byName);
   const adds = ADDICTIONS.filter(r => dy >= r[6]).map(r => [addName(r[0], {sex:'M'}), r[0]]).sort(byName);
   const conds = CONDS.filter(r => !r[5] || dy >= r[5]).map(r => [condName(r[0], {sex:'M'}), r[0]]).sort(byName);
@@ -7257,6 +7456,84 @@ if(window.cyngeneticDesktop){
   setTimeout(sendPresence, 1500); setInterval(sendPresence, 10000);
 }
 
+
+/* ================= 0.2.0a : console de développement (Ctrl + Maj + Y) ================= */
+let devMsg = '';
+const devInGame = () => !!(S && !$('#game').hidden && !S.over);
+function openDev(){
+  const g = devInGame(), me = g ? active() : null;
+  const legOpts = Object.entries(LEGS).flatMap(([k, set]) => [...set].map(id => { let n = id; try{ n = legName(k, id, me || {sex:'M'}); }catch(e){} return `<option value="${k}:${id}">${esc(t(ALB_CATS.find(c => c[0] === k)[1]))} · ${esc(n)}</option>`; })).join('');
+  const btn = (v, label, cls = '') => `<button class="gel ${cls}" data-act="dev" data-v="${v}"><span>${label}</span></button>`;
+  openModal(`<div class="m-head"><div class="eyebrow">Ctrl + Maj + Y</div><h2>Console de développement</h2></div>
+    ${devMsg ? `<p class="devmsg">✓ ${esc(devMsg)}</p>` : ''}
+    <div class="devsec"><b>Cyn</b><span class="devcyn">${cynFmt(CYN)} Cyn</span>
+      <div class="devrow"><input class="inp" id="devCyn" type="number" value="1000" step="100" aria-label="Cyn">${btn('cyn', 'Donner', 'gold')}</div>
+      <div class="devrow">${btn('cyn1k', '+1 000')}${btn('cyn10k', '+10 000')}${btn('cyn100k', '+100 000')}${btn('cyn0', 'Remettre à 0', 'pink')}</div></div>
+    <div class="devsec"><b>Déblocages</b>
+      <div class="devrow">${btn('themes', 'Tous les thèmes')}${btn('achall', 'Tous les succès')}${btn('achreset', 'Effacer les succès', 'pink')}</div>
+      <div class="devrow">${btn('albfull', 'Album complet')}${btn('albreset', "Vider l'album", 'pink')}</div></div>
+    ${g ? `<div class="devsec"><b>Partie · ${esc(nm(me))} · ${yearOf(S.t)}</b>
+      <div class="devrow">${btn('skip1', '+1 an')}${btn('skip10', '+10 ans')}${btn('skip50', '+50 ans')}</div>
+      <div class="devrow">${btn('tt', 'Devenir voyageur du temps')}${btn('rift', 'Ouvrir une faille')}${btn('cool', 'Recharger la montre')}</div>
+      <div class="devrow">${btn('star', 'Devenir une star', 'gold')}${btn('crim', 'Devenir criminel', 'pink')}${btn('heal', 'Soigner la famille', 'lime')}</div>
+      <div class="devrow">${btn('quads', 'Quadruplés au prochain bébé')}${btn('kill', 'Mourir (tester l\u2019héritier)', 'pink')}</div>
+      <div class="devrow"><select class="inp" id="devLeg" aria-label="Légendaire">${legOpts}</select>${btn('leg', 'Donner', 'gold')}</div>
+      <p class="note">Les morts légendaires tuent le personnage.</p></div>` : `<p class="note">Lance une partie pour avoir les commandes de partie.</p>`}`);
+  $('#modal').classList.add('devcon');
+}
+function devSkip(years){                              // avance rapide sans voyage : prénoms choisis tout seuls
+  const end = Math.floor(S.t) + Math.round(years * 365.25);
+  for(let d = Math.floor(S.t) + 1; d <= end; d++){
+    processDay(d); if(S.vs && !S.vs.done) vsDay(d); S.t = d + .001;
+    if(S.nameQueue.length) S.nameQueue.splice(0).forEach(id => { const c = P(id); if(c && !c.first){ c.first = nameFor(c); regnalize(c); } });
+    if(S.ttAsk || S.ttFF || needHeir() || S.end2100 === 1 || S.royalEnd || S.zombieLost || vsAiOut()) break;
+  }
+  dirty = true;
+}
+function devDo(v){
+  const g = devInGame(), me = g ? active() : null, day = g ? today() : 0;
+  const give = n => { payCyn(-n); return `${cynFmt(n)} Cyn donnés`; };
+  switch(v){
+    case 'cyn': { const n = Math.round(+$('#devCyn').value || 0); return n ? give(n) : ''; }
+    case 'cyn1k': return give(1000);
+    case 'cyn10k': return give(10000);
+    case 'cyn100k': return give(100000);
+    case 'cyn0': payCyn(CYN); return 'Cyn remis à 0';
+    case 'themes': ['orange','xp','dark','neon','kid','night','goth'].forEach(k => { UNL[k] = true; }); UNL.kills = Math.max(UNL.kills || 0, 50); store.set(UNL_KEY, JSON.stringify(UNL)); return 'Thèmes débloqués';
+    case 'achall': ACHS.forEach(a => { if(!ACH[a[0]]) ACH[a[0]] = {y: S ? yearOf(S.t) : null, f:'dev'}; }); store.set(ACH_KEY, JSON.stringify(ACH)); return 'Tous les succès débloqués (sans Cyn)';
+    case 'achreset': Object.keys(ACH).forEach(k => delete ACH[k]); store.set(ACH_KEY, JSON.stringify(ACH)); return 'Succès effacés';
+    case 'albfull': ALB_CATS.forEach(([k]) => albItems(k).forEach(x => { if(!ALB[k][x.id]){ ALB.n = (ALB.n || 1) + 1; ALB[k][x.id] = ALB.n; } })); store.set(ALB_KEY, JSON.stringify(ALB)); return 'Album complet';
+    case 'albreset': ALB_CATS.forEach(([k]) => { ALB[k] = {}; }); ALB.n = 1; store.set(ALB_KEY, JSON.stringify(ALB)); return 'Album vidé';
+  }
+  if(!g) return '';
+  switch(v){
+    case 'skip1': devSkip(1); return `Avancé jusqu'en ${yearOf(S.t)}`;
+    case 'skip10': devSkip(10); return `Avancé jusqu'en ${yearOf(S.t)}`;
+    case 'skip50': devSkip(50); return `Avancé jusqu'en ${yearOf(S.t)}`;
+    case 'tt': if(!isTT(me)) me.conds = (me.conds || []).concat('voyageur'); me.ttCool = 0; return `${me.first} voyage dans le temps (mode normal seulement)`;
+    case 'cool': me.ttCool = 0; return 'Montre rechargée';
+    case 'rift': { if(!isTT(me)) me.conds = (me.conds || []).concat('voyageur'); const y = Math.min(8 + Math.floor(Math.random() * 40), ttMax(day));
+      if(y < 5 || !ttCan(me, day)) return 'Faille impossible (mode, âge, maladie, couple enceint…)'; S.ttAsk = {id: me.id, y}; closeModal(true); return null; }
+    case 'star': if(me.star && me.star.famous) return 'Déjà une star'; delete me.crim; me.star = {day, famous:false}; becomeStar(me, day); return `${me.first} est une star`;
+    case 'crim': if(me.crim && me.crim.declared) return 'Déjà criminel'; delete me.star; me.crim = {day, declared:false, fate:null}; declareCrim(me, day); return `${me.first} est criminel`;
+    case 'heal': living().filter(p => inFamily(p)).forEach(p => { p.ill = null; p.onset = null; p.deathAt = null; p.mild = []; }); return 'Famille soignée';
+    case 'quads': S.devQuads = true; return 'Le prochain bébé du personnage sera des quadruplés';
+    case 'kill': die(me, day, {old:true}); closeModal(true); return null;
+    case 'leg': { const [k, id] = ($('#devLeg').value || '').split(':'); if(!k) return '';
+      if(k === 'i') me.interests = interestsOf(me).filter(x => x !== id).concat(id);
+      else if(k === 'c'){ if(!(me.conds || []).includes(id)) me.conds = (me.conds || []).concat(id); }
+      else if(k === 'j') me.work = {s:'job', job:id};
+      else if(k === 'e') me.work = {s:'uni', field:id.slice(2), until: day + 3*365};
+      else if(k === 'm') catchMild(me, id, day);
+      else if(k === 'a'){ if(!addictsOf(me).includes(id)) me.addicts = addictsOf(me).concat(id); delete me.addict; }
+      else if(k === 'd'){ die(me, day, {dz:id}); closeModal(true); return null; }
+      albumScan(); return 'Objet légendaire donné'; }
+  }
+  return '';
+}
+document.addEventListener('keydown', e => {
+  if(e.ctrlKey && e.shiftKey && !e.altKey && (e.key === 'Y' || e.key === 'y')){ e.preventDefault(); devMsg = ''; openDev(); }
+});
 /* ================= Actions ================= */
 const ACT = {
   pause(){ S.paused = !S.paused; renderControls(); },
@@ -7288,6 +7565,11 @@ const ACT = {
     closeModal(true); ttStart(n);
   },
   ttland(){ closeModal(true); },
+  dev(d){
+    const r = devDo(d.v); if(r === null){ dirty = true; render(); save(); return; }
+    devMsg = r || ''; sfx.click(); dirty = true; if(S && !$('#game').hidden) render(); if(S) save(); cynShow();
+    applySettings(); openDev();
+  },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     if(d.v === 'reveil' || d.v === 'decrim' || d.v === 'midlife' || d.v === 'potion' || d.v === 'lueur' || d.v === 'vaccin' || d.v === 'antidote') return openPick(d.v);
