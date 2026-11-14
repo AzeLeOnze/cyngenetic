@@ -1777,6 +1777,7 @@ const PATCHNOTES = [
        'Événement « Une relation à bout de souffle » : un couple de plus de 20 ans a 0,9 % de chances par an qu\'un des deux en ait assez. Tu choisis : rester ensemble (mais 1 à 5 ans plus tard, il ou elle devient criminel et s\'en prend d\'abord à son conjoint) ou clore la relation.',
        'Événement « Un vrai métier pour la vie » : entre 19 et 22 ans, une personne a 0,5 % de chances par an de ne pas être satisfaite de ses études. Tu choisis : le métier de ses études (burn-out longs et à répétition, et dans 90 % des cas une mort de « grave dépression professionnelle » entre 30 et 60 ans), autre chose (sans conséquence), ou un métier déjà découvert dans l\'album, gardé jusqu\'à la retraite sans chômage.',
        'Événement « Envie de sensations fortes » : de 45 à 75 ans, une personne a 0,22 % de chances par an de vouloir se mettre aux sports extrêmes. « C\'est parti ! » : une chance sur deux de mourir dans un sport extrême, sinon elle gagne l\'atout Courageux (ou Courageuse) et 50 Cyn. « Pas une bonne idée » : une dépression de 10 ans.',
+       'Événement « Fonder une famille, seul » : de 20 à 50 ans, une personne sans conjoint a 0,3 % de chances par an de vouloir adopter. « Bien sûr ! » : elle adopte un enfant de 0 à 9 ans (garçon ou fille, prénom au hasard), qui apparaît sous elle dans l\'arbre. « Hors de question ! » : une dépression de 10 ans.',
        'Les événements apparaissent aussi en mode auto. Pendant que l\'arbre se centre sur la personne concernée, le joueur ne peut plus bouger l\'arbre, pour ne pas perdre le focus.',
        'La case « Famille autonome » est maintenant cochée par défaut avant de commencer une partie.',
        'Version PC : si l\'application installée est trop ancienne pour changer la résolution, les paramètres le disent au lieu de cacher l\'option. Une nouvelle version de l\'application PC (0.2.0c) est disponible.'],
@@ -1784,6 +1785,7 @@ const PATCHNOTES = [
        '“A relationship running out of steam” event: a couple together for more than 20 years has a 0.9% chance a year that one of them gets fed up. You choose: stay together (but 1 to 5 years later, they become a criminal and go after their partner first) or end the relationship.',
        '“A real job for life” event: between 19 and 22, someone has a 0.5% chance a year of being unhappy with their studies. You choose: work in their field (long, repeated burnouts, and in 90% of cases death from “severe work-related depression” between 30 and 60), something else (no consequence), or a job already discovered in the album, kept until retirement with no unemployment.',
        '“A thirst for thrills” event: from 45 to 75, someone has a 0.22% chance a year of wanting to take up extreme sports. “Let\'s go!”: a one-in-two chance of dying in an extreme sports accident, otherwise they gain the Courage gift and 50 Cyn. “Not a good idea”: a 10-year depression.',
+       '“Starting a family alone” event: from 20 to 50, someone without a partner has a 0.3% chance a year of wanting to adopt. “Of course!”: they adopt a child aged 0 to 9 (boy or girl, random name), who appears below them in the tree. “Out of the question!”: a 10-year depression.',
        'Events now also appear in auto mode. While the tree centres on the person concerned, the player can\'t move the tree, so the focus isn\'t lost.',
        'The “Family on autopilot” box is now ticked by default before starting a game.',
        'PC version: if the installed app is too old to change the resolution, settings now say so instead of hiding the option. A new version of the PC app (0.2.0c) is available.']},
@@ -3425,6 +3427,10 @@ fr:{
   ev_x_title:'Envie de sensations fortes', ev_x_go:"C'est parti !", ev_x_no:'Pas une bonne idée', f_atout3:'Atout gagné',
   ev_x_1:p=>`${nm(p)} n'est plus tout${g(p,'','e')} jeune et n'a pas assez profité de sa jeunesse : ${g(p,'il','elle')} veut explorer de nouveaux horizons et passer aux sports extrêmes !`,
   log_ev_x_win:p=>`🪂 ${nm(p)} survit aux sports extrêmes et devient ${g(p,'courageux','courageuse')} ! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} renonce aux sports extrêmes… et sombre dans la déprime.`,
+  ev_a_title:'Fonder une famille, seul', ev_a_yes:'Bien sûr !', ev_a_no:'Hors de question !',
+  ev_a_1:p=>`${nm(p)} n'a pas de ${g(p,'conjointe','conjoint')}, mais veut tout de même fonder une famille !`,
+  ev_a_2:p=>`Doit-${g(p,'il','elle')} passer par l'adoption ?`,
+  log_ev_a_log:(p,c)=>`${nm(p)} adopte ${fn(c)}, ${g(per(c),'un garçon','une fille')} de ${TX.fr.ans(ageAt(per(c), S.t))}.`, log_ev_a_no_log:p=>`${nm(p)} renonce à adopter… et sombre dans la déprime.`,
   act_lost:p=>g(p,'Perdu dans le temps','Perdue dans le temps'),
   fiche_lost:(p,a,b)=>`⌛ ${g(p,'Perdu','Perdue')} dans le temps depuis ${a} · réapparaîtra en ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} saut${n>1?'s':''} dans le temps · ${tot} ans franchis`,
@@ -3776,6 +3782,10 @@ en:{
   ev_x_title:'A thirst for thrills', ev_x_go:"Let's go!", ev_x_no:'Not a good idea', f_atout3:'Earned gift',
   ev_x_1:p=>`${nm(p)} isn't young any more and didn't make the most of their youth: ${g(p,'he','she')} wants to explore new horizons and take up extreme sports!`,
   log_ev_x_win:p=>`🪂 ${nm(p)} survives extreme sports and gains Courage! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} gives up on extreme sports… and sinks into depression.`,
+  ev_a_title:'Starting a family alone', ev_a_yes:'Of course!', ev_a_no:'Out of the question!',
+  ev_a_1:p=>`${nm(p)} has no partner, but still wants to start a family!`,
+  ev_a_2:p=>`Should ${g(p,'he','she')} adopt?`,
+  log_ev_a_log:(p,c)=>`${nm(p)} adopts ${fn(c)}, a ${ageAt(per(c), S.t)}-year-old ${g(per(c),'boy','girl')}.`, log_ev_a_no_log:p=>`${nm(p)} gives up on adopting… and sinks into depression.`,
   act_lost:'Lost in time',
   fiche_lost:(p,a,b)=>`⌛ Lost in time since ${a} · will reappear in ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} leap${n>1?'s':''} through time · ${tot} years skipped`,
@@ -4126,6 +4136,10 @@ TX.de = {
   ev_x_title:'Lust auf Nervenkitzel', ev_x_go:'Los geht’s!', ev_x_no:'Keine gute Idee', f_atout3:'Gewonnene Gabe',
   ev_x_1:p=>`${nm(p)} ist nicht mehr ganz jung und hat die Jugend nicht genug genossen: ${g(p,'Er','Sie')} will neue Horizonte entdecken und mit Extremsport anfangen!`,
   log_ev_x_win:p=>`🪂 ${nm(p)} überlebt den Extremsport und erhält die Gabe Mut! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} verzichtet auf Extremsport… und versinkt in einer Depression.`,
+  ev_a_title:'Allein eine Familie gründen', ev_a_yes:'Natürlich!', ev_a_no:'Kommt nicht infrage!',
+  ev_a_1:p=>`${nm(p)} hat keinen Partner, möchte aber trotzdem eine Familie gründen!`,
+  ev_a_2:p=>`Soll ${g(p,'er','sie')} adoptieren?`,
+  log_ev_a_log:(p,c)=>`${nm(p)} adoptiert ${fn(c)}, ${g(per(c),'einen Jungen','ein Mädchen')} von ${ageAt(per(c), S.t)} Jahren.`, log_ev_a_no_log:p=>`${nm(p)} verzichtet auf eine Adoption… und versinkt in einer Depression.`,
   act_lost:'In der Zeit verschollen',
   fiche_lost:(p,a,b)=>`⌛ Seit ${a} in der Zeit verschollen · taucht ${b} wieder auf`,
   fiche_tt:(n,tot)=>`⌛ ${n} ${n>1?'Zeitsprünge':'Zeitsprung'} · ${tot} Jahre übersprungen`,
@@ -5626,6 +5640,12 @@ function openEvent(){
         <details class="act relocate full evother"><summary class="lab">${t('ev_s_pick')}</summary>
           ${known.length ? `<div class="reloc-row"><select class="inp" id="evJob" aria-label="${esc(t('ev_s_pick'))}">${known.map(([id, n]) => `<option value="${id}">${esc(n)}</option>`).join('')}</select>
           <button class="gel lime" data-act="evdo" data-v="pick"><span>${t('ev_s_pick_ok')}</span></button></div><p class="note">${t('ev_s_pick_note')}</p>` : `<p class="note">${t('ev_s_pick_none')}</p>`}</details></div>`, {locked:true});
+  } else if(e.k === 'adopt'){
+    if(householdUnion(p.id)){ S.evQ.shift(); return; }
+    openModal(`<div class="m-head"><div class="eyebrow">${t('ev_eye')} · ${fmt(day)}</div><h2>${t('ev_a_title')}</h2></div>
+      <div class="ttbox">${orb(p, 'xl')}<p class="evtxt">${esc(t('ev_a_1', p))}<br><b>${esc(t('ev_a_2', p))}</b></p></div>
+      <div class="acts tt-acts"><button class="gel lime wide" data-act="evdo" data-v="yes"><span>${t('ev_a_yes')}</span></button>
+        <button class="gel pink wide" data-act="evdo" data-v="no"><span>${t('ev_a_no')}</span></button></div>`, {locked:true});
   } else if(e.k === 'xtreme'){
     openModal(`<div class="m-head"><div class="eyebrow">${t('ev_eye')} · ${fmt(day)}</div><h2>${t('ev_x_title')}</h2></div>
       <div class="ttbox">${orb(p, 'xl')}<p class="evtxt">${esc(t('ev_x_1', p))}</p></div>
@@ -5641,6 +5661,16 @@ function evResolve(v, extra){                          // le choix du joueur (ou
       p.crim = {day: day + rnd(1, 5) * 365 + rnd(0, 364), declared:false, fate:null, target: q ? q.id : null};
       log('sad','ev_c_stayed',[p.id, e.pid], day, false);
     } else if(u){ endUnion(u, day, true); sfx.breakup(); }
+  } else if(e.k === 'adopt'){
+    if(v === 'yes'){                                     // un enfant de 0 à 9 ans, sexe et prénom au hasard
+      const age = rnd(0, 9), city = pick(CITIES);
+      const c = addPerson({first:null, last:p.last, sex: Math.random() < .5 ? 'M' : 'F', birth: day - Math.round(age * 365.25) - rnd(0, 360), blood:true,
+        parents:[p.id], adopted:true, city:p.city, birthCity:city});
+      c.first = nameFor(c); regnalize(c); c.conds = rollConds([], yearOf(c.birth)); planInterests(c, day);
+      c.lastAge = ageAt(c, day); scheduleYear(c, c.lastAge, day);
+      log('birth','ev_a_log',[p.id, c.id], day, true); sfx.birth(); burst(['#8cff1a','#ffffff','#3fd0ff','#ff6cc0'], 40);
+      checkParentAch(p); RH = undefined;
+    } else { catchMild(p, 'deprbenigne', day); log('sad','ev_a_no_log',[p.id], day, false); }
   } else if(e.k === 'xtreme'){
     if(v === 'go'){
       if(Math.random() < .5){ die(p, day, {dz:'sportx'}); sfx.death(); }          // une mort inédite
@@ -5684,6 +5714,8 @@ function evYear(p, A, day){                            // à chaque anniversaire
     if(pool.length && b && b.death == null && !b.lost){ const c = pick(pool), q = c === p ? b : p;
       evPush({k:'couple', id:c.id, pid:q.id, a:p.id}); }
   }
+  // seul(e) mais envie de fonder une famille : 0,3 % par an, de 20 à 50 ans, sans conjoint
+  if(p.blood && A >= 20 && A <= 50 && !householdUnion(p.id) && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .003) evPush({k:'adopt', id:p.id});
   // pas tout jeune, envie de sports extrêmes : 0,22 % par an, de 45 à 75 ans
   if(A >= 45 && A <= 75 && !p.xtremeEv && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .0022){ p.xtremeEv = true; evPush({k:'xtreme', id:p.id}); }
   // entre 19 et 22 ans, pas satisfait de ses études : 0,5 % par an
@@ -6570,10 +6602,11 @@ function buildTree(){
   KC.forEach(a => a.sort((x, y) => x.birth - y.birth));
   for(const u of S.unions){ if(!UA.has(u.a)) UA.set(u.a, []); UA.get(u.a).push(u); }
   const kidsL = u => KC.get(u.a + '-' + u.b) || [];
+  const soloL = pid => KC.get(pid + '-undefined') || [];   // 0.2.0c : adopté par une personne seule
   const unionsL = pid => (UA.get(pid) || []).filter(u => u.end == null || u.married || kidsL(u).length);
   let maxDepth = 0;
   function measure(pid){
-    const us = unionsL(pid), selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), kids = us.flatMap(kidsL);
+    const us = unionsL(pid), selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), kids = us.flatMap(kidsL).concat(soloL(pid));
     const kidsW = kids.length ? kids.reduce((s,k) => s + measure(k.id), 0) + (kids.length-1)*GX : 0;
     return memo[pid] = Math.max(selfW, kidsW);
   }
@@ -6584,7 +6617,7 @@ function buildTree(){
     pos[pid] = {x:sx, y};
     let ux = sx + NWo(pid) + PG;
     us.forEach(u => { pos[u.b] = {x: ux, y}; ux += NWo(u.b) + PG; });
-    const groups = us.map(kidsL), kids = groups.flat();
+    const groups = us.map(kidsL), solo = soloL(pid), kids = groups.flat().concat(solo);
     const kidsW = kids.length ? kids.reduce((s,k) => s + memo[k.id], 0) + (kids.length-1)*GX : 0;
     let kx = x + (w-kidsW)/2;
     us.forEach((u,i) => {
@@ -6596,6 +6629,11 @@ function buildTree(){
         links.push({mx:(x1+x2)/2, y1:by, bus: y + NH + GY/2 + 8 + i*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
         kx += memo[k.id] + GX;
       });
+    });
+    solo.forEach(k => {                                 // relié directement à son parent
+      place(k.id, kx, depth+1);
+      links.push({mx: sx + NWo(pid)/2, y1: y + NH, bus: y + NH + GY/2 + 8 + us.length*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
+      kx += memo[k.id] + GX;
     });
   }
   measure(S.founderId); place(S.founderId, 0, 0);
@@ -7654,7 +7692,7 @@ function openFiche(id){
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
       ${milTile(p)}${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${atoutTile3(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
       ${fame}${crime}${deadCity}
-      ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
+      ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${par.filter(Boolean).map(x => esc(nm(x))).join(' &amp; ')}</dd></div>` : ''}
     </dl>
     ${unionLines ? `<div class="eyebrow sect">${t('couple_life')}</div><ul class="ulist">${unionLines}</ul>` : ''}
     ${kids.length ? `<div class="eyebrow sect">${t('children_n', kids.length)}</div>${chips(kids)}` : ''}
