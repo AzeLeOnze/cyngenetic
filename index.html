@@ -1777,16 +1777,18 @@ const PATCHNOTES = [
        'Événement « Une relation à bout de souffle » : un couple de plus de 20 ans a 0,9 % de chances par an qu\'un des deux en ait assez. Tu choisis : rester ensemble (mais 1 à 5 ans plus tard, il ou elle devient criminel et s\'en prend d\'abord à son conjoint) ou clore la relation.',
        'Événement « Un vrai métier pour la vie » : entre 19 et 22 ans, une personne a 0,5 % de chances par an de ne pas être satisfaite de ses études. Tu choisis : le métier de ses études (burn-out longs et à répétition, et dans 90 % des cas une mort de « grave dépression professionnelle » entre 30 et 60 ans), autre chose (sans conséquence), ou un métier déjà découvert dans l\'album, gardé jusqu\'à la retraite sans chômage.',
        'Événement « Envie de sensations fortes » : de 45 à 75 ans, une personne a 0,22 % de chances par an de vouloir se mettre aux sports extrêmes. « C\'est parti ! » : une chance sur deux de mourir dans un sport extrême, sinon elle gagne l\'atout Courageux (ou Courageuse) et 50 Cyn. « Pas une bonne idée » : une dépression de 10 ans.',
-       'Événement « Fonder une famille, seul » : de 20 à 50 ans, une personne sans conjoint a 0,3 % de chances par an de vouloir adopter. « Bien sûr ! » : elle adopte un enfant de 0 à 9 ans (garçon ou fille, prénom au hasard), qui apparaît sous elle dans l\'arbre. « Hors de question ! » : une dépression de 10 ans.',
+       'Événement « Fonder une famille, seul » : de 20 à 50 ans, une personne sans conjoint a 0,4 % de chances par an de vouloir adopter. « Bien sûr ! » : elle adopte un enfant de 0 à 9 ans (garçon ou fille, prénom au hasard), qui apparaît sous elle dans l\'arbre. « Hors de question ! » : une dépression de 10 ans.',
        'Les événements apparaissent aussi en mode auto. Pendant que l\'arbre se centre sur la personne concernée, le joueur ne peut plus bouger l\'arbre, pour ne pas perdre le focus.',
+       'Un métier légendaire se garde maintenant jusqu\'à la retraite (sans changement ni chômage). La retraite qui suit s\'appelle « Retraite d\'enfer » et brille aux couleurs de l\'arc-en-ciel.',
        'La case « Famille autonome » est maintenant cochée par défaut avant de commencer une partie.',
        'Version PC : si l\'application installée est trop ancienne pour changer la résolution, les paramètres le disent au lieu de cacher l\'option. Une nouvelle version de l\'application PC (0.2.0c) est disponible.'],
    en:['New: events! They pop up in the middle of the screen and pause the game. Just before, the person concerned is shown in the tree with a red frame.',
        '“A relationship running out of steam” event: a couple together for more than 20 years has a 0.9% chance a year that one of them gets fed up. You choose: stay together (but 1 to 5 years later, they become a criminal and go after their partner first) or end the relationship.',
        '“A real job for life” event: between 19 and 22, someone has a 0.5% chance a year of being unhappy with their studies. You choose: work in their field (long, repeated burnouts, and in 90% of cases death from “severe work-related depression” between 30 and 60), something else (no consequence), or a job already discovered in the album, kept until retirement with no unemployment.',
        '“A thirst for thrills” event: from 45 to 75, someone has a 0.22% chance a year of wanting to take up extreme sports. “Let\'s go!”: a one-in-two chance of dying in an extreme sports accident, otherwise they gain the Courage gift and 50 Cyn. “Not a good idea”: a 10-year depression.',
-       '“Starting a family alone” event: from 20 to 50, someone without a partner has a 0.3% chance a year of wanting to adopt. “Of course!”: they adopt a child aged 0 to 9 (boy or girl, random name), who appears below them in the tree. “Out of the question!”: a 10-year depression.',
+       '“Starting a family alone” event: from 20 to 50, someone without a partner has a 0.4% chance a year of wanting to adopt. “Of course!”: they adopt a child aged 0 to 9 (boy or girl, random name), who appears below them in the tree. “Out of the question!”: a 10-year depression.',
        'Events now also appear in auto mode. While the tree centres on the person concerned, the player can\'t move the tree, so the focus isn\'t lost.',
+       'A legendary job is now kept until retirement (no job changes or unemployment). The retirement that follows is called “One hell of a retirement” and shines in rainbow colours.',
        'The “Family on autopilot” box is now ticked by default before starting a game.',
        'PC version: if the installed app is too old to change the resolution, settings now say so instead of hiding the option. A new version of the PC app (0.2.0c) is available.']},
   {v:'0.2.0b', date:{fr:'14 novembre 2026', en:'November 14, 2026', de:'14. November 2026'},
@@ -3427,7 +3429,7 @@ fr:{
   ev_x_title:'Envie de sensations fortes', ev_x_go:"C'est parti !", ev_x_no:'Pas une bonne idée', f_atout3:'Atout gagné',
   ev_x_1:p=>`${nm(p)} n'est plus tout${g(p,'','e')} jeune et n'a pas assez profité de sa jeunesse : ${g(p,'il','elle')} veut explorer de nouveaux horizons et passer aux sports extrêmes !`,
   log_ev_x_win:p=>`🪂 ${nm(p)} survit aux sports extrêmes et devient ${g(p,'courageux','courageuse')} ! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} renonce aux sports extrêmes… et sombre dans la déprime.`,
-  ev_a_title:'Fonder une famille, seul', ev_a_yes:'Bien sûr !', ev_a_no:'Hors de question !',
+  ev_a_title:'Fonder une famille, seul', ret_leg:"Retraite d'enfer", ev_a_yes:'Bien sûr !', ev_a_no:'Hors de question !',
   ev_a_1:p=>`${nm(p)} n'a pas de ${g(p,'conjointe','conjoint')}, mais veut tout de même fonder une famille !`,
   ev_a_2:p=>`Doit-${g(p,'il','elle')} passer par l'adoption ?`,
   log_ev_a_log:(p,c)=>`${nm(p)} adopte ${fn(c)}, ${g(per(c),'un garçon','une fille')} de ${TX.fr.ans(ageAt(per(c), S.t))}.`, log_ev_a_no_log:p=>`${nm(p)} renonce à adopter… et sombre dans la déprime.`,
@@ -3782,7 +3784,7 @@ en:{
   ev_x_title:'A thirst for thrills', ev_x_go:"Let's go!", ev_x_no:'Not a good idea', f_atout3:'Earned gift',
   ev_x_1:p=>`${nm(p)} isn't young any more and didn't make the most of their youth: ${g(p,'he','she')} wants to explore new horizons and take up extreme sports!`,
   log_ev_x_win:p=>`🪂 ${nm(p)} survives extreme sports and gains Courage! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} gives up on extreme sports… and sinks into depression.`,
-  ev_a_title:'Starting a family alone', ev_a_yes:'Of course!', ev_a_no:'Out of the question!',
+  ev_a_title:'Starting a family alone', ret_leg:'One hell of a retirement', ev_a_yes:'Of course!', ev_a_no:'Out of the question!',
   ev_a_1:p=>`${nm(p)} has no partner, but still wants to start a family!`,
   ev_a_2:p=>`Should ${g(p,'he','she')} adopt?`,
   log_ev_a_log:(p,c)=>`${nm(p)} adopts ${fn(c)}, a ${ageAt(per(c), S.t)}-year-old ${g(per(c),'boy','girl')}.`, log_ev_a_no_log:p=>`${nm(p)} gives up on adopting… and sinks into depression.`,
@@ -4136,7 +4138,7 @@ TX.de = {
   ev_x_title:'Lust auf Nervenkitzel', ev_x_go:'Los geht’s!', ev_x_no:'Keine gute Idee', f_atout3:'Gewonnene Gabe',
   ev_x_1:p=>`${nm(p)} ist nicht mehr ganz jung und hat die Jugend nicht genug genossen: ${g(p,'Er','Sie')} will neue Horizonte entdecken und mit Extremsport anfangen!`,
   log_ev_x_win:p=>`🪂 ${nm(p)} überlebt den Extremsport und erhält die Gabe Mut! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} verzichtet auf Extremsport… und versinkt in einer Depression.`,
-  ev_a_title:'Allein eine Familie gründen', ev_a_yes:'Natürlich!', ev_a_no:'Kommt nicht infrage!',
+  ev_a_title:'Allein eine Familie gründen', ret_leg:'Ruhestand der Extraklasse', ev_a_yes:'Natürlich!', ev_a_no:'Kommt nicht infrage!',
   ev_a_1:p=>`${nm(p)} hat keinen Partner, möchte aber trotzdem eine Familie gründen!`,
   ev_a_2:p=>`Soll ${g(p,'er','sie')} adoptieren?`,
   log_ev_a_log:(p,c)=>`${nm(p)} adoptiert ${fn(c)}, ${g(per(c),'einen Jungen','ein Mädchen')} von ${ageAt(per(c), S.t)} Jahren.`, log_ev_a_no_log:p=>`${nm(p)} verzichtet auf eine Adoption… und versinkt in einer Depression.`,
@@ -5203,8 +5205,9 @@ function workYear(p, A, day){
     return;
   }
   if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
-  if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
-  if(w.s==='job' && w.job !== 'president' && !hasAtout(p, 'discipline') && !p.lockJob){   // atout Discipliné : garde son métier jusqu'à la retraite
+  if(A >= p.retireAge){ const was = w.s, leg = was === 'job' && LEGS.j.has(w.job) ? w.job : null;   // 0.2.0c : après un métier légendaire, « retraite d'enfer »
+    p.work = leg ? {s:'retired', leg} : {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
+  if(w.s==='job' && w.job !== 'president' && !hasAtout(p, 'discipline') && !p.lockJob && !LEGS.j.has(w.job)){   // un métier légendaire se garde jusqu'à la retraite   // atout Discipliné : garde son métier jusqu'à la retraite
     const r = Math.random();
     const jc = .04 / 1.15;                                // 0.1.9c : changements de métier 1,15× plus rares
     if(r < jc){ const j = pickJob(yearOf(day), p); if(j !== w.job){ p.work = {s:'job', job:j}; log('work','job_change',[p.id,j],day); } }   // 0.1.2a : changements de métier 20 % plus rares
@@ -5257,7 +5260,7 @@ function activity(p, skipIll){
     case 'odd': return p.school && p.school.drop ? t('dropout', p) : t('odd');
     case 'uni': return t('student', p, fieldName(w.field));
     case 'unemp': return t('unemployed', p);
-    case 'retired': { const mr = w.mil != null ? w.mil : p.milPast ? p.milPast.rank : null; return mr != null ? t('mil_ret', p, milName(mr)) : t('retired', p); }
+    case 'retired': { if(w.leg) return t('ret_leg'); const mr = w.mil != null ? w.mil : p.milPast ? p.milPast.rank : null; return mr != null ? t('mil_ret', p, milName(mr)) : t('retired', p); }
     case 'star': return jobName(w.job, p);
   }
   return '';
@@ -5714,8 +5717,8 @@ function evYear(p, A, day){                            // à chaque anniversaire
     if(pool.length && b && b.death == null && !b.lost){ const c = pick(pool), q = c === p ? b : p;
       evPush({k:'couple', id:c.id, pid:q.id, a:p.id}); }
   }
-  // seul(e) mais envie de fonder une famille : 0,3 % par an, de 20 à 50 ans, sans conjoint
-  if(p.blood && A >= 20 && A <= 50 && !householdUnion(p.id) && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .003) evPush({k:'adopt', id:p.id});
+  // seul(e) mais envie de fonder une famille : 0,4 % par an, de 20 à 50 ans, sans conjoint
+  if(p.blood && A >= 20 && A <= 50 && !householdUnion(p.id) && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .004) evPush({k:'adopt', id:p.id});
   // pas tout jeune, envie de sports extrêmes : 0,22 % par an, de 45 à 75 ans
   if(A >= 45 && A <= 75 && !p.xtremeEv && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .0022){ p.xtremeEv = true; evPush({k:'xtreme', id:p.id}); }
   // entre 19 et 22 ans, pas satisfait de ses études : 0,5 % par an
@@ -6589,7 +6592,7 @@ function nodeHTML(p, x, y){
     <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b class="${rtt ? 'tt' : ''}">${rtt ? `<small class="rtt">${esc(rtt.replace(' consort', ''))}</small>` : ''}${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
     <span class="n-life"><span>${years}</span><b>${ageL}</b></span>
     <span class="n-city">${icon('pin')}<span>${esc(cityLine(p))}</span></span>
-    <span class="n-band${p.work && p.work.s === 'job' && LEGS.j.has(p.work.job) ? ' lgband' : ''}" title="${esc(activity(p))}">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
+    <span class="n-band${p.work && ((p.work.s === 'job' && LEGS.j.has(p.work.job)) || (p.work.s === 'retired' && p.work.leg)) ? ' lgband' : ''}" title="${esc(activity(p))}">${esc(activity(p))}</span>${jail ? '<i class="bars"></i>' : ''}
     ${cu && p.sex==='F' ? `<span class="badge">${ICON_BABY}</span>` : ''}</button>`;
 }
 function buildTree(){
