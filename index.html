@@ -1010,6 +1010,7 @@ body.zmode .treebox{position:relative}
 .journal p,.toast p{margin:0;min-width:0}
 .k-birth{--dot:var(--lime)} .k-death{--dot:#5f7890} .k-love{--dot:var(--magenta)} .k-wed{--dot:var(--sun-deep)}
 .k-tt{--dot:#3fc6ff}
+.facts .milf{background:linear-gradient(180deg,#f2f5e6,#e2e9c9)!important;border-color:#a9b77d!important}.facts .milf dt{color:#556b2f}.facts .milf dd{color:#33421a;font-weight:700}
 #ttFx.past{background:radial-gradient(circle at 50% 50%,#fffaf0 0,#ffe3a3 14%,#e9a743 40%,#8f4f12 72%,#3a1c05 100%)}
 #ttFx.past .tt-rings i{animation-name:ttringout;border-color:rgba(255,240,200,.6);box-shadow:0 0 30px rgba(255,210,120,.6),inset 0 0 30px rgba(255,210,120,.4)}
 #ttFx.past.home .tt-rings i{animation-name:ttring}
@@ -1367,6 +1368,8 @@ body.no-deco .gothfx .bat{display:none}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .ttmet{background:rgba(255,80,160,.12);border-color:rgba(255,120,190,.35);color:#ffb3d9}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .ttdz{background:rgba(80,190,255,.1);border-color:rgba(80,190,255,.3);color:#a8e0ff}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .devcon .devsec{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);box-shadow:none}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .facts .milf{background:rgba(140,170,70,.12)!important;border-color:rgba(160,190,90,.4)!important}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .facts .milf dd,:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .facts .milf dt{color:#c8dc8a}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .devmsg{background:rgba(60,200,90,.14);border-color:rgba(60,200,90,.4);color:#9df0b0}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .ctry{background:linear-gradient(180deg,#2a2a30,#1a1a1e);border-color:rgba(255,255,255,.14);color:var(--ink)}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"]) .ctry[aria-pressed="true"]{background:linear-gradient(180deg,#3c3c46,#26262c);border-color:var(--g2);box-shadow:0 0 0 3px rgba(255,255,255,.08)}
@@ -1765,8 +1768,11 @@ const APP_VERSION = '0.2.0b';
 const PATCHNOTES = [
   {v:'0.2.0b', date:{fr:'14 novembre 2026', en:'November 14, 2026', de:'14. November 2026'},
    fr:['Nouveau : la carrière militaire ! De 16 à 24 ans, quelqu\'un peut s\'engager dans l\'armée (environ 6 % des hommes, 2 % des femmes à partir de 1940). Impossible d\'en partir avant la retraite militaire, entre 48 et 58 ans.',
-       '13 grades, du plus bas au plus élevé : soldat, caporal, caporal-chef, sergent, sergent-chef, adjudant, adjudant-chef, lieutenant, capitaine, commandant, lieutenant-colonel, colonel et général. Une promotion est possible chaque année ; ceux qui s\'engagent tard n\'iront pas forcément jusqu\'en haut. L\'atout Ambition aide à monter plus vite.',
-       'Les militaires ont un risque élevé de mourir au combat (0,6 % par an), et bien plus élevé en temps de guerre (7 % par an). Leur bulle est kaki, et les officiers ont une étoile dorée. Les 13 grades se collectionnent dans l\'album (catégorie Métiers). L\'ancien métier « Militaire » est remplacé par cette carrière.',
+       '13 grades, du plus bas au plus élevé : soldat, caporal, caporal-chef, sergent, sergent-chef, adjudant, adjudant-chef, lieutenant, capitaine, commandant, lieutenant-colonel, colonel et général. Une promotion est possible chaque année, mais passer officier (lieutenant et au-dessus) est rare : la plupart finissent sous-officiers, et un général est exceptionnel. L\'atout Ambition aide à monter plus vite.',
+       'Les militaires ont un risque élevé de mourir au combat (0,6 % par an), et bien plus élevé en temps de guerre (7 % par an) : ils meurent alors au front, au canon, au gaz, dans une embuscade… avec le nom de la guerre (par exemple « mort au front (Première Guerre mondiale) »). Les autres morts de guerre indiquent aussi le nom de la guerre. Leur bulle est kaki, et les officiers ont une étoile dorée. Les 13 grades se collectionnent dans l\'album (catégorie Métiers). L\'ancien métier « Militaire » est remplacé par cette carrière.',
+       'À la retraite militaire, une personne sur deux commence une seconde carrière civile jusqu\'à la retraite normale.',
+       'Une case « Armée » dans la fiche indique le grade, l\'année d\'engagement et l\'âge de la retraite militaire (ou « Ancien capitaine, dans l\'armée de 1990 à 2025 »).',
+       'Mode Royal : un noble engagé dans l\'armée y reste au lieu de prendre un métier de noble.',
        'Nouvel atout « Discipliné » : 60 % de chances de faire carrière dans l\'armée (engagement entre 16 et 24 ans) ; sinon, la personne garde le même métier jusqu\'à la retraite, sans changement ni chômage.',
        'Versus : l\'IA commence maintenant avec un personnage du même âge que le tien.',
        'Nouveau thème Pastel, tout doux et mignon, à acheter dans la boutique pour 500 Cyn.',
@@ -1779,8 +1785,11 @@ const PATCHNOTES = [
        'Nouveau thème Cyberpunk, avec une ville néon, une grille lumineuse qui défile et de la pluie : il se débloque en atteignant l\'an 2300 dans une partie, sans jamais voyager dans le passé.',
        'Thèmes Dark et Obsidienne : la fenêtre des succès est maintenant adaptée, ainsi que les fenêtres quand le verre dépoli est décoché. Les boutons des pays de l\'écran de départ sont aussi lisibles dans les thèmes sombres.'],
    en:['New: military careers! From 16 to 24, someone can join the army (about 6% of men, 2% of women from 1940). There\'s no leaving before military retirement, between 48 and 58.',
-       '13 ranks, from lowest to highest: private, corporal, senior corporal, sergeant, staff sergeant, warrant officer, chief warrant officer, lieutenant, captain, major, lieutenant colonel, colonel and general. A promotion can come every year; those who join late won\'t necessarily reach the top. The Ambition gift helps climb faster.',
-       'Soldiers have a high risk of dying in combat (0.6% a year), and a much higher one in wartime (7% a year). Their bubble is khaki, and officers get a gold star. The 13 ranks can be collected in the album (Jobs category). The old “Service member” job is replaced by this career.',
+       '13 ranks, from lowest to highest: private, corporal, senior corporal, sergeant, staff sergeant, warrant officer, chief warrant officer, lieutenant, captain, major, lieutenant colonel, colonel and general. A promotion can come every year, but becoming an officer (lieutenant and above) is rare: most end up as NCOs, and a general is exceptional. The Ambition gift helps climb faster.',
+       'Soldiers have a high risk of dying in combat (0.6% a year), and a much higher one in wartime (7% a year): they\'re then killed in action, by a cannonball, by gas, in an ambush… with the name of the war (for example “killed in action (World War I)”). Other war deaths also show the name of the war. Their bubble is khaki, and officers get a gold star. The 13 ranks can be collected in the album (Jobs category). The old “Service member” job is replaced by this career.',
+       'At military retirement, one person in two starts a second civilian career until normal retirement.',
+       'An “Army” box in the character card shows the rank, the year they joined and their military retirement age (or “Former captain, in the army from 1990 to 2025”).',
+       'Royal mode: a noble who joined the army stays there instead of taking a noble\'s job.',
        'New “Discipline” gift: 60% chance of a military career (joining between 16 and 24); otherwise the person keeps the same job until retirement, with no job changes or unemployment.',
        'Versus: the AI now starts with a character the same age as yours.',
        'New Pastel theme, soft and cute, to buy in the shop for 500 Cyn.',
@@ -2938,11 +2947,11 @@ function nobleRank(p){                               // enfant d'un monarque : d
 function nobleYear(p, A, day){                        // ducs et comtes : 3 % de chances dans leur vie de renoncer à la vie royale
   if(!royalOn() || p.death != null || p.id === S.royal.king || p.id === heirId()) return;
   const r = nobleRank(p);
-  if(r === 'noble' && A >= 18 && !p.nobilityJob && !(p.work && ['royal','star','prison','retired','uni','noble'].includes(p.work.s))){ p.nobilityJob = true; p.work = {s:'noble', act: actPick(NOBILITY_ACTS, day)}; }
+  if(r === 'noble' && A >= 18 && !p.nobilityJob && !(p.work && ['royal','star','prison','retired','uni','noble','mil'].includes(p.work.s))){ p.nobilityJob = true; p.work = {s:'noble', act: actPick(NOBILITY_ACTS, day)}; }
   if(r === 'noble'){ p.nobleYears = (p.nobleYears || 0) + 1; if(p.nobleYears % 2 === 0) cyn(5 * (hasAtout(p,'richesse') ? 2 : 1), p.id); return; }   // un noble rapporte 5 Cyn tous les 2 ans
   if(r !== 'duc' && r !== 'comte') return;
   const w = p.work;
-  if(A >= 18 && !p.nobleJobRoll && !(w && ['royal','star','prison','retired','uni'].includes(w.s))){       // 60 % prennent un métier réservé à la noblesse
+  if(A >= 18 && !p.nobleJobRoll && !(w && ['royal','star','prison','retired','uni','mil'].includes(w.s))){       // 60 % prennent un métier réservé à la noblesse
     p.nobleJobRoll = true; if(Math.random() < .6){ p.work = {s:'noble', act: actPick(NOBLE_ACTS, day)}; dirty = true; }
   }
   if(r === 'comte' && A >= 16 && !p.nobleRoll){ p.nobleRoll = true; if(Math.random() < .22) p.nobleAt = day + rnd(0, 40*365); }   // 22 % des comtes deviennent nobles
@@ -3135,6 +3144,8 @@ function wPickRow(rows, fIdx){
   for(const r of rows){ s -= w(r); if(s <= 0) return r; }
   return rows[rows.length-1];
 }
+const MIL_WC = ['front','canon','gaz','embuscade','drone','fusille'];   // 0.2.0b : un militaire meurt au combat (homme ou femme)
+function pickMilWarCause(day){ const y = yearOf(day), ok = WARCAUSES.filter(c => MIL_WC.includes(c[0]) && y >= c[5] && y <= c[6]); return ok.length ? wPickRow(ok, 7)[0] : null; }
 function pickWarCause(p, day){
   const y = yearOf(day), A = ageAt(p, day);
   const r = wPickRow(WARCAUSES.filter(c => y >= c[5] && y <= c[6] && fits(c[7], p, A)), 7);
@@ -3353,7 +3364,10 @@ fr:{
   log_tt_butterfly:(p,q,c)=>`🦋 Effet papillon : au retour de ${nm(p)}, ${nm(q)} a toujours vécu à ${cityName(c)}.`,
   fiche_ttp:n=>`${n} voyage${n>1?'s':''} dans le passé`, fiche_visit:(y,v,f)=>`⌛ En ${y}, a reçu la visite de ${v.first} ${v.last}, ${g(v,'venu','venue')} de ${f}`,
   mil_ranks:["Soldat", "Caporal", "Caporal-chef", "Sergent", "Sergent-chef", "Adjudant", "Adjudant-chef", "Lieutenant", "Capitaine", "Commandant", "Lieutenant-colonel", "Colonel", "Général"],
-  mil_ret:(p,r)=>`${r} à la retraite`, alb_mil:'Armée', alb_mil_d:'Grade militaire',
+  mil_ret:(p,r)=>`${r} à la retraite`,
+  mil_tile_on:(p,r,y,a)=>`${r}${y ? ` · ${g(p,'engagé','engagée')} en ${y}` : ''} · retraite militaire à ${a} ans`,
+  mil_tile_past:(p,r,y,e)=>`${g(p,'Ancien','Ancienne')} ${r.toLowerCase()}${y && e ? ` · dans l'armée de ${y} à ${e}` : ''}`,
+  log_mil_second:(p,r,j)=>`🎖 ${nm(p)} quitte l'armée avec le grade de ${milName(r).toLowerCase()} et commence une seconde carrière : ${jobName(j, per(p)).toLowerCase()}.`, alb_mil:'Armée', alb_mil_d:'Grade militaire',
   log_mil_join:p=>`🎖 ${nm(p)} s'engage dans l'armée : impossible d'en partir avant la retraite militaire.`,
   log_mil_promo:(p,r)=>`🎖 ${nm(p)} ${g(per(p),'est promu','est promue')} ${milName(r).toLowerCase()}.`,
   log_mil_retire:(p,r)=>`🎖 ${nm(p)} prend sa retraite militaire avec le grade de ${milName(r).toLowerCase()}.`,
@@ -3400,7 +3414,7 @@ fr:{
   left_us:n=>`${n} nous a quittés`, who_next:'Qui reprend le flambeau ?',
   death_sentence:(p,a)=>{ const c = p.cause, A = TX.fr.ans(a), n = nm(p);
     if(c.old) return `${n} s'est ${g(p,'éteint','éteinte')} de vieillesse à ${A}.`;
-    if(c.war) return `${n} est ${warPhrase(c.war,p)} à ${A}.`;
+    if(c.war) return `${n} est ${warPhrase(c.war,p)}${warTag(c)} à ${A}.`;
     if(c.murder) return `${n} a été ${g(p,'assassiné','assassinée')} par ${nm(c.murder)} à ${A}.`;
     if(c.vanished) return `${n} a disparu sans laisser de trace, à ${A}.`;
     if(c.suicide) return `${n} a mis fin à ses jours à ${A}.`;
@@ -3453,7 +3467,7 @@ fr:{
   log_multi:(a,b,n)=>`${fn(a)} et ${fn(b)} accueillent des ${n===2?'jumeaux':n===3?'triplés':'quadruplés'} !`,
   war_badge:i=>WARS[i].fr,
   log_war_start:i=>`${WARS[i].fr} : la guerre éclate, le danger augmente pour toute la famille.`, log_war_end:i=>`${WARS[i].fr} : fin du conflit.`,
-  log_death_war:(p,w,a)=>`${nm(p)} est ${warPhrase(w,P(p))} à ${TX.fr.ans(a)}.`, cause_war:(w,p)=>warPhrase(w,p),
+  log_death_war:(p,w,a,n)=>`${nm(p)} est ${warPhrase(w,P(p))}${warTag({wn:n})} à ${TX.fr.ans(a)}.`, cause_war:(w,p)=>warPhrase(w,p),
   f_cond:'Particularité', cond_birth:n=>`Particularité détectée à la naissance : ${n}.`,
   fam_auto:'Famille autonome', fam_auto_hint:"Les membres que vous ne jouez pas se rencontrent, se marient et ont des enfants tout seuls.",
   fam_auto_inauto:'Inclus dans le mode auto.', dropout:p=>g(p,'Déscolarisé','Déscolarisée'),
@@ -3684,7 +3698,10 @@ en:{
   log_tt_butterfly:(p,q,c)=>`🦋 Butterfly effect: since ${nm(p)} came back, ${nm(q)} has always lived in ${cityName(c)}.`,
   fiche_ttp:n=>`${n} trip${n>1?'s':''} to the past`, fiche_visit:(y,v,f)=>`⌛ In ${y}, was visited by ${v.first} ${v.last}, who came from ${f}`,
   mil_ranks:["Private", "Corporal", "Senior corporal", "Sergeant", "Staff sergeant", "Warrant officer", "Chief warrant officer", "Lieutenant", "Captain", "Major", "Lieutenant colonel", "Colonel", "General"],
-  mil_ret:(p,r)=>`Retired ${r.toLowerCase()}`, alb_mil:'Army', alb_mil_d:'Military rank',
+  mil_ret:(p,r)=>`Retired ${r.toLowerCase()}`,
+  mil_tile_on:(p,r,y,a)=>`${r}${y ? ` · joined in ${y}` : ''} · military retirement at ${a}`,
+  mil_tile_past:(p,r,y,e)=>`Former ${r.toLowerCase()}${y && e ? ` · in the army from ${y} to ${e}` : ''}`,
+  log_mil_second:(p,r,j)=>`🎖 ${nm(p)} leaves the army as a ${milName(r).toLowerCase()} and starts a second career: ${jobName(j, per(p)).toLowerCase()}.`, alb_mil:'Army', alb_mil_d:'Military rank',
   log_mil_join:p=>`🎖 ${nm(p)} joins the army and can't leave before military retirement.`,
   log_mil_promo:(p,r)=>`🎖 ${nm(p)} is promoted to ${milName(r).toLowerCase()}.`,
   log_mil_retire:(p,r)=>`🎖 ${nm(p)} retires from the army as a ${milName(r).toLowerCase()}.`,
@@ -3731,7 +3748,7 @@ en:{
   left_us:n=>`${n} has passed away`, who_next:'Who carries on the family?',
   death_sentence:(p,a)=>{ const c = p.cause, n = nm(p);
     if(c.old) return `${n} passed away of old age at ${a}.`;
-    if(c.war) return `${n} died at ${a}: ${WARC[c.war][3]}.`;
+    if(c.war) return `${n} died at ${a}: ${WARC[c.war][3]}${warTag(c)}.`;
     if(c.murder) return `${n} was murdered by ${nm(c.murder)} at ${a}.`;
     if(c.vanished) return `${n} vanished without a trace at ${a}.`;
     if(c.suicide) return `${n} took ${g(p,'his','her')} own life at ${a}.`;
@@ -3782,7 +3799,7 @@ en:{
   log_multi:(a,b,n)=>`${fn(a)} and ${fn(b)} welcome ${n===2?'twins':n===3?'triplets':'quadruplets'}!`,
   war_badge:i=>WARS[i].en,
   log_war_start:i=>`${WARS[i].en} breaks out: the whole family is in greater danger.`, log_war_end:i=>`${WARS[i].en} is over.`,
-  log_death_war:(p,w,a)=>`${nm(p)} ${WARC[w][4]} at age ${a}.`, cause_war:w=>WARC[w][3],
+  log_death_war:(p,w,a,n)=>`${nm(p)} ${WARC[w][4]}${warTag({wn:n})} at age ${a}.`, cause_war:w=>WARC[w][3],
   f_cond:'Condition', cond_birth:n=>`Condition detected at birth: ${n}.`,
   fam_auto:'Family on autopilot', fam_auto_hint:"Family members you don't play meet, marry and have children on their own.",
   fam_auto_inauto:'Already included in auto mode.', dropout:()=>'Out of school',
@@ -4014,7 +4031,10 @@ TX.de = {
   log_tt_butterfly:(p,q,c)=>`🦋 Schmetterlingseffekt: Seit ${nm(p)} zurück ist, hat ${nm(q)} schon immer in ${cityName(c)} gelebt.`,
   fiche_ttp:n=>`${n} ${n>1?'Reisen':'Reise'} in die Vergangenheit`, fiche_visit:(y,v,f)=>`⌛ ${y} Besuch von ${v.first} ${v.last}, aus dem Jahr ${f}`,
   mil_ranks:["Soldat", "Gefreiter", "Obergefreiter", "Unteroffizier", "Feldwebel", "Hauptfeldwebel", "Stabsfeldwebel", "Leutnant", "Hauptmann", "Major", "Oberstleutnant", "Oberst", "General"],
-  mil_ret:(p,r)=>`${r} a. D.`, alb_mil:'Armee', alb_mil_d:'Militärischer Dienstgrad',
+  mil_ret:(p,r)=>`${r} a. D.`,
+  mil_tile_on:(p,r,y,a)=>`${r}${y ? ` · eingetreten ${y}` : ''} · Militärruhestand mit ${a}`,
+  mil_tile_past:(p,r,y,e)=>`Ehemals ${r}${y && e ? ` · in der Armee von ${y} bis ${e}` : ''}`,
+  log_mil_second:(p,r,j)=>`🎖 ${nm(p)} verlässt die Armee als ${milName(r)} und beginnt eine zweite Karriere: ${jobName(j, per(p))}.`, alb_mil:'Armee', alb_mil_d:'Militärischer Dienstgrad',
   log_mil_join:p=>`🎖 ${nm(p)} tritt in die Armee ein und kann sie erst mit dem Ruhestand verlassen.`,
   log_mil_promo:(p,r)=>`🎖 ${nm(p)} wird zum ${milName(r)} befördert.`,
   log_mil_retire:(p,r)=>`🎖 ${nm(p)} geht als ${milName(r)} in den Ruhestand.`,
@@ -4061,7 +4081,7 @@ TX.de = {
   left_us:n=>`${n} ist von uns gegangen`, who_next:'Wer führt die Familie weiter?',
   death_sentence:(p,a)=>{ const c = p.cause, n = nm(p);
     if(c.old) return `${n} ist mit ${a} Jahren an Altersschwäche gestorben.`;
-    if(c.war) return `${n} starb mit ${a} Jahren: ${DEx.warc[c.war] ? DEx.warc[c.war][0] : WARC[c.war][3]}.`;
+    if(c.war) return `${n} starb mit ${a} Jahren: ${DEx.warc[c.war] ? DEx.warc[c.war][0] : WARC[c.war][3]}${warTag(c)}.`;
     if(c.murder) return `${n} wurde mit ${a} Jahren von ${nm(c.murder)} ermordet.`;
     if(c.vanished) return `${n} ist mit ${a} Jahren spurlos verschwunden.`;
     if(c.suicide) return `${n} hat sich mit ${a} Jahren das Leben genommen.`;
@@ -4113,7 +4133,7 @@ TX.de = {
   log_multi:(a,b,n)=>`${fn(a)} und ${fn(b)} begrüßen ${n===2?'Zwillinge':n===3?'Drillinge':'Vierlinge'}!`,
   war_badge:i=>warName(i),
   log_war_start:i=>`${warName(i)} bricht aus: Die ganze Familie ist in größerer Gefahr.`, log_war_end:i=>`${warName(i)} ist vorbei.`,
-  log_death_war:(p,w,a)=>`${nm(p)} ${DEx.warc[w] ? DEx.warc[w][1] : WARC[w][4]}, mit ${a} Jahren.`, cause_war:w=>DEx.warc[w] ? DEx.warc[w][0] : WARC[w][3],
+  log_death_war:(p,w,a,n)=>`${nm(p)} ${DEx.warc[w] ? DEx.warc[w][1] : WARC[w][4]}${warTag({wn:n})}, mit ${a} Jahren.`, cause_war:w=>DEx.warc[w] ? DEx.warc[w][0] : WARC[w][3],
   f_cond:'Besonderheit', cond_birth:n=>`Bei der Geburt festgestellte Besonderheit: ${n}.`,
   fam_auto:'Selbstständige Familie', fam_auto_hint:'Familienmitglieder, die du nicht spielst, lernen sich kennen, heiraten und bekommen Kinder ganz allein.',
   fam_auto_inauto:'Im Automodus bereits enthalten.', dropout:()=>'Schulabbruch',
@@ -4571,6 +4591,7 @@ DEx.worldn = {
 // accès aux noms allemands
 const dzNom = id => DEx.dz[id] ? DEx.dz[id][0] : id, dzDat = id => DEx.dz[id] ? DEx.dz[id][1] : id;
 const deSex = (pair, p) => pair ? (p && p.sex === 'F' ? pair[1] : pair[0]) : null;
+const warTag = c => c && c.wn != null && c.wn >= 0 && WARS[c.wn] ? ` (${warName(c.wn)})` : '';   // 0.2.0b : le nom de la guerre
 const warName = i => { const w = WARS[i]; return LANG === 'fr' ? w.fr : LANG === 'de' ? (w.de || DEx.warn[w.fr] || w.en) : w.en; };
 
 const condName = (id, p) => { const r = COND[id]; if(LANG === 'de' && DEx.cond[id]) return deSex(DEx.cond[id], p); return LANG==='fr' ? (p.sex==='F' ? r[2] : r[1]) : r[3]; };
@@ -4610,6 +4631,13 @@ const reignTxt = p => p.reignStart == null ? '' : p.reignEnd != null ? t('reign_
 const reignTile = p => p.reignStart != null ? `<div class="span2 rgf"><dt>${t('f_reign')}</dt><dd>${esc(reignTxt(p))}</dd></div>` : '';
 const immTile = p => p.death == null && S && immune(p, S.t) ? `<div class="span2 imf"><dt>${t('f_immune')}</dt><dd>${icon('pill')}<span>${esc(t('immune_until', yearOf(p.immuneUntil)))}</span></dd></div>` : '';
 const atoutTile = p => p.atout && ATOUT[p.atout] ? `<div class="span2 atf"><dt>${t('f_atout')}</dt><dd>${icon(ATOUT[p.atout][4])}<span><b>${esc(atoutName(p.atout, p))}</b><small>${esc(atoutDesc(p.atout))}</small></span></dd></div>` : '';
+const milTile = p => {                               // 0.2.0b : la carrière militaire dans la fiche
+  const w = p.work, on = w && w.s === 'mil', mp = p.milPast || (w && w.s === 'retired' && w.mil != null ? {rank: w.mil} : null);
+  if(!on && !mp) return '';
+  const txt = on ? t('mil_tile_on', p, milName(w.rank), w.since != null ? yearOf(w.since) : null, w.ret)
+    : t('mil_tile_past', p, milName(mp.rank), mp.since != null ? yearOf(mp.since) : null, mp.end != null ? yearOf(mp.end) : null);
+  return `<div class="span2 milf"><dt>${t('alb_mil')}</dt><dd>🎖 ${esc(txt)}</dd></div>`;
+};
 const condTile = p => hasCond(p) ? `<div class="span2 condf"><dt>${t('f_cond')}</dt><dd>${condBadges(p)}${esc(condList(p))}</dd></div>` : '';
 
 /* ================= Succès ================= */
@@ -5135,7 +5163,7 @@ function activity(p, skipIll){
     case 'odd': return p.school && p.school.drop ? t('dropout', p) : t('odd');
     case 'uni': return t('student', p, fieldName(w.field));
     case 'unemp': return t('unemployed', p);
-    case 'retired': return w.mil != null ? t('mil_ret', p, milName(w.mil)) : t('retired', p);
+    case 'retired': { const mr = w.mil != null ? w.mil : p.milPast ? p.milPast.rank : null; return mr != null ? t('mil_ret', p, milName(mr)) : t('retired', p); }
     case 'star': return jobName(w.job, p);
   }
   return '';
@@ -5216,7 +5244,7 @@ function die(p, day, cause){
     if(u.end == null){ u.end = day; u.endReason = 'décès'; }
   }
   if(cause.old) log('death','death_old',[p.id, A], day);
-  else if(cause.war) log('death','death_war',[p.id, cause.war, A], day);
+  else if(cause.war) log('death','death_war',[p.id, cause.war, A, cause.wn], day);
   else if(cause.murder) log('death','death_murder',[p.id, cause.murder, A], day);
   else if(cause.vanished) log('crime','vanished',[p.id], day);
   else if(cause.suicide) log('death','death_suicide',[p.id, A], day);
@@ -5454,12 +5482,17 @@ function move(p, day, target){
   log('move','move',[p.id, city, group.size-1], day, !!(S.activeId && group.has(active())));
   if(group.has(active())) sfx.move();
 }
-const MIL_UP = [.7,.6,.5,.45,.4,.35,.3,.28,.25,.22,.18,.1];   // 0.2.0b : chances de promotion par an, d'un grade au suivant
+const MIL_UP = [.45,.28,.2,.15,.12,.1,.035,.2,.15,.1,.07,.05];   // 0.2.0b : chances de promotion par an ; passer officier (adjudant-chef → lieutenant) est rare
 const milName = r => t('mil_ranks')[r] || '';
 function milYear(p, A, day){                           // 0.2.0b : armée, de 16 à 24 ans on peut s'engager ; on n'en part qu'à la retraite militaire
   const w = p.work;
   if(w && w.s === 'mil'){
-    if(A >= w.ret){ p.work = {s:'retired', mil: w.rank}; log('work','mil_retire',[p.id, w.rank], day); dirty = true; return; }
+    if(A >= w.ret){                                     // retraite militaire ; une fois sur deux, une seconde carrière civile jusqu'à la retraite normale
+      p.milPast = {rank: w.rank, since: w.since, end: day};
+      if(A < (p.retireAge || 62) && Math.random() < .5){ const j = pickJob(yearOf(day), p); p.work = {s:'job', job:j}; log('work','mil_second',[p.id, w.rank, j], day); }
+      else { p.work = {s:'retired', mil: w.rank}; log('work','mil_retire',[p.id, w.rank], day); }
+      dirty = true; return;
+    }
     if(w.rank < MIL_UP.length && Math.random() < MIL_UP[w.rank] * (hasAtout(p,'ambition') ? 1.5 : 1)){
       w.rank++; const top = w.rank === MIL_UP.length; log(top ? 'star' : 'work', 'mil_promo', [p.id, w.rank], day, top ? undefined : false); dirty = true;
     }
@@ -5850,7 +5883,7 @@ function processDay(day){
     }
     if(p.deathAt != null && day >= p.deathAt){
       let cause = {old:true};
-      if(p.warDeath){ const w = pickWarCause(p, day); cause = w ? {war:w} : p.milDeath ? {dz:'combat'} : ageAt(p, day) > 80 ? {old:true} : {dz:'pneumonie'}; }
+      if(p.warDeath){ const w = p.milDeath || (p.work && p.work.s === 'mil') ? pickMilWarCause(day) : pickWarCause(p, day); cause = w ? {war:w, wn: warIndexAt(day)} : p.milDeath ? {dz:'combat'} : ageAt(p, day) > 80 ? {old:true} : {dz:'pneumonie'}; }
       else if(p.milDeath) cause = {dz:'combat'};
       die(p, day, cause); continue;
     }
@@ -7430,7 +7463,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
+      ${milTile(p)}${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>
@@ -7442,7 +7475,7 @@ function openFiche(id){
 function causeText(p){
   const c = p.cause || {};
   if(c.old) return t('cause_old');
-  if(c.war) return t('cause_war', c.war, p);
+  if(c.war) return t('cause_war', c.war, p) + warTag(c);
   if(c.murder) return t('cause_murder', p, c.murder);
   if(c.vanished) return t('cause_vanished', p);
   if(c.suicide) return t('cause_suicide');
