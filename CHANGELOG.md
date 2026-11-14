@@ -9,6 +9,14 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 - Retrouvailles : au retour, l'ancien amour du voyageur l'a peut-être attendu, s'il est encore en vie et seul. Plus le saut est court, plus c'est probable. Le couple reprend, avec 60 Cyn en cadeau.
 - Déboussolement : au retour, le voyageur est déboussolé pendant un an (six mois s'il retrouve son amour), avec un état différent pour chacune des 33 décennies de 1780 à 2100. Son risque de mourir augmente un peu, et si son métier n'existe plus, il se retrouve au chômage. Les 33 états se collectionnent dans la nouvelle catégorie Chocs temporels de l'album.
 - Boutique : la Montre temporelle (1 200 Cyn) fait de ton personnage un voyageur du temps. Depuis sa fiche, il peut sauter de 5 à 100 ans quand il le veut, une fois tous les 10 ans.
+- Nouveau : les voyages dans le passé ! Depuis la Montre temporelle, choisis « Passé » et remonte de 5 à 300 ans, jusqu'au début de ta lignée. Les failles aléatoires de ton personnage s'ouvrent aussi vers le passé une fois sur trois.
+- Le passé est déjà écrit : rien ne peut y être changé. Ton personnage y passe quelques mois, puis revient au même instant, un peu plus âgé. Son couple ne prend pas fin.
+- Sur place, tu ne fais qu'une seule chose : rendre visite à un membre de la famille vivant à cette époque (un ancêtre rapporte 40 Cyn par génération, jusqu'à 400), croiser ton propre jeune toi (150 Cyn), rapporter un objet d'époque (sa valeur grandit avec les années remontées, parfois une pièce de musée vaut le triple) ou assister à un événement historique (60 Cyn).
+- La personne visitée garde ce souvenir : sa fiche indique qu'elle a reçu la visite d'un voyageur venu du futur.
+- Effet papillon : au retour, il arrive (une fois sur cinq) qu'un petit détail du présent ait changé, comme la ville où vit un membre de la famille.
+- Un écran de voyage doré, où les années défilent à l'envers.
+- 5 nouveaux succès : Nostalgie, Témoin de l'Histoire, Antiquaire, Rencontre au sommet et Moi, en plus jeune.
+- La Montre temporelle se recharge toujours en 10 ans, que le voyage soit vers le futur ou vers le passé.
 - Dans l'arbre, les voyageurs ont un contour bleu en pointillés, et les personnes perdues dans le temps apparaissent en fantôme. Leur fiche indique leur date de retour.
 - 6 nouveaux succès : Premier saut, Plus jeune que ses petits-enfants, Je t'ai attendu, Bond de géant, Voyageur infatigable et Choc des époques.
 - Chaque succès rapporte maintenant des Cyn : Bronze 75, Argent 150, Or 300, Platine 500, Spécial 400, Légendaire 1 000. Le rang Multicolore s'appelle désormais Légendaire.

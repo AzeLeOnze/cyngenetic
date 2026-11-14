@@ -1010,6 +1010,22 @@ body.zmode .treebox{position:relative}
 .journal p,.toast p{margin:0;min-width:0}
 .k-birth{--dot:var(--lime)} .k-death{--dot:#5f7890} .k-love{--dot:var(--magenta)} .k-wed{--dot:var(--sun-deep)}
 .k-tt{--dot:#3fc6ff}
+#ttFx.past{background:radial-gradient(circle at 50% 50%,#fffaf0 0,#ffe3a3 14%,#e9a743 40%,#8f4f12 72%,#3a1c05 100%)}
+#ttFx.past .tt-rings i{animation-name:ttringout;border-color:rgba(255,240,200,.6);box-shadow:0 0 30px rgba(255,210,120,.6),inset 0 0 30px rgba(255,210,120,.4)}
+#ttFx.past.home .tt-rings i{animation-name:ttring}
+@keyframes ttringout{0%{transform:scale(.02);opacity:0}30%{opacity:.9}100%{transform:scale(1.6);opacity:0}}
+#ttFx.past .tt-clock{background:radial-gradient(circle at 35% 30%,#fff,rgba(255,235,190,.6) 45%,rgba(220,150,50,.4) 70%);box-shadow:0 0 40px rgba(255,215,140,.9),inset 0 -10px 25px rgba(140,70,0,.35)}
+#ttFx.past .tt-clock .h,#ttFx.past .tt-clock .m{animation-direction:reverse;background:#7a3d05}
+#ttFx.past.home .tt-clock .h,#ttFx.past.home .tt-clock .m{animation-direction:normal}
+#ttFx.past .tt-clock .orb{filter:sepia(.7)}
+#ttFx.past .tt-year{text-shadow:0 0 24px rgba(255,220,150,.95),0 4px 14px rgba(90,40,0,.6)}
+#ttFx.past .tt-who{color:#fff6e0;text-shadow:0 1px 6px rgba(90,40,0,.6)}
+#ttFx.past .tt-bar i{background:linear-gradient(90deg,#fff3d0,#ffc24d);box-shadow:0 0 12px #ffe0a0}
+.ttbox.past .orb{filter:sepia(.35)}
+.pastppl{display:grid;gap:6px;margin-bottom:6px}
+.pastppl .pickrow>svg{width:30px;height:30px;flex:none;fill:#c07a10}
+.pastcyn{margin:-4px 0 12px;text-align:center;font:800 18px var(--font-display);color:#0a8f6a}.pastcyn svg{width:16px;height:16px;fill:currentColor;vertical-align:-2px}
+.ttdir{margin-bottom:8px}.ttdir button{flex:1}
 .rib.dazed{top:auto;bottom:-10px;left:auto;right:8px;color:#1677c9;background:linear-gradient(180deg,#f0fcff,#c8f0ff);border:1px solid #9fe2ff;font-size:9px}
 .ttmet{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:10px 12px;border-radius:14px;background:linear-gradient(180deg,#fff5fa,#ffe0ef);border:1px solid #ffc2dc;color:#b0246a;font-weight:700}
 .ttdz{margin:0 0 12px;padding:10px 12px;border-radius:14px;background:linear-gradient(180deg,#f0fcff,#d4f3ff);border:1px solid #a8e4ff;color:#14609e}
@@ -1538,6 +1554,14 @@ const PATCHNOTES = [
        'Retrouvailles : au retour, l\'ancien amour du voyageur l\'a peut-être attendu, s\'il est encore en vie et seul. Plus le saut est court, plus c\'est probable. Le couple reprend, avec 60 Cyn en cadeau.',
        'Déboussolement : au retour, le voyageur est déboussolé pendant un an (six mois s\'il retrouve son amour), avec un état différent pour chacune des 33 décennies de 1780 à 2100. Son risque de mourir augmente un peu, et si son métier n\'existe plus, il se retrouve au chômage. Les 33 états se collectionnent dans la nouvelle catégorie Chocs temporels de l\'album.',
        'Boutique : la Montre temporelle (1 200 Cyn) fait de ton personnage un voyageur du temps. Depuis sa fiche, il peut sauter de 5 à 100 ans quand il le veut, une fois tous les 10 ans.',
+       'Nouveau : les voyages dans le passé ! Depuis la Montre temporelle, choisis « Passé » et remonte de 5 à 300 ans, jusqu\'au début de ta lignée. Les failles aléatoires de ton personnage s\'ouvrent aussi vers le passé une fois sur trois.',
+       'Le passé est déjà écrit : rien ne peut y être changé. Ton personnage y passe quelques mois, puis revient au même instant, un peu plus âgé. Son couple ne prend pas fin.',
+       'Sur place, tu ne fais qu\'une seule chose : rendre visite à un membre de la famille vivant à cette époque (un ancêtre rapporte 40 Cyn par génération, jusqu\'à 400), croiser ton propre jeune toi (150 Cyn), rapporter un objet d\'époque (sa valeur grandit avec les années remontées, parfois une pièce de musée vaut le triple) ou assister à un événement historique (60 Cyn).',
+       'La personne visitée garde ce souvenir : sa fiche indique qu\'elle a reçu la visite d\'un voyageur venu du futur.',
+       'Effet papillon : au retour, il arrive (une fois sur cinq) qu\'un petit détail du présent ait changé, comme la ville où vit un membre de la famille.',
+       'Un écran de voyage doré, où les années défilent à l\'envers.',
+       '5 nouveaux succès : Nostalgie, Témoin de l\'Histoire, Antiquaire, Rencontre au sommet et Moi, en plus jeune.',
+       'La Montre temporelle se recharge toujours en 10 ans, que le voyage soit vers le futur ou vers le passé.',
        'Dans l\'arbre, les voyageurs ont un contour bleu en pointillés, et les personnes perdues dans le temps apparaissent en fantôme. Leur fiche indique leur date de retour.',
        '6 nouveaux succès : Premier saut, Plus jeune que ses petits-enfants, Je t\'ai attendu, Bond de géant, Voyageur infatigable et Choc des époques.',
        'Chaque succès rapporte maintenant des Cyn : Bronze 75, Argent 150, Or 300, Platine 500, Spécial 400, Légendaire 1 000. Le rang Multicolore s\'appelle désormais Légendaire.',
@@ -1553,6 +1577,14 @@ const PATCHNOTES = [
        'Reunions: when the traveller comes back, their old love may have waited, if still alive and single. The shorter the leap, the likelier it is. The couple gets back together, with 60 Cyn as a gift.',
        'Disorientation: back from a leap, the traveller is disoriented for a year (six months if reunited with their love), with a different state for each of the 33 decades from 1780 to 2100. Their risk of dying goes up a little, and if their job no longer exists, they\'re out of work. The 33 states can be collected in the new Time shocks album category.',
        'Shop: the Time watch (1,200 Cyn) makes your character a time traveller. From their card, they can leap 5 to 100 years whenever they want, once every 10 years.',
+       'New: trips to the past! From the Time watch, choose “Past” and go back 5 to 300 years, as far as the start of your family line. Your character\'s random rifts also open into the past one time in three.',
+       'The past is already written: nothing can be changed. Your character spends a few months there, then comes back to the same moment, a little older. The relationship doesn\'t end.',
+       'Once there, you do one single thing: visit a family member alive at that time (an ancestor earns 40 Cyn per generation, up to 400), meet your own younger self (150 Cyn), bring back an antique (worth more the further back you go, sometimes a museum piece worth triple) or witness a historical event (60 Cyn).',
+       'The person you visit keeps the memory: their card shows they were visited by a traveller from the future.',
+       'Butterfly effect: when you come back, a small detail of the present has sometimes changed (one time in five), like the town where a family member lives.',
+       'A golden travel screen where the years roll backwards.',
+       '5 new achievements: Nostalgia, Witness to history, Antique dealer, Summit meeting and Me, but younger.',
+       'The Time watch still recharges in 10 years, whether you travel to the future or the past.',
        'In the tree, travellers have a dotted blue outline, and people lost in time appear as ghosts. Their card shows when they\'ll be back.',
        '6 new achievements: First leap, Younger than the grandkids, I waited for you, Giant leap, Tireless traveller and Culture shock.',
        'Every achievement now earns Cyn: Bronze 75, Silver 150, Gold 300, Platinum 500, Special 400, Legendary 1,000. The Rainbow tier is now called Legendary.',
@@ -3054,6 +3086,25 @@ fr:{
   log_tt_reunion:(p,q,n)=>`💞 ${nm(q)} a attendu ${nm(p)} pendant ${n} ans : les voilà de nouveau ensemble !`,
   ul_reunited:y=>`retrouvailles en ${y}`, leg_found:'Légendaire !',
   log_leg:(p,k,id)=>`✦ Légendaire ! ${nm(p)} : ${legName(k, id, P(p))}`,
+  tt_dir_fut:'Futur', tt_dir_past:'Passé', tt_past_btn:'Remonter le temps', tt_back_btn:n=>`Remonter de ${n} ans`,
+  tt_past_note:p=>`Ton couple ne prend pas fin : tu reviens au même instant, juste un peu plus ${g(p,'âgé','âgée')} (quelques mois passés là-bas). Tu n'y feras qu'une seule chose.`,
+  tt_past_none:'Ta lignée ne remonte pas encore assez loin dans le temps.',
+  tt_ask_past_txt:(p,n,y)=>`Le sol vibre sous les pieds de ${p.first} : une faille s'ouvre vers le passé, ${n} ans en arrière, en ${y}. ${g(p,'Il','Elle')} y passera quelques mois, puis reviendra à ce même instant, un peu plus ${g(p,'âgé','âgée')}. Son couple ne sera pas touché.`,
+  tt_ff_past:p=>`${p.first} remonte le temps…`, tt_ff_home:p=>`${p.first} rentre à son époque…`,
+  past_eye:'Voyage dans le passé', past_title:y=>`Te voilà en ${y} !`,
+  past_intro:(p,c,n)=>`${p.first} arrive à ${c}, ${n} ans en arrière. Le passé est déjà écrit, rien ne peut y être changé… mais tu as le temps de faire une seule chose avant de rentrer.`,
+  past_visit:'Rendre visite à', past_other:'Ou bien', past_rew:n=>`+${n} Cyn`, past_rel:'De ta famille', past_self:n=>`Toi, à ${n} ans`,
+  anc_lab:(q,n)=>n===1?g(q,'Ton père','Ta mère'):n===2?g(q,'Ton grand-père','Ta grand-mère'):n===3?g(q,'Ton arrière-grand-père','Ton arrière-grand-mère'):`${g(q,'Ton ancêtre','Ton ancêtre')}, ${n} générations avant toi`,
+  past_antique:"Rapporter un objet d'époque", past_antique_d:'Un objet ancien vaut une fortune à ton époque. Mais combien ?',
+  past_witness:'Assister à un événement', past_witness_none:'Rien de marquant ne se passe à cette époque.', past_home:'Rentrer sans rien faire',
+  past_res_visit:(p,q,l)=>`${p.first} passe une soirée avec ${nm(q)} (${l.charAt(0).toLowerCase()+l.slice(1)}), sans jamais dire d'où ${g(p,'il','elle')} vient. ${q.first} s'en souviendra toute sa vie.`,
+  past_res_self:(p,n)=>`${p.first} croise son propre jeune moi, à ${n} ans… Un long frisson. Mieux vaut ne rien lui dire !`,
+  past_res_antique:(p,v,m)=>m?`Incroyable : c'est une pièce de musée ! Elle vaut ${v} Cyn à ton époque.`:`${p.first} rapporte un objet d'époque qui vaut ${v} Cyn à ton époque.`,
+  past_res_witness:(p,e)=>`${p.first} assiste en personne à ce moment d'histoire : « ${e} »`,
+  past_res_home:p=>`${p.first} profite simplement de l'air d'une autre époque.`, past_back_btn:y=>`Rentrer en ${y}`,
+  log_tt_past_back:(p,y,m)=>`⌛ ${nm(p)} revient d'un voyage en ${y}, avec ${m} mois de plus.`,
+  log_tt_butterfly:(p,q,c)=>`🦋 Effet papillon : au retour de ${nm(p)}, ${nm(q)} a toujours vécu à ${cityName(c)}.`,
+  fiche_ttp:n=>`${n} voyage${n>1?'s':''} dans le passé`, fiche_visit:(y,v,f)=>`⌛ En ${y}, a reçu la visite de ${v.first} ${v.last}, ${g(v,'venu','venue')} de ${f}`,
   act_lost:p=>g(p,'Perdu dans le temps','Perdue dans le temps'),
   fiche_lost:(p,a,b)=>`⌛ ${g(p,'Perdu','Perdue')} dans le temps depuis ${a} · réapparaîtra en ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} saut${n>1?'s':''} dans le temps · ${tot} ans franchis`,
@@ -3351,6 +3402,25 @@ en:{
   log_tt_reunion:(p,q,n)=>`💞 ${nm(q)} waited ${n} years for ${nm(p)}: they're together again!`,
   ul_reunited:y=>`reunited in ${y}`, leg_found:'Legendary!',
   log_leg:(p,k,id)=>`✦ Legendary! ${nm(p)}: ${legName(k, id, P(p))}`,
+  tt_dir_fut:'Future', tt_dir_past:'Past', tt_past_btn:'Go back in time', tt_back_btn:n=>`Go back ${n} years`,
+  tt_past_note:()=>"Your relationship doesn't end: you come back to the same moment, just a little older (a few months spent there). You'll only do one thing there.",
+  tt_past_none:"Your family line doesn't go back far enough yet.",
+  tt_ask_past_txt:(p,n,y)=>`The ground shakes under ${p.first}'s feet: a rift opens into the past, ${n} years back, to ${y}. ${g(p,'He','She')} will spend a few months there, then come back to this very moment, a little older. The relationship won't be affected.`,
+  tt_ff_past:p=>`${p.first} is going back in time…`, tt_ff_home:p=>`${p.first} is heading home…`,
+  past_eye:'Trip to the past', past_title:y=>`Welcome to ${y}!`,
+  past_intro:(p,c,n)=>`${p.first} arrives in ${c}, ${n} years back. The past is already written and nothing can be changed… but there's time for one single thing before heading home.`,
+  past_visit:'Visit', past_other:'Or', past_rew:n=>`+${n} Cyn`, past_rel:'Your family', past_self:n=>`You, aged ${n}`,
+  anc_lab:(q,n)=>n===1?g(q,'Your father','Your mother'):n===2?g(q,'Your grandfather','Your grandmother'):n===3?g(q,'Your great-grandfather','Your great-grandmother'):`Your ancestor, ${n} generations back`,
+  past_antique:'Bring back an antique', past_antique_d:'An old object is worth a fortune in your time. But how much?',
+  past_witness:'Witness an event', past_witness_none:'Nothing remarkable happens around this time.', past_home:'Go home without doing anything',
+  past_res_visit:(p,q,l)=>`${p.first} spends an evening with ${nm(q)} (${l.charAt(0).toLowerCase()+l.slice(1)}), never saying where ${g(p,'he','she')} comes from. ${q.first} will remember it forever.`,
+  past_res_self:(p,n)=>`${p.first} crosses paths with their own younger self, aged ${n}… A long shiver. Better not say a word!`,
+  past_res_antique:(p,v,m)=>m?`Incredible: it's a museum piece! It's worth ${v} Cyn in your time.`:`${p.first} brings back an antique worth ${v} Cyn in your time.`,
+  past_res_witness:(p,e)=>`${p.first} witnesses this moment of history in person: “${e}”`,
+  past_res_home:p=>`${p.first} simply enjoys the air of another era.`, past_back_btn:y=>`Go home to ${y}`,
+  log_tt_past_back:(p,y,m)=>`⌛ ${nm(p)} is back from a trip to ${y}, ${m} months older.`,
+  log_tt_butterfly:(p,q,c)=>`🦋 Butterfly effect: since ${nm(p)} came back, ${nm(q)} has always lived in ${cityName(c)}.`,
+  fiche_ttp:n=>`${n} trip${n>1?'s':''} to the past`, fiche_visit:(y,v,f)=>`⌛ In ${y}, was visited by ${v.first} ${v.last}, who came from ${f}`,
   act_lost:'Lost in time',
   fiche_lost:(p,a,b)=>`⌛ Lost in time since ${a} · will reappear in ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} leap${n>1?'s':''} through time · ${tot} years skipped`,
@@ -3647,6 +3717,25 @@ TX.de = {
   log_tt_reunion:(p,q,n)=>`💞 ${nm(q)} hat ${n} Jahre auf ${nm(p)} gewartet: Sie sind wieder zusammen!`,
   ul_reunited:y=>`wieder vereint ${y}`, leg_found:'Legendär!',
   log_leg:(p,k,id)=>`✦ Legendär! ${nm(p)}: ${legName(k, id, P(p))}`,
+  tt_dir_fut:'Zukunft', tt_dir_past:'Vergangenheit', tt_past_btn:'Zurückreisen', tt_back_btn:n=>`${n} Jahre zurückreisen`,
+  tt_past_note:()=>'Deine Beziehung endet nicht: Du kehrst im selben Moment zurück, nur etwas älter (ein paar Monate dort). Du kannst dort nur eine Sache tun.',
+  tt_past_none:'Deine Familie reicht noch nicht weit genug zurück.',
+  tt_ask_past_txt:(p,n,y)=>`Der Boden bebt unter den Füßen von ${p.first}: Ein Riss öffnet sich in die Vergangenheit, ${n} Jahre zurück, ins Jahr ${y}. ${g(p,'Er','Sie')} bleibt ein paar Monate dort und kehrt dann im selben Moment zurück, etwas älter. Die Beziehung bleibt bestehen.`,
+  tt_ff_past:p=>`${p.first} reist in die Vergangenheit…`, tt_ff_home:p=>`${p.first} kehrt in die eigene Zeit zurück…`,
+  past_eye:'Reise in die Vergangenheit', past_title:y=>`Willkommen im Jahr ${y}!`,
+  past_intro:(p,c,n)=>`${p.first} kommt in ${c} an, ${n} Jahre zurück. Die Vergangenheit ist schon geschrieben und lässt sich nicht ändern… aber für eine einzige Sache bleibt Zeit.`,
+  past_visit:'Besuchen', past_other:'Oder', past_rew:n=>`+${n} Cyn`, past_rel:'Aus deiner Familie', past_self:n=>`Du selbst, mit ${n} Jahren`,
+  anc_lab:(q,n)=>n===1?g(q,'Dein Vater','Deine Mutter'):n===2?g(q,'Dein Großvater','Deine Großmutter'):n===3?g(q,'Dein Urgroßvater','Deine Urgroßmutter'):`${g(q,'Dein Vorfahr','Deine Vorfahrin')}, ${n} Generationen zurück`,
+  past_antique:'Eine Antiquität mitbringen', past_antique_d:'Ein altes Objekt ist in deiner Zeit ein Vermögen wert. Aber wie viel?',
+  past_witness:'Ein Ereignis miterleben', past_witness_none:'In dieser Zeit passiert nichts Besonderes.', past_home:'Ohne etwas zu tun zurückkehren',
+  past_res_visit:(p,q,l)=>`${p.first} verbringt einen Abend mit ${nm(q)} (${l}), ohne je zu verraten, woher ${g(p,'er','sie')} kommt. ${q.first} wird sich ein Leben lang daran erinnern.`,
+  past_res_self:(p,n)=>`${p.first} begegnet dem eigenen jüngeren Ich, mit ${n} Jahren… Ein langer Schauer. Lieber nichts sagen!`,
+  past_res_antique:(p,v,m)=>m?`Unglaublich: ein Museumsstück! Es ist in deiner Zeit ${v} Cyn wert.`:`${p.first} bringt eine Antiquität mit, die in deiner Zeit ${v} Cyn wert ist.`,
+  past_res_witness:(p,e)=>`${p.first} erlebt diesen Moment der Geschichte selbst mit: „${e}“`,
+  past_res_home:p=>`${p.first} genießt einfach die Luft einer anderen Zeit.`, past_back_btn:y=>`Zurück ins Jahr ${y}`,
+  log_tt_past_back:(p,y,m)=>`⌛ ${nm(p)} ist von einer Reise ins Jahr ${y} zurück, ${m} Monate älter.`,
+  log_tt_butterfly:(p,q,c)=>`🦋 Schmetterlingseffekt: Seit ${nm(p)} zurück ist, hat ${nm(q)} schon immer in ${cityName(c)} gelebt.`,
+  fiche_ttp:n=>`${n} ${n>1?'Reisen':'Reise'} in die Vergangenheit`, fiche_visit:(y,v,f)=>`⌛ ${y} Besuch von ${v.first} ${v.last}, aus dem Jahr ${f}`,
   act_lost:'In der Zeit verschollen',
   fiche_lost:(p,a,b)=>`⌛ Seit ${a} in der Zeit verschollen · taucht ${b} wieder auf`,
   fiche_tt:(n,tot)=>`⌛ ${n} ${n>1?'Zeitsprünge':'Zeitsprung'} · ${tot} Jahre übersprungen`,
@@ -4063,7 +4152,9 @@ DEx.mild = {synparis:'Paris-Syndrom', hoquet:'Ewiger Schluckauf', fourire:'Chron
   allergiesynth:'Allergie gegen synthetisches Protein', fatiguevr:'VR-Müdigkeit', dysgravite:'Dysgravitation', rejetimplant:'Abstoßung eines Neuroimplantats', covid:'Covid-19'};
 DEx.achcat = {tt:'Zeitreisen', age:'Alter', kids:'Kinder', star:'Stars', conq:'Eroberungen', crim:'Verbrecher', kill:'Verbrechen', time:'Die Zeit vergeht', other:'Sonstiges', album:'Album',
   royal:'Königlich', zomb:'Zombie', vsn:'Versus Normal', vsr:'Versus Königlich', vsz:'Versus Zombie', legend:'Legende'};
-DEx.ach = {tt_reunion:['Ich habe auf dich gewartet','Nach einem Sprung von 30 Jahren oder mehr wieder mit der großen Liebe vereint sein'],
+DEx.ach = {tt_past:['Nostalgie','In die Vergangenheit reisen'], tt_witness:['Zeuge der Geschichte','3 historische Ereignisse in einem Spiel miterleben'],
+  tt_antique:['Antiquitätenhändler','Ein Objekt im Wert von 1.000 Cyn oder mehr aus der Vergangenheit mitbringen'], tt_ancestor:['Gipfeltreffen','Einen Vorfahren besuchen, der mindestens 4 Generationen zurückliegt'],
+  tt_self:['Ich, nur jünger','Dem eigenen jüngeren Ich in der Vergangenheit begegnen'], tt_reunion:['Ich habe auf dich gewartet','Nach einem Sprung von 30 Jahren oder mehr wieder mit der großen Liebe vereint sein'],
   alb_t:['Epochenschock','Die Kategorie Zeitschocks im Album vervollständigen'], tt_first:['Erster Sprung','Ein Familienmitglied springt durch die Zeit'], tt_young:['Jünger als die Enkel','Ein Zeitreisender kehrt jünger zurück als eines seiner Enkelkinder'],
   tt_75:['Riesensprung','75 Jahre oder mehr auf einmal in die Zukunft springen'], tt_4:['Unermüdlicher Reisender','Dieselbe Person springt 4-mal durch die Zeit'], age100:['Hundertjährig','Ein Familienmitglied wird 100'], age110:['Superhundertjährig','Ein Familienmitglied wird 110'], age115:['Lebende Legende','Ein Familienmitglied wird 115'],
   age120:['Unsterblich?','Ein Familienmitglied wird 120'], kids6:['Großfamilie','Eine Person hat 6 Kinder'], kids9:['Sippe','Eine Person hat 9 Kinder'], kids14:['Clan','Eine Person hat 14 Kinder'],
@@ -4311,6 +4402,11 @@ const ACHS = [
  ['tt_young','tt','silver','Plus jeune que ses petits-enfants',"Un voyageur du temps revient plus jeune qu'un de ses petits-enfants",'Younger than the grandkids','A time traveller comes back younger than one of their grandchildren'],
  ['tt_75','tt','gold','Bond de géant',"Sauter 75 ans ou plus dans le futur d'un seul coup",'Giant leap','Leap 75 years or more into the future in one go'],
  ['tt_reunion','tt','silver',"Je t'ai attendu","Retrouver son amour après un saut de 30 ans ou plus",'I waited for you','Be reunited with your love after a leap of 30 years or more'],
+ ['tt_past','tt','bronze','Nostalgie','Voyager dans le passé','Nostalgia','Travel into the past'],
+ ['tt_witness','tt','silver',"Témoin de l'Histoire",'Assister à 3 événements historiques dans une même partie','Witness to history','Witness 3 historical events in a single game'],
+ ['tt_antique','tt','silver','Antiquaire','Rapporter du passé un objet qui vaut 1 000 Cyn ou plus','Antique dealer','Bring back an object worth 1,000 Cyn or more from the past'],
+ ['tt_ancestor','tt','gold','Rencontre au sommet',"Rendre visite à un ancêtre d'au moins 4 générations avant soi",'Summit meeting','Visit an ancestor at least 4 generations back'],
+ ['tt_self','tt','special','Moi, en plus jeune','Croiser son propre jeune soi dans le passé','Me, but younger','Meet your own younger self in the past'],
  ['tt_4','tt','platinum','Voyageur infatigable','Une même personne saute 4 fois dans le temps','Tireless traveller','The same person leaps through time 4 times'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
  ['vs_all','legend','legend','Maître du duel',"Battre l'IA dans toutes les difficultés de tous les modes Versus",'Duel master','Beat the AI at every difficulty in every Versus mode'],
@@ -4613,7 +4709,7 @@ const unionsShown = pid => S.unions.filter(u => u.a===pid && (u.end==null || u.m
 // membre « visible » de la famille : sang, ou conjoint affiché dans l'arbre (pas un ex caché)
 const inFamily = p => p.blood || S.unions.some(u => u.b===p.id && (u.end==null || u.married || kidsOf(u).length));
 const needHeir = () => S && !S.over && active().death != null;
-const blocked = () => S.nameQueue.length > 0 || needHeir() || S.end2100 === 1 || !!S.ttAsk || !!S.ttFF;
+const blocked = () => S.nameQueue.length > 0 || needHeir() || S.end2100 === 1 || !!S.ttAsk || !!S.ttFF || !!S.ttPast;
 function genOf(p){
   if(!p.blood){ const u = S.unions.find(u => u.b===p.id); return u ? genOf(P(u.a)) : 1; }
   return p.parents ? 1 + genOf(P(p.parents[0])) : 1;
@@ -5242,6 +5338,8 @@ function ttYear(p, A, day){                           // chaque anniversaire, de
   if(!isTT(p) || A < 16 || A > 60 || Math.random() >= .05 || !ttCan(p, day)) return false;
   let y = 8 + Math.floor(Math.pow(Math.random(), 1.6) * 83);          // de 8 à 90 ans, les petits sauts plus souvent
   if(p.id === S.activeId && !S.headless){
+    const back = pastMax(day);
+    if(!S.auto && back >= 10 && Math.random() < .3){ S.ttAsk = {id: p.id, past: true, y: Math.min(back, 5 + Math.floor(Math.pow(Math.random(), 1.5) * (back - 4)))}; return false; }   // 0.2.0b : faille vers le passé
     y = Math.min(y, ttMax(day)); if(y < 5) return false;
     if(S.auto){ ttStart(y, p, day); return true; }
     S.ttAsk = {id: p.id, y}; return false;              // le joueur choisit
@@ -5300,12 +5398,103 @@ function ttLand(){                                     // arrivée : ce qui s'es
 function openTT(){                                     // une faille s'ouvre pour le personnage joué : sauter ou rester ?
   const A = S.ttAsk, p = P(A.id), day = today();
   if(!p || p.id !== S.activeId || !ttCan(p, day)){ S.ttAsk = null; return; }
-  const y = Math.min(A.y, ttMax(day)); if(y < 5){ S.ttAsk = null; return; }
+  const y = Math.min(A.y, A.past ? pastMax(day) : ttMax(day)); if(y < 5){ S.ttAsk = null; return; }
   sfx.warp();
   openModal(`<div class="m-head"><div class="eyebrow">${t('tt_ask_eye')} · ${fmt(day)}</div><h2>${t('tt_ask_title')}</h2></div>
-    <div class="ttbox ask">${orb(p, 'xl')}<p>${esc(t('tt_ask_txt', p, y, yearOf(day) + y))}</p></div>
-    <div class="acts tt-acts"><button class="gel wide" data-act="ttgo" data-v="${y}"><span>${esc(t('tt_go_btn', y))}</span></button>
+    <div class="ttbox ask">${orb(p, 'xl')}<p>${esc(A.past ? t('tt_ask_past_txt', p, y, yearOf(day) - y) : t('tt_ask_txt', p, y, yearOf(day) + y))}</p></div>
+    <div class="acts tt-acts"><button class="gel wide ${A.past ? 'gold' : ''}" data-act="ttgo" data-v="${y}"><span>${esc(t(A.past ? 'tt_back_btn' : 'tt_go_btn', y))}</span></button>
       <button class="gel pink wide" data-act="ttstay"><span>${t('tt_stay')}</span></button></div>`, {locked:true});
+}
+/* ================= 0.2.0b : voyages dans le passé =================
+   Le passé est déjà écrit : on ne peut rien y changer. Le voyageur y passe quelques mois, fait UNE chose,
+   puis revient au même instant (son couple ne prend pas fin), un peu plus âgé. Sa visite devient un souvenir
+   qui « a toujours existé » dans la fiche de la personne visitée. */
+let pastAnim = false, ttDir = 'fut';
+const pastMax = day => yearOf(day) - S.startYear;          // on ne remonte pas avant le début de la lignée
+function ancGen(me){                                    // ancêtres du personnage : id → nombre de générations au-dessus
+  const m = new Map(); let lvl = [me], g = 0;
+  while(lvl.length && g < 40){ g++; lvl = lvl.flatMap(x => (x.parents || []).map(P).filter(Boolean)); lvl.forEach(x => { if(!m.has(x.id)) m.set(x.id, g); }); }
+  return m;
+}
+function pastPeople(T, me){                             // les membres de la famille vivants à cette date (les ancêtres d'abord)
+  const anc = ancGen(me), out = [];
+  for(const q of Object.values(S.people)){
+    if(!q.blood || q.id === me.id || bornD(q) > T.to || (q.death != null && q.death <= T.to)) continue;
+    out.push({q, g: anc.get(q.id) || 0, A: Math.floor((T.to - bornD(q)) / 365.25)});
+  }
+  out.sort((a, b) => b.g - a.g || bornD(a.q) - bornD(b.q));
+  const list = out.slice(0, 6);
+  if(bornD(me) <= T.to - 365) list.unshift({q: me, self: true, g: 0, A: Math.floor((T.to - bornD(me)) / 365.25)});   // son propre jeune soi
+  return list;
+}
+const pastRew = x => x.self ? 150 : x.g ? Math.min(400, 40 * x.g) : 30;
+const pastLab = x => x.self ? t('past_self', x.A) : x.g ? t('anc_lab', x.q, x.g) : t('past_rel');
+function pastEvent(T){                                  // l'événement historique le plus proche (4 ans maximum)
+  let best = -1, bd = 4 * 365.25;
+  WORLD.forEach((w, i) => { const dd = Math.abs(w.day - T.to); if(dd <= bd){ bd = dd; best = i; } });
+  return best;
+}
+function ttPastStart(n, p = active(), day = today()){
+  S.ttAsk = null;
+  const to = day - Math.round(n * 365.25);
+  S.ttPast = {id: p.id, from: day, to, y: yearOf(to), n, stay: rnd(60, 540), done: null};
+  sfx.warp(); dirty = true; save();
+  pastFx(yearOf(day), yearOf(to), 2600, false, () => { render(); openPast(); });
+}
+function pastFx(fromY, toY, dur, home, cb){             // l'écran du voyage, en doré : les années défilent à l'envers
+  pastAnim = true;
+  const p = active(), el = document.createElement('div'); el.id = 'ttFx'; el.className = 'past' + (home ? ' home' : ''); el.setAttribute('role', 'status');
+  el.innerHTML = `<div class="tt-rings"><i></i><i></i><i></i><i></i><i></i></div><div class="tt-core"><div class="tt-clock"><i class="h"></i><i class="m"></i>${orb(p, 'xl')}</div>
+    <div class="eyebrow tt-who"></div><div class="tt-year"></div><div class="tt-bar"><i></i></div></div>`;
+  document.body.appendChild(el);
+  el.querySelector('.tt-who').textContent = t(home ? 'tt_ff_home' : 'tt_ff_past', p);
+  const t0 = performance.now(), yEl = el.querySelector('.tt-year'), bar = el.querySelector('.tt-bar i');
+  const step = now => {
+    const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 2);
+    yEl.textContent = Math.round(fromY + (toY - fromY) * e); bar.style.width = (k * 100).toFixed(1) + '%';
+    if(k < 1){ requestAnimationFrame(step); return; }
+    el.classList.add('out'); setTimeout(() => el.remove(), 700); pastAnim = false; if(cb) cb();
+  };
+  requestAnimationFrame(step);
+}
+function openPast(){                                    // arrivé dans le passé : une seule chose à faire avant de rentrer
+  const T = S.ttPast, me = T && P(T.id);
+  if(!T || !me){ S.ttPast = null; return; }
+  if(T.done){ openPastDone(); return; }
+  const ppl = pastPeople(T, me), ev = pastEvent(T);
+  openModal(`<div class="m-head"><div class="eyebrow">${t('past_eye')} · ${fmt(T.to)}</div><h2>${t('past_title', T.y)}</h2></div>
+    <div class="ttbox past">${orb(me, 'xl')}<p>${esc(t('past_intro', me, cityName(me.city), T.n))}</p></div>
+    ${ppl.length ? `<div class="eyebrow sect">${t('past_visit')}</div><div class="pastppl">${ppl.map(x => `<button class="pickrow" data-act="pastdo" data-v="visit" data-id="${x.q.id}">${orb(x.q)}<span><b>${esc(nm(x.q))}</b><small>${esc(pastLab(x))} · ${esc(tA(x.A))}</small></span><em>${t('past_rew', pastRew(x))}</em></button>`).join('')}</div>` : ''}
+    <div class="eyebrow sect">${t('past_other')}</div><div class="pastppl">
+      <button class="pickrow" data-act="pastdo" data-v="antique">${icon('trophy')}<span><b>${t('past_antique')}</b><small>${t('past_antique_d')}</small></span><em>?</em></button>
+      ${ev >= 0 ? `<button class="pickrow" data-act="pastdo" data-v="witness" data-id="${ev}">${icon('flag')}<span><b>${t('past_witness')}</b><small>${esc(worldTxt(ev))}</small></span><em>${t('past_rew', 60)}</em></button>` : `<p class="note">${t('past_witness_none')}</p>`}
+      <button class="pickrow" data-act="pastdo" data-v="home">${icon('clock')}<span><b>${t('past_home')}</b></span><em></em></button></div>`, {locked:true});
+}
+function openPastDone(){
+  const T = S.ttPast, me = P(T.id), r = T.done, q = (r.k === 'visit' || r.k === 'self') ? P(r.id) : null;
+  const txt = r.k === 'visit' ? t('past_res_visit', me, q, r.lab) : r.k === 'self' ? t('past_res_self', me, r.A) : r.k === 'antique' ? t('past_res_antique', me, cynFmt(r.cyn), r.mus)
+    : r.k === 'witness' ? t('past_res_witness', me, worldTxt(r.id)) : t('past_res_home', me);
+  openModal(`<div class="m-head"><div class="eyebrow">${t('past_eye')} · ${fmt(T.to)}</div><h2>${t('past_title', T.y)}</h2></div>
+    <div class="ttbox past">${orb(q || me, 'xl')}<p>${esc(txt)}</p></div>${r.cyn ? `<p class="pastcyn">+${cynFmt(r.cyn)} ${icon('dna')}</p>` : ''}
+    <div class="acts"><button class="gel gold wide" data-act="pastback"><span>${t('past_back_btn', yearOf(T.from))}</span></button></div>`, {locked:true});
+}
+function ttPastEnd(){                                   // retour au même instant, avec quelques mois de plus
+  const T = S.ttPast; if(!T) return;
+  const me = P(T.id), day = today();
+  S.ttPast = null;
+  if(me && me.death == null){
+    if(me.birthReal == null) me.birthReal = me.birth;
+    me.birth -= T.stay;
+    me.ttCool = day + Math.round(10 * 365.25);
+    me.tt = me.tt || {n:0, tot:0, max:0}; me.tt.past = (me.tt.past || 0) + 1;
+    log('tt','tt_past_back',[me.id, T.y, Math.max(1, Math.round(T.stay / 30.4))], day, true);
+    if(inFamily(me)) unlock('tt_past');
+    if(Math.random() < .2){                              // effet papillon : un petit détail du présent a changé
+      const c = living().filter(q => q.id !== me.id && inFamily(q) && !q.zombie);
+      if(c.length){ const q = pick(c), city = pick(CITIES.filter(x => x !== q.city)); if(city){ q.city = city; log('tt','tt_butterfly',[me.id, q.id, city], day, true); } }
+    }
+  }
+  sfx.warp(); burst(['#ffd36b','#ffffff','#ffb02e','#fff1c4'], 50); dirty = true; render(); save();
 }
 function processDay(day){
   if(S.ttLost && S.ttLost.length) for(const id of S.ttLost.slice()){ const q = P(id); if(q && q.lost && day >= q.lost.back) ttBack(q, day); }
@@ -5653,6 +5842,7 @@ setInterval(() => {
     if(S.zombieLost && !S.over){ render(); gameOver(active(), 'zombie'); return; }
     if(S.nameQueue.length){ render(); openNaming(S.nameQueue[0]); return; }
     if(S.ttAsk){ render(); openTT(); return; }
+    if(S.ttPast && !pastAnim){ render(); openPast(); return; }
     if(needHeir()){ if(S.auto) autoHeir(); else { render(); openHeir(); } return; }
     if(S.end2100 === 1){ render(); open2100(); return; }
   }
@@ -6849,13 +7039,16 @@ function giveName(n){
   closeModal(true); render(); save();
 }
 
-function ttWatchHTML(me){                            // 0.2.0a : sauter dans le temps quand on veut (une fois tous les 10 ans)
-  const day = today(), cap = ttMax(day), cool = (me.ttCool || 0) > day, ok = ttCan(me, day) && !cool && cap >= 5;
-  const opts = [5,10,20,30,50,75,100].filter(n => n <= cap);
-  const note = cool ? t('tt_watch_cool', yearOf(me.ttCool)) : ok ? t('tt_watch_note') : t('tt_watch_no');
-  return `<div class="eyebrow sect">${icon('clock')} ${t('tt_watch')}</div><div class="acts ttwatch"><div class="reloc-row">
-    <select class="inp" id="ttSel" aria-label="${esc(t('tt_watch'))}" ${ok ? '' : 'disabled'}>${opts.map(n => `<option value="${n}" ${n === 20 ? 'selected' : ''}>${esc(t('tt_yrs', n))} → ${yearOf(day) + n}</option>`).join('')}</select>
-    <button class="gel wide" data-act="ttwatch" ${ok ? '' : 'disabled'}><span>${t('tt_watch_btn')}</span></button></div><p class="note">${esc(note)}</p></div>`;
+function ttWatchHTML(me){                            // 0.2.0a : sauter dans le temps quand on veut (une fois tous les 10 ans) ; 0.2.0b : vers le futur ou le passé
+  const day = today(), past = ttDir === 'past', cool = (me.ttCool || 0) > day;
+  const opts = past ? [5,10,20,30,50,75,100,150,200,250,300].filter(n => n <= pastMax(day)) : [5,10,20,30,50,75,100].filter(n => n <= ttMax(day));
+  const ok = ttCan(me, day) && !cool && opts.length > 0;
+  const note = cool ? t('tt_watch_cool', yearOf(me.ttCool)) : !ttCan(me, day) ? t('tt_watch_no') : !opts.length ? t(past ? 'tt_past_none' : 'tt_watch_no') : past ? t('tt_past_note', me) : t('tt_watch_note');
+  const def = past ? (opts.includes(50) ? 50 : opts[opts.length - 1]) : 20;
+  return `<div class="eyebrow sect">${icon('clock')} ${t('tt_watch')}</div><div class="acts ttwatch">
+    <div class="pills ttdir" role="group"><button data-act="ttdir" data-v="fut" aria-pressed="${!past}">${t('tt_dir_fut')} →</button><button data-act="ttdir" data-v="past" aria-pressed="${past}">← ${t('tt_dir_past')}</button></div>
+    <div class="reloc-row"><select class="inp" id="ttSel" aria-label="${esc(t('tt_watch'))}" ${ok ? '' : 'disabled'}>${opts.map(n => `<option value="${n}" ${n === def ? 'selected' : ''}>${esc(t('tt_yrs', n))} → ${yearOf(day) + (past ? -n : n)}</option>`).join('')}</select>
+    <button class="gel wide ${past ? 'gold' : ''}" data-act="ttwatch" ${ok ? '' : 'disabled'}><span>${t(past ? 'tt_past_btn' : 'tt_watch_btn')}</span></button></div><p class="note">${esc(note)}</p></div>`;
 }
 function openFiche(id){
   const p = P(id), me = active(), u = currentUnion(me.id), isPartner = u && u.b===p.id, isMe = p.id===me.id;
@@ -6864,7 +7057,9 @@ function openFiche(id){
   if(p.death!=null) sub = `${esc(t('born_in', p, fmt(bornD(p)), cityName(p.birthCity)))}<br>${esc(t('died_on', p, fmt(p.death), causeText(p)))}`;
   else sub = esc(t('city_alive', p, cityName(p.birthCity), cityName(p.city))) + ' · ' + esc(fmt(bornD(p)));
   if(p.lost) sub += `<br><span class="ttline">${esc(t('fiche_lost', p, yearOf(p.lost.at), yearOf(p.lost.back)))}</span>`;
-  else if(p.tt) sub += `<br><span class="ttline">${esc(t('fiche_tt', p.tt.n, p.tt.tot))}</span>`;
+  else if(p.tt){ const parts = []; if(p.tt.n) parts.push(t('fiche_tt', p.tt.n, p.tt.tot)); if(p.tt.past) parts.push(t('fiche_ttp', p.tt.past));
+    if(parts.length) sub += `<br><span class="ttline">${esc(parts.join(' · '))}</span>`; }
+  (p.ttVisits || []).forEach(v => { const by = P(v.by); if(by) sub += `<br><span class="ttline">${esc(t('fiche_visit', v.y, by, v.from))}</span>`; });
   const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id)).sort((x,y) => x.birth-y.birth);
   const chips = list => `<div class="chips">${list.map(c => `<button class="chip ${c.death!=null?'dead':''}" data-act="fiche" data-id="${c.id}">${orb(c)}${esc(c.first||'…')}</button>`).join('')}</div>`;
   const pu = p.blood ? S.unions.filter(x => x.a===p.id) : S.unions.filter(x => x.b===p.id);
@@ -7486,7 +7681,7 @@ function devSkip(years){                              // avance rapide sans voya
   for(let d = Math.floor(S.t) + 1; d <= end; d++){
     processDay(d); if(S.vs && !S.vs.done) vsDay(d); S.t = d + .001;
     if(S.nameQueue.length) S.nameQueue.splice(0).forEach(id => { const c = P(id); if(c && !c.first){ c.first = nameFor(c); regnalize(c); } });
-    if(S.ttAsk || S.ttFF || needHeir() || S.end2100 === 1 || S.royalEnd || S.zombieLost || vsAiOut()) break;
+    if(S.ttAsk || S.ttFF || S.ttPast || needHeir() || S.end2100 === 1 || S.royalEnd || S.zombieLost || vsAiOut()) break;
   }
   dirty = true;
 }
@@ -7556,14 +7751,36 @@ const ACT = {
     store.del(TUTO_KEY); b.disabled = true; b.querySelector('span').textContent = t('tuto_planned');
   },
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
-  ttgo(d){ const A = S.ttAsk; closeModal(true); if(A && ttCan(active(), today())) ttStart(+d.v); else S.ttAsk = null; },
+  ttgo(d){ const A = S.ttAsk; closeModal(true); if(A && ttCan(active(), today())){ if(A.past) ttPastStart(+d.v); else ttStart(+d.v); } else S.ttAsk = null; },
   ttstay(){ const A = S.ttAsk; S.ttAsk = null; closeModal(true); if(A) log('tt','tt_stay',[A.id], today(), false); },
   ttwatch(d, b){
-    const me = active(), day = today(), n = +($('#ttSel') || {}).value;
-    if(!n || n < 5 || n > ttMax(day) || !isTT(me) || !ttCan(me, day) || (me.ttCool || 0) > day) return;
+    const me = active(), day = today(), n = +($('#ttSel') || {}).value, past = ttDir === 'past';
+    if(!n || n < 5 || !isTT(me) || !ttCan(me, day) || (me.ttCool || 0) > day || n > (past ? pastMax(day) : ttMax(day))) return;
     if(!arm(b, t('shop_confirm'))) return;
-    closeModal(true); ttStart(n);
+    closeModal(true); if(past) ttPastStart(n); else ttStart(n);
   },
+  ttdir(d){ ttDir = d.v === 'past' ? 'past' : 'fut'; sfx.click(); openFiche(S.activeId); },
+  pastdo(d){
+    const T = S.ttPast; if(!T || T.done) return;
+    const me = P(T.id); let r;
+    if(d.v === 'visit'){
+      const x = pastPeople(T, me).find(z => z.q.id === +d.id); if(!x) return;
+      const n = pastRew(x); cyn(n, me.id);
+      if(x.self) unlock('tt_self');
+      else { x.q.ttVisits = (x.q.ttVisits || []).concat({by: me.id, y: T.y, from: yearOf(T.from)}); if(x.g >= 4) unlock('tt_ancestor'); }
+      r = {k: x.self ? 'self' : 'visit', id: x.q.id, cyn: n, lab: pastLab(x), A: x.A};
+    } else if(d.v === 'antique'){
+      const mus = Math.random() < .1, v = Math.min(3000, Math.max(5, Math.round(T.n * rnd(4, 8) * (mus ? 3 : 1) / 5) * 5));   // 3 000 Cyn maximum
+      cyn(v, me.id); if(v >= 1000) unlock('tt_antique');
+      r = {k:'antique', cyn: v, mus};
+    } else if(d.v === 'witness'){
+      const i = +d.id; if(!WORLD[i]) return; cyn(60, me.id);
+      S.ttSeen = [...new Set((S.ttSeen || []).concat(i))]; if(S.ttSeen.length >= 3) unlock('tt_witness');
+      r = {k:'witness', id: i, cyn: 60};
+    } else r = {k:'home', cyn: 0};
+    T.done = r; sfx.cure(); save(); openPastDone();
+  },
+  pastback(){ const T = S.ttPast; if(!T) return; closeModal(true); pastFx(T.y, yearOf(T.from), 1700, true, ttPastEnd); },
   ttland(){ closeModal(true); },
   dev(d){
     const r = devDo(d.v); if(r === null){ dirty = true; render(); save(); return; }
@@ -8036,7 +8253,7 @@ document.addEventListener('keydown', e => {
   else if(e.key === 'Enter' || e.key === 'ArrowRight'){ e.preventDefault(); ACT.tnext(); }
   else if(e.key === 'ArrowLeft' && tutoI > 0){ e.preventDefault(); tutoShow(tutoI - 1); }
 }, true);
-function newGame(){ document.body.classList.remove('zmode', 'vsmode'); ttFx(true); S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
+function newGame(){ document.body.classList.remove('zmode', 'vsmode'); ttFx(true); document.querySelectorAll('#ttFx').forEach(e => e.remove()); S = null; store.del(SAVE_KEY); cands = []; showSetup(); window.scrollTo(0,0); }
 
 /* ================= Démarrage ================= */
 (() => {
