@@ -2,6 +2,22 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.0b — 14 novembre 2026
+
+- Nouveau : la carrière militaire ! De 16 à 24 ans, quelqu'un peut s'engager dans l'armée (environ 6 % des hommes, 2 % des femmes à partir de 1940). Impossible d'en partir avant la retraite militaire, entre 48 et 58 ans.
+- 13 grades, du plus bas au plus élevé : soldat, caporal, caporal-chef, sergent, sergent-chef, adjudant, adjudant-chef, lieutenant, capitaine, commandant, lieutenant-colonel, colonel et général. Une promotion est possible chaque année ; ceux qui s'engagent tard n'iront pas forcément jusqu'en haut. L'atout Ambition aide à monter plus vite.
+- Les militaires ont un risque élevé de mourir au combat (0,6 % par an), et bien plus élevé en temps de guerre (7 % par an). Leur bulle est kaki, et les officiers ont une étoile dorée. Les 13 grades se collectionnent dans l'album (catégorie Métiers). L'ancien métier « Militaire » est remplacé par cette carrière.
+- Versus : l'IA commence maintenant avec un personnage du même âge que le tien.
+- Nouveau thème Pastel, tout doux et mignon, à acheter dans la boutique pour 500 Cyn.
+- Nouveau thème Lune, avec une grande lune pleine de cratères et un ciel étoilé : il se débloque quand un membre de la famille devient Marcheur lunaire.
+- Nouveau thème Galaxie, avec des nébuleuses, des galaxies spirales qui tournent et des étoiles : il se débloque quand un membre de la famille devient Astronaute.
+- Astronaute devient un métier légendaire (0,025 %). L'Académie spatiale mène maintenant à ce métier.
+- 2 nouveaux métiers : explorateur sous-marin et manutentionnaire.
+- Nouveau menu Thèmes, à part des paramètres (bouton palette, sur l'écran de départ et en partie) : chaque thème a sa carte avec un aperçu, son état, et comment il se débloque ou a été débloqué.
+- Nouveau thème Hacker, très sombre avec une pluie de caractères verts et une police de terminal : il se débloque quand quelqu'un meurt d'une crise de rage dans les jeux vidéo.
+- Nouveau thème Cyberpunk, avec une ville néon, une grille lumineuse qui défile et de la pluie : il se débloque en atteignant l'an 2300 dans une partie, sans jamais voyager dans le passé.
+- Thèmes Dark et Obsidienne : la fenêtre des succès est maintenant adaptée, ainsi que les fenêtres quand le verre dépoli est décoché. Les boutons des pays de l'écran de départ sont aussi lisibles dans les thèmes sombres.
+
 ## v0.2.0a — 14 novembre 2026
 
 - Nouveau : les voyageurs du temps (en mode normal) ! Une particularité très rare (0,5 % des naissances, 20 % si un parent l'est). De 16 à 60 ans, une faille temporelle peut s'ouvrir chaque année : le voyageur disparaît dans le futur (de 8 à 90 ans plus tard) et réapparaît avec le même âge, parfois plus jeune que ses propres petits-enfants.
