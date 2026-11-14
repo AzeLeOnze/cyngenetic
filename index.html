@@ -1010,6 +1010,11 @@ body.zmode .treebox{position:relative}
 .journal p,.toast p{margin:0;min-width:0}
 .k-birth{--dot:var(--lime)} .k-death{--dot:#5f7890} .k-love{--dot:var(--magenta)} .k-wed{--dot:var(--sun-deep)}
 .k-tt{--dot:#3fc6ff}
+:is(#treeCanvas,#aiCanvas) .node.evfocus{outline:3px solid rgba(255,40,60,.85);outline-offset:4px;animation:evpulse 1.1s ease-in-out infinite}
+@keyframes evpulse{50%{outline-color:rgba(255,40,60,.35)}}
+.evpair{display:flex;align-items:center;justify-content:center;gap:14px;margin:4px 0 12px}.evpair i{font-size:28px;font-style:normal}
+.evtxt{margin:0 0 10px;line-height:1.55}
+.evother summary{cursor:pointer}
 .facts .milf{background:linear-gradient(180deg,#f2f5e6,#e2e9c9)!important;border-color:#a9b77d!important}.facts .milf dt{color:#556b2f}.facts .milf dd{color:#33421a;font-weight:700}
 #ttFx.past{background:radial-gradient(circle at 50% 50%,#fffaf0 0,#ffe3a3 14%,#e9a743 40%,#8f4f12 72%,#3a1c05 100%)}
 #ttFx.past .tt-rings i{animation-name:ttringout;border-color:rgba(255,240,200,.6);box-shadow:0 0 30px rgba(255,210,120,.6),inset 0 0 30px rgba(255,210,120,.4)}
@@ -1663,7 +1668,7 @@ body.no-deco .cyberfx .rain{display:none}
           <div class="pills rulepills zpills" role="group"><button type="button" data-act="zpick" data-v="easy" data-t="zd_easy" aria-pressed="false"></button><button type="button" data-act="zpick" data-v="med" data-t="zd_med" aria-pressed="true"></button><button type="button" data-act="zpick" data-v="hard" data-t="zd_hard" aria-pressed="false"></button><button type="button" data-act="zpick" data-v="ext" data-t="zd_ext" aria-pressed="false"></button></div>
           <small class="fieldhint" id="fZHint"></small></div>
         <label class="switch optrow"><span class="opt-ic fam"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm8 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM1.5 20c0-4 3-6.5 6.5-6.5s6.5 2.5 6.5 6.5zm14 0c0-2.2-.7-4-2-5.3 1-.6 1.9-.9 2.5-.9 3 0 5.5 2.1 5.5 6.2z"/></svg></span>
-          <span class="opt-txt"><b data-t="fam_auto"></b><small data-t="fam_auto_hint"></small></span><input type="checkbox" id="fFam"><span class="sw"></span></label>
+          <span class="opt-txt"><b data-t="fam_auto"></b><small data-t="fam_auto_hint"></small></span><input type="checkbox" id="fFam" checked><span class="sw"></span></label>
       </div>
       <p id="fErr" class="err" hidden></p>
       <div class="form-actions">
@@ -1763,9 +1768,22 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.0b';
+const APP_VERSION = '0.2.0c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.0c', date:{fr:'14 novembre 2026', en:'November 14, 2026', de:'14. November 2026'},
+   fr:['Nouveau : les événements ! Ils apparaissent au milieu de l\'écran et mettent le jeu en pause. Juste avant, la personne concernée est montrée dans l\'arbre avec un cadre rouge.',
+       'Événement « Une relation à bout de souffle » : un couple de plus de 20 ans a 0,9 % de chances par an qu\'un des deux en ait assez. Tu choisis : rester ensemble (mais 1 à 5 ans plus tard, il ou elle devient criminel et s\'en prend d\'abord à son conjoint) ou clore la relation.',
+       'Événement « Un vrai métier pour la vie » : entre 19 et 22 ans, une personne a 0,5 % de chances par an de ne pas être satisfaite de ses études. Tu choisis : le métier de ses études (burn-out longs et à répétition, et dans 90 % des cas une mort de « grave dépression professionnelle » entre 30 et 60 ans), autre chose (sans conséquence), ou un métier déjà découvert dans l\'album, gardé jusqu\'à la retraite sans chômage.',
+       'En mode auto, les événements se règlent tout seuls, au hasard.',
+       'La case « Famille autonome » est maintenant cochée par défaut avant de commencer une partie.',
+       'Version PC : si l\'application installée est trop ancienne pour changer la résolution, les paramètres le disent au lieu de cacher l\'option. Une nouvelle version de l\'application PC (0.2.0c) est disponible.'],
+   en:['New: events! They pop up in the middle of the screen and pause the game. Just before, the person concerned is shown in the tree with a red frame.',
+       '“A relationship running out of steam” event: a couple together for more than 20 years has a 0.9% chance a year that one of them gets fed up. You choose: stay together (but 1 to 5 years later, they become a criminal and go after their partner first) or end the relationship.',
+       '“A real job for life” event: between 19 and 22, someone has a 0.5% chance a year of being unhappy with their studies. You choose: work in their field (long, repeated burnouts, and in 90% of cases death from “severe work-related depression” between 30 and 60), something else (no consequence), or a job already discovered in the album, kept until retirement with no unemployment.',
+       'In auto mode, events resolve on their own, at random.',
+       'The “Family on autopilot” box is now ticked by default before starting a game.',
+       'PC version: if the installed app is too old to change the resolution, settings now say so instead of hiding the option. A new version of the PC app (0.2.0c) is available.']},
   {v:'0.2.0b', date:{fr:'14 novembre 2026', en:'November 14, 2026', de:'14. November 2026'},
    fr:['Nouveau : la carrière militaire ! De 16 à 24 ans, quelqu\'un peut s\'engager dans l\'armée (environ 6 % des hommes, 2 % des femmes à partir de 1940). Impossible d\'en partir avant la retraite militaire, entre 48 et 58 ans.',
        '13 grades, du plus bas au plus élevé : soldat, caporal, caporal-chef, sergent, sergent-chef, adjudant, adjudant-chef, lieutenant, capitaine, commandant, lieutenant-colonel, colonel et général. Une promotion est possible chaque année, mais passer officier (lieutenant et au-dessus) est rare : la plupart finissent sous-officiers, et un général est exceptionnel. L\'atout Ambition aide à monter plus vite.',
@@ -3017,6 +3035,9 @@ function mildYear(p, A, day){                         // une fois par an : peut-
     p.covidRoll = true; if(Math.random() < .08) catchMild(p, 'covid', day);
   }
   const era = yearOf(day) < 1900 ? 1.17 : yearOf(day) > 2010 ? .9 : 1;           // 0.1.4j : plus fréquentes avant 1900, moins après 2010
+  if(p.burnPlus && p.work && p.work.s === 'job' && Math.random() < .3){   // 0.2.0c : le métier de ses études, à contrecœur
+    catchMild(p, 'burnout', day); const m = (p.mild || []).find(x => x.dz === 'burnout'); if(m && m.start === day) m.end = day + rnd(540, 1460);
+  }
   if(Math.random() < .06/1.29 * era * R.illness/100){                // 0.1.3g : fréquence ÷ 1,29
     const y = dataYear(yearOf(day)), ok = MILDS.filter(r => !r[7].special && !LEGS.m.has(r[0]) && y >= r[3] && y <= r[4] && (r[7].sex == null || p.sex === r[7].sex) && (r[7].minA == null || A >= r[7].minA) && (r[7].maxA == null || A <= r[7].maxA));
     if(ok.length){ const lg = MILDS.filter(r => LEGS.m.has(r[0]) && y >= r[3] && y <= r[4] && Math.random() < LEG_P); catchMild(p, lg.length ? lg[0][0] : pick(ok)[0], day); }
@@ -3097,6 +3118,7 @@ const DISEASES = [
  ['chutefatale','Chute fatale',"d'une chute fatale",'a fatal fall',1500,2100,1,1,0],['commotion','Commotion cérébrale',"d'une commotion cérébrale",'a concussion',1500,2100,1,14,.5],
  ['septicemie','Septicémie',"d'une septicémie",'sepsis',1500,2100,3,30,.3],['infarctus','Infarctus',"d'un infarctus",'a heart attack',1500,2100,1,7,.15,{minA:35}],
  ['faim','Faim','de faim','starvation',1500,1950,20,120,.3],
+ ['depropro','Grave dépression professionnelle',"d'une grave dépression professionnelle",'severe work-related depression',1500,2100,1,1,0,{special:true}],
  ['combat','Mort au combat','au combat','wounds sustained in combat',1500,2100,1,1,0,{special:true}],
  ['orgorge',"Étouffement avec de l'or","en s'étouffant avec de l'or",'choking on gold',1500,2100,1,1,0,{special:true}],
  ['mortderire','Mort de rire',"d'un fou rire",'laughing too hard',1500,2100,1,1,0,{special:true}],['cocotier','Chute de noix de coco',"d'une noix de coco tombée sur la tête",'a coconut falling on their head',1500,2100,1,1,0,{special:true}],
@@ -3381,6 +3403,20 @@ fr:{
   skin_locked_hacker:"Se débloque quand quelqu'un meurt d'une crise de rage dans les jeux vidéo.", skin_locked_cyber:"Se débloque en atteignant l'an 2300 dans une partie, sans jamais voyager dans le passé.",
   skin_how_hacker:"A été débloqué quand quelqu'un est mort d'une crise de rage dans les jeux vidéo.", skin_how_cyber:"A été débloqué en atteignant l'an 2300 sans voyager dans le passé.",
   log_hacker_skin:()=>"💻 Une rage fatale devant l'écran… Le thème Hacker est débloqué dans le menu Thèmes.", log_cyber_skin:()=>"🌆 L'an 2300 ! Le thème Cyberpunk est débloqué dans le menu Thèmes.",
+  ev_eye:'Événement', ev_c_title:'Une relation à bout de souffle',
+  ev_c_1:(p,q)=>`${nm(p)} en a marre de ${nm(q)} : leur relation est monotone.`,
+  ev_c_2:(p,q)=>`${nm(p)} n'en peut plus de cette relation, ${g(p,'il','elle')} a l'impression d'étouffer. Si ${g(p,'il','elle')} continue à être en couple avec ${nm(q)}, ${g(p,'il','elle')} risque de faire des dégâts !`,
+  ev_c_stay:q=>`Rester avec ${nm(q)}`, ev_c_leave:'Clore la relation',
+  log_ev_c_stayed:(p,q)=>`${nm(p)} reste avec ${nm(q)}, malgré tout…`,
+  ev_s_title:'Un vrai métier pour la vie', ev_s_appr:j=>`apprentissage de ${j.toLowerCase()}`,
+  ev_s_1:(p,x)=>`${nm(p)} a fait des études en ${x.charAt(0).toLowerCase()+x.slice(1)}, ${g(p,'il','elle')} n'est pas ${g(p,'satisfait','satisfaite')}…`,
+  ev_s_2:p=>`Maintenant, ${g(p,'il','elle')} doit choisir un vrai métier qu'${g(p,'il','elle')} va garder toute sa vie.`,
+  ev_s_study:j=>`Faire le métier de ses études (${j.toLowerCase()})`, ev_s_other:'Faire autre chose', ev_s_pick:'Autre…', ev_s_pick_ok:'Choisir',
+  ev_s_pick_note:'Parmi les métiers déjà découverts dans l’album. Gardé jusqu’à la retraite, sans chômage.', ev_s_pick_none:"Aucun métier n'est encore découvert dans l'album.",
+  log_ev_s_study_log:(p,j)=>`${nm(p)} choisit le métier de ses études : ${jobName(j, per(p)).toLowerCase()}… à contrecœur.`,
+  log_ev_s_other_log:(p,j)=>`${nm(p)} change de voie et devient ${jobName(j, per(p)).toLowerCase()}.`,
+  log_ev_s_pick_log:(p,j)=>`${nm(p)} devient ${jobName(j, per(p)).toLowerCase()}, pour toute sa vie.`,
+  set_res_old:"Installe la dernière version de l'application PC pour choisir la résolution.",
   act_lost:p=>g(p,'Perdu dans le temps','Perdue dans le temps'),
   fiche_lost:(p,a,b)=>`⌛ ${g(p,'Perdu','Perdue')} dans le temps depuis ${a} · réapparaîtra en ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} saut${n>1?'s':''} dans le temps · ${tot} ans franchis`,
@@ -3715,6 +3751,20 @@ en:{
   skin_locked_hacker:'Unlocks when someone dies of a gaming rage fit.', skin_locked_cyber:'Unlocks by reaching the year 2300 in a game without ever travelling to the past.',
   skin_how_hacker:'Unlocked when someone died of a gaming rage fit.', skin_how_cyber:'Unlocked by reaching the year 2300 without travelling to the past.',
   log_hacker_skin:()=>'💻 A fatal rage in front of the screen… The Hacker theme is now available in the Themes menu.', log_cyber_skin:()=>'🌆 The year 2300! The Cyberpunk theme is now available in the Themes menu.',
+  ev_eye:'Event', ev_c_title:'A relationship running out of steam',
+  ev_c_1:(p,q)=>`${nm(p)} is fed up with ${nm(q)}: their relationship has become dull.`,
+  ev_c_2:(p,q)=>`${nm(p)} can't take this relationship any more and feels suffocated. If ${g(p,'he','she')} stays with ${nm(q)}, ${g(p,'he','she')} might do some real damage!`,
+  ev_c_stay:q=>`Stay with ${nm(q)}`, ev_c_leave:'End the relationship',
+  log_ev_c_stayed:(p,q)=>`${nm(p)} stays with ${nm(q)}, despite everything…`,
+  ev_s_title:'A real job for life', ev_s_appr:j=>`an apprenticeship as a ${j.toLowerCase()}`,
+  ev_s_1:(p,x)=>`${nm(p)} studied ${x}, and isn't satisfied…`,
+  ev_s_2:p=>`Now ${g(p,'he','she')} has to choose a real job to keep for life.`,
+  ev_s_study:j=>`Work in their field (${j.toLowerCase()})`, ev_s_other:'Do something else', ev_s_pick:'Other…', ev_s_pick_ok:'Choose',
+  ev_s_pick_note:'From the jobs already discovered in the album. Kept until retirement, with no unemployment.', ev_s_pick_none:'No job has been discovered in the album yet.',
+  log_ev_s_study_log:(p,j)=>`${nm(p)} works in their field: ${jobName(j, per(p)).toLowerCase()}… reluctantly.`,
+  log_ev_s_other_log:(p,j)=>`${nm(p)} changes course and becomes a ${jobName(j, per(p)).toLowerCase()}.`,
+  log_ev_s_pick_log:(p,j)=>`${nm(p)} becomes a ${jobName(j, per(p)).toLowerCase()}, for life.`,
+  set_res_old:'Install the latest version of the PC app to choose the resolution.',
   act_lost:'Lost in time',
   fiche_lost:(p,a,b)=>`⌛ Lost in time since ${a} · will reappear in ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} leap${n>1?'s':''} through time · ${tot} years skipped`,
@@ -4048,6 +4098,20 @@ TX.de = {
   skin_locked_hacker:'Wird freigeschaltet, wenn jemand an einem Wutanfall beim Zocken stirbt.', skin_locked_cyber:'Wird freigeschaltet, wenn eine Partie das Jahr 2300 erreicht, ohne je in die Vergangenheit zu reisen.',
   skin_how_hacker:'Freigeschaltet, als jemand an einem Wutanfall beim Zocken starb.', skin_how_cyber:'Freigeschaltet durch das Jahr 2300 ohne Reise in die Vergangenheit.',
   log_hacker_skin:()=>'💻 Ein tödlicher Wutanfall vor dem Bildschirm… Das Hacker-Design ist jetzt im Design-Menü verfügbar.', log_cyber_skin:()=>'🌆 Das Jahr 2300! Das Cyberpunk-Design ist jetzt im Design-Menü verfügbar.',
+  ev_eye:'Ereignis', ev_c_title:'Eine Beziehung am Ende',
+  ev_c_1:(p,q)=>`${nm(p)} hat genug von ${nm(q)}: Die Beziehung ist eintönig geworden.`,
+  ev_c_2:(p,q)=>`${nm(p)} hält diese Beziehung nicht mehr aus und fühlt sich erstickt. Wenn ${g(p,'er','sie')} mit ${nm(q)} zusammenbleibt, könnte ${g(p,'er','sie')} Schlimmes anrichten!`,
+  ev_c_stay:q=>`Bei ${nm(q)} bleiben`, ev_c_leave:'Die Beziehung beenden',
+  log_ev_c_stayed:(p,q)=>`${nm(p)} bleibt trotz allem bei ${nm(q)}…`,
+  ev_s_title:'Ein Beruf fürs Leben', ev_s_appr:j=>`Lehre als ${j}`,
+  ev_s_1:(p,x)=>`${nm(p)} hat ${x} studiert und ist nicht zufrieden…`,
+  ev_s_2:p=>`Jetzt muss ${g(p,'er','sie')} einen echten Beruf wählen, den ${g(p,'er','sie')} ein Leben lang behält.`,
+  ev_s_study:j=>`Im studierten Beruf arbeiten (${j})`, ev_s_other:'Etwas anderes machen', ev_s_pick:'Anderes…', ev_s_pick_ok:'Wählen',
+  ev_s_pick_note:'Aus den im Album entdeckten Berufen. Bis zur Rente behalten, ohne Arbeitslosigkeit.', ev_s_pick_none:'Im Album wurde noch kein Beruf entdeckt.',
+  log_ev_s_study_log:(p,j)=>`${nm(p)} arbeitet im studierten Beruf: ${jobName(j, per(p))}… widerwillig.`,
+  log_ev_s_other_log:(p,j)=>`${nm(p)} schlägt einen anderen Weg ein und wird ${jobName(j, per(p))}.`,
+  log_ev_s_pick_log:(p,j)=>`${nm(p)} wird ${jobName(j, per(p))}, fürs ganze Leben.`,
+  set_res_old:'Installiere die neueste Version der PC-App, um die Auflösung zu wählen.',
   act_lost:'In der Zeit verschollen',
   fiche_lost:(p,a,b)=>`⌛ Seit ${a} in der Zeit verschollen · taucht ${b} wieder auf`,
   fiche_tt:(n,tot)=>`⌛ ${n} ${n>1?'Zeitsprünge':'Zeitsprung'} · ${tot} Jahre übersprungen`,
@@ -4445,7 +4509,7 @@ DEx.dz = {peste:['Pest','der Pest'], variole:['Pocken','den Pocken'], dysenterie
   cyn_fusion:['Verschmelzung mit Cyngenetik','einer Verschmelzung mit Cyngenetik'], overdose_ecstasy:['Ecstasy-Überdosis','einer Ecstasy-Überdosis'],
   serotonine:['Serotoninsyndrom durch Ecstasy','einem Serotoninsyndrom durch Ecstasy'], hyperthermie:['Schwere Hyperthermie durch Ecstasy','einer schweren Hyperthermie durch Ecstasy'],
   mst:['Geschlechtskrankheit','einer Geschlechtskrankheit'], ist:['Sexuell übertragbare Infektion','einer sexuell übertragbaren Infektion'], meningite:['Hirnhautentzündung','einer Hirnhautentzündung'],
-  tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], mortderire:['Lachtod','einem tödlichen Lachanfall'], orgorge:['Goldersticken','Ersticken an Gold'], combat:['Tod im Kampf','den Folgen eines Kampfeinsatzes'],
+  tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], mortderire:['Lachtod','einem tödlichen Lachanfall'], orgorge:['Goldersticken','Ersticken an Gold'], combat:['Tod im Kampf','den Folgen eines Kampfeinsatzes'], depropro:['Schwere berufliche Depression','einer schweren beruflichen Depression'],
   electrocution:['Stromschlag','einem Stromschlag'], hydrocution:['Kälteschock im Wasser','einem Kälteschock im Wasser'], deshydratation:['Austrocknung','Austrocknung'],
   gangrene:['Wundbrand','Wundbrand'], incendie:['Brand','einem Brand'], empoisonnement:['Vergiftung','einer Vergiftung'], chutefatale:['Tödlicher Sturz','einem tödlichen Sturz'],
   commotion:['Gehirnerschütterung','einer Gehirnerschütterung'], septicemie:['Blutvergiftung','einer Blutvergiftung'], infarctus:['Herzinfarkt','einem Herzinfarkt'], faim:['Hunger','Hunger'],
@@ -5030,7 +5094,7 @@ const unionsShown = pid => S.unions.filter(u => u.a===pid && (u.end==null || u.m
 // membre « visible » de la famille : sang, ou conjoint affiché dans l'arbre (pas un ex caché)
 const inFamily = p => p.blood || S.unions.some(u => u.b===p.id && (u.end==null || u.married || kidsOf(u).length));
 const needHeir = () => S && !S.over && active().death != null;
-const blocked = () => S.nameQueue.length > 0 || needHeir() || S.end2100 === 1 || !!S.ttAsk || !!S.ttFF || !!S.ttPast;
+const blocked = () => S.nameQueue.length > 0 || needHeir() || S.end2100 === 1 || !!S.ttAsk || !!S.ttFF || !!S.ttPast || !!(S.evQ && S.evQ.length);
 function genOf(p){
   if(!p.blood){ const u = S.unions.find(u => u.b===p.id); return u ? genOf(P(u.a)) : 1; }
   return p.parents ? 1 + genOf(P(p.parents[0])) : 1;
@@ -5091,6 +5155,7 @@ function workTick(p, day){
   const w = p.work; if(!w || !w.until || day < w.until) return;
   const y = yearOf(day);
   if(w.s==='uni'){
+    p.uniField = w.field;                               // 0.2.0c : on se souvient de ses études
     const f = FIELD[w.field], j = (f && JOB[f[4]] && inRange(JOB[f[4]], dataYear(y))) ? f[4] : pickJob(y, p);
     p.work = {s:'job', job:j}; log('work','graduate',[p.id,w.field,j],day);
   } else if(w.s==='odd'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','first_job',[p.id,j],day); }
@@ -5110,7 +5175,7 @@ function workYear(p, A, day){
   }
   if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
   if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
-  if(w.s==='job' && w.job !== 'president' && !hasAtout(p, 'discipline')){   // atout Discipliné : garde son métier jusqu'à la retraite
+  if(w.s==='job' && w.job !== 'president' && !hasAtout(p, 'discipline') && !p.lockJob){   // atout Discipliné : garde son métier jusqu'à la retraite
     const r = Math.random();
     const jc = .04 / 1.15;                                // 0.1.9c : changements de métier 1,15× plus rares
     if(r < jc){ const j = pickJob(yearOf(day), p); if(j !== w.job){ p.work = {s:'job', job:j}; log('work','job_change',[p.id,j],day); } }   // 0.1.2a : changements de métier 20 % plus rares
@@ -5212,7 +5277,7 @@ function contract(p, day){
 function die(p, day, cause){
   if(p.death != null) return;
   if(cause.dz === 'rage_jeux' && !VSH) unlockSkin('hacker');   // 0.2.0b : thème Hacker
-  if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide' && cause.dz !== 'combat'){   // morts légendaires (0,025 % chacune)
+  if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide' && cause.dz !== 'combat' && cause.dz !== 'depropro'){   // morts légendaires (0,025 % chacune)
     const lr = Math.random(); if(lr < LEG_P * 3) cause = {dz: lr < LEG_P ? 'mortderire' : lr < LEG_P * 2 ? 'cocotier' : 'orgorge'};
   }
   const wasHeir = royalOn() && p.id === heirId();
@@ -5421,6 +5486,8 @@ function declareCrim(p, day){
   const close = living().filter(q => q.id !== p.id && ((p.parents && p.parents.includes(q.id)) || (p.parents && q.parents && q.parents.some(i => p.parents.includes(i)))
     || mates.includes(q.id) || (q.parents && q.parents.includes(p.id))) && !hasAtout(q,'courage'));
   close.forEach(q => { if(Math.random() < .6){ q.murderAt = day + rnd(30, 3650); q.murderBy = p.id; } });
+  const tg = p.crim.target != null ? P(p.crim.target) : null;     // 0.2.0c : sa première victime, à coup sûr (sauf atout Courage)
+  if(tg && tg.death == null && !tg.lost && !hasAtout(tg, 'courage')){ tg.murderAt = day + rnd(20, 240); tg.murderBy = p.id; }
   log('crime','crim_declared',[p.id], day, true);
   const nCrim = Object.values(S.people).filter(q => q.crim && q.crim.declared).length;          // 0.1.4a : exigences ×2
   [[2,'crim1'],[4,'crim2'],[8,'crim4'],[12,'crim6']].forEach(([n, id]) => { if(nCrim >= n) unlock(id); });
@@ -5500,17 +5567,101 @@ function milYear(p, A, day){                           // 0.2.0b : armée, de 16
   }
   const disc = hasAtout(p, 'discipline');               // atout Discipliné : 60 % de chances de s'engager (à un âge tiré entre 16 et 24 ans)
   if(disc && p.discFate == null) p.discFate = A > 30 ? 0 : Math.random() < .6 ? Math.max(A, rnd(16, 24)) : 0;
-  if(A < 16 || A > (disc ? 30 : 24) || royalImmune(p) || p.star || p.crim || p.fameAt != null || p.zombie || p.lost || jailed(p)) return;
+  if(A < 16 || A > (disc ? 30 : 24) || p.lockJob || royalImmune(p) || p.star || p.crim || p.fameAt != null || p.zombie || p.lost || jailed(p)) return;
   if(w && !(['odd','unemp','uni'].includes(w.s) || (w.s === 'job' && !isPol(w.job)))) return;
   if(disc){ if(!p.discFate || A < p.discFate) return; }
   else { const y = yearOf(day), pr = p.sex === 'M' ? .007 : y >= 1940 ? .0022 : 0; if(Math.random() >= pr) return; }   // environ 6 % des hommes, 2 % des femmes (depuis 1940)
   p.work = {s:'mil', rank:0, since: day, ret: rnd(48, 58)};
   log('work','mil_join',[p.id], day); dirty = true;
 }
+
+/* ================= 0.2.0c : événements (pause, la personne concernée encadrée de rouge, puis la fenêtre) ================= */
+let evAnim = false;
+function evPush(e){ (S.evQ = S.evQ || []).push(e); dirty = true; }
+function evFocus(){                                    // on montre d'abord la personne, puis la fenêtre
+  const e = S.evQ[0], p = P(e.id);
+  if(!p || p.death != null){ S.evQ.shift(); return; }
+  evAnim = true; dirty = true; render(); centerOn(p.id, true); sfx.pop();
+  setTimeout(() => { evAnim = false; if(S && S.evQ && S.evQ[0] === e && !modalOpen) openEvent(); }, 1100);
+}
+function openEvent(){
+  const e = S.evQ[0], p = P(e.id), day = today();
+  if(e.k === 'couple'){
+    const q = P(e.pid), u = currentUnion(e.a);
+    if(!q || q.death != null || !u){ S.evQ.shift(); return; }
+    openModal(`<div class="m-head"><div class="eyebrow">${t('ev_eye')} · ${fmt(day)}</div><h2>${t('ev_c_title')}</h2></div>
+      <div class="evpair">${orb(p, 'xl')}<i>💔</i>${orb(q, 'xl')}</div>
+      <p class="evtxt">${esc(t('ev_c_1', p, q))}</p><p class="evtxt">${esc(t('ev_c_2', p, q))}</p>
+      <div class="acts tt-acts"><button class="gel pink wide" data-act="evdo" data-v="stay"><span>${esc(t('ev_c_stay', q))}</span></button>
+        <button class="gel wide" data-act="evdo" data-v="leave"><span>${t('ev_c_leave')}</span></button></div>`, {locked:true});
+  } else if(e.k === 'career'){
+    const st = studyOf(p); if(!st){ S.evQ.shift(); return; }
+    const sj = studyJob(st, day, p), known = Object.keys(ALB.j || {}).filter(id => JOB[id] && id !== 'militaire' && id !== 'president').map(id => [id, jobName(id, p)]).sort((a, b) => a[1].localeCompare(b[1], LANG));
+    openModal(`<div class="m-head"><div class="eyebrow">${t('ev_eye')} · ${fmt(day)}</div><h2>${t('ev_s_title')}</h2></div>
+      <div class="ttbox">${orb(p, 'xl')}<p class="evtxt">${esc(t('ev_s_1', p, studyName(st, p)))}<br>${esc(t('ev_s_2', p))}</p></div>
+      <div class="acts tt-acts"><button class="gel gold wide" data-act="evdo" data-v="study" data-j="${sj}"><span>${esc(t('ev_s_study', jobName(sj, p)))}</span></button>
+        <button class="gel wide" data-act="evdo" data-v="other"><span>${t('ev_s_other')}</span></button>
+        <details class="act relocate full evother"><summary class="lab">${t('ev_s_pick')}</summary>
+          ${known.length ? `<div class="reloc-row"><select class="inp" id="evJob" aria-label="${esc(t('ev_s_pick'))}">${known.map(([id, n]) => `<option value="${id}">${esc(n)}</option>`).join('')}</select>
+          <button class="gel lime" data-act="evdo" data-v="pick"><span>${t('ev_s_pick_ok')}</span></button></div><p class="note">${t('ev_s_pick_note')}</p>` : `<p class="note">${t('ev_s_pick_none')}</p>`}</details></div>`, {locked:true});
+  } else S.evQ.shift();
+}
+function evResolve(v, extra){                          // le choix du joueur (ou du mode auto)
+  const e = S.evQ.shift(), p = P(e.id), day = today(); if(!p) return;
+  if(e.k === 'couple'){
+    const q = P(e.pid), u = currentUnion(e.a);
+    if(v === 'stay'){                                  // 1 à 5 ans plus tard : il ou elle devient criminel et vise d'abord son conjoint
+      p.crim = {day: day + rnd(1, 5) * 365 + rnd(0, 364), declared:false, fate:null, target: q ? q.id : null};
+      log('sad','ev_c_stayed',[p.id, e.pid], day, false);
+    } else if(u){ endUnion(u, day, true); sfx.breakup(); }
+  } else if(e.k === 'career'){
+    const y = yearOf(day); p.careerEv = v;
+    if(v === 'study'){                                 // le métier de ses études : burn-out à répétition, et souvent une fin tragique
+      const j = extra || studyJob(studyOf(p), day, p); p.work = {s:'job', job:j}; p.lockJob = true; p.burnPlus = true;
+      if(Math.random() < .9) p.doomAt = Math.max(day + 3 * 365, bornD(p) + Math.round(rnd(30, 59) * 365.25) + rnd(0, 364));   // entre 30 et 60 ans
+      log('work','ev_s_study_log',[p.id, j], day, false);
+    } else if(v === 'pick'){ p.work = {s:'job', job: extra}; p.lockJob = true; log('work','ev_s_pick_log',[p.id, extra], day, false); }
+    else { const sj = studyJob(studyOf(p), day, p); let j = pickJob(y, p), n = 0; while(j === sj && n++ < 8) j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','ev_s_other_log',[p.id, j], day, false); }
+  }
+  dirty = true; save();
+}
+const TRACK_JOB = {capcuisine:'cuisinier', capcoif:'coiffeur', bep:'comptable', bacproelec:'electricien'};
+function studyOf(p){                                   // ce qu'il ou elle a étudié : faculté, filière du lycée ou apprentissage
+  const w = p.work, sc = p.school || {};
+  if(w && w.s === 'uni' && FIELD[w.field]) return {k:'f', id:w.field};
+  if(p.uniField && FIELD[p.uniField]) return {k:'f', id:p.uniField};
+  if(sc.track && TRACK[sc.track]) return {k:'t', id:sc.track};
+  if(sc.job && JOB[sc.job]) return {k:'a', id:sc.job};
+  return null;
+}
+const studyName = (st, p) => st.k === 'f' ? fieldName(st.id) : st.k === 't' ? trackName(st.id) : t('ev_s_appr', jobName(st.id, p));
+function studyJob(st, day, p){
+  const y = dataYear(yearOf(day)), ok = id => id && JOB[id] && inRange(JOB[id], y);
+  const j = st.k === 'f' ? FIELD[st.id] && FIELD[st.id][4] : st.k === 't' ? TRACK_JOB[st.id] : st.id;
+  return ok(j) ? j : pickJob(yearOf(day), p, true);
+}
+function evYear(p, A, day){                            // à chaque anniversaire : peut-être un événement
+  if(S.headless || p.death != null || p.lost || p.zombie || royalImmune(p) || !inFamily(p)) return;
+  // une relation de plus de 20 ans à bout de souffle : 0,9 % par an et par couple
+  const u = currentUnion(p.id);
+  if(u && day - u.start >= 20 * 365.25 && Math.random() < .009){
+    const b = P(u.b), pool = [p, b].filter(x => x && x.death == null && !x.lost && !x.zombie && !x.crim && !(x.star && x.star.famous) && !jailed(x) && !royalImmune(x));
+    if(pool.length && b && b.death == null && !b.lost){ const c = pick(pool), q = c === p ? b : p;
+      if(S.auto){ evPush({k:'couple', id:c.id, pid:q.id, a:p.id}); evResolve(Math.random() < .5 ? 'stay' : 'leave'); }
+      else evPush({k:'couple', id:c.id, pid:q.id, a:p.id}); }
+  }
+  // entre 19 et 22 ans, pas satisfait de ses études : 0,5 % par an
+  if(A >= 19 && A <= 22 && !p.careerEv && !p.lockJob && studyOf(p) && !(p.work && ['mil','star','prison','royal','noble'].includes(p.work.s)) && !(p.crim && p.crim.declared) && Math.random() < .005){
+    p.careerEv = 'asked';
+    if(S.auto){ evPush({k:'career', id:p.id}); evResolve(Math.random() < .5 ? 'study' : 'other'); }
+    else evPush({k:'career', id:p.id});
+  }
+}
 function onBirthday(p, A, day){
   dirty = true;
   if(ttYear(p, A, day)) return;                        // 0.2.0a : parti dans le futur
   milYear(p, A, day);                                  // 0.2.0b : carrière militaire
+  evYear(p, A, day);                                   // 0.2.0c : événements
   if(A >= 100 && inFamily(p)) checkTiers('age', A, [100,110,115,120]);
   if(A === R.legal) rollAddictions(p, day).forEach(id => log('addict','addict',[p.id, id], day, p.id===S.activeId));
   if(p.intAges) p.intAges.filter(a => a === A).forEach(() => gainInterest(p, day));
@@ -5888,6 +6039,7 @@ function processDay(day){
       die(p, day, cause); continue;
     }
     if(p.murderAt != null && day >= p.murderAt){ die(p, day, {murder: p.murderBy}); continue; }
+    if(p.doomAt != null && day >= p.doomAt){ p.doomAt = null; die(p, day, {dz:'depropro'}); continue; }   // 0.2.0c
     if(p.crim){
       if(!p.crim.declared && day >= p.crim.day){ if(royalImmune(p)) delete p.crim; else declareCrim(p, day); }
       else if(p.crim.declared && !p.crim.fate){
@@ -6201,6 +6353,7 @@ setInterval(() => {
     if(S.nameQueue.length){ render(); openNaming(S.nameQueue[0]); return; }
     if(S.ttAsk){ render(); openTT(); return; }
     if(S.ttPast && !pastAnim){ render(); openPast(); return; }
+    if(S.evQ && S.evQ.length && !evAnim){ evFocus(); return; }   // 0.2.0c : événement au milieu de l'écran
     if(needHeir()){ if(S.auto) autoHeir(); else { render(); openHeir(); } return; }
     if(S.end2100 === 1){ render(); open2100(); return; }
   }
@@ -6335,6 +6488,7 @@ function nodeHTML(p, x, y){
   const cls = ['node'];
   if(p.death!=null) cls.push('dead');
   if(p.zombie) cls.push('zombie');
+  if(S.evQ && S.evQ.length && S.evQ[0].id === p.id) cls.push('evfocus');   // 0.2.0c : la personne dont parle l'événement
   if(p.lost) cls.push('tlost'); else if(isTT(p) && p.death == null) cls.push('chrono');
   if(p.id===S.activeId) cls.push('active');
   if(!p.blood) cls.push('partner');
@@ -7922,6 +8076,7 @@ function openSettings(re){
     ${range('music', 0, 100, 5, '%', t('set_music'), t('set_music_hint'))}`
   : setTab === 'gfx' ? `
     <div class="setrow"><span><b>${t('set_full')}</b><small>${t(isDesk() ? 'set_full_hint_d' : 'set_full_hint')}</small></span><button class="gel ghost" data-act="fullscreen"><span>${t(isFull() ? 'set_full_off' : 'set_full_on')}</span></button></div>
+    ${isDesk() && !window.cyngeneticDesktop.setResolution ? `<div class="setrow"><span><b>${t('set_res')}</b><small>${t('set_res_old')}</small></span></div>` : ''}
     ${isDesk() && window.cyngeneticDesktop.setResolution ? `<div class="setrow"><span><b>${t('set_res')}</b><small>${t('set_res_hint')}</small></span><select class="inp resel" id="resSel" aria-label="${t('set_res')}">
       <option value="" disabled ${SET.res ? '' : 'selected'}>${t('set_res_pick')}</option>${RESOLUTIONS.filter(([w, h], i) => i === 0 || (w <= screen.width && h <= screen.height)).map(([w, h]) => `<option value="${w}x${h}" ${SET.res === w + 'x' + h ? 'selected' : ''}>${w} × ${h}</option>`).join('')}</select></div>` : ''}
     <div class="setrow"><span><b>${t('set_theme')}</b><small>${esc(t('skin_' + (skinLocked(SET.skin) ? 'aqua' : SET.skin)))}</small></span><button class="gel" data-act="themes"><span>${t('th_open')}</span></button></div>
@@ -8183,6 +8338,12 @@ const ACT = {
     const r = devDo(d.v); if(r === null){ dirty = true; render(); save(); return; }
     devMsg = r || ''; sfx.click(); dirty = true; if(S && !$('#game').hidden) render(); if(S) save(); cynShow();
     applySettings(); openDev();
+  },
+  evdo(d){
+    if(!S.evQ || !S.evQ.length) return;
+    let extra = null;
+    if(d.v === 'pick'){ extra = ($('#evJob') || {}).value; if(!extra || !JOB[extra]) return; }
+    closeModal(true); evResolve(d.v, extra); sfx.click(); render();
   },
   buy(d, b){
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;

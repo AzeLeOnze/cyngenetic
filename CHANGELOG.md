@@ -2,6 +2,15 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.0c — 14 novembre 2026
+
+- Nouveau : les événements ! Ils apparaissent au milieu de l'écran et mettent le jeu en pause. Juste avant, la personne concernée est montrée dans l'arbre avec un cadre rouge.
+- Événement « Une relation à bout de souffle » : un couple de plus de 20 ans a 0,9 % de chances par an qu'un des deux en ait assez. Tu choisis : rester ensemble (mais 1 à 5 ans plus tard, il ou elle devient criminel et s'en prend d'abord à son conjoint) ou clore la relation.
+- Événement « Un vrai métier pour la vie » : entre 19 et 22 ans, une personne a 0,5 % de chances par an de ne pas être satisfaite de ses études. Tu choisis : le métier de ses études (burn-out longs et à répétition, et dans 90 % des cas une mort de « grave dépression professionnelle » entre 30 et 60 ans), autre chose (sans conséquence), ou un métier déjà découvert dans l'album, gardé jusqu'à la retraite sans chômage.
+- En mode auto, les événements se règlent tout seuls, au hasard.
+- La case « Famille autonome » est maintenant cochée par défaut avant de commencer une partie.
+- Version PC : si l'application installée est trop ancienne pour changer la résolution, les paramètres le disent au lieu de cacher l'option. Une nouvelle version de l'application PC (0.2.0c) est disponible.
+
 ## v0.2.0b — 14 novembre 2026
 
 - Nouveau : la carrière militaire ! De 16 à 24 ans, quelqu'un peut s'engager dans l'armée (environ 6 % des hommes, 2 % des femmes à partir de 1940). Impossible d'en partir avant la retraite militaire, entre 48 et 58 ans.
