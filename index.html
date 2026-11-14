@@ -1015,6 +1015,7 @@ body.zmode .treebox{position:relative}
 .evpair{display:flex;align-items:center;justify-content:center;gap:14px;margin:4px 0 12px}.evpair i{font-size:28px;font-style:normal}
 .evtxt{margin:0 0 10px;line-height:1.55}
 .evother summary{cursor:pointer}
+.evblock{position:fixed;inset:0;z-index:45;cursor:wait;background:transparent}
 .facts .milf{background:linear-gradient(180deg,#f2f5e6,#e2e9c9)!important;border-color:#a9b77d!important}.facts .milf dt{color:#556b2f}.facts .milf dd{color:#33421a;font-weight:700}
 #ttFx.past{background:radial-gradient(circle at 50% 50%,#fffaf0 0,#ffe3a3 14%,#e9a743 40%,#8f4f12 72%,#3a1c05 100%)}
 #ttFx.past .tt-rings i{animation-name:ttringout;border-color:rgba(255,240,200,.6);box-shadow:0 0 30px rgba(255,210,120,.6),inset 0 0 30px rgba(255,210,120,.4)}
@@ -1775,13 +1776,15 @@ const PATCHNOTES = [
    fr:['Nouveau : les événements ! Ils apparaissent au milieu de l\'écran et mettent le jeu en pause. Juste avant, la personne concernée est montrée dans l\'arbre avec un cadre rouge.',
        'Événement « Une relation à bout de souffle » : un couple de plus de 20 ans a 0,9 % de chances par an qu\'un des deux en ait assez. Tu choisis : rester ensemble (mais 1 à 5 ans plus tard, il ou elle devient criminel et s\'en prend d\'abord à son conjoint) ou clore la relation.',
        'Événement « Un vrai métier pour la vie » : entre 19 et 22 ans, une personne a 0,5 % de chances par an de ne pas être satisfaite de ses études. Tu choisis : le métier de ses études (burn-out longs et à répétition, et dans 90 % des cas une mort de « grave dépression professionnelle » entre 30 et 60 ans), autre chose (sans conséquence), ou un métier déjà découvert dans l\'album, gardé jusqu\'à la retraite sans chômage.',
-       'En mode auto, les événements se règlent tout seuls, au hasard.',
+       'Événement « Envie de sensations fortes » : de 45 à 75 ans, une personne a 0,22 % de chances par an de vouloir se mettre aux sports extrêmes. « C\'est parti ! » : une chance sur deux de mourir dans un sport extrême, sinon elle gagne l\'atout Courageux (ou Courageuse) et 50 Cyn. « Pas une bonne idée » : une dépression de 10 ans.',
+       'Les événements apparaissent aussi en mode auto. Pendant que l\'arbre se centre sur la personne concernée, le joueur ne peut plus bouger l\'arbre, pour ne pas perdre le focus.',
        'La case « Famille autonome » est maintenant cochée par défaut avant de commencer une partie.',
        'Version PC : si l\'application installée est trop ancienne pour changer la résolution, les paramètres le disent au lieu de cacher l\'option. Une nouvelle version de l\'application PC (0.2.0c) est disponible.'],
    en:['New: events! They pop up in the middle of the screen and pause the game. Just before, the person concerned is shown in the tree with a red frame.',
        '“A relationship running out of steam” event: a couple together for more than 20 years has a 0.9% chance a year that one of them gets fed up. You choose: stay together (but 1 to 5 years later, they become a criminal and go after their partner first) or end the relationship.',
        '“A real job for life” event: between 19 and 22, someone has a 0.5% chance a year of being unhappy with their studies. You choose: work in their field (long, repeated burnouts, and in 90% of cases death from “severe work-related depression” between 30 and 60), something else (no consequence), or a job already discovered in the album, kept until retirement with no unemployment.',
-       'In auto mode, events resolve on their own, at random.',
+       '“A thirst for thrills” event: from 45 to 75, someone has a 0.22% chance a year of wanting to take up extreme sports. “Let\'s go!”: a one-in-two chance of dying in an extreme sports accident, otherwise they gain the Courage gift and 50 Cyn. “Not a good idea”: a 10-year depression.',
+       'Events now also appear in auto mode. While the tree centres on the person concerned, the player can\'t move the tree, so the focus isn\'t lost.',
        'The “Family on autopilot” box is now ticked by default before starting a game.',
        'PC version: if the installed app is too old to change the resolution, settings now say so instead of hiding the option. A new version of the PC app (0.2.0c) is available.']},
   {v:'0.2.0b', date:{fr:'14 novembre 2026', en:'November 14, 2026', de:'14. November 2026'},
@@ -2699,7 +2702,7 @@ const ATOUTS = [
  ['intel','Intelligence','Intelligence','Intelligence','bulb',"Ne meurt jamais d'un accident domestique ou de la route.",'Never dies in a household or road accident.'],
  ['charisme','Charisme','Charisme','Charisma','crown','Sa demande en mariage est toujours acceptée.','Their marriage proposal is always accepted.'],
  ['social','Sociabilité','Sociabilité','Sociability','user',"6 propositions au lieu de 3 pour trouver l'âme sœur.",'6 matches instead of 3 when looking for a soulmate.'],
- ['courage','Courage','Courage','Courage','helmet','Aucun criminel ne peut lui ôter la vie.','No criminal can take their life.'],
+ ['courage','Courageux','Courageuse','Courage','helmet','Aucun criminel ne peut lui ôter la vie.','No criminal can take their life.'],
  ['crea','Créativité','Créativité','Creativity','palette','Avec un métier artistique, devient forcément une star.','With an artistic job, always becomes a star.'],
  ['ego','Égoïsme','Égoïsme','Selfishness','skull',"12 % de risque d'avoir un enfant futur criminel (au lieu de 2 %).",'12% risk of having a future-criminal child (instead of 2%).'],
  ['chance','Chance','Chance','Luck','sparkle',"12 % de chances d'avoir un enfant future star (au lieu de 2,5 %).",'12% chance of having a future-star child (instead of 2.5%).'],
@@ -2710,7 +2713,7 @@ const ATOUTS = [
  ['discipline','Discipliné','Disciplinée','Discipline','sword',"60 % de chances de faire carrière dans l'armée ; sinon, garde le même métier jusqu'à la retraite.",'60% chance of a military career; otherwise keeps the same job until retirement.'],
  ['ambition','Ambitieux','Ambitieuse','Ambition','flag',"Fait souvent carrière en politique (30 % de chances) et, une fois élu, a 33 % de chances d'atteindre le plus haut poste du pays.","Often goes into politics (30% chance) and, once elected, has a 33% chance of reaching the country's top job."]
 ];
-const hasAtout = (p, id) => !!(p && (p.atout === id || p.atout2 === id));      // atout2 : crise de la cinquantaine (boutique)
+const hasAtout = (p, id) => !!(p && (p.atout === id || p.atout2 === id || p.atout3 === id));   // atout3 : gagné par un événement      // atout2 : crise de la cinquantaine (boutique)
 const immune = (p, day) => p.immuneUntil != null && day < p.immuneUntil;           // boutique : immunité 50 ans
 // métiers politiques, artistiques (pour l'atout Créativité) et sources de célébrité tardive
 const POLJOBS = {maire:50, depute:25, senateur:12, ministre:8, premierministre:2};
@@ -2885,6 +2888,7 @@ const TRACKS = [['bacphilo','Bac philosophie','Bac · Philosophy',1960,1967,'bac
 const TRACK = byId(TRACKS);
 // maladies bénignes : [id, fr, en, de, à, durée min (jours), durée max, filtre] — elles ne tuent pas, mais doublent le risque de maladie grave
 const MILDS = [
+ ['deprbenigne','Dépression','Depression',1500,2100,3652,3652,{special:true}],
  ['synparis','Syndrome de Paris','Paris syndrome',1960,2100,7,60,{minA:16}],
  ['hoquet','Hoquet éternel','Endless hiccups',1500,2100,180,1500,{}],['fourire','Fou rire chronique','Chronic giggles',1500,2100,30,365,{}],
  ['accent',"Syndrome de l'accent étranger",'Foreign accent syndrome',1500,2100,90,900,{}],['teteexplose','Syndrome de la tête qui explose','Exploding head syndrome',1500,2100,60,700,{}],
@@ -3118,6 +3122,7 @@ const DISEASES = [
  ['chutefatale','Chute fatale',"d'une chute fatale",'a fatal fall',1500,2100,1,1,0],['commotion','Commotion cérébrale',"d'une commotion cérébrale",'a concussion',1500,2100,1,14,.5],
  ['septicemie','Septicémie',"d'une septicémie",'sepsis',1500,2100,3,30,.3],['infarctus','Infarctus',"d'un infarctus",'a heart attack',1500,2100,1,7,.15,{minA:35}],
  ['faim','Faim','de faim','starvation',1500,1950,20,120,.3],
+ ['sportx','Mort dans un sport extrême','dans un sport extrême','an extreme sports accident',1500,2100,1,1,0,{special:true}],
  ['depropro','Grave dépression professionnelle',"d'une grave dépression professionnelle",'severe work-related depression',1500,2100,1,1,0,{special:true}],
  ['combat','Mort au combat','au combat','wounds sustained in combat',1500,2100,1,1,0,{special:true}],
  ['orgorge',"Étouffement avec de l'or","en s'étouffant avec de l'or",'choking on gold',1500,2100,1,1,0,{special:true}],
@@ -3175,7 +3180,7 @@ function pickWarCause(p, day){
 }
 const DZ = byId(DISEASES);
 // accidents et événements soudains : on en est « victime », on n'en est pas « atteint »
-const EVENTS = new Set(['combat','noyade','asteroide','mortderire','cocotier','orgorge','electrocution','hydrocution','incendie','chutefatale','etouffement','spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
+const EVENTS = new Set(['sportx','combat','noyade','asteroide','mortderire','cocotier','orgorge','electrocution','hydrocution','incendie','chutefatale','etouffement','spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
   'overdose_ecstasy','nanorobots','rage_jeux','cyn_fusion','arret_cafe','infarctus_tabac','infarctus_cannabis','avc','avc_tabac','avc_alcool','avc_cannabis']);
 function pickDisease(p, day){
   const y = dataYear(yearOf(day)), A = ageAt(p, day);
@@ -3417,6 +3422,9 @@ fr:{
   log_ev_s_other_log:(p,j)=>`${nm(p)} change de voie et devient ${jobName(j, per(p)).toLowerCase()}.`,
   log_ev_s_pick_log:(p,j)=>`${nm(p)} devient ${jobName(j, per(p)).toLowerCase()}, pour toute sa vie.`,
   set_res_old:"Installe la dernière version de l'application PC pour choisir la résolution.",
+  ev_x_title:'Envie de sensations fortes', ev_x_go:"C'est parti !", ev_x_no:'Pas une bonne idée', f_atout3:'Atout gagné',
+  ev_x_1:p=>`${nm(p)} n'est plus tout${g(p,'','e')} jeune et n'a pas assez profité de sa jeunesse : ${g(p,'il','elle')} veut explorer de nouveaux horizons et passer aux sports extrêmes !`,
+  log_ev_x_win:p=>`🪂 ${nm(p)} survit aux sports extrêmes et devient ${g(p,'courageux','courageuse')} ! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} renonce aux sports extrêmes… et sombre dans la déprime.`,
   act_lost:p=>g(p,'Perdu dans le temps','Perdue dans le temps'),
   fiche_lost:(p,a,b)=>`⌛ ${g(p,'Perdu','Perdue')} dans le temps depuis ${a} · réapparaîtra en ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} saut${n>1?'s':''} dans le temps · ${tot} ans franchis`,
@@ -3765,6 +3773,9 @@ en:{
   log_ev_s_other_log:(p,j)=>`${nm(p)} changes course and becomes a ${jobName(j, per(p)).toLowerCase()}.`,
   log_ev_s_pick_log:(p,j)=>`${nm(p)} becomes a ${jobName(j, per(p)).toLowerCase()}, for life.`,
   set_res_old:'Install the latest version of the PC app to choose the resolution.',
+  ev_x_title:'A thirst for thrills', ev_x_go:"Let's go!", ev_x_no:'Not a good idea', f_atout3:'Earned gift',
+  ev_x_1:p=>`${nm(p)} isn't young any more and didn't make the most of their youth: ${g(p,'he','she')} wants to explore new horizons and take up extreme sports!`,
+  log_ev_x_win:p=>`🪂 ${nm(p)} survives extreme sports and gains Courage! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} gives up on extreme sports… and sinks into depression.`,
   act_lost:'Lost in time',
   fiche_lost:(p,a,b)=>`⌛ Lost in time since ${a} · will reappear in ${b}`,
   fiche_tt:(n,tot)=>`⌛ ${n} leap${n>1?'s':''} through time · ${tot} years skipped`,
@@ -4112,6 +4123,9 @@ TX.de = {
   log_ev_s_other_log:(p,j)=>`${nm(p)} schlägt einen anderen Weg ein und wird ${jobName(j, per(p))}.`,
   log_ev_s_pick_log:(p,j)=>`${nm(p)} wird ${jobName(j, per(p))}, fürs ganze Leben.`,
   set_res_old:'Installiere die neueste Version der PC-App, um die Auflösung zu wählen.',
+  ev_x_title:'Lust auf Nervenkitzel', ev_x_go:'Los geht’s!', ev_x_no:'Keine gute Idee', f_atout3:'Gewonnene Gabe',
+  ev_x_1:p=>`${nm(p)} ist nicht mehr ganz jung und hat die Jugend nicht genug genossen: ${g(p,'Er','Sie')} will neue Horizonte entdecken und mit Extremsport anfangen!`,
+  log_ev_x_win:p=>`🪂 ${nm(p)} überlebt den Extremsport und erhält die Gabe Mut! +50 Cyn.`, log_ev_x_no_log:p=>`${nm(p)} verzichtet auf Extremsport… und versinkt in einer Depression.`,
   act_lost:'In der Zeit verschollen',
   fiche_lost:(p,a,b)=>`⌛ Seit ${a} in der Zeit verschollen · taucht ${b} wieder auf`,
   fiche_tt:(n,tot)=>`⌛ ${n} ${n>1?'Zeitsprünge':'Zeitsprung'} · ${tot} Jahre übersprungen`,
@@ -4509,7 +4523,7 @@ DEx.dz = {peste:['Pest','der Pest'], variole:['Pocken','den Pocken'], dysenterie
   cyn_fusion:['Verschmelzung mit Cyngenetik','einer Verschmelzung mit Cyngenetik'], overdose_ecstasy:['Ecstasy-Überdosis','einer Ecstasy-Überdosis'],
   serotonine:['Serotoninsyndrom durch Ecstasy','einem Serotoninsyndrom durch Ecstasy'], hyperthermie:['Schwere Hyperthermie durch Ecstasy','einer schweren Hyperthermie durch Ecstasy'],
   mst:['Geschlechtskrankheit','einer Geschlechtskrankheit'], ist:['Sexuell übertragbare Infektion','einer sexuell übertragbaren Infektion'], meningite:['Hirnhautentzündung','einer Hirnhautentzündung'],
-  tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], mortderire:['Lachtod','einem tödlichen Lachanfall'], orgorge:['Goldersticken','Ersticken an Gold'], combat:['Tod im Kampf','den Folgen eines Kampfeinsatzes'], depropro:['Schwere berufliche Depression','einer schweren beruflichen Depression'],
+  tetanos:['Tetanus','Tetanus'], noyade:['Ertrinken','Ertrinken'], asteroide:['Asteroideneinschlag','einem Asteroideneinschlag'], mortderire:['Lachtod','einem tödlichen Lachanfall'], orgorge:['Goldersticken','Ersticken an Gold'], combat:['Tod im Kampf','den Folgen eines Kampfeinsatzes'], depropro:['Schwere berufliche Depression','einer schweren beruflichen Depression'], sportx:['Extremsport-Unfall','einem Extremsport-Unfall'],
   electrocution:['Stromschlag','einem Stromschlag'], hydrocution:['Kälteschock im Wasser','einem Kälteschock im Wasser'], deshydratation:['Austrocknung','Austrocknung'],
   gangrene:['Wundbrand','Wundbrand'], incendie:['Brand','einem Brand'], empoisonnement:['Vergiftung','einer Vergiftung'], chutefatale:['Tödlicher Sturz','einem tödlichen Sturz'],
   commotion:['Gehirnerschütterung','einer Gehirnerschütterung'], septicemie:['Blutvergiftung','einer Blutvergiftung'], infarctus:['Herzinfarkt','einem Herzinfarkt'], faim:['Hunger','Hunger'],
@@ -4519,7 +4533,7 @@ DEx.dz = {peste:['Pest','der Pest'], variole:['Pocken','den Pocken'], dysenterie
   epuisement:['Schweres Burn-out','einem schweren Burn-out'], cocotier:['Kokosnuss-Unfall','einer herabfallenden Kokosnuss'], disparu:['Verschwinden','Verschwinden'],
   mortcerebrale:['Hirntod','Hirntod'], necrose:['Nekrose','einer Nekrose'], diabete:['Diabetes','Diabetes'], embolie:['Lungenembolie','einer Lungenembolie'], paludisme:['Malaria','Malaria'],
   grippeaviaire:['Vogelgrippe','der Vogelgrippe'], bpco:['COPD','COPD'], rage:['Tollwut','Tollwut'], solitude:['Einsamkeit','Einsamkeit'], enseule:['Vereinsamung','Vereinsamung'], coeurbrise:['Broken-Heart-Syndrom','dem Broken-Heart-Syndrom']};
-DEx.mild = {synparis:'Paris-Syndrom', hoquet:'Ewiger Schluckauf', fourire:'Chronischer Lachanfall', accent:'Fremdakzent-Syndrom', teteexplose:'Exploding-Head-Syndrom', gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheuma', teigne:'Scherpilzflechte', bronchite:'Chronische Bronchitis', zona:'Gürtelrose', eczema:'Ekzem',
+DEx.mild = {deprbenigne:'Depression', synparis:'Paris-Syndrom', hoquet:'Ewiger Schluckauf', fourire:'Chronischer Lachanfall', accent:'Fremdakzent-Syndrom', teteexplose:'Exploding-Head-Syndrom', gale:'Krätze', goutte:'Gicht', scorbut:'Skorbut', rhumatisme:'Rheuma', teigne:'Scherpilzflechte', bronchite:'Chronische Bronchitis', zona:'Gürtelrose', eczema:'Ekzem',
   psoriasis:'Schuppenflechte', asthme:'Asthma', migraine:'Chronische Migräne', hepatitea:'Hepatitis A', mono:'Pfeiffersches Drüsenfieber', dos:'Chronische Rückenschmerzen',
   rachitisme:'Rachitis', acne:'Schwere Akne', burnout:'Burn-out', allergie:'Heuschnupfen', fievrenum:'Digitalfieber', nanoderm:'Nanodermatitis', grippemars:'Marsgrippe',
   holosyndrome:'Hologramm-Syndrom', arthrose:'Arthrose', hypertension:'Bluthochdruck', hypothyroidie:'Schilddrüsenunterfunktion', angine:'Wiederkehrende Mandelentzündung',
@@ -4684,6 +4698,7 @@ const nodeBadges = p => {
 };
 const atoutDesc = id => LANG === 'de' && DEx.atout[id] ? DEx.atout[id][2] : ATOUT[id][LANG === 'fr' ? 5 : 6];
 const atoutName = (id, p) => { const r = ATOUT[id]; if(LANG === 'de' && DEx.atout[id]) return deSex(DEx.atout[id], p); return LANG==='fr' ? (p && p.sex==='F' ? r[2] : r[1]) : r[3]; };
+const atoutTile3 = p => p.atout3 && ATOUT[p.atout3] ? `<div class="span2 atf"><dt>${t('f_atout3')}</dt><dd>${icon(ATOUT[p.atout3][4])}<span><b>${esc(atoutName(p.atout3, p))}</b><small>${esc(atoutDesc(p.atout3))}</small></span></dd></div>` : '';
 const atoutTile2 = p => p.atout2 && ATOUT[p.atout2] ? `<div class="span2 atf"><dt>${t('f_atout2')}</dt><dd>${icon(ATOUT[p.atout2][4])}<span><b>${esc(atoutName(p.atout2, p))}</b><small>${esc(atoutDesc(p.atout2))}</small></span></dd></div>` : '';
 function spanTxt(a, b){                               // durée entre deux jours : « 52 ans, 2 mois »
   const x = toDate(a), y = toDate(b);
@@ -5277,7 +5292,7 @@ function contract(p, day){
 function die(p, day, cause){
   if(p.death != null) return;
   if(cause.dz === 'rage_jeux' && !VSH) unlockSkin('hacker');   // 0.2.0b : thème Hacker
-  if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide' && cause.dz !== 'combat' && cause.dz !== 'depropro'){   // morts légendaires (0,025 % chacune)
+  if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide' && cause.dz !== 'combat' && cause.dz !== 'depropro' && cause.dz !== 'sportx'){   // morts légendaires (0,025 % chacune)
     const lr = Math.random(); if(lr < LEG_P * 3) cause = {dz: lr < LEG_P ? 'mortderire' : lr < LEG_P * 2 ? 'cocotier' : 'orgorge'};
   }
   const wasHeir = royalOn() && p.id === heirId();
@@ -5582,7 +5597,14 @@ function evFocus(){                                    // on montre d'abord la p
   const e = S.evQ[0], p = P(e.id);
   if(!p || p.death != null){ S.evQ.shift(); return; }
   evAnim = true; dirty = true; render(); centerOn(p.id, true); sfx.pop();
-  setTimeout(() => { evAnim = false; if(S && S.evQ && S.evQ[0] === e && !modalOpen) openEvent(); }, 1100);
+  const blk = document.createElement('div'); blk.className = 'evblock'; document.body.appendChild(blk);   // on bloque souris, molette et doigts
+  const stop = ev => { ev.preventDefault(); ev.stopPropagation(); };
+  ['wheel','pointerdown','touchstart','keydown'].forEach(k => addEventListener(k, stop, {capture:true, passive:false}));
+  setTimeout(() => {
+    ['wheel','pointerdown','touchstart','keydown'].forEach(k => removeEventListener(k, stop, {capture:true}));
+    blk.remove(); evAnim = false;
+    if(S && S.evQ && S.evQ[0] === e && !modalOpen){ centerOn(p.id, false); render(); openEvent(); }
+  }, 1100);
 }
 function openEvent(){
   const e = S.evQ[0], p = P(e.id), day = today();
@@ -5604,6 +5626,11 @@ function openEvent(){
         <details class="act relocate full evother"><summary class="lab">${t('ev_s_pick')}</summary>
           ${known.length ? `<div class="reloc-row"><select class="inp" id="evJob" aria-label="${esc(t('ev_s_pick'))}">${known.map(([id, n]) => `<option value="${id}">${esc(n)}</option>`).join('')}</select>
           <button class="gel lime" data-act="evdo" data-v="pick"><span>${t('ev_s_pick_ok')}</span></button></div><p class="note">${t('ev_s_pick_note')}</p>` : `<p class="note">${t('ev_s_pick_none')}</p>`}</details></div>`, {locked:true});
+  } else if(e.k === 'xtreme'){
+    openModal(`<div class="m-head"><div class="eyebrow">${t('ev_eye')} · ${fmt(day)}</div><h2>${t('ev_x_title')}</h2></div>
+      <div class="ttbox">${orb(p, 'xl')}<p class="evtxt">${esc(t('ev_x_1', p))}</p></div>
+      <div class="acts tt-acts"><button class="gel gold wide" data-act="evdo" data-v="go"><span>${t('ev_x_go')}</span></button>
+        <button class="gel wide" data-act="evdo" data-v="no"><span>${t('ev_x_no')}</span></button></div>`, {locked:true});
   } else S.evQ.shift();
 }
 function evResolve(v, extra){                          // le choix du joueur (ou du mode auto)
@@ -5614,6 +5641,14 @@ function evResolve(v, extra){                          // le choix du joueur (ou
       p.crim = {day: day + rnd(1, 5) * 365 + rnd(0, 364), declared:false, fate:null, target: q ? q.id : null};
       log('sad','ev_c_stayed',[p.id, e.pid], day, false);
     } else if(u){ endUnion(u, day, true); sfx.breakup(); }
+  } else if(e.k === 'xtreme'){
+    if(v === 'go'){
+      if(Math.random() < .5){ die(p, day, {dz:'sportx'}); sfx.death(); }          // une mort inédite
+      else {                                             // devient Courageux / Courageuse, et gagne 50 Cyn
+        if(!hasAtout(p, 'courage')) p.atout3 = 'courage';
+        payCyn(-50); log('star','ev_x_win',[p.id], day, true);   // 50 Cyn pleins, même en mode auto sfx.fame(); burst(['#ff9a2e','#ffffff','#3fa9ff','#ffd000'], 50);
+      }
+    } else { catchMild(p, 'deprbenigne', day); log('sad','ev_x_no_log',[p.id], day, false); }
   } else if(e.k === 'career'){
     const y = yearOf(day); p.careerEv = v;
     if(v === 'study'){                                 // le métier de ses études : burn-out à répétition, et souvent une fin tragique
@@ -5647,14 +5682,14 @@ function evYear(p, A, day){                            // à chaque anniversaire
   if(u && day - u.start >= 20 * 365.25 && Math.random() < .009){
     const b = P(u.b), pool = [p, b].filter(x => x && x.death == null && !x.lost && !x.zombie && !x.crim && !(x.star && x.star.famous) && !jailed(x) && !royalImmune(x));
     if(pool.length && b && b.death == null && !b.lost){ const c = pick(pool), q = c === p ? b : p;
-      if(S.auto){ evPush({k:'couple', id:c.id, pid:q.id, a:p.id}); evResolve(Math.random() < .5 ? 'stay' : 'leave'); }
-      else evPush({k:'couple', id:c.id, pid:q.id, a:p.id}); }
+      evPush({k:'couple', id:c.id, pid:q.id, a:p.id}); }
   }
+  // pas tout jeune, envie de sports extrêmes : 0,22 % par an, de 45 à 75 ans
+  if(A >= 45 && A <= 75 && !p.xtremeEv && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .0022){ p.xtremeEv = true; evPush({k:'xtreme', id:p.id}); }
   // entre 19 et 22 ans, pas satisfait de ses études : 0,5 % par an
   if(A >= 19 && A <= 22 && !p.careerEv && !p.lockJob && studyOf(p) && !(p.work && ['mil','star','prison','royal','noble'].includes(p.work.s)) && !(p.crim && p.crim.declared) && Math.random() < .005){
     p.careerEv = 'asked';
-    if(S.auto){ evPush({k:'career', id:p.id}); evResolve(Math.random() < .5 ? 'study' : 'other'); }
-    else evPush({k:'career', id:p.id});
+    evPush({k:'career', id:p.id});
   }
 }
 function onBirthday(p, A, day){
@@ -7617,7 +7652,7 @@ function openFiche(id){
       <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${milTile(p)}${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
+      ${milTile(p)}${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${atoutTile3(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${esc(nm(par[0]))} &amp; ${esc(nm(par[1]))}</dd></div>` : ''}
     </dl>

@@ -7,7 +7,8 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 - Nouveau : les événements ! Ils apparaissent au milieu de l'écran et mettent le jeu en pause. Juste avant, la personne concernée est montrée dans l'arbre avec un cadre rouge.
 - Événement « Une relation à bout de souffle » : un couple de plus de 20 ans a 0,9 % de chances par an qu'un des deux en ait assez. Tu choisis : rester ensemble (mais 1 à 5 ans plus tard, il ou elle devient criminel et s'en prend d'abord à son conjoint) ou clore la relation.
 - Événement « Un vrai métier pour la vie » : entre 19 et 22 ans, une personne a 0,5 % de chances par an de ne pas être satisfaite de ses études. Tu choisis : le métier de ses études (burn-out longs et à répétition, et dans 90 % des cas une mort de « grave dépression professionnelle » entre 30 et 60 ans), autre chose (sans conséquence), ou un métier déjà découvert dans l'album, gardé jusqu'à la retraite sans chômage.
-- En mode auto, les événements se règlent tout seuls, au hasard.
+- Événement « Envie de sensations fortes » : de 45 à 75 ans, une personne a 0,22 % de chances par an de vouloir se mettre aux sports extrêmes. « C'est parti ! » : une chance sur deux de mourir dans un sport extrême, sinon elle gagne l'atout Courageux (ou Courageuse) et 50 Cyn. « Pas une bonne idée » : une dépression de 10 ans.
+- Les événements apparaissent aussi en mode auto. Pendant que l'arbre se centre sur la personne concernée, le joueur ne peut plus bouger l'arbre, pour ne pas perdre le focus.
 - La case « Famille autonome » est maintenant cochée par défaut avant de commencer une partie.
 - Version PC : si l'application installée est trop ancienne pour changer la résolution, les paramètres le disent au lieu de cacher l'option. Une nouvelle version de l'application PC (0.2.0c) est disponible.
 
