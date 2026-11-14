@@ -7,6 +7,7 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 - Nouveau : la carrière militaire ! De 16 à 24 ans, quelqu'un peut s'engager dans l'armée (environ 6 % des hommes, 2 % des femmes à partir de 1940). Impossible d'en partir avant la retraite militaire, entre 48 et 58 ans.
 - 13 grades, du plus bas au plus élevé : soldat, caporal, caporal-chef, sergent, sergent-chef, adjudant, adjudant-chef, lieutenant, capitaine, commandant, lieutenant-colonel, colonel et général. Une promotion est possible chaque année ; ceux qui s'engagent tard n'iront pas forcément jusqu'en haut. L'atout Ambition aide à monter plus vite.
 - Les militaires ont un risque élevé de mourir au combat (0,6 % par an), et bien plus élevé en temps de guerre (7 % par an). Leur bulle est kaki, et les officiers ont une étoile dorée. Les 13 grades se collectionnent dans l'album (catégorie Métiers). L'ancien métier « Militaire » est remplacé par cette carrière.
+- Nouvel atout « Discipliné » : 60 % de chances de faire carrière dans l'armée (engagement entre 16 et 24 ans) ; sinon, la personne garde le même métier jusqu'à la retraite, sans changement ni chômage.
 - Versus : l'IA commence maintenant avec un personnage du même âge que le tien.
 - Nouveau thème Pastel, tout doux et mignon, à acheter dans la boutique pour 500 Cyn.
 - Nouveau thème Lune, avec une grande lune pleine de cratères et un ciel étoilé : il se débloque quand un membre de la famille devient Marcheur lunaire.

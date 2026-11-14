@@ -1767,6 +1767,7 @@ const PATCHNOTES = [
    fr:['Nouveau : la carrière militaire ! De 16 à 24 ans, quelqu\'un peut s\'engager dans l\'armée (environ 6 % des hommes, 2 % des femmes à partir de 1940). Impossible d\'en partir avant la retraite militaire, entre 48 et 58 ans.',
        '13 grades, du plus bas au plus élevé : soldat, caporal, caporal-chef, sergent, sergent-chef, adjudant, adjudant-chef, lieutenant, capitaine, commandant, lieutenant-colonel, colonel et général. Une promotion est possible chaque année ; ceux qui s\'engagent tard n\'iront pas forcément jusqu\'en haut. L\'atout Ambition aide à monter plus vite.',
        'Les militaires ont un risque élevé de mourir au combat (0,6 % par an), et bien plus élevé en temps de guerre (7 % par an). Leur bulle est kaki, et les officiers ont une étoile dorée. Les 13 grades se collectionnent dans l\'album (catégorie Métiers). L\'ancien métier « Militaire » est remplacé par cette carrière.',
+       'Nouvel atout « Discipliné » : 60 % de chances de faire carrière dans l\'armée (engagement entre 16 et 24 ans) ; sinon, la personne garde le même métier jusqu\'à la retraite, sans changement ni chômage.',
        'Versus : l\'IA commence maintenant avec un personnage du même âge que le tien.',
        'Nouveau thème Pastel, tout doux et mignon, à acheter dans la boutique pour 500 Cyn.',
        'Nouveau thème Lune, avec une grande lune pleine de cratères et un ciel étoilé : il se débloque quand un membre de la famille devient Marcheur lunaire.',
@@ -1780,6 +1781,7 @@ const PATCHNOTES = [
    en:['New: military careers! From 16 to 24, someone can join the army (about 6% of men, 2% of women from 1940). There\'s no leaving before military retirement, between 48 and 58.',
        '13 ranks, from lowest to highest: private, corporal, senior corporal, sergeant, staff sergeant, warrant officer, chief warrant officer, lieutenant, captain, major, lieutenant colonel, colonel and general. A promotion can come every year; those who join late won\'t necessarily reach the top. The Ambition gift helps climb faster.',
        'Soldiers have a high risk of dying in combat (0.6% a year), and a much higher one in wartime (7% a year). Their bubble is khaki, and officers get a gold star. The 13 ranks can be collected in the album (Jobs category). The old “Service member” job is replaced by this career.',
+       'New “Discipline” gift: 60% chance of a military career (joining between 16 and 24); otherwise the person keeps the same job until retirement, with no job changes or unemployment.',
        'Versus: the AI now starts with a character the same age as yours.',
        'New Pastel theme, soft and cute, to buy in the shop for 500 Cyn.',
        'New Moon theme, with a big cratered moon and a starry sky: it unlocks when a family member becomes a Moonwalker.',
@@ -2678,6 +2680,7 @@ const ATOUTS = [
  ['fertile','Fertilité','Fertilité','Fertility','heart','Jumeaux, triplés et quadruplés 10 fois plus fréquents.','Twins, triplets and quadruplets 10 times more likely.'],
  ['longevite','Espérance de vie','Espérance de vie','Longevity','hourglass','10 fois moins de risque de mourir de vieillesse entre 80 et 105 ans.','10 times less likely to die of old age between 80 and 105.'],
  ['richesse','Riche','Riche','Wealth','sun','Gagne 2 fois plus de Cyn toute sa vie, y compris pour la naissance de ses enfants.','Earns twice as many Cyn for life, including for the births of their children.'],
+ ['discipline','Discipliné','Disciplinée','Discipline','sword',"60 % de chances de faire carrière dans l'armée ; sinon, garde le même métier jusqu'à la retraite.",'60% chance of a military career; otherwise keeps the same job until retirement.'],
  ['ambition','Ambitieux','Ambitieuse','Ambition','flag',"Fait souvent carrière en politique (30 % de chances) et, une fois élu, a 33 % de chances d'atteindre le plus haut poste du pays.","Often goes into politics (30% chance) and, once elected, has a 33% chance of reaching the country's top job."]
 ];
 const hasAtout = (p, id) => !!(p && (p.atout === id || p.atout2 === id));      // atout2 : crise de la cinquantaine (boutique)
@@ -4390,7 +4393,7 @@ DEx.track = {bacphilo:'Bac Philosophie', bacsci:'Bac Naturwissenschaften', baca:
   ausbbuero:'Ausbildung Bürokaufmann', ausbelek:'Ausbildung Elektriker', ausbkoch:'Ausbildung Koch', ausbfriseur:'Ausbildung Friseur', ausbbank:'Ausbildung Bankkaufmann',
   matsci:'Matura Naturwissenschaften', matlang:'Matura Sprachen', mateco:'Matura Wirtschaft', cfcpoly:'EFZ Polymechaniker', cfccom:'EFZ Kaufmann', cfchorlo:'EFZ Uhrmacher',
   cfcinfo:'EFZ Informatiker', cfccuis:'EFZ Koch'};
-DEx.atout = {intel:['Intelligenz','Intelligenz','Stirbt nie bei einem Haushalts- oder Verkehrsunfall.'], charisme:['Charisma','Charisma','Der Heiratsantrag wird immer angenommen.'],
+DEx.atout = {discipline:['Diszipliniert','Diszipliniert','60 % Chance auf eine Militärkarriere; sonst behält die Figur denselben Beruf bis zur Rente.'], intel:['Intelligenz','Intelligenz','Stirbt nie bei einem Haushalts- oder Verkehrsunfall.'], charisme:['Charisma','Charisma','Der Heiratsantrag wird immer angenommen.'],
   social:['Geselligkeit','Geselligkeit','6 statt 3 Vorschläge bei der Suche nach der großen Liebe.'], courage:['Mut','Mut','Kein Verbrecher kann ihm oder ihr das Leben nehmen.'],
   crea:['Kreativität','Kreativität','Mit einem künstlerischen Beruf wird man immer ein Star.'], ego:['Egoismus','Egoismus','12 % Risiko, ein Kind zu bekommen, das ein künftiger Verbrecher ist (statt 2 %).'],
   chance:['Glück','Glück','12 % Chance auf ein Kind, das ein künftiger Star ist (statt 2,5 %).'], sante:['Gesundheit','Gesundheit','Wird vor 60 nie krank.'],
@@ -5079,7 +5082,7 @@ function workYear(p, A, day){
   }
   if(!w || w.s==='star' || w.s==='retired' || w.s==='prison') return;
   if(A >= p.retireAge){ const was = w.s; p.work = {s:'retired'}; if(was==='job' || was==='unemp') log('work','retired',[p.id],day); return; }
-  if(w.s==='job' && w.job !== 'president'){
+  if(w.s==='job' && w.job !== 'president' && !hasAtout(p, 'discipline')){   // atout Discipliné : garde son métier jusqu'à la retraite
     const r = Math.random();
     const jc = .04 / 1.15;                                // 0.1.9c : changements de métier 1,15× plus rares
     if(r < jc){ const j = pickJob(yearOf(day), p); if(j !== w.job){ p.work = {s:'job', job:j}; log('work','job_change',[p.id,j],day); } }   // 0.1.2a : changements de métier 20 % plus rares
@@ -5462,10 +5465,12 @@ function milYear(p, A, day){                           // 0.2.0b : armée, de 16
     }
     return;
   }
-  if(A < 16 || A > 24 || royalImmune(p) || p.star || p.crim || p.fameAt != null || p.zombie || p.lost || jailed(p)) return;
+  const disc = hasAtout(p, 'discipline');               // atout Discipliné : 60 % de chances de s'engager (à un âge tiré entre 16 et 24 ans)
+  if(disc && p.discFate == null) p.discFate = A > 30 ? 0 : Math.random() < .6 ? Math.max(A, rnd(16, 24)) : 0;
+  if(A < 16 || A > (disc ? 30 : 24) || royalImmune(p) || p.star || p.crim || p.fameAt != null || p.zombie || p.lost || jailed(p)) return;
   if(w && !(['odd','unemp','uni'].includes(w.s) || (w.s === 'job' && !isPol(w.job)))) return;
-  const y = yearOf(day), pr = p.sex === 'M' ? .007 : y >= 1940 ? .0022 : 0;   // environ 6 % des hommes, 2 % des femmes (depuis 1940)
-  if(Math.random() >= pr) return;
+  if(disc){ if(!p.discFate || A < p.discFate) return; }
+  else { const y = yearOf(day), pr = p.sex === 'M' ? .007 : y >= 1940 ? .0022 : 0; if(Math.random() >= pr) return; }   // environ 6 % des hommes, 2 % des femmes (depuis 1940)
   p.work = {s:'mil', rank:0, since: day, ret: rnd(48, 58)};
   log('work','mil_join',[p.id], day); dirty = true;
 }
