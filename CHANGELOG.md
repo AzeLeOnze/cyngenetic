@@ -2,6 +2,17 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.2b — 16 novembre 2026
+
+- Nouveau thème Arcade 90 🕹️ : une moquette de salle d'arcade sous lumière noire, des néons cyan, magenta et jaune, « INSERT COIN »… Il se débloque quand quelqu'un devient joueur de salles d'arcade (nouveau centre d'intérêt).
+- Quand il faut choisir quelqu'un (objets de l'inventaire, soins, héritier), on le choisit maintenant directement dans l'arbre : les bulles possibles brillent, on touche, on confirme.
+- 5 métiers typiquement français : bouquiniste des quais de Seine, parfumeur à Grasse, gardian de Camargue, chansonnier de Montmartre et santonnier.
+- 5 centres d'intérêt typiquement français : fan du Tour de France, joueur de belote, fan de chanson française, chineur de vide-greniers et amateur de fromages.
+- Métiers du futur : vigneron de Bretagne et imprimeur de baguettes 3D (France), gardien des crues de la Tamise et bobby à drone (Royaume-Uni), aiguilleur d'autobahn autonome et ingénieur hydrogène (Allemagne), gardien des glaciers (Suisse), cow-boy martien, conducteur d'Hyperloop et shérif des IA (États-Unis), technicien en dessalement et torero de taureaux robots (Espagne).
+- Le bonus de connexion affiche le vrai logo des Cyn, et l'inventaire a une icône de coffre pour ne plus le confondre avec la boutique.
+- Les politiques espagnols brillent aux couleurs de l'Espagne (plus de reflet bleu-blanc-rouge).
+- En anglais, le CAP Flemme s'appelle maintenant « Certificate in Professional Slacking » (le « CAP » n'existe qu'en France).
+
 ## v0.2.2a — 16 novembre 2026
 
 - Nouveau pays de lignée : l'Espagne 🇪🇸 ! Une carte avec les Baléares et les Canaries, 59 villes, des prénoms qui évoluent de 1500 à 2100 (et au-delà), des noms de famille d'ici (basques, catalans, galiciens…), 12 guerres, l'histoire du pays de la Reconquista à nos jours, des écoles espagnoles, 16 métiers (torero, sereno, conquistador…) et 11 centres d'intérêt (flamenco, pelote basque, sieste…).
