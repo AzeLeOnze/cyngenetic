@@ -2,6 +2,18 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.1b — 15 novembre 2026
+
+- Nouvel événement « Un visiteur inattendu » : un alpaga débarque dans le jardin et ne veut plus partir. Tu l'adoptes, ou tu appelles la fourrière ?
+- Noms des criminels selon le thème : « virus » avec le thème Hacker, « alien » avec Galaxie et Lune, « vampire » avec Dark (comme Obsidienne) et « cyberpsycho » avec Cyberpunk.
+- Le thème Vaporwave change de décor pour un vrai style vaporwave : sol en damier pastel, colonnes de marbre, vieilles fenêtres Windows 95, écritures « ＡＥＳＴＨＥＴＩＣ » et japonaises. Fini les palmiers.
+- Les politiques des États-Unis ont des bulles à rayures rouges et blanches, avec des étoiles sur leur bandeau.
+- Les bulles des malades graves et des militaires sont lisibles dans tous les thèmes sombres.
+- Nouveau centre d'intérêt : Patineur / Patineuse.
+- Le succès « Increvable » demande maintenant de guérir 2 fois d'une maladie mortelle (au lieu de 3).
+- Tutoriel : plus de bouton « Passer cette étape » en double, et plus de zone grise à l'étape « La relève ».
+- Naissance : les prénoms proposés sont bien alignés (4 prénoms et un dé rond). « Déménager » est mieux espacé.
+
 ## v0.2.1a — 15 novembre 2026
 
 - Nouvelle boutique, plus lisible et plus pratique : des onglets par catégorie, des cartes avec le prix bien visible, les achats possibles mis en avant, la raison quand un achat est indisponible, et une barre qui montre combien il te manque.
