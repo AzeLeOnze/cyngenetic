@@ -1876,6 +1876,7 @@ body.no-deco .arcfx *{animation:none}
 /* ===== 0.2.2a : inventaire, objets et bonus de connexion ===== */
 .gel.invb{--c1:#f1e2ff;--c2:#a160ff;--c3:#6a2bd6;--edge:#4a1aa0;--ts:rgba(40,0,80,.5);position:relative}
 .hud .hudinv{flex:none}
+.gel.invb{overflow:visible}   /* 0.2.2c : la pastille rouge du bonus n'est plus coupée */
 @media (min-width:901px){ .tree-head .hud .hudinv{width:54px;min-height:54px;box-shadow:0 6px 18px rgba(74,26,160,.3)} .tree-head .hud .hudinv svg{width:26px;height:26px} }
 .invdot{position:absolute;top:-3px;right:-3px;width:13px;height:13px;border-radius:50%;background:#ff2f5a;border:2px solid #fff;box-shadow:0 0 8px rgba(255,40,80,.8);animation:invdot 1.4s ease-in-out infinite}
 @keyframes invdot{50%{transform:scale(1.25)}}
