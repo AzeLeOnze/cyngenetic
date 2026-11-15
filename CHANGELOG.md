@@ -2,6 +2,21 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.2c — 16 novembre 2026
+
+- L'inventaire quitte la barre du haut : son coffre est maintenant juste à côté de ton compteur de Cyn.
+- L'alpaga se fait beaucoup plus rare : il passe au plus une fois tous les 40 ans dans la famille.
+- Tutoriel sur téléphone : il ne bloque plus à l'étape « Ta moitié » (il revient tout seul sur l'arbre), l'étape « bébé » se passe d'elle-même si avoir un enfant est impossible, et sa bulle a un fond plein pour rester lisible.
+- Nouvelle étape du tutoriel pour l'inventaire et le bonus de connexion.
+- Un nouveau joueur ne reçoit plus le bonus de connexion avant même sa première partie : il arrive après la question du tutoriel.
+- Toucher l'horloge met le jeu en pause (ou le relance). Pratique sur téléphone, où le bouton Pause est souvent caché à droite de la barre.
+- Une personne immortelle (ticket doré) n'affiche plus de risque de décès.
+- Deux textes manquaient en allemand dans les paramètres.
+- Un criminel immortel (ticket doré) ne meurt plus, ne disparaît plus et ne va plus en prison : son crime s'arrête tout seul, entre 1 et 10 ans après son premier meurtre.
+- Sur téléphone, Pause et les vitesses sont maintenant au début de la barre du haut.
+- Tutoriel : le bouton « Passer » devient « Quitter le tutoriel », et l'étape « Trouve l'âme sœur » indique l'onglet « Moi » sur téléphone.
+- Un peu plus d'enfants après 1950 : les familles autonomes s'éteignaient trop souvent avant 2100.
+
 ## v0.2.2b — 16 novembre 2026
 
 - Nouveau thème Arcade 90 🕹️ : une moquette de salle d'arcade sous lumière noire, des néons cyan, magenta et jaune, « INSERT COIN »… Il se débloque quand quelqu'un devient joueur de salles d'arcade (nouveau centre d'intérêt).

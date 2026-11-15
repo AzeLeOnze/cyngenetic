@@ -123,6 +123,8 @@ button{font:inherit;color:inherit}
 .tuto-hole{position:fixed;border-radius:18px;pointer-events:none;box-shadow:0 0 0 9999px rgba(0,25,70,.6),0 0 0 3px #fff,0 0 26px 8px rgba(120,220,255,.85);
   transition:left .35s cubic-bezier(.3,1.2,.4,1),top .35s cubic-bezier(.3,1.2,.4,1),width .35s cubic-bezier(.3,1.2,.4,1),height .35s cubic-bezier(.3,1.2,.4,1)}
 .tuto-hole.center{left:50%;top:50%;width:0;height:0;box-shadow:0 0 0 9999px rgba(0,25,70,.6)}
+#tuto .tuto-card.glass,.tpbar.glass{background-color:#f4faff}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"]) :is(#tuto .tuto-card.glass,.tpbar.glass){background-color:#121216}
 #tuto.live{pointer-events:none}#tuto.live .tuto-card{pointer-events:auto}
 .tuto-try{color:var(--magenta);font-weight:900}
 .tuto-card{position:fixed;width:min(340px,calc(100vw - 24px));padding:16px 18px 14px;border-radius:22px;transition:left .35s ease,top .35s ease}
@@ -370,7 +372,7 @@ input[type=range]{width:100%;accent-color:var(--aqua)}
 .restartb{margin-left:auto}
 .topbar .logo{font-size:38px;text-align:left;filter:drop-shadow(0 2px 0 rgba(0,70,170,.5))}
 .clock{justify-self:center;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
-.lcd{position:relative;overflow:hidden;min-width:300px;padding:7px 26px;border-radius:999px;text-align:center;border:1px solid var(--lcd-edge);
+.lcd{cursor:pointer;position:relative;overflow:hidden;min-width:300px;padding:7px 26px;border-radius:999px;text-align:center;border:1px solid var(--lcd-edge);
   background:linear-gradient(180deg,var(--lcd-a) 0%,var(--lcd-b) 49%,var(--lcd-c) 51%,var(--lcd-d) 100%);
   box-shadow:0 6px 16px rgba(0,50,150,.4),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -6px 14px rgba(0,220,255,.35)}
 .lcd::before{content:"";position:absolute;left:5%;right:5%;top:1px;height:46%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0))}
@@ -807,6 +809,7 @@ body.zmode .treebox{position:relative}
 .achtag{flex:none;align-self:flex-start;padding:2px 8px;border-radius:99px;font:800 10px var(--font-display);text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--tg,#b8732f)}
 .achtag.t-silver{--tg:#8593a3}.achtag.t-gold{--tg:#d39600}.achtag.t-platinum{--tg:#2f9fc4}.achtag.t-special{--tg:#8f6bff}
 .achtag.t-legend{background:linear-gradient(90deg,#ff4f6d,#ff9a2e,#3fd46b,#3fa9ff,#8f6bff)}
+@media (max-width:900px){ .topbar .ctrls #btnPause{order:-2} .topbar .ctrls #speeds{order:-1} }   /* 0.2.2c */
 @media (max-width:900px){ .achnav{top:-16px;margin:12px -16px 4px;padding:10px 16px} }
 .achgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px}
 .ach{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 8px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:0 4px 10px rgba(0,70,160,.12)}
@@ -1872,6 +1875,8 @@ body.no-deco .arcfx *{animation:none}
 
 /* ===== 0.2.2a : inventaire, objets et bonus de connexion ===== */
 .gel.invb{--c1:#f1e2ff;--c2:#a160ff;--c3:#6a2bd6;--edge:#4a1aa0;--ts:rgba(40,0,80,.5);position:relative}
+.hud .hudinv{flex:none}
+@media (min-width:901px){ .tree-head .hud .hudinv{width:54px;min-height:54px;box-shadow:0 6px 18px rgba(74,26,160,.3)} .tree-head .hud .hudinv svg{width:26px;height:26px} }
 .invdot{position:absolute;top:-3px;right:-3px;width:13px;height:13px;border-radius:50%;background:#ff2f5a;border:2px solid #fff;box-shadow:0 0 8px rgba(255,40,80,.8);animation:invdot 1.4s ease-in-out infinite}
 @keyframes invdot{50%{transform:scale(1.25)}}
 .invgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
@@ -2028,7 +2033,7 @@ body.no-deco .arcfx *{animation:none}
   <header class="topbar glass">
     <div class="brand small"><span class="brand-slot"></span><div class="logo"><span>Cyn</span>genetic</div></div>
     <div class="clock">
-      <div class="lcd" id="lcd"><span id="dateText"></span></div>
+      <div class="lcd" id="lcd" data-act="pause" role="button" tabindex="0"><span id="dateText"></span></div>
       <div class="clock-sub"><div class="yearbar"><i id="yearFill"></i></div><span id="rate" class="rate"></span></div>
       <div class="era"><div class="decade" id="decade"></div><div class="warb" id="warb" hidden></div></div>
     </div>
@@ -2037,7 +2042,6 @@ body.no-deco .arcfx *{animation:none}
       <button class="gel round ghost" data-act="custom" data-ta="custom" data-tt="custom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h9.2a3 3 0 0 1 5.6 0H21v2h-3.2a3 3 0 0 1-5.6 0H3zm12 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 11h3.2a3 3 0 0 1 5.6 0H21v2h-9.2a3 3 0 0 1-5.6 0H3zm6 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-6 4h11.2a3 3 0 0 1 5.6 0H21v2h-1.2a3 3 0 0 1-5.6 0H3zm14 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></button>
       <button class="gel round ghost" data-act="themes" data-ta="themes" data-tt="themes"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A5.6 5.6 0 0 0 22 9.8C22 5.5 17.5 2 12 2zM6.5 13a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg></button>
       <button class="gel round shopb" data-act="shop" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7V6a4 4 0 0 1 8 0v1h-2V6a2 2 0 0 0-4 0v1zM4.2 8h15.6l-1.1 12.2A2 2 0 0 1 16.7 22H7.3a2 2 0 0 1-2-1.8z"/></svg></button>
-      <button class="gel round invb" data-act="inv" data-ta="inv_title" data-tt="inv_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 10V8.6A4.6 4.6 0 0 1 7.1 4h9.8a4.6 4.6 0 0 1 4.6 4.6V10zM6.4 5.5v4.5h1.7V5.3zm9.5-.2v4.7h1.7V5.5zM2.5 11.6h7.6v2.2a1.9 1.9 0 0 0 3.8 0v-2.2h7.6V19a3 3 0 0 1-3 3h-13a3 3 0 0 1-3-3zm3.9 1.6V20.4h1.7v-7.2zm9.5 0v7.2h1.7v-7.2zM10.6 10h2.8v3.5a1.4 1.4 0 0 1-2.8 0z"/></svg><i class="invdot" hidden></i></button>
       <button class="gel round gold achb" data-act="achs" data-ta="ach_title" data-tt="ach_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 7.4 12H7a4 4 0 0 1-4-4V5h4zM5 7v1a2 2 0 0 0 2 2V7zm12 0v3a2 2 0 0 0 2-2V7z"/></svg></button>
       <div class="pills" role="group" id="speeds">
         <button data-act="speed" data-v="0.25">×0,25</button>
@@ -2057,7 +2061,7 @@ body.no-deco .arcfx *{animation:none}
   <main class="board">
     <section class="glass treebox">
       <div class="tree-head">
-        <div class="hud"><span class="cyn" id="cynBox" data-act="shop" role="button" tabindex="0" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span><div class="zbox" id="zBox" hidden><span class="zic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM7 14.8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-5 4.2c-1.4 0-2.6-.6-3.4-1.6l1.5-1.2c.5.6 1.2.9 1.9.9s1.4-.3 1.9-.9l1.5 1.2c-.8 1-2 1.6-3.4 1.6z"/></svg></span><span class="ztxt"><b id="zTxt"></b><i class="zbar"><i id="zFill"></i></i></span></div></div>
+        <div class="hud"><span class="cyn" id="cynBox" data-act="shop" role="button" tabindex="0" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span><button class="gel round invb hudinv" data-act="inv" data-ta="inv_title" data-tt="inv_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 10V8.6A4.6 4.6 0 0 1 7.1 4h9.8a4.6 4.6 0 0 1 4.6 4.6V10zM6.4 5.5v4.5h1.7V5.3zm9.5-.2v4.7h1.7V5.5zM2.5 11.6h7.6v2.2a1.9 1.9 0 0 0 3.8 0v-2.2h7.6V19a3 3 0 0 1-3 3h-13a3 3 0 0 1-3-3zm3.9 1.6V20.4h1.7v-7.2zm9.5 0v7.2h1.7v-7.2zM10.6 10h2.8v3.5a1.4 1.4 0 0 1-2.8 0z"/></svg><i class="invdot" hidden></i></button><div class="zbox" id="zBox" hidden><span class="zic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM7 14.8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-5 4.2c-1.4 0-2.6-.6-3.4-1.6l1.5-1.2c.5.6 1.2.9 1.9.9s1.4-.3 1.9-.9l1.5 1.2c-.8 1-2 1.6-3.4 1.6z"/></svg></span><span class="ztxt"><b id="zTxt"></b><i class="zbar"><i id="zFill"></i></i></span></div></div>
         <h2 id="treeTitle"></h2>
         <span class="stats" id="treeStats"></span>
         <div class="pills" id="viewSw" role="group" hidden>
@@ -2111,9 +2115,34 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.2b';
+const APP_VERSION = '0.2.2c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.2c', date:{fr:'16 novembre 2026', en:'November 16, 2026', de:'16. November 2026', es:'16 de noviembre de 2026'},
+   fr:['L\'inventaire quitte la barre du haut : son coffre est maintenant juste à côté de ton compteur de Cyn.',
+       'L\'alpaga se fait beaucoup plus rare : il passe au plus une fois tous les 40 ans dans la famille.',
+       'Tutoriel sur téléphone : il ne bloque plus à l\'étape « Ta moitié » (il revient tout seul sur l\'arbre), l\'étape « bébé » se passe d\'elle-même si avoir un enfant est impossible, et sa bulle a un fond plein pour rester lisible.',
+       'Nouvelle étape du tutoriel pour l\'inventaire et le bonus de connexion.',
+       'Un nouveau joueur ne reçoit plus le bonus de connexion avant même sa première partie : il arrive après la question du tutoriel.',
+       'Toucher l\'horloge met le jeu en pause (ou le relance). Pratique sur téléphone, où le bouton Pause est souvent caché à droite de la barre.',
+       'Une personne immortelle (ticket doré) n\'affiche plus de risque de décès.',
+       'Deux textes manquaient en allemand dans les paramètres.',
+       'Un criminel immortel (ticket doré) ne meurt plus, ne disparaît plus et ne va plus en prison : son crime s\'arrête tout seul, entre 1 et 10 ans après son premier meurtre.',
+       'Sur téléphone, Pause et les vitesses sont maintenant au début de la barre du haut.',
+       'Tutoriel : le bouton « Passer » devient « Quitter le tutoriel », et l\'étape « Trouve l\'âme sœur » indique l\'onglet « Moi » sur téléphone.',
+       'Un peu plus d\'enfants après 1950 : les familles autonomes s\'éteignaient trop souvent avant 2100.'],
+   en:['The inventory leaves the top bar: its chest now sits right next to your Cyn counter.',
+       'The alpaca is much rarer: it visits the family at most once every 40 years.',
+       'Tutorial on phones: it no longer gets stuck at the “Your other half” step (it goes back to the tree on its own), the “baby” step moves on by itself when having a child is impossible, and its bubble has a solid background so it stays readable.',
+       'New tutorial step for the inventory and the login bonus.',
+       'New players no longer get the login bonus before their first game even starts: it comes after the tutorial question.',
+       'Tapping the clock pauses (or resumes) the game. Handy on phones, where the Pause button is often hidden off to the right of the bar.',
+       'An immortal person (golden ticket) no longer shows a risk of death.',
+       'Two texts were missing in German in the settings.',
+       'An immortal criminal (golden ticket) no longer dies, vanishes or goes to prison: their crime stops on its own, 1 to 10 years after their first murder.',
+       'On phones, Pause and the speeds now come first in the top bar.',
+       'Tutorial: the “Skip” button becomes “Exit tutorial”, and the “Find your soulmate” step points to the “Me” tab on phones.',
+       'A few more children after 1950: autonomous families died out too often before 2100.']},
   {v:'0.2.2b', date:{fr:'16 novembre 2026', en:'November 16, 2026', de:'16. November 2026', es:'16 de noviembre de 2026'},
    fr:['Nouveau thème Arcade 90 🕹️ : une moquette de salle d\'arcade sous lumière noire, des néons cyan, magenta et jaune, « INSERT COIN »… Il se débloque quand quelqu\'un devient joueur de salles d\'arcade (nouveau centre d\'intérêt).',
        'Quand il faut choisir quelqu\'un (objets de l\'inventaire, soins, héritier), on le choisit maintenant directement dans l\'arbre : les bulles possibles brillent, on touche, on confirme.',
@@ -3979,6 +4008,7 @@ fr:{
   skin_locked_vwave:'Se débloque quand un membre de la famille est fan de vaporwave.', skin_locked_coral:"S'achète dans la boutique pour 3 400 Cyn.",
   skin_how_vwave:"A été débloqué quand quelqu'un est devenu fan de vaporwave.", skin_how_coral:"A été débloqué en l'achetant dans la boutique (3 400 Cyn).",
   log_vwave_skin:()=>'🌴 Un fan de vaporwave dans la famille… Le thème Vaporwave est débloqué dans le menu Thèmes.',
+  log_crim_end:p=>`🕊️ ${nm(p)} range son couteau pour de bon : fini le crime, place à une éternité tranquille.`, tuto_me_tab:()=>`Sur téléphone, ouvre d'abord l'onglet « ${t('m_me')} » en bas.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:"Se débloque quand un membre de la famille devient joueur de salles d'arcade.", skin_how_arcade:"A été débloqué quand quelqu'un est devenu joueur de salles d'arcade.",
   log_arcade_skin:()=>"🕹️ Un joueur de salles d'arcade dans la famille… Le thème Arcade 90 est débloqué dans le menu Thèmes.",
   tp_count:n=>n > 1 ? `${n} personnes possibles` : n ? '1 personne possible' : 'personne pour le moment', tp_arm:n=>`Utiliser sur ${n} ?`, tp_heir_arm:n=>`Continuer avec ${n} ?`,
@@ -4228,9 +4258,9 @@ fr:{
   over_zombie_title:'Les zombies ont gagné', over_zombie_txt:(l,y)=>`En ${y}, plus aucun membre de la famille ${l} n'est humain.`,
   z_win_title:'Victoire, la famille a survécu !', z_win_txt:(l,n)=>`La famille ${l} a tenu face aux zombies jusqu'en 2100, avec ${n} survivant${n>1?'s':''}.`,
   tuto_offer_e:'Nouveau joueur ?', tuto_offer_t:'Bienvenue !', tuto_offer:"Tu découvres Cyngenetic ? Un petit tutoriel d'environ 2 minutes te montre les bases du jeu.",
-  tuto_yes:'Oui, montre-moi', tuto_no:'Non merci, je me débrouille', tuto_next:'Suivant', tuto_prev:'Retour', tuto_skip:'Passer', tuto_end:"C'est parti !",
+  tuto_yes:'Oui, montre-moi', tuto_no:'Non merci, je me débrouille', tuto_next:'Suivant', tuto_prev:'Retour', tuto_skip:'Quitter le tutoriel', tuto_end:"C'est parti !",
   tuto_set:'Tutoriel', tuto_set_hint:'Revoir les bases du jeu.', tuto_set_btn:'Lancer', tuto_planned:'Au début de la prochaine partie',
-  tuto_steps:[['Bienvenue dans Cyngenetic','Tu incarnes une personne. Ton but : faire vivre sa lignée le plus longtemps possible, de génération en génération.'],['Le temps passe','La date avance toute seule : une année dure 4 secondes. Ton personnage grandit, étudie, travaille et vieillit.'],['Vitesse et pause','Accélère, ralentis, ou mets le jeu en pause quand tu as besoin de réfléchir.'],['Ton personnage','C\'est toi ! Touche n\'importe quelle bulle de l\'arbre pour ouvrir sa fiche : âge, métier, santé, atout… Pince ou utilise la molette pour zoomer.'],['L\'âme sœur','Dès 18 ans, trouve l\'âme sœur (ici, ou dans ta fiche). En couple, vous pouvez vous marier et avoir des enfants.'],['La relève','Personne ne vit éternellement : à la mort de ton personnage, tu continues avec un de ses descendants. Sans héritier, la lignée s\'éteint.'],['Les Cyn','Naissances, stars, criminels… les événements te rapportent des Cyn. Touche le compteur pour ouvrir la boutique.'],['La boutique','Dépense tes Cyn : bébé star, fertilité, immunité, potion de santé, nouveaux thèmes…'],['L\'album','Tout ce que tu découvres (métiers, maladies, écoles…) s\'y range pour toujours, d\'une partie à l\'autre.'],['Les succès','Des défis à relever au fil de tes parties. Certains débloquent des thèmes.'],['Le journal','Naissances, mariages, maladies, décès : tout ce qui arrive à ta famille y est raconté.'],['Le mode auto','Envie de simplement regarder ? Le mode auto joue à ta place.'],['Réglages','Les Paramètres (son, thème, langue) et la Personnalisation (règles du jeu) se trouvent ici.'],['À toi de jouer !','Tu pourras revoir ce tutoriel à tout moment dans les Paramètres. Bonne chance pour ta lignée !']],
+  tuto_steps:[['Bienvenue dans Cyngenetic','Tu incarnes une personne. Ton but : faire vivre sa lignée le plus longtemps possible, de génération en génération.'],['Le temps passe','La date avance toute seule : une année dure 4 secondes. Ton personnage grandit, étudie, travaille et vieillit.'],['Vitesse et pause','Accélère, ralentis, ou mets le jeu en pause quand tu as besoin de réfléchir.'],['Ton personnage','C\'est toi ! Touche n\'importe quelle bulle de l\'arbre pour ouvrir sa fiche : âge, métier, santé, atout… Pince ou utilise la molette pour zoomer.'],['L\'âme sœur','Dès 18 ans, trouve l\'âme sœur (ici, ou dans ta fiche). En couple, vous pouvez vous marier et avoir des enfants.'],['La relève','Personne ne vit éternellement : à la mort de ton personnage, tu continues avec un de ses descendants. Sans héritier, la lignée s\'éteint.'],['Les Cyn','Naissances, stars, criminels… les événements te rapportent des Cyn. Touche le compteur pour ouvrir la boutique.'],['La boutique','Dépense tes Cyn : bébé star, fertilité, immunité, potion de santé, nouveaux thèmes…'],['L\'inventaire','Le coffre à côté de tes Cyn : tes objets y sont rangés, d\'une partie à l\'autre. Chaque jour, un bonus de connexion t\'y attend aussi.'],['L\'album','Tout ce que tu découvres (métiers, maladies, écoles…) s\'y range pour toujours, d\'une partie à l\'autre.'],['Les succès','Des défis à relever au fil de tes parties. Certains débloquent des thèmes.'],['Le journal','Naissances, mariages, maladies, décès : tout ce qui arrive à ta famille y est raconté.'],['Le mode auto','Envie de simplement regarder ? Le mode auto joue à ta place.'],['Réglages','Les Paramètres (son, thème, langue) et la Personnalisation (règles du jeu) se trouvent ici.'],['À toi de jouer !','Tu pourras revoir ce tutoriel à tout moment dans les Paramètres. Bonne chance pour ta lignée !']],
   shop_eyebrow:'Dépense tes Cyn', shop_potion:'Potion de santé', shop_potion_d:"Guérit toutes les maladies d'un membre de la famille au choix, même les plus graves.",
   shop_potion_none:"Personne n'est malade dans la famille.", pick_potion:()=>'Qui doit boire la potion ?', sick_soon:'Va bientôt tomber malade',
   f_mild:'Maladies bénignes', sick_rib:()=>'Malade', alb_mild:'Maladies', until_y:y=>`jusqu'en ${y}`,
@@ -4388,6 +4418,7 @@ en:{
   skin_locked_vwave:'Unlocks when a family member is a vaporwave fan.', skin_locked_coral:'Buy it in the shop for 3,400 Cyn.',
   skin_how_vwave:'Unlocked when someone became a vaporwave fan.', skin_how_coral:'Unlocked by buying it in the shop (3,400 Cyn).',
   log_vwave_skin:()=>'🌴 A vaporwave fan in the family… The Vaporwave theme is now available in the Themes menu.',
+  log_crim_end:p=>`🕊️ ${nm(p)} puts the knife away for good: no more crime, just a quiet eternity.`, tuto_me_tab:()=>`On a phone, first open the “${t('m_me')}” tab at the bottom.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:'Unlocks when a family member becomes an arcade gamer.', skin_how_arcade:'Unlocked when someone became an arcade gamer.',
   log_arcade_skin:()=>'🕹️ An arcade gamer in the family… The Arcade 90 theme is now available in the Themes menu.',
   tp_count:n=>n > 1 ? `${n} possible people` : n ? '1 possible person' : 'nobody for now', tp_arm:n=>`Use on ${n}?`, tp_heir_arm:n=>`Continue as ${n}?`,
@@ -4635,9 +4666,9 @@ en:{
   over_zombie_title:'The zombies won', over_zombie_txt:(l,y)=>`In ${y}, no member of the ${l} family is human any more.`,
   z_win_title:'Victory, the family survived!', z_win_txt:(l,n)=>`The ${l} family held out against the zombies until 2100, with ${n} survivor${n>1?'s':''}.`,
   tuto_offer_e:'New player?', tuto_offer_t:'Welcome!', tuto_offer:'New to Cyngenetic? A short tutorial (about 2 minutes) shows you the basics.',
-  tuto_yes:'Yes, show me', tuto_no:"No thanks, I'll figure it out", tuto_next:'Next', tuto_prev:'Back', tuto_skip:'Skip', tuto_end:"Let's go!",
+  tuto_yes:'Yes, show me', tuto_no:"No thanks, I'll figure it out", tuto_next:'Next', tuto_prev:'Back', tuto_skip:'Exit tutorial', tuto_end:"Let's go!",
   tuto_set:'Tutorial', tuto_set_hint:'Go over the basics again.', tuto_set_btn:'Start', tuto_planned:'At the start of the next game',
-  tuto_steps:[['Welcome to Cyngenetic','You play one person. Your goal: keep their bloodline going for as long as possible, generation after generation.'],['Time flies','The date moves on by itself: one year lasts 4 seconds. Your character grows up, studies, works and gets older.'],['Speed and pause','Speed up, slow down, or pause the game whenever you need to think.'],['Your character','That\'s you! Tap any bubble in the tree to open its card: age, job, health, gift… Pinch or use the mouse wheel to zoom.'],['Your soulmate','From 18, find your soulmate (here, or from your card). As a couple, you can marry and have children.'],['Carrying on','Nobody lives forever: when your character dies, you carry on as one of their descendants. With no heir, the bloodline ends.'],['Cyn','Births, stars, criminals… events earn you Cyn. Tap the counter to open the shop.'],['The shop','Spend your Cyn: star baby, fertility, immunity, health potion, new themes…'],['The album','Everything you discover (jobs, illnesses, schools…) is kept here for good, from one game to the next.'],['Achievements','Challenges to complete across your games. Some unlock themes.'],['The journal','Births, weddings, illnesses, deaths: everything that happens to your family is told here.'],['Auto mode','Just want to watch? Auto mode plays for you.'],['Settings','Settings (sound, theme, language) and Customization (game rules) are right here.'],['Your turn!','You can replay this tutorial anytime from Settings. Good luck with your bloodline!']],
+  tuto_steps:[['Welcome to Cyngenetic','You play one person. Your goal: keep their bloodline going for as long as possible, generation after generation.'],['Time flies','The date moves on by itself: one year lasts 4 seconds. Your character grows up, studies, works and gets older.'],['Speed and pause','Speed up, slow down, or pause the game whenever you need to think.'],['Your character','That\'s you! Tap any bubble in the tree to open its card: age, job, health, gift… Pinch or use the mouse wheel to zoom.'],['Your soulmate','From 18, find your soulmate (here, or from your card). As a couple, you can marry and have children.'],['Carrying on','Nobody lives forever: when your character dies, you carry on as one of their descendants. With no heir, the bloodline ends.'],['Cyn','Births, stars, criminals… events earn you Cyn. Tap the counter to open the shop.'],['The shop','Spend your Cyn: star baby, fertility, immunity, health potion, new themes…'],['The inventory','The chest next to your Cyn: your items are kept there, from one game to the next. A daily login bonus waits for you there too.'],['The album','Everything you discover (jobs, illnesses, schools…) is kept here for good, from one game to the next.'],['Achievements','Challenges to complete across your games. Some unlock themes.'],['The journal','Births, weddings, illnesses, deaths: everything that happens to your family is told here.'],['Auto mode','Just want to watch? Auto mode plays for you.'],['Settings','Settings (sound, theme, language) and Customization (game rules) are right here.'],['Your turn!','You can replay this tutorial anytime from Settings. Good luck with your bloodline!']],
   shop_eyebrow:'Spend your Cyn', shop_potion:'Health potion', shop_potion_d:'Cures every illness of a family member of your choice, even the most serious.',
   shop_potion_none:'Nobody in the family is ill.', pick_potion:()=>'Who should drink the potion?', sick_soon:'About to fall ill',
   f_mild:'Mild illnesses', sick_rib:()=>'Sick', alb_mild:'Illnesses', until_y:y=>`until ${y}`,
@@ -4796,6 +4827,7 @@ TX.de = {
   skin_locked_vwave:'Wird freigeschaltet, wenn ein Familienmitglied Vaporwave-Fan ist.', skin_locked_coral:'Im Shop für 3.400 Cyn erhältlich.',
   skin_how_vwave:'Freigeschaltet, als jemand Vaporwave-Fan wurde.', skin_how_coral:'Freigeschaltet durch Kauf im Shop (3.400 Cyn).',
   log_vwave_skin:()=>'🌴 Ein Vaporwave-Fan in der Familie… Das Vaporwave-Design ist jetzt im Design-Menü verfügbar.',
+  log_crim_end:p=>`🕊️ ${nm(p)} legt das Messer endgültig weg: Schluss mit dem Verbrechen, jetzt beginnt eine ruhige Ewigkeit.`, tuto_me_tab:()=>`Auf dem Handy öffne zuerst unten den Tab „${t('m_me')}“.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:'Wird freigeschaltet, wenn ein Familienmitglied Spielhallen-Zocker wird.', skin_how_arcade:'Freigeschaltet, als jemand Spielhallen-Zocker wurde.',
   log_arcade_skin:()=>'🕹️ Ein Spielhallen-Zocker in der Familie… Das Design Arcade 90 ist jetzt im Design-Menü verfügbar.',
   tp_count:n=>n > 1 ? `${n} Personen möglich` : n ? '1 Person möglich' : 'gerade niemand', tp_arm:n=>`Für ${n} verwenden?`, tp_heir_arm:n=>`Mit ${n} weiterspielen?`,
@@ -4940,7 +4972,7 @@ TX.de = {
   relocate_title:'Umziehen', relocate_custom:'Oder eine andere Stadt…', relocate_btn:'Gemeinsam umziehen',
   relocate_note:c=>`Du verlässt ${c} mit deinem Partner und den minderjährigen Kindern.`,
   skin_gold:'Gold', skin_locked:'Schließe eine ganze Erfolgskategorie ab, um dieses Design freizuschalten.', gold_unlocked:'Gold-Design freigeschaltet!',
-  ctry_fr:'Frankreich', ctry_uk:'Vereinigtes Königreich', ctry_de:'Deutschland', ctry_ch:'Schweiz', ctry_us:'Vereinigte Staaten', ctry_es:'Spanien', set_country:'Land der Blutlinie',
+  ctry_fr:'Frankreich', ctry_uk:'Vereinigtes Königreich', ctry_de:'Deutschland', ctry_ch:'Schweiz', ctry_us:'Vereinigte Staaten', ctry_es:'Spanien', set_country:'Land der Blutlinie', set_country_hint:'Vornamen, Nachnamen, Städte, Karte, Berufe, Schulen, Ereignisse und Kriege des gewählten Landes.', set_country_game:c=>`Das laufende Spiel findet hier statt: ${t('ctry_' + c)}. Die Änderung gilt ab dem nächsten Spiel.`,
   set_tab_gen:'Allgemein', set_tab_snd:'Ton', set_tab_gfx:'Video & Grafik', quit:'Beenden',
   set_full:'Vollbild', set_full_hint:'Das Spiel füllt den ganzen Bildschirm (Esc zum Verlassen).', set_full_hint_d:'Das Spiel füllt den ganzen Bildschirm (Taste F11).', set_full_on:'Einschalten', set_full_off:'Vollbild verlassen',
   set_res:'Auflösung', set_res_hint:'Größe des Spielfensters.', set_res_pick:'Wählen…',
@@ -5043,9 +5075,9 @@ TX.de = {
   over_zombie_title:'Die Zombies haben gewonnen', over_zombie_txt:(l,y)=>`Im Jahr ${y} ist kein Mitglied der Familie ${l} mehr ein Mensch.`,
   z_win_title:'Sieg, die Familie hat überlebt!', z_win_txt:(l,n)=>`Die Familie ${l} hat den Zombies bis 2100 standgehalten, mit ${n} Überlebenden.`,
   tuto_offer_e:'Neu hier?', tuto_offer_t:'Willkommen!', tuto_offer:'Neu bei Cyngenetic? Ein kurzes Tutorial (etwa 2 Minuten) zeigt dir die Grundlagen.',
-  tuto_yes:'Ja, zeig es mir', tuto_no:'Nein danke, ich komme klar', tuto_next:'Weiter', tuto_prev:'Zurück', tuto_skip:'Überspringen', tuto_end:'Los geht\'s!',
+  tuto_yes:'Ja, zeig es mir', tuto_no:'Nein danke, ich komme klar', tuto_next:'Weiter', tuto_prev:'Zurück', tuto_skip:'Tutorial beenden', tuto_end:'Los geht\'s!',
   tuto_set:'Tutorial', tuto_set_hint:'Die Grundlagen noch einmal ansehen.', tuto_set_btn:'Starten', tuto_planned:'Zu Beginn des nächsten Spiels',
-  tuto_steps:[['Willkommen bei Cyngenetic','Du spielst eine Person. Dein Ziel: ihre Blutlinie so lange wie möglich fortführen, Generation um Generation.'],['Die Zeit vergeht','Das Datum läuft von selbst: Ein Jahr dauert 4 Sekunden. Deine Figur wächst auf, lernt, arbeitet und wird älter.'],['Tempo und Pause','Beschleunige, verlangsame oder pausiere das Spiel, wann immer du nachdenken willst.'],['Deine Figur','Das bist du! Tippe auf eine Blase im Stammbaum, um ihre Karte zu öffnen: Alter, Beruf, Gesundheit, Gabe… Zum Zoomen zwei Finger oder das Mausrad benutzen.'],['Die große Liebe','Ab 18 findest du hier (oder über deine Karte) die große Liebe. Als Paar könnt ihr heiraten und Kinder bekommen.'],['Weitermachen','Niemand lebt ewig: Stirbt deine Figur, spielst du mit einem ihrer Nachkommen weiter. Ohne Erben endet die Blutlinie.'],['Cyn','Geburten, Stars, Verbrecher… Ereignisse bringen dir Cyn. Tippe auf den Zähler, um den Shop zu öffnen.'],['Der Shop','Gib deine Cyn aus: Star-Baby, Fruchtbarkeit, Immunität, Heiltrank, neue Designs…'],['Das Album','Alles, was du entdeckst (Berufe, Krankheiten, Schulen…), bleibt hier für immer gespeichert, von Spiel zu Spiel.'],['Erfolge','Herausforderungen über alle deine Spiele hinweg. Manche schalten Designs frei.'],['Die Chronik','Geburten, Hochzeiten, Krankheiten, Todesfälle: Alles, was deiner Familie passiert, wird hier erzählt.'],['Automodus','Willst du nur zuschauen? Der Automodus spielt für dich.'],['Einstellungen','Einstellungen (Ton, Design, Sprache) und Anpassung (Spielregeln) findest du genau hier.'],['Jetzt du!','Du kannst dieses Tutorial jederzeit in den Einstellungen erneut starten. Viel Glück mit deiner Blutlinie!']],
+  tuto_steps:[['Willkommen bei Cyngenetic','Du spielst eine Person. Dein Ziel: ihre Blutlinie so lange wie möglich fortführen, Generation um Generation.'],['Die Zeit vergeht','Das Datum läuft von selbst: Ein Jahr dauert 4 Sekunden. Deine Figur wächst auf, lernt, arbeitet und wird älter.'],['Tempo und Pause','Beschleunige, verlangsame oder pausiere das Spiel, wann immer du nachdenken willst.'],['Deine Figur','Das bist du! Tippe auf eine Blase im Stammbaum, um ihre Karte zu öffnen: Alter, Beruf, Gesundheit, Gabe… Zum Zoomen zwei Finger oder das Mausrad benutzen.'],['Die große Liebe','Ab 18 findest du hier (oder über deine Karte) die große Liebe. Als Paar könnt ihr heiraten und Kinder bekommen.'],['Weitermachen','Niemand lebt ewig: Stirbt deine Figur, spielst du mit einem ihrer Nachkommen weiter. Ohne Erben endet die Blutlinie.'],['Cyn','Geburten, Stars, Verbrecher… Ereignisse bringen dir Cyn. Tippe auf den Zähler, um den Shop zu öffnen.'],['Der Shop','Gib deine Cyn aus: Star-Baby, Fruchtbarkeit, Immunität, Heiltrank, neue Designs…'],['Das Inventar','Die Truhe neben deinen Cyn: Dort liegen deine Gegenstände, von Spiel zu Spiel. Jeden Tag wartet dort auch ein Login-Bonus.'],['Das Album','Alles, was du entdeckst (Berufe, Krankheiten, Schulen…), bleibt hier für immer gespeichert, von Spiel zu Spiel.'],['Erfolge','Herausforderungen über alle deine Spiele hinweg. Manche schalten Designs frei.'],['Die Chronik','Geburten, Hochzeiten, Krankheiten, Todesfälle: Alles, was deiner Familie passiert, wird hier erzählt.'],['Automodus','Willst du nur zuschauen? Der Automodus spielt für dich.'],['Einstellungen','Einstellungen (Ton, Design, Sprache) und Anpassung (Spielregeln) findest du genau hier.'],['Jetzt du!','Du kannst dieses Tutorial jederzeit in den Einstellungen erneut starten. Viel Glück mit deiner Blutlinie!']],
   shop_eyebrow:'Gib deine Cyn aus', shop_potion:'Heiltrank', shop_potion_d:'Heilt alle Krankheiten eines Familienmitglieds deiner Wahl, selbst die schwersten.',
   shop_potion_none:'Niemand in der Familie ist krank.', pick_potion:()=>'Wer soll den Trank trinken?', sick_soon:'Wird bald krank',
   f_mild:'Leichte Krankheiten', sick_rib:()=>'Krank', alb_mild:'Krankheiten', until_y:y=>`bis ${y}`,
@@ -5207,6 +5239,7 @@ TX.es = {
   skin_locked_vwave:'Se desbloquea cuando alguien de la familia es fan del vaporwave.', skin_locked_coral:'Cómpralo en la tienda por 3400 Cyn.',
   skin_how_vwave:'Desbloqueado cuando alguien se hizo fan del vaporwave.', skin_how_coral:'Desbloqueado al comprarlo en la tienda (3400 Cyn).',
   log_vwave_skin:()=>'🌴 Un fan del vaporwave en la familia… El tema Vaporwave ya está disponible en el menú Temas.',
+  log_crim_end:p=>`🕊️ ${nm(p)} guarda el cuchillo para siempre: se acabó el crimen, ahora toca una eternidad tranquila.`, tuto_me_tab:()=>`En el móvil, abre primero la pestaña «${t('m_me')}» de abajo.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:'Se desbloquea cuando alguien de la familia se hace jugador de recreativas.', skin_how_arcade:'Desbloqueado cuando alguien se hizo jugador de recreativas.',
   log_arcade_skin:()=>'🕹️ Un jugador de recreativas en la familia… El tema Arcade 90 ya está disponible en el menú Temas.',
   tp_count:n=>n > 1 ? `${n} personas posibles` : n ? '1 persona posible' : 'nadie por ahora', tp_arm:n=>`¿Usar con ${n}?`, tp_heir_arm:n=>`¿Seguir con ${n}?`,
@@ -5454,9 +5487,9 @@ TX.es = {
   over_zombie_title:'Los zombis han ganado', over_zombie_txt:(l,y)=>`En ${y}, ya ningún miembro de la familia ${l} es humano.`,
   z_win_title:'¡Victoria, la familia ha sobrevivido!', z_win_txt:(l,n)=>`La familia ${l} ha resistido a los zombis hasta 2100, con ${n} superviviente${n>1?'s':''}.`,
   tuto_offer_e:'¿Jugador nuevo?', tuto_offer_t:'¡Bienvenido!', tuto_offer:'¿Eres nuevo en Cyngenetic? Un tutorial corto (unos 2 minutos) te enseña lo básico.',
-  tuto_yes:'Sí, enséñame', tuto_no:'No, gracias, ya me apaño', tuto_next:'Siguiente', tuto_prev:'Atrás', tuto_skip:'Saltar', tuto_end:'¡Vamos!',
+  tuto_yes:'Sí, enséñame', tuto_no:'No, gracias, ya me apaño', tuto_next:'Siguiente', tuto_prev:'Atrás', tuto_skip:'Salir del tutorial', tuto_end:'¡Vamos!',
   tuto_set:'Tutorial', tuto_set_hint:'Repasar lo básico.', tuto_set_btn:'Empezar', tuto_planned:'Al empezar la próxima partida',
-  tuto_steps:[['Bienvenido a Cyngenetic','Juegas con una persona. Tu objetivo: mantener vivo su linaje el mayor tiempo posible, generación tras generación.'],['El tiempo vuela','La fecha avanza sola: un año dura 4 segundos. Tu personaje crece, estudia, trabaja y envejece.'],['Velocidad y pausa','Acelera, ralentiza o pausa el juego cuando necesites pensar.'],['Tu personaje','¡Ese eres tú! Toca cualquier burbuja del árbol para abrir su ficha: edad, oficio, salud, don… Pellizca o usa la rueda del ratón para hacer zoom.'],['Tu alma gemela','A partir de los 18, encuentra a tu alma gemela (aquí o desde tu ficha). En pareja, podéis casaros y tener hijos.'],['Continuar','Nadie vive para siempre: cuando tu personaje muere, sigues con uno de sus descendientes. Sin heredero, el linaje se acaba.'],['Los Cyn','Nacimientos, estrellas, criminales… los acontecimientos te dan Cyn. Toca el contador para abrir la tienda.'],['La tienda','Gasta tus Cyn: bebé estrella, fertilidad, inmunidad, poción de salud, temas nuevos…'],['El álbum','Todo lo que descubres (oficios, enfermedades, escuelas…) se guarda aquí para siempre, de una partida a otra.'],['Los logros','Retos que completar a lo largo de tus partidas. Algunos desbloquean temas.'],['El diario','Nacimientos, bodas, enfermedades, muertes: todo lo que le pasa a tu familia se cuenta aquí.'],['El modo auto','¿Solo quieres mirar? El modo auto juega por ti.'],['Los ajustes','Los Ajustes (sonido, tema, idioma) y la Personalización (reglas del juego) están justo aquí.'],['¡Te toca!','Puedes volver a ver este tutorial cuando quieras desde los Ajustes. ¡Suerte con tu linaje!']],
+  tuto_steps:[['Bienvenido a Cyngenetic','Juegas con una persona. Tu objetivo: mantener vivo su linaje el mayor tiempo posible, generación tras generación.'],['El tiempo vuela','La fecha avanza sola: un año dura 4 segundos. Tu personaje crece, estudia, trabaja y envejece.'],['Velocidad y pausa','Acelera, ralentiza o pausa el juego cuando necesites pensar.'],['Tu personaje','¡Ese eres tú! Toca cualquier burbuja del árbol para abrir su ficha: edad, oficio, salud, don… Pellizca o usa la rueda del ratón para hacer zoom.'],['Tu alma gemela','A partir de los 18, encuentra a tu alma gemela (aquí o desde tu ficha). En pareja, podéis casaros y tener hijos.'],['Continuar','Nadie vive para siempre: cuando tu personaje muere, sigues con uno de sus descendientes. Sin heredero, el linaje se acaba.'],['Los Cyn','Nacimientos, estrellas, criminales… los acontecimientos te dan Cyn. Toca el contador para abrir la tienda.'],['La tienda','Gasta tus Cyn: bebé estrella, fertilidad, inmunidad, poción de salud, temas nuevos…'],['El inventario','El cofre junto a tus Cyn: ahí se guardan tus objetos, de una partida a otra. Cada día te espera también un bono de conexión.'],['El álbum','Todo lo que descubres (oficios, enfermedades, escuelas…) se guarda aquí para siempre, de una partida a otra.'],['Los logros','Retos que completar a lo largo de tus partidas. Algunos desbloquean temas.'],['El diario','Nacimientos, bodas, enfermedades, muertes: todo lo que le pasa a tu familia se cuenta aquí.'],['El modo auto','¿Solo quieres mirar? El modo auto juega por ti.'],['Los ajustes','Los Ajustes (sonido, tema, idioma) y la Personalización (reglas del juego) están justo aquí.'],['¡Te toca!','Puedes volver a ver este tutorial cuando quieras desde los Ajustes. ¡Suerte con tu linaje!']],
   shop_eyebrow:'Gasta tus Cyn', shop_potion:'Poción de salud', shop_potion_d:'Cura todas las enfermedades de un miembro de la familia a tu elección, incluso las más graves.',
   shop_potion_none:'Nadie en la familia está enfermo.', pick_potion:()=>'¿Quién debe beberse la poción?', sick_soon:'A punto de enfermar',
   f_mild:'Enfermedades leves', sick_rib:p=>gs(p,'Enfermo','Enferma'), alb_mild:'Enfermedades', until_y:y=>`hasta ${y}`,
@@ -6544,7 +6577,8 @@ function die(p, day, cause){
     S.nKills = (S.nKills || 0) + 1;                     // Versus : nombre de meurtres
     if(!VSH){ UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 50) unlockSkin('goth'); pendingFx.push(p.id); }   // thème Dark : 50 meurtres (0.1.9d)
     [[4,'kill2'],[8,'kill4'],[12,'kill6'],[16,'kill8']].forEach(([n, id]) => { if(k.kills >= n) unlock(id); }); dirty = true;
-    if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
+    if(k.kills === 1 && k.crim && !k.crim.fate && k.immortal) k.crim.endAt = day + rnd(365, 3650);   // 0.2.2c : immortel, ni prison, ni mort : le crime s'arrête un jour
+    else if(k.kills === 1 && k.crim && !k.crim.fate && k.crim.jailAt == null && Math.random() < .4) k.crim.jailAt = day + rnd(30, 3600);   // premier crime : 40 % de prison dans les 10 ans
     if(!UNL.night && !VSH){ UNL.night = true; store.set(UNL_KEY, JSON.stringify(UNL)); setTimeout(() => { toast({d: today(), kind:'crime', k:'night', a:[]}); sfx.crime(); }, 1200); }   // thème Nuit débloqué
   }
   p.ill = null;
@@ -6575,6 +6609,7 @@ const PAIR_P = .72, LEAVE_P = .08, KIDS_P = [.80,.62,.30,.16,.05,.03,.01];   // 
 function newUnionPlan(day){
   const r = Math.random(); let target = 0;
   for(const th of KIDS_P) if(r < th) target++;
+  if(yearOf(day) >= 1950 && target < 3 && Math.random() < .3) target++;   // 0.2.2c
   const ag = aiSmart() ? S.aiGoal : null;                        // Versus : l'IA adapte ses familles à l'objectif
   if(ag === 'speed') target = Math.max(target, 2);
   if(ag === 'slow') target = Math.min(Math.max(target, 1), 2);
@@ -6763,6 +6798,11 @@ function crimFate(p, day){                  // 10 ans plus tard, s'il n'a pas é
   p.crim.fate = Math.random() < .5 ? 'vanished' : 'suicide';
   die(p, day, p.crim.fate === 'vanished' ? {vanished:true} : {suicide:true});
   return true;
+}
+function crimEnd(p, day){                   // 0.2.2c : un criminel immortel range son couteau : plus de victimes prévues, plus de statut de criminel
+  Object.values(S.people).forEach(q => { if(q.murderBy === p.id){ q.murderAt = null; q.murderBy = null; } });
+  p.exCrim = {at: p.crim.at, end: day}; delete p.crim; RH = undefined; dirty = true;
+  log('crime','crim_end',[p.id], day, true); sfx.sparkle();
 }
 const jailed = p => !!(p && p.crim && p.crim.fate === 'prison' && p.death == null);
 function jailCrim(p, day){                   // prison à vie : plus de couple, plus d'enfants, plus de victimes
@@ -6976,8 +7016,9 @@ function evYear(p, A, day){                            // à chaque anniversaire
   if(p.blood && A >= 20 && A <= 50 && !householdUnion(p.id) && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .004) evPush({k:'adopt', id:p.id});
   // pas tout jeune, envie de sports extrêmes : 0,22 % par an, de 45 à 75 ans
   if(A >= 45 && A <= 75 && !p.xtremeEv && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .0022){ p.xtremeEv = true; evPush({k:'xtreme', id:p.id}); }
-  // 0.2.1b : un alpaga débarque dans le jardin : 0,3 % par an, une fois dans une vie, de 18 à 85 ans
-  if(A >= 18 && A <= 85 && !p.alpacaEv && !jailed(p) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .003){ p.alpacaEv = true; evPush({k:'alpaca', id:p.id}); }
+  // 0.2.1b : un alpaga débarque dans le jardin, de 18 à 85 ans (0.2.2c : 0,07 % par an, et au plus une fois tous les 40 ans dans la famille)
+  if(A >= 18 && A <= 85 && !p.alpacaEv && !jailed(p) && !(S.alpacaAt != null && day - S.alpacaAt < 40 * 365.25) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .0007){
+    p.alpacaEv = true; S.alpacaAt = day; evPush({k:'alpaca', id:p.id}); }
   // entre 19 et 22 ans, pas satisfait de ses études : 0,5 % par an
   if(A >= 19 && A <= 22 && !p.careerEv && !p.lockJob && studyOf(p) && !(p.work && ['mil','star','prison','royal','noble'].includes(p.work.s)) && !(p.crim && p.crim.declared) && Math.random() < .005){
     p.careerEv = 'asked';
@@ -7374,7 +7415,8 @@ function processDay(day){
     if(p.crim){
       if(!p.crim.declared && day >= p.crim.day){ if(royalImmune(p)) delete p.crim; else declareCrim(p, day); }
       else if(p.crim.declared && !p.crim.fate){
-        if(p.crim.jailAt != null && day >= p.crim.jailAt) jailCrim(p, day);
+        if(p.immortal){ if(p.crim.endAt != null ? day >= p.crim.endAt : day >= p.crim.at + 3650) crimEnd(p, day); }   // 0.2.2c
+        else if(p.crim.jailAt != null && day >= p.crim.jailAt) jailCrim(p, day);
         else if(p.crim.jailAt == null && day >= p.crim.at + 3650 && crimFate(p, day)) continue;
       }
     }
@@ -7977,6 +8019,7 @@ const mildTile = p => { const on = p.death == null ? mildOn(p) : []; return on.l
 function riskTile(p, short){
   if(p.zombie) return `<div class="span2 zf"><dt>${t('f_status')}</dt><dd>☣ ${esc(t('zombie_since', p, yearOf(p.zombie.at)))}</dd></div>`;
   if(S && S.zombie && zProtected(p) && !short) return `<div class="imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div><div><dt>${t('f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
+  if(p.immortal && p.death == null) return `<div><dt>${t(short ? 'f_risk_short' : 'f_risk')}</dt><dd>${pctTxt(0)} · ∞</dd></div>`;   // 0.2.2c : ticket doré
   if(p.ill) return `<div class="red"><dt>${t('f_illness')}</dt><dd>${esc(dzName(p.ill.dz, p))}</dd></div>`;
   return `<div><dt>${t(short ? 'f_risk_short' : 'f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
 }
@@ -9987,7 +10030,8 @@ function itemApply(id, p, day){
   else if(id === 'couronne'){ p.crowned = true; log('star','it_crown',[p.id], day, true); sfx.fame(); burst(['#ffd000','#ffffff','#7a2bd6','#ffb300'], 60); }
   else if(id === 'medaille'){ p.work = {s:'mil', rank:0, since: day, ret: rnd(48, 58)}; log('work','mil_join',[p.id], day, true); sfx.fame(); }
   else if(id === 'lunettes'){ p.glasses = true; log('info','it_glasses',[p.id], day, true); sfx.sparkle(); burst(['#ff5fb8','#ffffff','#ffd000'], 30); }
-  else if(id === 'ticket'){ Object.assign(p, {immortal:true, ill:null, onset:null, deathAt:null, murderAt:null, murderBy:null, triDeath:null, doomAt:null}); log('star','it_ticket',[p.id], day, true); sfx.fame(); burst(['#ffd000','#ffffff','#fff3a0'], 60); }
+  else if(id === 'ticket'){ if(p.crim && p.crim.declared && !p.crim.fate){ p.crim.jailAt = null; if(p.kills) p.crim.endAt = day + rnd(365, 3650); }
+    Object.assign(p, {immortal:true, ill:null, onset:null, deathAt:null, murderAt:null, murderBy:null, triDeath:null, doomAt:null}); log('star','it_ticket',[p.id], day, true); sfx.fame(); burst(['#ffd000','#ffffff','#fff3a0'], 60); }
   dirty = true;
 }
 function cloneMe(me, day){                             // une réplique parfaite, en frère ou sœur jumeau
@@ -10067,7 +10111,7 @@ function dailyClaim(){
 const invDots = () => { const a = dailyState().avail; $$('.invdot').forEach(x => { x.hidden = !a; }); };
 setInterval(() => {                                    // à l'ouverture et à minuit : la fenêtre s'ouvre une fois par jour
   invDots(); if(window.__wiping) return;
-  const st = dailyState(); if(!st.avail || modalOpen || TPICK || $('#tuto') || (S && (S.ttFF || S.ttPast)) || evAnim) return;
+  const st = dailyState(); if(!st.avail || modalOpen || TPICK || !store.get(TUTO_KEY) || $('#tuto') || (S && (S.ttFF || S.ttPast)) || evAnim) return;
   const D = loadJSON(DAILY_KEY) || {}, k = dkey(new Date()); if(D.shown === k) return;
   store.set(DAILY_KEY, JSON.stringify(Object.assign(D, {shown: k}))); if(S) S.paused = true; openDaily();
 }, 2500);
@@ -10973,7 +11017,7 @@ function enterGame(){
 /* ================= Tutoriel (nouveaux joueurs, ou après une remise à zéro) ================= */
 const TUTO_KEY = 'lignee.tuto.v1';
 const TUTO_SEL = [[], ['#lcd'], ['#speeds'], ['#treeCanvas .node.active', '#treeScroll'], ['.side [data-act="soulmate"]', '#mnav [data-v="me"]'], [],
-  ['#cynBox'], ['.topbar [data-act="shop"]'], ['.topbar .albb', '#mnav [data-act="album"]'], ['.topbar .achb', '#mnav [data-act="achs"]'],
+  ['#cynBox'], ['.topbar [data-act="shop"]'], ['.hud .hudinv'], ['.topbar .albb', '#mnav [data-act="album"]'], ['.topbar .achb', '#mnav [data-act="achs"]'],
   ['.side .journal', '#mnav [data-v="journal"]'], ['#btnAuto'], ['.topbar [data-act="settings"]'], []];
 let tutoI = -1, tutoWasPaused = false, tutoList = [], tutoTimer = 0;
 function tutoBuild(){                                  // 0.2.1a : les étapes, avec une partie « à toi de jouer » (âme sœur, mariage, bébé)
@@ -10983,11 +11027,11 @@ function tutoBuild(){                                  // 0.2.1a : les étapes, 
     const mate = () => { const u = currentUnion(S.activeId); return u ? `#treeCanvas .node[data-id="${u.b}"]` : null; };
     const uu = () => currentUnion(S.activeId);
     list.splice(4, 1,
-      {t:L[0][0], x:L[0][1], sel:['.side [data-act="soulmate"]','#mnav [data-v="me"]'], live:{allow:['[data-act="soulmate"]','#mnav [data-v="me"]'], done:() => !!document.querySelector('#modal .cands')}},
+      {t:L[0][0], x:L[0][1] + (matchMedia('(max-width:900px)').matches ? ' ' + t('tuto_me_tab') : ''), sel:['.side [data-act="soulmate"]','#mnav [data-v="me"]'], live:{allow:['[data-act="soulmate"]','#mnav [data-v="me"]'], done:() => !!document.querySelector('#modal .cands')}},
       {t:L[1][0], x:L[1][1], sel:['#modal .cands'], live:{allow:['#modal .cands','#modal [data-act="anyage"]','#modal .seekage','#modal input'], done:() => !!uu()}},
-      {t:L[2][0], x:L[2][1], sel:[mate], live:{allow:[mate], done:() => !!document.querySelector('#modal [data-act="marry"]')}},
+      {t:L[2][0], x:L[2][1], sel:[mate], enter:() => { if(mtab !== 'tree') setMobileTab('tree'); }, live:{allow:[mate, '#mnav [data-v="tree"]'], done:() => !!document.querySelector('#modal [data-act="marry"]')}},
       {t:L[3][0], x:L[3][1], sel:['#modal [data-act="marry"]'], live:{allow:['#modal [data-act="marry"]'], done:() => { const u = uu(); return !!(u && (u.married || u.noMarry)); }}},
-      {t:L[4][0], x:L[4][1], sel:['#modal [data-act="baby"]', mate], live:{allow:['#modal [data-act="baby"]', mate], done:() => { const u = uu(); return !!(u && u.preg); }}});
+      {t:L[4][0], x:L[4][1], sel:['#modal [data-act="baby"]', mate], live:{allow:['#modal [data-act="baby"]', mate], done:() => { const u = uu(), b = document.querySelector('#modal [data-act="baby"]'); return !!(u && u.preg) || !!(b && b.disabled); }}});
   }
   return list;
 }
@@ -11019,6 +11063,7 @@ function tutoShow(i){
   const st = tutoList[i], last = i === tutoList.length - 1, live = !!st.live;
   if(!live && modalOpen) closeModal(true);            // fin de la partie « à toi de jouer » : on referme la fiche
   $('#tuto').classList.toggle('live', live);
+  if(st.enter) st.enter();
   $('#tutoCard').innerHTML = `<div class="eyebrow">${i + 1} / ${tutoList.length}${live ? ` · <b class="tuto-try">${t('tuto_try')}</b>` : ''}</div><h3>${esc(st.t)}</h3><p>${esc(st.x)}</p>
     <div class="tuto-btns">${last ? '<span></span>' : `<button class="gel ghost" data-act="tskip"><span>${t('tuto_skip')}</span></button>`}
       <span>${i && !live ? `<button class="gel ghost" data-act="tprev"><span>${t('tuto_prev')}</span></button>` : ''}${live ? ''
