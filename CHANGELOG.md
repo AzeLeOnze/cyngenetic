@@ -2,6 +2,20 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.2a — 16 novembre 2026
+
+- Nouveau pays de lignée : l'Espagne 🇪🇸 ! Une carte avec les Baléares et les Canaries, 59 villes, des prénoms qui évoluent de 1500 à 2100 (et au-delà), des noms de famille d'ici (basques, catalans, galiciens…), 12 guerres, l'histoire du pays de la Reconquista à nos jours, des écoles espagnoles, 16 métiers (torero, sereno, conquistador…) et 11 centres d'intérêt (flamenco, pelote basque, sieste…).
+- Inventaire : les objets achetés en boutique vont dans ton inventaire (gardé d'une partie à l'autre) et tu les utilises quand tu veux.
+- Bonus de connexion : un cadeau chaque jour à minuit pendant 14 jours (Cyn, étoile, couteau, couronne, médaille militaire, cadeau, chronomètre, fiole de clonage, lunettes étoiles, ticket doré…). Un jour manqué se rattrape jusqu'à midi le lendemain ; après, la série repart du jour 1.
+- Nouveaux objets : Étoile (star), Couteau (criminel), Couronne (roi ou reine même hors du mode Royal), Médaille militaire, Cadeau (découvre un élément de l'album), Cœur (conjoint sur mesure), Chronomètre (voyage vers l'année de ton choix), Fiole de clonage (un jumeau parfait), Lunettes étoiles et Ticket doré (immortalité).
+- Nouvelles raretés dans l'album : Rare et Épique, entre le commun et le légendaire (métiers, centres d'intérêt, particularités et maladies). Agent secret devient épique. Les légendaires sont un peu plus rares.
+- Nouvelle situation « Voyage » : de temps en temps, quelqu'un part 2 à 20 mois dans un autre pays (avec son drapeau), puis reprend sa vie.
+- Les déménagements se font maintenant vers une ville voisine (sauf depuis une île, l'Alaska ou un lieu inconnu).
+- Nouvelle mort légendaire : une chute dans les latrines. Le CAP Flemme devient légendaire, avec les nouvelles « Études supérieures de la Flemme ».
+- « Assistant familial » devient un métier (et n'est plus un centre d'intérêt).
+- Événement « Un vrai métier » : le choix « Autre… » ne propose plus que 5 métiers courants tirés au hasard. Le mode auto coupe les événements.
+- Les stars sont bien lisibles dans les thèmes sombres.
+
 ## v0.2.1b — 15 novembre 2026
 
 - Nouvel événement « Un visiteur inattendu » : un alpaga débarque dans le jardin et ne veut plus partir. Tu l'adoptes, ou tu appelles la fourrière ?
