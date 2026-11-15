@@ -2,6 +2,31 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.1a — 15 novembre 2026
+
+- Nouvelle boutique, plus lisible et plus pratique : des onglets par catégorie, des cartes avec le prix bien visible, les achats possibles mis en avant, la raison quand un achat est indisponible, et une barre qui montre combien il te manque.
+- Album : nouveau tri « Par probabilité », du plus courant au plus rare (les légendaires à la fin).
+- Vivre très vieux est plus rare : 105 ans et plus deviennent exceptionnels, surtout avant 2000, et atteindre 121 ans est rarissime.
+- 3 nouvelles morts légendaires : dans un tsunami, cobaye d'une expérience, et syndrome de Hutchinson-Gilford (seulement chez les jeunes).
+- Le centre d'intérêt légendaire « Funambule » devient « Clown ». Le métier Clown n'existe plus.
+- Trois guerres du futur dans tous les pays : la Guerre des Oméga (2108-2117), la Guerre spatio-galactique (2201-2209) et la Guerre temporelle (2319-2330), avec leurs propres causes de mort.
+- Plus de prénoms futuristes au Royaume-Uni, en Allemagne et en Suisse, et des noms du futur (après 2100) qui sonnent anglais ou allemand selon le pays.
+- Thèmes sombres : la fin de partie, les options de partie (Versus, Royal, Zombie, Famille autonome) et les conjoints criminels sont maintenant bien lisibles.
+- Nouveau pays de lignée : les États-Unis 🇺🇸 ! Une carte des 48 États avec l'Alaska et Hawaï, 68 villes qui apparaissent au fil de l'histoire, des prénoms qui évoluent de 1500 à 2100 (et au-delà), des noms de famille d'ici, 17 guerres, l'histoire du pays de Christophe Colomb à nos jours, des écoles à l'américaine, 18 métiers (cow-boy, shérif, chercheur d'or, ingénieur à la NASA…) et 11 centres d'intérêt (baseball, rodéo, Thanksgiving…).
+- Le jeu est maintenant traduit en espagnol 🇪🇸 : toute l'interface, les métiers, les maladies, les succès, l'histoire de chaque pays…
+- Album : un petit drapeau sur ce qui n'existe que dans un ou deux pays, et un nouveau tri « Par pays ». L'album montre maintenant les éléments de tous les pays (les succès d'album, eux, ne comptent que ceux du pays de la partie).
+- Deux nouveaux thèmes : Vaporwave (débloqué quand quelqu'un devient fan de vaporwave) et Corail, une eau sombre et profonde éclairée par la bioluminescence (3 400 Cyn en boutique).
+- Personnalisation : des curseurs tout neufs, plus jolis et plus clairs (icône, explication, boutons − et +, valeur à taper, valeur par défaut), avec des maximums bien plus hauts.
+- Nouvelle option « Événements » pour couper les fenêtres d'événement. Il n'y a plus d'événements en mode Zombie ni en mode Royal.
+- Tutoriel interactif : c'est toi qui trouves l'âme sœur, fais ta demande en mariage et attends ton premier bébé, guidé pas à pas.
+- Prénoms : 4 propositions tirées d'un choix bien plus large (avec un bouton 🎲 pour en avoir d'autres). Deux enfants d'une même fratrie ne peuvent porter le même prénom que si tu valides deux fois.
+- Écran de départ : chaque clic sur un drapeau tire un nouveau prénom et un nouveau nom de l'époque et du pays.
+- 18 nouveaux métiers (mannequin, PDG, juge, caissier, luminothérapeute, biomarsiste…), 4 nouvelles formations, 24 nouveaux centres d'intérêt (dont « Trolleur de forum », légendaire) et 2 nouvelles particularités : mégalomane et égocentrique.
+- La trisomie devient trisomie 13, 18 et 21. Les trisomies 13 et 18 sont rares et l'espérance de vie est très courte ; celle de la trisomie 21 a beaucoup augmenté au fil du siècle.
+- +3 % de particularités à la naissance (7 % au lieu de 4 %), et les fausses couches passent de 5 % à 8 %. Nouveau succès « Coups du sort » : 3 fausses couches d'affilée.
+- Mode Zombie : un personnage Courageux repousse une attaque de zombie (une seule fois). Les fissures de l'écran sont plus fines.
+- « Rétablir les valeurs par défaut » ne touche plus à l'âge légal. La page du mode Versus est lisible dans tous les thèmes.
+
 ## v0.2.0c — 14 novembre 2026
 
 - Nouveau : les événements ! Ils apparaissent au milieu de l'écran et mettent le jeu en pause. Juste avant, la personne concernée est montrée dans l'arbre avec un cadre rouge.
