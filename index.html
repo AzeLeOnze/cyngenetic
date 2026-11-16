@@ -155,7 +155,8 @@ button{font:inherit;color:inherit}
 .cyninfo em{display:inline-flex;align-items:center;gap:3px;font:800 13px var(--font-display);font-style:normal;color:#00876a}
 .cyninfo em svg{width:14px;height:14px;fill:#00a37f}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"]) .cyninfo{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
-.shopbal svg{width:40px;height:40px;padding:7px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
+.shopbal{flex-wrap:wrap;row-gap:6px}.shopbal b,.shopbal small,.shavail{white-space:nowrap}
+.shopbal svg{flex:none;width:40px;height:40px;padding:7px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
 .shopbal span{font-size:15px;color:var(--ink-soft)}
 .shoplist{display:grid;gap:10px}
 .shopit{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 3px 10px rgba(0,70,160,.1)}
@@ -231,8 +232,18 @@ button{font:inherit;color:inherit}
 .optsub{display:grid;gap:6px;padding:4px 6px 4px 58px}
 .rulepills{display:flex}
 .resel{width:auto;min-width:170px;flex:none}
-.ctrys{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
-@media (max-width:520px){.ctrys{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ctryfield{min-width:0;min-inline-size:0}
+.ctrywrap{position:relative;width:0;min-width:100%}
+.ctrys{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:2px 2px 4px;margin:-2px}
+.ctrys::-webkit-scrollbar{display:none}
+.ctrys .ctry{flex:0 0 calc((100% - 30px) / 5.5);scroll-snap-align:start}
+@media (max-width:520px){ .ctrys .ctry{flex-basis:calc((100% - 18px) / 3.5)} }
+.ctrynav{position:absolute;top:50%;z-index:2;width:34px;height:34px;margin-top:-17px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(0,100,200,.2);
+  background:linear-gradient(180deg,#ffffff,#dff1ff);color:var(--aqua-deep);font:800 20px/1 var(--font-display);cursor:pointer;box-shadow:0 4px 12px rgba(0,60,140,.25);transition:opacity .2s}
+.ctrynav.l{left:-10px}.ctrynav.r{right:-10px}
+.ctrynav[hidden]{display:grid;opacity:0;pointer-events:none}
+.ctrynav.r:not([hidden]){animation:ctrynudge 1.6s ease-in-out infinite}
+@keyframes ctrynudge{50%{translate:4px 0}}
 .ctry{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px 8px;border-radius:16px;border:2px solid rgba(0,100,200,.15);
   background:rgba(255,255,255,.8);cursor:pointer;font:700 13px var(--font-display);color:var(--ink);text-align:center}
 .ctry:hover{box-shadow:0 4px 12px rgba(0,70,160,.15)}
@@ -719,6 +730,13 @@ body.zmode .treebox{position:relative}
 :root[data-ctry="es"] .node.pres{animation-name:presES}
 @keyframes presES{0%,100%{box-shadow:0 0 0 2px #AA151B,0 0 0 4px #F1BF00,0 0 0 6px #AA151B,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(170,21,27,.3)}50%{box-shadow:0 0 0 2px #AA151B,0 0 0 4px #F1BF00,0 0 0 6px #AA151B,0 0 40px 14px rgba(241,191,0,.55),0 8px 18px rgba(170,21,27,.3)}}
 :root[data-ctry="es"] .rib.pr{background:linear-gradient(180deg,#c8202a,#AA151B);box-shadow:inset 0 -3px 0 #F1BF00,0 0 10px rgba(255,205,0,.7)}
+:root[data-ctry="no"] .node.pol,:root[data-ctry="no"] .node.partner.pol{background:linear-gradient(160deg,#ffe8ec 0%,#ffffff 52%,#e4e9f6 100%);box-shadow:0 0 0 2px #BA0C2F,0 0 0 4px #fff,0 0 0 6px #00205B,0 8px 18px rgba(0,32,91,.3)}
+:root[data-ctry="no"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(186,12,47,.3) 44%,rgba(255,255,255,.95) 48%,rgba(0,32,91,.3) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
+:root[data-ctry="no"] .node.pol .nt b,:root[data-ctry="no"] .node.pol .nt span,:root[data-ctry="no"] .node.pol .n-life,:root[data-ctry="no"] .node.pol .n-city{color:#00205B}
+:root[data-ctry="no"] .node.pol .n-band{background:linear-gradient(90deg,#BA0C2F,#d8213f 50%,#00205B);text-shadow:0 1px 2px rgba(0,0,0,.55)}
+:root[data-ctry="no"] .node.pres{animation-name:presNO}
+@keyframes presNO{0%,100%{box-shadow:0 0 0 2px #BA0C2F,0 0 0 4px #fff,0 0 0 6px #00205B,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(0,32,91,.3)}50%{box-shadow:0 0 0 2px #BA0C2F,0 0 0 4px #fff,0 0 0 6px #00205B,0 0 40px 14px rgba(186,12,47,.45),0 8px 18px rgba(0,32,91,.3)}}
+:root[data-ctry="no"] .rib.pr{background:linear-gradient(180deg,#d8213f,#BA0C2F);box-shadow:inset 0 -3px 0 #00205B,0 0 10px rgba(255,205,0,.7)}
 :root[data-ctry="uk"] .rib.pr{background:linear-gradient(180deg,#24408f,#012169);box-shadow:inset 0 -3px 0 #c8102e,0 0 10px rgba(255,205,0,.7)}
 :root[data-ctry="de"] .node.pol,:root[data-ctry="de"] .node.partner.pol{background:linear-gradient(180deg,#ececec 0%,#ffffff 30%,#ffe6e6 62%,#fff4cc 100%);box-shadow:0 0 0 2px #111,0 0 0 4px #dd0000,0 0 0 6px #ffce00,0 8px 18px rgba(60,0,0,.3)}
 :root[data-ctry="de"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(221,0,0,.28) 44%,rgba(255,255,255,.95) 48%,rgba(255,206,0,.4) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
@@ -1766,7 +1784,13 @@ body.no-deco .coralfx :is(.cbub,.jellies){display:none}
 .arcfx{position:absolute;inset:0;display:none;overflow:hidden}
 :root[data-skin="arcade"] .arcfx{display:block}
 :root[data-skin="arcade"] :is(.sky-sun,.flare,.bubble,.swoosh,.hills){display:none}
-.arcfx .carpet{position:absolute;inset:0;background:var(--arc-carpet) 0 0/260px 260px,var(--arc-carpet) 130px 96px/180px 180px,#0a0416}
+.arcfx .carpet{position:absolute;inset:0;background:var(--arc-carpet) 0 0/420px 420px,#0a0416;opacity:.5}
+.arcfx .inv{position:absolute;left:0;width:var(--w);height:var(--h);pointer-events:none;filter:drop-shadow(0 0 6px var(--c)) drop-shadow(0 0 14px var(--c));opacity:.75;animation:arcwalk var(--d) linear forwards}
+.arcfx .inv i{position:absolute;inset:0;background:var(--f1) center/contain no-repeat;animation:arcstep .9s steps(1) infinite}
+.arcfx .inv i+i{background-image:var(--f2);animation-delay:-.45s}
+@keyframes arcstep{50%{opacity:0}}
+@keyframes arcwalk{from{transform:translateX(var(--x0))}to{transform:translateX(var(--x1))}}
+body.no-deco .arcfx .inv{display:none}
 .arcfx .glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,rgba(6,1,14,.62),rgba(6,1,14,.28) 62%,rgba(6,1,14,.05) 100%);animation:arcuv 6s ease-in-out infinite}
 @keyframes arcuv{50%{opacity:.82}}
 .arcfx .neon{position:absolute;right:3vw;top:13vh;font:italic 900 clamp(26px,4.2vw,62px)/1 Impact,"Arial Black","Segoe UI",sans-serif;letter-spacing:.04em;color:#fff;opacity:.9;
@@ -1833,6 +1857,20 @@ body.no-deco .arcfx *{animation:none}
 .albflag{display:inline-grid;place-items:center}
 .albflag svg{display:block;width:17px;height:11px;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .albflag.f-ch svg{width:11px}
+.cbtab{background:linear-gradient(180deg,#fff7d6,#ffe9a0)!important;border-color:#f0c040!important}
+.cbtab[aria-pressed="true"]{background:linear-gradient(180deg,#ffe066,#ffb300)!important;color:#3a2400!important}
+.cbhint{margin:6px 0 10px}
+.carnet{columns:2 300px;column-gap:12px}
+.cbsec{break-inside:avoid;margin:0 0 12px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:0 3px 10px rgba(0,70,160,.1)}
+.cbsec h3{display:flex;align-items:center;gap:8px;margin:0 0 6px;font:800 15px var(--font-display);color:var(--ink)}
+.cbsec h3 svg{width:20px;height:20px;fill:var(--aqua-deep);flex:none}
+.cbsec dl{margin:0;display:grid;gap:2px}
+.cbsec dl div{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:4px 0;border-top:1px dashed rgba(0,80,160,.14)}
+.cbsec dl div:first-child{border-top:0}
+.cbsec dt{font-size:13px;line-height:1.3;color:var(--ink-soft)}
+.cbsec dd{margin:0;font:800 13.5px var(--font-display);color:var(--aqua-deep);white-space:nowrap;text-align:right}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"]) .cbsec{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"]) .cbsec dl div{border-top-color:rgba(255,255,255,.1)}
 .albhdr{grid-column:1/-1;display:flex;align-items:center;gap:8px;margin:10px 2px 0;padding-bottom:4px;border-bottom:2px solid rgba(0,100,200,.15);font:800 15px var(--font-display);color:var(--ink)}
 .albhdr:first-child{margin-top:0}
 .albhdr .albflag svg{width:24px;height:16px}
@@ -1854,6 +1892,7 @@ body.no-deco .arcfx *{animation:none}
 .names .gel span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .names .reroll{grid-column:3;grid-row:1 / span 2;justify-self:center;width:56px;height:56px;padding:0;border-radius:50%;border:2px solid var(--g2);background:rgba(255,255,255,.8);font-size:26px;line-height:1;cursor:pointer;
   box-shadow:0 3px 10px rgba(0,60,140,.18);transition:transform .15s}
+.evflag svg{display:block;width:84px;height:56px;border-radius:8px;box-shadow:0 6px 14px rgba(0,0,0,.3)}.evflag svg[viewBox="0 0 32 32"]{width:56px}
 .evpair i.evbig,.evbig{font-size:68px;font-style:normal;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25));animation:evbob 2.4s ease-in-out infinite}
 @keyframes evbob{50%{transform:translateY(-6px) rotate(-6deg)}}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"]) .names .reroll{background:rgba(255,255,255,.1)}
@@ -1895,6 +1934,31 @@ body.no-deco .arcfx *{animation:none}
 .daily{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:10px 0 14px}
 .dday{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:14px;background:rgba(255,255,255,.7);border:1px solid #fff;font:800 11px var(--font-display);color:var(--ink-soft);text-align:center}
 .dday i{font-size:24px;font-style:normal;line-height:1.1}
+/* 0.2.3a : ouverture animée du bonus de connexion */
+.dfx{position:fixed;inset:0;z-index:92;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,rgba(44,8,74,.86),rgba(6,0,20,.95));animation:dfxin .3s ease;cursor:pointer}
+.dfx.out{animation:dfxout .45s ease forwards}
+@keyframes dfxin{from{opacity:0}} @keyframes dfxout{to{opacity:0}}
+.dfx-stage{position:relative;width:260px;height:320px}
+.dfx-rays{position:absolute;left:50%;top:44%;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;opacity:0;
+  background:repeating-conic-gradient(rgba(255,226,120,.5) 0 7deg,rgba(255,226,120,0) 7deg 20deg);
+  -webkit-mask:radial-gradient(circle,#000 18%,transparent 66%);mask:radial-gradient(circle,#000 18%,transparent 66%);animation:dfxspin 7s linear infinite,dfxshow .4s ease .95s forwards}
+@keyframes dfxspin{to{rotate:360deg}} @keyframes dfxshow{to{opacity:1}}
+.dfx-day{position:absolute;left:-40px;right:-40px;top:-46px;text-align:center;font:800 15px var(--font-display);letter-spacing:.14em;text-transform:uppercase;color:#ffe9a8;opacity:0;animation:dfxshow .4s ease .15s forwards}
+.dfx-box{position:absolute;left:50%;bottom:24px;width:156px;height:128px;margin-left:-78px;animation:dfxdrop .6s cubic-bezier(.3,1.45,.5,1) both,dfxshake .4s ease-in-out .55s}
+@keyframes dfxdrop{from{transform:translateY(-80vh) scale(.6)}} @keyframes dfxshake{25%{rotate:-7deg}50%{rotate:6deg}75%{rotate:-3deg}}
+.dfx-box .body{position:absolute;left:8px;right:8px;top:34px;bottom:0;border-radius:12px;
+  background:linear-gradient(90deg,rgba(0,0,0,0) 41%,#ffd23a 41% 59%,rgba(0,0,0,0) 59%),linear-gradient(180deg,#ff7ccb,#c2187a);box-shadow:inset 0 -12px 22px rgba(0,0,0,.2),0 14px 30px rgba(0,0,0,.45)}
+.dfx-box .lid{position:absolute;left:0;right:0;top:0;height:38px;border-radius:12px;transform-origin:15% 100%;
+  background:linear-gradient(90deg,rgba(0,0,0,0) 39%,#ffe066 39% 61%,rgba(0,0,0,0) 61%),linear-gradient(180deg,#ffa0db,#e0389a);box-shadow:0 6px 14px rgba(0,0,0,.3);animation:dfxlid .6s cubic-bezier(.3,.7,.4,1) .95s forwards}
+.dfx-box .lid::before,.dfx-box .lid::after{content:"";position:absolute;top:-26px;width:34px;height:30px;border:8px solid #ffd23a;box-sizing:border-box}
+.dfx-box .lid::before{left:calc(50% - 36px);border-radius:60% 10% 60% 60%;rotate:-18deg}.dfx-box .lid::after{right:calc(50% - 36px);border-radius:10% 60% 60% 60%;rotate:18deg}
+@keyframes dfxlid{to{transform:translate(90px,-170px) rotate(42deg);opacity:0}}
+.dfx-prize{position:absolute;left:50%;top:44%;display:flex;flex-direction:column;align-items:center;gap:10px;transform:translate(-50%,-30%) scale(0);animation:dfxprize .7s cubic-bezier(.2,1.6,.4,1) 1.1s forwards}
+@keyframes dfxprize{to{transform:translate(-50%,-78%) scale(1)}}
+.dfx-prize i{font-size:92px;font-style:normal;line-height:1;filter:drop-shadow(0 0 22px rgba(255,230,140,.95))}
+.dfx-prize i svg{display:block;width:100px;height:100px;padding:18px;box-sizing:border-box;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a)}
+.dfx-prize b{font:800 28px var(--font-display);color:#fff;white-space:nowrap;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.dfx-skip{position:absolute;left:0;right:0;bottom:-34px;text-align:center;font:700 12px var(--font-display);color:rgba(255,255,255,.55);opacity:0;animation:dfxshow .4s ease 1.6s forwards}
 .dday i.dcyn{display:grid;place-items:center;height:27px}.dday i.dcyn svg{width:26px;height:26px;padding:4px;border-radius:50%;fill:#fff;background:radial-gradient(circle at 35% 30%,#c4fff0 0 10%,#14c9a0 55%,#00806a);box-shadow:inset 0 -2px 4px rgba(0,0,0,.15),0 2px 6px rgba(0,120,90,.3)} .dday small{font:700 10.5px var(--font-display);line-height:1.15}
 .dday.got{opacity:.55} .dday.got::after{content:"✓";position:absolute;top:2px;right:6px;color:#18a84a;font-size:14px}
 .dday.now{background:linear-gradient(180deg,#fff7c8,#ffd34a);border-color:#e0a800;color:#5a3a00;box-shadow:0 0 0 3px rgba(255,200,0,.35),0 0 18px rgba(255,190,0,.5);animation:dnow 1.6s ease-in-out infinite}
@@ -1967,7 +2031,7 @@ body.no-deco .arcfx *{animation:none}
     <form id="setupForm" class="glass card form" novalidate>
       <h2 data-t="first_ancestor"></h2>
       <fieldset class="field ctryfield"><legend class="lab" data-t="set_country"></legend>
-        <div class="ctrys" role="group"><button type="button" class="ctry" data-act="country" data-v="fr" aria-pressed="false"><i class="flag" data-flag="fr"></i><span data-t="ctry_fr"></span></button><button type="button" class="ctry" data-act="country" data-v="uk" aria-pressed="false"><i class="flag" data-flag="uk"></i><span data-t="ctry_uk"></span></button><button type="button" class="ctry" data-act="country" data-v="de" aria-pressed="false"><i class="flag" data-flag="de"></i><span data-t="ctry_de"></span></button><button type="button" class="ctry" data-act="country" data-v="ch" aria-pressed="false"><i class="flag" data-flag="ch"></i><span data-t="ctry_ch"></span></button><button type="button" class="ctry" data-act="country" data-v="us" aria-pressed="false"><i class="flag" data-flag="us"></i><span data-t="ctry_us"></span></button><button type="button" class="ctry" data-act="country" data-v="es" aria-pressed="false"><i class="flag" data-flag="es"></i><span data-t="ctry_es"></span></button></div></fieldset>
+        <div class="ctrywrap"><button type="button" class="ctrynav l" data-act="ctryscroll" data-v="-1" aria-label="‹" hidden>‹</button><div class="ctrys" role="group"><button type="button" class="ctry" data-act="country" data-v="fr" aria-pressed="false"><i class="flag" data-flag="fr"></i><span data-t="ctry_fr"></span></button><button type="button" class="ctry" data-act="country" data-v="uk" aria-pressed="false"><i class="flag" data-flag="uk"></i><span data-t="ctry_uk"></span></button><button type="button" class="ctry" data-act="country" data-v="de" aria-pressed="false"><i class="flag" data-flag="de"></i><span data-t="ctry_de"></span></button><button type="button" class="ctry" data-act="country" data-v="ch" aria-pressed="false"><i class="flag" data-flag="ch"></i><span data-t="ctry_ch"></span></button><button type="button" class="ctry" data-act="country" data-v="us" aria-pressed="false"><i class="flag" data-flag="us"></i><span data-t="ctry_us"></span></button><button type="button" class="ctry" data-act="country" data-v="es" aria-pressed="false"><i class="flag" data-flag="es"></i><span data-t="ctry_es"></span></button><button type="button" class="ctry" data-act="country" data-v="no" aria-pressed="false"><i class="flag" data-flag="no"></i><span data-t="ctry_no"></span></button></div><button type="button" class="ctrynav r" data-act="ctryscroll" data-v="1" aria-label="›">›</button></div></fieldset>
       <div class="row2">
         <label class="field"><span class="lab" data-t="lab_first"></span><input id="fFirst" class="inp" maxlength="20" autocomplete="off" required></label>
         <label class="field"><span class="lab" data-t="lab_last"></span><input id="fLast" class="inp" maxlength="26" autocomplete="off" required></label>
@@ -2020,7 +2084,6 @@ body.no-deco .arcfx *{animation:none}
       </div>
       <p id="fErr" class="err" hidden></p>
       <div class="form-actions">
-        <button type="button" class="gel ghost" data-act="random"><span data-t="random"></span></button>
         <button type="submit" class="gel lime big"><span id="fStartBtn"></span></button>
       </div>
       <p class="hint" data-t="setup_hint"></p>
@@ -2116,9 +2179,30 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.2c';
+const APP_VERSION = '0.2.3a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.3a', date:{fr:'16 novembre 2026', en:'November 16, 2026', de:'16. November 2026', es:'16 de noviembre de 2026'},
+   fr:['Nouveau pays de lignée : la Norvège 🇳🇴 ! Une carte avec les Lofoten et le Svalbard, 52 villes, des prénoms qui évoluent de 1500 à 2100 (et au-delà), des noms de famille d\'ici (et samis), 10 guerres, l\'histoire du pays de l\'Union de Kalmar à nos jours, des écoles norvégiennes, 16 métiers (pêcheur de morue des Lofoten, éleveur de rennes sami, baleinier…), 12 centres d\'intérêt (friluftsliv, brunost, ski de fond…) et deux morts légendaires qu\'on ne croise qu\'en Norvège.',
+       'Nouvel onglet dans l\'album : le Carnet des probabilités. Toutes les vraies chances du jeu, rangées par thème : naissances, vie, couples, santé, criminels, événements, album, voyage dans le temps et modes.',
+       'Nouvel événement « Le voyage d\'une vie » : quelqu\'un veut partir deux ans à l\'étranger avec son conjoint et ses enfants mineurs. « Profite ! » : toute la famille part, et au retour, 30 % de chances de rapporter un objet (médaille militaire, cœur, fiole de clonage ou lunettes étoiles). « Hors de question » : toute la famille déprime pendant deux ans.',
+       'Le bonus de connexion s\'ouvre avec une animation : le cadeau tombe, tremble, s\'ouvre, et la récompense en sort.',
+       'Thème Arcade 90 : la moquette est moins chargée, et de petits envahisseurs pixelisés traversent le fond de temps en temps.',
+       'Les pays de lignée défilent sur une rangée qu\'on fait glisser, avec des flèches pour montrer dans quel sens aller.',
+       'Le bouton « Au hasard » disparaît de l\'écran d\'accueil.',
+       'Boutique sur téléphone : le logo des Cyn reste bien rond, et les textes ne passent plus à la ligne.',
+       'Paramètres : plus de « À couper si le jeu rame ».',
+       'Le créateur s\'appelle Aze Le Onze (et pas Aze Le Dix).'],
+   en:['New bloodline country: Norway 🇳🇴! A map with the Lofoten Islands and Svalbard, 52 towns, first names that evolve from 1500 to 2100 (and beyond), local (and Sami) surnames, 10 wars, the country\'s history from the Kalmar Union to today, Norwegian schools, 16 jobs (Lofoten cod fisherman, Sami reindeer herder, whaler…), 12 interests (friluftsliv, brown cheese, cross-country skiing…) and two legendary deaths found only in Norway.',
+       'New album tab: the Probability notebook. All the real odds of the game, sorted by theme: births, life, couples, health, criminals, events, album, time travel and modes.',
+       'New “The trip of a lifetime” event: someone wants to spend two years abroad with their partner and young children. “Enjoy!”: the whole family leaves, and on return there is a 30% chance of bringing back an item (military medal, heart, cloning vial or star glasses). “Out of the question”: the whole family is depressed for two years.',
+       'The login bonus opens with an animation: the gift drops, shakes, opens, and the reward pops out.',
+       'Arcade 90 theme: the carpet is less busy, and little pixel invaders cross the background now and then.',
+       'Bloodline countries now sit in a row you can swipe, with arrows showing which way to go.',
+       'The “Random” button is gone from the home screen.',
+       'Shop on phones: the Cyn logo stays round, and the texts no longer wrap.',
+       'Settings: no more “Turn it off if the game lags”.',
+       'The creator is called Aze Le Onze (not Aze Le Dix).']},
   {v:'0.2.2c', date:{fr:'16 novembre 2026', en:'November 16, 2026', de:'16. November 2026', es:'16 de noviembre de 2026'},
    fr:['L\'inventaire quitte la barre du haut : son coffre est maintenant juste à côté de ton compteur de Cyn.',
        'L\'alpaga se fait beaucoup plus rare : il passe au plus une fois tous les 40 ans dans la famille.',
@@ -2982,6 +3066,8 @@ NEO_C.us = {pre:['X-','Neo','Zy','Ax','Q-','Ultra','Cyber','Holo','Nova-','Star-
   end:{M:['on','ex','er','yn','us','or','den','son','ley','ix'], F:['a','ia','lyn','ys','ie','ara','ey','elle','yn','anna']}};
 NEO_C.es = {pre:['X-','Neo','Zy','Ax','Q-','Ultra','Ciber','Holo','Nova-','Astro','Luz-','Sol-','Mar-','Cielo','Vex','Kyro'], mid:NEO_C.uk.mid,
   end:{M:['o','io','el','ón','ar','én','us','ix','iel','án'], F:['a','ia','ela','ina','ara','ira','is','ena','ía','ys']}};
+NEO_C.no = {pre:['X-','Neo','Zy','Ax','Q-','Fjord','Nord','Is-','Stjern','Astro','Lys-','Sol-','Hav-','Vind','Vex','Kyro'], mid:NEO_C.uk.mid,
+  end:{M:['ar','ir','en','ulf','mund','vald','ik','or','an','e'], F:['a','ia','hild','dis','run','frid','lin','ne','ja','ri']}};
 NEO_C.ch = {pre:NEO_C.de.pre.concat(['Néo','Méta']), mid:NEO_C.de.mid, end:{M:NEO_C.de.end.M.concat(['ino','urs']), F:NEO_C.de.end.F.concat(['ina','ella'])}};
 function neoName(sex){
   if(Math.random() < .2) return `X-${letters(rnd(1,2))}-${letters(1)}`;
@@ -3014,7 +3100,7 @@ const SURNAMES_ADDED = ['Le Meunier','Dubois','Renard','Duval','Thomas','Sapin',
   'Da Vinci','Da Silva','Delaigue','Delporte','Norge','Vincet','Véga','Lebroke','Castelgan','Laudebrook','Lankweldan','Tarney','Jaude','Neidega','Kartney','Lesage','Suffort','Bourgenet','Richard',
   'Höll','Sanchez','Pollez','Droey','McGonagall','Loës','Bravat'];
 function pickSurname(y){
-  if(CTRY !== 'fr') return (CTRY === 'uk' ? pickSurnameUK : CTRY === 'de' ? pickSurnameDE : CTRY === 'us' ? pickSurnameUS : CTRY === 'es' ? pickSurnameES : pickSurnameCH)(y);
+  if(CTRY !== 'fr') return (CTRY === 'uk' ? pickSurnameUK : CTRY === 'de' ? pickSurnameDE : CTRY === 'us' ? pickSurnameUS : CTRY === 'es' ? pickSurnameES : CTRY === 'no' ? pickSurnameNO : pickSurnameCH)(y);
   if(Math.random() < .18) return pick(SURNAMES_ADDED);
   const r = Math.random();
   if(r < .42) return pick(SURNAMES_RARE);
@@ -3350,7 +3436,7 @@ const JOB = byId(JOBS), STARJOB = byId(STARJOBS), COND = byId(CONDS), ADD = byId
 // 0.2.0a : objets légendaires, 0,025 % de chances chacun, qui brillent dans l'album
 const LEGS = {i:new Set(['trolleur','tresors','sourcier','fantomes','cryptozoo','meteorites','funambule','exorciste']), c:new Set(['vairons','memoire','etoile','bulle']),
   j:new Set(['chuchoteur','dresseurours','polaire','gouteurglace','tornades','lunaire','pilotejet','astronaute']), e:new Set(['f_cirque','f_polar','f_spatiale','f_flemme','tr_capflemme']),
-  m:new Set(['hoquet','fourire','accent','teteexplose']), d:new Set(['asteroide','mortderire','cocotier','orgorge','tsunami','cobaye','progeria','latrines']), a:new Set(['montagnesrusses'])};
+  m:new Set(['hoquet','fourire','accent','teteexplose']), d:new Set(['troll','kraken','asteroide','mortderire','cocotier','orgorge','tsunami','cobaye','progeria','latrines']), a:new Set(['montagnesrusses'])};
 const RARITY = {                                      // 0.2.2a : Rare (un peu rare) et Épique (rare) ; les légendaires restent à part
   e:{j:new Set(['agentsecret','espion','astrophysicien','paleontologue','egyptologue','voyant','gardecorps','bourreau','calineur','createurespece','therapeuteia','escapegm','kungfu','beefeater','gardesuisse']),
      i:new Set(['alchimie','sorcier','langmortes','faucon','duel','reves','zerog','orages','urbex','streamex','robots','spatial','paume','sabreur','gangster']),
@@ -3690,6 +3776,7 @@ const DISEASES = [
  ['sportx','Mort dans un sport extrême','dans un sport extrême','an extreme sports accident',1500,2100,1,1,0,{special:true}],
  ['depropro','Grave dépression professionnelle',"d'une grave dépression professionnelle",'severe work-related depression',1500,2100,1,1,0,{special:true}],
  ['combat','Mort au combat','au combat','wounds sustained in combat',1500,2100,1,1,0,{special:true}],
+ ['troll','Emporté par un troll',"dans les griffes d'un troll",'a troll attack',1500,2100,1,1,0,{special:true}],['kraken','Englouti par un kraken',"dans les tentacules d'un kraken",'a kraken attack',1500,2100,1,1,0,{special:true}],
  ['tsunami','Tsunami','dans un tsunami','a tsunami',1500,2100,1,1,0,{special:true}],['latrines','Chute dans les latrines',"d'une chute dans les latrines",'a fall into the latrine',1500,1969,1,1,0,{special:true}],['cobaye',"Cobaye d'expérience","comme cobaye d'une expérience",'a failed experiment as a test subject',1800,2100,1,1,0,{special:true}],
  ['progeria','Syndrome de Hutchinson-Gilford','du syndrome de Hutchinson-Gilford','Hutchinson-Gilford progeria syndrome',1500,2100,1,1,0,{special:true}],
  ['orgorge',"Étouffement avec de l'or","en s'étouffant avec de l'or",'choking on gold',1500,2100,1,1,0,{special:true}],
@@ -3751,7 +3838,7 @@ function pickWarCause(p, day){
 }
 const DZ = byId(DISEASES);
 // accidents et événements soudains : on en est « victime », on n'en est pas « atteint »
-const EVENTS = new Set(['latrines','tsunami','cobaye','sportx','combat','noyade','asteroide','mortderire','cocotier','orgorge','electrocution','hydrocution','incendie','chutefatale','etouffement','spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
+const EVENTS = new Set(['troll','kraken','latrines','tsunami','cobaye','sportx','combat','noyade','asteroide','mortderire','cocotier','orgorge','electrocution','hydrocution','incendie','chutefatale','etouffement','spatial','mortcerebrale','embolie','domestique','charrette','route','route2','accident_alcool','bagarre_casino','rapt_casino','overdose_lsd','badtrip',
   'overdose_ecstasy','nanorobots','rage_jeux','cyn_fusion','arret_cafe','infarctus_tabac','infarctus_cannabis','avc','avc_tabac','avc_alcool','avc_cannabis']);
 function pickDisease(p, day){
   const y = dataYear(yearOf(day)), A = ageAt(p, day);
@@ -4009,6 +4096,26 @@ fr:{
   skin_locked_vwave:'Se débloque quand un membre de la famille est fan de vaporwave.', skin_locked_coral:"S'achète dans la boutique pour 3 400 Cyn.",
   skin_how_vwave:"A été débloqué quand quelqu'un est devenu fan de vaporwave.", skin_how_coral:"A été débloqué en l'achetant dans la boutique (3 400 Cyn).",
   log_vwave_skin:()=>'🌴 Un fan de vaporwave dans la famille… Le thème Vaporwave est débloqué dans le menu Thèmes.',
+  cb_tab:'Carnet des probabilités', cb_hint:'Les vraies chances du jeu, avec les règles de ta partie.',
+  cb:v=>[['dna','Naissances',[['Garçon · fille',`${v.boys} · ${v.girls}`],['Jumeaux · triplés · quadruplés',`${v.twins} · ${v.tri} · ${v.quads}`],['… avec l\'atout Fertilité','×10'],['Fausse couche',v.miss],
+      ['Future star',v.star],['… avec l\'atout Chance',v.starLuck],['Futur criminel',v.crim],['… avec l\'atout Égoïsme',v.crimEgo],['Enfant de star',v.starKid],['… qui devient star à son tour',v.starKid2],
+      ['Particularité',v.conds],['Particularité d\'un parent héritée',v.inherit],['Voyageur du temps',v.tt],['… si un parent l\'est',v.ttPar]]],
+    ['user','Vie',[['Un centre d\'intérêt',v.int],['Une addiction à 18 ans',v.addict],['Des études supérieures',v.uni],['Changer de métier, par an',v.job],['Partir à l\'étranger, par an',v.trip],['Déménager, par an',v.move],
+      ['Armée : hommes · femmes',`${v.milM} · ${v.milF}`],['Armée avec l\'atout Discipliné',v.disc],['Politique',v.pol],['Politique avec l\'atout Ambition',v.amb]]],
+    ['heart','Couples et enfants',[['Demande en mariage refusée',v.refuse],['Famille autonome : mariage',v.marry],['Famille autonome : séparation',v.leave],['Refaire sa vie',v.pair],
+      ['Au moins 1 · 2 · 3 enfants',`${v.kids[0]} · ${v.kids[1]} · ${v.kids[2]}`],['Au moins 4 · 5 · 6 · 7 enfants',`${v.kids[3]} · ${v.kids[4]} · ${v.kids[5]} · ${v.kids[6]}`],['Un enfant de plus, dès 1950',v.kid1950]]],
+    ['pill','Santé et morts',[['Maladie, par an',v.ill],['Mortalité en temps de guerre',v.war],['Covid-19 (2019-2024)',v.covid],['Disparu, puis retrouvé',v.found],['Astéroïde, par an',v.ast]]],
+    ['knife','Criminels',[['Prison après le 1er meurtre',v.jail],['Sinon, après 10 ans : disparition · suicide',`${v.vanish} · ${v.suic}`],['Un proche est visé',v.target],['Criminel immortel : fin du crime','1-10 ans']]],
+    ['bulb','Événements, par an',[['Couple de 20 ans à bout de souffle',v.evC],['Envie d\'adopter (20-50 ans)',v.evA],['Sports extrêmes (45-75 ans)',v.evX],['… et y laisser la vie',v.evX2],
+      ['Déçu de ses études (19-22 ans)',v.evS],['Long voyage en famille (20-70 ans)',v.evT],['… et un souvenir au retour',v.evT2],['Un alpaga dans le jardin',v.evAl]]],
+    ['album','Album',[['Métiers, centres d\'intérêt… communs','normal'],['… rares','4× moins'],['… épiques','14× moins'],['… légendaires, à chaque tirage',v.leg]]],
+    ['hourglass','Temps et modes',[['Faille temporelle, par an (16-60 ans)',v.rift],['Effet papillon au retour',v.butterfly],['Royal : le monarque change d\'activité',v.royal],['Royal : un comte devient noble',v.count],
+      ['Zombie : contagion par proche, par an',v.zone],['Boutique Fertilité : 2 · 3 · 4 bébés',v.fert]]]],
+  dfx_skip:'Touche pour passer', ev_and:' et ', ev_tr_title:'Le voyage d\'une vie', ev_tr_1:(p,c,l)=>`${nm(p)} veut partir faire un long voyage ${c} avec sa famille (${l}).`,
+  ev_tr_2:p=>`${gs(p,'Peut-il','Peut-elle')} y aller ?`, ev_tr_go:'Profite !', ev_tr_no:'Hors de question',
+  ev_tf_title:'Un souvenir de voyage', ev_tf_1:(p,c)=>`${nm(p)} a trouvé quelque chose lors de son long voyage ${c}.`, ev_tf_take:o=>`Prendre : ${o}`,
+  log_trip_go:(p,c)=>`✈️ ${nm(p)} part pour deux ans ${placeTxt(c)} avec sa famille.`, log_trip_back:(p,c)=>`🧳 ${nm(p)} et sa famille rentrent de leur long voyage ${placeTxt(c)}.`,
+  log_trip_no:p=>`${nm(p)} renonce au voyage de sa vie… et toute la famille déprime pendant deux ans.`, log_trip_find:(p,o)=>`🎁 ${nm(p)} rapporte un souvenir de voyage : ${t('it_' + o)}. Il t'attend dans l'inventaire.`,
   log_crim_end:p=>`🕊️ ${nm(p)} range son couteau pour de bon : fini le crime, place à une éternité tranquille.`, tuto_me_tab:()=>`Sur téléphone, ouvre d'abord l'onglet « ${t('m_me')} » en bas.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:"Se débloque quand un membre de la famille devient joueur de salles d'arcade.", skin_how_arcade:"A été débloqué quand quelqu'un est devenu joueur de salles d'arcade.",
   log_arcade_skin:()=>"🕹️ Un joueur de salles d'arcade dans la famille… Le thème Arcade 90 est débloqué dans le menu Thèmes.",
@@ -4029,7 +4136,7 @@ fr:{
   log_ev_al_yes_log:(p,n)=>`🦙 ${nm(p)} adopte l'alpaga et le baptise ${n}. Il crache sur tous les invités, mais toute la famille l'adore. +30 Cyn.`,
   log_ev_al_no_log:p=>`🦙 L'alpaga repart tranquillement… en emportant le paillasson de ${nm(p)}.`,
   tier_rare:'Rare', tier_epic:'Épique',
-  trv_es:'Voyage en Espagne', trv_us:'Voyage aux États-Unis', trv_fr:'Voyage en France', trv_uk:'Voyage au Royaume-Uni', trv_ch:'Voyage en Suisse', trv_de:'Voyage en Allemagne',
+  trv_es:'Voyage en Espagne', trv_no:'Voyage en Norvège', trv_us:'Voyage aux États-Unis', trv_fr:'Voyage en France', trv_uk:'Voyage au Royaume-Uni', trv_ch:'Voyage en Suisse', trv_de:'Voyage en Allemagne',
   alb_trv_d:'Un voyage de 2 à 20 mois', log_travel:(p,c,m)=>`✈️ ${nm(p)} part ${t('trv_' + c).replace(/^Voyage /, '')} pour ${m} mois.`, log_travel_back:(p,c)=>`✈️ ${nm(p)} rentre de voyage.`,
   credit:'un jeu de',
   inv_title:'Inventaire', inv_hint:"Tes objets, gardés d'une partie à l'autre. Utilise-les quand tu veux.", inv_use:'Utiliser', inv_back:"← Retour à l'inventaire",
@@ -4155,13 +4262,13 @@ fr:{
   relocate_title:'Déménager', relocate_custom:'Ou une autre ville…', relocate_btn:'Déménager ensemble',
   relocate_note:c=>`Vous quittez ${c} avec votre conjoint et vos enfants mineurs.`,
   skin_gold:'Or', skin_locked:"Terminez une catégorie entière de succès pour débloquer ce thème.", gold_unlocked:'Thème Or débloqué !',
-  ctry_de:'Allemagne', ctry_ch:'Suisse', ctry_us:'États-Unis', ctry_es:'Espagne', set_country:'Pays de la lignée', set_country_hint:'Prénoms, noms, villes, carte, métiers, écoles, événements et guerres du pays choisi.',
+  ctry_de:'Allemagne', ctry_ch:'Suisse', ctry_us:'États-Unis', ctry_es:'Espagne', ctry_no:'Norvège', set_country:'Pays de la lignée', set_country_hint:'Prénoms, noms, villes, carte, métiers, écoles, événements et guerres du pays choisi.',
   set_country_game:c=>`La partie en cours se passe : ${t('ctry_' + c)}. Le changement s'appliquera à la prochaine partie.`, ctry_fr:'France', ctry_uk:'Royaume-Uni',
   set_tab_gen:'Général', set_tab_snd:'Son', set_tab_gfx:'Vidéo et graphismes', quit:'Quitter',
   set_full:'Plein écran', set_full_hint:'Le jeu occupe tout l\'écran (Échap pour en sortir).', set_full_hint_d:'Le jeu occupe tout l\'écran (touche F11).', set_full_on:'Activer', set_full_off:'Quitter le plein écran',
   set_res:'Résolution', set_res_hint:'Taille de la fenêtre du jeu.', set_res_pick:'Choisir…',
-  set_blur:'Verre dépoli', set_blur_hint:'Le flou derrière les fenêtres. À couper si le jeu rame.',
-  set_anim:'Animations', set_anim_hint:'Reflets, lueurs et transitions. À couper si le jeu rame.',
+  set_blur:'Verre dépoli', set_blur_hint:'Le flou derrière les fenêtres.',
+  set_anim:'Animations', set_anim_hint:'Reflets, lueurs et transitions.',
   settings:'Paramètres', custom:'Personnalisation', set_eyebrow:'Confort de jeu', set_lang:'Langue', set_sound:'Son', set_sound_hint:'Bruitages et petites musiques.',
   set_volume:'Volume', set_theme:'Thème', skin_aqua:'Aqua (bleu)', skin_orange:'Orange', skin_vapor:'Néon', skin_kid:'Enfantin', skin_xp:'Windows XP', shop_xp:'Thème Windows XP', shop_xp_d:'Débloque le thème Windows XP pour toujours : colline verte, ciel bleu et fenêtres d\'époque.', skin_locked_xp:"S'achète dans la boutique pour 2 000 Cyn.",
   set_toasts:'Notifications', set_toasts_hint:"Bulles en bas de l'écran pour les naissances, décès, etc.", set_deco:'Animations décoratives', set_deco_hint:'Bulles qui flottent et confettis.',
@@ -4419,6 +4526,26 @@ en:{
   skin_locked_vwave:'Unlocks when a family member is a vaporwave fan.', skin_locked_coral:'Buy it in the shop for 3,400 Cyn.',
   skin_how_vwave:'Unlocked when someone became a vaporwave fan.', skin_how_coral:'Unlocked by buying it in the shop (3,400 Cyn).',
   log_vwave_skin:()=>'🌴 A vaporwave fan in the family… The Vaporwave theme is now available in the Themes menu.',
+  cb_tab:'Probability notebook', cb_hint:'The real odds of the game, with your game rules.',
+  cb:v=>[['dna','Births',[['Boy · girl',`${v.boys} · ${v.girls}`],['Twins · triplets · quadruplets',`${v.twins} · ${v.tri} · ${v.quads}`],['… with the Fertility trait','×10'],['Miscarriage',v.miss],
+      ['Future star',v.star],['… with the Luck trait',v.starLuck],['Future criminal',v.crim],['… with the Selfishness trait',v.crimEgo],['Star\'s child',v.starKid],['… who becomes a star too',v.starKid2],
+      ['Special trait',v.conds],['Inheriting a parent\'s trait',v.inherit],['Time traveller',v.tt],['… if a parent is one',v.ttPar]]],
+    ['user','Life',[['Having an interest',v.int],['An addiction at 18',v.addict],['Higher education',v.uni],['Changing jobs, per year',v.job],['Going abroad, per year',v.trip],['Moving house, per year',v.move],
+      ['Army: men · women',`${v.milM} · ${v.milF}`],['Army with the Discipline trait',v.disc],['Politics',v.pol],['Politics with the Ambition trait',v.amb]]],
+    ['heart','Couples and children',[['Proposal turned down',v.refuse],['Autonomous family: marriage',v.marry],['Autonomous family: break-up',v.leave],['Finding love again',v.pair],
+      ['At least 1 · 2 · 3 children',`${v.kids[0]} · ${v.kids[1]} · ${v.kids[2]}`],['At least 4 · 5 · 6 · 7 children',`${v.kids[3]} · ${v.kids[4]} · ${v.kids[5]} · ${v.kids[6]}`],['One more child, from 1950',v.kid1950]]],
+    ['pill','Health and death',[['Illness, per year',v.ill],['Mortality in wartime',v.war],['Covid-19 (2019-2024)',v.covid],['Missing, then found',v.found],['Asteroid, per year',v.ast]]],
+    ['knife','Criminals',[['Prison after the 1st murder',v.jail],['Otherwise, after 10 years: vanish · suicide',`${v.vanish} · ${v.suic}`],['A relative is targeted',v.target],['Immortal criminal: crime ends','1-10 years']]],
+    ['bulb','Events, per year',[['Couple of 20 years running out of steam',v.evC],['Wanting to adopt (20-50)',v.evA],['Extreme sports (45-75)',v.evX],['… and dying from it',v.evX2],
+      ['Unhappy with their studies (19-22)',v.evS],['Long family trip (20-70)',v.evT],['… and a souvenir on return',v.evT2],['An alpaca in the garden',v.evAl]]],
+    ['album','Album',[['Common jobs, interests…','normal'],['… rare','4× less'],['… epic','14× less'],['… legendary, each draw',v.leg]]],
+    ['hourglass','Time and modes',[['Time rift, per year (16-60)',v.rift],['Butterfly effect on return',v.butterfly],['Royal: the monarch changes activity',v.royal],['Royal: a count becomes a noble',v.count],
+      ['Zombie: infection per relative, per year',v.zone],['Fertility shop item: 2 · 3 · 4 babies',v.fert]]]],
+  dfx_skip:'Tap to skip', ev_and:' and ', ev_tr_title:'The trip of a lifetime', ev_tr_1:(p,c,l)=>`${nm(p)} wants to go on a long trip ${c} with the family (${l}).`,
+  ev_tr_2:p=>`Can ${gs(p,'he','she')} go?`, ev_tr_go:'Enjoy!', ev_tr_no:'Out of the question',
+  ev_tf_title:'A travel souvenir', ev_tf_1:(p,c)=>`${nm(p)} found something during the long trip ${c}.`, ev_tf_take:o=>`Take: ${o}`,
+  log_trip_go:(p,c)=>`✈️ ${nm(p)} leaves for two years ${placeTxt(c)} with the family.`, log_trip_back:(p,c)=>`🧳 ${nm(p)} and the family are back from their long trip ${placeTxt(c)}.`,
+  log_trip_no:p=>`${nm(p)} gives up the trip of a lifetime… and the whole family is depressed for two years.`, log_trip_find:(p,o)=>`🎁 ${nm(p)} brings back a travel souvenir: ${t('it_' + o)}. It's waiting in your inventory.`,
   log_crim_end:p=>`🕊️ ${nm(p)} puts the knife away for good: no more crime, just a quiet eternity.`, tuto_me_tab:()=>`On a phone, first open the “${t('m_me')}” tab at the bottom.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:'Unlocks when a family member becomes an arcade gamer.', skin_how_arcade:'Unlocked when someone became an arcade gamer.',
   log_arcade_skin:()=>'🕹️ An arcade gamer in the family… The Arcade 90 theme is now available in the Themes menu.',
@@ -4439,7 +4566,7 @@ en:{
   log_ev_al_yes_log:(p,n)=>`🦙 ${nm(p)} adopts the alpaca and names it ${n}. It spits at every guest, but the whole family loves it. +30 Cyn.`,
   log_ev_al_no_log:p=>`🦙 The alpaca wanders off calmly… taking ${nm(p)}'s doormat with it.`,
   tier_rare:'Rare', tier_epic:'Epic',
-  trv_es:'Trip to Spain', trv_us:'Trip to the United States', trv_fr:'Trip to France', trv_uk:'Trip to the United Kingdom', trv_ch:'Trip to Switzerland', trv_de:'Trip to Germany',
+  trv_es:'Trip to Spain', trv_no:'Trip to Norway', trv_us:'Trip to the United States', trv_fr:'Trip to France', trv_uk:'Trip to the United Kingdom', trv_ch:'Trip to Switzerland', trv_de:'Trip to Germany',
   alb_trv_d:'A trip of 2 to 20 months', log_travel:(p,c,m)=>`✈️ ${nm(p)} sets off ${t('trv_' + c).replace(/^Trip /, '')} for ${m} months.`, log_travel_back:(p,c)=>`✈️ ${nm(p)} is back from a trip.`,
   credit:'a game by',
   inv_title:'Inventory', inv_hint:'Your items, kept from one game to the next. Use them whenever you like.', inv_use:'Use', inv_back:'← Back to the inventory',
@@ -4563,13 +4690,13 @@ en:{
   relocate_title:'Move', relocate_custom:'Or another town…', relocate_btn:'Move together',
   relocate_note:c=>`You leave ${c} with your partner and underage children.`,
   skin_gold:'Gold', skin_locked:'Complete a whole achievement category to unlock this theme.', gold_unlocked:'Gold theme unlocked!',
-  ctry_de:'Germany', ctry_ch:'Switzerland', ctry_us:'United States', ctry_es:'Spain', set_country:'Bloodline country', set_country_hint:'First names, surnames, towns, map, jobs, schools, events and wars of the chosen country.',
+  ctry_de:'Germany', ctry_ch:'Switzerland', ctry_us:'United States', ctry_es:'Spain', ctry_no:'Norway', set_country:'Bloodline country', set_country_hint:'First names, surnames, towns, map, jobs, schools, events and wars of the chosen country.',
   set_country_game:c=>`The current game takes place in: ${t('ctry_' + c)}. The change will apply to your next game.`, ctry_fr:'France', ctry_uk:'United Kingdom',
   set_tab_gen:'General', set_tab_snd:'Sound', set_tab_gfx:'Video & graphics', quit:'Quit',
   set_full:'Full screen', set_full_hint:'The game fills the whole screen (Esc to leave).', set_full_hint_d:'The game fills the whole screen (F11 key).', set_full_on:'Turn on', set_full_off:'Leave full screen',
   set_res:'Resolution', set_res_hint:'Size of the game window.', set_res_pick:'Choose…',
-  set_blur:'Frosted glass', set_blur_hint:'The blur behind windows. Turn it off if the game lags.',
-  set_anim:'Animations', set_anim_hint:'Shines, glows and transitions. Turn them off if the game lags.',
+  set_blur:'Frosted glass', set_blur_hint:'The blur behind windows.',
+  set_anim:'Animations', set_anim_hint:'Shines, glows and transitions.',
   settings:'Settings', custom:'Customization', set_eyebrow:'Comfort', set_lang:'Language', set_sound:'Sound', set_sound_hint:'Sound effects and jingles.',
   set_volume:'Volume', set_theme:'Theme', skin_aqua:'Aqua (blue)', skin_orange:'Orange', skin_vapor:'Neon', skin_kid:'Kiddy', skin_xp:'Windows XP', shop_xp:'Windows XP theme', shop_xp_d:'Unlocks the Windows XP theme for good: green hill, blue sky and old-school windows.', skin_locked_xp:'Buy it in the shop for 2,000 Cyn.',
   set_toasts:'Notifications', set_toasts_hint:'Pop-ups at the bottom for births, deaths and more.', set_deco:'Decorative animations', set_deco_hint:'Floating bubbles and confetti.',
@@ -4828,6 +4955,26 @@ TX.de = {
   skin_locked_vwave:'Wird freigeschaltet, wenn ein Familienmitglied Vaporwave-Fan ist.', skin_locked_coral:'Im Shop für 3.400 Cyn erhältlich.',
   skin_how_vwave:'Freigeschaltet, als jemand Vaporwave-Fan wurde.', skin_how_coral:'Freigeschaltet durch Kauf im Shop (3.400 Cyn).',
   log_vwave_skin:()=>'🌴 Ein Vaporwave-Fan in der Familie… Das Vaporwave-Design ist jetzt im Design-Menü verfügbar.',
+  cb_tab:'Wahrscheinlichkeiten', cb_hint:'Die echten Chancen im Spiel, mit den Regeln deines Spiels.',
+  cb:v=>[['dna','Geburten',[['Junge · Mädchen',`${v.boys} · ${v.girls}`],['Zwillinge · Drillinge · Vierlinge',`${v.twins} · ${v.tri} · ${v.quads}`],['… mit dem Talent Fruchtbarkeit','×10'],['Fehlgeburt',v.miss],
+      ['Künftiger Star',v.star],['… mit dem Talent Glück',v.starLuck],['Künftiger Verbrecher',v.crim],['… mit dem Talent Egoismus',v.crimEgo],['Kind eines Stars',v.starKid],['… das selbst ein Star wird',v.starKid2],
+      ['Besonderheit',v.conds],['Besonderheit eines Elternteils geerbt',v.inherit],['Zeitreisender',v.tt],['… wenn ein Elternteil einer ist',v.ttPar]]],
+    ['user','Leben',[['Ein Hobby',v.int],['Eine Sucht mit 18',v.addict],['Studium',v.uni],['Berufswechsel pro Jahr',v.job],['Reise ins Ausland pro Jahr',v.trip],['Umzug pro Jahr',v.move],
+      ['Armee: Männer · Frauen',`${v.milM} · ${v.milF}`],['Armee mit dem Talent Diszipliniert',v.disc],['Politik',v.pol],['Politik mit dem Talent Ehrgeiz',v.amb]]],
+    ['heart','Paare und Kinder',[['Heiratsantrag abgelehnt',v.refuse],['Eigenständige Familie: Heirat',v.marry],['Eigenständige Familie: Trennung',v.leave],['Neue Liebe finden',v.pair],
+      ['Mindestens 1 · 2 · 3 Kinder',`${v.kids[0]} · ${v.kids[1]} · ${v.kids[2]}`],['Mindestens 4 · 5 · 6 · 7 Kinder',`${v.kids[3]} · ${v.kids[4]} · ${v.kids[5]} · ${v.kids[6]}`],['Ein Kind mehr, ab 1950',v.kid1950]]],
+    ['pill','Gesundheit und Tod',[['Krankheit pro Jahr',v.ill],['Sterblichkeit im Krieg',v.war],['Covid-19 (2019-2024)',v.covid],['Vermisst, dann gefunden',v.found],['Asteroid pro Jahr',v.ast]]],
+    ['knife','Verbrecher',[['Gefängnis nach dem 1. Mord',v.jail],['Sonst nach 10 Jahren: verschwunden · Suizid',`${v.vanish} · ${v.suic}`],['Ein Angehöriger wird Ziel',v.target],['Unsterblicher Verbrecher: Ende','1-10 Jahre']]],
+    ['bulb','Ereignisse pro Jahr',[['Paar nach 20 Jahren ausgebrannt',v.evC],['Wunsch zu adoptieren (20-50)',v.evA],['Extremsport (45-75)',v.evX],['… und dabei sterben',v.evX2],
+      ['Unzufrieden mit dem Studium (19-22)',v.evS],['Lange Familienreise (20-70)',v.evT],['… und ein Andenken bei der Rückkehr',v.evT2],['Ein Alpaka im Garten',v.evAl]]],
+    ['album','Album',[['Gewöhnliche Berufe, Hobbys…','normal'],['… seltene','4× weniger'],['… epische','14× weniger'],['… legendäre, pro Ziehung',v.leg]]],
+    ['hourglass','Zeit und Modi',[['Zeitriss pro Jahr (16-60)',v.rift],['Schmetterlingseffekt bei der Rückkehr',v.butterfly],['Royal: Monarch wechselt die Tätigkeit',v.royal],['Royal: ein Graf wird adelig',v.count],
+      ['Zombie: Ansteckung pro Angehörigem, pro Jahr',v.zone],['Shop Fruchtbarkeit: 2 · 3 · 4 Babys',v.fert]]]],
+  dfx_skip:'Tippen zum Überspringen', ev_and:' und ', ev_tr_title:'Die Reise des Lebens', ev_tr_1:(p,c,l)=>`${nm(p)} möchte mit der Familie (${l}) auf eine lange Reise ${c}.`,
+  ev_tr_2:p=>`Darf ${gs(p,'er','sie')} fahren?`, ev_tr_go:'Viel Spaß!', ev_tr_no:'Kommt nicht in Frage',
+  ev_tf_title:'Ein Reiseandenken', ev_tf_1:(p,c)=>`${nm(p)} hat auf der langen Reise ${c} etwas gefunden.`, ev_tf_take:o=>`Nehmen: ${o}`,
+  log_trip_go:(p,c)=>`✈️ ${nm(p)} reist mit der Familie für zwei Jahre ${placeTxt(c)}.`, log_trip_back:(p,c)=>`🧳 ${nm(p)} und die Familie sind von der langen Reise ${placeTxt(c)} zurück.`,
+  log_trip_no:p=>`${nm(p)} verzichtet auf die Reise des Lebens… und die ganze Familie ist zwei Jahre lang deprimiert.`, log_trip_find:(p,o)=>`🎁 ${nm(p)} bringt ein Reiseandenken mit: ${t('it_' + o)}. Es wartet im Inventar.`,
   log_crim_end:p=>`🕊️ ${nm(p)} legt das Messer endgültig weg: Schluss mit dem Verbrechen, jetzt beginnt eine ruhige Ewigkeit.`, tuto_me_tab:()=>`Auf dem Handy öffne zuerst unten den Tab „${t('m_me')}“.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:'Wird freigeschaltet, wenn ein Familienmitglied Spielhallen-Zocker wird.', skin_how_arcade:'Freigeschaltet, als jemand Spielhallen-Zocker wurde.',
   log_arcade_skin:()=>'🕹️ Ein Spielhallen-Zocker in der Familie… Das Design Arcade 90 ist jetzt im Design-Menü verfügbar.',
@@ -4848,7 +4995,7 @@ TX.de = {
   log_ev_al_yes_log:(p,n)=>`🦙 ${nm(p)} adoptiert das Alpaka und tauft es ${n}. Es spuckt jeden Gast an, aber die ganze Familie liebt es. +30 Cyn.`,
   log_ev_al_no_log:p=>`🦙 Das Alpaka zieht gemütlich ab … und nimmt die Fußmatte von ${nm(p)} mit.`,
   tier_rare:'Selten', tier_epic:'Episch',
-  trv_es:'Reise nach Spanien', trv_us:'Reise in die USA', trv_fr:'Reise nach Frankreich', trv_uk:'Reise ins Vereinigte Königreich', trv_ch:'Reise in die Schweiz', trv_de:'Reise nach Deutschland',
+  trv_es:'Reise nach Spanien', trv_no:'Reise nach Norwegen', trv_us:'Reise in die USA', trv_fr:'Reise nach Frankreich', trv_uk:'Reise ins Vereinigte Königreich', trv_ch:'Reise in die Schweiz', trv_de:'Reise nach Deutschland',
   alb_trv_d:'Eine Reise von 2 bis 20 Monaten', log_travel:(p,c,m)=>`✈️ ${nm(p)} bricht zu einer ${t('trv_' + c)} auf, für ${m} Monate.`, log_travel_back:(p,c)=>`✈️ ${nm(p)} ist von der Reise zurück.`,
   credit:'ein Spiel von',
   inv_title:'Inventar', inv_hint:'Deine Gegenstände, von Spiel zu Spiel aufbewahrt. Benutze sie, wann du willst.', inv_use:'Benutzen', inv_back:'← Zurück zum Inventar',
@@ -4973,12 +5120,12 @@ TX.de = {
   relocate_title:'Umziehen', relocate_custom:'Oder eine andere Stadt…', relocate_btn:'Gemeinsam umziehen',
   relocate_note:c=>`Du verlässt ${c} mit deinem Partner und den minderjährigen Kindern.`,
   skin_gold:'Gold', skin_locked:'Schließe eine ganze Erfolgskategorie ab, um dieses Design freizuschalten.', gold_unlocked:'Gold-Design freigeschaltet!',
-  ctry_fr:'Frankreich', ctry_uk:'Vereinigtes Königreich', ctry_de:'Deutschland', ctry_ch:'Schweiz', ctry_us:'Vereinigte Staaten', ctry_es:'Spanien', set_country:'Land der Blutlinie', set_country_hint:'Vornamen, Nachnamen, Städte, Karte, Berufe, Schulen, Ereignisse und Kriege des gewählten Landes.', set_country_game:c=>`Das laufende Spiel findet hier statt: ${t('ctry_' + c)}. Die Änderung gilt ab dem nächsten Spiel.`,
+  ctry_fr:'Frankreich', ctry_uk:'Vereinigtes Königreich', ctry_de:'Deutschland', ctry_ch:'Schweiz', ctry_us:'Vereinigte Staaten', ctry_es:'Spanien', ctry_no:'Norwegen', set_country:'Land der Blutlinie', set_country_hint:'Vornamen, Nachnamen, Städte, Karte, Berufe, Schulen, Ereignisse und Kriege des gewählten Landes.', set_country_game:c=>`Das laufende Spiel findet hier statt: ${t('ctry_' + c)}. Die Änderung gilt ab dem nächsten Spiel.`,
   set_tab_gen:'Allgemein', set_tab_snd:'Ton', set_tab_gfx:'Video & Grafik', quit:'Beenden',
   set_full:'Vollbild', set_full_hint:'Das Spiel füllt den ganzen Bildschirm (Esc zum Verlassen).', set_full_hint_d:'Das Spiel füllt den ganzen Bildschirm (Taste F11).', set_full_on:'Einschalten', set_full_off:'Vollbild verlassen',
   set_res:'Auflösung', set_res_hint:'Größe des Spielfensters.', set_res_pick:'Wählen…',
-  set_blur:'Milchglas', set_blur_hint:'Die Unschärfe hinter Fenstern. Ausschalten, wenn das Spiel ruckelt.',
-  set_anim:'Animationen', set_anim_hint:'Glanz, Leuchten und Übergänge. Ausschalten, wenn das Spiel ruckelt.',
+  set_blur:'Milchglas', set_blur_hint:'Die Unschärfe hinter Fenstern.',
+  set_anim:'Animationen', set_anim_hint:'Glanz, Leuchten und Übergänge.',
   settings:'Einstellungen', custom:'Anpassung', set_eyebrow:'Spielkomfort', set_lang:'Sprache', set_sound:'Ton', set_sound_hint:'Soundeffekte und kleine Melodien.',
   set_volume:'Lautstärke', set_theme:'Design', skin_aqua:'Aqua (blau)', skin_orange:'Orange', skin_vapor:'Neon', skin_kid:'Kindlich', skin_xp:'Windows XP', shop_xp:'Design Windows XP', shop_xp_d:'Schaltet das Design Windows XP dauerhaft frei: grüner Hügel, blauer Himmel und Fenster von damals.', skin_locked_xp:'Im Shop für 2.000 Cyn erhältlich.',
   set_toasts:'Benachrichtigungen', set_toasts_hint:'Meldungen unten für Geburten, Todesfälle usw.', set_deco:'Dekorative Animationen', set_deco_hint:'Schwebende Blasen und Konfetti.',
@@ -5240,6 +5387,26 @@ TX.es = {
   skin_locked_vwave:'Se desbloquea cuando alguien de la familia es fan del vaporwave.', skin_locked_coral:'Cómpralo en la tienda por 3400 Cyn.',
   skin_how_vwave:'Desbloqueado cuando alguien se hizo fan del vaporwave.', skin_how_coral:'Desbloqueado al comprarlo en la tienda (3400 Cyn).',
   log_vwave_skin:()=>'🌴 Un fan del vaporwave en la familia… El tema Vaporwave ya está disponible en el menú Temas.',
+  cb_tab:'Cuaderno de probabilidades', cb_hint:'Las verdaderas probabilidades del juego, con las reglas de tu partida.',
+  cb:v=>[['dna','Nacimientos',[['Niño · niña',`${v.boys} · ${v.girls}`],['Gemelos · trillizos · cuatrillizos',`${v.twins} · ${v.tri} · ${v.quads}`],['… con la virtud Fertilidad','×10'],['Aborto espontáneo',v.miss],
+      ['Futura estrella',v.star],['… con la virtud Suerte',v.starLuck],['Futuro criminal',v.crim],['… con la virtud Egoísmo',v.crimEgo],['Hijo de estrella',v.starKid],['… que se vuelve estrella',v.starKid2],
+      ['Particularidad',v.conds],['Heredar la de un padre',v.inherit],['Viajero del tiempo',v.tt],['… si un padre lo es',v.ttPar]]],
+    ['user','Vida',[['Una afición',v.int],['Una adicción a los 18',v.addict],['Estudios superiores',v.uni],['Cambiar de oficio, al año',v.job],['Viajar al extranjero, al año',v.trip],['Mudarse, al año',v.move],
+      ['Ejército: hombres · mujeres',`${v.milM} · ${v.milF}`],['Ejército con la virtud Disciplina',v.disc],['Política',v.pol],['Política con la virtud Ambición',v.amb]]],
+    ['heart','Parejas e hijos',[['Petición de mano rechazada',v.refuse],['Familia autónoma: boda',v.marry],['Familia autónoma: separación',v.leave],['Rehacer su vida',v.pair],
+      ['Al menos 1 · 2 · 3 hijos',`${v.kids[0]} · ${v.kids[1]} · ${v.kids[2]}`],['Al menos 4 · 5 · 6 · 7 hijos',`${v.kids[3]} · ${v.kids[4]} · ${v.kids[5]} · ${v.kids[6]}`],['Un hijo más, desde 1950',v.kid1950]]],
+    ['pill','Salud y muerte',[['Enfermedad, al año',v.ill],['Mortalidad en guerra',v.war],['Covid-19 (2019-2024)',v.covid],['Desaparecido y encontrado',v.found],['Asteroide, al año',v.ast]]],
+    ['knife','Criminales',[['Cárcel tras el 1.er asesinato',v.jail],['Si no, a los 10 años: desaparición · suicidio',`${v.vanish} · ${v.suic}`],['Un familiar en el punto de mira',v.target],['Criminal inmortal: fin del crimen','1-10 años']]],
+    ['bulb','Eventos, al año',[['Pareja de 20 años sin chispa',v.evC],['Ganas de adoptar (20-50)',v.evA],['Deportes extremos (45-75)',v.evX],['… y morir en el intento',v.evX2],
+      ['Descontento con sus estudios (19-22)',v.evS],['Largo viaje en familia (20-70)',v.evT],['… y un recuerdo a la vuelta',v.evT2],['Una alpaca en el jardín',v.evAl]]],
+    ['album','Álbum',[['Oficios, aficiones… comunes','normal'],['… raros','4× menos'],['… épicos','14× menos'],['… legendarios, en cada tirada',v.leg]]],
+    ['hourglass','Tiempo y modos',[['Grieta temporal, al año (16-60)',v.rift],['Efecto mariposa a la vuelta',v.butterfly],['Real: el monarca cambia de actividad',v.royal],['Real: un conde se vuelve noble',v.count],
+      ['Zombi: contagio por familiar, al año',v.zone],['Tienda Fertilidad: 2 · 3 · 4 bebés',v.fert]]]],
+  dfx_skip:'Toca para saltar', ev_and:' y ', ev_tr_title:'El viaje de su vida', ev_tr_1:(p,c,l)=>`${nm(p)} quiere hacer un largo viaje ${c} con su familia (${l}).`,
+  ev_tr_2:p=>`¿Puede ir?`, ev_tr_go:'¡Disfruta!', ev_tr_no:'Ni hablar',
+  ev_tf_title:'Un recuerdo de viaje', ev_tf_1:(p,c)=>`${nm(p)} encontró algo durante su largo viaje ${c}.`, ev_tf_take:o=>`Coger: ${o}`,
+  log_trip_go:(p,c)=>`✈️ ${nm(p)} se va dos años ${placeTxt(c)} con su familia.`, log_trip_back:(p,c)=>`🧳 ${nm(p)} y su familia vuelven de su largo viaje ${placeTxt(c)}.`,
+  log_trip_no:p=>`${nm(p)} renuncia al viaje de su vida… y toda la familia se deprime durante dos años.`, log_trip_find:(p,o)=>`🎁 ${nm(p)} trae un recuerdo de viaje: ${t('it_' + o)}. Te espera en el inventario.`,
   log_crim_end:p=>`🕊️ ${nm(p)} guarda el cuchillo para siempre: se acabó el crimen, ahora toca una eternidad tranquila.`, tuto_me_tab:()=>`En el móvil, abre primero la pestaña «${t('m_me')}» de abajo.`,
   skin_arcade:'Arcade 90', skin_locked_arcade:'Se desbloquea cuando alguien de la familia se hace jugador de recreativas.', skin_how_arcade:'Desbloqueado cuando alguien se hizo jugador de recreativas.',
   log_arcade_skin:()=>'🕹️ Un jugador de recreativas en la familia… El tema Arcade 90 ya está disponible en el menú Temas.',
@@ -5260,7 +5427,7 @@ TX.es = {
   log_ev_al_yes_log:(p,n)=>`🦙 ${nm(p)} adopta a la alpaca y la llama ${n}. Escupe a todos los invitados, pero toda la familia la adora. +30 Cyn.`,
   log_ev_al_no_log:p=>`🦙 La alpaca se marcha tranquilamente… llevándose el felpudo de ${nm(p)}.`,
   tier_rare:'Raro', tier_epic:'Épico',
-  trv_es:'Viaje a España', trv_us:'Viaje a Estados Unidos', trv_fr:'Viaje a Francia', trv_uk:'Viaje al Reino Unido', trv_ch:'Viaje a Suiza', trv_de:'Viaje a Alemania',
+  trv_es:'Viaje a España', trv_no:'Viaje a Noruega', trv_us:'Viaje a Estados Unidos', trv_fr:'Viaje a Francia', trv_uk:'Viaje al Reino Unido', trv_ch:'Viaje a Suiza', trv_de:'Viaje a Alemania',
   alb_trv_d:'Un viaje de 2 a 20 meses', log_travel:(p,c,m)=>`✈️ ${nm(p)} se va de viaje ${t('trv_' + c).replace(/^Viaje /, '')} durante ${m} meses.`, log_travel_back:(p,c)=>`✈️ ${nm(p)} vuelve de viaje.`,
   credit:'un juego de',
   inv_title:'Inventario', inv_hint:'Tus objetos, guardados de una partida a otra. Úsalos cuando quieras.', inv_use:'Usar', inv_back:'← Volver al inventario',
@@ -5384,13 +5551,13 @@ TX.es = {
   relocate_title:'Mudarse', relocate_custom:'U otra ciudad…', relocate_btn:'Mudarse juntos',
   relocate_note:c=>`Dejas ${c} con tu pareja y tus hijos menores.`,
   skin_gold:'Oro', skin_locked:'Completa una categoría entera de logros para desbloquear este tema.', gold_unlocked:'¡Tema Oro desbloqueado!',
-  ctry_de:'Alemania', ctry_ch:'Suiza', ctry_us:'Estados Unidos', ctry_es:'España', set_country:'País del linaje', set_country_hint:'Nombres, apellidos, ciudades, mapa, oficios, escuelas, acontecimientos y guerras del país elegido.',
+  ctry_de:'Alemania', ctry_ch:'Suiza', ctry_us:'Estados Unidos', ctry_es:'España', ctry_no:'Noruega', set_country:'País del linaje', set_country_hint:'Nombres, apellidos, ciudades, mapa, oficios, escuelas, acontecimientos y guerras del país elegido.',
   set_country_game:c=>`La partida en curso transcurre en: ${t('ctry_' + c)}. El cambio se aplicará en la próxima partida.`, ctry_fr:'Francia', ctry_uk:'Reino Unido',
   set_tab_gen:'General', set_tab_snd:'Sonido', set_tab_gfx:'Vídeo y gráficos', quit:'Salir',
   set_full:'Pantalla completa', set_full_hint:'El juego ocupa toda la pantalla (Esc para salir).', set_full_hint_d:'El juego ocupa toda la pantalla (tecla F11).', set_full_on:'Activar', set_full_off:'Salir de la pantalla completa',
   set_res:'Resolución', set_res_hint:'Tamaño de la ventana del juego.', set_res_pick:'Elegir…',
-  set_blur:'Cristal esmerilado', set_blur_hint:'El desenfoque detrás de las ventanas. Desactívalo si el juego va lento.',
-  set_anim:'Animaciones', set_anim_hint:'Brillos, destellos y transiciones. Desactívalas si el juego va lento.',
+  set_blur:'Cristal esmerilado', set_blur_hint:'El desenfoque detrás de las ventanas.',
+  set_anim:'Animaciones', set_anim_hint:'Brillos, destellos y transiciones.',
   settings:'Ajustes', custom:'Personalización', set_eyebrow:'Comodidad', set_lang:'Idioma', set_sound:'Sonido', set_sound_hint:'Efectos de sonido y melodías.',
   set_volume:'Volumen', set_theme:'Tema', skin_aqua:'Aqua (azul)', skin_orange:'Naranja', skin_vapor:'Neón', skin_kid:'Infantil', skin_xp:'Windows XP', shop_xp:'Tema Windows XP', shop_xp_d:'Desbloquea para siempre el tema Windows XP: colina verde, cielo azul y ventanas de antes.', skin_locked_xp:'Cómpralo en la tienda por 2000 Cyn.',
   set_toasts:'Notificaciones', set_toasts_hint:'Avisos abajo para los nacimientos, las muertes y más.', set_deco:'Animaciones decorativas', set_deco_hint:'Burbujas flotantes y confeti.',
@@ -5901,6 +6068,36 @@ ESx.worldn = Object.fromEntries(`Victoire de François Ier à Marignan.§Victori
 Object.assign(ESx.decn, {"Siècle d'or : Cervantes et Velázquez":'Siglo de Oro: Cervantes y Velázquez', 'Sexenio : la Première République':'Sexenio: la Primera República'});
 Object.assign(ESx.worldn, Object.fromEntries(`Prise de Grenade : fin de la Reconquista.§Toma de Granada: fin de la Reconquista.|Charles Ier (Charles Quint) devient roi d'Espagne.§Carlos I (Carlos V) se convierte en rey de España.|Hernán Cortés conquiert Tenochtitlan.§Hernán Cortés conquista Tenochtitlan.|Philippe II fait de Madrid la capitale.§Felipe II hace de Madrid la capital.|Victoire de Lépante contre les Ottomans.§Victoria de Lepanto contra los otomanos.|Achèvement du monastère de l'Escurial.§Se termina el monasterio de El Escorial.|Défaite de l'Invincible Armada.§Derrota de la Armada Invencible.|Cervantes publie Don Quichotte.§Cervantes publica el Quijote.|Velázquez peint Les Ménines.§Velázquez pinta Las Meninas.|Mort de Charles II : fin des Habsbourg d'Espagne.§Muere Carlos II: fin de los Austrias.|Traité d'Utrecht : l'Espagne perd Gibraltar.§Tratado de Utrecht: España pierde Gibraltar.|Soulèvement du Dos de Mayo à Madrid.§Levantamiento del Dos de Mayo en Madrid.|Constitution de Cadix, « la Pepa ».§Constitución de Cádiz, «la Pepa».|Premier train d'Espagne entre Barcelone et Mataró.§Primer tren de España entre Barcelona y Mataró.|Proclamation de la Première République.§Proclamación de la Primera República.|Gaudí commence la Sagrada Família.§Gaudí empieza la Sagrada Familia.|Traité de Paris : l'Espagne perd Cuba et les Philippines.§Tratado de París: España pierde Cuba y Filipinas.|Inauguration du métro de Madrid.§Inauguración del metro de Madrid.|Proclamation de la Seconde République.§Proclamación de la Segunda República.|Les femmes votent pour la première fois.§Las mujeres votan por primera vez.|Coup d'État : la guerre d'Espagne commence.§Golpe de Estado: empieza la Guerra Civil.|Bombardement de Guernica.§Bombardeo de Guernica.|Fin de la guerre d'Espagne : début de la dictature de Franco.§Fin de la Guerra Civil: empieza la dictadura de Franco.|Plan de stabilisation : l'économie s'ouvre.§Plan de Estabilización: la economía se abre.|Mort de Franco ; Juan Carlos Ier devient roi.§Muere Franco; Juan Carlos I se convierte en rey.|La Constitution démocratique est approuvée.§Se aprueba la Constitución democrática.|Échec de la tentative de coup d'État du 23-F.§Fracasa el intento de golpe de Estado del 23-F.|L'Espagne accueille la Coupe du monde de football.§España acoge el Mundial de fútbol.|L'Espagne entre dans la CEE.§España entra en la CEE.|Exposition universelle de Séville.§Exposición Universal de Sevilla.|Jeux olympiques de Barcelone.§Juegos Olímpicos de Barcelona.|L'euro remplace la peseta.§El euro sustituye a la peseta.|Le mariage pour tous est légalisé.§Se legaliza el matrimonio igualitario.|L'Espagne championne du monde de football.§España campeona del mundo de fútbol.|Felipe VI devient roi.§Felipe VI se convierte en rey.|État d'alerte contre la pandémie de Covid-19.§Estado de alarma contra la pandemia de covid-19.|`.split('|').filter(Boolean).map(x => x.split('§'))));
 Object.assign(ESx.worldn, Object.fromEntries(`Christophe Colomb atteint les Amériques.§Cristóbal Colón llega a América.|Ponce de León explore la Floride.§Ponce de León explora Florida.|Fondation de Saint Augustine, la plus vieille ville du pays.§Fundación de San Agustín, la ciudad más antigua del país.|Fondation de Jamestown, en Virginie.§Fundación de Jamestown, en Virginia.|Le Mayflower accoste : les Pères pèlerins arrivent.§El Mayflower atraca: llegan los Padres Peregrinos.|Premier Thanksgiving à Plymouth.§Primer Día de Acción de Gracias en Plymouth.|Les Hollandais achètent Manhattan : naissance de La Nouvelle-Amsterdam.§Los neerlandeses compran Manhattan: nace Nueva Ámsterdam.|La Nouvelle-Amsterdam devient New York.§Nueva Ámsterdam pasa a llamarse Nueva York.|Procès des sorcières de Salem.§Juicios de las brujas de Salem.|Boston Tea Party.§Motín del té de Boston.|Déclaration d'indépendance des États-Unis !§¡Declaración de independencia de los Estados Unidos!|La Constitution est signée à Philadelphie.§Se firma la Constitución en Filadelfia.|George Washington devient le premier président.§George Washington se convierte en el primer presidente.|Achat de la Louisiane à la France.§Compra de Luisiana a Francia.|Lewis et Clark partent explorer l'Ouest.§Lewis y Clark parten a explorar el Oeste.|Les Britanniques incendient la Maison-Blanche.§Los británicos incendian la Casa Blanca.|La Piste des larmes : le peuple cherokee est chassé de ses terres.§El Sendero de Lágrimas: el pueblo cheroqui es expulsado de sus tierras.|De l'or en Californie : la ruée commence !§Oro en California: ¡empieza la fiebre!|Attaque de Fort Sumter : la guerre de Sécession commence.§Ataque a Fort Sumter: empieza la guerra de Secesión.|Proclamation d'émancipation de Lincoln.§Proclamación de Emancipación de Lincoln.|Assassinat du président Lincoln.§Asesinato del presidente Lincoln.|Le 13e amendement abolit l'esclavage.§La 13.ª enmienda abole la esclavitud.|Achat de l'Alaska à la Russie.§Compra de Alaska a Rusia.|Le premier chemin de fer transcontinental est achevé.§Se termina el primer ferrocarril transcontinental.|Graham Bell dépose le brevet du téléphone.§Graham Bell patenta el teléfono.|Edison met au point l'ampoule électrique durable.§Edison crea la bombilla eléctrica duradera.|Inauguration de la statue de la Liberté.§Inauguración de la estatua de la Libertad.|Ouverture d'Ellis Island pour les immigrants.§Abre Ellis Island para los inmigrantes.|Premier vol des frères Wright.§Primer vuelo de los hermanos Wright.|Ford lance la Ford T.§Ford lanza el Ford T.|Les États-Unis entrent dans la Grande Guerre.§Estados Unidos entra en la Gran Guerra.|Début de la Prohibition.§Empieza la Ley Seca.|Les femmes obtiennent le droit de vote.§Las mujeres obtienen el derecho de voto.|Lindbergh traverse l'Atlantique en avion.§Lindbergh cruza el Atlántico en avión.|Krach de Wall Street.§Crac de Wall Street.|Fin de la Prohibition.§Fin de la Ley Seca.|Attaque de Pearl Harbor.§Ataque a Pearl Harbor.|Fin de la guerre en Europe.§Fin de la guerra en Europa.|Le Japon capitule : fin de la Seconde Guerre mondiale.§Japón capitula: fin de la Segunda Guerra Mundial.|Rosa Parks refuse de céder sa place dans le bus.§Rosa Parks se niega a ceder su asiento en el autobús.|Hawaï devient le 50e État.§Hawái se convierte en el estado número 50.|Martin Luther King : « I have a dream ».§Martin Luther King: «I have a dream».|Assassinat du président Kennedy.§Asesinato del presidente Kennedy.|Signature de la loi sur les droits civiques.§Firma de la Ley de Derechos Civiles.|Apollo 11 : premiers pas sur la Lune.§Apolo 11: primeros pasos en la Luna.|Festival de Woodstock.§Festival de Woodstock.|Watergate : démission du président Nixon.§Watergate: dimite el presidente Nixon.|Lancement de MTV.§Nace la MTV.|Chute du mur de Berlin.§Caída del muro de Berlín.|Attentats du 11 septembre.§Atentados del 11 de septiembre.|Présentation de l'iPhone.§Presentación del iPhone.|Barack Obama, premier président afro-américain.§Barack Obama, primer presidente afroamericano.|Urgence nationale contre la pandémie de Covid-19.§Emergencia nacional contra la pandemia de covid-19.`.split('|').map(x => x.split('§'))));
+/* 0.2.3a : Norvège */
+DEx.jobc.no = {president:['Ministerpräsident Norwegens','Ministerpräsidentin Norwegens'], premierministre:['Präsident des Storting','Präsidentin des Storting'], depute:['Abgeordneter des Storting','Abgeordnete des Storting'],
+  senateur:['Statsforvalter','Statsforvalterin'], gendarme:['Lensmann','Lensmann']};
+Object.assign(DEx.job, {pecheurmorue:['Kabeljaufischer auf den Lofoten','Kabeljaufischerin auf den Lofoten'], baleinier:['Walfänger','Walfängerin'], flotteur:['Flößer','Flößerin'],
+  skieurpro:['Profi-Skiläufer','Profi-Skiläuferin'], eleveurrennes:['Samischer Rentierhirte','Samische Rentierhirtin'], petrolier:['Arbeiter auf einer Bohrinsel','Arbeiterin auf einer Bohrinsel'],
+  saumon:['Lachszüchter','Lachszüchterin'], stavkirke:['Stabkirchen-Restaurator','Stabkirchen-Restauratorin'], fjordguide:['Fjordführer','Fjordführerin'], hurtigruten:['Hurtigruten-Matrose','Hurtigruten-Matrosin'],
+  hareng:['Heringssalzer','Heringssalzerin'], hardingfele:['Hardangerfiedel-Spieler','Hardangerfiedel-Spielerin'], seter:['Almhirte (Seter)','Sennerin (Seter)'], aurore:['Nordlicht-Führer','Nordlicht-Führerin'],
+  eolienflot:['Ingenieur für schwimmende Windräder','Ingenieurin für schwimmende Windräder'], brisglace:['Arktis-Eisbrecherlotse','Arktis-Eisbrecherlotsin']});
+Object.assign(DEx.int, {friluftsliv:['Friluftsliv-Fan','Friluftsliv-Fan'], skifond:['Langläufer','Langläuferin'], hytte:['Hüttenliebhaber','Hüttenliebhaberin'], bunad:['Bunad-Fan','Bunad-Fan'],
+  brunost:['Brunost-Liebhaber','Brunost-Liebhaberin'], blackmetal:['Black-Metal-Fan','Black-Metal-Fan'], vikings:['Wikinger-Fan','Wikinger-Fan'], pecheglace:['Eisangler','Eisanglerin'],
+  aurores:['Nordlichtjäger','Nordlichtjägerin'], kos:['Gemütlichkeits-Fan (kos)','Gemütlichkeits-Fan (kos)'], sautski:['Skispringer','Skispringerin'], trolls:['Glaubt an Trolle','Glaubt an Trolle']});
+Object.assign(DEx.track, {vgsstud:'Videregående · Allgemeinbildung', vgsreal:'Videregående · Naturwissenschaften', gymnas:'Gymnasium (Examen artium)', fbelek:'Gesellenbrief · Elektriker',
+  fbtomrer:'Gesellenbrief · Zimmerer', fbkokk:'Gesellenbrief · Koch', fbfiske:'Gesellenbrief · Fischerei', fbolje:'Gesellenbrief · Offshore'});
+Object.assign(DEx.dz, {troll:['Trollangriff','einem Trollangriff'], kraken:['Krakenangriff','einem Krakenangriff']});
+Object.assign(DEx.warn, {'Guerre nordique de Sept Ans':'Dreikronenkrieg', 'Guerre de Kalmar':'Kalmarkrieg', 'Guerre de Hannibal':'Torstenssonkrieg', 'Guerre dano-suédoise':'Dänisch-Schwedischer Krieg',
+  'Guerre de Gyldenløve':'Gyldenløve-Fehde', 'Grande guerre du Nord':'Großer Nordischer Krieg', 'Guerre des Airelles':'Preiselbeerkrieg', 'Guerre des chaloupes canonnières':'Kanonenbootkrieg',
+  'Guerre suédo-norvégienne':'Schwedisch-Norwegischer Krieg', 'Occupation allemande de la Norvège':'Deutsche Besetzung Norwegens', "Guerre de l'Arctique":'Arktiskrieg'});
+ESx.jobc.no = esPairs("president:Primer ministro de Noruega/Primera ministra de Noruega|premierministre:Presidente del Storting/Presidenta del Storting|depute:Diputado del Storting/Diputada del Storting|senateur:Gobernador provincial/Gobernadora provincial|gendarme:Lensmann (jefe de policía rural)/Lensmann (jefa de policía rural)");
+Object.assign(ESx.job, esPairs("pecheurmorue:Pescador de bacalao de las Lofoten/Pescadora de bacalao de las Lofoten|baleinier:Ballenero/Ballenera|flotteur:Gabarrero/Gabarrera|skieurpro:Esquiador profesional/Esquiadora profesional|eleveurrennes:Pastor sami de renos/Pastora sami de renos|petrolier:Trabajador de plataforma petrolífera/Trabajadora de plataforma petrolífera|saumon:Criador de salmones/Criadora de salmones|stavkirke:Restaurador de iglesias de madera/Restauradora de iglesias de madera|fjordguide:Guía de los fiordos|hurtigruten:Marinero del Hurtigruten/Marinera del Hurtigruten|hareng:Salador de arenques/Saladora de arenques|hardingfele:Violinista de Hardanger|seter:Vaquero de pasto de verano/Vaquera de pasto de verano|aurore:Guía de auroras boreales|eolienflot:Ingeniero de eólica flotante/Ingeniera de eólica flotante|brisglace:Piloto de rompehielos ártico/Pilota de rompehielos ártico"));
+Object.assign(ESx.int, esPairs("friluftsliv:Amante del friluftsliv|skifond:Esquiador de fondo/Esquiadora de fondo|hytte:Enamorado de su cabaña/Enamorada de su cabaña|bunad:Fan del bunad|brunost:Amante del brunost|blackmetal:Fan del black metal|vikings:Apasionado de los vikingos/Apasionada de los vikingos|pecheglace:Pescador en hielo/Pescadora en hielo|aurores:Cazador de auroras boreales/Cazadora de auroras boreales|kos:Amante del kos (lo acogedor)|sautski:Saltador de esquí/Saltadora de esquí|trolls:Cree en los trols"));
+Object.assign(ESx.track, esStr("vgsstud:Videregående de estudios generales|vgsreal:Videregående de ciencias|gymnas:Gymnas (examen artium)|fbelek:Certificado de oficio de electricista|fbtomrer:Certificado de oficio de carpintero|fbkokk:Certificado de oficio de cocinero|fbfiske:Certificado de oficio de pesca|fbolje:Certificado de oficio offshore"));
+Object.assign(ESx.dz, esPairs("troll:Ataque de un trol/un ataque de trol|kraken:Ataque de un kraken/un ataque de kraken"));
+Object.assign(ESx.warn, {'Guerre nordique de Sept Ans':'Guerra Nórdica de los Siete Años', 'Guerre de Kalmar':'Guerra de Kalmar', 'Guerre de Hannibal':'Guerra de Hannibal', 'Guerre dano-suédoise':'Guerra danosueca',
+  'Guerre de Gyldenløve':'Guerra de Gyldenløve', 'Grande guerre du Nord':'Gran Guerra del Norte', 'Guerre des Airelles':'Guerra de los Arándanos', 'Guerre des chaloupes canonnières':'Guerra de las Cañoneras',
+  'Guerre suédo-norvégienne':'Guerra sueco-noruega', 'Occupation allemande de la Norvège':'Ocupación alemana de Noruega', "Guerre de l'Arctique":'Guerra del Ártico'});
+Object.assign(ESx.decn, {"L'Union de Kalmar":'La Unión de Kalmar', 'Réforme et règne danois':'Reforma y dominio danés', 'Christian IV et Christiania':'Cristián IV y Christiania', 'La monarchie absolue':'La monarquía absoluta',
+  "L'âge d'or du bois et de la pêche":'La edad de oro de la madera y la pesca', 'Guerres et blocus':'Guerras y bloqueo', "Eidsvoll et l'union avec la Suède":'Eidsvoll y la unión con Suecia',
+  'Chemins de fer et grande émigration':'Ferrocarril y gran emigración', 'Ibsen, Grieg et Munch':'Ibsen, Grieg y Munch', "L'indépendance":'La independencia', 'Hydroélectricité et crise':'Energía hidroeléctrica y crisis',
+  "L'occupation":'La ocupación', 'La reconstruction':'La reconstrucción', 'Le pétrole de la mer du Nord':'El petróleo del mar del Norte', 'Lillehammer 94':'Lillehammer 94'});
+Object.assign(ESx.worldn, Object.fromEntries(`La Norvège devient une province du Danemark.§Noruega se convierte en una provincia de Dinamarca.|Après un incendie, Oslo est reconstruite et rebaptisée Christiania.§Tras un incendio, Oslo se reconstruye y pasa a llamarse Christiania.|Fondation de l'université de Christiania.§Se funda la Universidad de Christiania.|La Constitution est signée à Eidsvoll.§Se firma la Constitución en Eidsvoll.|Union avec la Suède sous un même roi.§Unión con Suecia bajo un mismo rey.|Le sloop Restauration emmène les premiers émigrants en Amérique.§La balandra Restauration lleva a los primeros emigrantes a América.|Premier train de Norvège entre Christiania et Eidsvoll.§Primer tren de Noruega entre Christiania y Eidsvoll.|Ibsen publie Une maison de poupée.§Ibsen publica Casa de muñecas.|Edvard Munch peint Le Cri.§Edvard Munch pinta El grito.|Nansen revient de son expédition vers le pôle Nord à bord du Fram.§Nansen vuelve de su expedición hacia el Polo Norte a bordo del Fram.|Fin de l'union : la Norvège devient indépendante.§Fin de la unión: Noruega se independiza.|Haakon VII devient roi de Norvège.§Haakon VII se convierte en rey de Noruega.|Roald Amundsen atteint le pôle Sud.§Roald Amundsen alcanza el Polo Sur.|Les femmes obtiennent le droit de vote.§Las mujeres obtienen el derecho de voto.|Christiania reprend le nom d'Oslo.§Christiania recupera el nombre de Oslo.|L'Allemagne envahit la Norvège.§Alemania invade Noruega.|Libération de la Norvège.§Liberación de Noruega.|Thor Heyerdahl part du Pérou sur le radeau Kon-Tiki.§Thor Heyerdahl parte de Perú en la balsa Kon-Tiki.|Oslo accueille les Jeux olympiques d'hiver.§Oslo acoge los Juegos Olímpicos de invierno.|Découverte du gisement de pétrole d'Ekofisk.§Se descubre el yacimiento petrolífero de Ekofisk.|Les Norvégiens disent non à la CEE.§Los noruegos dicen no a la CEE.|Bobbysocks gagne l'Eurovision.§Bobbysocks gana Eurovisión.|Création du fonds pétrolier.§Se crea el fondo del petróleo.|Jeux olympiques d'hiver de Lillehammer.§Juegos Olímpicos de invierno de Lillehammer.|Deuxième non à l'Union européenne.§Segundo no a la Unión Europea.|L'Opéra d'Oslo ouvre ses portes.§Abre la Ópera de Oslo.|La Norvège ferme ses frontières face au Covid-19.§Noruega cierra sus fronteras ante la covid-19.|Presque toutes les voitures neuves sont électriques.§Casi todos los coches nuevos son eléctricos.`.split('|').map(x => x.split('§'))));
 XD = LANG === 'es' ? ESx : DEx;
 const deSex = (pair, p) => pair ? (p && p.sex === 'F' ? pair[1] : pair[0]) : null;
 const warTag = c => c && c.wn != null && c.wn >= 0 && WARS[c.wn] ? ` (${warName(c.wn)})` : '';   // 0.2.0b : le nom de la guerre
@@ -6098,7 +6295,7 @@ function nextAch(){
 }
 function openPatchnotes(){
   openModal(`<div class="m-head"><div class="eyebrow">Cyngenetic v${APP_VERSION}</div><h2>${t('pn_title')}</h2></div>
-    ${PATCHNOTES.map(n => `<section class="pn"><h3>v${esc(n.v)} <small>${esc(n.date[LANG] || n.date.en)}</small></h3><ul>${(n[LANG] || n.en).map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}<p class="credit">Cyngenetic · ${t('credit')} Aze Le Dix</p>`);
+    ${PATCHNOTES.map(n => `<section class="pn"><h3>v${esc(n.v)} <small>${esc(n.date[LANG] || n.date.en)}</small></h3><ul>${(n[LANG] || n.en).map(l => `<li>${esc(l)}</li>`).join('')}</ul></section>`).join('')}<p class="credit">Cyngenetic · ${t('credit')} Aze Le Onze</p>`);
 }
 let achOpen = false;                                   // menu des succès ouvert : musique de fête
 function openAchievements(){
@@ -6435,14 +6632,14 @@ function workTick(p, day){
   else if(w.s==='unemp'){ const j = pickJob(y, p); p.work = {s:'job', job:j}; log('work','back_to_work',[p.id,j],day); }
   else if(w.s==='travel'){ const pv = w.prev && w.prev.s !== 'travel' ? w.prev : null; p.work = pv && !(pv.s === 'unemp' || pv.s === 'odd') ? pv : {s:'job', job: pickJob(y, p)}; log('move','travel_back',[p.id, w.ctry], day, false); }
 }
-const TRAVEL_C = ['es','us','fr','uk','ch','de'];
+const TRAVEL_C = ['es','us','fr','uk','ch','de','no'];
 function workYear(p, A, day){
   nobleYear(p, A, day);
   if(royalOn() && A >= 16 && heirId() === p.id && (!p.princeAct || Math.random() < .4)){       // le prince héritier change d'occupation
     const a = actPick(PRINCE_ACTS, day, p.princeAct); p.princeAct = a; log('star','royal_act',[p.id, a], day, false);
   }
   const w = p.work; if(w && w.s === 'royal'){ royalYear(p, A, day); return; }
-  if(w && w.s === 'travel') return;                    // 0.2.2a : en voyage
+  if((w && w.s === 'travel') || p.trip) return;        // 0.2.2a : en voyage (0.2.3a : ou en long voyage en famille)
   if(w && ['job','unemp','odd','retired'].includes(w.s) && A >= 20 && A <= 75 && !p.lockJob && !jailed(p) && !p.zombie && !p.lost && !(p.star && p.star.famous) && !(p.crim && p.crim.declared)
     && !royalImmune(p) && Math.random() < .012){       // 1,2 % par an : un voyage de 2 à 20 mois dans un autre pays
     const c = pick(TRAVEL_C.filter(x => x !== CTRY)), m = rnd(2, 20);
@@ -6497,6 +6694,7 @@ function activity(p, skipIll){
   if(p.lost) return t('act_lost', p);
   const d = p.death!=null ? p.death : S.t, A = ageAt(p, d), y = yearOf(d);
   if(p.death==null && p.ill && !skipIll) return dzName(p.ill.dz, p);
+  if(p.death==null && p.trip) return t('trv_' + p.trip.ctry);   // 0.2.3a : long voyage en famille
   if(p.star && p.star.famous) return jobName(p.star.job, p);
   const w = p.work;
   if(royalOn() && A >= 16 && p.death == null && heirId() === p.id && !(w && (w.s === 'royal' || w.s === 'prison'))) return royalActName(p.princeAct || 'p_attente');   // prince héritier
@@ -6562,7 +6760,7 @@ function die(p, day, cause){
   if(p.immortal){ Object.assign(p, {deathAt:null, onset:null, ill:null, murderAt:null, murderBy:null, triDeath:null, doomAt:null}); return; }   // 0.2.2a : ticket doré
   if(cause.dz === 'rage_jeux' && !VSH) unlockSkin('hacker');   // 0.2.0b : thème Hacker
   if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide' && cause.dz !== 'combat' && cause.dz !== 'depropro' && cause.dz !== 'sportx' && !/^tri\d/.test(cause.dz || '')){   // morts légendaires (0,025 % chacune)
-    const LD = ['mortderire','cocotier','orgorge','tsunami','cobaye'].concat(ageAt(p, day) <= 20 ? ['progeria'] : [], yearOf(day) < 1970 ? ['latrines'] : []), li = Math.floor(Math.random() / LEG_P);
+    const LD = ['mortderire','cocotier','orgorge','tsunami','cobaye'].concat(ageAt(p, day) <= 20 ? ['progeria'] : [], yearOf(day) < 1970 ? ['latrines'] : [], CTRY === 'no' ? ['troll','kraken'] : []), li = Math.floor(Math.random() / LEG_P);
     if(li < LD.length) cause = {dz: LD[li]};
   }
   const wasHeir = royalOn() && p.id === heirId();
@@ -6845,7 +7043,7 @@ function checkBirthAch(c){                          // succès liés à une nais
   if(sibs.some(s => Math.abs(c.birth - s.birth) >= 50 * 365.25)) unlock('sib50');
 }
 const checkConq = pid => checkTiers('conq', S.unions.filter(x => x.a===pid).length, [3,6,10,15]);
-const ISLANDS = new Set(['Ajaccio','Bastia','Belfast','Derry','Anchorage','Fairbanks','Juneau','Honolulu','Hilo','Palma','Ibiza','Las Palmas','Santa Cruz de Tenerife']);
+const ISLANDS = new Set(['Svolvær','Longyearbyen','Honningsvåg','Vardø','Hammerfest','Harstad','Tromsø','Ajaccio','Bastia','Belfast','Derry','Anchorage','Fairbanks','Juneau','Honolulu','Hilo','Palma','Ibiza','Las Palmas','Santa Cruz de Tenerife']);
 function cityNear(day, from){                          // 0.2.2a : une des 5 villes les plus proches (sauf depuis une île, l'Alaska ou un lieu inconnu)
   const o = CITY_POS[from]; if(!o || ISLANDS.has(from)) return cityPick(day, from);
   const y = yearOf(day), k = Math.cos(o[1] * Math.PI / 180);
@@ -6946,7 +7144,33 @@ function openEvent(){
       <p class="evtxt">${esc(t('ev_al_1', p))}</p><p class="evtxt"><b>${t('ev_al_2')}</b></p>
       <div class="acts tt-acts"><button class="gel lime wide" data-act="evdo" data-v="yes"><span>${t('ev_al_yes')}</span></button>
         <button class="gel wide" data-act="evdo" data-v="no"><span>${t('ev_al_no')}</span></button></div>`, {locked:true});
+  } else if(e.k === 'trip'){
+    const fam = tripFam(p, day); if(fam.length < 2 || p.trip || jailed(p)){ S.evQ.shift(); return; }
+    const names = fam.slice(1).map(q => q.first), list = names.length > 1 ? names.slice(0, -1).join(', ') + t('ev_and') + names[names.length - 1] : names[0];
+    openModal(`<div class="m-head"><div class="eyebrow">${t('ev_eye')} · ${fmt(day)}</div><h2>${t('ev_tr_title')}</h2></div>
+      <div class="evpair">${orb(p, 'xl')}${evFlag(e.c)}</div>
+      <p class="evtxt">${esc(t('ev_tr_1', p, placeTxt(e.c), list))}</p><p class="evtxt"><b>${esc(t('ev_tr_2', p))}</b></p>
+      <div class="acts tt-acts"><button class="gel lime wide" data-act="evdo" data-v="go"><span>${t('ev_tr_go')}</span></button>
+        <button class="gel wide" data-act="evdo" data-v="no"><span>${t('ev_tr_no')}</span></button></div>`, {locked:true});
+  } else if(e.k === 'tripfind'){
+    openModal(`<div class="m-head"><div class="eyebrow">${t('ev_eye')} · ${fmt(day)}</div><h2>${t('ev_tf_title')}</h2></div>
+      <div class="evpair">${orb(p, 'xl')}<i class="evbig">${ITEMS[e.item]}</i></div>
+      <p class="evtxt">${esc(t('ev_tf_1', p, placeTxt(e.c)))}</p>
+      <div class="acts tt-acts"><button class="gel gold wide" data-act="evdo" data-v="take"><span>${esc(t('ev_tf_take', t('it_' + e.item)))}</span></button></div>`, {locked:true});
   } else S.evQ.shift();
+}
+function tripFam(p, day){                               // 0.2.3a : la personne, son conjoint, ses enfants mineurs (vivants, à la maison)
+  const u = currentUnion(p.id), mate = u ? P(u.a === p.id ? u.b : u.a) : null;
+  const kids = Object.values(S.people).filter(q => q.parents && q.parents.includes(p.id) && q.death == null && !q.lost && !q.zombie && ageAt(q, day) < 18);
+  return [p].concat(mate && mate.death == null && !mate.lost && !jailed(mate) ? [mate] : [], kids);
+}
+const placeTxt = c => t('trv_' + c).replace(/^\S+\s/, '');   // « en Norvège », « to Norway », « nach Norwegen », « a Noruega »
+const evFlag = c => `<i class="evbig evflag">${FLAGS[c] || ''}</i>`;
+const TRIP_ITEMS = ['medaille','coeur','clone','lunettes'];
+function tripEnd(p, day){                                // retour du long voyage
+  const tr = p.trip; p.trip = null; dirty = true;
+  if(tr.lead){ log('move','trip_back',[p.id, tr.ctry], day, false);
+    if(Math.random() < .3 && SET.events && !S.auto && !S.headless && p.death == null) evPush({k:'tripfind', id:p.id, c: tr.ctry, item: pick(TRIP_ITEMS)}); }
 }
 const ALPACAS = ['Gérard','Bernadette','Pistache','Caramel','Alpacino','Biscotte','Pompon','Lama Del Rey','Gaston','Noisette'];
 function evResolve(v, extra){                          // le choix du joueur (ou du mode auto)
@@ -6978,6 +7202,13 @@ function evResolve(v, extra){                          // le choix du joueur (ou
   } else if(e.k === 'alpaca'){
     if(v === 'yes'){ p.alpaca = pick(ALPACAS); payCyn(-30); log('star','ev_al_yes_log',[p.id, p.alpaca], day, true); sfx.sparkle(); burst(['#fff4d6','#ffffff','#c9a27a','#8cff1a'], 36); }
     else log('info','ev_al_no_log',[p.id], day, false);
+  } else if(e.k === 'trip'){
+    const fam = tripFam(p, day);
+    if(v === 'go'){ fam.forEach(q => { q.trip = {ctry: e.c, until: day + 730, lead: q.id === p.id}; }); log('move','trip_go',[p.id, e.c], day, true); sfx.sparkle(); burst(['#ffffff','#3fd0ff','#ffd000','#8cff1a'], 40); }
+    else { fam.forEach(q => { catchMild(q, 'deprbenigne', day); const m = (q.mild || []).find(x => x.dz === 'deprbenigne'); if(m) m.end = day + 730; }); log('sad','trip_no',[p.id], day, false); }
+    dirty = true;
+  } else if(e.k === 'tripfind'){
+    invAdd(e.item, 1); log('star','trip_find',[p.id, e.item], day, true); sfx.sparkle(); burst(['#ffd000','#ffffff','#c9a8ff'], 40);
   } else if(e.k === 'career'){
     const y = yearOf(day); p.careerEv = v;
     if(v === 'study'){                                 // le métier de ses études : burn-out à répétition, et souvent une fin tragique
@@ -7020,6 +7251,9 @@ function evYear(p, A, day){                            // à chaque anniversaire
   // 0.2.1b : un alpaga débarque dans le jardin, de 18 à 85 ans (0.2.2c : 0,07 % par an, et au plus une fois tous les 40 ans dans la famille)
   if(A >= 18 && A <= 85 && !p.alpacaEv && !jailed(p) && !(S.alpacaAt != null && day - S.alpacaAt < 40 * 365.25) && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .0007){
     p.alpacaEv = true; S.alpacaAt = day; evPush({k:'alpaca', id:p.id}); }
+  // 0.2.3a : envie d'un long voyage en famille (conjoint et enfants mineurs) : 0,13 % par an, de 20 à 70 ans
+  if(A >= 20 && A <= 70 && !p.trip && !jailed(p) && !(p.work && ['travel','mil','prison','royal'].includes(p.work.s)) && !(p.crim && p.crim.declared) && !(p.star && p.star.famous)
+    && tripFam(p, day).length > 1 && !(S.evQ || []).some(x => x.id === p.id) && Math.random() < .0013) evPush({k:'trip', id:p.id, c: pick(TRAVEL_C.filter(x => x !== CTRY))});
   // entre 19 et 22 ans, pas satisfait de ses études : 0,5 % par an
   if(A >= 19 && A <= 22 && !p.careerEv && !p.lockJob && studyOf(p) && !(p.work && ['mil','star','prison','royal','noble'].includes(p.work.s)) && !(p.crim && p.crim.declared) && Math.random() < .005){
     p.careerEv = 'asked';
@@ -7413,6 +7647,7 @@ function processDay(day){
     if(p.murderAt != null && day >= p.murderAt){ die(p, day, {murder: p.murderBy}); continue; }
     if(p.triDeath != null && day >= p.triDeath){ const dz = p.triDz; p.triDeath = null; die(p, day, {dz}); continue; }   // 0.2.1a : trisomies
     if(p.doomAt != null && day >= p.doomAt){ p.doomAt = null; die(p, day, {dz:'depropro'}); continue; }   // 0.2.0c
+    if(p.trip && day >= p.trip.until) tripEnd(p, day);   // 0.2.3a
     if(p.crim){
       if(!p.crim.declared && day >= p.crim.day){ if(royalImmune(p)) delete p.crim; else declareCrim(p, day); }
       else if(p.crim.declared && !p.crim.fate){
@@ -7901,7 +8136,7 @@ function nodeHTML(p, x, y){
     <span class="n-top"><span class="orbw">${orb(p)}${nodeBadges(p)}</span><span class="nt"><b class="${rtt ? 'tt' : ''}">${rtt ? `<small class="rtt">${esc(rtt.replace(' consort', ''))}</small>` : ''}${esc(p.first||'…')}</b><span>${esc(p.last)}</span></span></span>
     <span class="n-life"><span>${years}</span><b>${ageL}</b></span>
     <span class="n-city">${icon('pin')}<span>${esc(cityLine(p))}</span></span>
-    <span class="n-band${p.work && ((p.work.s === 'job' && LEGS.j.has(p.work.job)) || (p.work.s === 'retired' && p.work.leg)) ? ' lgband' : ''}" title="${esc(activity(p))}">${esc(activity(p))}${p.work && p.work.s === 'travel' && p.death == null && FLAGS[p.work.ctry] ? `<span class="bflag">${FLAGS[p.work.ctry]}</span>` : ''}</span>${jail ? '<i class="bars"></i>' : ''}
+    <span class="n-band${p.work && ((p.work.s === 'job' && LEGS.j.has(p.work.job)) || (p.work.s === 'retired' && p.work.leg)) ? ' lgband' : ''}" title="${esc(activity(p))}">${esc(activity(p))}${p.death == null && (p.trip || (p.work && p.work.s === 'travel')) && FLAGS[(p.trip || p.work).ctry] ? `<span class="bflag">${FLAGS[(p.trip || p.work).ctry]}</span>` : ''}</span>${jail ? '<i class="bars"></i>' : ''}
     ${cu && p.sex==='F' ? `<span class="badge">${ICON_BABY}</span>` : ''}</button>`;
 }
 function buildTree(){
@@ -8594,6 +8829,169 @@ const TX_US = {
     lyc:['10. Klasse','11. Klasse','12. Klasse'], cours_sup:'Landschule · 8. Klasse', certif:'Grundschulabschluss', petite_ecole:'Einraumschule', alb_mat:'Grundschule', alb_col:'Middle School und High School',
     log_president:p=>`${nm(p)} wird ${g(P(p),'Präsident','Präsidentin')} der Vereinigten Staaten!`, pres_rib:p=>`★ ${g(p,'Präsident','Präsidentin')}`, set_map:'Karte der Vereinigten Staaten', map_zoom_reset:'Die ganzen USA'})
 };
+/* ---------- Norvège (0.2.3a) ---------- */
+const NO_NAMES = [
+ [1599,['Ole','Hans','Peder','Jon','Anders','Nils','Lars','Erik','Knut','Torstein','Halvor','Gunnar','Tore','Arne','Svein','Eirik','Olav','Bjørn'],
+       ['Kari','Marit','Ragnhild','Ingeborg','Guri','Sigrid','Astrid','Gunhild','Brynhild','Gjertrud','Margrete','Anne','Siri','Gro','Helga','Ingrid','Ragna','Tora']],
+ [1699,['Ole','Hans','Peder','Jon','Anders','Nils','Lars','Erik','Knut','Iver','Halvor','Christen','Jens','Paul','Tollef','Amund','Even','Jakob'],
+       ['Kari','Marit','Anne','Ingeborg','Guri','Marte','Berte','Karen','Maren','Sigrid','Ragnhild','Gjertrud','Ingrid','Dorte','Mari','Siri','Live','Barbro']],
+ [1799,['Ole','Hans','Peder','Johannes','Anders','Nils','Lars','Jens','Christian','Knut','Halvor','Iver','Erik','Jacob','Gulbrand','Tosten','Mikkel','Ellef'],
+       ['Anne','Marte','Kari','Maren','Ingeborg','Berte','Karen','Marit','Guri','Johanne','Kirsti','Mari','Inger','Oline','Gunhild','Helene','Sophie','Randi']],
+ [1859,['Ole','Hans','Johannes','Peder','Anders','Karl','Martin','Nils','Lars','Johan','Kristian','Olaf','Andreas','Edvard','Jens','Halvor','Søren','Even'],
+       ['Anne','Marie','Karen','Inger','Maren','Hanna','Kari','Anna','Johanne','Ingeborg','Marte','Berte','Oline','Mathilde','Karoline','Elise','Hilda','Petra']],
+ [1899,['Johan','Olav','Karl','Hans','Ole','Kristian','Peder','Einar','Arne','Martin','Johannes','Sverre','Ragnar','Harald','Sigurd','Henrik','Erling','Trygve'],
+       ['Anna','Marie','Ingeborg','Karen','Ragnhild','Signe','Hanna','Dagny','Astrid','Borghild','Ingrid','Helga','Gudrun','Solveig','Agnes','Klara','Olga','Sigrid']],
+ [1924,['Arne','Olav','Einar','Odd','Kjell','Rolf','Knut','Ragnar','Sverre','Leif','Erling','Thor','Gunnar','Harald','Per','Bjarne','Alf','Tor'],
+       ['Ingrid','Astrid','Gerd','Solveig','Bjørg','Liv','Ruth','Randi','Karin','Aase','Else','Sigrid','Margit','Inger','Ragnhild','Gunvor','Eldbjørg','Turid']],
+ [1949,['Jan','Per','Bjørn','Arne','Kjell','Svein','Tor','Terje','Odd','Knut','Rune','Geir','Jon','Rolf','Tore','Hans','Erik','Egil'],
+       ['Anne','Inger','Kari','Bjørg','Liv','Randi','Grete','Wenche','Turid','Unni','Berit','Solveig','Gunn','Eva','Marit','Ellen','Sissel','Aud']],
+ [1969,['Geir','Jan','Per','Terje','Morten','Tor','Rune','Trond','Frode','Bjørn','Tom','Kjetil','Svein','Espen','Lars','Hans','Stein','Arild'],
+       ['Anne','Hilde','Kari','Marit','Bente','Mette','Hege','Tone','Elin','Trine','Gro','Heidi','Randi','Grete','Siri','Liv','Berit','Wenche']],
+ [1984,['Kristian','Martin','Thomas','Anders','Marius','Andreas','Ole','Kristoffer','Daniel','Espen','Stian','Jørgen','Magnus','Lars','Eirik','Håkon','Christian','Fredrik'],
+       ['Ida','Kristine','Marte','Ingrid','Silje','Maria','Camilla','Hanne','Kristin','Linn','Kari','Line','Marianne','Ane','Stine','Elisabeth','Julie','Tonje']],
+ [1999,['Markus','Mathias','Martin','Jonas','Tobias','Kristian','Andreas','Sander','Emil','Daniel','Henrik','Magnus','Kristoffer','Fredrik','Even','Sindre','Jørgen','Eirik'],
+       ['Ida','Thea','Julie','Ingrid','Emilie','Sara','Hanna','Maria','Nora','Marte','Silje','Malin','Andrea','Mari','Martine','Vilde','Karoline','Tuva']],
+ [2014,['Lucas','Emil','William','Oliver','Filip','Jakob','Noah','Aksel','Isak','Henrik','Theodor','Magnus','Elias','Johannes','Sander','Liam','Mathias','Tobias'],
+       ['Emma','Nora','Sara','Sofie','Ella','Maja','Olivia','Ingrid','Emilie','Leah','Thea','Vilde','Frida','Hedda','Tiril','Linnea','Selma','Astrid']],
+ [2029,['Jakob','Noah','Emil','Lucas','Oliver','Isak','William','Filip','Aksel','Theodor','Elias','Kasper','Ludvig','Olav','Johannes','Even','Leon','Matheo'],
+       ['Nora','Emma','Olivia','Ella','Sofie','Leah','Frida','Ingrid','Maja','Astrid','Selma','Iben','Alma','Ellinor','Tiril','Hedda','Solveig','Sigrid']],
+ [2049,['Odin','Loke','Balder','Frøy','Eik','Storm','Ask','Brage','Vale','Ravn','Ulv','Aron','Ivar','Sigurd','Leif','Bjarke','Vidar','Tor'],
+       ['Frøya','Saga','Idun','Siv','Eir','Runa','Live','Embla','Aurora','Vår','Ylva','Tyra','Ronja','Signe','Liv','Sol','Iselin','Hel']],
+ [2069,['Nordlys','Vinter','Fjell','Ravn','Isfjord','Atle','Neo','Zorn','Kosmo','Taro','Orion','Hugin','Munin','Skjold','Varg','Kaos','Stellan','Vidar'],
+       ['Stjerna','Snø','Aurora','Polaris','Isa','Kometa','Lyra','Vega','Nova','Astra','Galdra','Hekla','Vala','Fjora','Selene','Brisa','Iselin','Nordis']],
+ [2100,['Xorn','Zyvald','Kyrr','Thyrr','Vorx','Nexar','Odinx','Lokex','Kvasar','Zeph','Vexo','Ravnor','Astrom','Fjalar','Skrymir','Ymir','Surt','Stellan'],
+       ['Zyra','Nyx','Xelja','Ystra','Frøyx','Aelra','Nornia','Valkyra','Skadi','Hlin','Gna','Sjofn','Lofn','Vor','Syn','Gefjon','Eira','Astryd']]
+];
+const NO_BASIC = {M:['Ole','Lars','Jan','Per','Bjørn','Knut','Hans','Erik','Olav','Arne','Kristian','Martin','Magnus','Emil','Jakob','Lucas','Henrik','Anders'],
+  F:['Anne','Kari','Ingrid','Marit','Liv','Astrid','Hanne','Ida','Nora','Emma','Sofie','Thea','Maria','Ingeborg','Sigrid','Silje','Marte','Solveig']};
+const NO_SN_PLAIN = ['Hansen','Johansen','Olsen','Larsen','Andersen','Pedersen','Nilsen','Kristiansen','Jensen','Karlsen','Johnsen','Pettersen','Eriksen','Berg','Haugen','Hagen',
+  'Johannessen','Andreassen','Jacobsen','Dahl','Jørgensen','Halvorsen','Henriksen','Lund','Sørensen','Jakobsen','Moen','Gundersen','Iversen','Strand','Solberg','Svendsen','Eide',
+  'Knutsen','Martinsen','Paulsen','Bakken','Kristoffersen','Mathisen','Lie','Amundsen','Rasmussen','Lunde','Solheim','Berge','Moe','Nygård','Bakke','Kristensen','Fredriksen',
+  'Holm','Lien','Hauge','Christensen','Andresen','Nielsen','Knudsen','Evensen','Sæther','Aas','Myhre','Hanssen','Haugland','Thomassen','Sivertsen','Simonsen','Danielsen',
+  'Berntsen','Sandvik','Rønning','Arnesen','Antonsen','Næss','Vik','Haug','Ellingsen','Thorsen'];
+const NO_SN_RARE = ['Bjørnstad','Fjeldstad','Grønvold','Kvamme','Rognstad','Myrvold','Tveit','Ødegård','Sæterdal','Brekke','Haukeland','Skjervheim','Aasen','Grieg','Ibsen','Nansen',
+  'Heyerdahl','Munch','Vigeland','Sverdrup','Wessel','Løvenskiold','Treschow','Anker','Wedel-Jarlsberg','Sara','Hætta','Eira','Gaup'];
+const NO_SN_MODERN = ['Nguyen','Ali','Ahmed','Hussain','Khan','Mohamed','Andersson','Johansson','Nowak','Kowalski','Hassan','Abdi','Tran','Singh','Rahman','Jama'];
+function pickSurnameNO(y){
+  const r = Math.random();
+  if(r < .14) return pick(NO_SN_RARE);
+  if(y >= 1985 && r < .3) return pick(NO_SN_MODERN);
+  return pick(NO_SN_PLAIN);
+}
+// carte : la Norvège continentale, ses grandes îles, et le Svalbard en médaillon (à droite)
+const NO_SV = ([lo, la]) => { const X = 330 + (lo - 10.5) * 7.4, Y = 150 + (80.9 - la) * 19; return [+((X - 50) / 16 + 4.5).toFixed(3), +(71.3 - (Y - 14) / 37).toFixed(3)]; };
+const NO_CITY_POS = {Oslo:[10.75,59.91],Bergen:[5.32,60.39],Trondheim:[10.40,63.43],Stavanger:[5.73,58.97],Drammen:[10.20,59.74],Fredrikstad:[10.93,59.22],Kristiansand:[8.00,58.15],
+  Sandnes:[5.74,58.85],'Tromsø':[18.96,69.65],Sarpsborg:[11.11,59.28],Skien:[9.61,59.21],'Ålesund':[6.15,62.47],Sandefjord:[10.22,59.13],Haugesund:[5.27,59.41],'Tønsberg':[10.41,59.27],
+  Moss:[10.66,59.43],Porsgrunn:[9.66,59.14],'Bodø':[14.40,67.28],Arendal:[8.77,58.46],Hamar:[11.07,60.79],Larvik:[10.03,59.05],Halden:[11.39,59.12],Lillehammer:[10.47,61.11],
+  Molde:[7.16,62.74],Harstad:[16.54,68.80],Kongsberg:[9.65,59.67],'Gjøvik':[10.69,60.80],Narvik:[17.43,68.44],Alta:[23.27,69.97],Hammerfest:[23.68,70.66],Kirkenes:[30.05,69.73],
+  'Vardø':[31.11,70.37],Kristiansund:[7.73,63.11],Elverum:[11.56,60.88],'Røros':[11.39,62.57],'Lillestrøm':[11.05,59.96],Steinkjer:[11.50,64.01],Namsos:[11.50,64.47],
+  'Mo i Rana':[14.14,66.31],'Svolvær':[14.57,68.23],'Florø':[5.03,61.60],'Førde':[5.85,61.45],'Flåm':[7.12,60.86],Geiranger:[7.21,62.10],Kautokeino:[23.04,69.01],Karasjok:[25.51,69.47],
+  Mandal:[7.46,58.03],Egersund:[6.00,58.45],Notodden:[9.26,59.56],'Honningsvåg':[25.97,70.98],'Hønefoss':[10.26,60.17],Longyearbyen:NO_SV([15.63,78.22])};
+const NO_CITY_FROM = {Fredrikstad:1567,Kristiansand:1641,Sandnes:1860,'Tromsø':1794,'Ålesund':1848,Sandefjord:1845,Haugesund:1855,Porsgrunn:1807,'Bodø':1816,Hamar:1849,Larvik:1671,
+  Halden:1665,Lillehammer:1827,Molde:1742,Harstad:1904,Kongsberg:1624,'Gjøvik':1861,Narvik:1902,Hammerfest:1789,Kirkenes:1906,Kristiansund:1742,'Røros':1646,'Lillestrøm':1908,
+  Steinkjer:1857,Namsos:1845,'Mo i Rana':1923,'Svolvær':1918,'Florø':1860,Notodden:1913,'Hønefoss':1852,Longyearbyen:1906};
+const NO_OUTLINE = [[11.43,58.99],[10.95,59.15],[10.65,59.42],[10.75,59.88],[10.45,59.55],[10.25,59.10],[9.75,58.98],[9.2,58.72],[8.75,58.45],[8.0,58.10],[7.05,57.98],[6.6,58.08],
+  [5.95,58.42],[5.55,58.75],[5.6,59.1],[5.2,59.4],[5.0,59.9],[4.95,60.4],[4.9,60.8],[4.85,61.2],[5.0,61.6],[5.15,62.0],[5.9,62.5],[6.9,62.85],[7.6,63.15],[8.3,63.5],[9.6,63.75],
+  [10.8,64.6],[11.2,64.9],[12.2,65.5],[12.6,66.1],[13.2,66.6],[13.9,67.1],[14.3,67.35],[15.0,67.8],[15.5,68.1],[16.0,68.4],[17.0,68.6],[16.8,69.0],[17.8,69.4],[18.6,69.75],
+  [19.9,70.1],[21.0,70.2],[22.0,70.4],[23.3,70.6],[24.6,70.9],[25.7,71.0],[26.8,70.95],[27.7,71.1],[28.5,70.9],[29.5,70.7],[30.8,70.4],[31.1,70.1],[30.2,69.85],[30.9,69.65],
+  [30.85,69.55],[28.9,69.05],[28.4,69.45],[28.5,69.85],[27.95,70.08],[27.0,69.9],[26.3,69.75],[25.8,69.55],[25.6,69.2],[25.0,68.9],[24.0,68.6],[22.4,68.7],[21.6,69.1],[20.55,69.06],
+  [19.5,68.45],[18.1,68.45],[17.9,67.95],[16.3,67.5],[15.5,66.5],[14.6,66.0],[14.4,65.1],[13.7,64.6],[14.1,64.3],[13.2,64.0],[12.2,63.5],[12.1,62.8],[12.2,62.2],[12.6,61.6],
+  [12.8,61.2],[12.4,60.6],[12.5,60.1],[11.8,59.8],[11.6,59.4]];
+const NO_EXTRA = [[[12.9,67.85],[13.6,68.1],[14.6,68.3],[15.6,68.45],[16.0,68.35],[15.0,68.1],[14.0,67.95],[13.2,67.75]],
+  [[15.6,68.55],[16.3,68.4],[16.9,68.55],[17.2,68.85],[17.9,69.15],[18.3,69.55],[17.5,69.6],[16.9,69.25],[16.3,69.0],[15.7,68.85]],
+  [[18.4,69.55],[18.9,69.45],[19.3,69.65],[19.1,69.85],[18.6,69.85]], [[23.2,70.55],[23.6,70.5],[24.0,70.65],[23.7,70.85],[23.3,70.75]],
+  [[25.4,70.95],[25.8,70.85],[26.3,70.95],[26.1,71.18],[25.6,71.12]], [[31.0,70.32],[31.25,70.32],[31.25,70.43],[31.0,70.43]],
+  [[11.0,78.9],[12.5,79.8],[16.0,80.0],[18.5,79.8],[17.0,78.6],[16.5,77.5],[15.0,77.0],[13.8,77.6],[13.0,78.3]].map(NO_SV),
+  [[19.0,79.8],[22.0,80.4],[27.0,80.1],[24.5,79.3],[20.5,79.3]].map(NO_SV), [[21.5,77.7],[24.0,77.9],[24.5,77.3],[22.5,77.0]].map(NO_SV)];
+const NO_WARS = [[1563,7,13,1570,11,13,'Guerre nordique de Sept Ans',"Northern Seven Years' War",'Dreikronenkrieg'],[1611,3,4,1613,0,20,'Guerre de Kalmar','Kalmar War','Kalmarkrieg'],
+ [1643,11,12,1645,7,13,'Guerre de Hannibal','Hannibal War','Torstenssonkrieg'],[1657,5,1,1660,4,27,'Guerre dano-suédoise','Dano-Swedish War','Dänisch-Schwedischer Krieg'],
+ [1675,8,2,1679,8,26,'Guerre de Gyldenløve','Gyldenløve War','Gyldenløve-Fehde'],[1700,2,1,1720,6,3,'Grande guerre du Nord','Great Northern War','Großer Nordischer Krieg'],
+ [1788,8,24,1788,10,9,'Guerre des Airelles','Lingonberry War','Preiselbeerkrieg'],[1807,7,16,1814,0,14,'Guerre des chaloupes canonnières','Gunboat War','Kanonenbootkrieg'],
+ [1814,6,26,1814,7,14,'Guerre suédo-norvégienne','Swedish–Norwegian War','Schwedisch-Norwegischer Krieg'],[1940,3,9,1945,4,8,'Occupation allemande de la Norvège','German occupation of Norway','Deutsche Besetzung Norwegens'],
+ [2058,5,1,2061,8,1,"Guerre de l'Arctique",'Arctic War','Arktiskrieg'],[2108,0,4,2117,9,30,'Guerre des Oméga','Omega War','Omega-Krieg'],
+ [2201,1,21,2209,5,6,'Guerre spatio-galactique','Space-Galactic War','Raumgalaktischer Krieg'],[2319,4,1,2330,7,24,'Guerre temporelle','Temporal War','Zeitkrieg']
+].map(w => ({a:fromYMD(w[0],w[1],w[2]), b:fromYMD(w[3],w[4],w[5]), fr:w[6], en:w[7], de:w[8]}));
+const NO_DECADES = [
+ [1500,1536,'castle',"L'Union de Kalmar",'The Kalmar Union','Die Kalmarer Union'],[1537,1599,'book','Réforme et règne danois','Reformation and Danish rule','Reformation und dänische Herrschaft'],
+ [1600,1659,'crown','Christian IV et Christiania','Christian IV and Christiania','Christian IV. und Christiania'],[1660,1719,'castle','La monarchie absolue','Absolute monarchy','Der Absolutismus'],
+ [1720,1787,'wave',"L'âge d'or du bois et de la pêche",'The golden age of timber and fishing','Das goldene Zeitalter von Holz und Fisch'],[1788,1813,'sword','Guerres et blocus','Wars and blockade','Kriege und Blockade'],
+ [1814,1849,'flag',"Eidsvoll et l'union avec la Suède",'Eidsvoll and the union with Sweden','Eidsvoll und die Union mit Schweden'],[1850,1884,'train','Chemins de fer et grande émigration','Railways and the great emigration','Eisenbahn und große Auswanderung'],
+ [1885,1904,'palette','Ibsen, Grieg et Munch','Ibsen, Grieg and Munch','Ibsen, Grieg und Munch'],[1905,1919,'flag',"L'indépendance",'Independence','Die Unabhängigkeit'],
+ [1920,1939,'bolt','Hydroélectricité et crise','Hydropower and the Depression','Wasserkraft und Wirtschaftskrise'],[1940,1945,'lock',"L'occupation",'The occupation','Die Besatzungszeit'],
+ [1946,1968,'building','La reconstruction','Rebuilding the country','Der Wiederaufbau'],[1969,1989,'wave','Le pétrole de la mer du Nord','North Sea oil','Das Nordseeöl'],
+ [1990,1999,'trophy','Lillehammer 94','Lillehammer 94','Lillehammer 94']
+];
+const NO_WORLD = [
+ [1536,9,30,'La Norvège devient une province du Danemark.','Norway becomes a province of Denmark.','Norwegen wird eine dänische Provinz.'],
+ [1624,8,17,'Après un incendie, Oslo est reconstruite et rebaptisée Christiania.','After a fire, Oslo is rebuilt and renamed Christiania.','Nach einem Brand wird Oslo neu aufgebaut und in Christiania umbenannt.'],
+ [1811,8,2,"Fondation de l'université de Christiania.",'The University of Christiania is founded.','Die Universität Christiania wird gegründet.'],
+ [1814,4,17,'La Constitution est signée à Eidsvoll.','The Constitution is signed at Eidsvoll.','Die Verfassung wird in Eidsvoll unterzeichnet.'],
+ [1814,10,4,'Union avec la Suède sous un même roi.','Union with Sweden under one king.','Union mit Schweden unter einem König.'],
+ [1825,6,4,'Le sloop Restauration emmène les premiers émigrants en Amérique.','The sloop Restauration takes the first emigrants to America.','Die Schaluppe Restauration bringt die ersten Auswanderer nach Amerika.'],
+ [1854,8,1,'Premier train de Norvège entre Christiania et Eidsvoll.',"Norway's first train runs between Christiania and Eidsvoll.",'Norwegens erster Zug fährt zwischen Christiania und Eidsvoll.'],
+ [1879,11,21,'Ibsen publie Une maison de poupée.',"Ibsen publishes A Doll's House.",'Ibsen veröffentlicht Nora oder Ein Puppenheim.'],
+ [1893,0,1,'Edvard Munch peint Le Cri.','Edvard Munch paints The Scream.','Edvard Munch malt Der Schrei.'],
+ [1896,7,13,'Nansen revient de son expédition vers le pôle Nord à bord du Fram.','Nansen returns from his Fram expedition towards the North Pole.','Nansen kehrt von seiner Fram-Expedition zum Nordpol zurück.'],
+ [1905,5,7,"Fin de l'union : la Norvège devient indépendante.",'The union ends: Norway becomes independent.','Die Union endet: Norwegen wird unabhängig.'],
+ [1905,10,18,'Haakon VII devient roi de Norvège.','Haakon VII becomes King of Norway.','Haakon VII. wird König von Norwegen.'],
+ [1911,11,14,'Roald Amundsen atteint le pôle Sud.','Roald Amundsen reaches the South Pole.','Roald Amundsen erreicht den Südpol.'],
+ [1913,5,11,'Les femmes obtiennent le droit de vote.','Women win the right to vote.','Frauen erhalten das Wahlrecht.'],
+ [1925,0,1,"Christiania reprend le nom d'Oslo.",'Christiania takes back the name Oslo.','Christiania heißt wieder Oslo.'],
+ [1940,3,9,"L'Allemagne envahit la Norvège.",'Germany invades Norway.','Deutschland marschiert in Norwegen ein.'],
+ [1945,4,8,'Libération de la Norvège.','Norway is liberated.','Norwegen wird befreit.'],
+ [1947,3,28,'Thor Heyerdahl part du Pérou sur le radeau Kon-Tiki.','Thor Heyerdahl sets off from Peru on the Kon-Tiki raft.','Thor Heyerdahl bricht mit dem Floß Kon-Tiki von Peru auf.'],
+ [1952,1,14,"Oslo accueille les Jeux olympiques d'hiver.",'Oslo hosts the Winter Olympics.','Oslo richtet die Olympischen Winterspiele aus.'],
+ [1969,11,23,"Découverte du gisement de pétrole d'Ekofisk.",'The Ekofisk oil field is discovered.','Das Ölfeld Ekofisk wird entdeckt.'],
+ [1972,8,25,'Les Norvégiens disent non à la CEE.','Norwegians vote no to the EEC.','Die Norweger stimmen gegen die EG.'],
+ [1985,4,4,"Bobbysocks gagne l'Eurovision.",'Bobbysocks win Eurovision.','Bobbysocks gewinnen den Eurovision Song Contest.'],
+ [1990,5,22,'Création du fonds pétrolier.','The oil fund is created.','Der Ölfonds wird gegründet.'],
+ [1994,1,12,"Jeux olympiques d'hiver de Lillehammer.",'The Lillehammer Winter Olympics.','Olympische Winterspiele in Lillehammer.'],
+ [1994,10,28,"Deuxième non à l'Union européenne.",'A second no to the European Union.','Ein zweites Nein zur Europäischen Union.'],
+ [2008,3,12,"L'Opéra d'Oslo ouvre ses portes.",'The Oslo Opera House opens.','Das Opernhaus Oslo wird eröffnet.'],
+ [2020,2,12,'La Norvège ferme ses frontières face au Covid-19.','Norway closes its borders against Covid-19.','Norwegen schließt wegen Covid-19 seine Grenzen.'],
+ [2025,0,1,'Presque toutes les voitures neuves sont électriques.','Almost every new car sold is electric.','Fast alle Neuwagen fahren elektrisch.']
+].map(w => ({day:fromYMD(w[0],w[1],w[2]), fr:w[3], en:w[4], de:w[5]})).sort((a, b) => a.day - b.day);
+const NO_TRACKS = [['vgsstud','Videregående · études générales','Upper secondary · General studies',1974,2100,'bac'],['vgsreal','Videregående · sciences','Upper secondary · Natural sciences',1974,2100,'bac'],
+ ['gymnas','Gymnas (examen artium)','Gymnasium (examen artium)',1869,1973,'bac'],['fbelek','Fagbrev · Électricien','Trade certificate · Electrician',1950,2100,'cap'],
+ ['fbtomrer','Fagbrev · Charpentier','Trade certificate · Carpenter',1950,2100,'cap'],['fbkokk','Fagbrev · Cuisinier','Trade certificate · Chef',1950,2100,'cap'],
+ ['fbfiske','Fagbrev · Pêche','Trade certificate · Fishing',1950,2100,'cap'],['fbolje','Fagbrev · Offshore','Trade certificate · Offshore',1975,2100,'cap']];
+const NO_JOB_EDIT = {
+  president:['Premier ministre de Norvège','Première ministre de Norvège','Prime Minister of Norway','Prime Minister of Norway',1873,2100],
+  premierministre:['Président du Storting','Présidente du Storting','President of the Storting','President of the Storting',1814,2100],
+  depute:['Député au Storting','Députée au Storting','Member of the Storting','Member of the Storting',1814,2100],
+  senateur:['Gouverneur de comté','Gouverneure de comté','County governor','County governor',1500,2100],
+  gendarme:['Lensmann (chef de police rurale)','Lensmann (cheffe de police rurale)','Lensmann (rural police chief)','Lensmann (rural police chief)',1500,2100]
+};
+const NO_JOB_ADD = [['pecheurmorue','Pêcheur de morue des Lofoten','Pêcheuse de morue des Lofoten','Lofoten cod fisherman','Lofoten cod fisherwoman',1500,2100],
+  ['baleinier','Baleinier','Baleinière','Whaler','Whaler',1600,1986],['flotteur','Flotteur de bois','Flotteuse de bois','Timber floater','Timber floater',1500,1991],
+  ['skieurpro','Skieur professionnel','Skieuse professionnelle','Professional skier','Professional skier',1880,2100],['eleveurrennes','Éleveur de rennes sami','Éleveuse de rennes samie','Sami reindeer herder','Sami reindeer herder',1500,2100],
+  ['petrolier','Ouvrier sur plateforme pétrolière','Ouvrière sur plateforme pétrolière','Offshore oil worker','Offshore oil worker',1971,2100],['saumon','Éleveur de saumons','Éleveuse de saumons','Salmon farmer','Salmon farmer',1970,2100],
+  ['stavkirke',"Restaurateur d'églises en bois debout","Restauratrice d'églises en bois debout",'Stave church restorer','Stave church restorer',1850,2100],['fjordguide','Guide des fjords','Guide des fjords','Fjord guide','Fjord guide',1880,2100],
+  ['hurtigruten',"Marin de l'Hurtigruten","Marin de l'Hurtigruten",'Hurtigruten sailor','Hurtigruten sailor',1893,2100],['hareng','Saleur de harengs','Saleuse de harengs','Herring salter','Herring salter',1500,1970],
+  ['hardingfele','Joueur de hardingfele','Joueuse de hardingfele','Hardanger fiddle player','Hardanger fiddle player',1650,2100],['seter',"Vacher d'alpage (seter)","Vachère d'alpage (seter)",'Summer farm herder','Summer farm dairymaid',1500,1960],
+  ['aurore','Guide des aurores boréales','Guide des aurores boréales','Northern lights guide','Northern lights guide',1990,2100],
+  ['eolienflot','Ingénieur en éoliennes flottantes','Ingénieure en éoliennes flottantes','Floating wind engineer','Floating wind engineer',2030,2100],
+  ['brisglace','Pilote de brise-glace arctique','Pilote de brise-glace arctique','Arctic icebreaker pilot','Arctic icebreaker pilot',2050,2100]];
+const NO_INT_OUT = new Set(['tektonik','petanque']);
+const NO_INT_ADD = [['friluftsliv','Adepte du friluftsliv','Adepte du friluftsliv','Friluftsliv lover','Friluftsliv lover','tree',1850,9999,true],
+  ['skifond','Fondeur','Fondeuse','Cross-country skier','Cross-country skier','bolt',1800,9999,true],['hytte','Amoureux de sa cabane','Amoureuse de sa cabane','Cabin life lover','Cabin life lover','tree',1880,9999],
+  ['bunad','Fan de bunad','Fan de bunad','Bunad enthusiast','Bunad enthusiast','shirt',1900,9999],['brunost','Amateur de brunost','Amatrice de brunost','Brown cheese lover','Brown cheese lover','apple',1863,9999],
+  ['blackmetal','Fan de black metal','Fan de black metal','Black metal fan','Black metal fan','bolt',1990,9999],['vikings','Passionné de vikings','Passionnée de vikings','Viking enthusiast','Viking enthusiast','sword',1850,9999],
+  ['pecheglace','Pêcheur sur glace','Pêcheuse sur glace','Ice fisher','Ice fisher','wave',1500,9999],['aurores',"Chasseur d'aurores boréales","Chasseuse d'aurores boréales",'Northern lights chaser','Northern lights chaser','sparkle',1900,9999],
+  ['kos','Adepte du kos','Adepte du kos','Cosiness (kos) lover','Cosiness (kos) lover','cup',1500,9999],['sautski','Sauteur à ski','Sauteuse à ski','Ski jumper','Ski jumper','rocket',1860,9999,true],
+  ['trolls','Croit aux trolls','Croit aux trolls','Troll believer','Troll believer','moon',1500,9999]];
+const SCHOOL_NO = {mat:['Barnehage (3 ans)','Barnehage (4 ans)','Barnehage (5 ans)'], prim:['1. klasse','2. klasse','3. klasse','4. klasse','5. klasse'], col:['6. klasse','7. klasse','8. klasse','9. klasse'],
+  lyc:['10. klasse','VG1','VG2'], old_lyc:['1. gymnas','2. gymnas','3. gymnas','4. gymnas','5. gymnas'], lycee:'Videregående skole'};
+const TX_NO = {
+  fr:Object.assign({}, SCHOOL_NO, {cours_sup:'École · dernière année', certif:"Certificat de fin d'école", petite_ecole:'École du village', alb_mat:'Barnehage', alb_col:'Barneskole et ungdomsskole',
+    log_president:p=>`${nm(p)} devient ${g(P(p),'Premier ministre','Première ministre')} de Norvège !`, pres_rib:p=>`★ ${g(p,'Premier ministre','Première ministre')}`, set_map:'Carte de la Norvège', map_zoom_reset:'Toute la Norvège'}),
+  en:Object.assign({}, SCHOOL_NO, {mat:['Barnehage (age 3)','Barnehage (age 4)','Barnehage (age 5)'], cours_sup:'School · last year', certif:'School leaving certificate', petite_ecole:'Village school', alb_mat:'Kindergarten', alb_col:'Primary and lower secondary',
+    log_president:p=>`${nm(p)} becomes Prime Minister of Norway!`, pres_rib:()=>'★ Prime Minister', set_map:'Map of Norway', map_zoom_reset:'All of Norway'}),
+  de:Object.assign({}, SCHOOL_NO, {mat:['Barnehage (3 Jahre)','Barnehage (4 Jahre)','Barnehage (5 Jahre)'], cours_sup:'Schule · letztes Jahr', certif:'Schulabschluss', petite_ecole:'Dorfschule', alb_mat:'Kindergarten', alb_col:'Grund- und Mittelstufe',
+    log_president:p=>`${nm(p)} wird ${g(P(p),'norwegischer Ministerpräsident','norwegische Ministerpräsidentin')}!`, pres_rib:p=>`★ ${g(p,'Ministerpräsident','Ministerpräsidentin')}`, set_map:'Norwegenkarte', map_zoom_reset:'Ganz Norwegen'}),
+  es:Object.assign({}, SCHOOL_NO, {mat:['Barnehage (3 años)','Barnehage (4 años)','Barnehage (5 años)'], cours_sup:'Escuela · último curso', certif:'Certificado escolar', petite_ecole:'Escuela del pueblo', alb_mat:'Educación infantil', alb_col:'Primaria y secundaria',
+    log_president:p=>`¡${nm(p)} se convierte en ${gs(P(p),'primer ministro','primera ministra')} de Noruega!`, pres_rib:p=>`★ ${gs(p,'Primer ministro','Primera ministra')}`, set_map:'Mapa de Noruega', map_zoom_reset:'Toda Noruega'})
+};
 /* ---------- Espagne (0.2.2a) ---------- */
 const ES_NAMES = [
  [1599,['Juan','Pedro','Francisco','Diego','Alonso','Antonio','Hernando','Gonzalo','Rodrigo','Luis','Miguel','Martín','Andrés','Cristóbal','Bartolomé','Sebastián','Jerónimo','Gaspar'],
@@ -9043,6 +9441,7 @@ const SCHOOL_CH = {fr:{mat:['Crèche','1P (école enfantine)','2P (école enfant
 const TXC = {
   us:TX_US,
   es:TX_ESP,
+  no:TX_NO,
   uk:Object.assign(TX_UK, {de:Object.assign({}, TX_UK.en, {cours_sup:'Elementary school · Standard VI', certif:'Elementary school · Standard VII', petite_ecole:'Dame school',
     alb_mat:'Grundschule', alb_col:'Weiterführende Schule', log_president:p=>`${nm(p)} wird ${g(P(p),'Premierminister','Premierministerin')} des Vereinigten Königreichs!`,
     pres_rib:p=>`★ ${g(p,'Premierminister','Premierministerin')}`, set_map:'Karte des Vereinigten Königreichs', map_zoom_reset:'Das ganze Vereinigte Königreich'})}),
@@ -9071,11 +9470,12 @@ TXC.ch.es = {mat:['Guardería','1P (infantil)','2P (infantil)'], prim:['3P','4P'
   set_map:'Mapa de Suiza', map_zoom_reset:'Toda Suiza'};
 TXC.us.es = Object.assign({}, SCHOOL_US, {cours_sup:'Escuela rural · 8.º curso', certif:'Diploma de escuela elemental', petite_ecole:'Escuela de una sola aula', alb_mat:'Escuela elemental', alb_col:'Middle school y high school',
   log_president:p=>`¡${nm(p)} se convierte en ${gs(P(p),'presidente','presidenta')} de los Estados Unidos!`, pres_rib:p=>`★ ${gs(p,'Presidente','Presidenta')}`, set_map:'Mapa de los Estados Unidos', map_zoom_reset:'Todos los Estados Unidos'});
-const CAPITAL = {fr:'Paris', uk:'London', de:'Berlin', ch:'Bern', us:'Washington', es:'Madrid'};
+const CAPITAL = {fr:'Paris', uk:'London', de:'Berlin', ch:'Bern', us:'Washington', es:'Madrid', no:'Oslo'};
 const FLAGS = {fr:'<svg viewBox="0 0 30 20" preserveAspectRatio="none" aria-hidden="true"><rect width="10" height="20" fill="#0055a4"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ef4135"/></svg>',
   uk:'<svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30M60,0 0,30" stroke="#C8102E" stroke-width="2"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg>',
   de:'<svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg>',
   ch:'<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D52B1E"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg>',
+  no:'<svg viewBox="0 0 22 16" preserveAspectRatio="none" aria-hidden="true"><rect width="22" height="16" fill="#BA0C2F"/><path d="M6 0h4v16H6zM0 6h22v4H0z" fill="#fff"/><path d="M7 0h2v16H7zM0 7h22v2H0z" fill="#00205B"/></svg>',
   es:'<svg viewBox="0 0 30 20" preserveAspectRatio="none" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/><rect x="7" y="7.5" width="3.4" height="5" rx="1" fill="#AA151B" opacity=".75"/></svg>',
   us:'<svg viewBox="0 0 190 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="190" height="100" fill="#B22234"/><path d="M0 11.54h190M0 26.92h190M0 42.31h190M0 57.69h190M0 73.08h190M0 88.46h190" stroke="#fff" stroke-width="7.7"/><rect width="76" height="53.85" fill="#3C3B6E"/>'
     + Array.from({length:30}, (_, i) => `<circle cx="${7 + (i % 6) * 12.4 + (Math.floor(i / 6) % 2) * 6.2}" cy="${6 + Math.floor(i / 6) * 10.4}" r="2.6" fill="#fff"/>`).join('') + '</svg>'};
@@ -9111,10 +9511,26 @@ COUNTRY.es = {NAMES:ES_NAMES, BASIC:ES_BASIC, CITIES:Object.keys(ES_CITY_POS).so
   WARCAUSES:COUNTRY.fr.WARCAUSES.filter(r => !['collabo','deporte','gaz'].includes(r[0])), DECADES:ES_DECADES.concat(FR_2000), WORLD:ES_WORLD,
   TRACKS:withFlemme(ES_TRACKS), JOBS:editRows(COUNTRY.fr.JOBS, ES_JOB_EDIT, new Set(['cpe']), ES_JOB_ADD), STARJOBS:COUNTRY.fr.STARJOBS,
   INTERESTS:editRows(COUNTRY.fr.INTERESTS, {}, ES_INT_OUT, ES_INT_ADD), PJ:{lon:9.4, k:36.5, lat:43.85, sy:47.6, x0:20, y0:50}, UNK:{x:398, y:420, w:128, h:96}};   // 0.2.2a
+COUNTRY.no = {NAMES:NO_NAMES, BASIC:NO_BASIC, CITIES:Object.keys(NO_CITY_POS).sort(byName), CITY_POS:NO_CITY_POS, OUT1:NO_OUTLINE, OUT2:NO_EXTRA, WARS:NO_WARS,
+  WARCAUSES:COUNTRY.fr.WARCAUSES.filter(r => !['gaz'].includes(r[0])), DECADES:NO_DECADES.concat(FR_2000), WORLD:NO_WORLD, TRACKS:withFlemme(NO_TRACKS),
+  JOBS:editRows(COUNTRY.fr.JOBS, NO_JOB_EDIT, new Set(['cpe','academicien']), NO_JOB_ADD), STARJOBS:COUNTRY.fr.STARJOBS,
+  INTERESTS:editRows(COUNTRY.fr.INTERESTS, {}, NO_INT_OUT, NO_INT_ADD), CITY_FROM:NO_CITY_FROM, PJ:{lon:-4.5, k:16, lat:71.3, sy:37, x0:50, y0:14}, UNK:{x:398, y:410, w:128, h:96}};   // 0.2.3a
 const FR_ONLY = new Set(['bouquiniste','parfumeur','gardian','chansonnier','santonnier','vigneronnord','baguette3d','tourdefrance','belote','chanson','videgrenier','fromage']);   // 0.2.2b
-['uk','de','ch','us','es'].forEach(c => { COUNTRY[c].JOBS = COUNTRY[c].JOBS.filter(r => !FR_ONLY.has(r[0])); COUNTRY[c].INTERESTS = COUNTRY[c].INTERESTS.filter(r => !FR_ONLY.has(r[0])); });
+['uk','de','ch','us','es','no'].forEach(c => { COUNTRY[c].JOBS = COUNTRY[c].JOBS.filter(r => !FR_ONLY.has(r[0])); COUNTRY[c].INTERESTS = COUNTRY[c].INTERESTS.filter(r => !FR_ONLY.has(r[0])); });
+function ctryArrows(){                                  // 0.2.3a : les flèches montrent de quel côté on peut faire glisser les pays
+  const box = $('#setupForm .ctrys'); if(!box) return;
+  const max = box.scrollWidth - box.clientWidth - 2;
+  $('#setupForm .ctrynav.l').hidden = box.scrollLeft <= 2; $('#setupForm .ctrynav.r').hidden = box.scrollLeft >= max;
+}
+setTimeout(() => { const box = $('#setupForm .ctrys'); if(box){ box.addEventListener('scroll', ctryArrows, {passive:true}); addEventListener('resize', ctryArrows); ctryArrows(); } }, 0);
 function setupCountryUI(){                              // écran de départ : le drapeau du pays choisi est enfoncé
   $$('#setupForm [data-act="country"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === SET.country)));
+  requestAnimationFrame(() => {                         // le pays choisi reste visible dans la rangée
+    const on = $(`#setupForm [data-act="country"][data-v="${SET.country}"]`), box = $('#setupForm .ctrys');
+    if(on && box && box.clientWidth){ const l = on.offsetLeft - box.offsetLeft, r = l + on.offsetWidth;
+      if(l < box.scrollLeft || r > box.scrollLeft + box.clientWidth){ box.style.scrollBehavior = 'auto'; box.scrollLeft = Math.max(0, r - box.clientWidth + 8); box.style.scrollBehavior = ''; } }
+    ctryArrows();
+  });
 }
 function applyCountry(c){                               // remplace les données du pays sur place ; renvoie vrai si le pays a changé
   c = COUNTRY[c] ? c : 'fr';
@@ -9618,6 +10034,7 @@ function albumScan(force){
     if(p.work && (p.work.s === 'job' || p.work.s === 'star')) mark('j', p.work.job);
     if(p.work && p.work.s === 'mil') mark('j', 'mil_' + p.work.rank);
     if(p.work && p.work.s === 'travel') mark('j', 'trv_' + p.work.ctry);   // 0.2.2a
+    if(p.trip) mark('j', 'trv_' + p.trip.ctry);   // 0.2.3a
     const wj = p.work && (p.work.s === 'job' || p.work.s === 'star') ? p.work.job : null;   // 0.2.0b : thèmes Lune et Galaxie
     if(wj === 'lunaire' && !VSH) unlockSkin('moon');
     if(!VSH && !UNL.vwave && interestsOf(p).includes('vaporwave')) unlockSkin('vwave');   // 0.2.1a : thème Vaporwave
@@ -9663,7 +10080,7 @@ function schoolItems(){
     it('petite_ecole', t('petite_ecole'), 'book', 1500, 1880), it('betes', t('betes'), 'paw', 1500, 1880),
     it('appr', t('alb_appr'), 'shirt', 1500, 1959), it('dropout', t('alb_dropout'), 'eyeoff', 1881, 2100)];
 }
-const CTRY_ORDER = ['fr','uk','de','ch','us','es'];
+const CTRY_ORDER = ['fr','uk','de','ch','us','es','no'];
 const albRowMemo = {};
 function rowAny(L, id){                                // une ligne de données, quel que soit le pays (0.2.1a)
   const m = albRowMemo[L] || (albRowMemo[L] = new Map());
@@ -9749,6 +10166,21 @@ function albProb0(k, id){
   return .2;
 }
 let albCat = 'i';
+const cbP = v => { const s = String(+(+v).toFixed(2)); return LANG === 'en' ? s + '%' : s.replace('.', ',') + ' %'; };
+function cbVals(){                                     // 0.2.3a : les vraies valeurs du jeu (règles de la partie comprises)
+  return {boys: cbP(R.boys), girls: cbP(100 - R.boys), twins: cbP(R.twins), tri: cbP(R.triplets), quads: cbP(R.quads), miss: cbP(8), star: cbP(R.star), starLuck: cbP(Math.max(12, R.star)),
+    crim: cbP(R.crim), crimEgo: cbP(Math.max(12, R.crim)), starKid: cbP(90), starKid2: cbP(12), conds: cbP(R.conds), inherit: cbP(R.inherit), tt: cbP(.5), ttPar: cbP(20), int: cbP(70),
+    addict: cbP(R.addict), uni: `${cbP(5)} – ${cbP(15)}`, job: cbP(3.5), trip: cbP(1.2), move: `${cbP(.4)} – ${cbP(1.9)}`, milM: cbP(6), milF: cbP(2), disc: cbP(60), pol: cbP(1.4), amb: cbP(30),
+    refuse: cbP(5), marry: cbP(60), leave: cbP(LEAVE_P * 100), pair: cbP(PAIR_P * 100), kids: KIDS_P.map(x => cbP(x * 100)), kid1950: cbP(30), war: '+' + cbP(35),
+    ill: cbP(Math.round(600 / 1.29 * R.illness / 100) / 100), covid: cbP(8), found: cbP(20), ast: cbP(.05), jail: cbP(40), vanish: cbP(50), suic: cbP(50), target: cbP(60),
+    evC: cbP(.9), evA: cbP(.4), evX: cbP(.22), evX2: cbP(50), evS: cbP(.5), evT: cbP(.13), evT2: cbP(30), evAl: cbP(.07), leg: cbP(LEG_P * 100), rift: cbP(5), butterfly: cbP(20),
+    royal: cbP(40), count: cbP(22), zone: `${cbP(ZRATE.easy * 100)} – ${cbP(ZRATE.ext * 100)}`, fert: [77, 15, 8].map(cbP).join(' · ')};
+}
+function carnetHTML(){
+  const v = cbVals();
+  return `<p class="hint cbhint">${esc(t('cb_hint'))}</p><div class="carnet">${t('cb', v).map(([ic, title, rows]) => `<section class="cbsec"><h3>${icon(ic)}<span>${esc(title)}</span></h3>
+    <dl>${rows.map(([l, val]) => `<div><dt>${esc(l)}</dt><dd>${esc(val)}</dd></div>`).join('')}</dl></section>`).join('')}</div>`;
+}
 function openAlbum(k, re){
   albumScan(); if(k) albCat = k;
   const all = ALB_CATS.map(([c]) => { const it = albItems(c); return [c, it, it.filter(x => ALB[c][x.id]).length]; });
@@ -9763,18 +10195,19 @@ function openAlbum(k, re){
     : mode === 'prob' ? (a, b) => albProb(albCat, b.id) - albProb(albCat, a.id) || az(a, b)
     : mode === 'ctry' ? (a, b) => ctryRank(a) - ctryRank(b) || az(a, b)
     : az;
-  const items = all.find(x => x[0] === albCat)[1].slice().sort(cmp);
+  const isCb = albCat === 'p';                           // 0.2.3a : le carnet des probabilités
+  const items = isCb ? [] : all.find(x => x[0] === albCat)[1].slice().sort(cmp);
   const SORTS = [['az','alb_s_az'],['year','alb_s_year'],['found','alb_s_found'],['order','alb_s_order'],['prob','alb_s_prob']].concat('ijed'.includes(albCat) ? [['ctry','alb_s_ctry']] : []);
   let lastRank = null;
   const hdr = x => { if(mode !== 'ctry') return ''; const r = ctryRank(x); if(r === lastRank) return ''; lastRank = r;
     return `<div class="albhdr">${r < 99 ? `<span class="albflag">${FLAGS[CTRY_ORDER[r]]}</span>${esc(t('ctry_' + CTRY_ORDER[r]))}` : esc(t('alb_ctry_all'))}</div>`; };
   openModal(`<div class="m-head"><div class="eyebrow">${t('alb_count', found, total)}</div><h2>${t('album')}</h2><p class="hint">${t('alb_hint')}</p></div>
-    <div class="pills albtabs" role="group">${all.map(([c, it, n]) => `<button data-act="albcat" data-v="${c}" aria-pressed="${c === albCat}">${t(ALB_CATS.find(x => x[0] === c)[1])}<small>${n}/${it.length}</small></button>`).join('')}</div>
-    <div class="albsort"><label for="albSort">${t('alb_sort')}</label><select class="inp" id="albSort">${SORTS.map(([v, l]) => `<option value="${v}" ${v === mode ? 'selected' : ''}>${t(l)}</option>`).join('')}</select></div>
+    <div class="pills albtabs" role="group">${all.map(([c, it, n]) => `<button data-act="albcat" data-v="${c}" aria-pressed="${c === albCat}">${t(ALB_CATS.find(x => x[0] === c)[1])}<small>${n}/${it.length}</small></button>`).join('')}<button class="cbtab" data-act="albcat" data-v="p" aria-pressed="${isCb}">${t('cb_tab')}<small>%</small></button></div>
+    ${isCb ? carnetHTML() : `<div class="albsort"><label for="albSort">${t('alb_sort')}</label><select class="inp" id="albSort">${SORTS.map(([v, l]) => `<option value="${v}" ${v === mode ? 'selected' : ''}>${t(l)}</option>`).join('')}</select></div>
     <div class="albgrid">${items.map(x => { const ok = !!ALB[albCat][x.id];
       const lg = LEGS[albCat] && LEGS[albCat].has(x.id), cs = albCountries(albCat, x.id), rr = lg ? '' : rarityOf(albCat, x.id);
-      return `${hdr(x)}<div class="albc ${ok ? '' : 'unk'} ${lg ? 'leg' : ''} ${rr === 'e' ? 'epic' : rr === 'r' ? 'rare' : ''}">${cs ? `<span class="albflags" title="${esc(cs.map(c => t('ctry_' + c)).join(', '))}">${cs.map(c => `<span class="albflag f-${c}">${FLAGS[c]}</span>`).join('')}</span>` : ''}<i>${icon(ok ? x.ic : 'lock')}</i><div><b>${ok ? esc(x.name) : '???????'}</b>${x.desc && (ok || !x.secret) ? `<small>${esc(x.desc)}</small>` : ''}${lg ? `<em class="albleg">✦ ${t('tier_legend')}</em>` : rr === 'e' ? `<em class="albrar e">◆ ${t('tier_epic')}</em>` : rr === 'r' ? `<em class="albrar r">◆ ${t('tier_rare')}</em>` : ''}</div></div>`; }).join('')}</div>`, {sound: !re});
-  $('#albSort').addEventListener('change', e => {
+      return `${hdr(x)}<div class="albc ${ok ? '' : 'unk'} ${lg ? 'leg' : ''} ${rr === 'e' ? 'epic' : rr === 'r' ? 'rare' : ''}">${cs ? `<span class="albflags" title="${esc(cs.map(c => t('ctry_' + c)).join(', '))}">${cs.map(c => `<span class="albflag f-${c}">${FLAGS[c]}</span>`).join('')}</span>` : ''}<i>${icon(ok ? x.ic : 'lock')}</i><div><b>${ok ? esc(x.name) : '???????'}</b>${x.desc && (ok || !x.secret) ? `<small>${esc(x.desc)}</small>` : ''}${lg ? `<em class="albleg">✦ ${t('tier_legend')}</em>` : rr === 'e' ? `<em class="albrar e">◆ ${t('tier_epic')}</em>` : rr === 'r' ? `<em class="albrar r">◆ ${t('tier_rare')}</em>` : ''}</div></div>`; }).join('')}</div>`}`, {sound: !re});
+  if($('#albSort')) $('#albSort').addEventListener('change', e => {
     ALB.sort = ALB.sort || {}; ALB.sort[albCat] = e.target.value; store.set(ALB_KEY, JSON.stringify(ALB)); sfx.click(); openAlbum(null, true);
   });
 }
@@ -10106,8 +10539,21 @@ function dailyClaim(){
   store.set(DAILY_KEY, JSON.stringify(Object.assign({}, st.D, {streak: st.day, last: st.forDate})));
   dailyRes = `${t('daily_got')} ${r[0] === 'cyn' ? `+${cynFmt(r[1])} Cyn` : `${ITEMS[r[0]]} ${t('it_' + r[0])}${r[1] > 1 ? ' ×' + r[1] : ''}`}`;
   if(dailyState().avail) dailyRes += ' · ' + t('daily_more');
-  sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff'], 60); invDots(); if(S){ dirty = true; render(); }
-  openDaily();
+  invDots(); if(S){ dirty = true; render(); }
+  openDaily(); dailyFx(st.day, r);
+}
+function dailyFx(day, r){                                // 0.2.3a : le cadeau tombe, tremble, s'ouvre, et la récompense en sort
+  if(reduced){ sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff'], 60); return; }
+  const old = $('#dailyFx'); if(old) old.remove();
+  const el = document.createElement('div'); el.id = 'dailyFx'; el.className = 'dfx'; el.setAttribute('role', 'status');
+  const prize = r[0] === 'cyn' ? [icon('dna'), `+${cynFmt(r[1])} Cyn`] : [ITEMS[r[0]], `${t('it_' + r[0])}${r[1] > 1 ? ' ×' + r[1] : ''}`];
+  el.innerHTML = `<div class="dfx-stage"><div class="dfx-rays"></div><div class="dfx-day">${esc(t('daily_day', day))}</div>
+    <div class="dfx-prize"><i>${prize[0]}</i><b>${esc(prize[1])}</b></div><div class="dfx-box"><i class="body"></i><i class="lid"></i></div><div class="dfx-skip">${esc(t('dfx_skip'))}</div></div>`;
+  document.body.appendChild(el); sfx.pop();
+  const timers = [setTimeout(() => sfx.pop(), 550), setTimeout(() => { sfx.fame(); burst(['#ffd000','#ffffff','#ff6cc0','#3fd0ff','#8cff1a'], 70); }, 1050), setTimeout(close, 3300)];
+  let done = false;
+  function close(){ if(done) return; done = true; timers.forEach(clearTimeout); el.classList.add('out'); setTimeout(() => el.remove(), 450); }
+  el.addEventListener('click', close);
 }
 const invDots = () => { const a = dailyState().avail; $$('.invdot').forEach(x => { x.hidden = !a; }); };
 setInterval(() => {                                    // à l'ouverture et à minuit : la fenêtre s'ouvre une fois par jour
@@ -10466,6 +10912,33 @@ document.addEventListener('keydown', e => {
   if(e.ctrlKey && e.shiftKey && !e.altKey && (e.key === 'Y' || e.key === 'y')){ e.preventDefault(); devMsg = ''; openDev(); }
 });
 
+/* ================= 0.2.3a : Arcade 90, de petits envahisseurs pixelisés traversent le fond de temps en temps ================= */
+(() => {
+  const SPR = [                                         // dessins originaux, deux images chacun (les pattes bougent)
+    ['..X.....X..', '...X...X...', '..XXXXXXX..', '.XX.XXX.XX.', 'XXXXXXXXXXX', 'X.XXXXXXX.X', 'X.X.....X.X', '...XX.XX...'],
+    ['..X.....X..', 'X..X...X..X', 'X.XXXXXXX.X', 'XXX.XXX.XXX', 'XXXXXXXXXXX', '.XXXXXXXXX.', '..X.....X..', '.X.......X.'],
+    ['....XXX....', '..XXXXXXX..', '.XX.XXX.XX.', 'XXXXXXXXXXX', '.X.XX.XX.X.', 'X.........X', '.X.......X.'],
+    ['....XXX....', '..XXXXXXX..', '.XX.XXX.XX.', 'XXXXXXXXXXX', '..XX.X.XX..', '.X..X.X..X.', 'X.........X'],
+    ['...XXXXX...', '.XXXXXXXXX.', 'XX..XXX..XX', 'XXXXXXXXXXX', '..X..X..X..', '.X.X...X.X.'],
+    ['...XXXXX...', '.XXXXXXXXX.', 'XX..XXX..XX', 'XXXXXXXXXXX', '.X..X.X..X.', 'X...X.X...X']];
+  const svg = (rows, c) => { let r = ''; rows.forEach((row, y) => [...row].forEach((ch, x) => { if(ch === 'X') r += `<rect x="${x}" y="${y}" width="1.02" height="1.02"/>`; }));
+    return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${rows[0].length} ${rows.length}' shape-rendering='crispEdges' fill='${c}'>${r}</svg>`)}")`; };
+  const COLS = ['#00f0ff', '#ff2bd6', '#ffe600', '#7dff5a'];
+  function spawn(){
+    const box = $('#arcfx');
+    if(!box || document.documentElement.dataset.skin !== 'arcade' || document.body.classList.contains('no-deco') || document.hidden || reduced) return;
+    if(box.querySelectorAll('.inv').length >= 2) return;
+    const k = Math.floor(Math.random() * 3), c = pick(COLS), sz = rnd(4, 7), rows = SPR[k * 2], W = rows[0].length * sz, H = rows.length * sz;
+    const dir = Math.random() < .5 ? 1 : -1, el = document.createElement('div'); el.className = 'inv';
+    el.style.cssText = `top:${rnd(14, 78)}%;--w:${W}px;--h:${H}px;--c:${c};--f1:${svg(rows, c)};--f2:${svg(SPR[k * 2 + 1], c)};--d:${rnd(26, 40)}s;`
+      + `--x0:${dir > 0 ? -W - 20 + 'px' : 'calc(100vw + 20px)'};--x1:${dir > 0 ? 'calc(100vw + 20px)' : -W - 20 + 'px'}`;
+    el.innerHTML = '<i></i><i></i>'; el.addEventListener('animationend', e => { if(e.animationName === 'arcwalk') el.remove(); });
+    box.appendChild(el);
+  }
+  (function loop(){ setTimeout(() => { spawn(); loop(); }, rnd(14, 30) * 1000); })();
+  setTimeout(spawn, 4000);
+})();
+
 /* ================= 0.2.0b : décors animés des thèmes Hacker et Cyberpunk ================= */
 (() => {                                               // pluie de caractères verts
   const cv = $('#hackfx'); if(!cv || !cv.getContext) return;
@@ -10666,6 +11139,7 @@ const ACT = {
       armTxt: p => t('tp_heir_arm', p.first), armSub: p => `${rel(p.id)} · ${tA(age(p))} · ${activity(p)}`,
       onPick: p => { if(needHeir()) ACT.heir({id: String(p.id)}); }, onCancel: () => openHeir()});
   },
+  ctryscroll(d){ const box = $('#setupForm .ctrys'); if(box) box.scrollBy({left: +d.v * box.clientWidth * .8, behavior: reduced ? 'auto' : 'smooth'}); },
   country(d){ SET.country = COUNTRY[d.v] ? d.v : 'fr'; saveSet();                // pays de la lignée (écran de départ)
     applyCountry(SET.country); refreshSetupCountry(true); setupCountryUI(); sfx.pop(); },
   quit(){ if(S) save(); const D = window.cyngeneticDesktop; if(D && D.quit) D.quit(); else window.close(); },

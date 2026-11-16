@@ -2,6 +2,19 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.3a — 16 novembre 2026
+
+- Nouveau pays de lignée : la Norvège 🇳🇴 ! Une carte avec les Lofoten et le Svalbard, 52 villes, des prénoms qui évoluent de 1500 à 2100 (et au-delà), des noms de famille d'ici (et samis), 10 guerres, l'histoire du pays de l'Union de Kalmar à nos jours, des écoles norvégiennes, 16 métiers (pêcheur de morue des Lofoten, éleveur de rennes sami, baleinier…), 12 centres d'intérêt (friluftsliv, brunost, ski de fond…) et deux morts légendaires qu'on ne croise qu'en Norvège.
+- Nouvel onglet dans l'album : le Carnet des probabilités. Toutes les vraies chances du jeu, rangées par thème : naissances, vie, couples, santé, criminels, événements, album, voyage dans le temps et modes.
+- Nouvel événement « Le voyage d'une vie » : quelqu'un veut partir deux ans à l'étranger avec son conjoint et ses enfants mineurs. « Profite ! » : toute la famille part, et au retour, 30 % de chances de rapporter un objet (médaille militaire, cœur, fiole de clonage ou lunettes étoiles). « Hors de question » : toute la famille déprime pendant deux ans.
+- Le bonus de connexion s'ouvre avec une animation : le cadeau tombe, tremble, s'ouvre, et la récompense en sort.
+- Thème Arcade 90 : la moquette est moins chargée, et de petits envahisseurs pixelisés traversent le fond de temps en temps.
+- Les pays de lignée défilent sur une rangée qu'on fait glisser, avec des flèches pour montrer dans quel sens aller.
+- Le bouton « Au hasard » disparaît de l'écran d'accueil.
+- Boutique sur téléphone : le logo des Cyn reste bien rond, et les textes ne passent plus à la ligne.
+- Paramètres : plus de « À couper si le jeu rame ».
+- Le créateur s'appelle Aze Le Onze (et pas Aze Le Dix).
+
 ## v0.2.2c — 16 novembre 2026
 
 - L'inventaire quitte la barre du haut : son coffre est maintenant juste à côté de ton compteur de Cyn.
