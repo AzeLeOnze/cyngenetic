@@ -2,6 +2,11 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6d — 17 novembre 2026
+
+- Mode libre : les conjoints peuvent maintenant avoir leurs parents, frères, sœurs (et toute leur famille, avec leurs propres conjoints et enfants). Leur famille s'affiche à droite de l'arbre, à la bonne génération, avec le conjoint en reflet. Une petite icône sur la bulle du conjoint l'affiche ou la cache.
+- Mode libre : chacun peut avoir un âge sur mesure, sans limite (2 000 000 ans, pourquoi pas). Il continue d'avancer avec le temps.
+
 ## v0.2.6c — 17 novembre 2026
 
 - Mode libre : ton arbre a maintenant sa propre sauvegarde. Il est enregistré quand tu quittes, et se reprend depuis la tuile Libre de l'écran de départ, sans écraser ta partie en cours dans un autre mode.

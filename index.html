@@ -2279,6 +2279,18 @@ body[data-era="3"] .treebox::before{content:"";position:absolute;inset:0;z-index
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .freecard{background:rgba(155,52,245,.16);border-color:rgba(200,160,255,.35)}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .freecard .fcic svg{fill:#d0a8ff}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .exok{color:#7ee05a}
+/* ===== 0.2.6d : familles des conjoints, âge sur mesure ===== */
+.famtog{position:absolute;z-index:8;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;cursor:pointer;font-style:normal;
+  color:#7a24d8;background:linear-gradient(180deg,#fff,#eadcff);border:1.5px solid #b07aff;box-shadow:0 2px 7px rgba(80,0,160,.28);transition:transform .15s}
+.famtog:hover{transform:scale(1.12)}
+.famtog svg{width:15px;height:15px;fill:currentColor}
+.famtog:not(.on){color:#8a7fa0;background:#fff;border-color:#cfc6dc;opacity:.8}
+.node.ghost{opacity:.62;border-style:dashed!important}
+.famlab{position:absolute;z-index:2;padding:3px 11px;border-radius:99px;white-space:nowrap;pointer-events:none;
+  font:800 12.5px var(--font-display);color:#6c1fc4;background:rgba(255,255,255,.75);border:1px solid #d7b8ff}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .famtog{background:linear-gradient(180deg,#3a2560,#24163e);border-color:#9b6bff;color:#e2c8ff}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .famtog:not(.on){background:#2a2a34;border-color:#555;color:#aaa}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .famlab{background:rgba(155,52,245,.2);border-color:rgba(200,160,255,.4);color:#e2c8ff}
 /* ===== 0.2.6a : mode Créatif ===== */
 .opt-ic.crea{background:linear-gradient(160deg,#ffd0f6,#c04dff 55%,#5a17c8)}
 .opt-ic.crea svg{width:22px;height:22px;fill:#fff}
@@ -2729,9 +2741,14 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BAIN_COLS = ['#3af4ff','#ff4fe0','#ffe84a','#ffffff','#b48cff'];   // 0.2.3d : les couleurs du thème Bain d'étoile
 const isBain = () => document.documentElement.dataset.skin === 'bain';
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.6c';
+const APP_VERSION = '0.2.6d';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.6d', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
+   fr:['Mode libre : les conjoints peuvent maintenant avoir leurs parents, frères, sœurs (et toute leur famille, avec leurs propres conjoints et enfants). Leur famille s\'affiche à droite de l\'arbre, à la bonne génération, avec le conjoint en reflet. Une petite icône sur la bulle du conjoint l\'affiche ou la cache.',
+       'Mode libre : chacun peut avoir un âge sur mesure, sans limite (2 000 000 ans, pourquoi pas). Il continue d\'avancer avec le temps.'],
+   en:['Free mode: partners can now have their parents, brothers and sisters (and their whole family, with its own partners and children). Their family appears to the right of the tree, at the right generation, with the partner mirrored in it. A small icon on the partner\'s bubble shows or hides it.',
+       'Free mode: anyone can have a custom age, with no limit (2,000,000 years, why not). It keeps going up as time passes.']},
   {v:'0.2.6c', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
    fr:['Mode libre : ton arbre a maintenant sa propre sauvegarde. Il est enregistré quand tu quittes, et se reprend depuis la tuile Libre de l\'écran de départ, sans écraser ta partie en cours dans un autre mode.',
        'Nouveau bouton « Exporter » à côté de « Arbre / Carte » : il enregistre l\'arbre en image PNG ou JPEG. La taille de l\'image suit celle de l\'arbre, et tout se règle : la résolution, le format, le thème de l\'image (parmi tes thèmes débloqués) et le titre. Un petit logo Cyngenetic discret, à 20 % d\'opacité, est ajouté dans un coin.'],
@@ -4708,7 +4725,10 @@ fr:{
   born_unk:(p,c)=>`${g(p,'Né','Née')} à ${c}, à une date inconnue`, died_unk:(p,c)=>`${g(p,'Décédé','Décédée')} à une date inconnue, ${c}`, bdate_unk:'date de naissance inconnue',
   ce_edit:'Modifier', ce_add_father:'+ Père', ce_add_mother:'+ Mère', ce_add_brother:'+ Frère', ce_add_sister:'+ Sœur', ce_add_son:'+ Fils', ce_add_daughter:'+ Fille', ce_add_partner:'+ Conjoint(e)',
   ce_del:'Supprimer', ce_del_confirm:'Vraiment ?', ce_del_founder:'Le fondateur ne peut pas être supprimé.', ce_del_active:'Le personnage joué ne peut pas être supprimé.', ce_del_kids:'Une personne qui a des enfants ne peut pas être supprimée.',
-  ce_no_inlaw:"Les parents et les frères et sœurs d'un conjoint n'apparaissent pas dans l'arbre.", ce_no_para:"Cette personne vient d'un paradoxe temporel : elle n'a pas de parents.", ce_two_par:'Cette personne a déjà ses deux parents.', ce_need_par:"Ajoute-lui d'abord un parent pour lui créer un frère ou une sœur.",
+  ce_no_inlaw:"Cette personne est déjà le conjoint de quelqu'un : crée-lui d'abord un parent pour qu'elle ait sa propre branche.",
+  fam_of:n=>`Famille de ${n}`, year_around:y=>`vers l'an ${y}`, fam_tog_hide:n=>`Cacher la famille de ${n}`, fam_tog_show:n=>`Afficher la famille de ${n}`,
+  ce_agefix:'Âge sur mesure (facultatif)', ce_agefix_ph:'Ex. : 2000000', ce_err_age:"Cet âge n'est pas un nombre valide.",
+  born_age:(p,c,y)=>`${g(p,'Né','Née')} à ${c}, vers l'an ${y}`, ce_no_para:"Cette personne vient d'un paradoxe temporel : elle n'a pas de parents.", ce_two_par:'Cette personne a déjà ses deux parents.', ce_need_par:"Ajoute-lui d'abord un parent pour lui créer un frère ou une sœur.",
   ce_edit_title:n=>`Modifier ${n}`, ce_new:(k,n)=>`${{father:'Père',mother:'Mère',brother:'Frère',sister:'Sœur',son:'Fils',daughter:'Fille',partner:'Conjoint(e)'}[k]} de ${n}`,
   ce_photo:'Photo', ce_photo_pick:'Choisir une image', ce_photo_del:'Retirer', ce_photo_note:"L'image est fortement réduite pour tenir dans la bulle.",
   ce_bcity:'Ville de naissance', ce_city:'Ville actuelle', ce_state:'État', ce_alive:'En vie', ce_dead:'Mort(e)', ce_vanished:'Disparu(e)', ce_dod:'Date du décès',
@@ -5194,7 +5214,10 @@ en:{
   born_unk:(p,c)=>`Born in ${c}, date unknown`, died_unk:(p,c)=>`Died on an unknown date, ${c}`, bdate_unk:'birth date unknown',
   ce_edit:'Edit', ce_add_father:'+ Father', ce_add_mother:'+ Mother', ce_add_brother:'+ Brother', ce_add_sister:'+ Sister', ce_add_son:'+ Son', ce_add_daughter:'+ Daughter', ce_add_partner:'+ Partner',
   ce_del:'Delete', ce_del_confirm:'Really?', ce_del_founder:"The founder can't be deleted.", ce_del_active:"The character you play can't be deleted.", ce_del_kids:"Someone with children can't be deleted.",
-  ce_no_inlaw:"A partner's parents and siblings don't appear in the tree.", ce_no_para:'This person comes from a time paradox: no parents.', ce_two_par:'This person already has both parents.', ce_need_par:'Give them a parent first to add a brother or sister.',
+  ce_no_inlaw:'This person is already someone’s partner: give them a parent first so they get their own branch.',
+  fam_of:n=>`${n}'s family`, year_around:y=>`around the year ${y}`, fam_tog_hide:n=>`Hide ${n}'s family`, fam_tog_show:n=>`Show ${n}'s family`,
+  ce_agefix:'Custom age (optional)', ce_agefix_ph:'E.g.: 2000000', ce_err_age:"This age isn't a valid number.",
+  born_age:(p,c,y)=>`Born in ${c}, around the year ${y}`, ce_no_para:'This person comes from a time paradox: no parents.', ce_two_par:'This person already has both parents.', ce_need_par:'Give them a parent first to add a brother or sister.',
   ce_edit_title:n=>`Edit ${n}`, ce_new:(k,n)=>`${n}'s ${{father:'father',mother:'mother',brother:'brother',sister:'sister',son:'son',daughter:'daughter',partner:'partner'}[k]}`,
   ce_photo:'Photo', ce_photo_pick:'Choose an image', ce_photo_del:'Remove', ce_photo_note:'The image is heavily shrunk to fit in the bubble.',
   ce_bcity:'Birthplace', ce_city:'Current city', ce_state:'State', ce_alive:'Alive', ce_dead:'Dead', ce_vanished:'Vanished', ce_dod:'Date of death',
@@ -5679,7 +5702,10 @@ TX.de = {
   born_unk:(p,c)=>`Geboren in ${c}, Datum unbekannt`, died_unk:(p,c)=>`Gestorben an einem unbekannten Datum, ${c}`, bdate_unk:'Geburtsdatum unbekannt',
   ce_edit:'Bearbeiten', ce_add_father:'+ Vater', ce_add_mother:'+ Mutter', ce_add_brother:'+ Bruder', ce_add_sister:'+ Schwester', ce_add_son:'+ Sohn', ce_add_daughter:'+ Tochter', ce_add_partner:'+ Partner(in)',
   ce_del:'Löschen', ce_del_confirm:'Wirklich?', ce_del_founder:'Der Gründer kann nicht gelöscht werden.', ce_del_active:'Deine gespielte Figur kann nicht gelöscht werden.', ce_del_kids:'Wer Kinder hat, kann nicht gelöscht werden.',
-  ce_no_inlaw:'Eltern und Geschwister eines Partners erscheinen nicht im Stammbaum.', ce_no_para:'Diese Person stammt aus einem Zeitparadoxon: Sie hat keine Eltern.', ce_two_par:'Diese Person hat schon beide Eltern.', ce_need_par:'Füge zuerst einen Elternteil hinzu, um Geschwister zu erstellen.',
+  ce_no_inlaw:'Diese Person ist schon jemandes Partner: Gib ihr zuerst einen Elternteil, damit sie ihren eigenen Zweig bekommt.',
+  fam_of:n=>`Familie von ${n}`, year_around:y=>`um das Jahr ${y}`, fam_tog_hide:n=>`Familie von ${n} ausblenden`, fam_tog_show:n=>`Familie von ${n} anzeigen`,
+  ce_agefix:'Eigenes Alter (optional)', ce_agefix_ph:'Z. B.: 2000000', ce_err_age:'Dieses Alter ist keine gültige Zahl.',
+  born_age:(p,c,y)=>`Geboren in ${c}, um das Jahr ${y}`, ce_no_para:'Diese Person stammt aus einem Zeitparadoxon: Sie hat keine Eltern.', ce_two_par:'Diese Person hat schon beide Eltern.', ce_need_par:'Füge zuerst einen Elternteil hinzu, um Geschwister zu erstellen.',
   ce_edit_title:n=>`${n} bearbeiten`, ce_new:(k,n)=>`${{father:'Vater',mother:'Mutter',brother:'Bruder',sister:'Schwester',son:'Sohn',daughter:'Tochter',partner:'Partner(in)'}[k]} von ${n}`,
   ce_photo:'Foto', ce_photo_pick:'Bild auswählen', ce_photo_del:'Entfernen', ce_photo_note:'Das Bild wird stark verkleinert, damit es in die Blase passt.',
   ce_bcity:'Geburtsort', ce_city:'Aktueller Wohnort', ce_state:'Zustand', ce_alive:'Am Leben', ce_dead:'Tot', ce_vanished:'Verschwunden', ce_dod:'Todesdatum',
@@ -6167,7 +6193,10 @@ TX.es = {
   born_unk:(p,c)=>`${gs(p,'Nacido','Nacida')} en ${c}, en fecha desconocida`, died_unk:(p,c)=>`${gs(p,'Fallecido','Fallecida')} en fecha desconocida, ${c}`, bdate_unk:'fecha de nacimiento desconocida',
   ce_edit:'Editar', ce_add_father:'+ Padre', ce_add_mother:'+ Madre', ce_add_brother:'+ Hermano', ce_add_sister:'+ Hermana', ce_add_son:'+ Hijo', ce_add_daughter:'+ Hija', ce_add_partner:'+ Pareja',
   ce_del:'Eliminar', ce_del_confirm:'¿Seguro?', ce_del_founder:'El fundador no se puede eliminar.', ce_del_active:'El personaje que juegas no se puede eliminar.', ce_del_kids:'Alguien con hijos no se puede eliminar.',
-  ce_no_inlaw:'Los padres y hermanos de una pareja no aparecen en el árbol.', ce_no_para:'Esta persona viene de una paradoja temporal: no tiene padres.', ce_two_par:'Esta persona ya tiene a sus dos padres.', ce_need_par:'Añádele primero un padre o una madre para crearle un hermano o una hermana.',
+  ce_no_inlaw:'Esta persona ya es pareja de alguien: créale primero un padre o una madre para que tenga su propia rama.',
+  fam_of:n=>`Familia de ${n}`, year_around:y=>`hacia el año ${y}`, fam_tog_hide:n=>`Ocultar la familia de ${n}`, fam_tog_show:n=>`Mostrar la familia de ${n}`,
+  ce_agefix:'Edad a medida (opcional)', ce_agefix_ph:'P. ej.: 2000000', ce_err_age:'Esta edad no es un número válido.',
+  born_age:(p,c,y)=>`${gs(p,'Nacido','Nacida')} en ${c}, hacia el año ${y}`, ce_no_para:'Esta persona viene de una paradoja temporal: no tiene padres.', ce_two_par:'Esta persona ya tiene a sus dos padres.', ce_need_par:'Añádele primero un padre o una madre para crearle un hermano o una hermana.',
   ce_edit_title:n=>`Editar a ${n}`, ce_new:(k,n)=>`${{father:'Padre',mother:'Madre',brother:'Hermano',sister:'Hermana',son:'Hijo',daughter:'Hija',partner:'Pareja'}[k]} de ${n}`,
   ce_photo:'Foto', ce_photo_pick:'Elegir una imagen', ce_photo_del:'Quitar', ce_photo_note:'La imagen se reduce mucho para caber en la burbuja.',
   ce_bcity:'Lugar de nacimiento', ce_city:'Ciudad actual', ce_state:'Estado', ce_alive:'Con vida', ce_dead:'Muerto/a', ce_vanished:'Desaparecido/a', ce_dod:'Fecha de la muerte',
@@ -9882,9 +9911,11 @@ function cityLine(p){
 // Les animations en boucle (reflets, lueurs) gardent leur rythme même quand l'arbre est redessiné :
 // chaque bulle démarre avec un retard négatif calé sur une horloge commune.
 const animT = () => `-${(performance.now()/1000).toFixed(2)}s`;
-const yShow = (p, k) => { const v = k === 'b' ? p.bShow : p.dShow; return v === 'unk' ? '?' : v === 'hide' ? '' : String(yearOf(k === 'b' ? bornD(p) : p.death)); };
-const ageTx = (p, A) => p.bShow === 'unk' || (p.death != null && p.dShow === 'unk') ? '?' : tA(A);
-const bornLine = p => p.bShow === 'unk' ? t('born_unk', p, cityName(p.birthCity)) : t('born_in', p, fmt(bornD(p)), cityName(p.birthCity));
+const bigN = n => Math.abs(n) >= 10000 ? cynFmt(n) : n;
+const ageVal = (p, A) => { if(!p.ageBase) return A; const ref = p.death != null && p.death <= S.t ? p.death : S.t; return p.ageBase.a + Math.floor((ref - p.ageBase.at) / 365.2425); };   // 0.2.6d : âge sur mesure, qui continue d'avancer avec le temps
+const yShow = (p, k) => { const v = k === 'b' ? p.bShow : p.dShow; return v === 'unk' ? '?' : v === 'hide' ? '' : String(k === 'b' && p.ageBase ? bigN(yearOf(p.ageBase.at) - p.ageBase.a) : yearOf(k === 'b' ? bornD(p) : p.death)); };
+const ageTx = (p, A) => p.bShow === 'unk' || (p.death != null && p.dShow === 'unk') ? '?' : tA(bigN(ageVal(p, A)));
+const bornLine = p => p.ageBase && p.bShow !== 'unk' ? t('born_age', p, cityName(p.birthCity), bigN(yearOf(p.ageBase.at) - p.ageBase.a)) : p.bShow === 'unk' ? t('born_unk', p, cityName(p.birthCity)) : t('born_in', p, fmt(bornD(p)), cityName(p.birthCity));
 function nodeHTML(p, x, y){
   const cls = ['node'];
   if(p.death!=null) cls.push('dead');
@@ -9945,19 +9976,23 @@ function buildTree(){
   const PL = new Map(); for(const c of Object.values(S.people)) if(c.paraLink){ if(!PL.has(c.paraLink.to)) PL.set(c.paraLink.to, []); PL.get(c.paraLink.to).push(c); }
   const paraL = pid => PL.get(pid) || [];                 // 0.2.3b : paradoxe temporel, relié en pointillés
   const unionsL = pid => (UA.get(pid) || []).filter(u => u.end == null || u.married || kidsL(u).length);
-  let maxDepth = 0;
+  let maxDepth = 0, minDepth = 0, GH = null;              // 0.2.6d : GH = le conjoint montré « en reflet » dans sa propre famille
+  const ghosts = [], spouses = new Set(), dep = {}, famLabs = [];
   function measure(pid){
+    if(GH != null && (pid === GH || pos[pid])) return memo[pid] = NWo(pid);
     const us = unionsL(pid), selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), kids = us.flatMap(kidsL).concat(soloL(pid), paraL(pid));
     const kidsW = kids.length ? kids.reduce((s,k) => s + measure(k.id), 0) + (kids.length-1)*GX : 0;
     return memo[pid] = Math.max(selfW, kidsW);
   }
   function place(pid, x, depth){
-    maxDepth = Math.max(maxDepth, depth);
+    maxDepth = Math.max(maxDepth, depth); minDepth = Math.min(minDepth, depth);
+    if(GH != null && (pid === GH || pos[pid])){ ghosts.push({id: pid, x: PAD + x + (memo[pid] - NWo(pid)) / 2, y: PAD + depth*(NH+GY)}); return; }
+    dep[pid] = depth;
     const us = unionsL(pid), w = memo[pid];
     const selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), y = PAD + depth*(NH+GY), sx = PAD + x + (w-selfW)/2;
     pos[pid] = {x:sx, y};
     let ux = sx + NWo(pid) + PG;
-    us.forEach(u => { pos[u.b] = {x: ux, y}; ux += NWo(u.b) + PG; });
+    us.forEach(u => { pos[u.b] = {x: ux, y}; ux += NWo(u.b) + PG; spouses.add(u.b); dep[u.b] = depth; });
     const groups = us.map(kidsL), solo = soloL(pid), para = paraL(pid), kids = groups.flat().concat(solo, para);
     const kidsW = kids.length ? kids.reduce((s,k) => s + memo[k.id], 0) + (kids.length-1)*GX : 0;
     let kx = x + (w-kidsW)/2;
@@ -9983,7 +10018,26 @@ function buildTree(){
     });
   }
   measure(S.founderId); place(S.founderId, 0, 0);
-  const W = memo[S.founderId] + PAD*2, H = PAD*2 + (maxDepth+1)*NH + maxDepth*GY;
+  // 0.2.6d : la famille d'un conjoint (ses parents, frères et sœurs…) se range à droite, à la bonne hauteur, avec le conjoint en reflet
+  let xEnd = memo[S.founderId];
+  const FG = 110, famDone = new Set();
+  for(let g = 0; g < 60; g++){
+    const c = [...spouses].find(b => !famDone.has(b) && P(b) && P(b).parents && P(b).parents[0] != null && !(S.famShow && S.famShow[b] === false));
+    if(c == null) break; famDone.add(c);
+    let r = c, k = 0; while(k < 400){ const pp = P(r).parents; if(!pp || pp[0] == null || !P(pp[0])) break; r = pp[0]; k++; }
+    if(pos[r] || r === c) continue;
+    GH = c; measure(r); const x0 = xEnd + FG; place(r, x0, dep[c] - k); GH = null;
+    if(pos[r]) famLabs.push({id: c, x: pos[r].x, y: pos[r].y - 40});
+    xEnd = x0 + memo[r];
+  }
+  if(minDepth < 0){                                     // une famille plus ancienne que l'arbre : tout descend d'autant de rangs
+    const dy = -minDepth * (NH+GY);
+    for(const id in pos) pos[id].y += dy;
+    ghosts.forEach(o => { o.y += dy; }); famLabs.forEach(o => { o.y += dy; });
+    unionsD.forEach(u => { u.y0 += dy; u.by += dy; }); links.forEach(l => { l.y1 += dy; l.bus += dy; l.ky += dy; });
+  }
+  const rows = maxDepth - minDepth;
+  const W = xEnd + PAD*2, H = PAD*2 + (rows+1)*NH + rows*GY;
   let svg = '';
   for(const l of links){ const d = `M${l.mx} ${l.y1}V${l.bus}H${l.kx}V${l.ky}`; svg += l.para ? `<path class="ln-para" d="${d}"/>` : `<path class="ln-wire-under" d="${d}"/><path class="ln-wire" d="${d}"/>`; }
   for(const u of unionsD){
@@ -9993,6 +10047,11 @@ function buildTree(){
   }
   let nodes = '';
   for(const id in pos) nodes += nodeHTML(P(id), pos[id].x, pos[id].y);
+  for(const o of ghosts) nodes += nodeHTML(P(o.id), o.x, o.y).replace('<button class="node', '<button class="node ghost');
+  for(const o of famLabs) nodes += `<span class="famlab" style="left:${o.x}px;top:${o.y}px">${esc(t('fam_of', P(o.id).first || '…'))}</span>`;
+  for(const b of spouses){ const q = P(b), ps = pos[b]; if(!q || !ps || !q.parents || q.parents[0] == null) continue;   // l'icône pour montrer ou cacher sa famille
+    const on = !(S.famShow && S.famShow[b] === false);
+    nodes += `<i class="famtog${on ? ' on' : ''}" data-act="famtog" data-id="${b}" role="button" style="left:${ps.x - 13}px;top:${ps.y + NH/2 - 13}px" title="${esc(t(on ? 'fam_tog_hide' : 'fam_tog_show', q.first || '…'))}">${icon(on ? 'tree' : 'eyeoff')}</i>`; }
   return {html: `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}${catHTML(links)}`, W, H, pos};
 }
 const CAT_SVG = '<svg viewBox="0 0 40 38" aria-hidden="true"><path class="ctail" d="M28 34c6 .6 9.6-2.6 8.6-8.2-.4-2.2-2.2-2.8-3-1.4" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="5.4" stroke-linecap="round"/><path class="ctail" d="M28 34c6 .6 9.6-2.6 8.6-8.2-.4-2.2-2.2-2.8-3-1.4" fill="none" stroke="#3b3346" stroke-width="3.2" stroke-linecap="round"/><g fill="#3b3346" stroke="#fff" stroke-opacity=".75" stroke-width="1.1" stroke-linejoin="round"><path d="M10.5 37.5c-1-8.4 2.4-14.6 8-15.4h3c5.6.8 9 7 8 15.4z"/><path d="M12 18.5 11 6l6 4.8h6L29 6l-1 12.5c0 4.8-3.6 7.9-8 7.9s-8-3.1-8-7.9z"/></g><g class="ceyes"><ellipse cx="16.6" cy="16.4" rx="1.7" ry="2.1" fill="#c6ff4a"/><ellipse cx="23.4" cy="16.4" rx="1.7" ry="2.1" fill="#c6ff4a"/></g><path d="M19 20h2l-1 1.3z" fill="#ff9ccf"/></svg>';
@@ -11740,7 +11799,7 @@ function openFiche0(id, extra){
   const a = age(p);
   let sub = '';
   if(p.death!=null) sub = `${esc(bornLine(p))}<br>${esc(p.dShow === 'unk' ? t('died_unk', p, causeText(p)) : t('died_on', p, fmt(p.death), causeText(p)))}`;
-  else sub = esc(t('city_alive', p, cityName(p.birthCity), cityName(p.city))) + ' · ' + esc(p.bShow === 'unk' ? t('bdate_unk') : fmt(bornD(p)));
+  else sub = esc(t('city_alive', p, cityName(p.birthCity), cityName(p.city))) + ' · ' + esc(p.bShow === 'unk' ? t('bdate_unk') : p.ageBase ? t('year_around', bigN(yearOf(p.ageBase.at) - p.ageBase.a)) : fmt(bornD(p)));
   if(p.lost) sub += `<br><span class="ttline">${esc(t('fiche_lost', p, yearOf(p.lost.at), yearOf(p.lost.back)))}</span>`;
   else if(p.tt){ const parts = []; if(p.tt.n) parts.push(t('fiche_tt', p.tt.n, p.tt.tot)); if(p.tt.past) parts.push(t('fiche_ttp', p.tt.past));
     if(parts.length) sub += `<br><span class="ttline">${esc(parts.join(' · '))}</span>`; }
@@ -13014,17 +13073,17 @@ document.addEventListener('keydown', e => {
 const CE_ROLES = ['father','mother','brother','sister','son','daughter','partner'], YD = 365.25;
 const ceSexOf = k => ({father:'M', mother:'F', brother:'M', sister:'F', son:'M', daughter:'F'})[k] || null;
 const ceAffected = q => !q.parents ? [q] : Object.values(S.people).filter(c => c.parents && c.parents[0] === q.parents[0] && c.parents[1] == null && (c === q || !c.adopted));   // les enfants qui recevront le nouveau parent
+const ceLine = q => !!q && !q.blood && (q.parents != null || Object.values(S.people).some(c => c.parents && c.parents[0] === q.id) || S.unions.some(u => u.a === q.id));   // 0.2.6d : de la famille d'un conjoint
 function ceWhy(q, k){                                  // '' : on peut lui ajouter ce proche ; sinon, la raison
   if(!q) return 'x';
   if(k === 'father' || k === 'mother'){
-    if(!q.blood) return t('ce_no_inlaw');
     if(q.paraLink) return t('ce_no_para');
     if(q.parents && q.parents[1] != null) return t('ce_two_par');
     return '';
   }
-  if(k === 'brother' || k === 'sister') return !q.blood ? t('ce_no_inlaw') : !q.parents ? t('ce_need_par') : '';
-  if(k === 'partner') return q.blood ? '' : t('ce_no_inlaw');
-  return q.blood || S.unions.some(u => u.b === q.id) ? '' : t('ce_no_inlaw');
+  if(k === 'brother' || k === 'sister') return !q.parents ? t('ce_need_par') : '';
+  if(k === 'partner') return q.blood || ceLine(q) ? '' : t('ce_no_inlaw');
+  return q.blood || ceLine(q) || S.unions.some(u => u.b === q.id) ? '' : t('ce_no_inlaw');
 }
 function ceDelWhy(p){
   if(p.id === S.founderId) return t('ce_del_founder');
@@ -13054,12 +13113,12 @@ function ceDefaults(k, q){
     birth = lim(Math.max(Math.max(...par.map(x => x.birth)) + 16 * YD, q.birth + (Math.random() < .5 ? -1 : 1) * rnd(1, 4) * YD));
     last = q.maiden || q.last;
   } else if(k === 'son' || k === 'daughter'){
-    const u = q.blood ? (currentUnion(q.id) || S.unions.filter(x => x.a === q.id).sort((a, b) => b.start - a.start)[0]) : S.unions.find(x => x.b === q.id);
-    other = u ? (q.blood ? u.b : u.a) : null;
+    const lq = q.blood || ceLine(q), u = lq ? (currentUnion(q.id) || S.unions.filter(x => x.a === q.id).sort((a, b) => b.start - a.start)[0]) : S.unions.find(x => x.b === q.id);
+    other = u ? (lq ? u.b : u.a) : null;
     const o = other != null ? P(other) : null, lo = Math.max(q.birth, o ? o.birth : -Infinity);
     birth = lim(lo + rnd(22, 34) * YD); if(birth <= lo) birth = day;
     const dad = [q, o].find(x => x && x.sex === 'M');
-    last = dad ? dad.last : q.blood || !o ? q.last : o.last;
+    last = dad ? dad.last : lq || !o ? q.last : o.last;
   } else {
     birth = lim(q.birth + rnd(-4, 4) * YD);
     last = ceSurname(yearOf(birth), q.last);
@@ -13121,7 +13180,7 @@ function ceOpen(id, k, of){
   if(ed){ const us = S.unions.filter(u => u.a === ed.id || u.b === ed.id).sort((a, b) => a.start - b.start);
     if(us.length) ublock = `<div class="eyebrow sect">${t('ce_couple')}</div>` + us.map(u => uRow(u, P(u.a === ed.id ? u.b : u.a))).join(''); }
   else if(k === 'partner') ublock = `<div class="eyebrow sect">${t('ce_couple')}</div>` + uRow({id:'new', start: Math.min(day, Math.round(Math.max(q.birth, d.birth) + 20 * YD)), end:null, married:false}, q);
-  const otherSel = (k === 'son' || k === 'daughter') && q.blood ? `<label class="field"><span class="lab">${t('ce_other')}</span><select class="inp" id="ceOther">${opt('', t('ce_other_none'), d.other == null)}${S.unions.filter(u => u.a === q.id).map(u => opt(u.b, nm(P(u.b)), u.b === d.other)).join('')}</select></label>` : '';
+  const otherSel = (k === 'son' || k === 'daughter') && (q.blood || ceLine(q)) ? `<label class="field"><span class="lab">${t('ce_other')}</span><select class="inp" id="ceOther">${opt('', t('ce_other_none'), d.other == null)}${S.unions.filter(u => u.a === q.id).map(u => opt(u.b, nm(P(u.b)), u.b === d.other)).join('')}</select></label>` : '';
   openModal(`<div class="m-head"><div class="eyebrow">${t('lab_creative')}</div><h2>${esc(ed ? t('ce_edit_title', nm(ed)) : t('ce_new', k, q.first || '…'))}</h2></div>
     <form id="ceForm" class="spform ceform" novalidate>
       <div class="cephoto"><span class="orb xl${d.sex === 'F' ? ' f' : ''}" id="ceOrb">${avatar({sex: d.sex, photo: d.photo})}</span>
@@ -13132,6 +13191,7 @@ function ceOpen(id, k, of){
       <div class="row2"><label class="field"><span class="lab">${t('lab_sex')}</span><select class="inp" id="ceSex">${['F','M'].map(x => opt(x, t(x === 'F' ? 'female' : 'male'), x === d.sex)).join('')}</select></label>
         <label class="field"><span class="lab">${t('lab_dob')}</span><span class="dpair"><input class="inp" type="date" id="ceDob" value="${isoDay(d.birth)}">${showSel('ceBShow', d.bShow)}</span></label></div>
       <p class="setnote" id="ceAge"></p>
+      <label class="field"><span class="lab">${t('ce_agefix')}</span><input class="inp" type="number" id="ceAgeFix" step="1" inputmode="numeric" value="${ed && ed.ageBase ? ageVal(ed, 0) : ''}" placeholder="${esc(t('ce_agefix_ph'))}"></label>
       ${otherSel}
       <div class="row2"><label class="field"><span class="lab">${t('ce_bcity')}</span><input class="inp" id="ceBCity" list="ceCities" maxlength="28" autocomplete="off" value="${esc(cityName(d.bcity))}"></label>
         <label class="field"><span class="lab">${t('ce_city')}</span><input class="inp" id="ceCity" list="ceCities" maxlength="28" autocomplete="off" value="${esc(cityName(d.city))}"></label></div>
@@ -13205,9 +13265,10 @@ function ceSave(){
   const first = $('#ceFirst').value.trim().replace(/\s+/g, ' '), last = $('#ceLast').value.trim().replace(/\s+/g, ' '), sex = $('#ceSex').value;
   const birth = dayOfIso($('#ceDob').value), st = $('#ceState').value, dead = st !== 'alive', death = dead ? dayOfIso($('#ceDod').value) : null;
   if(!first || !last) return fail(t('err_name'));
+  const afc = $('#ceAgeFix').value.trim(); if(afc !== '' && !(isFinite(+afc) && Math.abs(+afc) < 1e15)) return fail(t('ce_err_age'));
   if(birth == null) return fail(t('ce_err_dob'));                 // 0.2.6b : mode libre, aucune restriction de date
   if(dead && death == null) return fail(t('ce_err_dod'));
-  const oSel = $('#ceOther'), other = q && !q.blood ? (S.unions.find(u => u.b === q.id) || {}).a : oSel && oSel.value !== '' ? +oSel.value : null;
+  const qLine = !!q && (q.blood || ceLine(q)), oSel = $('#ceOther'), other = q && !qLine ? (S.unions.find(u => u.b === q.id) || {}).a : oSel && oSel.value !== '' ? +oSel.value : null;
   let pars = [], kids = [];
   if(ed){ pars = (ed.parents || []).filter(x => x != null).map(P).filter(Boolean); kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(ed.id)); }
   else if(k === 'father' || k === 'mother') kids = ceAffected(q);
@@ -13222,11 +13283,11 @@ function ceSave(){
   // ---- création et place dans la famille ----
   let p = ed;
   if(!p){
-    const blood = k === 'partner' ? false : (k === 'father' || k === 'mother') ? !q.parents : true;
+    const blood = k === 'partner' ? false : (k === 'father' || k === 'mother') ? (!q.parents && q.blood) : (k === 'brother' || k === 'sister') ? q.blood : qLine ? q.blood : !!(P(other) || {}).blood;
     p = addPerson({first: cap(first).slice(0, 20), last: cap(last).slice(0, 26), sex, birth, blood, city: q.city, birthCity: q.city});
     p.conds = []; p.intAges = []; p.interests = []; p.addicts = [];
     if(k === 'father' || k === 'mother'){
-      if(!q.parents){ q.parents = [p.id]; S.founderId = p.id; }          // un ancêtre : il devient le fondateur
+      if(!q.parents){ q.parents = [p.id]; if(q.blood) S.founderId = p.id; }          // un ancêtre : il devient le fondateur (pour un conjoint : le début de sa famille)
       else {
         const a = q.parents[0], A0 = P(a), aff = ceAffected(q), lo = Math.max(birth, A0 ? A0.birth : birth);
         const start = Math.max(lo, Math.round(Math.min(...aff.map(c => c.birth)) - YD)), u = {id:S.nextId++, a, b:p.id, start, married:true, marriedAt:start, end:null, endReason:null, preg:null};
@@ -13234,7 +13295,7 @@ function ceSave(){
         S.unions.push(u); aff.forEach(c => { c.parents = [a, p.id]; });
       }
     } else if(k === 'brother' || k === 'sister') p.parents = q.parents.slice();
-    else if(k === 'son' || k === 'daughter') p.parents = q.blood ? (other != null ? [q.id, other] : [q.id]) : [other, q.id];
+    else if(k === 'son' || k === 'daughter') p.parents = qLine ? (other != null ? [q.id, other] : [q.id]) : [other, q.id];
     else {
       const r = rows.find(x => x.uid === 'new'), ended = r.st === 'split' || r.st === 'divorce', mar = r.st === 'married' || r.st === 'divorce';
       if(!ended){ const cur = currentUnion(q.id); if(cur){ cur.end = Math.max(cur.start, r.a); cur.endReason = cur.married ? 'divorce' : 'rupture'; cur.preg = null; } }
@@ -13247,6 +13308,8 @@ function ceSave(){
   p.last = cap(last).slice(0, 26); p.sex = sex;
   const db = birth - bornD(p); if(db){ p.birth += db; if(p.birthReal != null) p.birthReal += db; }
   p.birthCity = ceCity($('#ceBCity').value) || p.birthCity || p.city;
+  const afv = $('#ceAgeFix').value.trim();                // 0.2.6d : âge sur mesure
+  if(afv === '') delete p.ageBase; else { const n = Math.round(+afv); if(isFinite(n) && Math.abs(n) < 1e15) p.ageBase = {a: n, at: today()}; }
   const bs = $('#ceBShow').value, dsh = $('#ceDShow').value;
   if(bs === 'year') delete p.bShow; else p.bShow = bs;
   if(dsh === 'year' || !dead) delete p.dShow; else p.dShow = dsh;
@@ -13354,7 +13417,8 @@ function cShadow(VT){
     if(m.married === false) [u.a, u.b].forEach(x => { const q = ppl[x]; if(q.maiden && q.last !== q.maiden) ppl[x] = Object.assign({}, q, {last: q.maiden}); });   // pas encore mariée : son nom de jeune fille
   }
   const inU = new Set(uns.map(u => u.b));
-  for(const id in ppl) if(!ppl[id].blood && !inU.has(+id)) delete ppl[id];   // un conjoint pas encore rencontré n'est pas encore de la famille
+  const parA = new Set(); for(const id in ppl){ const c = ppl[id]; if(c.parents && c.parents[0] != null) parA.add(c.parents[0]); }
+  for(const id in ppl){ const q = ppl[id]; if(!q.blood && !inU.has(+id) && !q.parents && !parA.has(+id) && !uns.some(u => u.a === +id)) delete ppl[id]; }   // un conjoint pas encore rencontré n'est pas encore de la famille
   return Object.assign({}, S, {people: ppl, unions: uns, t: VT, evQ: [], cat: S.cat && ppl[S.cat.k] ? S.cat : null});
 }
 let ctRaf = 0, ctAnim = 0, ctLast = 0;
@@ -13769,6 +13833,7 @@ const ACT = {
   achjump(d){ const el = document.getElementById('achsec-' + d.v), m = $('#modal'), nav = $('#modal .achnav');   // défile dans la fenêtre seulement
     if(el) m.scrollTo({top: el.offsetTop - (nav ? nav.offsetHeight : 0) - 8, behavior: reduced ? 'auto' : 'smooth'}); },
   vsmenu(){ vsDraft = Object.assign({mode:'normal', diff:'std', goal:'speed'}, VS_CFG || {}); openVsMenu(false); },
+  famtog(d){ if(!S) return; S.famShow = S.famShow || {}; const id = +d.id; S.famShow[id] = S.famShow[id] === false; dirty = true; render(); save(); },   // 0.2.6d
   modepick(d){ setMode(d.v); sfx.click(); },
   vsq(d){ if(!VS_CFG) return; VS_CFG[d.k] = d.v; if(d.k === 'mode' && !VS_GOALS[d.v].includes(VS_CFG.goal)) VS_CFG.goal = VS_GOALS[d.v][0]; vsSetup(); sfx.click(); },
   vsset(d){ vsDraft[d.k] = d.v; if(d.k === 'mode' && !VS_GOALS[d.v].includes(vsDraft.goal)) vsDraft.goal = VS_GOALS[d.v][0]; openVsMenu(true); },
