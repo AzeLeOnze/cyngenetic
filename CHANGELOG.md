@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6b — 17 novembre 2026
+
+- Le mode créatif s'appelle maintenant le mode libre. Il n'a plus le gameplay du mode normal : plus d'âme sœur à chercher, de bébé à faire, de mariage, d'héritier à choisir, d'objets ni de mode auto. Quand le temps tourne, il passe sans que rien n'arrive tout seul.
+- Mode libre : plus aucune restriction de date. On peut mourir n'importe quand, même avant sa naissance (-44 ans, pourquoi pas), naître après ses enfants, se mettre en couple dans le futur… et la date du jeu se choisit librement.
+- Mode libre : chaque date de naissance ou de décès peut être inconnue (affichée « ? ») ou cachée sur la bulle.
+- Mode libre : star, criminel et prison ont maintenant une date. L'arbre, sa fiche et le curseur du temps les transforment le jour venu.
+- Nouvel écran de choix du mode, plus compact et plus lisible : Normal (choisi par défaut), Versus, Royal, Zombie, Argent et Libre, chacun avec ses réglages juste en dessous. Le Versus se règle directement sans fenêtre, et les difficultés ont des crans de couleur. Le tout s'adapte à chaque thème.
+
 ## v0.2.6a — 17 novembre 2026
 
 - Nouveau : le mode créatif ! Tout y est personnalisable. Le temps est arrêté au départ et la date du jeu se choisit (bouton « Date » sous l'arbre). Dans la fiche de chacun, crée-lui un père, une mère, un frère, une sœur, un fils, une fille ou un(e) conjoint(e), avec sa date de naissance.
