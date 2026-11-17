@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6e — 17 novembre 2026
+
+- Correction : en mode libre, l'icône pour afficher ou cacher la famille d'un conjoint réagit enfin au clic sur ordinateur (le chat de l'arbre aussi). Le reflet du conjoint est maintenant bien relié à ses parents.
+- Les fils qui relient parents et enfants ont une nuance de couleur légèrement différente pour chaque famille.
+- Mode libre : un métier peut avoir le nom de ton choix (« Dresseur de licornes »…), la bulle s'élargit pour l'afficher. C'est juste visuel : il n'entre pas dans l'album.
+- Mode libre : nouveau « Parcours professionnel » dans la fiche : Jacques est technicien à partir du 1er juin 2002, fermier à partir du 20 avril 2003… L'arbre et le curseur du temps changent son métier le jour venu.
+- Personnalisation : nouveau calendrier sur mesure. Invente tes mois, leur nombre et leur longueur, la numérotation des années (avec un mot devant, comme « An ») et tes propres ères. Toutes les dates du jeu suivent ton calendrier, et on peut revenir au calendrier réel. Un calendrier sur mesure désactive les succès.
+
 ## v0.2.6d — 17 novembre 2026
 
 - Mode libre : les conjoints peuvent maintenant avoir leurs parents, frères, sœurs (et toute leur famille, avec leurs propres conjoints et enfants). Leur famille s'affiche à droite de l'arbre, à la bonne génération, avec le conjoint en reflet. Une petite icône sur la bulle du conjoint l'affiche ou la cache.
