@@ -2255,6 +2255,30 @@ body[data-era="3"] .treebox::before{content:"";position:absolute;inset:0;z-index
 .dpair{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}
 .dpair .dshow{width:auto;max-width:150px;padding-left:8px;padding-right:22px;font-size:12.5px}
 .ctempty{position:absolute;left:0;top:60px;width:100%;text-align:center;font:800 15px var(--font-display);color:var(--ink-soft);opacity:.8}
+/* ===== 0.2.6c : exporter l'arbre, arbre libre enregistré ===== */
+.tree-head .thbtns{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-left:auto}
+.tree-head .thbtns>*{margin-left:0!important}
+.tree-head .exportb{gap:6px}
+.tree-head .exportb svg{width:17px;height:17px;fill:currentColor;flex:none}
+.tree-head .exportb~#viewSw,.tree-head .exportb~[data-act="center"]{margin-left:0}
+.tree-head .exportb[hidden]{display:none!important}
+.tree-head .exportb[hidden]~#viewSw:not([hidden]){margin-left:auto}
+@media (max-width:900px){ .tree-head .exportb{width:42px;min-width:42px;height:42px;padding:0;border-radius:50%;justify-content:center;flex:none}
+  .tree-head .exportb span{display:none} .tree-head .exportb svg{width:21px;height:21px} .tree-head .exportb~.ctrico{margin-left:0!important} }
+.exlab{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.exlab b{font:800 13px var(--font-display);color:var(--ink);text-transform:none;letter-spacing:0}
+.exrange{margin-top:4px}
+.exticks{display:flex;justify-content:space-between;margin-top:-6px;font:700 11px var(--font-display);color:var(--ink-soft);opacity:.8}
+.exok{color:#1f8a00;font-weight:700}
+.freecard{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:linear-gradient(180deg,#fbf6ff,#efe0ff);border:1px solid #d7b8ff}
+.freecard .fcic svg{width:26px;height:26px;fill:#9b34f5;display:block}
+.freecard>div{flex:1;min-width:0}
+.freecard b{display:block;font:800 14px var(--font-display);color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.freecard small{display:block;font-size:12px;color:var(--ink-soft)}
+.freecard .gel{min-height:36px;padding:6px 14px;font-size:13px;flex:none}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .freecard{background:rgba(155,52,245,.16);border-color:rgba(200,160,255,.35)}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .freecard .fcic svg{fill:#d0a8ff}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .exok{color:#7ee05a}
 /* ===== 0.2.6a : mode Créatif ===== */
 .opt-ic.crea{background:linear-gradient(160deg,#ffd0f6,#c04dff 55%,#5a17c8)}
 .opt-ic.crea svg{width:22px;height:22px;fill:#fff}
@@ -2588,6 +2612,7 @@ body[data-era="3"] .treebox::before{content:"";position:absolute;inset:0;z-index
             <div class="pills rulepills" role="group"><button type="button" data-act="rulepick" data-v="patri" data-t="rule_patri" aria-pressed="true"></button><button type="button" data-act="rulepick" data-v="matri" data-t="rule_matri" aria-pressed="false"></button><button type="button" data-act="rulepick" data-v="both" data-t="rule_both" aria-pressed="false"></button></div>
             <select id="fRule" class="inp" hidden></select></div>
           <div class="msub" id="fZBox" hidden><span class="lab" data-t="lab_zdiff"></span><div class="dsegs" id="fZSegs"></div><small class="fieldhint" id="fZHint"></small></div>
+          <div class="msub" id="fFreeBox" hidden></div>
           <div class="msub" id="fMBox" hidden><span class="lab" data-t="lab_mgoal"></span><div class="dsegs" id="fMCards"></div><small class="fieldhint" id="fMHint"></small><small class="fieldhint" data-t="m_real_note"></small></div>
         </div>
         <label class="switch optrow famrow" id="fFamRow"><span class="opt-ic fam"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm8 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6zM1.5 20c0-4 3-6.5 6.5-6.5s6.5 2.5 6.5 6.5zm14 0c0-2.2-.7-4-2-5.3 1-.6 1.9-.9 2.5-.9 3 0 5.5 2.1 5.5 6.2z"/></svg></span>
@@ -2640,12 +2665,14 @@ body[data-era="3"] .treebox::before{content:"";position:absolute;inset:0;z-index
         <div class="hud"><span class="cyn" id="cynBox" data-act="shop" role="button" tabindex="0" data-ta="shop" data-tt="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2c0 3.2 1.7 4.8 3.8 6.4C15.1 10.1 17 12 17 16c0 2.4-.7 4.4-2 6h-2.4c1.5-1.7 2.4-3.6 2.4-6 0-3-1.5-4.6-3.4-6.1C9.4 8.2 7 6.3 7 2zm8 0h2c0 2.3-.8 4.1-2 5.5l-1.5-1.3C14.5 5 15 3.7 15 2zM9.5 13.8l1.5 1.3C9.7 16.5 9 18 9 20v2H7v-2c0-2.6.9-4.5 2.5-6.2zM9.3 4.3h5.4v1.6H9.3zm0 14h5.4v1.6H9.3zM10.6 9.2h3v1.5h-3zm.4 4h2.8v1.5H11z"/></svg><b id="cynVal">0</b></span><button class="gel round invb hudinv" data-act="inv" data-ta="inv_title" data-tt="inv_title"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M2.5 10V8.6A4.6 4.6 0 0 1 7.1 4h9.8a4.6 4.6 0 0 1 4.6 4.6V10zM6.4 5.5v4.5h1.7V5.3zm9.5-.2v4.7h1.7V5.5zM2.5 11.6h7.6v2.2a1.9 1.9 0 0 0 3.8 0v-2.2h7.6V19a3 3 0 0 1-3 3h-13a3 3 0 0 1-3-3zm3.9 1.6V20.4h1.7v-7.2zm9.5 0v7.2h1.7v-7.2zM10.6 10h2.8v3.5a1.4 1.4 0 0 1-2.8 0z"/></svg><i class="invdot" hidden></i></button><div class="zbox" id="zBox" hidden><span class="zic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3.2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM7 14.8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-5 4.2c-1.4 0-2.6-.6-3.4-1.6l1.5-1.2c.5.6 1.2.9 1.9.9s1.4-.3 1.9-.9l1.5 1.2c-.8 1-2 1.6-3.4 1.6z"/></svg></span><span class="ztxt"><b id="zTxt"></b><i class="zbar"><i id="zFill"></i></i></span></div><span class="mbox" id="mBox" data-act="money" role="button" tabindex="0" hidden><i class="mic"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2.2a7.8 7.8 0 1 1 0 15.6 7.8 7.8 0 0 1 0-15.6zM11.1 6v1.3c-1.7.3-2.8 1.5-2.8 3 0 1.7 1.3 2.5 3 2.9 1.3.3 1.8.6 1.8 1.2s-.6 1-1.6 1c-1.1 0-2-.4-2.6-1L7.7 15.8c.8.8 2 1.3 3.4 1.4V18.5h1.8v-1.3c1.8-.3 2.9-1.5 2.9-3.1 0-1.7-1.2-2.5-3-2.9-1.3-.3-1.8-.6-1.8-1.1s.5-.9 1.4-.9c.9 0 1.7.3 2.3.8l1.1-1.4c-.7-.6-1.7-1-2.9-1.1V6z"/></svg></i><span class="mtx"><b id="mVal">0</b><span class="mbar"><i id="mBar"></i></span></span></span></div>
         <h2 id="treeTitle"></h2>
         <span class="stats" id="treeStats"></span><span class="lifex" id="treeLife" hidden></span>
+        <div class="thbtns">
+        <button class="gel ghost exportb" id="btnExport" data-act="export" data-ta="ex_btn" data-tt="ex_btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v8.6l2.8-2.8 1.4 1.4L12 16.4l-5.2-5.2 1.4-1.4 2.8 2.8V4a1 1 0 0 1 1-1zM5 15h2v3h10v-3h2v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/></svg><span data-t="ex_btn"></span></button>
         <div class="pills" id="viewSw" role="group" hidden>
           <button data-act="view" data-v="tree" data-t="view_tree" aria-pressed="true"></button>
           <button data-act="view" data-v="map" data-t="view_map" aria-pressed="false"></button>
         </div>
         <button class="gel ghost" data-act="center"><span data-t="center"></span></button>
-        <button class="gel ghost ctrico" data-act="center" data-ta="center"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M11 1.5h2v2.6a8 8 0 0 1 6.9 6.9h2.6v2h-2.6a8 8 0 0 1-6.9 6.9v2.6h-2v-2.6A8 8 0 0 1 4.1 13H1.5v-2h2.6A8 8 0 0 1 11 4.1zM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 3.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/></svg></button>
+        <button class="gel ghost ctrico" data-act="center" data-ta="center"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M11 1.5h2v2.6a8 8 0 0 1 6.9 6.9h2.6v2h-2.6a8 8 0 0 1-6.9 6.9v2.6h-2v-2.6A8 8 0 0 1 4.1 13H1.5v-2h2.6A8 8 0 0 1 11 4.1zM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 3.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/></svg></button></div>
       </div>
       <div id="treeScroll" class="tree-scroll"><div id="treeSizer" class="tree-sizer"><div id="treeCanvas" class="tree-canvas"></div><div id="mpopl" class="mpopl" aria-hidden="true"></div></div></div>
       <div class="ctime" id="ctime" hidden>
@@ -2702,9 +2729,14 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BAIN_COLS = ['#3af4ff','#ff4fe0','#ffe84a','#ffffff','#b48cff'];   // 0.2.3d : les couleurs du thème Bain d'étoile
 const isBain = () => document.documentElement.dataset.skin === 'bain';
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.6b';
+const APP_VERSION = '0.2.6c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.6c', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
+   fr:['Mode libre : ton arbre a maintenant sa propre sauvegarde. Il est enregistré quand tu quittes, et se reprend depuis la tuile Libre de l\'écran de départ, sans écraser ta partie en cours dans un autre mode.',
+       'Nouveau bouton « Exporter » à côté de « Arbre / Carte » : il enregistre l\'arbre en image PNG ou JPEG. La taille de l\'image suit celle de l\'arbre, et tout se règle : la résolution, le format, le thème de l\'image (parmi tes thèmes débloqués) et le titre. Un petit logo Cyngenetic discret, à 20 % d\'opacité, est ajouté dans un coin.'],
+   en:['Free mode: your tree now has its own save. It\'s saved when you leave, and you resume it from the Free tile on the start screen, without overwriting your current game in another mode.',
+       'New « Export » button next to « Tree / Map »: it saves the tree as a PNG or JPEG image. The image size follows the tree\'s, and everything is adjustable: resolution, format, the image\'s theme (among your unlocked themes) and the title. A small, discreet Cyngenetic logo at 20% opacity is added in a corner.']},
   {v:'0.2.6b', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
    fr:['Le mode créatif s\'appelle maintenant le mode libre. Il n\'a plus le gameplay du mode normal : plus d\'âme sœur à chercher, de bébé à faire, de mariage, d\'héritier à choisir, d\'objets ni de mode auto. Quand le temps tourne, il passe sans que rien n\'arrive tout seul.',
        'Mode libre : plus aucune restriction de date. On peut mourir n\'importe quand, même avant sa naissance (-44 ans, pourquoi pas), naître après ses enfants, se mettre en couple dans le futur… et la date du jeu se choisit librement.',
@@ -3492,7 +3524,7 @@ const PATCHNOTES = [
        'The close button stays visible at the top of windows while scrolling.',
        'Version number shown under the start screen and in Settings, plus these patch notes.']}
 ];
-const SAVE_KEY = 'lignee.save.v2', LANG_KEY = 'lignee.lang', MUTE_KEY = 'lignee.muted';
+const SAVE_KEY = 'lignee.save.v2', FREE_KEY = 'lignee.free.v1', LANG_KEY = 'lignee.lang', MUTE_KEY = 'lignee.muted';
 const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }, del(k){ try{ localStorage.removeItem(k); }catch(e){} } };
 const loadJSON = k => { try{ return JSON.parse(store.get(k)) || {}; }catch(e){ return {}; } };
 /* Paramètres (confort) et règles de jeu (personnalisation), gardés dans le navigateur */
@@ -4691,6 +4723,12 @@ fr:{
   ct_now:"Aujourd'hui", ct_past:n=>n<1?"il y a moins d'un an":`il y a ${n} an${n>1?'s':''}`, ct_fut:n=>n<1?"dans moins d'un an":`dans ${n} an${n>1?'s':''}`, ct_young:'◀ Rajeunir', ct_old:'Vieillir ▶', ct_play:"Animer l'arbre", ct_reset:'Revenir au présent',
   cd_btn:'Date', cd_title:'Changer la date du jeu', cd_lab:'Nouvelle date', cd_hint:d=>`Pas avant le ${d} : le dernier événement de la famille. Entre les deux, les gens vieillissent sans rien vivre.`, cd_y:'ans', cd_go:'Aller à cette date', cd_err:d=>`Choisis une date à partir du ${d}.`,
   f_race:'Race', log_c_date:d=>`Mode libre : nous voilà le ${fmt(d)}.`,
+  ex_btn:'Exporter', ex_title:"Exporter l'arbre en image", ex_hint:"L'arbre entier, tel qu'il est affiché, enregistré en image sur ton appareil.",
+  ex_hint_free:"L'arbre entier tel qu'il est à la date affichée (celle du curseur du temps), enregistré en image sur ton appareil.",
+  ex_fmt:'Format', ex_skin:"Thème de l'image", ex_res:'Résolution', ex_small:'Plus léger', ex_big:'Plus net', ex_title_opt:'Nom de la famille et date',
+  ex_wm:'Un petit logo Cyngenetic discret est ajouté dans un coin.', ex_go:"Enregistrer l'image", ex_wait:"Création de l'image…",
+  ex_done:n=>`Image enregistrée : ${n}`, ex_fail:"L'image n'a pas pu être créée. Essaie une résolution plus petite.",
+  free_saved:(n,d)=>`${n} membre${n>1?'s':''} · ${d}`, free_replace:"Tu as déjà un arbre libre (tu peux le reprendre juste au-dessus). Clique encore sur Commencer pour le remplacer par un nouvel arbre.",
   center:'Recentrer', lifex:'Espérance de vie :', lifex_tip:(a,n)=>`Espérance de vie de la famille : ${a} ans (âge moyen au décès de ${n} membre${n>1?'s':''})`, stats:(n,v,k)=>`${n} membre${n>1?'s':''} · ${v} en vie · ${k} génération${k>1?'s':''}`,
   you:'Vous', future_star:'★ Future star', star:'★ Star',
   you_play:'Vous incarnez', born_in:(p,d,c)=>`${g(p,'Né','Née')} le ${d} à ${c}`,
@@ -5171,6 +5209,12 @@ en:{
   ct_now:'Today', ct_past:n=>n<1?'less than a year ago':`${n} year${n>1?'s':''} ago`, ct_fut:n=>n<1?'in less than a year':`in ${n} year${n>1?'s':''}`, ct_young:'◀ Younger', ct_old:'Older ▶', ct_play:'Animate the tree', ct_reset:'Back to the present',
   cd_btn:'Date', cd_title:'Change the game date', cd_lab:'New date', cd_hint:d=>`Not before ${d}: the family's latest event. In between, people grow older without living through anything.`, cd_y:'yrs', cd_go:'Go to this date', cd_err:d=>`Pick a date from ${d} onwards.`,
   f_race:'Species', log_c_date:d=>`Free mode: it is now ${fmt(d)}.`,
+  ex_btn:'Export', ex_title:'Export the tree as an image', ex_hint:'The whole tree, as shown, saved as an image on your device.',
+  ex_hint_free:'The whole tree as it is on the date shown (the time slider’s date), saved as an image on your device.',
+  ex_fmt:'Format', ex_skin:'Image theme', ex_res:'Resolution', ex_small:'Lighter', ex_big:'Sharper', ex_title_opt:'Family name and date',
+  ex_wm:'A small, discreet Cyngenetic logo is added in a corner.', ex_go:'Save the image', ex_wait:'Creating the image…',
+  ex_done:n=>`Image saved: ${n}`, ex_fail:"The image couldn't be created. Try a lower resolution.",
+  free_saved:(n,d)=>`${n} member${n>1?'s':''} · ${d}`, free_replace:'You already have a free tree (you can resume it just above). Click Start again to replace it with a new tree.',
   center:'Recenter', lifex:'Life expectancy:', lifex_tip:(a,n)=>`Family life expectancy: ${a} (average age at death of ${n} member${n>1?'s':''})`, stats:(n,v,k)=>`${n} member${n>1?'s':''} · ${v} alive · ${k} generation${k>1?'s':''}`,
   you:'You', future_star:'★ Future star', star:'★ Star',
   you_play:'You are playing', born_in:(p,d,c)=>`Born ${d} in ${c}`,
@@ -5650,6 +5694,12 @@ TX.de = {
   ct_now:'Heute', ct_past:n=>n<1?'vor weniger als einem Jahr':`vor ${n} Jahr${n>1?'en':''}`, ct_fut:n=>n<1?'in weniger als einem Jahr':`in ${n} Jahr${n>1?'en':''}`, ct_young:'◀ Jünger', ct_old:'Älter ▶', ct_play:'Stammbaum animieren', ct_reset:'Zurück in die Gegenwart',
   cd_btn:'Datum', cd_title:'Spieldatum ändern', cd_lab:'Neues Datum', cd_hint:d=>`Nicht vor dem ${d}: dem letzten Ereignis der Familie. Dazwischen altern alle, ohne etwas zu erleben.`, cd_y:'J.', cd_go:'Zu diesem Datum', cd_err:d=>`Wähle ein Datum ab dem ${d}.`,
   f_race:'Spezies', log_c_date:d=>`Freier Modus: Heute ist der ${fmt(d)}.`,
+  ex_btn:'Exportieren', ex_title:'Stammbaum als Bild exportieren', ex_hint:'Der ganze Stammbaum, so wie er angezeigt wird, als Bild auf deinem Gerät gespeichert.',
+  ex_hint_free:'Der ganze Stammbaum, so wie er am angezeigten Datum ist (dem des Zeitreglers), als Bild auf deinem Gerät gespeichert.',
+  ex_fmt:'Format', ex_skin:'Thema des Bildes', ex_res:'Auflösung', ex_small:'Leichter', ex_big:'Schärfer', ex_title_opt:'Familienname und Datum',
+  ex_wm:'Ein kleines, unauffälliges Cyngenetic-Logo wird in einer Ecke hinzugefügt.', ex_go:'Bild speichern', ex_wait:'Bild wird erstellt…',
+  ex_done:n=>`Bild gespeichert: ${n}`, ex_fail:'Das Bild konnte nicht erstellt werden. Versuche eine kleinere Auflösung.',
+  free_saved:(n,d)=>`${n} Mitglied${n>1?'er':''} · ${d}`, free_replace:'Du hast schon einen freien Stammbaum (du kannst ihn direkt darüber fortsetzen). Klicke noch einmal auf Starten, um ihn durch einen neuen zu ersetzen.',
   center:'Zentrieren', lifex:'Lebenserwartung:', lifex_tip:(a,n)=>`Lebenserwartung der Familie: ${a} Jahre (Durchschnittsalter beim Tod von ${n} Mitglied${n>1?'ern':''})`, stats:(n,v,k)=>`${n} Mitglied${n>1?'er':''} · ${v} am Leben · ${k} Generation${k>1?'en':''}`,
   you:'Du', future_star:'★ Künftiger Star', star:'★ Star',
   you_play:'Du spielst', born_in:(p,d,c)=>`Geboren am ${d} in ${c}`,
@@ -6132,6 +6182,12 @@ TX.es = {
   ct_now:'Hoy', ct_past:n=>n<1?'hace menos de un año':`hace ${n} año${n>1?'s':''}`, ct_fut:n=>n<1?'en menos de un año':`dentro de ${n} año${n>1?'s':''}`, ct_young:'◀ Rejuvenecer', ct_old:'Envejecer ▶', ct_play:'Animar el árbol', ct_reset:'Volver al presente',
   cd_btn:'Fecha', cd_title:'Cambiar la fecha del juego', cd_lab:'Nueva fecha', cd_hint:d=>`No antes del ${d}: el último acontecimiento de la familia. Entretanto, todos envejecen sin vivir nada.`, cd_y:'años', cd_go:'Ir a esta fecha', cd_err:d=>`Elige una fecha a partir del ${d}.`,
   f_race:'Especie', log_c_date:d=>`Modo libre: hoy es ${fmt(d)}.`,
+  ex_btn:'Exportar', ex_title:'Exportar el árbol como imagen', ex_hint:'El árbol entero, tal como se ve, guardado como imagen en tu dispositivo.',
+  ex_hint_free:'El árbol entero tal como está en la fecha mostrada (la del cursor del tiempo), guardado como imagen en tu dispositivo.',
+  ex_fmt:'Formato', ex_skin:'Tema de la imagen', ex_res:'Resolución', ex_small:'Más ligera', ex_big:'Más nítida', ex_title_opt:'Nombre de la familia y fecha',
+  ex_wm:'Se añade un pequeño logo discreto de Cyngenetic en una esquina.', ex_go:'Guardar la imagen', ex_wait:'Creando la imagen…',
+  ex_done:n=>`Imagen guardada: ${n}`, ex_fail:'No se pudo crear la imagen. Prueba con una resolución menor.',
+  free_saved:(n,d)=>`${n} miembro${n>1?'s':''} · ${d}`, free_replace:'Ya tienes un árbol libre (puedes retomarlo justo arriba). Pulsa otra vez Empezar para sustituirlo por un árbol nuevo.',
   center:'Centrar', lifex:'Esperanza de vida:', lifex_tip:(a,n)=>`Esperanza de vida de la familia: ${a} años (edad media al morir de ${n} miembro${n>1?'s':''})`, stats:(n,v,k)=>`${n} miembro${n>1?'s':''} · ${v} con vida · ${k} generaci${k>1?'ones':'ón'}`,
   you:'Tú', future_star:'★ Futura estrella', star:'★ Estrella',
   you_play:'Juegas con', born_in:(p,d,c)=>`${gs(p,'Nacido','Nacida')} el ${d} en ${c}`,
@@ -7856,7 +7912,7 @@ function addPerson(o){
   S.people[p.id] = p; return p;
 }
 let lastSave = 0;
-function save(){ if(S && !S.headless){ store.set(SAVE_KEY, JSON.stringify(S)); lastSave = performance.now(); } }
+function save(){ if(S && !S.headless){ store.set(S.creative ? FREE_KEY : SAVE_KEY, JSON.stringify(S)); lastSave = performance.now(); } }   // 0.2.6c : le mode libre a sa propre sauvegarde
 const saveSoon = () => { if(performance.now() - lastSave > 4000) save(); };
 document.addEventListener('visibilitychange', () => { if(document.hidden) save(); });
 addEventListener('pagehide', () => save());
@@ -11385,6 +11441,7 @@ function setView(v){
   sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === curView)));
   $('#treeScroll').hidden = curView !== 'tree'; $('#mapView').hidden = curView !== 'map'; ctimeUI();
   document.querySelectorAll('.tree-head [data-act="center"]').forEach(b => { b.hidden = curView !== 'tree'; });
+  const eb = $('#btnExport'); if(eb) eb.hidden = curView !== 'tree';   // 0.2.6c
   if(curView === 'map') renderMap(); else if(S) renderTree();
 }
 function buildMap(){
@@ -13394,6 +13451,123 @@ function cSetDate(T1){
   log('info', 'c_date', [T1], T1, true);
   render(); renderControls(); save();
 }
+/* ================= 0.2.6c : exporter l'arbre en image ================= */
+// L'arbre est redessiné avec les vraies règles CSS du jeu (dans le thème choisi) à l'intérieur d'une image SVG, puis copié dans un canvas.
+const EX_M = 40;
+let EXF = {}, EXCSS = null, exBusy = false;
+function treeSnap(){                                   // l'arbre tel qu'il est affiché (en mode libre : à la date regardée)
+  const S0 = S; let out = null;
+  if(S.creative){ const sh = cShadow(S.cView != null ? S.cView : S.t); if(!sh) return null; S = sh; }
+  try{ const b = buildTree(); out = {html: b.html.split('@T@').join('0s'), W: b.W, H: b.H, title: t('family', familyName(P(S.founderId))), date: fmt(S.t), y: yearOf(S.t)}; }
+  finally{ S = S0; }
+  return out;
+}
+const exDims = (sn, title) => [sn.W + EX_M * 2, sn.H + EX_M * 2 + (title ? 64 : 0)];
+function exMaxScale(w, h){                              // la plus grande image que le navigateur peut fabriquer sans risque
+  const area = matchMedia('(pointer: coarse)').matches ? 24e6 : 64e6;
+  return Math.max(.25, Math.floor(Math.min(4, 16384 / Math.max(w, h), Math.sqrt(area / (w * h))) * 4) / 4);
+}
+function openExport(){
+  const sn = treeSnap();
+  if(!sn){ openModal(`<div class="m-head"><div class="eyebrow">${t('ex_btn')}</div><h2>${t('ex_title')}</h2><p class="hint">${esc(t('ct_empty'))}</p></div>`); return; }
+  const cur = document.documentElement.dataset.skin, skins = SKINS.filter(k => !skinLocked(k));
+  const [w, h] = exDims(sn, true), def = Math.min(2, exMaxScale(w, h));
+  openModal(`<div class="m-head"><div class="eyebrow">${t('ex_btn')}</div><h2>${t('ex_title')}</h2><p class="hint">${esc(t(S.creative ? 'ex_hint_free' : 'ex_hint'))}</p></div>
+    <form id="exForm" class="spform exform" novalidate>
+      <div class="row2"><label class="field"><span class="lab">${t('ex_fmt')}</span><select class="inp" id="exFmt"><option value="png">PNG</option><option value="jpeg">JPEG</option></select></label>
+        <label class="field"><span class="lab">${t('ex_skin')}</span><select class="inp" id="exSkin">${skins.map(k => `<option value="${k}"${k === cur ? ' selected' : ''}>${esc(t('skin_' + k))}</option>`).join('')}</select></label></div>
+      <label class="field"><span class="lab exlab"><span>${t('ex_res')}</span><b id="exSize"></b></span><input type="range" class="ctrange exrange" id="exScale" min="0.25" max="4" step="0.25" value="${def}" style="--z:-20%"></label>
+      <div class="exticks"><span>${t('ex_small')}</span><span>${t('ex_big')}</span></div>
+      <label class="cechk"><input type="checkbox" id="exTitle" checked><span>${t('ex_title_opt')}</span></label>
+      <p class="setnote">${t('ex_wm')}</p>
+      <p class="setnote exok" id="exOk" hidden></p><p class="err" id="exErr" hidden></p>
+      <div class="m-actions"><button type="button" class="gel ghost" data-act="close"><span>${t('ce_cancel')}</span></button><button type="submit" class="gel lime big" id="exGo"><span>${t('ex_go')}</span></button></div>
+    </form>`, {sound:false});
+  const upd = () => {
+    const [w2, h2] = exDims(sn, $('#exTitle').checked), m2 = exMaxScale(w2, h2), r = $('#exScale');
+    r.max = m2; if(+r.value > m2) r.value = m2;
+    const k = +r.value; $('#exSize').textContent = `${cynFmt(Math.round(w2 * k))} × ${cynFmt(Math.round(h2 * k))} px`;
+  };
+  $('#exForm').addEventListener('input', upd); $('#exForm').addEventListener('change', upd); upd();
+  $('#exForm').addEventListener('submit', async e => {
+    e.preventDefault(); if(exBusy) return; exBusy = true;
+    const go = $('#exGo'); go.disabled = true; go.querySelector('span').textContent = t('ex_wait'); $('#exErr').hidden = true; $('#exOk').hidden = true;
+    try{ const name = await exportTree({fmt: $('#exFmt').value, skin: $('#exSkin').value, scale: +$('#exScale').value, title: $('#exTitle').checked});
+      const ok = $('#exOk'); if(ok){ ok.textContent = t('ex_done', name); ok.hidden = false; } sfx.sparkle(); }
+    catch(err){ const er = $('#exErr'); if(er){ er.textContent = t('ex_fail'); er.hidden = false; } sfx.refuse(); console.warn(err); }
+    finally{ exBusy = false; const g2 = $('#exGo'); if(g2){ g2.disabled = false; g2.querySelector('span').textContent = t('ex_go'); } }
+  });
+}
+function exCSS(){                                       // toutes les règles du jeu, sans celles réservées aux petits écrans (l'image n'est pas un téléphone)
+  if(EXCSS) return EXCSS;
+  const css = [...document.querySelectorAll('style')].map(x => x.textContent).join('\n').replace(/\/\*[\s\S]*?\*\//g, '');
+  let out = '', i = 0;
+  for(;;){
+    const j = css.indexOf('@media', i); if(j < 0){ out += css.slice(i); break; }
+    out += css.slice(i, j);
+    const b = css.indexOf('{', j); if(b < 0){ out += css.slice(j); break; }
+    const cond = css.slice(j + 6, b); let d = 1, k = b + 1;
+    while(k < css.length && d){ const ch = css[k]; if(ch === '{') d++; else if(ch === '}') d--; k++; }
+    const maxw = /max-width/.test(cond), minw = /min-width/.test(cond);
+    if(minw && !maxw) out += css.slice(b + 1, k - 1); else if(!maxw) out += css.slice(j, k);
+    i = k;
+  }
+  return EXCSS = out.split(']]>').join(']] >');
+}
+async function exFonts(fam){                            // les polices du thème, intégrées dans l'image (sinon elle prendrait une police de secours)
+  const want = new Set(fam.split(',').map(x => x.trim().replace(/^["']|["']$/g, '')).filter(Boolean));
+  const link = document.querySelector('link[href*="fonts.googleapis.com/css2"]'); if(!link) return '';
+  try{
+    if(!EXF.css){                                       // même feuille, adresse un peu différente : la copie gardée hors ligne par l'application n'est pas lisible
+      const u = new URL(link.href), fams = u.searchParams.getAll('family'); u.search = '';
+      fams.reverse().forEach(x => u.searchParams.append('family', x)); u.searchParams.set('display', 'swap');
+      const rs = await fetch(u.href); if(!rs.ok) throw new Error('css'); EXF.css = await rs.text(); }
+    const out = [];
+    for(const blk of EXF.css.split('@font-face').slice(1)){
+      const fm = (/font-family:\s*['"]([^'"]+)['"]/.exec(blk) || [])[1]; if(!fm || !want.has(fm)) continue;
+      const ur = (/unicode-range:\s*([^;]+);/.exec(blk) || [])[1] || '';
+      if(ur && !/U\+0000-00FF|U\+0100-/i.test(ur)) continue;    // alphabet latin seulement
+      const url = (/url\(([^)]+)\)/.exec(blk) || [])[1]; if(!url) continue;
+      if(!EXF[url]){ const bl = await (await fetch(url.replace(/^['"]|['"]$/g, ''))).blob(); EXF[url] = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(bl); }); }
+      out.push('@font-face' + blk.slice(0, blk.lastIndexOf('}') + 1).replace(url, EXF[url]));
+    }
+    return out.join('\n');
+  }catch(e){ return ''; }
+}
+async function exportTree(o){
+  const root = document.documentElement, sk0 = root.dataset.skin;
+  let sn = null, fam = '';
+  root.dataset.skin = o.skin;                           // le thème de l'image, le temps de mesurer les bulles (rien n'est affiché entre-temps)
+  try{ sn = treeSnap(); const cs = getComputedStyle(root); fam = cs.getPropertyValue('--font-display') + ',' + cs.getPropertyValue('--font-body'); }
+  finally{ root.dataset.skin = sk0; }
+  renderTree();
+  if(!sn) throw new Error('empty');
+  const [w, h] = exDims(sn, o.title), k = Math.min(o.scale, exMaxScale(w, h)), Wp = Math.round(w * k), Hp = Math.round(h * k);
+  const css = exCSS() + '\n' + await exFonts(fam) + '\n.xport *,.xport *::before,.xport *::after{animation:none!important;transition:none!important}';
+  const ty = EX_M + (o.title ? 64 : 0), wm = Math.round(Math.max(18, Math.min(56, Math.min(w, h) * .035)));
+  const box = document.createElement('div');
+  box.innerHTML = `<div class="tree-scroll" style="position:absolute;left:0;top:0;width:${w}px;height:${h}px;overflow:visible;border:0;cursor:default"></div>
+    ${o.title ? `<div class="xtitle" style="position:absolute;left:${EX_M}px;right:${EX_M}px;top:${Math.round(EX_M * .7)}px;font:800 30px/1.25 var(--font-display);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(sn.title)}<span style="font-weight:600;font-size:18px;opacity:.65"> · ${esc(sn.date)}</span></div>` : ''}
+    <div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${EX_M}px;top:${ty}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>
+    <div class="xwm" style="position:absolute;right:${Math.round(EX_M * .5)}px;bottom:${Math.round(EX_M * .4)}px;display:flex;align-items:center;gap:${Math.round(wm * .3)}px;opacity:.2">${emblem('xwm')}<span class="logo" style="margin:0;padding:0;font-size:${wm}px;line-height:1.1;letter-spacing:-.03em;text-align:left"><span>Cyn</span>genetic</span></div>`;
+  const em = box.querySelector('.xwm svg'); em.setAttribute('style', `width:${Math.round(wm * 1.2)}px;height:${Math.round(wm * 1.2)}px;flex:none`);
+  const xs = new XMLSerializer(), inner = [...box.childNodes].map(n => xs.serializeToString(n)).join('');
+  const cls = ['zmode', 'no-deco'].filter(c => document.body.classList.contains(c)).concat('xport').join(' '), era = document.body.dataset.era;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${Wp}" height="${Hp}" viewBox="0 0 ${Wp} ${Hp}" data-skin="${esc(o.skin)}"><foreignObject x="0" y="0" width="${Wp}" height="${Hp}">`
+    + `<body xmlns="http://www.w3.org/1999/xhtml" class="${cls}"${era ? ` data-era="${esc(era)}"` : ''} style="margin:0;position:relative;width:${w}px;height:${h}px;overflow:hidden;transform:scale(${k});transform-origin:0 0;background-attachment:scroll">`
+    + `<style><![CDATA[${css}]]></style>${inner}</body></foreignObject></svg>`;
+  const img = new Image();
+  await new Promise((res, rej) => { img.onload = res; img.onerror = () => rej(new Error('svg')); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
+  await new Promise(r => setTimeout(r, 150));            // le temps que les polices intégrées soient prêtes
+  const c = document.createElement('canvas'); c.width = Wp; c.height = Hp;
+  const g = c.getContext('2d'); g.drawImage(img, 0, 0, Wp, Hp);
+  const blob = await new Promise((res, rej) => { try{ c.toBlob(b => b ? res(b) : rej(new Error('blob')), o.fmt === 'jpeg' ? 'image/jpeg' : 'image/png', .92); }catch(e){ rej(e); } });
+  const slug = String(sn.title).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'arbre';
+  const name = `cyngenetic-${slug}-${sn.y}.${o.fmt === 'jpeg' ? 'jpg' : 'png'}`;
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 8000);
+  return name;
+}
 const ACT = {
   pause(){ S.paused = !S.paused; if(S.creative && !S.paused){ ctStop(); if(S.cView != null){ S.cView = null; dirty = true; render(); } } renderControls(); },   // 0.2.6a : le temps repart du présent
   ctplay(){ if(S && S.creative) ctPlay(); },
@@ -13679,6 +13853,8 @@ const ACT = {
   restart(){ if(S) save(); document.body.classList.remove('zmode', 'vsmode'); S = null; cands = []; showSetup(); window.scrollTo(0, 0); },   // retour au menu : on peut reprendre
   newgame(){ newGame(); },
   resume(){ try{ S = JSON.parse(store.get(SAVE_KEY)); }catch(e){ S = null; } if(S) enterGame(); },
+  resumefree(){ try{ S = JSON.parse(store.get(FREE_KEY)); }catch(e){ S = null; } if(S){ S.creative = true; enterGame(); } },   // 0.2.6c
+  export(){ if(S && !$('#game').hidden) openExport(); },
   random(){ randomFounder(); }
 };
 document.addEventListener('click', e => {
@@ -13808,10 +13984,10 @@ function vsInline(){                                   // 0.2.6b : le Versus se 
     <span class="lab">${t('vs_goal')}</span>${pills('goal', VS_GOALS[c.mode], g => t('vs_g_' + g))}<small class="fieldhint">${t('vs_g_' + c.goal + '_h')}</small>
     <small class="fieldhint vsnote">${t('vs_1780')}</small>`;
 }
-let SMODE = 'normal';
+let SMODE = 'normal', freeOk = false;
 function setMode(m){                                   // un seul mode à la fois ; les anciennes cases à cocher restent (cachées) pour tout le reste du code
   if(m === 'vs' && vsNoHere()) m = 'normal';
-  SMODE = m;
+  SMODE = m; freeOk = false; const fe = $('#fErr'); if(fe) fe.hidden = true;
   VS_CFG = m === 'vs' ? (VS_CFG || {mode:'normal', diff:'std', goal:'speed'}) : null;
   $('#fRoyal').checked = m === 'royal'; $('#fZombie').checked = m === 'zombie'; $('#fMoney').checked = m === 'money'; $('#fCreative').checked = m === 'free';
   vsSetup(); royalSetup(); zSetup(); mSetup(); modeUI();
@@ -13821,6 +13997,9 @@ function modeUI(){
   $$('#fModes .mtile').forEach(b => { b.setAttribute('aria-checked', String(b.dataset.v === SMODE)); if(b.dataset.v === 'vs') b.hidden = noVs; });
   $('#fModeDesc').textContent = t({normal:'normal_hint', vs:'vs_hint', royal:'royal_hint', zombie:'zombie_hint', money:'money_hint', free:'creative_hint'}[SMODE]);
   $('#fModePanel').dataset.m = SMODE; $('#fFamRow').hidden = SMODE === 'free';
+  let fs = null; if(SMODE === 'free'){ try{ fs = JSON.parse(store.get(FREE_KEY)); }catch(e){} }   // 0.2.6c : l'arbre libre enregistré
+  const fb = $('#fFreeBox'), fok = !!(fs && fs.people && fs.people[fs.founderId]); fb.hidden = !fok;
+  if(fok){ const ff = fs.people[fs.founderId]; fb.innerHTML = `<div class="freecard"><span class="fcic">${icon('tree')}</span><div><b>${esc(t('family', ff.maiden || ff.last))}</b><small>${esc(t('free_saved', Object.keys(fs.people).length, fmt(fs.t)))}</small></div><button type="button" class="gel lime" data-act="resumefree"><span>${t('resume')}</span></button></div>`; }
   const ds = $('#fDestiny'); ds.disabled = SMODE === 'vs' || SMODE === 'free'; if(SMODE === 'free'){ ds.value = 'none'; setupNote(); }
 }
 function openVsMenu(re){
@@ -13897,6 +14076,7 @@ $('#setupForm').addEventListener('submit', e => {
   else if(d > daysIn(y,m)) msg = t('err_days', t('months')[m], y, daysIn(y,m));
   else if(fromYMD(y,m,d) > fromYMD(s,0,1)) msg = t('err_after', fmt(fromYMD(s,0,1)));
   if(msg){ err.textContent = msg; err.hidden = false; sfx.refuse(); return; }
+  if($('#fCreative').checked && !VS_CFG && store.get(FREE_KEY) && !freeOk){ freeOk = true; err.textContent = t('free_replace'); err.hidden = false; sfx.refuse(); return; }   // 0.2.6c
   err.hidden = true;
   S = newState(s); S.country = CTRY;
   const day = today(), city = fCity.value;
@@ -13929,7 +14109,7 @@ $('#setupForm').addEventListener('submit', e => {
   }
   if(VS_CFG) S.vs = Object.assign({}, VS_CFG, {ai: vsMakeAI(VS_CFG, day, S.royal && S.royal.rule), done:false, result:null});   // Versus : la famille de l'IA
   scheduleYear(p, p.lastAge, day);
-  sfx.start(); store.del(SAVE_KEY); aiZoom = null; enterGame(); save();
+  sfx.start(); store.del(S.creative ? FREE_KEY : SAVE_KEY); aiZoom = null; enterGame(); save();
 });
 
 function showSetup(){
@@ -13937,6 +14117,7 @@ function showSetup(){
   refreshSetupCountry(applyCountry(SET.country)); setupCountryUI();   // l'écran de départ suit le pays choisi (drapeaux)
   if(modalOpen) closeModal(true);
   let saved = null; try{ saved = JSON.parse(store.get(SAVE_KEY)); }catch(e){}
+  if(saved && saved.creative){ if(!store.get(FREE_KEY)) store.set(FREE_KEY, store.get(SAVE_KEY)); store.del(SAVE_KEY); saved = null; }   // 0.2.6c : un arbre libre d'avant rejoint sa propre sauvegarde
   const box = $('#resumeBox');
   if(saved && saved.v===2 && !saved.over && saved.people && saved.people[saved.activeId]){
     const a = saved.people[saved.activeId], f = saved.people[saved.founderId];

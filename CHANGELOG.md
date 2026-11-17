@@ -2,6 +2,11 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6c — 17 novembre 2026
+
+- Mode libre : ton arbre a maintenant sa propre sauvegarde. Il est enregistré quand tu quittes, et se reprend depuis la tuile Libre de l'écran de départ, sans écraser ta partie en cours dans un autre mode.
+- Nouveau bouton « Exporter » à côté de « Arbre / Carte » : il enregistre l'arbre en image PNG ou JPEG. La taille de l'image suit celle de l'arbre, et tout se règle : la résolution, le format, le thème de l'image (parmi tes thèmes débloqués) et le titre. Un petit logo Cyngenetic discret, à 20 % d'opacité, est ajouté dans un coin.
+
 ## v0.2.6b — 17 novembre 2026
 
 - Le mode créatif s'appelle maintenant le mode libre. Il n'a plus le gameplay du mode normal : plus d'âme sœur à chercher, de bébé à faire, de mariage, d'héritier à choisir, d'objets ni de mode auto. Quand le temps tourne, il passe sans que rien n'arrive tout seul.
