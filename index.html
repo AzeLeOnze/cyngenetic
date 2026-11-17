@@ -8040,6 +8040,11 @@ function glitchName(n){                                  // 0.2.3c : Rypoint, un
   const ov = '\u0334\u0335\u0336\u0337\u0338', up = '\u030d\u0352\u0346\u0310\u0311', dn = '\u0316\u0329\u032b\u0323\u0330';
   return [...n].map(ch => ch + ov[rnd(0, 4)] + (Math.random() < .5 ? up[rnd(0, 4)] : '') + (Math.random() < .45 ? dn[rnd(0, 4)] : '')).join('');
 }
+function eggName(p){                                     // 0.2.3c : Aze et Rypoint, partout où le joueur choisit un prénom
+  const b = bareName(p.first); delete p.egg;
+  if(b === 'aze') p.egg = 'aze';
+  else if(b === 'rypoint'){ p.egg = 'ryp'; p.first = glitchName('Rypoint'); }
+}
 const bareName = n => String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+[IVXLC]+$/, '').trim().toLowerCase();
 const eggTile = p => p.egg === 'aze' ? `<div class="span2 eggf"><dt>${t('f_egg')}</dt><dd><b class="eleven">11</b>${esc(t('egg_aze'))}</dd></div>` : '';
 function leapAge(p){                                     // 0.2.3c : né un 29 février, un vrai anniversaire tous les 4 ans
@@ -10313,9 +10318,7 @@ function openNaming(id){
 function giveName(n){
   const c = namingId != null && P(namingId); if(!c) return;
   c.first = n.slice(0,20);
-  const bn = bareName(n);                               // 0.2.3c : easter eggs
-  if(bn === 'aze') c.egg = 'aze';
-  else if(bn === 'rypoint'){ c.egg = 'ryp'; c.first = glitchName('Rypoint'); }
+  eggName(c);                                           // 0.2.3c : easter eggs
   regnalize(c);
   S.nameQueue = S.nameQueue.filter(x => x !== c.id);
   log('birth', c.adopted ? 'adopt' : 'birth', [c.id], c.birth);
@@ -11114,7 +11117,7 @@ function openSpouseForm(){                            // conjoint(e) entièremen
     const day = today(), sex = $('#spSex').value;
     const c = Object.assign({first: cap(first), last: cap(last), sex, birth, city: me.city, birthCity: $('#spCity').value, conds: $('#spCond').value ? [$('#spCond').value] : []}, traits());
     c.atout = $('#spAtout').value || pick(ATOUTS)[0];
-    const p = addPerson(Object.assign(c, {blood:false}));
+    const p = addPerson(Object.assign(c, {blood:false})); eggName(p);   // 0.2.3c
     p.addicts = $('#spAdd').value ? [$('#spAdd').value] : [];
     p.intAges = []; p.interests = $('#spInt').value ? [$('#spInt').value] : [];
     if(p.interests[0] === 'fanof'){ const st = famStars(p); if(st.length) p.fanOf = pick(st).id; }
@@ -11699,7 +11702,7 @@ const ACT = {
       e.preventDefault(); const v = inp.value.trim().replace(/\s+/g, ' ');
       if(!v){ inp.focus(); return; }
       if(p.parents && cap(v).toLowerCase() !== (p.base || p.first || '').toLowerCase() && sibBases(p).has(cap(v).toLowerCase())){ inp.setCustomValidity(t('name_sib_taken', cap(v))); inp.reportValidity(); inp.addEventListener('input', () => inp.setCustomValidity(''), {once:true}); sfx.refuse(); return; }
-      const bv = bareName(v); if(!(p.egg === 'ryp' && bv === 'rypoint')){ if(p.egg && bv !== {aze:'aze', ryp:'rypoint'}[p.egg]) delete p.egg; p.first = cap(v).slice(0, 20); }   // 0.2.3c
+      const bv = bareName(v); if(!(p.egg === 'ryp' && bv === 'rypoint')){ p.first = cap(v).slice(0, 20); eggName(p); }   // 0.2.3c
       sfx.sparkle(); dirty = true; save(); render(); openFiche(p.id);
     });
   },
@@ -11929,6 +11932,7 @@ $('#setupForm').addEventListener('submit', e => {
   S = newState(s); S.country = CTRY;
   const day = today(), city = fCity.value;
   const p = addPerson({first: cap(first), last: cap(last), sex:fSex(), birth:fromYMD(y,m,d), blood:true, city, birthCity:city});
+  eggName(p);                                           // 0.2.3c
   p.lastAge = ageAt(p, day);
   p.conds = rollConds([], S.startYear);
   p.atout = $('#fAtout').value || pick(ATOUTS)[0];                         // atout choisi (ou au hasard)
