@@ -1105,6 +1105,37 @@ body.zmode .treebox{position:relative}
 #paraFx{position:fixed;inset:0;z-index:9100;display:grid;place-items:center;overflow:hidden;color:#fff;cursor:pointer;
   background:radial-gradient(circle at 50% 46%,#4a0024 0,#1d0034 36%,#050009 76%);animation:pxin .35s ease-out both}
 #paraFx.out{animation:pxout .8s ease-in forwards}
+/* 0.2.3c : easter eggs */
+.orb.ryp{--o1:#ffc06a;--o2:#ff6a00}
+.node.ryp .nt b,.who h2.ryptxt{animation:rypg 1.9s steps(1,end) infinite}
+@keyframes rypg{0%,100%{text-shadow:none}6%{text-shadow:2px 0 #ff2a6d,-2px 0 #05d9e8}10%{text-shadow:-3px 0 #ff2a6d,3px 0 #05d9e8}14%{text-shadow:none}52%{text-shadow:1px 0 #ff2a6d,-1px 0 #05d9e8}56%{text-shadow:none}}
+.eggf dd{display:flex;align-items:center;gap:8px;font-weight:800}
+.eggf .eleven{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font:800 12px var(--font-display);color:#fff;background:radial-gradient(circle at 35% 30%,#d4ff70,#2f9a00);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 1px 3px rgba(0,0,0,.3)}
+.leapage{display:block;font-size:.78em;font-weight:700;opacity:.8;margin-top:2px}
+.logo.lwob{animation:lwob .35s ease}
+@keyframes lwob{30%{transform:scale(1.05) rotate(-2deg)}70%{transform:scale(.98) rotate(1.5deg)}}
+.treecat{position:absolute;z-index:4;width:36px;height:34px;padding:0;margin:0;border:0;background:none;cursor:pointer;overflow:visible;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35));transform-origin:50% 100%}
+.treecat svg{display:block;width:100%;height:100%;overflow:visible}
+.treecat.flip svg{transform:scaleX(-1)}
+.treecat .ctail{transform-origin:28px 33px;animation:ctail 2.6s ease-in-out infinite}
+@keyframes ctail{0%,100%{transform:rotate(0)}50%{transform:rotate(-16deg)}}
+.treecat .ceyes{transform-origin:20px 16.4px;animation:cblink 5s infinite}
+@keyframes cblink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.treecat.petting{animation:cpet .45s ease-in-out 3}
+@keyframes cpet{50%{transform:scale(1.12,.88)}}
+.treecat .cheart{position:absolute;left:50%;top:-2px;font:normal 800 16px sans-serif;color:#ff3d8b;text-shadow:0 0 4px #fff;pointer-events:none;opacity:0;animation:cheart 1.4s ease-out forwards}
+@keyframes cheart{0%{opacity:1;transform:translate(-50%,0) scale(.6)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),-48px) scale(1.25)}}
+#eggFx{position:fixed;inset:0;z-index:9100;overflow:hidden;cursor:pointer;background:radial-gradient(ellipse at 50% 115%,rgba(140,240,255,.75),rgba(0,90,190,.92) 60%,rgba(0,30,90,.97));animation:efade .7s ease}
+#eggFx.out{opacity:0;transition:opacity .9s ease}
+@keyframes efade{from{opacity:0}}
+#eggFx .eb{position:absolute;bottom:-170px;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 7%,rgba(255,255,255,.35) 17%,rgba(140,230,255,.14) 46%,rgba(80,200,255,.32) 72%,rgba(255,255,255,.75) 100%);box-shadow:inset 0 0 14px rgba(255,255,255,.55),0 0 16px rgba(120,220,255,.45);animation:ebrise var(--d) cubic-bezier(.35,.1,.6,1) var(--w) infinite}
+@keyframes ebrise{0%{transform:translate(0,0)}50%{transform:translate(var(--x),-62vh)}100%{transform:translate(0,calc(-100vh - 340px))}}
+#eggFx .roll{position:absolute;left:0;right:0;top:100%;padding:0 16px;text-align:center;color:#fff;text-shadow:0 2px 10px rgba(0,40,110,.85);animation:eroll 17s linear .6s forwards}
+@keyframes eroll{to{transform:translateY(calc(-100% - 100vh))}}
+#eggFx .roll .logo{font-size:clamp(46px,11vw,84px);margin-bottom:30px}
+#eggFx .roll h3{margin:46px 0 6px;font:800 13px var(--font-display);letter-spacing:.22em;text-transform:uppercase;opacity:.85}
+#eggFx .roll p{margin:0;font:800 clamp(22px,5vw,30px) var(--font-display)}
+#eggFx .eggend{margin-top:70px;font-size:64px}
 @keyframes pxin{from{opacity:0}}
 @keyframes pxout{to{opacity:0;filter:brightness(2.4) blur(8px)}}
 #paraFx::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,transparent 30%,rgba(255,0,70,.35) 100%);animation:pxpulse .5s ease-in-out 2 alternate,pxpulse 1.4s 1.6s ease-in-out infinite alternate}
@@ -2247,9 +2278,14 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.3b';
+const APP_VERSION = '0.2.3c';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.3c', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
+   fr:['Des secrets se cachent maintenant dans Cyngenetic… certains très rares. À toi de les trouver ! 🥚',
+       '3 nouveaux succès, dont un secret.'],
+   en:['Secrets are now hidden in Cyngenetic… some of them very rare. Up to you to find them! 🥚',
+       '3 new achievements, including a secret one.']},
   {v:'0.2.3b', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
    fr:['Les criminels voyageurs du temps peuvent maintenant tuer quelqu\'un de la famille pendant un voyage dans le passé : toute la descendance de la victime née après ce jour-là n\'a jamais existé et disparaît de l\'arbre. Un criminel ne voyage que dans le passé.',
        'S\'il tue son propre ancêtre : paradoxe temporel, avec son animation. Une chance sur deux de revenir au même instant dans une toute nouvelle lignée (nouveaux parents, frères et sœurs… ou pas). Sinon, il revient sans aucune origine : relié en pointillés à sa victime, tout en bas de l\'arbre, plus criminel, et condamné par une maladie légendaire qui l\'emporte en 8 à 10 ans.',
@@ -4130,6 +4166,9 @@ fr:{
   para_title:'Paradoxe temporel', para_sub_new:()=>'La ligne du temps se déchire… et se recoud autrement.', para_sub_cut:p=>`${g(p,'Effacé','Effacée')} de sa propre histoire…`,
   para_res_new:(p,q,s)=>`${p.first} a tué ${nm(q)}, ${g(q,'son propre ancêtre','sa propre ancêtre')}. L'histoire s'est réécrite : ${p.first} revient au même instant dans une toute nouvelle lignée, avec de nouveaux parents${s.length ? ` et ${s.length > 1 ? s.length + ' frères et sœurs' : g(s[0],'un frère','une sœur')}` : ', sans frère ni sœur'}.`,
   para_res_cut:(p,q)=>`${p.first} a tué ${nm(q)}, ${g(q,'son propre ancêtre','sa propre ancêtre')}. ${g(p,'Il','Elle')} revient au même instant, mais plus rien ne ${g(p,'le','la')} relie au passé : plus de parents, plus de casier, juste un fil en pointillés jusqu'à ${q.first}. Le paradoxe ${g(p,'le','la')} ronge : il lui reste 8 à 10 ans.`,
+  f_egg:'Trait unique', egg_aze:'Le Onze', ach_secret:'Succès secret', leap_age:n=>`« vrai » âge : ${n} an${n > 1 ? 's' : ''}`, cat_aria:'Caresser le chat',
+  log_cat_in:()=>"🐈 Un chat s'est installé dans l'arbre généalogique. Il paraît qu'il adore les caresses.", log_cat_out:()=>"🐈 Le chat de l'arbre est reparti vers d'autres branches.",
+  egg_c:['Un jeu de','Aze Le Onze','Idée, game design et tests','Aze Le Onze','Code','Claude','Bulles','Frutiger Aero','Chats dans les arbres','1 sur 2 000','Et surtout',"Toi. Merci d'avoir joué !"],
   para_parents:(a,b)=>`Nouveaux parents : ${a} et ${b}.`, para_ok:'Revenir au présent', para_ill:p=>`${g(p,'Mourant','Mourante')} d'un paradoxe temporel`,
   tt_crim_past:'Un criminel ne peut voyager que dans le passé.',
   log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} remonte en ${y} et assassine ${nm(q)}${n ? ` : ${n} descendant${n>1?'s':''} ${n>1?'disparaissent':'disparaît'} de l'arbre` : ''}.`,
@@ -4572,6 +4611,9 @@ en:{
   para_title:'Time paradox', para_sub_new:()=>'Time tears apart… and stitches itself back differently.', para_sub_cut:()=>'Erased from their own story…',
   para_res_new:(p,q,s)=>`${p.first} killed ${nm(q)}, ${g(p,'his','her')} own ancestor. History has rewritten itself: ${p.first} returns to the same moment in a brand-new bloodline, with new parents${s.length ? ` and ${s.length > 1 ? s.length + ' siblings' : g(s[0],'a brother','a sister')}` : ' and no siblings'}.`,
   para_res_cut:(p,q)=>`${p.first} killed ${nm(q)}, ${g(p,'his','her')} own ancestor. ${g(p,'He','She')} returns to the same moment, but nothing ties ${g(p,'him','her')} to the past anymore: no parents, no criminal record, just a dotted thread to ${q.first}. The paradox is eating ${g(p,'him','her')} away: 8 to 10 years left.`,
+  f_egg:'Unique trait', egg_aze:'Le Onze', ach_secret:'Secret achievement', leap_age:n=>`“real” age: ${n}`, cat_aria:'Pet the cat',
+  log_cat_in:()=>'🐈 A cat has settled in the family tree. Rumour has it, it loves being petted.', log_cat_out:()=>'🐈 The tree cat has left for other branches.',
+  egg_c:['A game by','Aze Le Onze','Idea, game design and testing','Aze Le Onze','Code','Claude','Bubbles','Frutiger Aero','Cats in trees','1 in 2,000','And above all','You. Thanks for playing!'],
   para_parents:(a,b)=>`New parents: ${a} and ${b}.`, para_ok:'Back to the present', para_ill:()=>'Dying of a time paradox',
   tt_crim_past:'A criminal can only travel into the past.',
   log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} travels back to ${y} and murders ${nm(q)}${n ? `: ${n} descendant${n>1?'s':''} vanish${n>1?'':'es'} from the tree` : ''}.`,
@@ -5013,6 +5055,9 @@ TX.de = {
   para_title:'Zeitparadoxon', para_sub_new:()=>'Die Zeit reißt… und näht sich anders wieder zusammen.', para_sub_cut:()=>'Aus der eigenen Geschichte gelöscht…',
   para_res_new:(p,q,s)=>`${p.first} hat ${nm(q)} getötet, ${g(q,'den eigenen Vorfahren','die eigene Vorfahrin')}. Die Geschichte hat sich neu geschrieben: ${p.first} kehrt im selben Moment in eine ganz neue Linie zurück, mit neuen Eltern${s.length ? ` und ${s.length > 1 ? s.length + ' Geschwistern' : g(s[0],'einem Bruder','einer Schwester')}` : ' und ohne Geschwister'}.`,
   para_res_cut:(p,q)=>`${p.first} hat ${nm(q)} getötet, ${g(q,'den eigenen Vorfahren','die eigene Vorfahrin')}. ${p.first} kehrt im selben Moment zurück, doch nichts verbindet ${g(p,'ihn','sie')} mehr mit der Vergangenheit: keine Eltern, keine Vorstrafen, nur ein gepunkteter Faden zu ${q.first}. Das Paradoxon zehrt an ${g(p,'ihm','ihr')}: noch 8 bis 10 Jahre.`,
+  f_egg:'Einzigartiges Merkmal', egg_aze:'Le Onze', ach_secret:'Geheimer Erfolg', leap_age:n=>`„echtes“ Alter: ${n}`, cat_aria:'Die Katze streicheln',
+  log_cat_in:()=>'🐈 Eine Katze hat sich im Stammbaum niedergelassen. Angeblich lässt sie sich gern streicheln.', log_cat_out:()=>'🐈 Die Baumkatze ist zu anderen Ästen weitergezogen.',
+  egg_c:['Ein Spiel von','Aze Le Onze','Idee, Spieldesign und Tests','Aze Le Onze','Code','Claude','Blasen','Frutiger Aero','Katzen in Bäumen','1 zu 2.000','Und vor allem','Du. Danke fürs Spielen!'],
   para_parents:(a,b)=>`Neue Eltern: ${a} und ${b}.`, para_ok:'Zurück in die Gegenwart', para_ill:()=>'Stirbt an einem Zeitparadoxon',
   tt_crim_past:'Ein Verbrecher kann nur in die Vergangenheit reisen.',
   log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} reist ins Jahr ${y} zurück und ermordet ${nm(q)}${n ? `: ${n} Nachkommen verschwinden aus dem Stammbaum` : ''}.`,
@@ -5457,6 +5502,9 @@ TX.es = {
   para_title:'Paradoja temporal', para_sub_new:()=>'El tiempo se rasga… y se vuelve a coser de otra forma.', para_sub_cut:p=>`${gs(p,'Borrado','Borrada')} de su propia historia…`,
   para_res_new:(p,q,s)=>`${p.first} ha matado a ${nm(q)}, ${gs(q,'su propio antepasado','su propia antepasada')}. La historia se ha reescrito: ${p.first} vuelve al mismo instante en un linaje totalmente nuevo, con nuevos padres${s.length ? ` y ${s.length > 1 ? s.length + ' hermanos' : gs(s[0],'un hermano','una hermana')}` : ' y sin hermanos'}.`,
   para_res_cut:(p,q)=>`${p.first} ha matado a ${nm(q)}, ${gs(q,'su propio antepasado','su propia antepasada')}. Vuelve al mismo instante, pero ya nada ${gs(p,'lo','la')} une al pasado: ni padres, ni antecedentes, solo un hilo de puntos hasta ${q.first}. La paradoja ${gs(p,'lo','la')} consume: le quedan de 8 a 10 años.`,
+  f_egg:'Rasgo único', egg_aze:'Le Onze', ach_secret:'Logro secreto', leap_age:n=>`edad «real»: ${n}`, cat_aria:'Acariciar al gato',
+  log_cat_in:()=>'🐈 Un gato se ha instalado en el árbol genealógico. Dicen que le encantan las caricias.', log_cat_out:()=>'🐈 El gato del árbol se ha ido a otras ramas.',
+  egg_c:['Un juego de','Aze Le Onze','Idea, diseño y pruebas','Aze Le Onze','Código','Claude','Burbujas','Frutiger Aero','Gatos en los árboles','1 entre 2000','Y sobre todo','Tú. ¡Gracias por jugar!'],
   para_parents:(a,b)=>`Nuevos padres: ${a} y ${b}.`, para_ok:'Volver al presente', para_ill:()=>'Muriendo de una paradoja temporal',
   tt_crim_past:'Un criminal solo puede viajar al pasado.',
   log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} viaja a ${y} y asesina a ${nm(q)}${n ? `: ${n} descendiente${n>1?'s':''} ${n>1?'desaparecen':'desaparece'} del árbol` : ''}.`,
@@ -6213,6 +6261,7 @@ Object.assign(DEx.track, {vgsstud:'Videregående · Allgemeinbildung', vgsreal:'
 Object.assign(DEx.dz, {troll:['Trollangriff','einem Trollangriff'], kraken:['Krakenangriff','einem Krakenangriff']});
 Object.assign(DEx.dz, {paradoxe:['Zeitparadoxon','einem Zeitparadoxon']});   // 0.2.3b
 Object.assign(DEx.ach, {tt_kill:['Sanduhrhieb','Mit einem zeitreisenden Verbrecher jemanden in der Vergangenheit töten'], tt_paradox:['Zeitparadoxon','Den eigenen Vorfahren in der Vergangenheit töten und ein Zeitparadoxon auslösen']});
+Object.assign(DEx.ach, {leap:['Schaltkind','An einem 29. Februar geboren werden'], treecat:['Schnurr','Die Katze im Stammbaum streicheln'], logo11:['Elfmal','Elfmal hintereinander auf das Logo klicken']});
 Object.assign(DEx.warn, {'Guerre nordique de Sept Ans':'Dreikronenkrieg', 'Guerre de Kalmar':'Kalmarkrieg', 'Guerre de Hannibal':'Torstenssonkrieg', 'Guerre dano-suédoise':'Dänisch-Schwedischer Krieg',
   'Guerre de Gyldenløve':'Gyldenløve-Fehde', 'Grande guerre du Nord':'Großer Nordischer Krieg', 'Guerre des Airelles':'Preiselbeerkrieg', 'Guerre des chaloupes canonnières':'Kanonenbootkrieg',
   'Guerre suédo-norvégienne':'Schwedisch-Norwegischer Krieg', 'Occupation allemande de la Norvège':'Deutsche Besetzung Norwegens', "Guerre de l'Arctique":'Arktiskrieg'});
@@ -6223,6 +6272,7 @@ Object.assign(ESx.track, esStr("vgsstud:Videregående de estudios generales|vgsr
 Object.assign(ESx.dz, esPairs("troll:Ataque de un trol/un ataque de trol|kraken:Ataque de un kraken/un ataque de kraken"));
 Object.assign(ESx.dz, esPairs("paradoxe:Paradoja temporal/una paradoja temporal"));   // 0.2.3b
 Object.assign(ESx.ach, Object.fromEntries(Object.entries(esStr("tt_kill:Golpe de reloj de arena~Matar a alguien en el pasado con un criminal viajero del tiempo|tt_paradox:Paradoja temporal~Matar a tu propio antepasado en el pasado y provocar una paradoja temporal")).map(([k, v]) => [k, v.split('~')])));
+Object.assign(ESx.ach, {leap:['Bebé bisiesto','Nacer un 29 de febrero'], treecat:['Ronroneo','Acariciar al gato del árbol'], logo11:['Once veces','Hacer clic 11 veces seguidas en el logo']});
 Object.assign(ESx.warn, {'Guerre nordique de Sept Ans':'Guerra Nórdica de los Siete Años', 'Guerre de Kalmar':'Guerra de Kalmar', 'Guerre de Hannibal':'Guerra de Hannibal', 'Guerre dano-suédoise':'Guerra danosueca',
   'Guerre de Gyldenløve':'Guerra de Gyldenløve', 'Grande guerre du Nord':'Gran Guerra del Norte', 'Guerre des Airelles':'Guerra de los Arándanos', 'Guerre des chaloupes canonnières':'Guerra de las Cañoneras',
   'Guerre suédo-norvégienne':'Guerra sueco-noruega', 'Occupation allemande de la Norvège':'Ocupación alemana de Noruega', "Guerre de l'Arctique":'Guerra del Ártico'});
@@ -6375,12 +6425,16 @@ const ACHS = [
  ['tt_paradox','tt','platinum','Paradoxe temporel',"Tuer son propre ancêtre dans le passé et provoquer un paradoxe temporel",'Time paradox','Kill your own ancestor in the past and cause a time paradox'],
  ['tt_4','tt','platinum','Voyageur infatigable','Une même personne saute 4 fois dans le temps','Tireless traveller','The same person leaps through time 4 times'],
  ['miss3','kids','special','Coups du sort',"Subir 3 fausses couches d'affilée",'Strokes of bad luck','Suffer 3 miscarriages in a row'],
+ ['leap','other','special','Un anniversaire tous les 4 ans','Naître un 29 février','Leap baby','Be born on February 29'],
+ ['treecat','other','special','Ronron',"Caresser le chat de l'arbre",'Purr','Pet the cat in the tree'],
+ ['logo11','other','special','Onze fois','Cliquer 11 fois de suite sur le logo','Eleven times','Click the logo 11 times in a row'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
  ['vs_all','legend','legend','Maître du duel',"Battre l'IA dans toutes les difficultés de tous les modes Versus",'Duel master','Beat the AI at every difficulty in every Versus mode'],
  ['leg_all','legend','legend','Légende vivante','Débloquer tous les autres succès','Living legend','Unlock every other achievement'],
  ['leg_album','legend','legend','Album complet',"Compléter toutes les catégories de l'album",'Full album','Complete every category of the album']
 ];
 const ACHV = byId(ACHS);
+const SECRET_ACH = new Set(['logo11']);                  // 0.2.3c : cachés tant qu'ils ne sont pas débloqués
 const ACH_CYN = {bronze:75, silver:150, gold:300, platinum:500, special:400, legend:1000};   // 0.2.0a : chaque succès rapporte des Cyn
 const ACH_CATS = [['age','sun','Âge','Age'],['kids','heart','Enfants','Children'],['star','disco','Stars','Stars'],['conq','sparkle','Conquêtes','Conquests'],['crim','skull','Criminels','Criminals'],['kill','sword','Crimes','Crimes'],['time','hourglass','Le temps passe','Time flies'],['tt','clock','Voyage dans le temps','Time travel'],['other','trophy','Autres','Others'],['album','album','Album','Album'],['royal','castle','Royal','Royal'],['zomb','brain','Zombie','Zombie'],['vsn','robot','Versus Normal','Versus Normal'],['vsr','crown','Versus Royal','Versus Royal'],['vsz','brain','Versus Zombie','Versus Zombie'],['legend','crown','Légende','Legend']];
 // thème Or : débloqué dès qu'une catégorie entière de succès est complète
@@ -6442,8 +6496,8 @@ function openAchievements(){
     return `<button class="achchip ${got === all.length ? 'full' : ''}" data-act="achjump" data-v="${c[0]}">${icon(c[1])}<span>${esc(cn(c))}</span><em>${got}/${all.length}</em></button>`; }).join('');
   const cats = ACH_CATS.map(c => { const [all, got] = prog(c), full = got === all.length;
     return `<section class="achsec ${full ? 'full' : ''}" id="achsec-${c[0]}"><header><i class="achic">${icon(c[1])}</i><b>${esc(cn(c))}</b>${full ? `<span class="achdone">${t('ach_full')}</span>` : ''}<em>${got} / ${all.length}</em><span class="achbar"><i style="width:${(got / all.length * 100).toFixed(1)}%"></i></span></header>
-      <div class="achlist">${all.map(a => { const g2 = ACH[a[0]];
-        return `<div class="ach ${g2 ? 'got' : 'locked'} ${a[2] === 'legend' ? 'leg' : ''}">${medal(a[0])}<div class="achtx"><b>${esc(achTitle(a[0]))}</b><small>${esc(achDesc(a[0]))}</small><span class="achrw">+${ACH_CYN[a[2]] || 0} ${icon('dna')}</span>${g2 ? `<em>${esc(g2.y ? t('ach_got', g2.y, g2.f) : t('ach_done'))}</em>` : ''}</div><span class="achtag t-${a[2]}">${t('tier_' + a[2])}</span></div>`; }).join('')}</div></section>`; }).join('');
+      <div class="achlist">${all.map(a => { const g2 = ACH[a[0]], sec = !g2 && SECRET_ACH.has(a[0]);
+        return `<div class="ach ${g2 ? 'got' : 'locked'} ${a[2] === 'legend' ? 'leg' : ''}">${medal(a[0])}<div class="achtx"><b>${esc(sec ? '???' : achTitle(a[0]))}</b><small>${esc(sec ? t('ach_secret') : achDesc(a[0]))}</small><span class="achrw">+${ACH_CYN[a[2]] || 0} ${icon('dna')}</span>${g2 ? `<em>${esc(g2.y ? t('ach_got', g2.y, g2.f) : t('ach_done'))}</em>` : ''}</div><span class="achtag t-${a[2]}">${t('tier_' + a[2])}</span></div>`; }).join('')}</div></section>`; }).join('');
   openModal(`<div class="m-head achhead"><div class="eyebrow">${t('ach_count', n, ACHS.length)}</div><h2>${t('ach_title')}</h2>
     <div class="achprog"><span class="achbar big"><i style="width:${pct}%"></i></span><b>${pct} %</b></div><div class="achtiers">${tiers}</div></div>
     <nav class="achnav">${nav}</nav>${cats}`);
@@ -6579,6 +6633,8 @@ const sfx = (() => {
       note(140,0,1.3,{to:2200,glide:1.2,vol:.07,type:'triangle'}); note(147,.04,1.3,{to:2350,glide:1.2,vol:.035});
       [3136,2637,2349,1976,1568,1318].forEach((f,i) => note(f,1.05+i*.06,.55,{vol:.028,type:'triangle'})); bell(1568,1.45);
     },
+    meow(){ note(620,0,.4,{to:880,glide:.14,type:'triangle',vol:.05}); note(880,.14,.36,{to:520,type:'triangle',vol:.05}); },   // 0.2.3c
+    purr(){ for(let i = 0; i < 10; i++) note(46 + (i % 2) * 7, i * .09, .085, {type:'sawtooth', vol:.035}); note(700,.1,.3,{to:950,type:'triangle',vol:.03}); },
     paradox(){                                       // 0.2.3b : aspiration à l'envers, bégaiements, impact, éclats de verre
       note(2600,0,1.05,{to:70,glide:1,vol:.06,type:'sawtooth'}); note(1800,.05,1,{to:60,glide:.95,vol:.03,type:'square'});
       for(let i = 0; i < 9; i++) note(180 + Math.random()*1500, .2 + i*.09, .05, {vol:.035, type:'square'});
@@ -7177,6 +7233,7 @@ const familyName = f => f.maiden || f.last;           // la lignée garde le nom
 function checkBirthAch(c){                          // succès liés à une naissance
   const x = toDate(c.birth);
   if(x.getUTCMonth() === 11 && x.getUTCDate() === 25) unlock('xmas');
+  if(x.getUTCMonth() === 1 && x.getUTCDate() === 29) unlock('leap');   // 0.2.3c
   const par = c.parents.map(P);
   par.forEach(p => {
     if(ageAt(p, c.birth) >= 90) unlock('parent90');
@@ -7966,7 +8023,55 @@ function openParaDone(r){                               // de retour au présent
     ${mom && dad ? `<p class="ttmet">${orb(mom)}${orb(dad)}<span>${esc(t('para_parents', nm(mom), nm(dad)))}</span></p>` : ''}
     <div class="acts"><button class="gel wide" data-act="paraok"><span>${t('para_ok')}</span></button></div>`, {locked:true});
 }
+const catPick = ex => { const c = Object.values(S.people).filter(x => x.blood && (x.parents || x.paraLink) && x.id !== ex); return c.length ? pick(c).id : null; };
+function catArrive(day){                                 // 0.2.3c : 1 chance sur 2000 par an
+  const k = catPick(); if(k == null) return;
+  S.cat = {k, at: day, until: day + rnd(3, 8) * 365, next: day + rnd(45, 180)};
+  log('world', 'cat_in', [], day, true); sfx.meow(); dirty = true;
+}
+function catMove(day){ const k = catPick(S.cat.k); S.cat.next = day + rnd(45, 180); if(k != null){ S.cat.k = k; dirty = true; } }
+function catDay(day){
+  if(S.cat){
+    if(day >= S.cat.until){ S.cat = null; log('world', 'cat_out', [], day, false); dirty = true; return; }
+    if(day >= S.cat.next || !P(S.cat.k)) catMove(day);
+  } else if(Math.random() < 1 / (2000 * 365.25)) catArrive(day);
+}
+function glitchName(n){                                  // 0.2.3c : Rypoint, un prénom qui bugue partout où il s'affiche
+  const ov = '\u0334\u0335\u0336\u0337\u0338', up = '\u030d\u0352\u0346\u0310\u0311', dn = '\u0316\u0329\u032b\u0323\u0330';
+  return [...n].map(ch => ch + ov[rnd(0, 4)] + (Math.random() < .5 ? up[rnd(0, 4)] : '') + (Math.random() < .45 ? dn[rnd(0, 4)] : '')).join('');
+}
+const bareName = n => String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+[IVXLC]+$/, '').trim().toLowerCase();
+const eggTile = p => p.egg === 'aze' ? `<div class="span2 eggf"><dt>${t('f_egg')}</dt><dd><b class="eleven">11</b>${esc(t('egg_aze'))}</dd></div>` : '';
+function leapAge(p){                                     // 0.2.3c : né un 29 février, un vrai anniversaire tous les 4 ans
+  const b = toDate(p.birth); if(b.getUTCMonth() !== 1 || b.getUTCDate() !== 29) return null;
+  const ref = p.death != null ? p.death : p.zombie ? p.zombie.ref : p.lost ? p.lost.at : S.t, ry = yearOf(ref); let n = 0;
+  for(let y = b.getUTCFullYear() + 1; y <= ry; y++) if(y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0) && fromYMD(y, 1, 29) <= ref) n++;
+  return n;
+}
+const leapTxt = p => { const n = leapAge(p); return n == null ? '' : `<small class="leapage">🎂 ${esc(t('leap_age', n))}</small>`; };
+let logoN = 0, logoT = 0;
+document.addEventListener('click', e => {                // 0.2.3c : le logo cliqué 11 fois de suite
+  const l = e.target.closest('.logo'); if(!l || l.closest('#eggFx')) return;
+  const now = Date.now(); logoN = now - logoT < 1600 ? logoN + 1 : 1; logoT = now;
+  if(logoN >= 11){ logoN = 0; eggCredits(); }
+  else if(logoN >= 6){ l.classList.remove('lwob'); void l.offsetWidth; l.classList.add('lwob'); }
+});
+function eggCredits(){
+  if($('#eggFx')) return;
+  const c = t('egg_c'), fx = document.createElement('div'); fx.id = 'eggFx';
+  let bub = '', roll = '<div class="logo"><span>Cyn</span>genetic</div>';
+  for(let i = 0; i < 48; i++){ const z = rnd(18, 150); bub += `<i class="eb" style="left:${rnd(-6, 100)}%;width:${z}px;height:${z}px;--d:${(4.5 + Math.random() * 6).toFixed(2)}s;--w:${(Math.random() * 3).toFixed(2)}s;--x:${rnd(-90, 90)}px"></i>`; }
+  for(let i = 0; i < c.length; i += 2) roll += `<h3>${esc(c[i])}</h3><p>${esc(c[i + 1])}</p>`;
+  fx.innerHTML = `${bub}<div class="roll">${roll}<div class="eggend">⓫</div></div>`;
+  document.body.appendChild(fx);
+  sfx.init(); sfx.fame(); setTimeout(() => sfx.sparkle(), 900);
+  unlock('logo11');
+  const t0 = Date.now(), end = () => { if(!fx.isConnected || fx.classList.contains('out')) return; fx.classList.add('out'); setTimeout(() => fx.remove(), 950); };
+  fx.addEventListener('click', () => { if(Date.now() - t0 > 2000) end(); });
+  setTimeout(end, 18500);
+}
 function processDay(day){
+  if(!VSH && !S.vs) catDay(day);                         // 0.2.3c : le chat de l'arbre
   if(!VSH && !UNL.cyber && !S.ttPastUsed && day % 365 === 0 && yearOf(day) >= 2300) unlockSkin('cyber');   // 0.2.0b : thème Cyberpunk
   if(S.ttLost && S.ttLost.length) for(const id of S.ttLost.slice()){ const q = P(id); if(q && q.lost && day >= q.lost.back) ttBack(q, day); }
   if(S.zombie && !S.zombie.began && day >= S.zombie.firstAt){                // 60 ans après le départ : le premier zombie
@@ -8446,7 +8551,7 @@ function avatar(p){
   const hair = p.sex==='F' ? '<path d="M11 21c-1.6-9 2.6-14.5 9-14.5s10.6 5.5 9 14.5l1.4 8H9.6z" fill="rgba(0,0,0,.2)"/>' : '<path d="M12.6 14.2c.6-5 3.6-7.4 7.4-7.4s6.8 2.4 7.4 7.4c-2.2-2-4.6-2.8-7.4-2.8s-5.2.8-7.4 2.8z" fill="rgba(0,0,0,.18)"/>';
   return `<svg viewBox="0 0 40 40" aria-hidden="true">${hair}<circle cx="20" cy="16.5" r="7.2" fill="rgba(255,255,255,.95)"/><path d="M5 42c0-9 6.8-14.5 15-14.5S35 33 35 42z" fill="rgba(255,255,255,.95)"/>${p.glasses ? GLASSES : ''}</svg>`;
 }
-const orb = (p, cls='') => `<span class="orb ${p.sex==='F'?'f':''} ${p.star?'gold':''} ${cls}">${avatar(p)}</span>`;
+const orb = (p, cls='') => `<span class="orb ${p.sex==='F'?'f':''} ${p.star?'gold':''} ${p.egg==='ryp'?'ryp':''} ${cls}">${avatar(p)}</span>`;
 function cityLine(p){
   if(p.death != null) return p.deathCity && p.deathCity !== p.birthCity ? `${cityName(p.birthCity)} → ${cityName(p.deathCity)}` : cityName(p.birthCity);
   return cityName(p.city);
@@ -8464,6 +8569,7 @@ function nodeHTML(p, x, y){
   if(TPICK){ cls.push(TPICK.ids.has(p.id) ? 'tpk' : 'tpx'); if(TPICK.armed === p.id) cls.push('tparm'); }   // 0.2.2b : choix dans l'arbre
   if(!p.blood) cls.push('partner');
   if(p.paraLink) cls.push('paranode');
+  if(p.egg === 'ryp') cls.push('ryp');                  // 0.2.3c
   if(p.star){ cls.push('star'); if(p.star.famous){ cls.push('famous'); if(p.death==null && S.t - p.star.at < 200) cls.push('fresh'); } }
   if(p.ill && p.death==null) cls.push('ill');
   else if(p.death==null && mildOn(p).length) cls.push('mild');
@@ -8534,18 +8640,18 @@ function buildTree(){
       unionsD.push({x1, x2, y0:y+NH, by, st, mx:(x1+x2)/2});
       groups[i].forEach(k => {
         place(k.id, kx, depth+1);
-        links.push({mx:(x1+x2)/2, y1:by, bus: y + NH + GY/2 + 8 + i*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
+        links.push({mx:(x1+x2)/2, y1:by, bus: y + NH + GY/2 + 8 + i*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y, kid: k.id});
         kx += memo[k.id] + GX;
       });
     });
     solo.forEach(k => {                                 // relié directement à son parent
       place(k.id, kx, depth+1);
-      links.push({mx: sx + NWo(pid)/2, y1: y + NH, bus: y + NH + GY/2 + 8 + us.length*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
+      links.push({mx: sx + NWo(pid)/2, y1: y + NH, bus: y + NH + GY/2 + 8 + us.length*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y, kid: k.id});
       kx += memo[k.id] + GX;
     });
     para.forEach(k => {                                 // très loin en bas, autant de rangs vides que de générations effacées
       place(k.id, kx, depth + (k.paraLink.g || 1));
-      links.push({para:true, mx: sx + NWo(pid)/2, y1: y + NH, bus: y + NH + GY/2 + 8 + (us.length + 1)*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
+      links.push({para:true, mx: sx + NWo(pid)/2, y1: y + NH, bus: y + NH + GY/2 + 8 + (us.length + 1)*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y, kid: k.id});
       kx += memo[k.id] + GX;
     });
   }
@@ -8560,7 +8666,15 @@ function buildTree(){
   }
   let nodes = '';
   for(const id in pos) nodes += nodeHTML(P(id), pos[id].x, pos[id].y);
-  return {html: `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}`, W, H, pos};
+  return {html: `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${svg}</svg>${nodes}${catHTML(links)}`, W, H, pos};
+}
+const CAT_SVG = '<svg viewBox="0 0 40 38" aria-hidden="true"><path class="ctail" d="M28 34c6 .6 9.6-2.6 8.6-8.2-.4-2.2-2.2-2.8-3-1.4" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="5.4" stroke-linecap="round"/><path class="ctail" d="M28 34c6 .6 9.6-2.6 8.6-8.2-.4-2.2-2.2-2.8-3-1.4" fill="none" stroke="#3b3346" stroke-width="3.2" stroke-linecap="round"/><g fill="#3b3346" stroke="#fff" stroke-opacity=".75" stroke-width="1.1" stroke-linejoin="round"><path d="M10.5 37.5c-1-8.4 2.4-14.6 8-15.4h3c5.6.8 9 7 8 15.4z"/><path d="M12 18.5 11 6l6 4.8h6L29 6l-1 12.5c0 4.8-3.6 7.9-8 7.9s-8-3.1-8-7.9z"/></g><g class="ceyes"><ellipse cx="16.6" cy="16.4" rx="1.7" ry="2.1" fill="#c6ff4a"/><ellipse cx="23.4" cy="16.4" rx="1.7" ry="2.1" fill="#c6ff4a"/></g><path d="M19 20h2l-1 1.3z" fill="#ff9ccf"/></svg>';
+function catHTML(links){                                 // 0.2.3c : le chat de l'arbre, assis sur une branche
+  if(!S.cat || VSH) return '';
+  const l = links.find(x => x.kid === S.cat.k); if(!l) return '';
+  const dir = l.mx > l.kx ? 1 : -1, span = Math.abs(l.mx - l.kx);
+  const x = span > 60 ? l.kx + dir * Math.min(70, span * .45) : l.kx;
+  return `<button class="treecat${dir < 0 ? ' flip' : ''}" data-act="petcat" style="left:${Math.round(x - 18)}px;top:${l.bus - 33}px" aria-label="${esc(t('cat_aria'))}" title="${esc(t('cat_aria'))}">${CAT_SVG}</button>`;
 }
 function renderTree(){
   const {html, W, H, pos} = buildTree(), cv = $('#treeCanvas');
@@ -8651,7 +8765,7 @@ function renderSide(){
       <div class="eyebrow">${t('you_play')}</div>
       <button class="me-head" data-act="fiche" data-id="${me.id}">${orb(me,'xl')}<span><h3>${esc(nm(me))}</h3><p>${esc(t('born_in', me, fmt(bornD(me)), cityName(me.birthCity)))}</p></span></button>
       <dl class="facts">
-        <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
+        <div><dt>${t('f_age')}</dt><dd>${tA(a)}${leapTxt(me)}</dd></div>
         <div><dt>${t('f_gen')}</dt><dd>${genOf(me)}</dd></div>
         ${riskTile(me)}${mildTile(me)}
         <div><dt>${t('f_kids')}</dt><dd>${kids}</dd></div>
@@ -10199,6 +10313,9 @@ function openNaming(id){
 function giveName(n){
   const c = namingId != null && P(namingId); if(!c) return;
   c.first = n.slice(0,20);
+  const bn = bareName(n);                               // 0.2.3c : easter eggs
+  if(bn === 'aze') c.egg = 'aze';
+  else if(bn === 'rypoint'){ c.egg = 'ryp'; c.first = glitchName('Rypoint'); }
   regnalize(c);
   S.nameQueue = S.nameQueue.filter(x => x !== c.id);
   log('birth', c.adopted ? 'adopt' : 'birth', [c.id], c.birth);
@@ -10265,12 +10382,12 @@ function openFiche(id){
   const fame = p.star ? `<div class="goldf span2"><dt>${t('f_fame')}</dt><dd>★ ${p.star.famous ? t('fame_now') : t('fame_future')}</dd></div>`
     : p.starKid ? `<div class="skf span2"><dt>${t('f_starkid')}</dt><dd>★ ${t('starkid_val')}</dd></div>` : '';
   const crime = p.crim ? `<div class="crf span2"><dt>${t('f_crime')}</dt><dd>☠ ${esc(!p.crim.declared ? t('crime_future', p) : p.crim.fate === 'prison' ? t('crime_fate_prison', p) : t('crime_now', p))}</dd></div>` : '';
-  openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2>${esc(nm(p))}<button class="pen" data-act="rename" data-id="${p.id}" aria-label="${esc(t('rename', p.first))}" title="${esc(t('rename', p.first))}">${icon('pencil')}</button></h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
+  openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2${p.egg === 'ryp' ? ' class="ryptxt"' : ''}>${esc(nm(p))}<button class="pen" data-act="rename" data-id="${p.id}" aria-label="${esc(t('rename', p.first))}" title="${esc(t('rename', p.first))}">${icon('pencil')}</button></h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
     <dl class="facts">
-      <div><dt>${t('f_age')}</dt><dd>${tA(a)}</dd></div>
+      <div><dt>${t('f_age')}</dt><dd>${tA(a)}${leapTxt(p)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
       <div class="span2 ${p.star?'goldf':''}"><dt>${t('f_activity')}</dt><dd>${esc(activity(p, true))}</dd></div>
-      ${milTile(p)}${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${atoutTile3(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
+      ${eggTile(p)}${milTile(p)}${legTile(p)}${dazeTile(p)}${condTile(p)}${intTile(p)}${atoutTile(p)}${atoutTile2(p)}${atoutTile3(p)}${immTile(p)}${reignTile(p)}${S.zombie && !p.zombie && p.death == null && zProtected(p) ? `<div class="span2 imf"><dt>${t('f_vaccin')}</dt><dd>${icon('pill')}<span>${esc(zProtTxt(p))}</span></dd></div>` : ''}
       ${fame}${crime}${deadCity}
       ${par ? `<div class="span2"><dt>${p.adopted ? t('f_adopted', p) : t('f_parents')}</dt><dd>${par.filter(Boolean).map(x => esc(nm(x))).join(' &amp; ')}</dd></div>` : ''}
     </dl>
@@ -11211,6 +11328,7 @@ function openDev(){
     ${g ? `<div class="devsec"><b>Partie · ${esc(nm(me))} · ${yearOf(S.t)}</b>
       <div class="devrow">${btn('skip1', '+1 an')}${btn('skip10', '+10 ans')}${btn('skip50', '+50 ans')}</div>
       <div class="devrow">${btn('tt', 'Devenir voyageur du temps')}${btn('rift', 'Ouvrir une faille')}${btn('cool', 'Recharger la montre')}</div>
+      <div class="devrow">${btn('cat', 'Faire venir le chat')}</div>
       <div class="devrow">${btn('star', 'Devenir une star', 'gold')}${btn('crim', 'Devenir criminel', 'pink')}${btn('heal', 'Soigner la famille', 'lime')}</div>
       <div class="devrow">${btn('quads', 'Quadruplés au prochain bébé')}${btn('kill', 'Mourir (tester l\u2019héritier)', 'pink')}</div>
       <div class="devrow"><select class="inp" id="devLeg" aria-label="Légendaire">${legOpts}</select>${btn('leg', 'Donner', 'gold')}</div>
@@ -11253,6 +11371,7 @@ function devDo(v){
     case 'skip10': devSkip(10); return `Avancé jusqu'en ${yearOf(S.t)}`;
     case 'skip50': devSkip(50); return `Avancé jusqu'en ${yearOf(S.t)}`;
     case 'tt': if(!isTT(me)) me.conds = (me.conds || []).concat('voyageur'); me.ttCool = 0; return `${me.first} voyage dans le temps (mode normal seulement)`;
+    case 'cat': if(S.cat) catMove(day); else catArrive(day); render(); return S.cat ? "Le chat est dans l'arbre" : 'Pas de branche pour le chat';
     case 'cool': me.ttCool = 0; return 'Montre rechargée';
     case 'rift': { if(!isTT(me)) me.conds = (me.conds || []).concat('voyageur'); const y = Math.min(8 + Math.floor(Math.random() * 40), ttMax(day));
       if(y < 5 || !ttCan(me, day)) return 'Faille impossible (mode, âge, maladie, couple enceint…)'; S.ttAsk = {id: me.id, y}; closeModal(true); return null; }
@@ -11451,6 +11570,12 @@ const ACT = {
     if(r.para){ closeModal(true); paraFx(r, () => { ttPastEnd(); openParaDone(r); }); }
     else { sfx.crime(); burst(['#ff2a00','#1a0003','#b3001b','#ffd36b'], 40); openPastDone(); }
   },
+  petcat(d, b){                                      // 0.2.3c : caresser le chat de l'arbre
+    if(!S || !S.cat) return;
+    b.classList.remove('petting'); void b.offsetWidth; b.classList.add('petting');
+    for(let i = 0; i < 4; i++){ const h = document.createElement('i'); h.className = 'cheart'; h.textContent = '♥'; h.style.setProperty('--dx', rnd(-26, 26) + 'px'); h.style.animationDelay = (i * .18) + 's'; b.appendChild(h); setTimeout(() => h.remove(), 1700 + i * 180); }
+    sfx.purr(); S.cat.pets = (S.cat.pets || 0) + 1; unlock('treecat'); save();
+  },
   paraok(){ closeModal(true); dirty = true; render(); centerOn(S.activeId, true); },
   pastback(){ const T = S.ttPast; if(!T) return; closeModal(true); pastFx(T.y, yearOf(T.from), 1700, true, ttPastEnd); },
   ttland(){ closeModal(true); },
@@ -11574,7 +11699,8 @@ const ACT = {
       e.preventDefault(); const v = inp.value.trim().replace(/\s+/g, ' ');
       if(!v){ inp.focus(); return; }
       if(p.parents && cap(v).toLowerCase() !== (p.base || p.first || '').toLowerCase() && sibBases(p).has(cap(v).toLowerCase())){ inp.setCustomValidity(t('name_sib_taken', cap(v))); inp.reportValidity(); inp.addEventListener('input', () => inp.setCustomValidity(''), {once:true}); sfx.refuse(); return; }
-      p.first = cap(v).slice(0, 20); sfx.sparkle(); dirty = true; save(); render(); openFiche(p.id);
+      const bv = bareName(v); if(!(p.egg === 'ryp' && bv === 'rypoint')){ if(p.egg && bv !== {aze:'aze', ryp:'rypoint'}[p.egg]) delete p.egg; p.first = cap(v).slice(0, 20); }   // 0.2.3c
+      sfx.sparkle(); dirty = true; save(); render(); openFiche(p.id);
     });
   },
   relocate(){

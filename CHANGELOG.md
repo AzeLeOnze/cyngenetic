@@ -2,6 +2,11 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.3c — 17 novembre 2026
+
+- Des secrets se cachent maintenant dans Cyngenetic… certains très rares. À toi de les trouver ! 🥚
+- 3 nouveaux succès, dont un secret.
+
 ## v0.2.3b — 17 novembre 2026
 
 - Les criminels voyageurs du temps peuvent maintenant tuer quelqu'un de la famille pendant un voyage dans le passé : toute la descendance de la victime née après ce jour-là n'a jamais existé et disparaît de l'arbre. Un criminel ne voyage que dans le passé.
