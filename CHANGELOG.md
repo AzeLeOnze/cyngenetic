@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6a — 17 novembre 2026
+
+- Nouveau : le mode créatif ! Tout y est personnalisable. Le temps est arrêté au départ et la date du jeu se choisit (bouton « Date » sous l'arbre). Dans la fiche de chacun, crée-lui un père, une mère, un frère, une sœur, un fils, une fille ou un(e) conjoint(e), avec sa date de naissance.
+- Mode créatif : modifie n'importe qui : prénom, nom, sexe, dates de naissance et de décès (avec une cause en texte libre si tu veux), villes, métier, études, armée, particularités, centre d'intérêt, addictions, atout, star, criminel, et sa vie de couple (en couple, mariés, séparés, divorcés).
+- Mode créatif : mets tes propres images dans les bulles (elles sont fortement réduites pour y tenir), et une race personnalisée affichée sur la bulle (renard, loup, dragon…).
+- Mode créatif : un curseur sous l'arbre l'anime dans le temps. Vers la gauche, tout le monde rajeunit et disparaît avant sa naissance ; vers la droite, tout le monde vieillit. Le bouton ▶ rejoue toute l'histoire de la famille.
+- Le mode créatif ne rapporte ni Cyn ni succès, et ne débloque ni thème ni album.
+
 ## v0.2.5a — 17 novembre 2026
 
 - L'en-tête de l'arbre affiche l'espérance de vie de la famille : l'âge moyen au décès de tous ses membres disparus.
