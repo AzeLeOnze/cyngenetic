@@ -1445,7 +1445,7 @@ body.vsmode .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px}
   .toasts{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 24px))}
   .toasts .toast:nth-child(n+2){display:none}
   .tree-head .zoomer,.tree-head [data-act="center"]:not(.ctrico){display:none!important}
-  .tree-head .ctrico:not([hidden]){display:inline-grid!important;place-items:center;margin-left:auto;width:42px;min-width:42px;height:42px;padding:0;border-radius:50%;flex:none}
+  .tree-head .ctrico:not([hidden]){display:inline-grid!important;place-items:center;margin-left:auto!important;width:42px;min-width:42px;height:42px;padding:0;border-radius:50%;flex:none}
   .tree-head .ctrico svg{width:22px;height:22px;fill:currentColor}
   .pills button{min-height:38px}
   .gel{min-height:42px}
@@ -1972,17 +1972,17 @@ body.no-deco .arcfx *{animation:none}
 .bainfx{position:absolute;inset:0;display:none;overflow:hidden;background:#05020e}
 :root[data-skin="bain"] .bainfx{display:block}
 :root[data-skin="bain"] :is(.sky-sun,.flare,.bubble,.swoosh,.hills){display:none}
-.bainfx .bneb{position:absolute;inset:-20%;background:radial-gradient(ellipse at 22% 30%,rgba(255,79,224,.34),transparent 55%),radial-gradient(ellipse at 78% 62%,rgba(58,244,255,.26),transparent 55%),
-  radial-gradient(ellipse at 55% 12%,rgba(255,232,74,.13),transparent 50%),radial-gradient(ellipse at 38% 86%,rgba(120,70,255,.3),transparent 60%);animation:bneb 40s ease-in-out infinite alternate}
+.bainfx .bneb{position:absolute;inset:-20%;background:radial-gradient(ellipse at 22% 30%,rgba(255,58,216,.42),transparent 50%),radial-gradient(ellipse at 78% 62%,rgba(30,200,200,.34),transparent 52%),
+  radial-gradient(ellipse at 52% 48%,rgba(170,40,150,.32),transparent 45%),radial-gradient(ellipse at 62% 14%,rgba(40,170,150,.3),transparent 48%),radial-gradient(ellipse at 30% 82%,rgba(20,150,170,.3),transparent 55%),
+  radial-gradient(ellipse at 88% 18%,rgba(255,232,74,.08),transparent 40%);animation:bneb 40s ease-in-out infinite alternate}
 @keyframes bneb{to{transform:rotate(8deg) scale(1.12)}}
 .bainfx .bdust{position:absolute;inset:0;animation:bdust 5s ease-in-out infinite alternate;
   background-image:radial-gradient(1.4px 1.4px at 20px 30px,#fff 50%,transparent),radial-gradient(1.2px 1.2px at 140px 90px,#3af4ff 50%,transparent),radial-gradient(1.6px 1.6px at 80px 160px,#ff4fe0 50%,transparent),
     radial-gradient(1.2px 1.2px at 190px 200px,#ffe84a 50%,transparent),radial-gradient(1px 1px at 60px 220px,#fff 50%,transparent),radial-gradient(1.5px 1.5px at 230px 60px,#fff 50%,transparent);
   background-size:250px 250px,310px 310px,270px 270px,330px 330px,210px 210px,290px 290px}
 @keyframes bdust{to{opacity:.45}}
-.bainfx .bv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.8s ease}
-.bainfx .bv.on{opacity:1}
-.bainfx .bveil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,rgba(5,2,14,.42),rgba(5,2,14,.16) 68%,rgba(5,2,14,.4));transition:opacity 1.5s}
+.bainfx .bcv{position:absolute;inset:0;width:100%;height:100%}
+.bainfx .bveil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,rgba(5,2,14,.3),rgba(5,2,14,.08) 68%,rgba(5,2,14,.28));transition:opacity 1.5s}
 .bainfx.game .bveil{background:radial-gradient(ellipse at 50% 50%,rgba(5,2,14,.28),rgba(5,2,14,.06) 65%,rgba(5,2,14,.3))}
 .bainfx .bstars i{position:absolute;width:var(--s);height:var(--s);color:var(--c);opacity:0;filter:drop-shadow(0 0 5px var(--c)) drop-shadow(0 0 12px var(--c));animation:btwink var(--d) ease-in-out var(--dl) infinite}
 .bainfx .bstars svg{display:block;width:100%;height:100%;fill:currentColor}
@@ -2256,7 +2256,7 @@ body.no-deco .bainfx :is(.bstars,.bshoot){display:none}
   <div class="vwfx" id="vwfx" aria-hidden="true"><i class="vsun"></i><i class="vfloor"></i><b class="vtxt">ＡＥＳＴＨＥＴＩＣ</b><i class="col l"></i><i class="col r"></i><b class="vjp">ヴェイパーウェイヴ</b><div class="vwins"></div><div class="vshapes"></div></div>
   <div class="arcfx" id="arcfx" aria-hidden="true"><i class="carpet"></i><i class="glow"></i><b class="hisc">HI-SCORE<span>0999990</span></b><b class="neon">ARCADE<span>90</span></b><b class="coin">INSERT COIN</b></div>
   <div class="coralfx" id="coralfx" aria-hidden="true"><i class="rays"></i><div class="glow"></div><div class="jellies"></div><svg class="reef" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice"></svg><div class="cbub"></div></div>
-  <div class="bainfx" id="bainfx" aria-hidden="true"><i class="bneb"></i><i class="bdust"></i><video class="bv bv-a" muted playsinline loop preload="none" disablepictureinpicture></video><video class="bv bv-b" muted playsinline loop preload="none" disablepictureinpicture></video><i class="bveil"></i><div class="bstars"></div><div class="bshoot"></div></div>
+  <div class="bainfx" id="bainfx" aria-hidden="true"><i class="bneb"></i><i class="bdust"></i><canvas class="bcv"></canvas><i class="bveil"></i><div class="bstars"></div><div class="bshoot"></div></div>
   <div class="cyberfx" id="cyberfx" aria-hidden="true"><i class="glow"></i><div class="city b"></div><div class="city f"></div><i class="grid"></i><i class="rain"></i></div>
   <div class="galfx" aria-hidden="true"><i class="neb n1"></i><i class="neb n2"></i><i class="neb n3"></i><i class="spiral"></i><i class="spiral s2"></i></div>
   <div class="zcracks deco" id="zSkyCracks"></div>
@@ -11771,33 +11771,90 @@ document.addEventListener('keydown', e => {
 /* ================= 0.2.3d : thème Bain d'étoile ================= */
 (() => {
   const box = $('#bainfx'); if(!box) return;
-  const va = box.querySelector('.bv-a'), vb = box.querySelector('.bv-b');      // a : pluie d'étoiles (menus) ; b : tunnel d'étoiles (en partie)
-  const SRC = {a:'media/bain-etoiles.mp4', b:'media/bain-tunnel.mp4'}, asked = {};
   const STAR4 = '<svg viewBox="0 0 40 40"><path d="M20 0C21.4 13.6 26.4 18.6 40 20 26.4 21.4 21.4 26.4 20 40 18.6 26.4 13.6 21.4 0 20 13.6 18.6 18.6 13.6 20 0Z"/></svg>';
-  async function media(src){                          // gardée dans le cache : le thème marche aussi hors ligne
-    try{ if(window.caches){ const c = await caches.open('cyngenetic-media'); let r = await c.match(src);
-      if(!r){ r = await fetch(src); if(!r.ok) throw 0; try{ await c.put(src, r.clone()); }catch(e){} }
-      return URL.createObjectURL(await r.blob()); } }catch(e){}
-    return src;
+  try{ if(window.caches) caches.delete('cyngenetic-media'); }catch(e){}   // les anciennes vidéos (0.2.3d) ne servent plus
+  // Le fond est dessiné à la main dans un canvas : une pluie d'étoiles à quatre branches (menus)
+  // et un voyage à travers les étoiles (en partie), en magenta, cyan, jaune et blanc, en lumière additive.
+  const cv = box.querySelector('.bcv'), cx = cv.getContext('2d');
+  const COLS = ['#ff3ad8','#2ff0ff','#ffe83a','#ffffff','#ff7af0','#5ff8ff','#fff06a'];
+  const rgba = (h, a) => `rgba(${parseInt(h.slice(1, 3), 16)},${parseInt(h.slice(3, 5), 16)},${parseInt(h.slice(5, 7), 16)},${a})`;
+  const SPR = COLS.map(col => {                        // une étoile scintillante : cœur blanc, halo coloré, deux longs rayons en croix
+    const z = 96, m = z / 2, c = document.createElement('canvas'); c.width = c.height = z; const x = c.getContext('2d');
+    const g = x.createRadialGradient(m, m, 0, m, m, m * .46);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(.1, rgba(col, .95)); g.addColorStop(.35, rgba(col, .32)); g.addColorStop(1, rgba(col, 0));
+    x.fillStyle = g; x.fillRect(0, 0, z, z); x.globalCompositeOperation = 'lighter';
+    for(const rot of [0, Math.PI / 2]) for(const [w, al, core] of [[5, .45, false], [1.8, 1, true]]){
+      x.save(); x.translate(m, m); x.rotate(rot);
+      const lg = x.createLinearGradient(-m, 0, m, 0); lg.addColorStop(0, rgba(col, 0)); lg.addColorStop(.5, core ? 'rgba(255,255,255,1)' : rgba(col, al)); lg.addColorStop(1, rgba(col, 0));
+      x.fillStyle = lg; x.beginPath(); x.moveTo(-m, 0); x.lineTo(0, -w); x.lineTo(m, 0); x.lineTo(0, w); x.closePath(); x.fill(); x.restore();
+    }
+    return c;
+  });
+  let W = 0, H = 0, small = false, field = [], warp = [], dots = [], mixW = 0, last = 0, raf = 0;
+  const pc = () => { const r = Math.random(); return r < .3 ? 0 : r < .58 ? 1 : r < .82 ? 2 : Math.floor(Math.random() * COLS.length); };   // surtout magenta, cyan et jaune
+  const newW = any => ({x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: any ? .06 + Math.random() * .94 : 1, c: pc(), ph: Math.random() * 6.3, big: Math.random() < .08});
+  function size(){
+    small = innerWidth < 900; const dpr = Math.min(small ? 1 : 1.5, devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const A = W * H;                                    // aussi dense que la vidéo : un ciel rempli d'étoiles
+    field = Array.from({length: Math.min(small ? 380 : 900, Math.round(A / 1600))}, () => { const r = Math.random();
+      return {x: Math.random(), y: Math.random(), s: r < .58 ? rnd(5, 11) : r < .92 ? rnd(12, 26) : rnd(28, 56), c: pc(), ph: Math.random() * 6.3, sp: .5 + Math.random() * 2.4,
+        vx: (Math.random() - .5) * .006, vy: (Math.random() - .5) * .006 - .0025}; });
+    warp = Array.from({length: Math.min(small ? 450 : 1000, Math.round(A / 1300))}, () => newW(true));
+    dots = Array.from({length: Math.min(small ? 380 : 950, Math.round(A / 1300))}, () => ({x: Math.random(), y: Math.random(), a: .2 + Math.random() * .6, c: pc(), ph: Math.random() * 6.3}));
   }
-  function load(v, k){
-    if(asked[k]) return; asked[k] = true;
-    v.addEventListener('loadeddata', () => { v.dataset.ok = '1'; sync(); });
-    media(SRC[k]).then(u => { v.src = u; v.load(); });
+  function drawField(t, a, dt){                        // la pluie d'étoiles qui dérive doucement et scintille
+    for(const d of dots){ cx.globalAlpha = a * d.a * (.55 + .45 * Math.sin(t * 1.4 + d.ph)); cx.fillStyle = COLS[d.c]; cx.fillRect(d.x * W, d.y * H, 1.7, 1.7); }
+    for(const p of field){
+      p.x = (p.x + p.vx * dt + 1) % 1; p.y = (p.y + p.vy * dt + 1) % 1;
+      const k = .5 + .5 * Math.sin(t * p.sp + p.ph), z = p.s * (.4 + .8 * k);
+      cx.globalAlpha = a * (.3 + .7 * k); cx.drawImage(SPR[p.c], p.x * W - z, p.y * H - z, z * 2, z * 2);
+    }
+  }
+  function drawWarp(t, a, dt){                         // le voyage : les étoiles naissent au centre et filent vers nous
+    const mx = W / 2, my = H / 2, F = Math.max(W, H) * .36;
+    cx.lineCap = 'round';
+    for(let i = 0; i < warp.length; i++){
+      let p = warp[i]; const z0 = p.z; p.z -= dt * .1;
+      const X = mx + p.x / p.z * F, Y = my + p.y / p.z * F;
+      if(p.z <= .03 || X < -80 || X > W + 80 || Y < -80 || Y > H + 80){ warp[i] = newW(false); continue; }
+      const zb = Math.min(1, p.z + .022), X0 = mx + p.x / zb * F, Y0 = my + p.y / zb * F;   // une traînée courte, comme un flou de vitesse
+      const near = 1 - p.z, z = (p.big ? 6 : 3) + near * near * (p.big ? 30 : 12), fade = Math.min(1, near * 1.8);
+      cx.globalAlpha = a * fade * .35; cx.strokeStyle = COLS[p.c]; cx.lineWidth = Math.max(1, z * .2);
+      cx.beginPath(); cx.moveTo(X0, Y0); cx.lineTo(X, Y); cx.stroke();
+      cx.globalAlpha = a * fade * (.72 + .28 * Math.sin(t * 3 + p.ph)); cx.drawImage(SPR[p.c], X - z, Y - z, z * 2, z * 2);
+    }
+  }
+  function drawAll(t, dt, mw){
+    if(mw != null) mixW = mw;                           // pour fixer l'un des deux ciels (tests, animations coupées)
+    if(!W) size();
+    cx.globalCompositeOperation = 'source-over'; cx.globalAlpha = 1; cx.clearRect(0, 0, W, H);
+    cx.globalCompositeOperation = 'lighter';
+    if(mixW < .99) drawField(t, 1 - mixW, dt);
+    if(mixW > .01) drawWarp(t, mixW, dt);
+    cx.globalCompositeOperation = 'source-over'; cx.globalAlpha = 1;
+  }
+  const live = () => isBain() && !document.hidden && SET.anim && !reduced;
+  function frame(now){
+    raf = 0; if(!live()) return;
+    if(now - last >= (small ? 40 : 30)){             // 25 à 33 images par seconde : doux pour la batterie
+      const dt = Math.min(.1, (now - last) / 1000); last = now;
+      mixW += ((box.classList.contains('game') ? 1 : 0) - mixW) * Math.min(1, dt * 1.1);   // fondu entre les deux ciels
+      drawAll(now / 1000, dt);
+    }
+    raf = requestAnimationFrame(frame);
   }
   let was = null;
   function sync(){
     const on = isBain(), game = !!(S && !$('#game').hidden);
     if(on !== was){ was = on; if(S) dirty = true; }
     box.classList.toggle('game', game);
-    if(!on){ [va, vb].forEach(v => { v.classList.remove('on'); if(!v.paused) v.pause(); }); return; }
-    const want = game ? vb : va, other = game ? va : vb, still = !SET.anim || reduced || document.hidden;
-    load(want, game ? 'b' : 'a');
-    want.defaultPlaybackRate = want.playbackRate = game ? .8 : 1;
-    if(want.dataset.ok){ want.classList.add('on'); if(still) want.pause(); else if(want.paused) want.play().catch(() => {}); }
-    other.classList.remove('on'); setTimeout(() => { if(!other.classList.contains('on') && !other.paused) other.pause(); }, 1900);
+    if(!on || document.hidden) return;
+    if(!SET.anim || reduced){ mixW = game ? 1 : 0; drawAll(0, 0); return; }   // animations coupées : un ciel immobile
+    if(!raf){ last = performance.now(); raf = requestAnimationFrame(frame); }
   }
-  window.bainSync = sync;
+  window.bainSync = sync; window.bainDraw = drawAll;
+  addEventListener('resize', () => { if(W){ size(); if(!live() && isBain()) drawAll(0, 0); } });
   new MutationObserver(sync).observe($('#game'), {attributes:true, attributeFilter:['hidden']});
   document.addEventListener('visibilitychange', sync);
   const bs = box.querySelector('.bstars');            // de grandes étoiles qui scintillent
