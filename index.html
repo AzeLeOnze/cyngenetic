@@ -13455,6 +13455,7 @@ function cSetDate(T1){
 // L'arbre est redessiné avec les vraies règles CSS du jeu (dans le thème choisi) à l'intérieur d'une image SVG, puis copié dans un canvas.
 const EX_M = 40;
 let EXF = {}, EXCSS = null, exBusy = false;
+const EXDL = (() => { try{ return window.claude && window.claude.use ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null); }catch(e){ return Promise.resolve(null); } })();
 function treeSnap(){                                   // l'arbre tel qu'il est affiché (en mode libre : à la date regardée)
   const S0 = S; let out = null;
   if(S.creative){ const sh = cShadow(S.cView != null ? S.cView : S.t); if(!sh) return null; S = sh; }
@@ -13493,7 +13494,7 @@ function openExport(){
     e.preventDefault(); if(exBusy) return; exBusy = true;
     const go = $('#exGo'); go.disabled = true; go.querySelector('span').textContent = t('ex_wait'); $('#exErr').hidden = true; $('#exOk').hidden = true;
     try{ const name = await exportTree({fmt: $('#exFmt').value, skin: $('#exSkin').value, scale: +$('#exScale').value, title: $('#exTitle').checked});
-      const ok = $('#exOk'); if(ok){ ok.textContent = t('ex_done', name); ok.hidden = false; } sfx.sparkle(); }
+      const ok = $('#exOk'); if(ok && name){ ok.textContent = t('ex_done', name); ok.hidden = false; sfx.sparkle(); } }
     catch(err){ const er = $('#exErr'); if(er){ er.textContent = t('ex_fail'); er.hidden = false; } sfx.refuse(); console.warn(err); }
     finally{ exBusy = false; const g2 = $('#exGo'); if(g2){ g2.disabled = false; g2.querySelector('span').textContent = t('ex_go'); } }
   });
@@ -13564,6 +13565,11 @@ async function exportTree(o){
   const blob = await new Promise((res, rej) => { try{ c.toBlob(b => b ? res(b) : rej(new Error('blob')), o.fmt === 'jpeg' ? 'image/jpeg' : 'image/png', .92); }catch(e){ rej(e); } });
   const slug = String(sn.title).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'arbre';
   const name = `cyngenetic-${slug}-${sn.y}.${o.fmt === 'jpeg' ? 'jpg' : 'png'}`;
+  const dl = await Promise.race([EXDL, new Promise(r => setTimeout(() => r(null), 800))]);   // dans claude.ai, l'enregistrement passe par sa propre confirmation
+  if(dl){
+    try{ await dl.save({filename: name, data: blob}); return name; }
+    catch(e){ const c = e && e.code; if(c === 'declined') return null; if(!['unavailable','not_granted','capability_disabled','capability_removed'].includes(c)) throw e; }
+  }
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 8000);
   return name;
