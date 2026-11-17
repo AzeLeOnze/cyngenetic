@@ -737,6 +737,17 @@ body.zmode .treebox{position:relative}
 :root[data-ctry="no"] .node.pres{animation-name:presNO}
 @keyframes presNO{0%,100%{box-shadow:0 0 0 2px #BA0C2F,0 0 0 4px #fff,0 0 0 6px #00205B,0 0 24px 8px rgba(255,205,0,.6),0 8px 18px rgba(0,32,91,.3)}50%{box-shadow:0 0 0 2px #BA0C2F,0 0 0 4px #fff,0 0 0 6px #00205B,0 0 40px 14px rgba(186,12,47,.45),0 8px 18px rgba(0,32,91,.3)}}
 :root[data-ctry="no"] .rib.pr{background:linear-gradient(180deg,#d8213f,#BA0C2F);box-shadow:inset 0 -3px 0 #00205B,0 0 10px rgba(255,205,0,.7)}
+:root[data-ctry="br"] .node.pol,:root[data-ctry="br"] .node.partner.pol{background:linear-gradient(160deg,#dff5e6 0%,#fffbe0 50%,#e2e8f7 100%);box-shadow:0 0 0 2px #009C3B,0 0 0 4px #FFDF00,0 0 0 6px #002776,0 8px 18px rgba(0,60,30,.3)}
+:root[data-ctry="br"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(0,156,59,.3) 44%,rgba(255,255,255,.95) 48%,rgba(255,223,0,.45) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
+:root[data-ctry="br"] .node.pol .nt b,:root[data-ctry="br"] .node.pol .nt span,:root[data-ctry="br"] .node.pol .n-life,:root[data-ctry="br"] .node.pol .n-city{color:#0a3d1f}
+:root[data-ctry="br"] .node.pol .n-band{background:linear-gradient(90deg,#009C3B,#13b24a 45%,#002776);color:#FFDF00;border-color:#00561f;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+:root[data-ctry="br"] .node.pres{animation-name:presBR}
+@keyframes presBR{0%,100%{box-shadow:0 0 0 2px #009C3B,0 0 0 4px #FFDF00,0 0 0 6px #002776,0 0 24px 8px rgba(255,223,0,.6),0 8px 18px rgba(0,60,30,.3)}50%{box-shadow:0 0 0 2px #009C3B,0 0 0 4px #FFDF00,0 0 0 6px #002776,0 0 40px 14px rgba(0,156,59,.5),0 8px 18px rgba(0,60,30,.3)}}
+:root[data-ctry="br"] .rib.pr{background:linear-gradient(180deg,#13b24a,#009C3B);box-shadow:inset 0 -3px 0 #FFDF00,0 0 10px rgba(255,223,0,.7)}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"])[data-ctry="br"] .node.pol,:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"])[data-ctry="br"] .node.partner.pol{background:linear-gradient(160deg,#0b4022 0%,#0a2a16 52%,#0a1a44 100%)}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"])[data-ctry="br"] .node.pol .nt b,:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"])[data-ctry="br"] .node.pol .n-life{color:#fff3a0}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"])[data-ctry="br"] .node.pol .nt span,:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"])[data-ctry="br"] .node.pol .n-city{color:#bfe8cc}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"])[data-ctry="br"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(0,156,59,.35) 44%,rgba(255,240,150,.4) 48%,rgba(255,223,0,.35) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
 :root[data-ctry="uk"] .rib.pr{background:linear-gradient(180deg,#24408f,#012169);box-shadow:inset 0 -3px 0 #c8102e,0 0 10px rgba(255,205,0,.7)}
 :root[data-ctry="de"] .node.pol,:root[data-ctry="de"] .node.partner.pol{background:linear-gradient(180deg,#ececec 0%,#ffffff 30%,#ffe6e6 62%,#fff4cc 100%);box-shadow:0 0 0 2px #111,0 0 0 4px #dd0000,0 0 0 6px #ffce00,0 8px 18px rgba(60,0,0,.3)}
 :root[data-ctry="de"] .node.pol::after{background:linear-gradient(115deg,rgba(255,255,255,0) 36%,rgba(221,0,0,.28) 44%,rgba(255,255,255,.95) 48%,rgba(255,206,0,.4) 52%,rgba(255,255,255,0) 60%);background-size:260% 100%}
@@ -2540,7 +2551,9 @@ const APP_VERSION = '0.2.5a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.2.5a', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
-   fr:['Nouveau pays de lignée : le Brésil 🇧🇷 ! Une carte avec 54 villes (de Porto Seguro en 1503 à Brasília en 1960), des prénoms qui évoluent de 1500 à 2100, des noms de famille d\'ici (et des familles venues d\'Italie, d\'Allemagne, du Japon et du Liban), 18 guerres, l\'histoire du pays de Cabral à aujourd\'hui, 17 métiers (seringueiro, garimpeiro, sambiste, mestre de capoeira…), 12 centres d\'intérêt, des écoles brésiliennes… et 2 morts légendaires bien d\'ici.',
+   fr:['Le thème Dark a sa propre musique : une marche gothique en ré mineur, menaçante et bien rythmée (batterie, basse qui martèle, orgue d\'église, clavecin, chœur qui gémit, une mélodie qui rôde… et le glas toutes les 8 mesures).',
+       'Les politiques brésiliens ont leurs couleurs (vert, jaune et bleu), en version claire et en version sombre.',
+       'Nouveau pays de lignée : le Brésil 🇧🇷 ! Une carte avec 54 villes (de Porto Seguro en 1503 à Brasília en 1960), des prénoms qui évoluent de 1500 à 2100, des noms de famille d\'ici (et des familles venues d\'Italie, d\'Allemagne, du Japon et du Liban), 18 guerres, l\'histoire du pays de Cabral à aujourd\'hui, 17 métiers (seringueiro, garimpeiro, sambiste, mestre de capoeira…), 12 centres d\'intérêt, des écoles brésiliennes… et 2 morts légendaires bien d\'ici.',
        'Après 2300, les prénoms et les noms se corrompent de plus en plus jusqu\'en 4000 : lettres cassées, katakana et idéogrammes qui s\'infiltrent, noms qui perdent tout sens… avec des effets de plus en plus flippants (couleurs malades, tremblements, noms géants ou minuscules qui débordent des bulles, fantômes, portraits inversés). Après 3000, l\'arbre lui-même s\'assombrit.',
        'Mode Argent au Brésil : réis, cruzeiros, cruzados… jusqu\'au real en 1994, avec l\'hyperinflation des années 1980.',
        'Mode Argent : les montants qui s\'envolent au-dessus des bulles affichent leur monnaie (+10€, +305lt, −14F…).',
@@ -2549,7 +2562,9 @@ const PATCHNOTES = [
        'Nouveaux objectifs : 200 000 € (facile), 1,5 million (moyen), 10 millions (dur) et 50 millions (extrême).',
        'Version PC : le statut Discord affiche le mode Argent (difficulté, fortune, progression… ou la faillite).',
        'Les bulles s\'élargissent pour laisser lire « Voyage aux États-Unis » et les autres voyages en entier.'],
-   en:['New bloodline country: Brazil 🇧🇷! A map with 54 towns (from Porto Seguro in 1503 to Brasília in 1960), first names that evolve from 1500 to 2100, local surnames (and families from Italy, Germany, Japan and Lebanon), 18 wars, the country\'s history from Cabral to today, 17 jobs (seringueiro, garimpeiro, samba musician, capoeira master…), 12 interests, Brazilian schools… and 2 very local legendary deaths.',
+   en:['The Dark theme gets its own music: a gothic march in D minor, menacing and driving (drums, pounding bass, church organ, harpsichord, a moaning choir, a prowling melody… and a death knell every 8 bars).',
+       'Brazilian politicians get their colours (green, yellow and blue), in light and dark versions.',
+       'New bloodline country: Brazil 🇧🇷! A map with 54 towns (from Porto Seguro in 1503 to Brasília in 1960), first names that evolve from 1500 to 2100, local surnames (and families from Italy, Germany, Japan and Lebanon), 18 wars, the country\'s history from Cabral to today, 17 jobs (seringueiro, garimpeiro, samba musician, capoeira master…), 12 interests, Brazilian schools… and 2 very local legendary deaths.',
        'After 2300, first names and surnames get more and more corrupted until 4000: broken letters, katakana and kanji creeping in, names losing all meaning… with ever creepier effects (sickly colours, shaking, giant or tiny names spilling out of the bubbles, ghosts, inverted portraits). After 3000, the tree itself grows darker.',
        'Money mode in Brazil: réis, cruzeiros, cruzados… up to the real in 1994, with the hyperinflation of the 1980s.',
        'Money mode: the amounts floating above the bubbles now show their currency (+10€, +305lt, −14F…).',
@@ -7091,7 +7106,9 @@ const music = (() => {
   const FEST = {bpm:126, chords:[[48,55,64,67],[43,50,59,67],[45,52,60,64],[41,48,57,65]], mel:[72,74,76,79,81,84]};   // Do · Sol · La m · Fa : la fête
   const STAR = {bpm:52, chords:[[50,57,61,64]], mel:[74]};   // 0.2.3d : Bain d'étoile, voir playStar (le rythme sert au métronome)
   const starOn = () => mode === 'calm' && document.documentElement.dataset.skin === 'bain';
-  const cfgOf = m => m === 'zombie' ? ZOMB : m === 'tense' ? TENSE : m === 'fest' ? FEST : starOn() ? STAR : CALM;
+  const DARKC = {bpm:104, chords:[[50,53,57,62]], mel:[74]};   // 0.2.5a : thème Dark (le métronome de playDark)
+  const gothOn = () => mode === 'calm' && document.documentElement.dataset.skin === 'goth';
+  const cfgOf = m => m === 'zombie' ? ZOMB : m === 'tense' ? TENSE : m === 'fest' ? FEST : gothOn() ? DARKC : starOn() ? STAR : CALM;
   const volOf = m => m === 'calm' ? 1 : m === 'fest' ? 1.25 : TENSE_VOL;
   const TENSE = {bpm:92, chords:[[45,52,60,64],[41,48,57,60],[38,45,53,57],[40,47,56,59]], mel:[69,71,72,75,76,80,81]};  // La m · Fa · Ré m · Mi
   const mtof = m => 440 * Math.pow(2, (m-69)/12), TENSE_VOL = 1.7;   // la musique du criminel est plus forte
@@ -7188,7 +7205,117 @@ const music = (() => {
     if(k % 32 === 20 && Math.random() < .5){ const f = mtof(pick(C.sc) + 12); [0, .2].forEach(d => sBlip(f, t + d, .01, .75)); }
     if(Math.random() < .07) sBlip(mtof(rnd(96, 103)), t + Math.random() * beat, .007, Math.random() * 2 - 1);
   }
+  /* ===== 0.2.5a : la musique du thème Dark =====
+     une marche gothique en ré mineur, menaçante et bien rythmée : batterie de rock gothique, basse qui martèle,
+     orgue d'église, clavecin grinçant, chœur qui gémit, une mélodie qui rôde, et le glas toutes les 8 mesures */
+  const DK = [   // basse, orgue : Ré m · Si♭ · Sol m · La (avec sa ♭9) · Ré m · Mi♭ (le demi-ton phrygien) · Si♭ · La
+    {r:38, o:[50,53,57,62]}, {r:34, o:[46,53,58,62]}, {r:43, o:[55,58,62,67]}, {r:45, o:[57,61,64,70]},
+    {r:38, o:[50,53,57,62]}, {r:39, o:[51,55,58,63]}, {r:34, o:[46,53,58,62]}, {r:45, o:[57,61,64,70]}];
+  const MOTIF = [74,0,69,70,69,0,73,74, 77,0,76,74,73,0,70,69];   // ré la si♭ la do♯ ré · fa mi ré do♯ si♭ la
+  let DB = null, irDark = null, darkFrom = -1;
+  const noise = () => { if(!noiseBuf){ const n = ctx.sampleRate * 2; noiseBuf = ctx.createBuffer(1, n, ctx.sampleRate); const d = noiseBuf.getChannelData(0); for(let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1; } return noiseBuf; };
+  function darkBus(){                                   // une crypte : compresseur qui soude le tout, réverbération de 3,6 s
+    if(DB && DB.out === out) return DB;
+    const sr = ctx.sampleRate;
+    if(!irDark){ const n = Math.floor(sr * 3.6); irDark = ctx.createBuffer(2, n, sr);
+      for(let c = 0; c < 2; c++){ const d = irDark.getChannelData(c); for(let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2.2) * (i < sr * .012 ? i / (sr * .012) : 1); } }
+    const mix = ctx.createGain(), comp = ctx.createDynamicsCompressor(), rev = ctx.createGain(), conv = ctx.createConvolver(), wet = ctx.createGain();
+    comp.threshold.value = -20; comp.knee.value = 12; comp.ratio.value = 4; comp.attack.value = .004; comp.release.value = .22;
+    conv.buffer = irDark; wet.gain.value = .55;
+    const trim = ctx.createGain(); trim.gain.value = .28;   // au même niveau que les autres musiques
+    mix.connect(comp); rev.connect(conv); conv.connect(wet); wet.connect(comp); comp.connect(trim); trim.connect(out);
+    DB = {mix, rev, out}; return DB;
+  }
+  function dOut(node, send, pan){
+    const b = darkBus(); let n = node;
+    if(pan != null && ctx.createStereoPanner){ const p = ctx.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan)); n.connect(p); n = p; }
+    n.connect(b.mix); if(send){ const g = ctx.createGain(); g.gain.value = send; n.connect(g); g.connect(b.rev); }
+  }
+  function dKick(t, v){                                 // grosse caisse
+    const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine';
+    o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + .13);
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + .42); o.connect(g); dOut(g, .04); o.start(t); o.stop(t + .45);
+  }
+  function dNoise(t, dur, v, type, fq, q, send, pan){
+    const sr = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain(); sr.buffer = noise(); fl.type = type; fl.frequency.value = fq; fl.Q.value = q || 1;
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur); sr.connect(fl); fl.connect(g); dOut(g, send, pan); sr.start(t, Math.random() * 1.5); sr.stop(t + dur + .05);
+  }
+  function dSnare(t, v){                                // caisse claire, noyée dans la crypte
+    dNoise(t, .24, v, 'bandpass', 1900, .8, .4);
+    const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'triangle'; o.frequency.setValueAtTime(210, t); o.frequency.exponentialRampToValueAtTime(150, t + .08);
+    g.gain.setValueAtTime(v * .7, t); g.gain.exponentialRampToValueAtTime(.0001, t + .13); o.connect(g); dOut(g, .25); o.start(t); o.stop(t + .16);
+  }
+  const dHat = (t, v, open) => dNoise(t, open ? .3 : .045, v, 'highpass', 7500, .7, .04, .3);
+  function dTom(t, fq, v){
+    const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.setValueAtTime(fq, t); o.frequency.exponentialRampToValueAtTime(fq * .62, t + .25);
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + .33); o.connect(g); dOut(g, .25, (fq - 150) / 110); o.start(t); o.stop(t + .36);
+  }
+  function dBass(m, t, dur, v){                         // la basse qui martèle (scie et carré à l'octave, filtre qui se referme)
+    const o = ctx.createOscillator(), o2 = ctx.createOscillator(), g2 = ctx.createGain(), fl = ctx.createBiquadFilter(), g = ctx.createGain();
+    o.type = 'sawtooth'; o2.type = 'square'; o.frequency.value = mtof(m); o2.frequency.value = mtof(m - 12); g2.gain.value = .5;
+    fl.type = 'lowpass'; fl.Q.value = 6; fl.frequency.setValueAtTime(950, t); fl.frequency.exponentialRampToValueAtTime(170, t + dur);
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(fl); o2.connect(g2); g2.connect(fl); fl.connect(g); dOut(g, 0); [o, o2].forEach(x => { x.start(t); x.stop(t + dur + .05); });
+  }
+  function dOrgan(m, t, dur, v, pan){                   // orgue d'église : fondamentale, octave, quinte, sous-octave, et un trémolo
+    const g = ctx.createGain(), fl = ctx.createBiquadFilter(), lfo = ctx.createOscillator(), lg = ctx.createGain(); fl.type = 'lowpass'; fl.frequency.value = 2600;
+    [[1,'square',.42],[2,'sine',.6],[3,'sine',.3],[.5,'sine',.5]].forEach(([k, ty, a]) => { const o = ctx.createOscillator(), og = ctx.createGain();
+      o.type = ty; o.frequency.value = mtof(m) * k; og.gain.value = a; o.connect(og); og.connect(fl); o.start(t); o.stop(t + dur + .35); });
+    g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .09); g.gain.setValueAtTime(v, t + dur - .15); g.gain.linearRampToValueAtTime(.0001, t + dur + .3);
+    lfo.frequency.value = 5.5; lg.gain.value = v * .2; lfo.connect(lg); lg.connect(g.gain); lfo.start(t); lfo.stop(t + dur + .35);
+    fl.connect(g); dOut(g, .45, pan);
+  }
+  function dHarp(m, t, v, pan){                         // clavecin, sec et grinçant
+    const o = ctx.createOscillator(), o2 = ctx.createOscillator(), g2 = ctx.createGain(), fl = ctx.createBiquadFilter(), g = ctx.createGain();
+    o.type = 'sawtooth'; o2.type = 'square'; o.frequency.value = mtof(m); o2.frequency.value = mtof(m) * 2.003; g2.gain.value = .35; fl.type = 'highpass'; fl.frequency.value = 700;
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + .5);
+    o.connect(fl); o2.connect(g2); g2.connect(fl); fl.connect(g); dOut(g, .3, pan); [o, o2].forEach(x => { x.start(t); x.stop(t + .55); });
+  }
+  function dChoir(m, t, dur, v){                        // un chœur qui gémit (deux formants, « aah »)
+    [m, m + 7].forEach((mm, i) => { const o = ctx.createOscillator(), o2 = ctx.createOscillator(), b1 = ctx.createBiquadFilter(), b2 = ctx.createBiquadFilter(), g = ctx.createGain();
+      o.type = o2.type = 'sawtooth'; o.frequency.value = mtof(mm); o2.frequency.value = mtof(mm) * 1.006; b1.type = b2.type = 'bandpass'; b1.frequency.value = 650; b2.frequency.value = 1080; b1.Q.value = b2.Q.value = 6;
+      o.connect(b1); o2.connect(b1); o.connect(b2); o2.connect(b2); b1.connect(g); b2.connect(g); swell(g, t, dur, v); dOut(g, .6, i ? .5 : -.5);
+      [o, o2].forEach(x => { x.start(t); x.stop(t + dur + .1); }); });
+  }
+  function dBell(m, t, v){                              // le glas : une cloche grave, inharmonique, qui n'en finit pas
+    const c = ctx.createOscillator(), md = ctx.createOscillator(), mg = ctx.createGain(), g = ctx.createGain(), fq = mtof(m);
+    c.frequency.value = fq; md.frequency.value = fq * 2.76; mg.gain.setValueAtTime(fq * 2.2, t); mg.gain.exponentialRampToValueAtTime(fq * .05, t + 3);
+    md.connect(mg); mg.connect(c.frequency); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + 6);
+    c.connect(g); dOut(g, .7); c.start(t); md.start(t); c.stop(t + 6.1); md.stop(t + 6.1);
+  }
+  function dLead(m, t, dur, v){                         // une voix qui rôde : sinus, vibrato, et son ombre une octave plus bas
+    const o = ctx.createOscillator(), o2 = ctx.createOscillator(), lfo = ctx.createOscillator(), lg = ctx.createGain(), g = ctx.createGain(), g2 = ctx.createGain();
+    o.type = 'sine'; o2.type = 'triangle'; o.frequency.value = mtof(m); o2.frequency.value = mtof(m) * .5; g2.gain.value = .4;
+    lfo.frequency.value = 5.2; lg.gain.value = mtof(m) * .012; lfo.connect(lg); lg.connect(o.frequency);
+    g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .06); g.gain.setValueAtTime(v * .8, t + dur * .7); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g); o2.connect(g2); g2.connect(g); dOut(g, .5, .2); [o, o2, lfo].forEach(x => { x.start(t); x.stop(t + dur + .05); });
+  }
+  function dRiser(t, dur, v){                           // un souffle qui monte avant le retour du thème
+    const sr = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain(); sr.buffer = noise(); sr.loop = true;
+    fl.type = 'bandpass'; fl.Q.value = 2; fl.frequency.setValueAtTime(200, t); fl.frequency.exponentialRampToValueAtTime(4000, t + dur);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + dur * .95); g.gain.exponentialRampToValueAtTime(.0001, t + dur + .05);
+    sr.connect(fl); fl.connect(g); dOut(g, .4); sr.start(t); sr.stop(t + dur + .1);
+  }
+  function playDark(s, t){
+    if(darkFrom < 0) darkFrom = s;                      // on entre dans le thème : l'orgue et le glas d'abord
+    const k = s - darkFrom, beat = 60 / DARKC.bpm / 2, b = k % 8, bar = Math.floor(k / 8), C = DK[Math.floor(k / 16) % DK.length], ph = k % 64;
+    if(k % 16 === 0) C.o.forEach((m, i) => dOrgan(m, t, beat * 16, .026, (i - 1.5) * .35));
+    if(ph === 0) dBell(C.r + 12, t, .16);
+    if(k < 16) return;                                  // deux mesures d'introduction, puis tout entre
+    if(b === 0 || b === 3 || b === 4 || (b === 7 && bar % 2 === 1)) dKick(t, b === 0 ? .95 : .72);   // la batterie
+    if(b === 2 || b === 6) dSnare(t, .3);
+    dHat(t, b % 2 === 0 ? .07 : .04, b === 7 && bar % 4 === 3);
+    if(b % 2 === 1) dHat(t + beat / 2, .022);
+    if(ph >= 60){ const fq = [210, 180, 150, 120][ph - 60]; dTom(t, fq, .42); dTom(t + beat / 2, fq * .9, .36); }   // roulement de toms
+    dBass(C.r + [0, 0, 12, 0, 0, 12, 0, 10][b], t, beat * .9, .1);
+    if(ph >= 16 && k % 16 >= 8){ const A = [3, 2, 1, 0, 1, 2, 3, 2]; dHarp(C.o[A[b]] + 12, t, .04, (A[b] - 1.5) * .4); }
+    if(ph >= 32 && MOTIF[ph - 32 & 15]) dLead(MOTIF[ph - 32 & 15], t, beat * 1.8, .05);
+    if(k % 32 === 16) dChoir(C.r + 24, t, beat * 16, .028);
+    if(ph === 56) dRiser(t, beat * 8, .06);
+  }
   function play(s, t){
+    if(gothOn()){ playDark(s, t); return; }               // 0.2.5a : thème Dark
+    darkFrom = -1;
     if(starOn()){ playStar(s, t); return; }
     starFrom = -1;
     const cfg = cfgOf(mode), beat = 60/cfg.bpm/2, ch = cfg.chords[Math.floor(s/8) % 4];
