@@ -947,6 +947,7 @@ body.zmode .treebox{position:relative}
 .tree-head .stats{color:var(--ink-soft);font-size:13px;font-variant-numeric:tabular-nums}
 .tree-head .gel{min-height:34px;padding:6px 14px;font-size:13px}
 .tree-head [data-act="center"],.tree-head [data-act="aicenter"]{margin-left:auto}
+.tree-head .ctrico{display:none}
 .tree-head #viewSw:not([hidden])~[data-act="center"]{margin-left:0}
 .zoomer button{min-width:36px;min-height:32px;font-size:15px}
 .zoomer #zoomPct{min-width:56px;font-size:13px}
@@ -958,6 +959,9 @@ body.zmode .treebox{position:relative}
 .tree-canvas>svg{position:absolute;inset:0;overflow:visible;pointer-events:none}
 .ln-wire-under{fill:none;stroke:rgba(0,90,200,.28);stroke-width:6;stroke-linejoin:round;stroke-linecap:round}
 .ln-wire{fill:none;stroke:#fff;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.ln-para{fill:none;stroke:#b25cff;stroke-width:4.5;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1 10;filter:drop-shadow(0 0 4px rgba(190,90,255,.9));animation:paraflow 1.4s linear infinite}
+@keyframes paraflow{to{stroke-dashoffset:-20}}
+:is(#treeCanvas,#aiCanvas) .node.paranode{outline:2px dashed rgba(178,92,255,.9);outline-offset:4px}
 .ln-u{fill:none;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
 .ln-u.married{stroke:var(--sun-deep)}
 .ln-u.dating{stroke:var(--magenta);stroke-dasharray:6 6}
@@ -1090,6 +1094,67 @@ body.zmode .treebox{position:relative}
 #ttFx.past .tt-bar i{background:linear-gradient(90deg,#fff3d0,#ffc24d);box-shadow:0 0 12px #ffe0a0}
 .ttbox.past .orb{filter:sepia(.35)}
 .pastppl{display:grid;gap:6px;margin-bottom:6px}
+.killsect{color:#e0203f!important;display:flex;align-items:center;gap:6px}.killsect svg{width:15px;height:15px;fill:currentColor}
+.pastppl.kill .pickrow{background:linear-gradient(180deg,#fff3f5,#ffe1e7)!important;border-color:rgba(255,60,90,.55)!important}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"]) .pastppl.kill .pickrow{background:rgba(255,40,70,.16)!important}
+.pastppl.kill .pickrow em svg{width:22px;height:22px;fill:#e0203f}
+.pastppl.kill .pickrow.armed{background:rgba(255,40,70,.3)!important}.pastppl.kill .pickrow.armed em{font-weight:800;color:#e0203f}
+.killnote{display:inline-block;margin-top:6px;color:#e0203f}
+.paratitle{background:linear-gradient(90deg,#ff0050,#b25cff,#00c8e0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ttbox.para .orb{filter:drop-shadow(3px 0 rgba(255,0,80,.6)) drop-shadow(-3px 0 rgba(0,240,255,.6))}
+#paraFx{position:fixed;inset:0;z-index:9100;display:grid;place-items:center;overflow:hidden;color:#fff;cursor:pointer;
+  background:radial-gradient(circle at 50% 46%,#4a0024 0,#1d0034 36%,#050009 76%);animation:pxin .35s ease-out both}
+#paraFx.out{animation:pxout .8s ease-in forwards}
+@keyframes pxin{from{opacity:0}}
+@keyframes pxout{to{opacity:0;filter:brightness(2.4) blur(8px)}}
+#paraFx::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,transparent 30%,rgba(255,0,70,.35) 100%);animation:pxpulse .5s ease-in-out 2 alternate,pxpulse 1.4s 1.6s ease-in-out infinite alternate}
+@keyframes pxpulse{from{opacity:.25}to{opacity:1}}
+#paraFx .px-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.06) 0 1px,transparent 1px 3px);pointer-events:none;animation:pxscan .12s steps(2) infinite}
+@keyframes pxscan{50%{transform:translateY(1px)}}
+#paraFx .px-bars b{position:absolute;left:0;right:0;top:var(--t);height:var(--h);background:linear-gradient(90deg,transparent,rgba(0,240,255,.45),rgba(255,0,90,.45),transparent);opacity:0;animation:pxbar var(--du) var(--dl) steps(1) infinite}
+@keyframes pxbar{0%{opacity:0}10%{opacity:1;transform:translateX(-9%)}22%{opacity:0}60%{opacity:.8;transform:translateX(7%)}68%{opacity:0}}
+#paraFx .px-crack{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#paraFx .px-crack path{fill:none;stroke:#fff;stroke-width:2.2;vector-effect:non-scaling-stroke;stroke-linejoin:bevel;stroke-dasharray:200;stroke-dashoffset:200;
+  filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #ff0050);animation:pxcrackl .45s 1.12s cubic-bezier(.2,.8,.3,1) forwards,pxfade 3s 1.6s ease-in forwards}
+@keyframes pxcrackl{to{stroke-dashoffset:0}}
+@keyframes pxfade{to{opacity:.35}}
+#paraFx .px-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;animation:pxflash .9s 1.1s ease-out both}
+@keyframes pxflash{0%{opacity:0}6%{opacity:1}100%{opacity:0}}
+#paraFx .px-rings i{position:absolute;left:50%;top:46%;width:90vmax;height:90vmax;margin:-45vmax 0 0 -45vmax;border-radius:50%;border:3px solid rgba(255,40,110,.9);
+  box-shadow:0 0 40px rgba(255,0,90,.8),inset 0 0 40px rgba(0,240,255,.5);opacity:0;animation:pxring 1.5s 1.1s cubic-bezier(.1,.7,.3,1) both}
+#paraFx .px-rings i:nth-child(2){animation-delay:1.24s;border-color:rgba(0,240,255,.9)}
+#paraFx .px-rings i:nth-child(3){animation-delay:1.42s;border-color:rgba(190,90,255,.9)}
+@keyframes pxring{0%{transform:scale(.02);opacity:1}100%{transform:scale(1.3);opacity:0}}
+#paraFx .px-shards i{position:absolute;left:50%;top:46%;width:calc(64px*var(--s));height:calc(104px*var(--s));margin:calc(-52px*var(--s)) 0 0 calc(-32px*var(--s));
+  background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(127,246,255,.6) 45%,rgba(255,0,90,.55));clip-path:polygon(50% 0,100% 38%,70% 100%,0 72%);opacity:0;
+  animation:pxshard 1.7s var(--dl) cubic-bezier(.12,.8,.3,1) both}
+@keyframes pxshard{0%{opacity:1;transform:rotate(var(--a)) translateX(0) rotate(0deg) scale(.3)}100%{opacity:0;transform:rotate(var(--a)) translateX(var(--d)) rotate(var(--r)) scale(1)}}
+#paraFx .px-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:16px;animation:pxquake .6s 1.1s linear both}
+@keyframes pxquake{0%,100%{transform:none}8%{transform:translate(-16px,9px) rotate(-1.6deg)}16%{transform:translate(14px,-11px) rotate(1.2deg)}26%{transform:translate(-11px,-7px)}36%{transform:translate(10px,8px) rotate(-.7deg)}48%{transform:translate(-7px,4px)}60%{transform:translate(5px,-4px)}72%{transform:translate(-3px,2px)}86%{transform:translate(2px,-1px)}}
+#paraFx .px-clock{position:relative;width:min(44vw,200px);aspect-ratio:1;display:grid;place-items:center;animation:pxclock 1.1s ease-in both}
+@keyframes pxclock{0%{transform:scale(.55) rotate(0)}100%{transform:scale(1.06) rotate(-28deg)}}
+#paraFx .px-clock svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#paraFx .px-clock .face{fill:rgba(25,0,35,.65);stroke:#ff2d7a;stroke-width:4;filter:drop-shadow(0 0 10px #ff2d7a)}
+#paraFx .px-clock .tk{stroke:#7ff6ff;stroke-width:3;stroke-linecap:round}
+#paraFx .px-clock .hh,#paraFx .px-clock .mh{stroke:#fff;stroke-linecap:round;transform-origin:100px 100px;transform-box:view-box}
+#paraFx .px-clock .hh{stroke-width:6;animation:pxspin .9s linear infinite reverse}
+#paraFx .px-clock .mh{stroke-width:4;animation:pxspin .22s linear infinite reverse}
+@keyframes pxspin{to{transform:rotate(360deg)}}
+#paraFx .px-clock .cr{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:260;stroke-dashoffset:260;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #ff2d7a);animation:pxcrackl .35s 1.1s ease-out forwards}
+#paraFx .px-clock .orb{position:relative;z-index:1;animation:pxorb .14s steps(2) infinite}
+@keyframes pxorb{50%{transform:translate(2px,-1px);filter:saturate(2) hue-rotate(140deg) drop-shadow(3px 0 #ff0050) drop-shadow(-3px 0 #00f0ff)}}
+#paraFx .px-year{min-height:1em;font:900 clamp(26px,7vw,46px)/1 var(--font-display);letter-spacing:.08em;font-variant-numeric:tabular-nums;color:#7ff6ff;text-shadow:2px 0 #ff0050,-2px 0 #00f0ff,0 0 18px rgba(127,246,255,.8)}
+#paraFx .px-title{position:relative;margin:0;font:900 clamp(30px,9.5vw,92px)/.95 var(--font-display);letter-spacing:.03em;text-transform:uppercase;color:#fff;
+  text-shadow:4px 0 #ff0050,-4px 0 #00f0ff,0 0 30px rgba(255,0,90,.9);animation:pxslam .55s 1.1s cubic-bezier(.2,1.5,.4,1) both,pxjit 2.6s 1.7s steps(1) infinite}
+@keyframes pxslam{0%{transform:scale(3.4);opacity:0;filter:blur(16px)}100%{transform:none;opacity:1;filter:none}}
+@keyframes pxjit{0%,100%{transform:none;clip-path:none}7%{transform:translate(-7px,0) skewX(-14deg);clip-path:inset(18% 0 45% 0)}9%{transform:translate(6px,0);clip-path:inset(60% 0 6% 0)}11%{transform:none;clip-path:none}52%{transform:translate(3px,-2px) skewX(9deg)}54%{transform:none}}
+#paraFx .px-title::before,#paraFx .px-title::after{content:attr(data-t);position:absolute;inset:0;pointer-events:none;text-shadow:none}
+#paraFx .px-title::before{color:#00f0ff;mix-blend-mode:screen;clip-path:inset(0 0 55% 0);animation:pxsplit 1.3s 1.6s steps(2) infinite}
+#paraFx .px-title::after{color:#ff0050;mix-blend-mode:screen;clip-path:inset(52% 0 0 0);animation:pxsplit 1.1s 1.7s steps(2) infinite reverse}
+@keyframes pxsplit{0%{transform:translate(-6px,1px)}50%{transform:translate(7px,-1px)}100%{transform:translate(-2px,0)}}
+#paraFx .px-sub{margin:0;max-width:30ch;font:700 clamp(15px,4vw,20px)/1.4 var(--font-display);color:#ffd6ea;opacity:0;animation:pxsub .9s 2.1s ease-out forwards}
+@keyframes pxsub{from{opacity:0;transform:translateY(10px);letter-spacing:.25em}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){ #paraFx *,#paraFx::before{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important} }
 .pastppl .pickrow>svg{width:30px;height:30px;flex:none;fill:#c07a10}
 .pastcyn{margin:-4px 0 12px;text-align:center;font:800 18px var(--font-display);color:#0a8f6a}.pastcyn svg{width:16px;height:16px;fill:currentColor;vertical-align:-2px}
 .ttdir{margin-bottom:8px}.ttdir button{flex:1}
@@ -1348,7 +1413,9 @@ body.vsmode .board{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px}
   .tree-head h2{font-size:17px}
   .toasts{left:max(12px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100% - 24px))}
   .toasts .toast:nth-child(n+2){display:none}
-  .tree-head .zoomer,.tree-head [data-act="center"]{display:none!important}
+  .tree-head .zoomer,.tree-head [data-act="center"]:not(.ctrico){display:none!important}
+  .tree-head .ctrico:not([hidden]){display:inline-grid!important;place-items:center;margin-left:auto;width:42px;min-width:42px;height:42px;padding:0;border-radius:50%;flex:none}
+  .tree-head .ctrico svg{width:22px;height:22px;fill:currentColor}
   .pills button{min-height:38px}
   .gel{min-height:42px}
   .overlay{padding:8px}
@@ -1857,8 +1924,8 @@ body.no-deco .arcfx *{animation:none}
 .albflag{display:inline-grid;place-items:center}
 .albflag svg{display:block;width:17px;height:11px;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .albflag.f-ch svg{width:11px}
-.cbtab{background:linear-gradient(180deg,#fff7d6,#ffe9a0)!important;border-color:#f0c040!important}
-.cbtab[aria-pressed="true"]{background:linear-gradient(180deg,#ffe066,#ffb300)!important;color:#3a2400!important}
+.cbtab{box-shadow:inset 0 0 0 1.5px rgba(222,160,20,.7)}
+.cbtab small{display:inline-block;margin-top:1px;padding:0 7px;border-radius:99px;background:rgba(222,160,20,.22);color:inherit;opacity:1!important;font-weight:800}
 .cbhint{margin:6px 0 10px}
 .carnet{columns:2 300px;column-gap:12px}
 .cbsec{break-inside:avoid;margin:0 0 12px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid #fff;box-shadow:0 3px 10px rgba(0,70,160,.1)}
@@ -2133,6 +2200,7 @@ body.no-deco .arcfx *{animation:none}
           <button data-act="view" data-v="map" data-t="view_map" aria-pressed="false"></button>
         </div>
         <button class="gel ghost" data-act="center"><span data-t="center"></span></button>
+        <button class="gel ghost ctrico" data-act="center" data-ta="center"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M11 1.5h2v2.6a8 8 0 0 1 6.9 6.9h2.6v2h-2.6a8 8 0 0 1-6.9 6.9v2.6h-2v-2.6A8 8 0 0 1 4.1 13H1.5v-2h2.6A8 8 0 0 1 11 4.1zM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 3.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/></svg></button>
       </div>
       <div id="treeScroll" class="tree-scroll"><div id="treeSizer" class="tree-sizer"><div id="treeCanvas" class="tree-canvas"></div></div></div>
       <div id="mapView" class="mapview" hidden></div>
@@ -2179,9 +2247,20 @@ const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 const lc = s => (!s || (s.length>1 && /[A-ZÉ]/.test(s[1]))) ? s : s.charAt(0).toLowerCase() + s.slice(1);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.3a';
+const APP_VERSION = '0.2.3b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.3b', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
+   fr:['Les criminels voyageurs du temps peuvent maintenant tuer quelqu\'un de la famille pendant un voyage dans le passé : toute la descendance de la victime née après ce jour-là n\'a jamais existé et disparaît de l\'arbre. Un criminel ne voyage que dans le passé.',
+       'S\'il tue son propre ancêtre : paradoxe temporel, avec son animation. Une chance sur deux de revenir au même instant dans une toute nouvelle lignée (nouveaux parents, frères et sœurs… ou pas). Sinon, il revient sans aucune origine : relié en pointillés à sa victime, tout en bas de l\'arbre, plus criminel, et condamné par une maladie légendaire qui l\'emporte en 8 à 10 ans.',
+       '2 nouveaux succès : Coup de sablier (or) et Paradoxe temporel (platine). Et 2 nouvelles morts légendaires dans l\'album : assassiné dans le passé, mort d\'un paradoxe temporel.',
+       'Sur téléphone, un bouton cible recentre l\'arbre sur le personnage joué.',
+       'Album : l\'onglet Carnet des probabilités se fond dans chaque thème au lieu de briller en jaune.'],
+   en:['Time-travelling criminals can now kill a family member during a trip to the past: all of the victim\'s descendants born after that day never existed and vanish from the tree. A criminal can only travel into the past.',
+       'If they kill their own ancestor: time paradox, with its own animation. One chance in two of coming back at the same moment in a brand-new bloodline (new parents, brothers and sisters… or not). Otherwise, they come back with no roots at all: linked by a dotted line to their victim, at the very bottom of the tree, no longer a criminal, and doomed by a legendary illness that takes them within 8 to 10 years.',
+       '2 new achievements: Hourglass strike (gold) and Time paradox (platinum). And 2 new legendary deaths in the album: murdered in the past, died of a time paradox.',
+       'On phones, a target button centres the tree on the character you play.',
+       'Album: the Probability notebook tab now blends into every theme instead of glowing yellow.']},
   {v:'0.2.3a', date:{fr:'16 novembre 2026', en:'November 16, 2026', de:'16. November 2026', es:'16 de noviembre de 2026'},
    fr:['Nouveau pays de lignée : la Norvège 🇳🇴 ! Une carte avec les Lofoten et le Svalbard, 52 villes, des prénoms qui évoluent de 1500 à 2100 (et au-delà), des noms de famille d\'ici (et samis), 10 guerres, l\'histoire du pays de l\'Union de Kalmar à nos jours, des écoles norvégiennes, 16 métiers (pêcheur de morue des Lofoten, éleveur de rennes sami, baleinier…), 12 centres d\'intérêt (friluftsliv, brunost, ski de fond…) et deux morts légendaires qu\'on ne croise qu\'en Norvège.',
        'Nouvel onglet dans l\'album : le Carnet des probabilités. Toutes les vraies chances du jeu, rangées par thème : naissances, vie, couples, santé, criminels, événements, album, voyage dans le temps et modes.',
@@ -3436,7 +3515,7 @@ const JOB = byId(JOBS), STARJOB = byId(STARJOBS), COND = byId(CONDS), ADD = byId
 // 0.2.0a : objets légendaires, 0,025 % de chances chacun, qui brillent dans l'album
 const LEGS = {i:new Set(['trolleur','tresors','sourcier','fantomes','cryptozoo','meteorites','funambule','exorciste']), c:new Set(['vairons','memoire','etoile','bulle']),
   j:new Set(['chuchoteur','dresseurours','polaire','gouteurglace','tornades','lunaire','pilotejet','astronaute']), e:new Set(['f_cirque','f_polar','f_spatiale','f_flemme','tr_capflemme']),
-  m:new Set(['hoquet','fourire','accent','teteexplose']), d:new Set(['troll','kraken','asteroide','mortderire','cocotier','orgorge','tsunami','cobaye','progeria','latrines']), a:new Set(['montagnesrusses'])};
+  m:new Set(['hoquet','fourire','accent','teteexplose']), d:new Set(['ttmurder','paradoxe','troll','kraken','asteroide','mortderire','cocotier','orgorge','tsunami','cobaye','progeria','latrines']), a:new Set(['montagnesrusses'])};
 const RARITY = {                                      // 0.2.2a : Rare (un peu rare) et Épique (rare) ; les légendaires restent à part
   e:{j:new Set(['agentsecret','espion','astrophysicien','paleontologue','egyptologue','voyant','gardecorps','bourreau','calineur','createurespece','therapeuteia','escapegm','kungfu','beefeater','gardesuisse']),
      i:new Set(['alchimie','sorcier','langmortes','faucon','duel','reves','zerog','orages','urbex','streamex','robots','spatial','paume','sabreur','gangster']),
@@ -3696,7 +3775,7 @@ function mildYear(p, A, day){                         // une fois par an : peut-
   }
 }
 function cureAll(p){                                  // potion de santé : plus aucune maladie, même grave
-  p.ill = null; p.onset = null; p.onsetAddict = false; p.mild = [];
+  if(!(p.ill && p.ill.dz === 'paradoxe')) p.ill = null;   // 0.2.3b : sauf un paradoxe temporel p.onset = null; p.onsetAddict = false; p.mild = [];
   log('cure','potion',[p.id], today(), true); dirty = true;
 }
 // maladies : [id, nom fr, « de … » fr, en, de, à, durée min (jours), durée max, chance de guérir, filtre]
@@ -3777,6 +3856,7 @@ const DISEASES = [
  ['depropro','Grave dépression professionnelle',"d'une grave dépression professionnelle",'severe work-related depression',1500,2100,1,1,0,{special:true}],
  ['combat','Mort au combat','au combat','wounds sustained in combat',1500,2100,1,1,0,{special:true}],
  ['troll','Emporté par un troll',"dans les griffes d'un troll",'a troll attack',1500,2100,1,1,0,{special:true}],['kraken','Englouti par un kraken',"dans les tentacules d'un kraken",'a kraken attack',1500,2100,1,1,0,{special:true}],
+ ['paradoxe','Paradoxe temporel',"d'un paradoxe temporel",'a time paradox',1500,2100,2922,3652,0,{special:true}],   // 0.2.3b : 8 à 10 ans, jamais guéri
  ['tsunami','Tsunami','dans un tsunami','a tsunami',1500,2100,1,1,0,{special:true}],['latrines','Chute dans les latrines',"d'une chute dans les latrines",'a fall into the latrine',1500,1969,1,1,0,{special:true}],['cobaye',"Cobaye d'expérience","comme cobaye d'une expérience",'a failed experiment as a test subject',1800,2100,1,1,0,{special:true}],
  ['progeria','Syndrome de Hutchinson-Gilford','du syndrome de Hutchinson-Gilford','Hutchinson-Gilford progeria syndrome',1500,2100,1,1,0,{special:true}],
  ['orgorge',"Étouffement avec de l'or","en s'étouffant avec de l'or",'choking on gold',1500,2100,1,1,0,{special:true}],
@@ -3897,6 +3977,7 @@ const ICONS = {
   dumbbell:'<path d="M1.5 10h2V7.5h3v9h-3V14h-2zm21 0h-2V7.5h-3v9h3V14h2zM7.5 6h2v12h-2zm7 0h2v12h-2zM9.5 11h5v2h-5z"/>',
   dice:'<path fill-rule="evenodd" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2.5 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM12 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM7.5 15a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>',
   pill:'<path fill-rule="evenodd" d="M8.5 3.5a5 5 0 0 1 7 0l5 5a5 5 0 0 1-7 7l-5-5a5 5 0 0 1 0-7zm1.4 1.4a3 3 0 0 0 0 4.2l2.5 2.5 4.2-4.2-2.5-2.5a3 3 0 0 0-4.2 0z"/>',
+  target:'<path fill-rule="evenodd" d="M11 1.5h2v2.6a8 8 0 0 1 6.9 6.9h2.6v2h-2.6a8 8 0 0 1-6.9 6.9v2.6h-2v-2.6A8 8 0 0 1 4.1 13H1.5v-2h2.6A8 8 0 0 1 11 4.1zM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 3.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/>',
   knife:'<path d="M3 20.5 13.6 9.9l1.4 1.4L4.4 21.9zM14.3 9.2l1.4-1.4 5.3-5.3c.6 2.6-.3 5.6-2.6 7.9l-2.7 2.7z"/>',
   lock:'<path fill-rule="evenodd" d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1zm2 0h6V7a3 3 0 0 0-6 0zm3 4a1.5 1.5 0 0 0-1 2.6V18h2v-1.4a1.5 1.5 0 0 0-1-2.6z"/>',
   hourglass:'<path fill-rule="evenodd" d="M6 2h12v2h-1v3.5a5 5 0 0 1-2.5 4.3L13 12l1.5.2A5 5 0 0 1 17 16.5V20h1v2H6v-2h1v-3.5a5 5 0 0 1 2.5-4.3L11 12l-1.5-.2A5 5 0 0 1 7 7.5V4H6zm3 2v3.5a3 3 0 0 0 1.5 2.6L12 11l1.5-.9A3 3 0 0 0 15 7.5V4zm3 10.2-1.5.9A3 3 0 0 0 9 16.5V20h6v-3.5a3 3 0 0 0-1.5-2.6z"/>',
@@ -3982,7 +4063,7 @@ const nm = x => { const p = per(x), tt = royalTitle(p); return `${tt ? tt + ' ' 
 const art = s => /^[aeiouAEIOU]/.test(s) ? 'an ' + s : 'a ' + s;
 const jobName = (id, p) => { const r = JOB[id] || STARJOB[id]; if(!r) return '';
   if(XL()){ const d = (XD.jobc[CTRY] && XD.jobc[CTRY][id]) || (XD.starc[CTRY] && XD.starc[CTRY][id]) || (JOB[id] ? XD.job[id] : XD.star[id]); if(d) return deSex(d, p); } return LANG==='fr' ? (p.sex==='F'?r[2]:r[1]) : (p.sex==='F'?r[4]:r[3]); };
-const dzName = (id, p) => { if(XL() && XD.dz[id]) return XD.dz[id][0]; const d = DZ[id]; if(id === 'disparu' && p && p.sex === 'F' && LANG==='fr') return 'Portée disparue'; return LANG==='fr' ? d[1] : cap(d[3].replace(/^(the|a|an) /,'')); };
+const dzName = (id, p) => { if(id === 'paradoxe' && p && p.death == null && p.ill) return t('para_ill', p); if(XL() && XD.dz[id]) return XD.dz[id][0]; const d = DZ[id]; if(id === 'disparu' && p && p.sex === 'F' && LANG==='fr') return 'Portée disparue'; return LANG==='fr' ? d[1] : cap(d[3].replace(/^(the|a|an) /,'')); };
 const dzOf = id => { const d = DZ[id]; return LANG==='fr' ? d[2] : XL() ? dzDat(id) : d[3]; };     // « de la tuberculose » / « tuberculosis »
 const fieldName = id => { const f = FIELD[id]; return LANG==='fr' ? f[1] : XL() && XD.field[id] ? XD.field[id] : f[2]; };
 const trackName = id => { const r = TRACK[id]; return LANG==='fr' ? r[1] : XL() && XD.track[id] ? XD.track[id] : r[2]; };
@@ -4042,6 +4123,18 @@ fr:{
   anc_lab:(q,n)=>n===1?g(q,'Ton père','Ta mère'):n===2?g(q,'Ton grand-père','Ta grand-mère'):n===3?g(q,'Ton arrière-grand-père','Ton arrière-grand-mère'):`${g(q,'Ton ancêtre','Ton ancêtre')}, ${n} générations avant toi`,
   past_antique:"Rapporter un objet d'époque", past_antique_d:'Un objet ancien vaut une fortune à ton époque. Mais combien ?',
   past_witness:'Assister à un événement', past_witness_none:'Rien de marquant ne se passe à cette époque.', past_home:'Rentrer sans rien faire',
+  past_kill_note:p=>`Sauf pour ${g(p,'un criminel','une criminelle')} : ici, un seul geste peut effacer des générations entières.`,
+  past_kill:'Commettre un crime', past_kill_n:n=> n ? `efface ${n} descendant${n>1?'s':''}` : "n'efface aucun descendant",
+  past_res_kill:(p,q,n)=>`${p.first} tue ${nm(q)} et disparaît dans la faille. ${n ? `${n} descendant${n>1?'s':''} de ${q.first} n'${n>1?'ont':'a'} jamais existé.` : `${q.first} n'aura jamais d'autre descendance.`}`,
+  cause_tmurder:(p,k)=>`${g(p,'assassiné','assassinée')} par ${nm(k)}, ${g(P(k) || p,'venu','venue')} du futur`, alb_d_ttmurder:'Assassiné dans le passé',
+  para_title:'Paradoxe temporel', para_sub_new:()=>'La ligne du temps se déchire… et se recoud autrement.', para_sub_cut:p=>`${g(p,'Effacé','Effacée')} de sa propre histoire…`,
+  para_res_new:(p,q,s)=>`${p.first} a tué ${nm(q)}, ${g(q,'son propre ancêtre','sa propre ancêtre')}. L'histoire s'est réécrite : ${p.first} revient au même instant dans une toute nouvelle lignée, avec de nouveaux parents${s.length ? ` et ${s.length > 1 ? s.length + ' frères et sœurs' : g(s[0],'un frère','une sœur')}` : ', sans frère ni sœur'}.`,
+  para_res_cut:(p,q)=>`${p.first} a tué ${nm(q)}, ${g(q,'son propre ancêtre','sa propre ancêtre')}. ${g(p,'Il','Elle')} revient au même instant, mais plus rien ne ${g(p,'le','la')} relie au passé : plus de parents, plus de casier, juste un fil en pointillés jusqu'à ${q.first}. Le paradoxe ${g(p,'le','la')} ronge : il lui reste 8 à 10 ans.`,
+  para_parents:(a,b)=>`Nouveaux parents : ${a} et ${b}.`, para_ok:'Revenir au présent', para_ill:p=>`${g(p,'Mourant','Mourante')} d'un paradoxe temporel`,
+  tt_crim_past:'Un criminel ne peut voyager que dans le passé.',
+  log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} remonte en ${y} et assassine ${nm(q)}${n ? ` : ${n} descendant${n>1?'s':''} ${n>1?'disparaissent':'disparaît'} de l'arbre` : ''}.`,
+  log_tt_para_new:(p,q)=>`💥 Paradoxe temporel ! En tuant ${nm(q)}, ${nm(p)} a réécrit sa propre histoire : nouvelle lignée, nouveaux parents.`,
+  log_tt_para_cut:(p,q)=>`💥 Paradoxe temporel ! En tuant ${nm(q)}, ${nm(p)} s'est ${g(P(p),'coupé','coupée')} de ses origines et se meurt d'un paradoxe temporel.`,
   past_res_visit:(p,q,l)=>`${p.first} passe une soirée avec ${nm(q)} (${l.charAt(0).toLowerCase()+l.slice(1)}), sans jamais dire d'où ${g(p,'il','elle')} vient. ${q.first} s'en souviendra toute sa vie.`,
   past_res_self:(p,n)=>`${p.first} croise son propre jeune moi, à ${n} ans… Un long frisson. Mieux vaut ne rien lui dire !`,
   past_res_antique:(p,v,m)=>m?`Incroyable : c'est une pièce de musée ! Elle vaut ${v} Cyn à ton époque.`:`${p.first} rapporte un objet d'époque qui vaut ${v} Cyn à ton époque.`,
@@ -4109,7 +4202,7 @@ fr:{
     ['bulb','Événements, par an',[['Couple de 20 ans à bout de souffle',v.evC],['Envie d\'adopter (20-50 ans)',v.evA],['Sports extrêmes (45-75 ans)',v.evX],['… et y laisser la vie',v.evX2],
       ['Déçu de ses études (19-22 ans)',v.evS],['Long voyage en famille (20-70 ans)',v.evT],['… et un souvenir au retour',v.evT2],['Un alpaga dans le jardin',v.evAl]]],
     ['album','Album',[['Métiers, centres d\'intérêt… communs','normal'],['… rares','4× moins'],['… épiques','14× moins'],['… légendaires, à chaque tirage',v.leg]]],
-    ['hourglass','Temps et modes',[['Faille temporelle, par an (16-60 ans)',v.rift],['Effet papillon au retour',v.butterfly],['Royal : le monarque change d\'activité',v.royal],['Royal : un comte devient noble',v.count],
+    ['hourglass','Temps et modes',[['Faille temporelle, par an (16-60 ans)',v.rift],['Effet papillon au retour',v.butterfly],['Paradoxe : nouvelle lignée · sans origine',v.para],['Royal : le monarque change d\'activité',v.royal],['Royal : un comte devient noble',v.count],
       ['Zombie : contagion par proche, par an',v.zone],['Boutique Fertilité : 2 · 3 · 4 bébés',v.fert]]]],
   dfx_skip:'Touche pour passer', ev_and:' et ', ev_tr_title:'Le voyage d\'une vie', ev_tr_1:(p,c,l)=>`${nm(p)} veut partir faire un long voyage ${c} avec sa famille (${l}).`,
   ev_tr_2:p=>`${gs(p,'Peut-il','Peut-elle')} y aller ?`, ev_tr_go:'Profite !', ev_tr_no:'Hors de question',
@@ -4472,6 +4565,18 @@ en:{
   anc_lab:(q,n)=>n===1?g(q,'Your father','Your mother'):n===2?g(q,'Your grandfather','Your grandmother'):n===3?g(q,'Your great-grandfather','Your great-grandmother'):`Your ancestor, ${n} generations back`,
   past_antique:'Bring back an antique', past_antique_d:'An old object is worth a fortune in your time. But how much?',
   past_witness:'Witness an event', past_witness_none:'Nothing remarkable happens around this time.', past_home:'Go home without doing anything',
+  past_kill_note:()=>'Except for a criminal: here, a single act can wipe out entire generations.',
+  past_kill:'Commit a crime', past_kill_n:n=> n ? `erases ${n} descendant${n>1?'s':''}` : 'erases no descendants',
+  past_res_kill:(p,q,n)=>`${p.first} kills ${nm(q)} and vanishes into the rift. ${n ? `${n} of ${q.first}'s descendant${n>1?'s':''} never existed.` : `${q.first} will never have any other descendants.`}`,
+  cause_tmurder:(p,k)=>`murdered by ${nm(k)}, who came from the future`, alb_d_ttmurder:'Murdered in the past',
+  para_title:'Time paradox', para_sub_new:()=>'Time tears apart… and stitches itself back differently.', para_sub_cut:()=>'Erased from their own story…',
+  para_res_new:(p,q,s)=>`${p.first} killed ${nm(q)}, ${g(p,'his','her')} own ancestor. History has rewritten itself: ${p.first} returns to the same moment in a brand-new bloodline, with new parents${s.length ? ` and ${s.length > 1 ? s.length + ' siblings' : g(s[0],'a brother','a sister')}` : ' and no siblings'}.`,
+  para_res_cut:(p,q)=>`${p.first} killed ${nm(q)}, ${g(p,'his','her')} own ancestor. ${g(p,'He','She')} returns to the same moment, but nothing ties ${g(p,'him','her')} to the past anymore: no parents, no criminal record, just a dotted thread to ${q.first}. The paradox is eating ${g(p,'him','her')} away: 8 to 10 years left.`,
+  para_parents:(a,b)=>`New parents: ${a} and ${b}.`, para_ok:'Back to the present', para_ill:()=>'Dying of a time paradox',
+  tt_crim_past:'A criminal can only travel into the past.',
+  log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} travels back to ${y} and murders ${nm(q)}${n ? `: ${n} descendant${n>1?'s':''} vanish${n>1?'':'es'} from the tree` : ''}.`,
+  log_tt_para_new:(p,q)=>`💥 Time paradox! By killing ${nm(q)}, ${nm(p)} rewrote ${g(P(p),'his','her')} own story: new bloodline, new parents.`,
+  log_tt_para_cut:(p,q)=>`💥 Time paradox! By killing ${nm(q)}, ${nm(p)} cut ${g(P(p),'himself','herself')} off from ${g(P(p),'his','her')} roots and is dying of a time paradox.`,
   past_res_visit:(p,q,l)=>`${p.first} spends an evening with ${nm(q)} (${l.charAt(0).toLowerCase()+l.slice(1)}), never saying where ${g(p,'he','she')} comes from. ${q.first} will remember it forever.`,
   past_res_self:(p,n)=>`${p.first} crosses paths with their own younger self, aged ${n}… A long shiver. Better not say a word!`,
   past_res_antique:(p,v,m)=>m?`Incredible: it's a museum piece! It's worth ${v} Cyn in your time.`:`${p.first} brings back an antique worth ${v} Cyn in your time.`,
@@ -4539,7 +4644,7 @@ en:{
     ['bulb','Events, per year',[['Couple of 20 years running out of steam',v.evC],['Wanting to adopt (20-50)',v.evA],['Extreme sports (45-75)',v.evX],['… and dying from it',v.evX2],
       ['Unhappy with their studies (19-22)',v.evS],['Long family trip (20-70)',v.evT],['… and a souvenir on return',v.evT2],['An alpaca in the garden',v.evAl]]],
     ['album','Album',[['Common jobs, interests…','normal'],['… rare','4× less'],['… epic','14× less'],['… legendary, each draw',v.leg]]],
-    ['hourglass','Time and modes',[['Time rift, per year (16-60)',v.rift],['Butterfly effect on return',v.butterfly],['Royal: the monarch changes activity',v.royal],['Royal: a count becomes a noble',v.count],
+    ['hourglass','Time and modes',[['Time rift, per year (16-60)',v.rift],['Butterfly effect on return',v.butterfly],['Paradox: new bloodline · no roots',v.para],['Royal: the monarch changes activity',v.royal],['Royal: a count becomes a noble',v.count],
       ['Zombie: infection per relative, per year',v.zone],['Fertility shop item: 2 · 3 · 4 babies',v.fert]]]],
   dfx_skip:'Tap to skip', ev_and:' and ', ev_tr_title:'The trip of a lifetime', ev_tr_1:(p,c,l)=>`${nm(p)} wants to go on a long trip ${c} with the family (${l}).`,
   ev_tr_2:p=>`Can ${gs(p,'he','she')} go?`, ev_tr_go:'Enjoy!', ev_tr_no:'Out of the question',
@@ -4901,6 +5006,18 @@ TX.de = {
   anc_lab:(q,n)=>n===1?g(q,'Dein Vater','Deine Mutter'):n===2?g(q,'Dein Großvater','Deine Großmutter'):n===3?g(q,'Dein Urgroßvater','Deine Urgroßmutter'):`${g(q,'Dein Vorfahr','Deine Vorfahrin')}, ${n} Generationen zurück`,
   past_antique:'Eine Antiquität mitbringen', past_antique_d:'Ein altes Objekt ist in deiner Zeit ein Vermögen wert. Aber wie viel?',
   past_witness:'Ein Ereignis miterleben', past_witness_none:'In dieser Zeit passiert nichts Besonderes.', past_home:'Ohne etwas zu tun zurückkehren',
+  past_kill_note:()=>'Außer für Verbrecher: Hier kann eine einzige Tat ganze Generationen auslöschen.',
+  past_kill:'Ein Verbrechen begehen', past_kill_n:n=> n ? `löscht ${n} Nachkommen` : 'löscht keine Nachkommen',
+  past_res_kill:(p,q,n)=>`${p.first} tötet ${nm(q)} und verschwindet im Riss. ${n ? `${n} Nachkommen von ${q.first} hat es nie gegeben.` : `${q.first} wird keine weiteren Nachkommen haben.`}`,
+  cause_tmurder:(p,k)=>`ermordet von ${nm(k)}, aus der Zukunft gekommen`, alb_d_ttmurder:'In der Vergangenheit ermordet',
+  para_title:'Zeitparadoxon', para_sub_new:()=>'Die Zeit reißt… und näht sich anders wieder zusammen.', para_sub_cut:()=>'Aus der eigenen Geschichte gelöscht…',
+  para_res_new:(p,q,s)=>`${p.first} hat ${nm(q)} getötet, ${g(q,'den eigenen Vorfahren','die eigene Vorfahrin')}. Die Geschichte hat sich neu geschrieben: ${p.first} kehrt im selben Moment in eine ganz neue Linie zurück, mit neuen Eltern${s.length ? ` und ${s.length > 1 ? s.length + ' Geschwistern' : g(s[0],'einem Bruder','einer Schwester')}` : ' und ohne Geschwister'}.`,
+  para_res_cut:(p,q)=>`${p.first} hat ${nm(q)} getötet, ${g(q,'den eigenen Vorfahren','die eigene Vorfahrin')}. ${p.first} kehrt im selben Moment zurück, doch nichts verbindet ${g(p,'ihn','sie')} mehr mit der Vergangenheit: keine Eltern, keine Vorstrafen, nur ein gepunkteter Faden zu ${q.first}. Das Paradoxon zehrt an ${g(p,'ihm','ihr')}: noch 8 bis 10 Jahre.`,
+  para_parents:(a,b)=>`Neue Eltern: ${a} und ${b}.`, para_ok:'Zurück in die Gegenwart', para_ill:()=>'Stirbt an einem Zeitparadoxon',
+  tt_crim_past:'Ein Verbrecher kann nur in die Vergangenheit reisen.',
+  log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} reist ins Jahr ${y} zurück und ermordet ${nm(q)}${n ? `: ${n} Nachkommen verschwinden aus dem Stammbaum` : ''}.`,
+  log_tt_para_new:(p,q)=>`💥 Zeitparadoxon! Mit dem Mord an ${nm(q)} hat ${nm(p)} die eigene Geschichte neu geschrieben: neue Linie, neue Eltern.`,
+  log_tt_para_cut:(p,q)=>`💥 Zeitparadoxon! Mit dem Mord an ${nm(q)} hat sich ${nm(p)} von den eigenen Wurzeln abgeschnitten und stirbt an einem Zeitparadoxon.`,
   past_res_visit:(p,q,l)=>`${p.first} verbringt einen Abend mit ${nm(q)} (${l}), ohne je zu verraten, woher ${g(p,'er','sie')} kommt. ${q.first} wird sich ein Leben lang daran erinnern.`,
   past_res_self:(p,n)=>`${p.first} begegnet dem eigenen jüngeren Ich, mit ${n} Jahren… Ein langer Schauer. Lieber nichts sagen!`,
   past_res_antique:(p,v,m)=>m?`Unglaublich: ein Museumsstück! Es ist in deiner Zeit ${v} Cyn wert.`:`${p.first} bringt eine Antiquität mit, die in deiner Zeit ${v} Cyn wert ist.`,
@@ -4968,7 +5085,7 @@ TX.de = {
     ['bulb','Ereignisse pro Jahr',[['Paar nach 20 Jahren ausgebrannt',v.evC],['Wunsch zu adoptieren (20-50)',v.evA],['Extremsport (45-75)',v.evX],['… und dabei sterben',v.evX2],
       ['Unzufrieden mit dem Studium (19-22)',v.evS],['Lange Familienreise (20-70)',v.evT],['… und ein Andenken bei der Rückkehr',v.evT2],['Ein Alpaka im Garten',v.evAl]]],
     ['album','Album',[['Gewöhnliche Berufe, Hobbys…','normal'],['… seltene','4× weniger'],['… epische','14× weniger'],['… legendäre, pro Ziehung',v.leg]]],
-    ['hourglass','Zeit und Modi',[['Zeitriss pro Jahr (16-60)',v.rift],['Schmetterlingseffekt bei der Rückkehr',v.butterfly],['Royal: Monarch wechselt die Tätigkeit',v.royal],['Royal: ein Graf wird adelig',v.count],
+    ['hourglass','Zeit und Modi',[['Zeitriss pro Jahr (16-60)',v.rift],['Schmetterlingseffekt bei der Rückkehr',v.butterfly],['Paradoxon: neue Linie · ohne Wurzeln',v.para],['Royal: Monarch wechselt die Tätigkeit',v.royal],['Royal: ein Graf wird adelig',v.count],
       ['Zombie: Ansteckung pro Angehörigem, pro Jahr',v.zone],['Shop Fruchtbarkeit: 2 · 3 · 4 Babys',v.fert]]]],
   dfx_skip:'Tippen zum Überspringen', ev_and:' und ', ev_tr_title:'Die Reise des Lebens', ev_tr_1:(p,c,l)=>`${nm(p)} möchte mit der Familie (${l}) auf eine lange Reise ${c}.`,
   ev_tr_2:p=>`Darf ${gs(p,'er','sie')} fahren?`, ev_tr_go:'Viel Spaß!', ev_tr_no:'Kommt nicht in Frage',
@@ -5333,6 +5450,18 @@ TX.es = {
   anc_lab:(q,n)=>n===1?gs(q,'Tu padre','Tu madre'):n===2?gs(q,'Tu abuelo','Tu abuela'):n===3?gs(q,'Tu bisabuelo','Tu bisabuela'):`Tu antepasado, ${n} generaciones atrás`,
   past_antique:'Traer una antigüedad', past_antique_d:'Un objeto antiguo vale una fortuna en tu época. Pero ¿cuánto?',
   past_witness:'Presenciar un acontecimiento', past_witness_none:'No pasa nada destacable por estas fechas.', past_home:'Volver a casa sin hacer nada',
+  past_kill_note:p=>`Salvo para ${gs(p,'un criminal','una criminal')}: aquí, un solo gesto puede borrar generaciones enteras.`,
+  past_kill:'Cometer un crimen', past_kill_n:n=> n ? `borra ${n} descendiente${n>1?'s':''}` : 'no borra a ningún descendiente',
+  past_res_kill:(p,q,n)=>`${p.first} mata a ${nm(q)} y desaparece por la grieta. ${n ? `${n} descendiente${n>1?'s':''} de ${q.first} nunca ${n>1?'existieron':'existió'}.` : `${q.first} ya no tendrá más descendencia.`}`,
+  cause_tmurder:(p,k)=>`${gs(p,'asesinado','asesinada')} por ${nm(k)}, ${gs(P(k),'llegado','llegada')} del futuro`, alb_d_ttmurder:'Asesinado en el pasado',
+  para_title:'Paradoja temporal', para_sub_new:()=>'El tiempo se rasga… y se vuelve a coser de otra forma.', para_sub_cut:p=>`${gs(p,'Borrado','Borrada')} de su propia historia…`,
+  para_res_new:(p,q,s)=>`${p.first} ha matado a ${nm(q)}, ${gs(q,'su propio antepasado','su propia antepasada')}. La historia se ha reescrito: ${p.first} vuelve al mismo instante en un linaje totalmente nuevo, con nuevos padres${s.length ? ` y ${s.length > 1 ? s.length + ' hermanos' : gs(s[0],'un hermano','una hermana')}` : ' y sin hermanos'}.`,
+  para_res_cut:(p,q)=>`${p.first} ha matado a ${nm(q)}, ${gs(q,'su propio antepasado','su propia antepasada')}. Vuelve al mismo instante, pero ya nada ${gs(p,'lo','la')} une al pasado: ni padres, ni antecedentes, solo un hilo de puntos hasta ${q.first}. La paradoja ${gs(p,'lo','la')} consume: le quedan de 8 a 10 años.`,
+  para_parents:(a,b)=>`Nuevos padres: ${a} y ${b}.`, para_ok:'Volver al presente', para_ill:()=>'Muriendo de una paradoja temporal',
+  tt_crim_past:'Un criminal solo puede viajar al pasado.',
+  log_tt_kill:(p,q,y,n)=>`🔪 ${nm(p)} viaja a ${y} y asesina a ${nm(q)}${n ? `: ${n} descendiente${n>1?'s':''} ${n>1?'desaparecen':'desaparece'} del árbol` : ''}.`,
+  log_tt_para_new:(p,q)=>`💥 ¡Paradoja temporal! Al matar a ${nm(q)}, ${nm(p)} ha reescrito su propia historia: nuevo linaje, nuevos padres.`,
+  log_tt_para_cut:(p,q)=>`💥 ¡Paradoja temporal! Al matar a ${nm(q)}, ${nm(p)} se ha separado de sus raíces y se muere de una paradoja temporal.`,
   past_res_visit:(p,q,l)=>`${p.first} pasa una velada con ${nm(q)} (${l.charAt(0).toLowerCase()+l.slice(1)}), sin decir nunca de dónde viene. ${q.first} lo recordará siempre.`,
   past_res_self:(p,n)=>`${p.first} se cruza con su yo más joven, de ${n} años… Un largo escalofrío. ¡Mejor no decir nada!`,
   past_res_antique:(p,v,m)=>m?`Increíble: ¡es una pieza de museo! Vale ${v} Cyn en tu época.`:`${p.first} trae una antigüedad que vale ${v} Cyn en su época.`,
@@ -5400,7 +5529,7 @@ TX.es = {
     ['bulb','Eventos, al año',[['Pareja de 20 años sin chispa',v.evC],['Ganas de adoptar (20-50)',v.evA],['Deportes extremos (45-75)',v.evX],['… y morir en el intento',v.evX2],
       ['Descontento con sus estudios (19-22)',v.evS],['Largo viaje en familia (20-70)',v.evT],['… y un recuerdo a la vuelta',v.evT2],['Una alpaca en el jardín',v.evAl]]],
     ['album','Álbum',[['Oficios, aficiones… comunes','normal'],['… raros','4× menos'],['… épicos','14× menos'],['… legendarios, en cada tirada',v.leg]]],
-    ['hourglass','Tiempo y modos',[['Grieta temporal, al año (16-60)',v.rift],['Efecto mariposa a la vuelta',v.butterfly],['Real: el monarca cambia de actividad',v.royal],['Real: un conde se vuelve noble',v.count],
+    ['hourglass','Tiempo y modos',[['Grieta temporal, al año (16-60)',v.rift],['Efecto mariposa a la vuelta',v.butterfly],['Paradoja: nuevo linaje · sin raíces',v.para],['Real: el monarca cambia de actividad',v.royal],['Real: un conde se vuelve noble',v.count],
       ['Zombi: contagio por familiar, al año',v.zone],['Tienda Fertilidad: 2 · 3 · 4 bebés',v.fert]]]],
   dfx_skip:'Toca para saltar', ev_and:' y ', ev_tr_title:'El viaje de su vida', ev_tr_1:(p,c,l)=>`${nm(p)} quiere hacer un largo viaje ${c} con su familia (${l}).`,
   ev_tr_2:p=>`¿Puede ir?`, ev_tr_go:'¡Disfruta!', ev_tr_no:'Ni hablar',
@@ -6082,6 +6211,8 @@ Object.assign(DEx.int, {friluftsliv:['Friluftsliv-Fan','Friluftsliv-Fan'], skifo
 Object.assign(DEx.track, {vgsstud:'Videregående · Allgemeinbildung', vgsreal:'Videregående · Naturwissenschaften', gymnas:'Gymnasium (Examen artium)', fbelek:'Gesellenbrief · Elektriker',
   fbtomrer:'Gesellenbrief · Zimmerer', fbkokk:'Gesellenbrief · Koch', fbfiske:'Gesellenbrief · Fischerei', fbolje:'Gesellenbrief · Offshore'});
 Object.assign(DEx.dz, {troll:['Trollangriff','einem Trollangriff'], kraken:['Krakenangriff','einem Krakenangriff']});
+Object.assign(DEx.dz, {paradoxe:['Zeitparadoxon','einem Zeitparadoxon']});   // 0.2.3b
+Object.assign(DEx.ach, {tt_kill:['Sanduhrhieb','Mit einem zeitreisenden Verbrecher jemanden in der Vergangenheit töten'], tt_paradox:['Zeitparadoxon','Den eigenen Vorfahren in der Vergangenheit töten und ein Zeitparadoxon auslösen']});
 Object.assign(DEx.warn, {'Guerre nordique de Sept Ans':'Dreikronenkrieg', 'Guerre de Kalmar':'Kalmarkrieg', 'Guerre de Hannibal':'Torstenssonkrieg', 'Guerre dano-suédoise':'Dänisch-Schwedischer Krieg',
   'Guerre de Gyldenløve':'Gyldenløve-Fehde', 'Grande guerre du Nord':'Großer Nordischer Krieg', 'Guerre des Airelles':'Preiselbeerkrieg', 'Guerre des chaloupes canonnières':'Kanonenbootkrieg',
   'Guerre suédo-norvégienne':'Schwedisch-Norwegischer Krieg', 'Occupation allemande de la Norvège':'Deutsche Besetzung Norwegens', "Guerre de l'Arctique":'Arktiskrieg'});
@@ -6090,6 +6221,8 @@ Object.assign(ESx.job, esPairs("pecheurmorue:Pescador de bacalao de las Lofoten/
 Object.assign(ESx.int, esPairs("friluftsliv:Amante del friluftsliv|skifond:Esquiador de fondo/Esquiadora de fondo|hytte:Enamorado de su cabaña/Enamorada de su cabaña|bunad:Fan del bunad|brunost:Amante del brunost|blackmetal:Fan del black metal|vikings:Apasionado de los vikingos/Apasionada de los vikingos|pecheglace:Pescador en hielo/Pescadora en hielo|aurores:Cazador de auroras boreales/Cazadora de auroras boreales|kos:Amante del kos (lo acogedor)|sautski:Saltador de esquí/Saltadora de esquí|trolls:Cree en los trols"));
 Object.assign(ESx.track, esStr("vgsstud:Videregående de estudios generales|vgsreal:Videregående de ciencias|gymnas:Gymnas (examen artium)|fbelek:Certificado de oficio de electricista|fbtomrer:Certificado de oficio de carpintero|fbkokk:Certificado de oficio de cocinero|fbfiske:Certificado de oficio de pesca|fbolje:Certificado de oficio offshore"));
 Object.assign(ESx.dz, esPairs("troll:Ataque de un trol/un ataque de trol|kraken:Ataque de un kraken/un ataque de kraken"));
+Object.assign(ESx.dz, esPairs("paradoxe:Paradoja temporal/una paradoja temporal"));   // 0.2.3b
+Object.assign(ESx.ach, Object.fromEntries(Object.entries(esStr("tt_kill:Golpe de reloj de arena~Matar a alguien en el pasado con un criminal viajero del tiempo|tt_paradox:Paradoja temporal~Matar a tu propio antepasado en el pasado y provocar una paradoja temporal")).map(([k, v]) => [k, v.split('~')])));
 Object.assign(ESx.warn, {'Guerre nordique de Sept Ans':'Guerra Nórdica de los Siete Años', 'Guerre de Kalmar':'Guerra de Kalmar', 'Guerre de Hannibal':'Guerra de Hannibal', 'Guerre dano-suédoise':'Guerra danosueca',
   'Guerre de Gyldenløve':'Guerra de Gyldenløve', 'Grande guerre du Nord':'Gran Guerra del Norte', 'Guerre des Airelles':'Guerra de los Arándanos', 'Guerre des chaloupes canonnières':'Guerra de las Cañoneras',
   'Guerre suédo-norvégienne':'Guerra sueco-noruega', 'Occupation allemande de la Norvège':'Ocupación alemana de Noruega', "Guerre de l'Arctique":'Guerra del Ártico'});
@@ -6238,6 +6371,8 @@ const ACHS = [
  ['tt_antique','tt','silver','Antiquaire','Rapporter du passé un objet qui vaut 1 000 Cyn ou plus','Antique dealer','Bring back an object worth 1,000 Cyn or more from the past'],
  ['tt_ancestor','tt','gold','Rencontre au sommet',"Rendre visite à un ancêtre d'au moins 4 générations avant soi",'Summit meeting','Visit an ancestor at least 4 generations back'],
  ['tt_self','tt','special','Moi, en plus jeune','Croiser son propre jeune soi dans le passé','Me, but younger','Meet your own younger self in the past'],
+ ['tt_kill','tt','gold','Coup de sablier',"Tuer quelqu'un dans le passé avec un criminel voyageur du temps",'Hourglass strike','Kill someone in the past with a time-travelling criminal'],
+ ['tt_paradox','tt','platinum','Paradoxe temporel',"Tuer son propre ancêtre dans le passé et provoquer un paradoxe temporel",'Time paradox','Kill your own ancestor in the past and cause a time paradox'],
  ['tt_4','tt','platinum','Voyageur infatigable','Une même personne saute 4 fois dans le temps','Tireless traveller','The same person leaps through time 4 times'],
  ['miss3','kids','special','Coups du sort',"Subir 3 fausses couches d'affilée",'Strokes of bad luck','Suffer 3 miscarriages in a row'],
  ['asteroid','other','special','Touché par le ciel',"Un membre de la famille meurt d'une chute d'astéroïde",'Struck from the sky','A family member is killed by a falling asteroid'],
@@ -6444,6 +6579,13 @@ const sfx = (() => {
       note(140,0,1.3,{to:2200,glide:1.2,vol:.07,type:'triangle'}); note(147,.04,1.3,{to:2350,glide:1.2,vol:.035});
       [3136,2637,2349,1976,1568,1318].forEach((f,i) => note(f,1.05+i*.06,.55,{vol:.028,type:'triangle'})); bell(1568,1.45);
     },
+    paradox(){                                       // 0.2.3b : aspiration à l'envers, bégaiements, impact, éclats de verre
+      note(2600,0,1.05,{to:70,glide:1,vol:.06,type:'sawtooth'}); note(1800,.05,1,{to:60,glide:.95,vol:.03,type:'square'});
+      for(let i = 0; i < 9; i++) note(180 + Math.random()*1500, .2 + i*.09, .05, {vol:.035, type:'square'});
+      note(52,1.1,2.4,{to:28,glide:2.2,vol:.2,type:'triangle'}); note(39,1.1,2.6,{vol:.14}); note(104,1.1,1.2,{to:40,glide:1.1,vol:.08,type:'sawtooth'});
+      [4699,3951,3136,2637,2093,1568,1175].forEach((f,i) => note(f,1.25+i*.07,.8,{vol:.022,type:'triangle'}));
+      [[220,277,330],[208,262,311]].forEach((ch,i) => ch.forEach(f => note(f,2.1+i*.5,1.4,{vol:.03,att:.1,type:'sawtooth'})));
+    },
     war(){ note(110,0,.9,{to:82,vol:.12,type:'triangle'}); note(98,.35,1.1,{to:73,vol:.1,type:'triangle'}); note(147,.7,1,{vol:.05}); },
     growl(){                                         // contamination : un accord grave et mystérieux qui frissonne, avec un souffle
       if(muted) return; const c = init(); if(!c) return;
@@ -6567,6 +6709,7 @@ const needHeir = () => S && !S.over && active().death != null;
 const blocked = () => S.nameQueue.length > 0 || needHeir() || S.end2100 === 1 || !!S.ttAsk || !!S.ttFF || !!S.ttPast || !!(S.evQ && S.evQ.length);
 function genOf(p){
   if(!p.blood){ const u = S.unions.find(u => u.b===p.id); return u ? genOf(P(u.a)) : 1; }
+  if(p.paraLink){ const q = P(p.paraLink.to); return (q ? genOf(q) : 1) + (p.paraLink.g || 1); }   // 0.2.3b : sans origine
   return p.parents ? 1 + genOf(P(p.parents[0])) : 1;
 }
 function traits(){ return {retireAge:rnd(60,66), firstJobAge:rnd(18,30), uniP:rnd(5,15)/100, moveP:rnd(5,25)/100, menoAge:rnd(44,55),
@@ -6759,7 +6902,7 @@ function die(p, day, cause){
   if(p.death != null) return;
   if(p.immortal){ Object.assign(p, {deathAt:null, onset:null, ill:null, murderAt:null, murderBy:null, triDeath:null, doomAt:null}); return; }   // 0.2.2a : ticket doré
   if(cause.dz === 'rage_jeux' && !VSH) unlockSkin('hacker');   // 0.2.0b : thème Hacker
-  if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide' && cause.dz !== 'combat' && cause.dz !== 'depropro' && cause.dz !== 'sportx' && !/^tri\d/.test(cause.dz || '')){   // morts légendaires (0,025 % chacune)
+  if(!cause.murder && !cause.war && !cause.vanished && !cause.legend && !cause.suicide && cause.dz !== 'asteroide' && cause.dz !== 'paradoxe' && cause.dz !== 'combat' && cause.dz !== 'depropro' && cause.dz !== 'sportx' && !/^tri\d/.test(cause.dz || '')){   // morts légendaires (0,025 % chacune)
     const LD = ['mortderire','cocotier','orgorge','tsunami','cobaye'].concat(ageAt(p, day) <= 20 ? ['progeria'] : [], yearOf(day) < 1970 ? ['latrines'] : [], CTRY === 'no' ? ['troll','kraken'] : []), li = Math.floor(Math.random() / LEG_P);
     if(li < LD.length) cause = {dz: LD[li]};
   }
@@ -7381,7 +7524,8 @@ function zombieSpread(day){                           // chaque mois : 2 à 6,5 
   if(!S.over && !alive().some(p => !p.zombie && inFamily(p))) S.zombieLost = true;           // plus aucun humain : défaite
 }
 /* ================= 0.2.0a : voyageurs du temps ================= */
-const ttCan = (p, day) => !!p && p.death == null && !p.lost && !p.zombie && !royalOn() && !S.zombie && !S.vs && !S.headless && !jailed(p) && !(p.crim && p.crim.declared)
+const ttCan = (p, day, past) => !!p && p.death == null && !p.lost && !p.zombie && !royalOn() && !S.zombie && !S.vs && !S.headless && !jailed(p)
+  && !(p.crim && p.crim.declared && !(past && p.id === S.activeId))                  // 0.2.3b : un criminel ne voyage que dans le passé
   && !p.ill && p.onset == null && p.deathAt == null && p.murderAt == null && !(S.headless && p.id === S.activeId)
   && !S.unions.some(u => u.end == null && u.preg && (u.a === p.id || u.b === p.id));
 const ttMax = day => S.end2100 === 0 ? Math.floor((DAY2100 - 2 - day) / 365.25) : 120;   // le joueur ne saute pas par-dessus 2100
@@ -7446,11 +7590,13 @@ const dazeIdx = y => Math.max(0, Math.min(32, Math.floor((y - 1780) / 10)));   /
 const dazedOn = p => !!(p.dazed && p.death == null && S.t < p.dazed.until);
 const dazeTile = p => dazedOn(p) ? `<div class="span2 ttf"><dt>${t('f_dazed', p)}</dt><dd>⌛ ${esc(t('daze')[p.dazed.dec])} · ${esc(t('until_y', yearOf(p.dazed.until)))}</dd></div>` : '';
 function ttYear(p, A, day){                           // chaque anniversaire, de 16 à 60 ans : 5 % de chances qu'une faille s'ouvre
-  if(!isTT(p) || A < 16 || A > 60 || Math.random() >= .05 || !ttCan(p, day)) return false;
+  const cr = !!(p.crim && p.crim.declared);
+  if(!isTT(p) || A < 16 || A > 60 || Math.random() >= .05 || !ttCan(p, day, cr)) return false;
   let y = 8 + Math.floor(Math.pow(Math.random(), 1.6) * 83);          // de 8 à 90 ans, les petits sauts plus souvent
   if(p.id === S.activeId && !S.headless){
     const back = pastMax(day);
-    if(!S.auto && back >= 10 && Math.random() < .3){ S.ttAsk = {id: p.id, past: true, y: Math.min(back, 5 + Math.floor(Math.pow(Math.random(), 1.5) * (back - 4)))}; return false; }   // 0.2.0b : faille vers le passé
+    if(!S.auto && back >= 10 && (cr || Math.random() < .3)){ S.ttAsk = {id: p.id, past: true, y: Math.min(back, 5 + Math.floor(Math.pow(Math.random(), 1.5) * (back - 4)))}; return false; }   // 0.2.0b : faille vers le passé
+    if(cr) return false;
     y = Math.min(y, ttMax(day)); if(y < 5) return false;
     if(S.auto){ ttStart(y, p, day); return true; }
     S.ttAsk = {id: p.id, y}; return false;              // le joueur choisit
@@ -7508,7 +7654,7 @@ function ttLand(){                                     // arrivée : ce qui s'es
 }
 function openTT(){                                     // une faille s'ouvre pour le personnage joué : sauter ou rester ?
   const A = S.ttAsk, p = P(A.id), day = today();
-  if(!p || p.id !== S.activeId || !ttCan(p, day)){ S.ttAsk = null; return; }
+  if(!p || p.id !== S.activeId || !ttCan(p, day, A.past)){ S.ttAsk = null; return; }
   const y = Math.min(A.y, A.past ? pastMax(day) : ttMax(day)); if(y < 5){ S.ttAsk = null; return; }
   sfx.warp();
   openModal(`<div class="m-head"><div class="eyebrow">${t('tt_ask_eye')} · ${fmt(day)}</div><h2>${t('tt_ask_title')}</h2></div>
@@ -7572,19 +7718,20 @@ function pastFx(fromY, toY, dur, home, cb){             // l'écran du voyage, e
 function openPast(){                                    // arrivé dans le passé : une seule chose à faire avant de rentrer
   const T = S.ttPast, me = T && P(T.id);
   if(!T || !me){ S.ttPast = null; return; }
-  if(T.done){ openPastDone(); return; }
-  const ppl = pastPeople(T, me), ev = pastEvent(T);
+  if(T.done){ if(T.done.para){ ttPastEnd(); openParaDone(T.done); return; } openPastDone(); return; }
+  const ppl = pastPeople(T, me), ev = pastEvent(T), prey = isKiller(me) ? ppl.filter(x => !x.self) : [];
   openModal(`<div class="m-head"><div class="eyebrow">${t('past_eye')} · ${fmt(T.to)}</div><h2>${t('past_title', T.y)}</h2></div>
-    <div class="ttbox past">${orb(me, 'xl')}<p>${esc(t('past_intro', me, cityName(me.city), T.n))}</p></div>
+    <div class="ttbox past">${orb(me, 'xl')}<p>${esc(t('past_intro', me, cityName(me.city), T.n))}${prey.length ? `<br><b class="killnote">${esc(t('past_kill_note', me))}</b>` : ''}</p></div>
     ${ppl.length ? `<div class="eyebrow sect">${t('past_visit')}</div><div class="pastppl">${ppl.map(x => `<button class="pickrow" data-act="pastdo" data-v="visit" data-id="${x.q.id}">${orb(x.q)}<span><b>${esc(nm(x.q))}</b><small>${esc(pastLab(x))} · ${esc(tA(x.A))}</small></span><em>${t('past_rew', pastRew(x))}</em></button>`).join('')}</div>` : ''}
+    ${prey.length ? `<div class="eyebrow sect killsect">${icon('knife')} ${t('past_kill')}</div><div class="pastppl kill">${prey.map(x => `<button class="pickrow" data-act="pastkill" data-id="${x.q.id}">${orb(x.q)}<span><b>${esc(nm(x.q))}</b><small>${esc(pastLab(x))} · ${esc(t('past_kill_n', [...pastErase(x.q, T)].filter(i => P(i).blood).length))}</small></span><em>${icon('knife')}</em></button>`).join('')}</div>` : ''}
     <div class="eyebrow sect">${t('past_other')}</div><div class="pastppl">
       <button class="pickrow" data-act="pastdo" data-v="antique">${icon('trophy')}<span><b>${t('past_antique')}</b><small>${t('past_antique_d')}</small></span><em>?</em></button>
       ${ev >= 0 ? `<button class="pickrow" data-act="pastdo" data-v="witness" data-id="${ev}">${icon('flag')}<span><b>${t('past_witness')}</b><small>${esc(worldTxt(ev))}</small></span><em>${t('past_rew', 60)}</em></button>` : `<p class="note">${t('past_witness_none')}</p>`}
       <button class="pickrow" data-act="pastdo" data-v="home">${icon('clock')}<span><b>${t('past_home')}</b></span><em></em></button></div>`, {locked:true});
 }
 function openPastDone(){
-  const T = S.ttPast, me = P(T.id), r = T.done, q = (r.k === 'visit' || r.k === 'self') ? P(r.id) : null;
-  const txt = r.k === 'visit' ? t('past_res_visit', me, q, r.lab) : r.k === 'self' ? t('past_res_self', me, r.A) : r.k === 'antique' ? t('past_res_antique', me, cynFmt(r.cyn), r.mus)
+  const T = S.ttPast, me = P(T.id), r = T.done, q = (r.k === 'visit' || r.k === 'self' || r.k === 'kill') ? P(r.id) : null;
+  const txt = r.k === 'kill' ? t('past_res_kill', me, q, r.n) : r.k === 'visit' ? t('past_res_visit', me, q, r.lab) : r.k === 'self' ? t('past_res_self', me, r.A) : r.k === 'antique' ? t('past_res_antique', me, cynFmt(r.cyn), r.mus)
     : r.k === 'witness' ? t('past_res_witness', me, worldTxt(r.id)) : t('past_res_home', me);
   openModal(`<div class="m-head"><div class="eyebrow">${t('past_eye')} · ${fmt(T.to)}</div><h2>${t('past_title', T.y)}</h2></div>
     <div class="ttbox past">${orb(q || me, 'xl')}<p>${esc(txt)}</p></div>${r.cyn ? `<p class="pastcyn">+${cynFmt(r.cyn)} ${icon('dna')}</p>` : ''}
@@ -7607,6 +7754,217 @@ function ttPastEnd(){                                   // retour au même insta
     }
   }
   sfx.warp(); burst(['#ffd36b','#ffffff','#ffb02e','#fff1c4'], 50); dirty = true; render(); save();
+}
+/* ================= 0.2.3b : meurtre dans le passé et paradoxe temporel =================
+   Un criminel (le personnage joué) qui voyage dans le passé peut y tuer quelqu'un de la famille : toute la descendance de sa victime
+   née après ce jour-là n'a jamais existé. S'il fait lui-même partie de cette descendance : paradoxe temporel.
+   50 % : une toute nouvelle lignée s'écrit de la victime jusqu'à lui (nouveaux parents, frères et sœurs ou pas) ;
+   50 % : il revient sans aucune origine, relié en pointillés à sa victime, n'est plus criminel, et meurt du paradoxe en 8 à 10 ans. */
+const isKiller = p => !!(p && p.crim && p.crim.declared && !p.crim.fate && p.death == null);
+function kidsMap(){
+  const m = new Map(), add = (i, c) => { if(i == null) return; if(!m.has(i)) m.set(i, []); m.get(i).push(c); };
+  for(const c of Object.values(S.people)){ if(c.parents) c.parents.forEach(i => add(i, c)); if(c.paraLink) add(c.paraLink.to, c); }
+  return m;
+}
+function pastErase(k, T, keep){                          // toute la descendance de k née après le meurtre
+  const km = kidsMap(), E = new Set(), st = (km.get(k.id) || []).filter(c => bornD(c) > T.to);
+  while(st.length){ const c = st.pop(); if(E.has(c.id) || (keep && keep.has(c.id))) continue; E.add(c.id); (km.get(c.id) || []).forEach(x => st.push(x)); }
+  return E;
+}
+function purgePeople(E, late){                          // ceux qui n'ont jamais existé disparaissent de partout
+  E.forEach(id => delete S.people[id]);
+  S.unions = S.unions.filter(u => !E.has(u.a) && !E.has(u.b) && !(late && late.has(u.id)));
+  for(const q of Object.values(S.people)){
+    if(q.murderBy != null && E.has(q.murderBy)){ q.murderAt = null; q.murderBy = null; }
+    if(q.crim && q.crim.target != null && E.has(q.crim.target)) q.crim.target = null;
+    if(q.ttVisits) q.ttVisits = q.ttVisits.filter(v => !E.has(v.by));
+    if(q.dazed && q.dazed.met != null && E.has(q.dazed.met)) q.dazed.met = null;
+    if(q.multi && E.has(q.multi.first)) delete q.multi;
+  }
+  S.nameQueue = S.nameQueue.filter(i => !E.has(i));
+  if(S.evQ) S.evQ = S.evQ.filter(e => !E.has(e.id) && !E.has(e.pid) && !E.has(e.a));
+  if(S.ttLost) S.ttLost = S.ttLost.filter(i => !E.has(i));
+  if(S.ttAsk && E.has(S.ttAsk.id)) S.ttAsk = null;
+  S.log = S.log.filter(e => !(e.a || []).some(x => E.has(x)) || logText(e) !== '');
+  RH = undefined; dirty = true;
+}
+function timeKill(me, k, T){
+  const day = today(), g = ancGen(me).get(k.id) || 0;
+  let E = pastErase(k, T); const para = E.has(me.id);
+  if(para){                                              // le voyageur et sa propre descendance survivent au paradoxe
+    const km = kidsMap(), keep = new Set([me.id]), st = [...(km.get(me.id) || [])];
+    while(st.length){ const c = st.pop(); if(keep.has(c.id)) continue; keep.add(c.id); (km.get(c.id) || []).forEach(x => st.push(x)); }
+    E = pastErase(k, T, keep);
+  }
+  const late = new Set(S.unions.filter(u => (u.a === k.id || u.b === k.id) && u.start > T.to).map(u => u.id));   // ses couples d'après n'ont jamais existé
+  const gone = u => E.has(u.a) || E.has(u.b) || late.has(u.id);
+  for(const q of Object.values(S.people)){                // les conjoints venus d'ailleurs, s'ils n'étaient là que pour eux
+    if(q.blood || E.has(q.id) || q.id === k.id || q.id === me.id) continue;
+    const us = S.unions.filter(u => u.a === q.id || u.b === q.id);
+    if(us.length && us.every(gone)) E.add(q.id);
+  }
+  const nb = [...E].filter(id => S.people[id] && S.people[id].blood).length;
+  purgePeople(E, late);
+  const kA = ageAt(k, T.to);                             // la victime meurt ce jour-là, dans le passé
+  Object.assign(k, {death: T.to, deathAt: null, onset: null, onsetAddict: false, ill: null, murderAt: null, murderBy: null, triDeath: null, doomAt: null, fameAt: null, presAt: null,
+    lost: null, trip: null, dazed: null, warDeath: false, milDeath: false, mild: [], deathCity: k.city, cause: {murder: me.id, ttm: true}, lastAge: kA});
+  if(kA < 18) k.work = null;
+  if(k.star && !(k.star.famous && k.star.at <= T.to)) k.star = null;
+  if(k.crim && !(k.crim.declared && k.crim.at <= T.to)) delete k.crim;
+  for(const q of Object.values(S.people)) if(q.murderBy === k.id){ q.murderAt = null; q.murderBy = null; }
+  if(S.ttLost) S.ttLost = S.ttLost.filter(i => i !== k.id);
+  if(S.ttAsk && S.ttAsk.id === k.id) S.ttAsk = null;
+  if(S.evQ) S.evQ = S.evQ.filter(e => e.id !== k.id);
+  for(const u of S.unions) if((u.a === k.id || u.b === k.id) && (u.end == null || u.end > T.to)){
+    u.end = T.to; u.endReason = 'décès'; u.preg = null;
+    if(u.marriedAt != null && u.marriedAt > T.to){ u.married = false; u.marriedAt = null; }
+  }
+  me.kills = (me.kills || 0) + 1; S.nKills = (S.nKills || 0) + 1;
+  if(!VSH){ UNL.kills = (UNL.kills || 0) + 1; store.set(UNL_KEY, JSON.stringify(UNL)); if(UNL.kills >= 50) unlockSkin('goth'); }
+  if(inFamily(me)){ unlock('tt_kill'); [[4,'kill2'],[8,'kill4'],[12,'kill6'],[16,'kill8']].forEach(([n, id]) => { if(me.kills >= n) unlock(id); }); }
+  log('crime','tt_kill',[me.id, k.id, T.y, nb], day, false);
+  const r = {k:'kill', id: k.id, n: nb, para: null};
+  if(para){
+    if(inFamily(me)) unlock('tt_paradox');
+    const fam = Math.random() < .5 ? paraNewLine(me, k, T, g) : null;    // si la nouvelle lignée est impossible (dates), il reste sans origine
+    if(fam){ r.para = 'new'; r.fam = fam; } else { paraCut(me, k, g, day); r.para = 'cut'; }
+    log('crime', 'tt_para_' + r.para, [me.id, k.id], day, false);
+  }
+  S.log = S.log.filter(e => logText(e) !== '');
+  RH = undefined; dirty = true;
+  return r;
+}
+function paraCut(me, k, g, day){                        // sans origine : relié en pointillés à sa victime, et le paradoxe le ronge
+  me.parents = null; me.paraLink = {to: k.id, g: Math.max(1, g)}; delete me.multi;
+  if(me.crim){ for(const q of Object.values(S.people)) if(q.murderBy === me.id){ q.murderAt = null; q.murderBy = null; }
+    me.exCrim = {at: me.crim.at, end: day}; delete me.crim; }
+  me.immortal = false;                                   // même le ticket doré ne résiste pas à un paradoxe
+  Object.assign(me, {ill: {dz:'paradoxe', start: day, end: day + rnd(2922, 3652), cure: false}, onset: null, onsetAddict: false, deathAt: null, triDeath: null, doomAt: null, murderAt: null, murderBy: null});
+}
+function paraLife(x, minD){                             // une vie entière, déjà écrite (ou toujours en cours)
+  const Y = 365.25, day = today(), b = bornD(x);
+  let d = b + Math.round((minD == null && Math.random() < .05 ? rnd(0, 14) : rnd(45, 92)) * Y) + rnd(0, 364);
+  if(minD != null && d < minD) d = minD + Math.round(rnd(1, 30) * Y);
+  if(d >= day && ageAt(x, day) > 96) d = Math.max(minD ?? b, day - rnd(30, 1500));
+  if(d >= day){
+    x.lastAge = ageAt(x, day);
+    if(x.lastAge >= R.legal) rollAddictions(x, day);
+    planInterests(x, day); setupWork(x, day); scheduleYear(x, x.lastAge, day);
+    return;
+  }
+  const A = ageAt(x, d), row = A < 80 ? pickDisease(x, d) : null;
+  x.death = d; x.deathCity = x.city; x.lastAge = A;
+  x.cause = !row ? {old: true} : row[0] === 'disparu' ? {vanished: true} : {dz: row[0]};
+  if(A >= 18) setupWork(x, d);
+}
+function paraMate(x, childDay, sex, last){              // un conjoint d'à peu près le même âge
+  const Y = 365.25, lo = childDay - (sex === 'F' ? 42 : 60) * Y, hi = childDay - 18 * Y;
+  const b = Math.round(Math.max(lo, Math.min(hi, bornD(x) + (Math.random() * 12 - 6) * Y))), y = yearOf(b);
+  return addPerson({first: wpick(namePool(y, sex)), last: last || pickSurname(yearOf(childDay)), sex, birth: b, blood: false, city: x.city, birthCity: x.city, conds: rollConds([], y)});
+}
+function paraKid(A, B, d, sex){
+  const dad = [A, B].find(x => x.sex === 'M');
+  const c = addPerson({first: null, last: dad ? dad.last : A.last, sex: sex || (Math.random() * 100 < R.boys ? 'M' : 'F'), birth: d, blood: true, parents: [A.id, B.id], city: A.city, birthCity: A.city});
+  c.conds = rollConds([A, B], yearOf(d)); c.first = nameFor(c); regnalize(c);
+  return c;
+}
+function paraUnion(x, mt, childDay){
+  const Y = 365.25, st = Math.min(childDay - 280, Math.max(bornD(x) + 18 * Y, bornD(mt) + 18 * Y, childDay - rnd(1, 6) * Y));
+  const u = {id: S.nextId++, a: x.id, b: mt.id, start: Math.round(st), married: Math.random() < .75, marriedAt: null, end: null, endReason: null, preg: null, plan: null};
+  S.unions.push(u); return u;
+}
+function paraEnd(u){                                    // fin du couple : le premier décès (ou toujours ensemble)
+  const day = today(), ds = [P(u.a), P(u.b)].map(x => x.death).filter(d => d != null);
+  u.end = ds.length ? Math.min(...ds) : null; u.endReason = u.end != null ? 'décès' : null;
+  if(u.married){ u.marriedAt = Math.round(u.start + Math.random() * Math.min(700, Math.max(0, (u.end ?? day) - u.start - 1))); takeHusbandName(u); }
+  if(u.end == null) u.plan = {target: 0, next: day + rnd(365, 1500), leaveAt: null, marryAt: null};
+}
+function paraSibs(u, nMax, taken){                      // frères et sœurs… ou pas
+  const Y = 365.25, a = P(u.a), b = P(u.b), mom = [a, b].find(x => x.sex === 'F') || a, out = [];
+  const lo = u.start + 280, hi = Math.min(today() - 1, u.end ?? Infinity, ...[a, b].map(x => x.death != null ? x.death : Infinity), bornD(mom) + 44 * Y), want = rnd(0, nMax);
+  for(let tries = 0; out.length < want && tries < 14 && hi - lo >= 300; tries++){
+    const d = Math.round(lo + Math.random() * (hi - lo));
+    if(taken.some(x => Math.abs(x - d) < 300)) continue;
+    taken.push(d); const c = paraKid(a, b, d, null); paraLife(c, null); out.push(c);
+  }
+  return out;
+}
+function paraNewLine(me, k, T, g){                       // une toute nouvelle lignée s'écrit, de la victime jusqu'au voyageur
+  const Y = 365.25, bM = bornD(me);
+  let top = null, mate = null, U = null, lo = 1, hi = 0;
+  if(T.to - bornD(k) >= 18 * Y){                         // la victime avait eu un autre enfant avant de mourir
+    top = k; lo = bornD(k) + 18 * Y; hi = Math.min(T.to - 30, bM - 18 * Y);
+    const u = S.unions.filter(x => x.a === k.id && x.start <= T.to - 300).sort((a, b) => b.start - a.start)[0];
+    if(u){ const l2 = Math.max(lo, u.start + 280), h2 = Math.min(hi, u.end ?? T.to); if(l2 <= h2){ lo = l2; hi = h2; U = u; mate = P(u.b); } }
+  }
+  if(!(top && lo <= hi)){                                // sinon : un nouveau frère ou une nouvelle sœur de la victime
+    const pa = k.parents && P(k.parents[0]), pb = k.parents && k.parents[1] != null ? P(k.parents[1]) : null;
+    U = pa && pb ? S.unions.find(x => x.a === pa.id && x.b === pb.id) : null;
+    if(!U) return null;
+    const mom = [pa, pb].find(x => x.sex === 'F');
+    top = pa; mate = pb;
+    lo = Math.max(bornD(pa) + 18 * Y, bornD(pb) + 18 * Y, U.start);
+    hi = Math.min(bM - 18 * Y, ...[pa, pb].map(x => x.death != null ? x.death + (x === mom ? -1 : 270) : Infinity), mom ? bornD(mom) + 44 * Y : Infinity);
+  }
+  if(!(lo <= hi)) return null;
+  const born = U ? kidsOf(U).map(bornD) : [];
+  let d1 = Math.round(lo + Math.random() * (hi - lo));
+  for(let i = 0; i < 12 && born.some(x => Math.abs(x - d1) < 300); i++) d1 = Math.round(lo + Math.random() * (hi - lo));
+  const span = bM - d1, nLo = Math.max(1, Math.ceil(span / (40 * Y))), nHi = Math.max(nLo, Math.floor(span / (18 * Y)));
+  const n = Math.min(nHi, Math.max(nLo, top === k ? g - 1 : g)), births = [d1];   // le nombre de générations peut changer : c'est une autre histoire
+  const sl = Math.max(0, Math.min(3 * Y, (span / n - 18 * Y) / 2));
+  for(let i = 1; i < n; i++) births.push(Math.round(d1 + span * i / n + (Math.random() * 2 - 1) * sl));
+  if(!U){                                                // la victime avec un nouvel amour, avant sa mort
+    mate = paraMate(top, d1, top.sex === 'M' ? 'F' : 'M'); paraLife(mate, d1 + 30);
+    U = paraUnion(top, mate, d1); paraEnd(U); paraSibs(U, 2, [d1]);
+  }
+  let A = top, B = mate, u2 = U, sibs = [];
+  for(let i = 0; i < n; i++){
+    const last = i === n - 1, next = last ? bM : births[i + 1];
+    const kid = paraKid(A, B, births[i], last ? 'F' : null);
+    const mt = paraMate(kid, next, last ? 'M' : kid.sex === 'M' ? 'F' : 'M', last ? me.last : null);
+    paraLife(kid, next + Math.round(Y)); paraLife(mt, next + 30);
+    u2 = paraUnion(kid, mt, next); paraEnd(u2);
+    if(last) sibs = paraSibs(u2, 3, [bM]); else paraSibs(u2, 2, [next]);
+    A = kid; B = mt;
+  }
+  me.parents = [A.id, B.id]; delete me.multi; delete me.paraLink;
+  return {mom: A.id, dad: B.id, sibs: sibs.map(c => c.id)};
+}
+function paraFx(r, cb){                                 // l'animation du paradoxe temporel
+  const me = active(), T = S.ttPast, y0 = T ? T.y : yearOf(today()) - 50, y1 = yearOf(today());
+  const el = document.createElement('div'); el.id = 'paraFx'; el.setAttribute('role', 'alert');
+  const R2 = (a, b) => a + Math.random() * (b - a);
+  const shards = Array.from({length: 22}, (_, i) => `<i style="--a:${(i / 22 * 360 + R2(-7, 7)).toFixed(1)}deg;--d:${R2(38, 78).toFixed(1)}vmax;--r:${Math.round(R2(-600, 600))}deg;--s:${R2(.5, 1.5).toFixed(2)};--dl:${R2(1.08, 1.3).toFixed(2)}s"></i>`).join('');
+  const bars = Array.from({length: 7}, () => `<b style="--t:${R2(0, 96).toFixed(1)}%;--h:${R2(2, 12).toFixed(1)}px;--du:${R2(.6, 1.6).toFixed(2)}s;--dl:${R2(0, .9).toFixed(2)}s"></b>`).join('');
+  const crack = () => { let x = 50, yy = 46, d = `M50 46`; const a = R2(0, Math.PI * 2); for(let i = 0; i < 6; i++){ const aa = a + R2(-.45, .45), st = R2(6, 14); x += Math.cos(aa) * st; yy += Math.sin(aa) * st; d += `L${x.toFixed(1)} ${yy.toFixed(1)}`; } return `<path d="${d}"/>`; };
+  const ticks = Array.from({length: 12}, (_, i) => { const a = i / 12 * Math.PI * 2; return `<line class="tk" x1="${(100 + Math.cos(a) * 78).toFixed(1)}" y1="${(100 + Math.sin(a) * 78).toFixed(1)}" x2="${(100 + Math.cos(a) * 90).toFixed(1)}" y2="${(100 + Math.sin(a) * 90).toFixed(1)}"/>`; }).join('');
+  el.innerHTML = `<div class="px-bars">${bars}</div><div class="px-scan"></div>
+    <svg class="px-crack" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${Array.from({length: 9}, crack).join('')}</svg>
+    <div class="px-rings"><i></i><i></i><i></i></div><div class="px-shards">${shards}</div>
+    <div class="px-core"><div class="px-clock"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="face" cx="100" cy="100" r="92"/>${ticks}
+      <line class="hh" x1="100" y1="100" x2="100" y2="52"/><line class="mh" x1="100" y1="100" x2="100" y2="26"/>
+      <path class="cr" d="M100 8 L92 40 L108 62 L96 100 L118 128 L104 160 L112 192"/><path class="cr" d="M14 70 L46 82 L60 108 L96 100"/><path class="cr" d="M186 120 L150 112 L128 90 L108 62"/></svg>${orb(me, 'xl')}</div>
+      <div class="px-year"></div><h2 class="px-title" data-t="${esc(t('para_title'))}">${esc(t('para_title'))}</h2>
+      <p class="px-sub">${esc(r.para === 'new' ? t('para_sub_new', me) : t('para_sub_cut', me))}</p></div><div class="px-flash"></div>`;
+  document.body.appendChild(el); sfx.paradox();
+  let on = true; const yEl = el.querySelector('.px-year'), GL = '█▓▒░#%?';
+  const glitch = () => { if(!on) return; const q = Math.random();
+    yEl.textContent = q < .12 ? '????' : q < .22 ? '∞' : String(Math.round(R2(Math.min(y0, y1) - 150, Math.max(y0, y1) + 150))).split('').map(c => Math.random() < .25 ? GL[Math.floor(Math.random() * GL.length)] : c).join('');
+    setTimeout(glitch, 55); };
+  glitch();
+  const end = () => { if(!on) return; on = false; el.classList.add('out'); setTimeout(() => el.remove(), 800); cb(); };
+  setTimeout(() => el.addEventListener('click', end), 1500);
+  setTimeout(end, reduced ? 1800 : 5400);
+}
+function openParaDone(r){                               // de retour au présent, après le paradoxe
+  const me = active(), q = P(r.id), day = today(), fam = r.fam, mom = fam && P(fam.mom), dad = fam && P(fam.dad);
+  const sibs = fam ? fam.sibs.map(P).filter(Boolean) : [];
+  sfx.warp(); burst(['#ff0050','#00f0ff','#ffffff','#b25cff'], 60);
+  openModal(`<div class="m-head"><div class="eyebrow">${t('tt_ask_eye')} · ${fmt(day)}</div><h2 class="paratitle">${t('para_title')}</h2></div>
+    <div class="ttbox para">${orb(me, 'xl')}<p>${esc(r.para === 'new' ? t('para_res_new', me, q, sibs) : t('para_res_cut', me, q))}</p></div>
+    ${mom && dad ? `<p class="ttmet">${orb(mom)}${orb(dad)}<span>${esc(t('para_parents', nm(mom), nm(dad)))}</span></p>` : ''}
+    <div class="acts"><button class="gel wide" data-act="paraok"><span>${t('para_ok')}</span></button></div>`, {locked:true});
 }
 function processDay(day){
   if(!VSH && !UNL.cyber && !S.ttPastUsed && day % 365 === 0 && yearOf(day) >= 2300) unlockSkin('cyber');   // 0.2.0b : thème Cyberpunk
@@ -8105,6 +8463,7 @@ function nodeHTML(p, x, y){
   if(p.id===S.activeId) cls.push('active');
   if(TPICK){ cls.push(TPICK.ids.has(p.id) ? 'tpk' : 'tpx'); if(TPICK.armed === p.id) cls.push('tparm'); }   // 0.2.2b : choix dans l'arbre
   if(!p.blood) cls.push('partner');
+  if(p.paraLink) cls.push('paranode');
   if(p.star){ cls.push('star'); if(p.star.famous){ cls.push('famous'); if(p.death==null && S.t - p.star.at < 200) cls.push('fresh'); } }
   if(p.ill && p.death==null) cls.push('ill');
   else if(p.death==null && mildOn(p).length) cls.push('mild');
@@ -8150,10 +8509,12 @@ function buildTree(){
   for(const u of S.unions){ if(!UA.has(u.a)) UA.set(u.a, []); UA.get(u.a).push(u); }
   const kidsL = u => KC.get(u.a + '-' + u.b) || [];
   const soloL = pid => KC.get(pid + '-undefined') || [];   // 0.2.0c : adopté par une personne seule
+  const PL = new Map(); for(const c of Object.values(S.people)) if(c.paraLink){ if(!PL.has(c.paraLink.to)) PL.set(c.paraLink.to, []); PL.get(c.paraLink.to).push(c); }
+  const paraL = pid => PL.get(pid) || [];                 // 0.2.3b : paradoxe temporel, relié en pointillés
   const unionsL = pid => (UA.get(pid) || []).filter(u => u.end == null || u.married || kidsL(u).length);
   let maxDepth = 0;
   function measure(pid){
-    const us = unionsL(pid), selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), kids = us.flatMap(kidsL).concat(soloL(pid));
+    const us = unionsL(pid), selfW = NWo(pid) + us.reduce((a, u) => a + NWo(u.b) + PG, 0), kids = us.flatMap(kidsL).concat(soloL(pid), paraL(pid));
     const kidsW = kids.length ? kids.reduce((s,k) => s + measure(k.id), 0) + (kids.length-1)*GX : 0;
     return memo[pid] = Math.max(selfW, kidsW);
   }
@@ -8164,7 +8525,7 @@ function buildTree(){
     pos[pid] = {x:sx, y};
     let ux = sx + NWo(pid) + PG;
     us.forEach(u => { pos[u.b] = {x: ux, y}; ux += NWo(u.b) + PG; });
-    const groups = us.map(kidsL), solo = soloL(pid), kids = groups.flat().concat(solo);
+    const groups = us.map(kidsL), solo = soloL(pid), para = paraL(pid), kids = groups.flat().concat(solo, para);
     const kidsW = kids.length ? kids.reduce((s,k) => s + memo[k.id], 0) + (kids.length-1)*GX : 0;
     let kx = x + (w-kidsW)/2;
     us.forEach((u,i) => {
@@ -8182,11 +8543,16 @@ function buildTree(){
       links.push({mx: sx + NWo(pid)/2, y1: y + NH, bus: y + NH + GY/2 + 8 + us.length*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
       kx += memo[k.id] + GX;
     });
+    para.forEach(k => {                                 // très loin en bas, autant de rangs vides que de générations effacées
+      place(k.id, kx, depth + (k.paraLink.g || 1));
+      links.push({para:true, mx: sx + NWo(pid)/2, y1: y + NH, bus: y + NH + GY/2 + 8 + (us.length + 1)*7, kx: pos[k.id].x + NWo(k.id)/2, ky: pos[k.id].y});
+      kx += memo[k.id] + GX;
+    });
   }
   measure(S.founderId); place(S.founderId, 0, 0);
   const W = memo[S.founderId] + PAD*2, H = PAD*2 + (maxDepth+1)*NH + maxDepth*GY;
   let svg = '';
-  for(const l of links){ const d = `M${l.mx} ${l.y1}V${l.bus}H${l.kx}V${l.ky}`; svg += `<path class="ln-wire-under" d="${d}"/><path class="ln-wire" d="${d}"/>`; }
+  for(const l of links){ const d = `M${l.mx} ${l.y1}V${l.bus}H${l.kx}V${l.ky}`; svg += l.para ? `<path class="ln-para" d="${d}"/>` : `<path class="ln-wire-under" d="${d}"/><path class="ln-wire" d="${d}"/>`; }
   for(const u of unionsD){
     svg += `<path class="ln-u ${u.st}" d="M${u.x1} ${u.y0}V${u.by}H${u.x2}V${u.y0}"/>`;
     if(u.st==='married') svg += `<g transform="translate(${u.mx} ${u.by})"><circle cx="-4" r="5.5" fill="none" stroke="#ffb300" stroke-width="2.6"/><circle cx="4" r="5.5" fill="none" stroke="#ff8a00" stroke-width="2.6"/></g>`;
@@ -9568,7 +9934,7 @@ function setView(v){
   const sw = $('#viewSw'); sw.hidden = !SET.map;
   sw.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === curView)));
   $('#treeScroll').hidden = curView !== 'tree'; $('#mapView').hidden = curView !== 'map';
-  $('.tree-head [data-act="center"]').hidden = curView !== 'tree';
+  document.querySelectorAll('.tree-head [data-act="center"]').forEach(b => { b.hidden = curView !== 'tree'; });
   if(curView === 'map') renderMap(); else if(S) renderTree();
 }
 function buildMap(){
@@ -9842,8 +10208,8 @@ function giveName(n){
 function ttWatchHTML(me){                            // 0.2.0a : sauter dans le temps quand on veut (une fois tous les 10 ans) ; 0.2.0b : vers le futur ou le passé
   const day = today(), past = ttDir === 'past', cool = (me.ttCool || 0) > day;
   const opts = past ? [5,10,20,30,50,75,100,150,200,250,300].filter(n => n <= pastMax(day)) : [5,10,20,30,50,75,100].filter(n => n <= ttMax(day));
-  const ok = ttCan(me, day) && !cool && opts.length > 0;
-  const note = cool ? t('tt_watch_cool', yearOf(me.ttCool)) : !ttCan(me, day) ? t('tt_watch_no') : !opts.length ? t(past ? 'tt_past_none' : 'tt_watch_no') : past ? t('tt_past_note', me) : t('tt_watch_note');
+  const ok = ttCan(me, day, past) && !cool && opts.length > 0;
+  const note = cool ? t('tt_watch_cool', yearOf(me.ttCool)) : !past && me.crim && me.crim.declared && ttCan(me, day, true) ? t('tt_crim_past') : !ttCan(me, day, past) ? t('tt_watch_no') : !opts.length ? t(past ? 'tt_past_none' : 'tt_watch_no') : past ? t('tt_past_note', me) : t('tt_watch_note');
   const def = past ? (opts.includes(50) ? 50 : opts[opts.length - 1]) : 20;
   return `<div class="eyebrow sect">${icon('clock')} ${t('tt_watch')}</div><div class="acts ttwatch">
     <div class="pills ttdir" role="group"><button data-act="ttdir" data-v="fut" aria-pressed="${!past}">${t('tt_dir_fut')} →</button><button data-act="ttdir" data-v="past" aria-pressed="${past}">← ${t('tt_dir_past')}</button></div>
@@ -9917,7 +10283,7 @@ function causeText(p){
   const c = p.cause || {};
   if(c.old) return t('cause_old');
   if(c.war) return t('cause_war', c.war, p) + warTag(c);
-  if(c.murder) return t('cause_murder', p, c.murder);
+  if(c.murder) return t(c.ttm ? 'cause_tmurder' : 'cause_murder', p, c.murder);
   if(c.vanished) return t('cause_vanished', p);
   if(c.suicide) return t('cause_suicide');
   if(c.legend) return t('cause_legend', p);
@@ -10005,7 +10371,7 @@ function legKeys(p){                                 // 0.2.0a : ce qu'une perso
   return out;
 }
 const legName = (k, id, p) => k === 'i' ? intName(id, p) : k === 'c' ? condName(id, p) : k === 'j' ? jobName(id, p) : k === 'e' ? (id.startsWith('tr_') ? trackName(id.slice(3)) : fieldName(id.slice(2)))
-  : k === 'm' ? mildName(id) : k === 'd' ? dzName(id, p) : addName(id, p);
+  : k === 'm' ? mildName(id) : k === 'd' ? (id === 'ttmurder' ? t('alb_d_ttmurder') : dzName(id, p)) : addName(id, p);
 const legIcon = (k, id) => k === 'i' ? INT[id][5] : k === 'c' ? COND[id][4] : k === 'a' ? ADD[id][4] : {j:'sparkle', e:'atom', m:'pill', d:'bolt'}[k];
 const legTile = p => { const L = legKeys(p); return L.length ? `<div class="span2 legf"><dt>✦ ${t('tier_legend')}</dt><dd>${esc(L.map(([k, id]) => legName(k, id, p)).join(' · '))}</dd></div>` : ''; };
 function legNotice(p){                                // grande annonce quand quelqu'un obtient quelque chose de légendaire
@@ -10019,7 +10385,7 @@ function legNotice(p){                                // grande annonce quand qu
     if(!achBusy) nextAch();
   }
 }
-const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 'w_' + c.war : c.murder ? 'murder' : c.vanished ? 'vanished' : c.suicide ? 'suicide' : c.legend ? 'legend' : c.dz || null; };
+const deathKey = p => { const c = p.cause || {}; return c.old ? 'old' : c.war ? 'w_' + c.war : c.murder ? (c.ttm ? 'ttmurder' : 'murder') : c.vanished ? 'vanished' : c.suicide ? 'suicide' : c.legend ? 'legend' : c.dz || null; };
 function albumScan(force){
   if(!S) return;
   let ch = false;
@@ -10121,7 +10487,7 @@ function albItemsCur(k){
     .concat(STARJOBS.map(r => ({id:r[0], name: '★ ' + jobName(r[0], {sex:'M'}), ic:'sparkle', y:r[5], desc: albYears(r[5], r[6])})))
     .concat(t('mil_ranks').map((n, i) => ({id:'mil_' + i, name: `${t('alb_mil')} · ${n}`, ic:'helmet', y:1500, desc: t('alb_mil_d')})))
     .concat(TRAVEL_C.filter(c => c !== CTRY).map(c => ({id:'trv_' + c, name: t('trv_' + c), ic:'planet', y:1500, desc: t('alb_trv_d')}))).filter(uniq);
-  if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle']].map(([id, ic]) => ({id, ic, y:1500, name: t('alb_d_' + id)}))
+  if(k === 'd') return [['old','hourglass'],['murder','knife'],['suicide','skull'],['vanished','eyeoff'],['legend','sparkle'],['ttmurder','clock']].map(([id, ic]) => ({id, ic, y:1500, name: t('alb_d_' + id)}))
     .concat(WARCAUSES.map(r => ({id:'w_' + r[0], ic:'sword', name: cap(XL() && XD.warc[r[0]] ? XD.warc[r[0]][0] : fr ? r[1] : r[3]), y:r[5], desc: albYears(r[5], r[6]), secret:true})))
     .concat(DISEASES.filter(d => d[0] !== 'disparu' && d[5] >= d[4]).map(d => ({id:d[0], ic: EVENTS.has(d[0]) ? 'bolt' : 'pill', name: dzName(d[0]), y:d[4], desc: albYears(d[4], d[5]), secret:true}))).filter(uniq);
   if(k === 'e') return schoolItems();
@@ -10173,7 +10539,7 @@ function cbVals(){                                     // 0.2.3a : les vraies va
     addict: cbP(R.addict), uni: `${cbP(5)} – ${cbP(15)}`, job: cbP(3.5), trip: cbP(1.2), move: `${cbP(.4)} – ${cbP(1.9)}`, milM: cbP(6), milF: cbP(2), disc: cbP(60), pol: cbP(1.4), amb: cbP(30),
     refuse: cbP(5), marry: cbP(60), leave: cbP(LEAVE_P * 100), pair: cbP(PAIR_P * 100), kids: KIDS_P.map(x => cbP(x * 100)), kid1950: cbP(30), war: '+' + cbP(35),
     ill: cbP(Math.round(600 / 1.29 * R.illness / 100) / 100), covid: cbP(8), found: cbP(20), ast: cbP(.05), jail: cbP(40), vanish: cbP(50), suic: cbP(50), target: cbP(60),
-    evC: cbP(.9), evA: cbP(.4), evX: cbP(.22), evX2: cbP(50), evS: cbP(.5), evT: cbP(.13), evT2: cbP(30), evAl: cbP(.07), leg: cbP(LEG_P * 100), rift: cbP(5), butterfly: cbP(20),
+    evC: cbP(.9), evA: cbP(.4), evX: cbP(.22), evX2: cbP(50), evS: cbP(.5), evT: cbP(.13), evT2: cbP(30), evAl: cbP(.07), leg: cbP(LEG_P * 100), rift: cbP(5), butterfly: cbP(20), para: `${cbP(50)} · ${cbP(50)}`,
     royal: cbP(40), count: cbP(22), zone: `${cbP(ZRATE.easy * 100)} – ${cbP(ZRATE.ext * 100)}`, fert: [77, 15, 8].map(cbP).join(' · ')};
 }
 function carnetHTML(){
@@ -11044,11 +11410,11 @@ const ACT = {
     store.del(TUTO_KEY); b.disabled = true; b.querySelector('span').textContent = t('tuto_planned');
   },
   cyninfo(){ cynInfoOpen = !cynInfoOpen; openShop(true); },
-  ttgo(d){ const A = S.ttAsk; closeModal(true); if(A && ttCan(active(), today())){ if(A.past) ttPastStart(+d.v); else ttStart(+d.v); } else S.ttAsk = null; },
+  ttgo(d){ const A = S.ttAsk; closeModal(true); if(A && ttCan(active(), today(), A.past)){ if(A.past) ttPastStart(+d.v); else ttStart(+d.v); } else S.ttAsk = null; },
   ttstay(){ const A = S.ttAsk; S.ttAsk = null; closeModal(true); if(A) log('tt','tt_stay',[A.id], today(), false); },
   ttwatch(d, b){
     const me = active(), day = today(), n = +($('#ttSel') || {}).value, past = ttDir === 'past';
-    if(!n || n < 5 || !isTT(me) || !ttCan(me, day) || (me.ttCool || 0) > day || n > (past ? pastMax(day) : ttMax(day))) return;
+    if(!n || n < 5 || !isTT(me) || !ttCan(me, day, past) || (me.ttCool || 0) > day || n > (past ? pastMax(day) : ttMax(day))) return;
     if(!arm(b, t('shop_confirm'))) return;
     closeModal(true); if(past) ttPastStart(n); else ttStart(n);
   },
@@ -11073,6 +11439,19 @@ const ACT = {
     } else r = {k:'home', cyn: 0};
     T.done = r; sfx.cure(); save(); openPastDone();
   },
+  pastkill(d, b){                                     // 0.2.3b : un criminel tue quelqu'un dans le passé
+    const T = S.ttPast; if(!T || T.done) return;
+    const me = P(T.id); if(!isKiller(me)) return;
+    const x = pastPeople(T, me).find(z => z.q.id === +d.id && !z.self); if(!x) return;
+    if(b.dataset.armed !== '1'){                       // deuxième appui pour confirmer
+      const em = b.querySelector('em'), old = em.innerHTML; b.dataset.armed = '1'; b.classList.add('armed'); em.textContent = t('shop_confirm');
+      setTimeout(() => { if(b.isConnected){ b.dataset.armed = ''; b.classList.remove('armed'); em.innerHTML = old; } }, 3000); return;
+    }
+    const r = timeKill(me, x.q, T); T.done = r; save();
+    if(r.para){ closeModal(true); paraFx(r, () => { ttPastEnd(); openParaDone(r); }); }
+    else { sfx.crime(); burst(['#ff2a00','#1a0003','#b3001b','#ffd36b'], 40); openPastDone(); }
+  },
+  paraok(){ closeModal(true); dirty = true; render(); centerOn(S.activeId, true); },
   pastback(){ const T = S.ttPast; if(!T) return; closeModal(true); pastFx(T.y, yearOf(T.from), 1700, true, ttPastEnd); },
   ttland(){ closeModal(true); },
   dev(d){

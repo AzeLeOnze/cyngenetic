@@ -2,6 +2,14 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.3b — 17 novembre 2026
+
+- Les criminels voyageurs du temps peuvent maintenant tuer quelqu'un de la famille pendant un voyage dans le passé : toute la descendance de la victime née après ce jour-là n'a jamais existé et disparaît de l'arbre. Un criminel ne voyage que dans le passé.
+- S'il tue son propre ancêtre : paradoxe temporel, avec son animation. Une chance sur deux de revenir au même instant dans une toute nouvelle lignée (nouveaux parents, frères et sœurs… ou pas). Sinon, il revient sans aucune origine : relié en pointillés à sa victime, tout en bas de l'arbre, plus criminel, et condamné par une maladie légendaire qui l'emporte en 8 à 10 ans.
+- 2 nouveaux succès : Coup de sablier (or) et Paradoxe temporel (platine). Et 2 nouvelles morts légendaires dans l'album : assassiné dans le passé, mort d'un paradoxe temporel.
+- Sur téléphone, un bouton cible recentre l'arbre sur le personnage joué.
+- Album : l'onglet Carnet des probabilités se fond dans chaque thème au lieu de briller en jaune.
+
 ## v0.2.3a — 16 novembre 2026
 
 - Nouveau pays de lignée : la Norvège 🇳🇴 ! Une carte avec les Lofoten et le Svalbard, 52 villes, des prénoms qui évoluent de 1500 à 2100 (et au-delà), des noms de famille d'ici (et samis), 10 guerres, l'histoire du pays de l'Union de Kalmar à nos jours, des écoles norvégiennes, 16 métiers (pêcheur de morue des Lofoten, éleveur de rennes sami, baleinier…), 12 centres d'intérêt (friluftsliv, brunost, ski de fond…) et deux morts légendaires qu'on ne croise qu'en Norvège.
