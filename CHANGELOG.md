@@ -4,6 +4,7 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 
 ## v0.2.5a — 17 novembre 2026
 
+- Trois thèmes ont leur musique : Arcade 90 (un vrai chiptune de borne d'arcade, avec la pièce qu'on insère), Galaxie (douce, froide et magique : nappes de glace, cristaux, vent de l'espace) et Or (royale et épique : fanfare de cuivres, trompette héroïque, timbales, cordes qui galopent, cymbales).
 - Le thème Dark a sa propre musique : une marche gothique en ré mineur, menaçante et bien rythmée (batterie, basse qui martèle, orgue d'église, clavecin, chœur qui gémit, une mélodie qui rôde… et le glas toutes les 8 mesures).
 - Les politiques brésiliens ont leurs couleurs (vert, jaune et bleu), en version claire et en version sombre.
 - Nouveau pays de lignée : le Brésil 🇧🇷 ! Une carte avec 54 villes (de Porto Seguro en 1503 à Brasília en 1960), des prénoms qui évoluent de 1500 à 2100, des noms de famille d'ici (et des familles venues d'Italie, d'Allemagne, du Japon et du Liban), 18 guerres, l'histoire du pays de Cabral à aujourd'hui, 17 métiers (seringueiro, garimpeiro, sambiste, mestre de capoeira…), 12 centres d'intérêt, des écoles brésiliennes… et 2 morts légendaires bien d'ici.

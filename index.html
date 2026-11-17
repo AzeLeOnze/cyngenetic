@@ -2551,7 +2551,8 @@ const APP_VERSION = '0.2.5a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.2.5a', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
-   fr:['Le thème Dark a sa propre musique : une marche gothique en ré mineur, menaçante et bien rythmée (batterie, basse qui martèle, orgue d\'église, clavecin, chœur qui gémit, une mélodie qui rôde… et le glas toutes les 8 mesures).',
+   fr:['Trois thèmes ont leur musique : Arcade 90 (un vrai chiptune de borne d\'arcade, avec la pièce qu\'on insère), Galaxie (douce, froide et magique : nappes de glace, cristaux, vent de l\'espace) et Or (royale et épique : fanfare de cuivres, trompette héroïque, timbales, cordes qui galopent, cymbales).',
+       'Le thème Dark a sa propre musique : une marche gothique en ré mineur, menaçante et bien rythmée (batterie, basse qui martèle, orgue d\'église, clavecin, chœur qui gémit, une mélodie qui rôde… et le glas toutes les 8 mesures).',
        'Les politiques brésiliens ont leurs couleurs (vert, jaune et bleu), en version claire et en version sombre.',
        'Nouveau pays de lignée : le Brésil 🇧🇷 ! Une carte avec 54 villes (de Porto Seguro en 1503 à Brasília en 1960), des prénoms qui évoluent de 1500 à 2100, des noms de famille d\'ici (et des familles venues d\'Italie, d\'Allemagne, du Japon et du Liban), 18 guerres, l\'histoire du pays de Cabral à aujourd\'hui, 17 métiers (seringueiro, garimpeiro, sambiste, mestre de capoeira…), 12 centres d\'intérêt, des écoles brésiliennes… et 2 morts légendaires bien d\'ici.',
        'Après 2300, les prénoms et les noms se corrompent de plus en plus jusqu\'en 4000 : lettres cassées, katakana et idéogrammes qui s\'infiltrent, noms qui perdent tout sens… avec des effets de plus en plus flippants (couleurs malades, tremblements, noms géants ou minuscules qui débordent des bulles, fantômes, portraits inversés). Après 3000, l\'arbre lui-même s\'assombrit.',
@@ -2562,7 +2563,8 @@ const PATCHNOTES = [
        'Nouveaux objectifs : 200 000 € (facile), 1,5 million (moyen), 10 millions (dur) et 50 millions (extrême).',
        'Version PC : le statut Discord affiche le mode Argent (difficulté, fortune, progression… ou la faillite).',
        'Les bulles s\'élargissent pour laisser lire « Voyage aux États-Unis » et les autres voyages en entier.'],
-   en:['The Dark theme gets its own music: a gothic march in D minor, menacing and driving (drums, pounding bass, church organ, harpsichord, a moaning choir, a prowling melody… and a death knell every 8 bars).',
+   en:['Three themes get their own music: Arcade 90 (a real arcade cabinet chiptune, coin sound included), Galaxy (soft, cold and magical: icy pads, crystals, space wind) and Gold (royal and epic: brass fanfare, heroic trumpet, timpani, galloping strings, cymbals).',
+       'The Dark theme gets its own music: a gothic march in D minor, menacing and driving (drums, pounding bass, church organ, harpsichord, a moaning choir, a prowling melody… and a death knell every 8 bars).',
        'Brazilian politicians get their colours (green, yellow and blue), in light and dark versions.',
        'New bloodline country: Brazil 🇧🇷! A map with 54 towns (from Porto Seguro in 1503 to Brasília in 1960), first names that evolve from 1500 to 2100, local surnames (and families from Italy, Germany, Japan and Lebanon), 18 wars, the country\'s history from Cabral to today, 17 jobs (seringueiro, garimpeiro, samba musician, capoeira master…), 12 interests, Brazilian schools… and 2 very local legendary deaths.',
        'After 2300, first names and surnames get more and more corrupted until 4000: broken letters, katakana and kanji creeping in, names losing all meaning… with ever creepier effects (sickly colours, shaking, giant or tiny names spilling out of the bubbles, ghosts, inverted portraits). After 3000, the tree itself grows darker.',
@@ -7108,7 +7110,9 @@ const music = (() => {
   const starOn = () => mode === 'calm' && document.documentElement.dataset.skin === 'bain';
   const DARKC = {bpm:104, chords:[[50,53,57,62]], mel:[74]};   // 0.2.5a : thème Dark (le métronome de playDark)
   const gothOn = () => mode === 'calm' && document.documentElement.dataset.skin === 'goth';
-  const cfgOf = m => m === 'zombie' ? ZOMB : m === 'tense' ? TENSE : m === 'fest' ? FEST : gothOn() ? DARKC : starOn() ? STAR : CALM;
+  const ARCC = {bpm:150, chords:[[60,64,67]], mel:[72]}, GALC = {bpm:60, chords:[[55,59,62]], mel:[76]}, GOLDC = {bpm:92, chords:[[62,66,69]], mel:[74]};   // 0.2.5a : Arcade 90, Galaxie, Or
+  const skinMus = () => mode === 'calm' ? document.documentElement.dataset.skin : '';
+  const cfgOf = m => m === 'zombie' ? ZOMB : m === 'tense' ? TENSE : m === 'fest' ? FEST : ({goth:DARKC, bain:STAR, arcade:ARCC, galaxy:GALC, gold:GOLDC})[skinMus()] || CALM;
   const volOf = m => m === 'calm' ? 1 : m === 'fest' ? 1.25 : TENSE_VOL;
   const TENSE = {bpm:92, chords:[[45,52,60,64],[41,48,57,60],[38,45,53,57],[40,47,56,59]], mel:[69,71,72,75,76,80,81]};  // La m · Fa · Ré m · Mi
   const mtof = m => 440 * Math.pow(2, (m-69)/12), TENSE_VOL = 1.7;   // la musique du criminel est plus forte
@@ -7313,11 +7317,175 @@ const music = (() => {
     if(k % 32 === 16) dChoir(C.r + 24, t, beat * 16, .028);
     if(ph === 56) dRiser(t, beat * 8, .06);
   }
+  /* ===== 0.2.5a : trois musiques de thèmes ===== */
+  const BUS = {}, BIR = {};
+  function themeBus(key, sec, pw, wetv, trimv){            // une salle par thème : réverbération, compresseur, volume
+    const B = BUS[key]; if(B && B.out === out) return B;
+    const sr = ctx.sampleRate;
+    if(!BIR[key] || BIR[key].sampleRate !== sr){ const n = Math.floor(sr * sec), ir = ctx.createBuffer(2, n, sr);
+      for(let c = 0; c < 2; c++){ const d = ir.getChannelData(c); for(let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, pw) * (i < sr * .01 ? i / (sr * .01) : 1); }
+      BIR[key] = ir; }
+    const mix = ctx.createGain(), comp = ctx.createDynamicsCompressor(), rev = ctx.createGain(), conv = ctx.createConvolver(), wet = ctx.createGain(), trim = ctx.createGain();
+    comp.threshold.value = -18; comp.knee.value = 10; comp.ratio.value = 4; comp.attack.value = .004; comp.release.value = .2;
+    conv.buffer = BIR[key]; wet.gain.value = wetv; trim.gain.value = trimv;
+    mix.connect(comp); rev.connect(conv); conv.connect(wet); wet.connect(comp); comp.connect(trim); trim.connect(out);
+    return BUS[key] = {mix, rev, out};
+  }
+  function tOut(bus, node, send, pan){
+    let n = node;
+    if(pan != null && ctx.createStereoPanner){ const p = ctx.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan)); n.connect(p); n = p; }
+    n.connect(bus.mix); if(send){ const g = ctx.createGain(); g.gain.value = send; n.connect(g); g.connect(bus.rev); }
+  }
+  const noteLen = (arr, i, max) => { let n = 1; while(n < max && !arr[(i + n) % arr.length]) n++; return n; };
+
+  /* ----- Arcade 90 : une vraie musique de borne d'arcade (chiptune) ----- */
+  const ARCB = () => themeBus('arc', 1, 3.5, .16, .3);
+  const PW = {};
+  function pulse(d){                                     // onde carrée à rapport cyclique (12,5 %, 25 %, 50 %), comme les vieilles consoles
+    if(PW[d] && PW[d].c === ctx) return PW[d].w;
+    const N = 40, re = new Float32Array(N), im = new Float32Array(N); for(let n = 1; n < N; n++) re[n] = 2 / (n * Math.PI) * Math.sin(Math.PI * n * d);
+    const w = ctx.createPeriodicWave(re, im); PW[d] = {c: ctx, w}; return w;
+  }
+  function chip(m, t, dur, v, d, pan, vib){
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    if(d === 'tri') o.type = 'triangle'; else o.setPeriodicWave(pulse(d)); o.frequency.value = mtof(m);
+    if(vib){ const l = ctx.createOscillator(), lg = ctx.createGain(); l.frequency.value = 6.5; lg.gain.setValueAtTime(0, t); lg.gain.linearRampToValueAtTime(mtof(m) * .014, t + Math.min(.25, dur * .5));
+      l.connect(lg); lg.connect(o.frequency); l.start(t); l.stop(t + dur + .05); }
+    g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .004); g.gain.setValueAtTime(v * .75, t + dur * .55); g.gain.linearRampToValueAtTime(.0001, t + dur);
+    o.connect(g); tOut(ARCB(), g, .1, pan); o.start(t); o.stop(t + dur + .05);
+  }
+  function aNoise(t, dur, v, hp){ const sr = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain(); sr.buffer = noise(); fl.type = 'highpass'; fl.frequency.value = hp;
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur); sr.connect(fl); fl.connect(g); tOut(ARCB(), g, .04); sr.start(t, Math.random() * 1.5); sr.stop(t + dur + .03); }
+  function aKick(t, v){ const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'triangle'; o.frequency.setValueAtTime(190, t); o.frequency.exponentialRampToValueAtTime(45, t + .09);
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + .17); o.connect(g); tOut(ARCB(), g, 0); o.start(t); o.stop(t + .2); }
+  const AC = {C:{r:36, a:[60,64,67]}, Am:{r:33, a:[57,60,64]}, F:{r:41, a:[53,57,60]}, G:{r:43, a:[55,59,62]}, Em:{r:40, a:[52,55,59]}};
+  const ARC_BARS = ['C','Am','F','G','C','Am','F','G', 'F','G','Em','Am','F','G','C','C'];
+  const ARC_MEL = [76,0,79,0,84,0,79,76, 81,0,0,79,76,0,72,0, 77,0,81,0,84,0,81,77, 79,0,0,0,83,0,86,0,
+    88,0,86,84,79,0,76,0, 81,0,84,0,88,0,86,84, 81,0,79,77,76,0,74,0, 79,0,0,0,83,81,79,74,
+    81,0,0,84,0,0,81,0, 83,0,0,86,0,0,83,0, 79,0,83,0,88,0,86,83, 84,0,0,0,81,0,0,0,
+    77,81,84,89,0,88,86,84, 86,0,83,0,79,0,83,86, 88,0,0,86,0,0,84,0, 84,0,0,0,79,0,76,0];
+  let arcFrom = -1;
+  function playArc(s, t){
+    if(arcFrom < 0) arcFrom = s;
+    const k = s - arcFrom, beat = 60 / ARCC.bpm / 2, pos = k % 128, bar = pos >> 3, b = pos & 7, C = AC[ARC_BARS[bar]];
+    if(pos === 0){ chip(83, t, .07, .05, .5, 0); chip(88, t + .07, .28, .05, .5, 0); }   // le bruit de la pièce qu'on insère
+    chip(C.r + [0, 12, 0, 12, 0, 12, 7, 12][b], t, beat * .85, .11, 'tri');                 // la basse en triangle
+    for(let i = 0; i < 2; i++) chip(C.a[(b * 2 + i) % 3] + 12, t + i * beat / 2, beat * .42, .028, .125, -.35);   // l'arpège des accords
+    const m = ARC_MEL[pos];
+    if(m){ const n = noteLen(ARC_MEL, pos, 4); chip(m, t, n * beat * .92, .07, .25, .12, n >= 2); chip(m, t + beat * .75, n * beat * .6, .018, .25, .5); }   // la mélodie, et son écho
+    if(b === 0 || b === 4 || (b === 3 && bar % 2)) aKick(t, .55);
+    if(b === 2 || b === 6) aNoise(t, .12, .22, 1200);
+    aNoise(t, .03, b % 2 ? .05 : .08, 8000);
+    if(bar === 15 && b >= 4){ aNoise(t, .08, .14, 1500); aNoise(t + beat / 2, .08, .18, 1500); }   // le roulement avant de reboucler
+  }
+
+  /* ----- Galaxie : douce, froide et magique ----- */
+  const GAL = [{r:40, p:[55,59,62,66], sc:[76,79,83,86,88,91]}, {r:36, p:[55,59,64,66], sc:[76,78,79,83,88,90]},
+    {r:45, p:[55,60,64,71], sc:[76,79,81,84,88,93]}, {r:47, p:[54,59,64,66], sc:[78,83,86,88,90,95]}];   // Mi m9 · Do maj7♯11 · La m9 · Si sus4
+  let galFrom = -1;
+  function gPad(fq, t, dur, v, pan){                     // une nappe de glace : sinus et triangle à peine désaccordés, trémolo lent
+    const fl = ctx.createBiquadFilter(), g = ctx.createGain(), l = ctx.createOscillator(), lg = ctx.createGain(); fl.type = 'lowpass'; fl.frequency.value = 1400;
+    [['sine', 0, 1], ['triangle', 7, .5], ['sine', -6, .6]].forEach(([ty, dt, a]) => { const o = ctx.createOscillator(), og = ctx.createGain(); o.type = ty; o.frequency.value = fq; o.detune.value = dt;
+      og.gain.value = a; o.connect(og); og.connect(fl); o.start(t); o.stop(t + dur + .1); });
+    swell(g, t, dur, v); l.frequency.value = .3 + Math.random() * .3; lg.gain.value = v * .3; l.connect(lg); lg.connect(g.gain); l.start(t); l.stop(t + dur + .1);
+    fl.connect(g); g.connect(dest(pan));
+  }
+  function gBell(fq, t, dur, v, pan){                    // un cristal de glace (synthèse FM, rapport 7 : très froid)
+    const c = ctx.createOscillator(), md = ctx.createOscillator(), mg = ctx.createGain(), g = ctx.createGain();
+    c.frequency.value = fq; md.frequency.value = fq * 7.01; mg.gain.setValueAtTime(fq * 1.2, t); mg.gain.exponentialRampToValueAtTime(fq * .005, t + dur * .3);
+    md.connect(mg); mg.connect(c.frequency); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .004); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    c.connect(g); g.connect(dest(pan)); c.start(t); md.start(t); c.stop(t + dur + .05); md.stop(t + dur + .05);
+  }
+  function gPluck(fq, t, v, pan){ const o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o2.type = 'sine'; o.frequency.value = fq; o2.frequency.value = fq * 2;
+    g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .005); g.gain.exponentialRampToValueAtTime(.0001, t + 1.6);
+    const g2 = ctx.createGain(); g2.gain.value = .25; o.connect(g); o2.connect(g2); g2.connect(g); g.connect(dest(pan)); [o, o2].forEach(x => { x.start(t); x.stop(t + 1.7); }); }
+  function gWind(t, dur, v){                             // le vent froid de l'espace
+    const sr = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain(); sr.buffer = noise(); sr.loop = true; bp.type = 'bandpass'; bp.Q.value = 9;
+    bp.frequency.setValueAtTime(500, t); bp.frequency.linearRampToValueAtTime(1700, t + dur * .5); bp.frequency.linearRampToValueAtTime(650, t + dur);
+    swell(g, t, dur, v); sr.connect(bp); bp.connect(g);
+    if(ctx.createStereoPanner){ const p = ctx.createStereoPanner(); p.pan.setValueAtTime(-.7, t); p.pan.linearRampToValueAtTime(.7, t + dur); g.connect(p); p.connect(starBus().input); } else g.connect(starBus().input);
+    sr.start(t); sr.stop(t + dur + .1);
+  }
+  function playGal(s, t){
+    if(galFrom < 0) galFrom = s;
+    const k = s - galFrom, beat = 60 / GALC.bpm / 2, C = GAL[Math.floor(k / 16) % GAL.length], dur = beat * 16 * 1.35;
+    if(k % 16 === 0){ C.p.forEach((m, i) => gPad(mtof(m), t, dur, .022, (i - 1.5) * .5)); gPad(mtof(C.r), t, dur, .018, 0); gWind(t, beat * 16, .035); }
+    if(k % 2 === 0 && Math.random() < .42) gBell(mtof(pick(C.sc)), t, 4.5, .038, Math.random() * 1.6 - .8);
+    if(k % 16 === 10 && Math.random() < .65) C.sc.forEach((m, i) => gPluck(mtof(m), t + i * beat * .28, .022, -.8 + i * .32));   // une petite pluie de cristaux
+    if(Math.random() < .12) gBell(mtof(rnd(98, 104)), t + Math.random() * beat, 1.5, .007, Math.random() * 2 - 1);
+  }
+
+  /* ----- Or : royale, épique et impressionnante ----- */
+  const GOLDB = () => themeBus('gold', 3.2, 2.4, .5, .3);
+  const GOLD = [{r:38, v:[62,66,69]}, {r:45, v:[61,64,69]}, {r:47, v:[62,66,71]}, {r:43, v:[62,67,71]},
+    {r:38, v:[62,66,69]}, {r:43, v:[62,67,71]}, {r:45, v:[61,64,69]}, {r:38, v:[62,66,69]}];   // Ré · La · Si m · Sol · Ré · Sol · La · Ré
+  const GOLD_MEL = [69,0,74,0,78,0,0,76, 76,0,0,0,73,0,69,0, 71,0,74,0,78,0,83,0, 81,0,0,79,78,0,76,0,
+    78,0,81,0,86,0,0,0, 83,0,81,79,78,0,79,0, 81,0,0,0,76,0,73,0, 74,0,0,0,0,0,69,0];
+  const THIRD = {69:66, 71:67, 73:69, 74:71, 76:73, 78:74, 79:76, 81:78, 83:79, 86:83};   // une tierce en dessous, dans la gamme de ré
+  let goldFrom = -1;
+  function oBrass(m, t, dur, v, pan){                    // un pupitre de cuivres : trois scies, un filtre qui « souffle »
+    const fl = ctx.createBiquadFilter(), g = ctx.createGain(); fl.type = 'lowpass'; fl.Q.value = 1.5;
+    fl.frequency.setValueAtTime(350, t); fl.frequency.exponentialRampToValueAtTime(2600, t + .07); fl.frequency.exponentialRampToValueAtTime(1500, t + .3);
+    [-8, 0, 8].forEach(dt => { const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = mtof(m); o.detune.value = dt; o.connect(fl); o.start(t); o.stop(t + dur + .2); });
+    g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .03); g.gain.setValueAtTime(v * .85, t + dur * .7); g.gain.linearRampToValueAtTime(.0001, t + dur + .15);
+    fl.connect(g); tOut(GOLDB(), g, .35, pan);
+  }
+  function oTrump(m, t, dur, v, pan){                    // la trompette héroïque
+    const fl = ctx.createBiquadFilter(), g = ctx.createGain(), o = ctx.createOscillator(), o2 = ctx.createOscillator(), g2 = ctx.createGain(), l = ctx.createOscillator(), lg = ctx.createGain();
+    o.type = 'sawtooth'; o2.type = 'square'; o.frequency.value = mtof(m); o2.frequency.value = mtof(m); g2.gain.value = .3;
+    fl.type = 'lowpass'; fl.Q.value = 2; fl.frequency.setValueAtTime(700, t); fl.frequency.exponentialRampToValueAtTime(3400, t + .06); fl.frequency.exponentialRampToValueAtTime(2200, t + .25);
+    l.frequency.value = 5.5; lg.gain.setValueAtTime(0, t); lg.gain.linearRampToValueAtTime(mtof(m) * .01, t + Math.min(.4, dur * .6)); l.connect(lg); lg.connect(o.frequency); lg.connect(o2.frequency);
+    g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .025); g.gain.setValueAtTime(v * .9, t + dur * .75); g.gain.linearRampToValueAtTime(.0001, t + dur + .08);
+    o.connect(fl); o2.connect(g2); g2.connect(fl); fl.connect(g); tOut(GOLDB(), g, .4, pan); [o, o2, l].forEach(x => { x.start(t); x.stop(t + dur + .12); });
+  }
+  function oStr(m, t, dur, v, pan){ const fl = ctx.createBiquadFilter(), g = ctx.createGain(); fl.type = 'lowpass'; fl.frequency.value = 1700;
+    [-10, 10].forEach(dt => { const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = mtof(m); o.detune.value = dt; o.connect(fl); o.start(t); o.stop(t + dur + .1); });
+    g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .012); g.gain.exponentialRampToValueAtTime(v * .5, t + dur * .6); g.gain.linearRampToValueAtTime(.0001, t + dur);
+    fl.connect(g); tOut(GOLDB(), g, .25, pan); }
+  function oTimp(m, t, v){                               // les timbales
+    const fq = mtof(m), o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain(), g2 = ctx.createGain(); o.type = 'sine'; o2.type = 'triangle';
+    o.frequency.setValueAtTime(fq * 1.06, t); o.frequency.exponentialRampToValueAtTime(fq, t + .12); o2.frequency.value = fq * 1.5; g2.gain.value = .25;
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + 1.3); o.connect(g); o2.connect(g2); g2.connect(g); tOut(GOLDB(), g, .3, -.2); [o, o2].forEach(x => { x.start(t); x.stop(t + 1.35); });
+    const sr = ctx.createBufferSource(), lp = ctx.createBiquadFilter(), gn = ctx.createGain(); sr.buffer = noise(); lp.type = 'lowpass'; lp.frequency.value = 350;
+    gn.gain.setValueAtTime(v * .6, t); gn.gain.exponentialRampToValueAtTime(.0001, t + .12); sr.connect(lp); lp.connect(gn); tOut(GOLDB(), gn, .2, -.2); sr.start(t, Math.random()); sr.stop(t + .15);
+  }
+  function oNoise(t, dur, v, type, fq, send, pan){ const sr = ctx.createBufferSource(), fl = ctx.createBiquadFilter(), g = ctx.createGain(); sr.buffer = noise(); fl.type = type; fl.frequency.value = fq;
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur); sr.connect(fl); fl.connect(g); tOut(GOLDB(), g, send, pan); sr.start(t, Math.random() * 1.5); sr.stop(t + dur + .05); }
+  const oSnare = (t, v) => oNoise(t, .16, v, 'bandpass', 2100, .3, .2);
+  function oBell(m, t, v){ const c = ctx.createOscillator(), md = ctx.createOscillator(), mg = ctx.createGain(), g = ctx.createGain(), fq = mtof(m);
+    c.frequency.value = fq; md.frequency.value = fq * 3.5; mg.gain.setValueAtTime(fq * 1.5, t); mg.gain.exponentialRampToValueAtTime(fq * .02, t + 2);
+    md.connect(mg); mg.connect(c.frequency); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(v, t + .005); g.gain.exponentialRampToValueAtTime(.0001, t + 4);
+    c.connect(g); tOut(GOLDB(), g, .6, .3); c.start(t); md.start(t); c.stop(t + 4.1); md.stop(t + 4.1); }
+  function oChoir(m, t, dur, v){ [m, m + 7, m + 12].forEach((mm, i) => { const o = ctx.createOscillator(), o2 = ctx.createOscillator(), b1 = ctx.createBiquadFilter(), b2 = ctx.createBiquadFilter(), g = ctx.createGain();
+    o.type = o2.type = 'sawtooth'; o.frequency.value = mtof(mm); o2.frequency.value = mtof(mm) * 1.005; b1.type = b2.type = 'bandpass'; b1.frequency.value = 700; b2.frequency.value = 1150; b1.Q.value = b2.Q.value = 5;
+    o.connect(b1); o2.connect(b1); o.connect(b2); o2.connect(b2); b1.connect(g); b2.connect(g); swell(g, t, dur, v); tOut(GOLDB(), g, .55, (i - 1) * .6); [o, o2].forEach(x => { x.start(t); x.stop(t + dur + .1); }); }); }
+  function playGold(s, t){
+    if(goldFrom < 0) goldFrom = s;
+    const k = s - goldFrom, beat = 60 / GOLDC.bpm / 2, b = k & 7, bar = (k >> 3) & 7, loop = k >> 6, C = GOLD[bar];
+    if(k < 8){                                           // l'ouverture : roulement de timbales et accord de cuivres qui enfle
+      oTimp(38, t, .12 + k * .03); oTimp(38, t + beat / 2, .14 + k * .03);
+      if(k === 0) C.v.forEach((m, i) => oBrass(m, t, beat * 7.5, .022, (i - 1) * .4));
+      return;
+    }
+    if(bar === 0 && b === 0){ oNoise(t, 2.4, .1, 'highpass', 4500, .5, .4); oBell(86, t, .05); }   // cymbale et cloche à chaque reprise
+    if(b === 0) oChoir(C.r + 12, t, beat * 8, .012);
+    oStr([C.r + 12, C.r + 19, C.r + 24, C.r + 19][b & 3], t, beat * .9, .03, -.3);   // les cordes qui galopent
+    if(b === 0 || b === 3 || b === 4) C.v.forEach((m, i) => oBrass(m, t, b === 0 ? beat * 2.6 : b === 3 ? beat * .8 : beat * 3.6, .02, (i - 1) * .45));   // la fanfare
+    if(b === 0) oTimp(C.r, t, .3); else if(b === 4) oTimp(C.r + 7, t, .22);
+    if(bar === 7 && b >= 4){ oTimp(C.r, t, .14 + (b - 4) * .05); oTimp(C.r, t + beat / 2, .16 + (b - 4) * .05); }   // roulement avant la reprise
+    if(b === 2 || b === 6){ oSnare(t, .13); if(b === 6) oSnare(t + beat * .5, .06); }
+    if(bar === 7 && b >= 4){ oSnare(t, .09); oSnare(t + beat / 2, .11); }
+    const pos = bar * 8 + b, m = GOLD_MEL[pos];
+    if(m){ const n = noteLen(GOLD_MEL, pos, 4); oTrump(m, t, n * beat * .95, .055, .15); if(loop % 2) oTrump(THIRD[m] || m - 3, t, n * beat * .95, .035, -.25); }   // la mélodie, harmonisée une fois sur deux
+  }
   function play(s, t){
-    if(gothOn()){ playDark(s, t); return; }               // 0.2.5a : thème Dark
-    darkFrom = -1;
-    if(starOn()){ playStar(s, t); return; }
-    starFrom = -1;
+    const sk = skinMus();                                 // 0.2.5a : chaque grand thème a sa musique
+    if(sk !== 'goth') darkFrom = -1; if(sk !== 'bain') starFrom = -1; if(sk !== 'arcade') arcFrom = -1; if(sk !== 'galaxy') galFrom = -1; if(sk !== 'gold') goldFrom = -1;
+    if(sk === 'goth'){ playDark(s, t); return; }
+    if(sk === 'bain'){ playStar(s, t); return; }
+    if(sk === 'arcade'){ playArc(s, t); return; }
+    if(sk === 'galaxy'){ playGal(s, t); return; }
+    if(sk === 'gold'){ playGold(s, t); return; }
     const cfg = cfgOf(mode), beat = 60/cfg.bpm/2, ch = cfg.chords[Math.floor(s/8) % 4];
     if(s % 8 === 0) ch.forEach(m => { tone(mtof(m), t, beat*8.6, 'sine', .04, 1.2); tone(mtof(m)*1.004, t, beat*8.6, 'triangle', .016, 1.5); });
     if(mode === 'zombie'){
