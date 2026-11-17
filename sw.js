@@ -1,6 +1,7 @@
-// Cyngenetic : cache hors ligne. Version 20261117-033322 (change à chaque fabrication, pour que les mises à jour arrivent).
-const VERSION = 'cyngenetic-20261117-033322';
+// Cyngenetic : cache hors ligne. Version 20261117-042512 (change à chaque fabrication, pour que les mises à jour arrivent).
+const VERSION = 'cyngenetic-20261117-042512';
 const FONTS = 'cyngenetic-fonts';
+const MEDIA = 'cyngenetic-media';   // vidéos des thèmes (0.2.3d), gardées d'une mise à jour à l'autre
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png?v=2', './icons/icon-512.png?v=2',
   './icons/icon-maskable-512.png?v=2', './icons/apple-touch-icon.png?v=2', './icons/favicon.svg?v=2'];
 self.addEventListener('install', e => {
@@ -8,7 +9,7 @@ self.addEventListener('install', e => {
 });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys()
-    .then(keys => Promise.all(keys.filter(k => k !== VERSION && k !== FONTS).map(k => caches.delete(k))))
+    .then(keys => Promise.all(keys.filter(k => k !== VERSION && k !== FONTS && k !== MEDIA).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 self.addEventListener('fetch', e => {

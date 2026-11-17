@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.3d — 17 novembre 2026
+
+- Nouveau thème Bain d'étoile ✨, le plus cher de la boutique (10 000 Cyn) : un vrai ciel d'étoiles animé en fond (une pluie d'étoiles dans les menus, un voyage à travers les étoiles pendant la partie), des étoiles filantes et parfois une comète dorée, de la poussière d'étoiles qui suit ta souris ou tes doigts.
+- Dans ce thème, l'arbre devient une constellation, une petite étoile tourne autour de ton personnage, les disparus portent une étoile au lieu d'une croix, les criminels deviennent des trous noirs… et la musique devient spatiale : de grandes nappes cosmiques, un chœur éthéré, des cloches de verre qui résonnent dans l'espace, des étoiles filantes en notes et des souffles venus d'ailleurs.
+- Après 2500, les prénoms et les noms de famille (ceux qu'apportent les conjoints) se dégradent de plus en plus : lettres doublées, perdues ou inversées, chiffres à la place des lettres, morceaux désassemblés, caractères cassés… jusqu'à des noms complètement glitchés vers 2900.
+
 ## v0.2.3c — 17 novembre 2026
 
 - Des secrets se cachent maintenant dans Cyngenetic… certains très rares. À toi de les trouver ! 🥚
