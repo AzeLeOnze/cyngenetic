@@ -2,6 +2,18 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.5a — 17 novembre 2026
+
+- Nouveau pays de lignée : le Brésil 🇧🇷 ! Une carte avec 54 villes (de Porto Seguro en 1503 à Brasília en 1960), des prénoms qui évoluent de 1500 à 2100, des noms de famille d'ici (et des familles venues d'Italie, d'Allemagne, du Japon et du Liban), 18 guerres, l'histoire du pays de Cabral à aujourd'hui, 17 métiers (seringueiro, garimpeiro, sambiste, mestre de capoeira…), 12 centres d'intérêt, des écoles brésiliennes… et 2 morts légendaires bien d'ici.
+- Après 2300, les prénoms et les noms se corrompent de plus en plus jusqu'en 4000 : lettres cassées, katakana et idéogrammes qui s'infiltrent, noms qui perdent tout sens… avec des effets de plus en plus flippants (couleurs malades, tremblements, noms géants ou minuscules qui débordent des bulles, fantômes, portraits inversés). Après 3000, l'arbre lui-même s'assombrit.
+- Mode Argent au Brésil : réis, cruzeiros, cruzados… jusqu'au real en 1994, avec l'hyperinflation des années 1980.
+- Mode Argent : les montants qui s'envolent au-dessus des bulles affichent leur monnaie (+10€, +305lt, −14F…).
+- Les addictions comptent : un accro au travail gagne 1,8 fois plus, un accro au casino perd gros chaque année (avec de rares jackpots), et l'alcool, le tabac, les drogues, les jeux vidéo… coûtent de l'argent, parfois en faisant aussi baisser le salaire.
+- Après une rupture, l'ex ne met plus rien en commun avec la famille (sa fiche l'indique).
+- Nouveaux objectifs : 200 000 € (facile), 1,5 million (moyen), 10 millions (dur) et 50 millions (extrême).
+- Version PC : le statut Discord affiche le mode Argent (difficulté, fortune, progression… ou la faillite).
+- Les bulles s'élargissent pour laisser lire « Voyage aux États-Unis » et les autres voyages en entier.
+
 ## v0.2.4a — 17 novembre 2026
 
 - Nouveau mode Argent 💰 (à cocher avant de commencer) : toute la famille met son argent en commun. Chaque année, le revenu de chacun s'envole au-dessus de sa bulle (en vert), et les enfants et les ados coûtent de l'argent (en rouge).
