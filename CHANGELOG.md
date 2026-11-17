@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6f — 18 novembre 2026
+
+- Nouveau : l'export peut aussi créer une vidéo de l'arbre qui grandit au fil du temps (1 000 ans au plus). Tout se règle : le thème (parmi tes thèmes débloqués), le format (de 720p à 4K, vertical ou carré), la durée, les années de début et de fin, et le titre. Le même petit logo Cyngenetic que sur les images est ajouté dans un coin.
+- L'espérance de vie de la famille se calcule sur les 15 derniers décès.
+- Calendrier sur mesure : quand l'année n'appartient à aucune ère, la petite bulle sous la date disparaît. Il est aussi rangé tout en haut des personnalisations.
+- Petites retouches : plus de curseur « ? » au survol de l'espérance de vie, et plus de phrase inutile sur le logo dans l'export.
+
 ## v0.2.6e — 17 novembre 2026
 
 - Correction : en mode libre, l'icône pour afficher ou cacher la famille d'un conjoint réagit enfin au clic sur ordinateur (le chat de l'arbre aussi). Le reflet du conjoint est maintenant bien relié à ses parents.

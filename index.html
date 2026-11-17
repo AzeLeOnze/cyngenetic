@@ -2308,6 +2308,17 @@ body[data-era="3"] .treebox::before{content:"";position:absolute;inset:0;z-index
 @media (max-width:600px){ .cejob{grid-template-columns:minmax(0,1fr) auto} .cejob .cjAt{grid-column:1 / 2} .cejob .cjW{grid-column:1 / 3;grid-row:2} .cejob .cjTxt{grid-column:1 / 3;grid-row:3}
   .cejob .cjDel{grid-column:2 / 3;grid-row:1} .calm{grid-template-columns:minmax(0,1fr) 72px 36px} .calform .calhead{grid-template-columns:minmax(0,1fr) 72px 36px} }
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .calprev{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+/* ===== 0.2.6f : export vidéo ===== */
+.tree-head .lifex,.tree-head .stats .lxm{cursor:default}
+.extabs{display:flex}
+.extabs button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.extabs button svg{width:17px;height:17px;fill:currentColor}
+.exform .exImg,.exform .exVid{display:grid;gap:9px}
+.exform .ceoff{display:none!important}
+.exprog{height:12px;border-radius:99px;overflow:hidden;background:rgba(0,40,110,.12);box-shadow:inset 0 1px 2px rgba(0,40,110,.2)}
+.exprog i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#7fd0ff,#2a8cff);transition:width .15s}
+.exprog.rec i{background:linear-gradient(90deg,#ff9ab0,#e8305f)}
+:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"]) .exprog{background:rgba(255,255,255,.1)}
 /* ===== 0.2.6a : mode Créatif ===== */
 .opt-ic.crea{background:linear-gradient(160deg,#ffd0f6,#c04dff 55%,#5a17c8)}
 .opt-ic.crea svg{width:22px;height:22px;fill:#fff}
@@ -2758,9 +2769,18 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BAIN_COLS = ['#3af4ff','#ff4fe0','#ffe84a','#ffffff','#b48cff'];   // 0.2.3d : les couleurs du thème Bain d'étoile
 const isBain = () => document.documentElement.dataset.skin === 'bain';
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.6e';
+const APP_VERSION = '0.2.6f';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.6f', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
+   fr:['Nouveau : l\'export peut aussi créer une vidéo de l\'arbre qui grandit au fil du temps (1 000 ans au plus). Tout se règle : le thème (parmi tes thèmes débloqués), le format (de 720p à 4K, vertical ou carré), la durée, les années de début et de fin, et le titre. Le même petit logo Cyngenetic que sur les images est ajouté dans un coin.',
+       'L\'espérance de vie de la famille se calcule sur les 15 derniers décès.',
+       'Calendrier sur mesure : quand l\'année n\'appartient à aucune ère, la petite bulle sous la date disparaît. Il est aussi rangé tout en haut des personnalisations.',
+       'Petites retouches : plus de curseur « ? » au survol de l\'espérance de vie, et plus de phrase inutile sur le logo dans l\'export.'],
+   en:['New: export can also create a video of the tree growing through time (1,000 years at most). Everything is adjustable: theme (among your unlocked themes), format (from 720p to 4K, vertical or square), length, start and end years, and title. The same small Cyngenetic logo as on images is added in a corner.',
+       'The family\'s life expectancy is now based on the last 15 deaths.',
+       'Custom calendar: when the year belongs to no era, the small bubble under the date disappears. It also sits at the very top of the customisation panel now.',
+       'Small touches: no more « ? » cursor when hovering the life expectancy, and no more pointless sentence about the logo in export.']},
   {v:'0.2.6e', date:{fr:'17 novembre 2026', en:'November 17, 2026', de:'17. November 2026', es:'17 de noviembre de 2026'},
    fr:['Correction : en mode libre, l\'icône pour afficher ou cacher la famille d\'un conjoint réagit enfin au clic sur ordinateur (le chat de l\'arbre aussi). Le reflet du conjoint est maintenant bien relié à ses parents.',
        'Les fils qui relient parents et enfants ont une nuance de couleur légèrement différente pour chaque famille.',
@@ -4788,6 +4808,11 @@ fr:{
   cal_eras:'Ères', cal_era_name:"Nom de l'ère", cal_era_from:"À partir de l'an", cal_era_ph:"Ex. : Ère du Dragon", cal_adde:'+ Ajouter une ère',
   cal_prev:(d,n)=>`Aujourd'hui : ${d} · ${n} jours par an`, cal_ach:'Un calendrier sur mesure désactive les succès, comme les autres personnalisations.',
   cal_default:'Remettre le calendrier réel', cal_err:'Il faut entre 1 et 60 mois.',
+  lifex_tip15:(a,n)=>`Espérance de vie de la famille : ${a} ans (âge moyen au décès ${n>1?`des ${n} derniers membres disparus`:'du dernier membre disparu'})`,
+  ex_tab_img:'Image', ex_tab_vid:'Vidéo', exv_res:'Format de la vidéo', exv_dur:'Durée', exv_from:"De l'année", exv_to:"À l'année", exv_vert:'Vertical', exv_square:'Carré',
+  exv_max:'Une vidéo couvre 1 000 ans au plus : le début sera avancé.', exv_order:"L'année de fin doit venir après l'année de début.", exv_info:(y,s)=>`${y} ans d'histoire · environ ${s} s par année`,
+  exv_go:'Créer la vidéo', exv_stop:'Arrêter', exv_prep:(a,b)=>`Préparation des images… ${a} / ${b}`, exv_rec:(a,b)=>`Enregistrement de la vidéo… ${a} s / ${b} s`,
+  exv_done:n=>`Vidéo enregistrée : ${n}`, exv_fail:"La vidéo n'a pas pu être créée. Essaie un format plus petit.", exv_nosupport:'Ton navigateur ne sait pas fabriquer de vidéo.',
   center:'Recentrer', lifex:'Espérance de vie :', lifex_tip:(a,n)=>`Espérance de vie de la famille : ${a} ans (âge moyen au décès de ${n} membre${n>1?'s':''})`, stats:(n,v,k)=>`${n} membre${n>1?'s':''} · ${v} en vie · ${k} génération${k>1?'s':''}`,
   you:'Vous', future_star:'★ Future star', star:'★ Star',
   you_play:'Vous incarnez', born_in:(p,d,c)=>`${g(p,'Né','Née')} le ${d} à ${c}`,
@@ -5287,6 +5312,11 @@ en:{
   cal_eras:'Eras', cal_era_name:'Era name', cal_era_from:'From year', cal_era_ph:'E.g.: Age of the Dragon', cal_adde:'+ Add an era',
   cal_prev:(d,n)=>`Today: ${d} · ${n} days a year`, cal_ach:'A custom calendar turns achievements off, like other customisations.',
   cal_default:'Back to the real calendar', cal_err:'You need between 1 and 60 months.',
+  lifex_tip15:(a,n)=>`Family life expectancy: ${a} (average age at death of ${n>1?`the last ${n} members who died`:'the last member who died'})`,
+  ex_tab_img:'Image', ex_tab_vid:'Video', exv_res:'Video format', exv_dur:'Length', exv_from:'From year', exv_to:'To year', exv_vert:'Vertical', exv_square:'Square',
+  exv_max:'A video covers 1,000 years at most: the start will be moved forward.', exv_order:'The end year must come after the start year.', exv_info:(y,s)=>`${y} years of history · about ${s} s per year`,
+  exv_go:'Create the video', exv_stop:'Stop', exv_prep:(a,b)=>`Preparing frames… ${a} / ${b}`, exv_rec:(a,b)=>`Recording the video… ${a} s / ${b} s`,
+  exv_done:n=>`Video saved: ${n}`, exv_fail:"The video couldn't be created. Try a smaller format.", exv_nosupport:"Your browser can't make videos.",
   center:'Recenter', lifex:'Life expectancy:', lifex_tip:(a,n)=>`Family life expectancy: ${a} (average age at death of ${n} member${n>1?'s':''})`, stats:(n,v,k)=>`${n} member${n>1?'s':''} · ${v} alive · ${k} generation${k>1?'s':''}`,
   you:'You', future_star:'★ Future star', star:'★ Star',
   you_play:'You are playing', born_in:(p,d,c)=>`Born ${d} in ${c}`,
@@ -5785,6 +5815,11 @@ TX.de = {
   cal_eras:'Zeitalter', cal_era_name:'Name des Zeitalters', cal_era_from:'Ab dem Jahr', cal_era_ph:'Z. B.: Zeitalter des Drachen', cal_adde:'+ Zeitalter hinzufügen',
   cal_prev:(d,n)=>`Heute: ${d} · ${n} Tage pro Jahr`, cal_ach:'Ein eigener Kalender schaltet die Erfolge ab, wie andere Anpassungen.',
   cal_default:'Zurück zum echten Kalender', cal_err:'Es braucht zwischen 1 und 60 Monate.',
+  lifex_tip15:(a,n)=>`Lebenserwartung der Familie: ${a} Jahre (Durchschnittsalter beim Tod ${n>1?`der letzten ${n} Verstorbenen`:'des zuletzt Verstorbenen'})`,
+  ex_tab_img:'Bild', ex_tab_vid:'Video', exv_res:'Videoformat', exv_dur:'Dauer', exv_from:'Ab dem Jahr', exv_to:'Bis zum Jahr', exv_vert:'Hochformat', exv_square:'Quadrat',
+  exv_max:'Ein Video umfasst höchstens 1.000 Jahre: Der Anfang wird vorverlegt.', exv_order:'Das Endjahr muss nach dem Startjahr liegen.', exv_info:(y,s)=>`${y} Jahre Geschichte · etwa ${s} s pro Jahr`,
+  exv_go:'Video erstellen', exv_stop:'Anhalten', exv_prep:(a,b)=>`Bilder werden vorbereitet… ${a} / ${b}`, exv_rec:(a,b)=>`Video wird aufgenommen… ${a} s / ${b} s`,
+  exv_done:n=>`Video gespeichert: ${n}`, exv_fail:'Das Video konnte nicht erstellt werden. Versuche ein kleineres Format.', exv_nosupport:'Dein Browser kann keine Videos erstellen.',
   center:'Zentrieren', lifex:'Lebenserwartung:', lifex_tip:(a,n)=>`Lebenserwartung der Familie: ${a} Jahre (Durchschnittsalter beim Tod von ${n} Mitglied${n>1?'ern':''})`, stats:(n,v,k)=>`${n} Mitglied${n>1?'er':''} · ${v} am Leben · ${k} Generation${k>1?'en':''}`,
   you:'Du', future_star:'★ Künftiger Star', star:'★ Star',
   you_play:'Du spielst', born_in:(p,d,c)=>`Geboren am ${d} in ${c}`,
@@ -6286,6 +6321,11 @@ TX.es = {
   cal_eras:'Eras', cal_era_name:'Nombre de la era', cal_era_from:'A partir del año', cal_era_ph:'P. ej.: Era del Dragón', cal_adde:'+ Añadir una era',
   cal_prev:(d,n)=>`Hoy: ${d} · ${n} días al año`, cal_ach:'Un calendario a medida desactiva los logros, como las demás personalizaciones.',
   cal_default:'Volver al calendario real', cal_err:'Hacen falta entre 1 y 60 meses.',
+  lifex_tip15:(a,n)=>`Esperanza de vida de la familia: ${a} años (edad media al morir ${n>1?`de los últimos ${n} miembros fallecidos`:'del último miembro fallecido'})`,
+  ex_tab_img:'Imagen', ex_tab_vid:'Vídeo', exv_res:'Formato del vídeo', exv_dur:'Duración', exv_from:'Desde el año', exv_to:'Hasta el año', exv_vert:'Vertical', exv_square:'Cuadrado',
+  exv_max:'Un vídeo abarca 1000 años como máximo: el inicio se adelantará.', exv_order:'El año final debe ser posterior al inicial.', exv_info:(y,s)=>`${y} años de historia · unos ${s} s por año`,
+  exv_go:'Crear el vídeo', exv_stop:'Detener', exv_prep:(a,b)=>`Preparando las imágenes… ${a} / ${b}`, exv_rec:(a,b)=>`Grabando el vídeo… ${a} s / ${b} s`,
+  exv_done:n=>`Vídeo guardado: ${n}`, exv_fail:'No se pudo crear el vídeo. Prueba un formato más pequeño.', exv_nosupport:'Tu navegador no puede crear vídeos.',
   center:'Centrar', lifex:'Esperanza de vida:', lifex_tip:(a,n)=>`Esperanza de vida de la familia: ${a} años (edad media al morir de ${n} miembro${n>1?'s':''})`, stats:(n,v,k)=>`${n} miembro${n>1?'s':''} · ${v} con vida · ${k} generaci${k>1?'ones':'ón'}`,
   you:'Tú', future_star:'★ Futura estrella', star:'★ Estrella',
   you_play:'Juegas con', born_in:(p,d,c)=>`${gs(p,'Nacido','Nacida')} el ${d} en ${c}`,
@@ -9958,6 +9998,7 @@ function renderDecade(y, force){
   wb.hidden = wi < 0;
   if(wi >= 0) wb.innerHTML = `${icon('sword')}<span>${esc(t('war_badge', wi))} · ${LANG!=='en' ? '+35 %' : '+35%'}</span>`;
   const el = $('#decade');
+  el.hidden = !!(cc && !cc.era);                          // 0.2.6f : calendrier sur mesure sans ère : rien à afficher ici
   if(cc) el.innerHTML = `<span class="di">${icon('hourglass')}</span><span>${esc(calYT(cc))}${cc.era ? ` · <b>${esc(cc.era.n)}</b>` : ''}</span>`; else
   el.innerHTML = `<span class="di">${icon(row[2])}</span><span>${t('decade', Math.floor(dy/10)*10)} · <b>${esc(LANG==='fr' ? row[3] : LANG==='de' ? (row[5] || DEx.decn[row[3]] || row[4]) : LANG==='es' ? (ESx.decn[row[3]] || row[4]) : row[4])}</b></span>`;
   if(lastDecade !== null){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
@@ -10170,11 +10211,11 @@ function renderTree0(){
   layout = pos; treeW = W; treeH = H; applyZoom();
   const f = P(S.founderId), all = Object.values(S.people), gens = Math.max(...all.filter(p => p.blood).map(genOf));
   $('#treeTitle').textContent = t('family', familyName(f));
-  const dead = all.filter(p => p.death != null && !(p.cause && p.cause.vanished)), lx = $('#treeLife');   // 0.2.5a : l'espérance de vie de la famille
+  const dead = all.filter(p => p.death != null && !(p.cause && p.cause.vanished)).sort((a, b) => b.death - a.death).slice(0, 15), lx = $('#treeLife');   // 0.2.6f : les 15 derniers décès   // 0.2.5a : l'espérance de vie de la famille
   const avg = dead.length ? Math.round(dead.reduce((a, p) => a + ageAt(p, p.death), 0) / dead.length) : 0;
-  $('#treeStats').innerHTML = `<span class="sxm">${esc(t('stats', all.length, living().length, gens))}</span>` + (dead.length ? ` <span class="lxm" title="${esc(t('lifex_tip', avg, dead.length))}">⌛ ${esc(tA(avg))}</span>` : '');   // sur téléphone : discrètement, dans les statistiques
+  $('#treeStats').innerHTML = `<span class="sxm">${esc(t('stats', all.length, living().length, gens))}</span>` + (dead.length ? ` <span class="lxm" title="${esc(t('lifex_tip15', avg, dead.length))}">⌛ ${esc(tA(avg))}</span>` : '');   // sur téléphone : discrètement, dans les statistiques
   if(lx){ lx.hidden = !dead.length;
-    if(dead.length){ lx.innerHTML = `${icon('hourglass')}<span class="lxl">${esc(t('lifex'))}</span><b>${esc(tA(avg))}</b>`; lx.title = t('lifex_tip', avg, dead.length); } }
+    if(dead.length){ lx.innerHTML = `${icon('hourglass')}<span class="lxl">${esc(t('lifex'))}</span><b>${esc(tA(avg))}</b>`; lx.title = t('lifex_tip15', avg, dead.length); } }
 }
 function centerOn(id, smooth){
   const p = layout[id], sc = $('#treeScroll'); if(!p) return;
@@ -12829,6 +12870,8 @@ function openCustom(re){
   const sc = document.querySelector('#modal .custlist'), keep = sc ? $('#modal').scrollTop : 0;
   openModal(`<div class="m-head"><div class="eyebrow">${t('cust_eyebrow')}</div><h2>${t('custom')}</h2><p>${t('cust_intro')}</p></div>
   <div class="custlist">
+    <div class="eyebrow sect">${t('cal_title')}</div>
+    <div class="setrow calrow"><span><b>${t('cal_title')}</b><small>${esc(calOn() ? t('cal_on', calFmt(S ? S.t : fromYMD(2000, 0, 1))) : t('cal_off'))}</small></span><button class="gel${calOn() ? ' lime' : ''}" data-act="calopen"><span>${t(calOn() ? 'cal_edit' : 'cal_create')}</span></button></div>
     <div class="eyebrow sect">${t('cust_rules')}</div>
     ${sw('data-rule','evoNames',R.evoNames,t('r_evoNames'),t('r_evoNames_hint'))}
     ${sw('data-rule','ach',R.ach,t('r_ach'),t(rulesTweaked() ? 'r_ach_locked' : 'r_ach_hint'),rulesTweaked())}
@@ -12842,8 +12885,6 @@ function openCustom(re){
         <div class="sld-val"><button class="sld-b" data-act="rstep" data-k="${k}" data-v="-1" aria-label="−">−</button><input class="sld-num" type="number" min="${min}" max="${max}" step="${step}" value="${+R[k].toFixed(2)}" data-rule="${k}" data-unit="${u}" aria-label="${esc(t('r_'+k))}"><span class="u">${u}</span><button class="sld-b" data-act="rstep" data-k="${k}" data-v="1" aria-label="+">+</button></div></div>
         <input class="sld-r" type="range" min="${min}" max="${max}" step="${step}" value="${R[k]}" data-rule="${k}" data-unit="${u}" style="--p:${p}%" aria-label="${esc(t('r_'+k))}">
         <div class="sld-foot"><span>${t('r_def', numTxt(RULES_DEF[k], u))}</span>${chg ? `<button class="sld-reset" data-act="rreset" data-k="${k}">↺ ${t('r_def_btn')}</button>` : ''}</div></div>`; }).join('')}</div>
-    <div class="eyebrow sect">${t('cal_title')}</div>
-    <div class="setrow calrow"><span><b>${t('cal_title')}</b><small>${esc(calOn() ? t('cal_on', calFmt(S ? S.t : fromYMD(2000, 0, 1))) : t('cal_off'))}</small></span><button class="gel${calOn() ? ' lime' : ''}" data-act="calopen"><span>${t(calOn() ? 'cal_edit' : 'cal_create')}</span></button></div>
     <div class="m-actions"><button class="gel gold" data-act="resetrules"><span>${t('r_reset')}</span></button></div>
   </div>`, {sound: !re});
   if(re) $('#modal').scrollTop = keep;
@@ -13688,35 +13729,62 @@ function exMaxScale(w, h){                              // la plus grande image 
   const area = matchMedia('(pointer: coarse)').matches ? 24e6 : 64e6;
   return Math.max(.25, Math.floor(Math.min(4, 16384 / Math.max(w, h), Math.sqrt(area / (w * h))) * 4) / 4);
 }
-function openExport(){
+function openExport(){                                  // 0.2.6f : une image, ou une vidéo de l'arbre au fil du temps
   const sn = treeSnap();
   if(!sn){ openModal(`<div class="m-head"><div class="eyebrow">${t('ex_btn')}</div><h2>${t('ex_title')}</h2><p class="hint">${esc(t('ct_empty'))}</p></div>`); return; }
-  const cur = document.documentElement.dataset.skin, skins = SKINS.filter(k => !skinLocked(k));
-  const [w, h] = exDims(sn, true), def = Math.min(2, exMaxScale(w, h));
-  openModal(`<div class="m-head"><div class="eyebrow">${t('ex_btn')}</div><h2>${t('ex_title')}</h2><p class="hint">${esc(t(S.creative ? 'ex_hint_free' : 'ex_hint'))}</p></div>
+  const cur = document.documentElement.dataset.skin, skins = SKINS.filter(k => !skinLocked(k)), canVid = !!window.MediaRecorder && !!HTMLCanvasElement.prototype.captureStream;
+  const [w, h] = exDims(sn, true), def = Math.min(2, exMaxScale(w, h)), f = P(S.founderId), yNow = yearOf(S.cView != null ? S.cView : S.t);
+  const yF = Math.max(yNow - 1000, yearOf(bornD(f))), RES = [['1280x720','HD 720p'],['1920x1080','Full HD 1080p'],['2560x1440','2K 1440p'],['3840x2160','4K 2160p'],['1080x1920', t('exv_vert') + ' 1080×1920'],['1080x1080', t('exv_square') + ' 1080×1080']];
+  openModal(`<div class="m-head"><div class="eyebrow">${t('ex_btn')}</div><h2>${t('ex_title')}</h2><p class="hint" id="exHint">${esc(t(S.creative ? 'ex_hint_free' : 'ex_hint'))}</p></div>
     <form id="exForm" class="spform exform" novalidate>
-      <div class="row2"><label class="field"><span class="lab">${t('ex_fmt')}</span><select class="inp" id="exFmt"><option value="png">PNG</option><option value="jpeg">JPEG</option></select></label>
-        <label class="field"><span class="lab">${t('ex_skin')}</span><select class="inp" id="exSkin">${skins.map(k => `<option value="${k}"${k === cur ? ' selected' : ''}>${esc(t('skin_' + k))}</option>`).join('')}</select></label></div>
-      <label class="field"><span class="lab exlab"><span>${t('ex_res')}</span><b id="exSize"></b></span><input type="range" class="ctrange exrange" id="exScale" min="0.25" max="4" step="0.25" value="${def}" style="--z:-20%"></label>
-      <div class="exticks"><span>${t('ex_small')}</span><span>${t('ex_big')}</span></div>
+      <div class="pills extabs" role="tablist"><button type="button" data-act="extab" data-v="img" aria-pressed="true">${icon('palette')}<span>${t('ex_tab_img')}</span></button><button type="button" data-act="extab" data-v="vid" aria-pressed="false"${canVid ? '' : ' disabled'}>${icon('film')}<span>${t('ex_tab_vid')}</span></button></div>
+      ${canVid ? '' : `<p class="setnote">${t('exv_nosupport')}</p>`}
+      <label class="field"><span class="lab">${t('ex_skin')}</span><select class="inp" id="exSkin">${skins.map(k => `<option value="${k}"${k === cur ? ' selected' : ''}>${esc(t('skin_' + k))}</option>`).join('')}</select></label>
+      <div class="exImg">
+        <label class="field"><span class="lab">${t('ex_fmt')}</span><select class="inp" id="exFmt"><option value="png">PNG</option><option value="jpeg">JPEG</option></select></label>
+        <label class="field"><span class="lab exlab"><span>${t('ex_res')}</span><b id="exSize"></b></span><input type="range" class="ctrange exrange" id="exScale" min="0.25" max="4" step="0.25" value="${def}" style="--z:-20%"></label>
+        <div class="exticks"><span>${t('ex_small')}</span><span>${t('ex_big')}</span></div>
+      </div>
+      <div class="exVid ceoff">
+        <label class="field"><span class="lab">${t('exv_res')}</span><select class="inp" id="exVRes">${RES.map(([v, l]) => `<option value="${v}"${v === '1920x1080' ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+        <label class="field"><span class="lab exlab"><span>${t('exv_dur')}</span><b id="exVDurT"></b></span><input type="range" class="ctrange exrange" id="exVDur" min="5" max="120" step="5" value="20" style="--z:-20%"></label>
+        <div class="row2"><label class="field"><span class="lab">${t('exv_from')}</span><input class="inp" type="number" id="exVY0" value="${yF}"></label>
+          <label class="field"><span class="lab">${t('exv_to')}</span><input class="inp" type="number" id="exVY1" value="${yNow}"></label></div>
+        <p class="setnote" id="exVInfo"></p>
+        <div class="exprog" id="exProg" hidden><i></i></div><p class="setnote" id="exPhase" hidden></p>
+      </div>
       <label class="cechk"><input type="checkbox" id="exTitle" checked><span>${t('ex_title_opt')}</span></label>
-      <p class="setnote">${t('ex_wm')}</p>
       <p class="setnote exok" id="exOk" hidden></p><p class="err" id="exErr" hidden></p>
       <div class="m-actions"><button type="button" class="gel ghost" data-act="close"><span>${t('ce_cancel')}</span></button><button type="submit" class="gel lime big" id="exGo"><span>${t('ex_go')}</span></button></div>
     </form>`, {sound:false});
+  const vid = () => !$('#exForm .exVid').classList.contains('ceoff');
   const upd = () => {
     const [w2, h2] = exDims(sn, $('#exTitle').checked), m2 = exMaxScale(w2, h2), r = $('#exScale');
     r.max = m2; if(+r.value > m2) r.value = m2;
     const k = +r.value; $('#exSize').textContent = `${cynFmt(Math.round(w2 * k))} × ${cynFmt(Math.round(h2 * k))} px`;
+    const d = +$('#exVDur').value, y0 = Math.round(+$('#exVY0').value), y1 = Math.round(+$('#exVY1').value), n = Math.max(2, Math.min(Math.abs(y1 - y0) + 1, d * 12));
+    $('#exVDurT').textContent = `${d} s`;
+    $('#exVInfo').textContent = y1 - y0 > 1000 ? t('exv_max') : y1 <= y0 ? t('exv_order') : t('exv_info', y1 - y0, (d / n).toFixed(2).replace('.', LANG !== 'en' ? ',' : '.'));
+    if(!exBusy) $('#exGo span').textContent = t(vid() ? 'exv_go' : 'ex_go');
   };
   $('#exForm').addEventListener('input', upd); $('#exForm').addEventListener('change', upd); upd();
   $('#exForm').addEventListener('submit', async e => {
-    e.preventDefault(); if(exBusy) return; exBusy = true;
-    const go = $('#exGo'); go.disabled = true; go.querySelector('span').textContent = t('ex_wait'); $('#exErr').hidden = true; $('#exOk').hidden = true;
-    try{ const name = await exportTree({fmt: $('#exFmt').value, skin: $('#exSkin').value, scale: +$('#exScale').value, title: $('#exTitle').checked});
-      const ok = $('#exOk'); if(ok && name){ ok.textContent = t('ex_done', name); ok.hidden = false; sfx.sparkle(); } }
-    catch(err){ const er = $('#exErr'); if(er){ er.textContent = t('ex_fail'); er.hidden = false; } sfx.refuse(); console.warn(err); }
-    finally{ exBusy = false; const g2 = $('#exGo'); if(g2){ g2.disabled = false; g2.querySelector('span').textContent = t('ex_go'); } }
+    e.preventDefault();
+    if(exBusy){ EXSTOP.v = true; return; }              // pendant une vidéo, le bouton sert à arrêter
+    const isVid = vid(); let y0 = Math.round(+$('#exVY0').value), y1 = Math.round(+$('#exVY1').value);
+    if(isVid && (!(y1 > y0) || !isFinite(y0) || !isFinite(y1))){ const er = $('#exErr'); er.textContent = t('exv_order'); er.hidden = false; sfx.refuse(); return; }
+    if(isVid && y1 - y0 > 1000){ y0 = y1 - 1000; $('#exVY0').value = y0; }
+    exBusy = true; EXSTOP.v = false;
+    const go = $('#exGo'); go.querySelector('span').textContent = t(isVid ? 'exv_stop' : 'ex_wait'); go.disabled = !isVid; $('#exErr').hidden = true; $('#exOk').hidden = true;
+    const prog = (ph, a, b) => { const bar = $('#exProg'), tx = $('#exPhase'); if(!bar) return; bar.hidden = false; tx.hidden = false;
+      bar.querySelector('i').style.width = (a / b * 100).toFixed(1) + '%'; bar.classList.toggle('rec', ph === 'rec'); tx.textContent = t(ph === 'rec' ? 'exv_rec' : 'exv_prep', a, b); };
+    try{
+      const skin = $('#exSkin').value, title = $('#exTitle').checked;
+      const name = isVid ? await exportVideo({skin, title, res: $('#exVRes').value.split('x').map(Number), dur: +$('#exVDur').value, y0, y1}, prog)
+        : await exportTree({fmt: $('#exFmt').value, skin, scale: +$('#exScale').value, title});
+      const ok = $('#exOk'); if(ok && name){ ok.textContent = t(isVid ? 'exv_done' : 'ex_done', name); ok.hidden = false; sfx.sparkle(); } }
+    catch(err){ const er = $('#exErr'); if(er && !(err && err.message === 'stop')){ er.textContent = t(isVid ? 'exv_fail' : 'ex_fail'); er.hidden = false; sfx.refuse(); } console.warn(err); }
+    finally{ exBusy = false; const g2 = $('#exGo'); if(g2){ g2.disabled = false; upd(); } const bar = $('#exProg'); if(bar){ bar.hidden = true; $('#exPhase').hidden = true; } }
   });
 }
 function exCSS(){                                       // toutes les règles du jeu, sans celles réservées aux petits écrans (l'image n'est pas un téléphone)
@@ -13755,44 +13823,104 @@ async function exFonts(fam){                            // les polices du thème
     return out.join('\n');
   }catch(e){ return ''; }
 }
-async function exportTree(o){
-  const root = document.documentElement, sk0 = root.dataset.skin;
-  let sn = null, fam = '';
-  root.dataset.skin = o.skin;                           // le thème de l'image, le temps de mesurer les bulles (rien n'est affiché entre-temps)
-  try{ sn = treeSnap(); const cs = getComputedStyle(root); fam = cs.getPropertyValue('--font-display') + ',' + cs.getPropertyValue('--font-body'); }
-  finally{ root.dataset.skin = sk0; }
-  renderTree();
-  if(!sn) throw new Error('empty');
-  const [w, h] = exDims(sn, o.title), k = Math.min(o.scale, exMaxScale(w, h)), Wp = Math.round(w * k), Hp = Math.round(h * k);
-  const css = exCSS() + '\n' + await exFonts(fam) + '\n.xport *,.xport *::before,.xport *::after{animation:none!important;transition:none!important}';
-  const ty = EX_M + (o.title ? 64 : 0), wm = Math.round(Math.max(18, Math.min(56, Math.min(w, h) * .035)));
-  const box = document.createElement('div');
-  box.innerHTML = `<div class="tree-scroll" style="position:absolute;left:0;top:0;width:${w}px;height:${h}px;overflow:visible;border:0;cursor:default"></div>
-    ${o.title ? `<div class="xtitle" style="position:absolute;left:${EX_M}px;right:${EX_M}px;top:${Math.round(EX_M * .7)}px;font:800 30px/1.25 var(--font-display);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(sn.title)}<span style="font-weight:600;font-size:18px;opacity:.65"> · ${esc(sn.date)}</span></div>` : ''}
-    <div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${EX_M}px;top:${ty}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>
+const EXSTOP = {v:false};
+const exSleep = ms => new Promise(r => setTimeout(r, ms));
+function exSnapAt(VT){                                  // l'arbre tel qu'il était (ou sera) à cette date
+  const S0 = S, sh = cShadow(VT); if(!sh) return null; S = sh;
+  try{ const b = buildTree(); return {html: b.html.split('@T@').join('0s'), W: b.W, H: b.H, title: t('family', familyName(P(S.founderId))), date: fmt(VT), y: yearOf(VT), era: eraLvl(yearOf(VT)) || ''}; }
+  finally{ S = S0; }
+}
+async function exStyle(skin){                           // les règles du jeu et les polices du thème choisi
+  const root = document.documentElement, sk0 = root.dataset.skin; let fam = '';
+  root.dataset.skin = skin; try{ const cs = getComputedStyle(root); fam = cs.getPropertyValue('--font-display') + ',' + cs.getPropertyValue('--font-body'); } finally{ root.dataset.skin = sk0; }
+  return exCSS() + '\n' + await exFonts(fam) + '\n.xport *,.xport *::before,.xport *::after{animation:none!important;transition:none!important}';
+}
+function exInner(sn, o){                                 // la scène : fond, titre, arbre, petit logo
+  const wm = Math.round(Math.max(18, Math.min(56, Math.min(o.w, o.h) * .035))), box = document.createElement('div');
+  box.innerHTML = `<div class="tree-scroll" style="position:absolute;left:0;top:0;width:${o.w}px;height:${o.h}px;overflow:visible;border:0;cursor:default"></div>
+    ${o.title ? `<div class="xtitle" style="position:absolute;left:${EX_M}px;right:${EX_M}px;top:${Math.round(EX_M * .7)}px;font:800 30px/1.25 var(--font-display);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(sn.title)}<span style="font-weight:600;font-size:18px;opacity:.65"> · ${esc(o.dateTxt)}</span></div>` : ''}
+    <div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${o.left}px;top:${o.top}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>
     <div class="xwm" style="position:absolute;right:${Math.round(EX_M * .5)}px;bottom:${Math.round(EX_M * .4)}px;display:flex;align-items:center;gap:${Math.round(wm * .3)}px;opacity:.2">${emblem('xwm')}<span class="logo" style="margin:0;padding:0;font-size:${wm}px;line-height:1.1;letter-spacing:-.03em;text-align:left"><span>Cyn</span>genetic</span></div>`;
-  const em = box.querySelector('.xwm svg'); em.setAttribute('style', `width:${Math.round(wm * 1.2)}px;height:${Math.round(wm * 1.2)}px;flex:none`);
-  const xs = new XMLSerializer(), inner = [...box.childNodes].map(n => xs.serializeToString(n)).join('');
-  const cls = ['zmode', 'no-deco'].filter(c => document.body.classList.contains(c)).concat('xport').join(' '), era = document.body.dataset.era;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${Wp}" height="${Hp}" viewBox="0 0 ${Wp} ${Hp}" data-skin="${esc(o.skin)}"><foreignObject x="0" y="0" width="${Wp}" height="${Hp}">`
-    + `<body xmlns="http://www.w3.org/1999/xhtml" class="${cls}"${era ? ` data-era="${esc(era)}"` : ''} style="margin:0;position:relative;width:${w}px;height:${h}px;overflow:hidden;transform:scale(${k});transform-origin:0 0;background-attachment:scroll">`
-    + `<style><![CDATA[${css}]]></style>${inner}</body></foreignObject></svg>`;
-  const img = new Image();
-  await new Promise((res, rej) => { img.onload = res; img.onerror = () => rej(new Error('svg')); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
-  await new Promise(r => setTimeout(r, 150));            // le temps que les polices intégrées soient prêtes
-  const c = document.createElement('canvas'); c.width = Wp; c.height = Hp;
-  const g = c.getContext('2d'); g.drawImage(img, 0, 0, Wp, Hp);
-  const blob = await new Promise((res, rej) => { try{ c.toBlob(b => b ? res(b) : rej(new Error('blob')), o.fmt === 'jpeg' ? 'image/jpeg' : 'image/png', .92); }catch(e){ rej(e); } });
-  const slug = String(sn.title).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'arbre';
-  const name = `cyngenetic-${slug}-${sn.y}.${o.fmt === 'jpeg' ? 'jpg' : 'png'}`;
-  const dl = await Promise.race([EXDL, new Promise(r => setTimeout(() => r(null), 800))]);   // dans claude.ai, l'enregistrement passe par sa propre confirmation
+  box.querySelector('.xwm svg').setAttribute('style', `width:${Math.round(wm * 1.2)}px;height:${Math.round(wm * 1.2)}px;flex:none`);
+  const xs = new XMLSerializer(); return [...box.childNodes].map(n => xs.serializeToString(n)).join('');
+}
+function exSVG(inner, o){
+  const Wp = Math.round(o.w * o.k), Hp = Math.round(o.h * o.k), cls = ['zmode', 'no-deco'].filter(c => document.body.classList.contains(c)).concat('xport').join(' ');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${Wp}" height="${Hp}" viewBox="0 0 ${Wp} ${Hp}" data-skin="${esc(o.skin)}"><foreignObject x="0" y="0" width="${Wp}" height="${Hp}">`
+    + `<body xmlns="http://www.w3.org/1999/xhtml" class="${cls}"${o.era ? ` data-era="${esc(o.era)}"` : ''} style="margin:0;position:relative;width:${o.w}px;height:${o.h}px;overflow:hidden;transform:scale(${o.k});transform-origin:0 0;background-attachment:scroll">`
+    + `<style><![CDATA[${o.css}]]></style>${inner}</body></foreignObject></svg>`;
+}
+const exImg = svg => new Promise((res, rej) => { const img = new Image(); img.onload = () => res(img); img.onerror = () => rej(new Error('svg')); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
+const exSlug = s0 => String(s0).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'arbre';
+async function exSave(blob, name){
+  const dl = await Promise.race([EXDL, exSleep(800).then(() => null)]);   // dans claude.ai, l'enregistrement passe par sa propre confirmation
   if(dl){
     try{ await dl.save({filename: name, data: blob}); return name; }
     catch(e){ const c = e && e.code; if(c === 'declined') return null; if(!['unavailable','not_granted','capability_disabled','capability_removed'].includes(c)) throw e; }
   }
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
-  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 8000);
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 15000);
   return name;
+}
+async function exportTree(o){
+  const root = document.documentElement, sk0 = root.dataset.skin; let sn = null;
+  root.dataset.skin = o.skin;                           // le thème de l'image, le temps de mesurer les bulles (rien n'est affiché entre-temps)
+  try{ sn = treeSnap(); } finally{ root.dataset.skin = sk0; }
+  renderTree();
+  if(!sn) throw new Error('empty');
+  const [w, h] = exDims(sn, o.title), k = Math.min(o.scale, exMaxScale(w, h)), Wp = Math.round(w * k), Hp = Math.round(h * k);
+  const css = await exStyle(o.skin), inner = exInner(sn, {w, h, title: o.title, left: EX_M, top: EX_M + (o.title ? 64 : 0), dateTxt: sn.date});
+  const img = await exImg(exSVG(inner, {w, h, k, skin: o.skin, era: document.body.dataset.era, css}));
+  await exSleep(150);                                    // le temps que les polices intégrées soient prêtes
+  const c = document.createElement('canvas'); c.width = Wp; c.height = Hp; c.getContext('2d').drawImage(img, 0, 0, Wp, Hp);
+  const blob = await new Promise((res, rej) => { try{ c.toBlob(b => b ? res(b) : rej(new Error('blob')), o.fmt === 'jpeg' ? 'image/jpeg' : 'image/png', .92); }catch(e){ rej(e); } });
+  return exSave(blob, `cyngenetic-${exSlug(sn.title)}-${sn.y}.${o.fmt === 'jpeg' ? 'jpg' : 'png'}`);
+}
+async function exportVideo(o, prog){                     // 0.2.6f : l'arbre qui grandit, de l'année y0 à l'année y1 (1 000 ans au plus)
+  const MR = window.MediaRecorder; if(!MR) throw new Error('nomr');
+  const mime = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm']
+    .find(m => { try{ return MR.isTypeSupported(m); }catch(e){ return false; } }); if(!mime) throw new Error('nomime');
+  const root = document.documentElement, sk0 = root.dataset.skin, t0 = fromYMD(o.y0, 0, 1), t1 = fromYMD(o.y1, 11, 31);
+  const nF = Math.max(2, Math.min(o.y1 - o.y0 + 1, Math.round(o.dur * 12))), at = i => t0 + (t1 - t0) * i / (nF - 1);
+  let mW = 0, mH = 0;                                    // 1. la taille de la scène : celle du plus grand arbre de la vidéo
+  root.dataset.skin = o.skin;
+  try{ for(let i = 0; i < nF; i++){ const sn = exSnapAt(at(i)); if(sn){ mW = Math.max(mW, sn.W); mH = Math.max(mH, sn.H); } } }
+  finally{ root.dataset.skin = sk0; }
+  if(!mW){ renderTree(); throw new Error('empty'); }
+  const [Vw, Vh] = o.res, th = o.title ? 64 : 0; let cw = mW + EX_M * 2, ch = mH + EX_M * 2 + th;
+  if(cw / ch < Vw / Vh) cw = ch * Vw / Vh; else ch = cw * Vh / Vw;   // la scène prend la forme de la vidéo
+  const k = Vw / cw, css = await exStyle(o.skin), fam0 = t('family', familyName(P(S.founderId)));
+  // 2. chaque image est dessinée en direct pendant l'enregistrement (l'image suivante se prépare pendant que l'actuelle s'affiche)
+  let lastKey = null;
+  const mk = async i => {
+    const VT = at(i); let sn;
+    root.dataset.skin = o.skin; try{ sn = exSnapAt(VT); } finally{ root.dataset.skin = sk0; }
+    if(!sn) sn = {html:'', W:0, H:0, title: fam0, era:''};
+    const dateTxt = String(yD(VT)), key = sn.html + '|' + dateTxt;
+    if(key === lastKey) return null; lastKey = key;
+    return exImg(exSVG(exInner(sn, {w: cw, h: ch, title: o.title, left: Math.round((cw - sn.W) / 2), top: EX_M + th, dateTxt}), {w: cw, h: ch, k, skin: o.skin, era: sn.era, css}));
+  };
+  const vc = document.createElement('canvas'); vc.width = Vw; vc.height = Vh; const g = vc.getContext('2d');
+  let cur = await mk(0); g.drawImage(cur, 0, 0, Vw, Vh); await exSleep(200); g.drawImage(cur, 0, 0, Vw, Vh);   // le temps que les polices soient prêtes
+  const stream = vc.captureStream(30), rec = new MR(stream, {mimeType: mime, videoBitsPerSecond: Math.round(Math.min(40e6, Math.max(2e6, Vw * Vh * 4)))});
+  const chunks = []; rec.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
+  const stopped = new Promise(r => { rec.onstop = r; });
+  const fms = o.dur * 1000 / nF; rec.start(500);
+  const start = performance.now(); let acc = 0;
+  const hold = async until => { while(performance.now() < until){ if(EXSTOP.v) break; g.drawImage(cur, 0, 0, Vw, Vh); await exSleep(Math.max(0, Math.min(90, until - performance.now()))); } };
+  try{
+    for(let i = 0; i < nF; i++){
+      g.drawImage(cur, 0, 0, Vw, Vh);
+      const next = i + 1 < nF ? mk(i + 1) : null;
+      acc += fms; await hold(start + acc);
+      if(EXSTOP.v) throw new Error('stop');
+      prog('rec', Math.min(o.dur, Math.round(acc / 1000)), o.dur);
+      if(next){ const im = await next; if(im) cur = im; }
+    }
+    await hold(performance.now() + 1200);                // la dernière image reste un instant
+  } finally{ rec.stop(); await stopped; stream.getTracks().forEach(x => x.stop()); renderTree(); }
+  const blob = new Blob(chunks, {type: mime.split(';')[0]});
+  return exSave(blob, `cyngenetic-${exSlug(fam0)}-${o.y0}-${o.y1}.${mime.includes('mp4') ? 'mp4' : 'webm'}`);
 }
 const ACT = {
   pause(){ S.paused = !S.paused; if(S.creative && !S.paused){ ctStop(); if(S.cView != null){ S.cView = null; dirty = true; render(); } } renderControls(); },   // 0.2.6a : le temps repart du présent
@@ -13991,6 +14119,9 @@ const ACT = {
   vsmenu(){ vsDraft = Object.assign({mode:'normal', diff:'std', goal:'speed'}, VS_CFG || {}); openVsMenu(false); },
   calopen(){ openCal(); },
   caldef(){ CAL = {on:false}; store.del(CAL_KEY); calApplied(); sfx.pop(); openCustom(true); },   // le calendrier réel
+  extab(d){ if(exBusy) return; $$('#exForm .extabs button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === d.v)));
+    $('#exForm .exImg').classList.toggle('ceoff', d.v !== 'img'); $('#exForm .exVid').classList.toggle('ceoff', d.v !== 'vid');
+    $('#exForm').dispatchEvent(new Event('change')); },
   famtog(d){ if(!S) return; S.famShow = S.famShow || {}; const id = +d.id; S.famShow[id] = S.famShow[id] === false;
     const el = () => document.querySelector(`#treeCanvas .famtog[data-id="${id}"]`), b0 = el() && el().getBoundingClientRect();
     render(); const b1 = el() && el().getBoundingClientRect();
