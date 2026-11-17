@@ -2,6 +2,13 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.4a — 17 novembre 2026
+
+- Nouveau mode Argent 💰 (à cocher avant de commencer) : toute la famille met son argent en commun. Chaque année, le revenu de chacun s'envole au-dessus de sa bulle (en vert), et les enfants et les ados coûtent de l'argent (en rouge).
+- Les salaires dépendent du métier et de l'époque, avec une monnaie d'époque et une inflation réaliste : livres, francs, nouveaux francs, euros… et des crédits dans le futur. Chaque pays a ses monnaies (thalers et marks, pesetas, couronnes, dollars…).
+- 4 objectifs de fortune, en euros d'aujourd'hui : 100 000 (facile), 1 million (moyen), 10 millions (dur) et 100 millions (extrême). Sous zéro, c'est la faillite et la partie se termine.
+- Les stars gagnent 10 à 20 fois plus, les criminels font perdre de l'argent, la prison ne rapporte presque rien. Le total de la famille s'affiche sous les Cyn, et 6 nouveaux succès.
+
 ## v0.2.3d — 17 novembre 2026
 
 - Nouveau thème Bain d'étoile ✨, le plus cher de la boutique (10 000 Cyn) : un vrai ciel d'étoiles animé en fond (une pluie d'étoiles dans les menus, un voyage à travers les étoiles pendant la partie), des étoiles filantes et parfois une comète dorée, de la poussière d'étoiles qui suit ta souris ou tes doigts.
