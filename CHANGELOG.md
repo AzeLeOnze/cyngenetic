@@ -4,6 +4,7 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 
 ## v0.2.5a — 17 novembre 2026
 
+- L'en-tête de l'arbre affiche l'espérance de vie de la famille : l'âge moyen au décès de tous ses membres disparus.
 - Trois thèmes ont leur musique : Arcade 90 (un vrai chiptune de borne d'arcade, avec la pièce qu'on insère), Galaxie (douce, froide et magique : nappes de glace, cristaux, vent de l'espace) et Or (royale et épique : fanfare de cuivres, trompette héroïque, timbales, cordes qui galopent, cymbales).
 - Le thème Dark a sa propre musique : une marche gothique en ré mineur, menaçante et bien rythmée (batterie, basse qui martèle, orgue d'église, clavecin, chœur qui gémit, une mélodie qui rôde… et le glas toutes les 8 mesures).
 - Les politiques brésiliens ont leurs couleurs (vert, jaune et bleu), en version claire et en version sombre.

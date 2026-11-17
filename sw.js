@@ -1,5 +1,5 @@
-// Cyngenetic : cache hors ligne. Version 20261117-074352 (change à chaque fabrication, pour que les mises à jour arrivent).
-const VERSION = 'cyngenetic-20261117-074352';
+// Cyngenetic : cache hors ligne. Version 20261117-075439 (change à chaque fabrication, pour que les mises à jour arrivent).
+const VERSION = 'cyngenetic-20261117-075439';
 const FONTS = 'cyngenetic-fonts';
 const MEDIA = 'cyngenetic-media';   // vidéos des thèmes (0.2.3d), gardées d'une mise à jour à l'autre
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png?v=2', './icons/icon-512.png?v=2',
