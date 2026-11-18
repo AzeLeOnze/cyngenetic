@@ -2,6 +2,12 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6i — 18 novembre 2026
+
+- Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une lignée après l'autre, du fondateur jusqu'au bout de la branche, assez près pour bien lire. Ceux qu'on n'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l'ombre, puis le temps rembobine jusqu'à l'embranchement suivant. À la fin, tout l'arbre s'allume.
+- Vidéo : le cadrage se choisit maintenant entre « Tout l'arbre », « Zoom intelligent » et « Séquentiel ». Le zoom intelligent est plus calme : la caméra reste plus longtemps au même endroit et se déplace plus doucement.
+- Les globe-trotteurs voyagent 20 fois plus souvent que les autres.
+
 ## v0.2.6h — 18 novembre 2026
 
 - Vidéo : nouvelle case « Zoom intelligent ». Quand l'arbre devient trop grand pour être lu, la caméra s'approche, suit les naissances et les décès, puis recule à la fin pour montrer tout l'arbre.

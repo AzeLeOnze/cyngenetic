@@ -2311,6 +2311,7 @@ body[data-era="3"] .treebox::before{content:"";position:absolute;inset:0;z-index
 /* ===== 0.2.6f : export vidéo ===== */
 .tree-head .lifex,.tree-head .stats .lxm{cursor:default}
 .extabs{display:flex}
+.exmodes{display:flex;margin-top:6px}.exmodes button{flex:1;justify-content:center;text-align:center;line-height:1.15}
 .extabs button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .extabs button svg{width:17px;height:17px;fill:currentColor}
 .exform .exImg,.exform .exVid{display:grid;gap:9px}
@@ -2774,9 +2775,16 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BAIN_COLS = ['#3af4ff','#ff4fe0','#ffe84a','#ffffff','#b48cff'];   // 0.2.3d : les couleurs du thème Bain d'étoile
 const isBain = () => document.documentElement.dataset.skin === 'bain';
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.6h';
+const APP_VERSION = '0.2.6i';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.6i', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
+   fr:['Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une lignée après l\'autre, du fondateur jusqu\'au bout de la branche, assez près pour bien lire. Ceux qu\'on n\'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l\'ombre, puis le temps rembobine jusqu\'à l\'embranchement suivant. À la fin, tout l\'arbre s\'allume.',
+       'Vidéo : le cadrage se choisit maintenant entre « Tout l\'arbre », « Zoom intelligent » et « Séquentiel ». Le zoom intelligent est plus calme : la caméra reste plus longtemps au même endroit et se déplace plus doucement.',
+       'Les globe-trotteurs voyagent 20 fois plus souvent que les autres.'],
+   en:['Video: new “Sequential” framing. The camera tells one lineage after another, from the founder to the end of the branch, close enough to read. People not yet discovered stay in the dark, those already seen go into the shade, then time rewinds to the next fork. At the end, the whole tree lights up.',
+       'Video: framing is now a choice between “Whole tree”, “Smart zoom” and “Sequential”. Smart zoom is calmer: the camera stays longer in one place and moves more gently.',
+       'Globetrotters travel 20 times more often than everyone else.']},
   {v:'0.2.6h', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
    fr:['Vidéo : nouvelle case « Zoom intelligent ». Quand l\'arbre devient trop grand pour être lu, la caméra s\'approche, suit les naissances et les décès, puis recule à la fin pour montrer tout l\'arbre.',
        'Vidéo : la caméra cadre maintenant l\'arbre au centre de l\'écran et zoome en douceur à mesure qu\'il grandit, en vertical, en carré comme en paysage. Le titre et la date gardent la même taille quelle que soit la taille de l\'arbre.',
@@ -4840,7 +4848,12 @@ fr:{
   cal_prev:(d,n)=>`Aujourd'hui : ${d} · ${n} jours par an`, cal_ach:'Un calendrier sur mesure désactive les succès, comme les autres personnalisations.',
   cal_default:'Remettre le calendrier réel', cal_err:'Il faut entre 1 et 60 mois.',
   lifex_tip15:(a,n)=>`Espérance de vie de la famille : ${a} ans (âge moyen au décès ${n>1?`des ${n} derniers membres disparus`:'du dernier membre disparu'})`,
-  ex_tab_img:'Image', ex_tab_vid:'Vidéo', exv_res:'Format de la vidéo', exv_dur:'Durée', exv_from:"De l'année", exv_to:"À l'année", exv_vert:'Vertical', exv_square:'Carré', exv_zoom:'Zoom intelligent', exv_zoom_hint:"Quand l'arbre devient trop grand pour être lu, la caméra s'approche et suit les naissances et les décès, puis recule à la fin pour montrer tout l'arbre.", 
+  ex_tab_img:'Image', ex_tab_vid:'Vidéo', exv_res:'Format de la vidéo', exv_dur:'Durée', exv_from:"De l'année", exv_to:"À l'année", exv_vert:'Vertical', exv_square:'Carré',
+  exv_mode:'Cadrage', exv_m_all:"Tout l'arbre", exv_m_smart:'Zoom intelligent', exv_m_seq:'Séquentiel',
+  exv_h_all:"La caméra montre l'arbre en entier et recule à mesure qu'il grandit.",
+  exv_h_smart:"Quand l'arbre devient trop grand pour être lu, la caméra s'approche et suit tranquillement les naissances et les décès, puis recule à la fin.",
+  exv_h_seq:"Une lignée après l'autre : la caméra suit chaque branche, du fondateur jusqu'au bout. Ceux qu'on n'a pas encore découverts restent dans le noir. Puis le temps rembobine jusqu'à l'embranchement suivant.",
+  exv_lin:(a,b)=>`Lignée ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} lignée${n>1?'s':''} · durée de la vidéo : ${d}`, exv_zoom:'Zoom intelligent', exv_zoom_hint:"Quand l'arbre devient trop grand pour être lu, la caméra s'approche et suit les naissances et les décès, puis recule à la fin pour montrer tout l'arbre.", 
   exv_max:'Une vidéo couvre 1 000 ans au plus : le début sera avancé.', exv_order:"L'année de fin doit venir après l'année de début.", exv_info:(y,s)=>`${y} ans d'histoire · environ ${s} s par année`,
   exv_go:'Créer la vidéo', exv_enc:(a,b)=>`Création de la vidéo… ${a} s / ${b} s`, exv_stop:'Arrêter', exv_prep:(a,b)=>`Préparation des images… ${a} / ${b}`, exv_rec:(a,b)=>`Enregistrement de la vidéo… ${a} s / ${b} s`,
   exv_done:n=>`Vidéo enregistrée : ${n}`, exv_fail:"La vidéo n'a pas pu être créée. Essaie un format plus petit.", exv_nosupport:'Ton navigateur ne sait pas fabriquer de vidéo.',
@@ -5350,7 +5363,12 @@ en:{
   cal_prev:(d,n)=>`Today: ${d} · ${n} days a year`, cal_ach:'A custom calendar turns achievements off, like other customisations.',
   cal_default:'Back to the real calendar', cal_err:'You need between 1 and 60 months.',
   lifex_tip15:(a,n)=>`Family life expectancy: ${a} (average age at death of ${n>1?`the last ${n} members who died`:'the last member who died'})`,
-  ex_tab_img:'Image', ex_tab_vid:'Video', exv_res:'Video format', exv_dur:'Length', exv_from:'From year', exv_to:'To year', exv_vert:'Vertical', exv_square:'Square', exv_zoom:'Smart zoom', exv_zoom_hint:'When the tree gets too big to read, the camera moves in and follows births and deaths, then pulls back at the end to show the whole tree.', 
+  ex_tab_img:'Image', ex_tab_vid:'Video', exv_res:'Video format', exv_dur:'Length', exv_from:'From year', exv_to:'To year', exv_vert:'Vertical', exv_square:'Square',
+  exv_mode:'Framing', exv_m_all:'Whole tree', exv_m_smart:'Smart zoom', exv_m_seq:'Sequential',
+  exv_h_all:'The camera shows the whole tree and pulls back as it grows.',
+  exv_h_smart:'When the tree gets too big to read, the camera moves in and calmly follows births and deaths, then pulls back at the end.',
+  exv_h_seq:'One lineage after another: the camera follows each branch from the founder to its end. People not yet discovered stay in the dark. Then time rewinds to the next fork.',
+  exv_lin:(a,b)=>`Lineage ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} lineage${n>1?'s':''} · video length: ${d}`, exv_zoom:'Smart zoom', exv_zoom_hint:'When the tree gets too big to read, the camera moves in and follows births and deaths, then pulls back at the end to show the whole tree.', 
   exv_max:'A video covers 1,000 years at most: the start will be moved forward.', exv_order:'The end year must come after the start year.', exv_info:(y,s)=>`${y} years of history · about ${s} s per year`,
   exv_go:'Create the video', exv_enc:(a,b)=>`Creating the video… ${a} s / ${b} s`, exv_stop:'Stop', exv_prep:(a,b)=>`Preparing frames… ${a} / ${b}`, exv_rec:(a,b)=>`Recording the video… ${a} s / ${b} s`,
   exv_done:n=>`Video saved: ${n}`, exv_fail:"The video couldn't be created. Try a smaller format.", exv_nosupport:"Your browser can't make videos.",
@@ -5859,7 +5877,12 @@ TX.de = {
   cal_prev:(d,n)=>`Heute: ${d} · ${n} Tage pro Jahr`, cal_ach:'Ein eigener Kalender schaltet die Erfolge ab, wie andere Anpassungen.',
   cal_default:'Zurück zum echten Kalender', cal_err:'Es braucht zwischen 1 und 60 Monate.',
   lifex_tip15:(a,n)=>`Lebenserwartung der Familie: ${a} Jahre (Durchschnittsalter beim Tod ${n>1?`der letzten ${n} Verstorbenen`:'des zuletzt Verstorbenen'})`,
-  ex_tab_img:'Bild', ex_tab_vid:'Video', exv_res:'Videoformat', exv_dur:'Dauer', exv_from:'Ab dem Jahr', exv_to:'Bis zum Jahr', exv_vert:'Hochformat', exv_square:'Quadrat', exv_zoom:'Intelligenter Zoom', exv_zoom_hint:'Wird der Baum zu groß zum Lesen, fährt die Kamera näher heran und folgt Geburten und Todesfällen; am Ende zeigt sie den ganzen Baum.', 
+  ex_tab_img:'Bild', ex_tab_vid:'Video', exv_res:'Videoformat', exv_dur:'Dauer', exv_from:'Ab dem Jahr', exv_to:'Bis zum Jahr', exv_vert:'Hochformat', exv_square:'Quadrat',
+  exv_mode:'Bildausschnitt', exv_m_all:'Ganzer Baum', exv_m_smart:'Intelligenter Zoom', exv_m_seq:'Sequenziell',
+  exv_h_all:'Die Kamera zeigt den ganzen Baum und fährt zurück, während er wächst.',
+  exv_h_smart:'Wird der Baum zu groß zum Lesen, fährt die Kamera heran und folgt ruhig Geburten und Todesfällen; am Ende zeigt sie alles.',
+  exv_h_seq:'Eine Linie nach der anderen: Die Kamera folgt jedem Zweig vom Gründer bis zum Ende. Noch nicht Entdeckte bleiben im Dunkeln. Dann spult die Zeit bis zur nächsten Gabelung zurück.',
+  exv_lin:(a,b)=>`Linie ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} Linie${n>1?'n':''} · Videolänge: ${d}`, exv_zoom:'Intelligenter Zoom', exv_zoom_hint:'Wird der Baum zu groß zum Lesen, fährt die Kamera näher heran und folgt Geburten und Todesfällen; am Ende zeigt sie den ganzen Baum.', 
   exv_max:'Ein Video umfasst höchstens 1.000 Jahre: Der Anfang wird vorverlegt.', exv_order:'Das Endjahr muss nach dem Startjahr liegen.', exv_info:(y,s)=>`${y} Jahre Geschichte · etwa ${s} s pro Jahr`,
   exv_go:'Video erstellen', exv_enc:(a,b)=>`Video wird erstellt… ${a} s / ${b} s`, exv_stop:'Anhalten', exv_prep:(a,b)=>`Bilder werden vorbereitet… ${a} / ${b}`, exv_rec:(a,b)=>`Video wird aufgenommen… ${a} s / ${b} s`,
   exv_done:n=>`Video gespeichert: ${n}`, exv_fail:'Das Video konnte nicht erstellt werden. Versuche ein kleineres Format.', exv_nosupport:'Dein Browser kann keine Videos erstellen.',
@@ -6371,7 +6394,12 @@ TX.es = {
   cal_prev:(d,n)=>`Hoy: ${d} · ${n} días al año`, cal_ach:'Un calendario a medida desactiva los logros, como las demás personalizaciones.',
   cal_default:'Volver al calendario real', cal_err:'Hacen falta entre 1 y 60 meses.',
   lifex_tip15:(a,n)=>`Esperanza de vida de la familia: ${a} años (edad media al morir ${n>1?`de los últimos ${n} miembros fallecidos`:'del último miembro fallecido'})`,
-  ex_tab_img:'Imagen', ex_tab_vid:'Vídeo', exv_res:'Formato del vídeo', exv_dur:'Duración', exv_from:'Desde el año', exv_to:'Hasta el año', exv_vert:'Vertical', exv_square:'Cuadrado', exv_zoom:'Zoom inteligente', exv_zoom_hint:'Cuando el árbol es demasiado grande para leerse, la cámara se acerca y sigue los nacimientos y las muertes, y al final se aleja para mostrar todo el árbol.', 
+  ex_tab_img:'Imagen', ex_tab_vid:'Vídeo', exv_res:'Formato del vídeo', exv_dur:'Duración', exv_from:'Desde el año', exv_to:'Hasta el año', exv_vert:'Vertical', exv_square:'Cuadrado',
+  exv_mode:'Encuadre', exv_m_all:'Todo el árbol', exv_m_smart:'Zoom inteligente', exv_m_seq:'Secuencial',
+  exv_h_all:'La cámara muestra todo el árbol y se aleja a medida que crece.',
+  exv_h_smart:'Cuando el árbol es demasiado grande para leerse, la cámara se acerca y sigue con calma los nacimientos y las muertes, y al final se aleja.',
+  exv_h_seq:'Un linaje tras otro: la cámara sigue cada rama del fundador hasta el final. Quienes aún no se han descubierto quedan en la oscuridad. Luego el tiempo rebobina hasta la siguiente bifurcación.',
+  exv_lin:(a,b)=>`Linaje ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} linaje${n>1?'s':''} · duración del vídeo: ${d}`, exv_zoom:'Zoom inteligente', exv_zoom_hint:'Cuando el árbol es demasiado grande para leerse, la cámara se acerca y sigue los nacimientos y las muertes, y al final se aleja para mostrar todo el árbol.', 
   exv_max:'Un vídeo abarca 1000 años como máximo: el inicio se adelantará.', exv_order:'El año final debe ser posterior al inicial.', exv_info:(y,s)=>`${y} años de historia · unos ${s} s por año`,
   exv_go:'Crear el vídeo', exv_enc:(a,b)=>`Creando el vídeo… ${a} s / ${b} s`, exv_stop:'Detener', exv_prep:(a,b)=>`Preparando las imágenes… ${a} / ${b}`, exv_rec:(a,b)=>`Grabando el vídeo… ${a} s / ${b} s`,
   exv_done:n=>`Vídeo guardado: ${n}`, exv_fail:'No se pudo crear el vídeo. Prueba un formato más pequeño.', exv_nosupport:'Tu navegador no puede crear vídeos.',
@@ -8181,7 +8209,7 @@ function workYear(p, A, day){
   const w = p.work; if(w && w.s === 'royal'){ royalYear(p, A, day); return; }
   if((w && w.s === 'travel') || p.trip) return;        // 0.2.2a : en voyage (0.2.3a : ou en long voyage en famille)
   if(w && ['job','unemp','odd','retired'].includes(w.s) && A >= 20 && A <= 75 && !p.lockJob && !jailed(p) && !p.zombie && !p.lost && !(p.star && p.star.famous) && !(p.crim && p.crim.declared)
-    && !royalImmune(p) && Math.random() < .012){       // 1,2 % par an : un voyage de 2 à 20 mois dans un autre pays
+    && !royalImmune(p) && Math.random() < (p.interests && p.interests.includes('globe') ? .24 : .012)){   // 1,2 % par an : un voyage de 2 à 20 mois dans un autre pays (0.2.6i : globe-trotteur, 20 fois plus)
     const c = pick(TRAVEL_C.filter(x => x !== CTRY)), m = rnd(2, 20);
     p.work = {s:'travel', ctry:c, until: day + Math.round(m * 30.44), prev: w}; log('move','travel',[p.id, c, m], day, false); dirty = true; return;
   }
@@ -10065,7 +10093,7 @@ function renderDecade(y, force){
 /* ================= Rendu : arbre ================= */
 const NW = 172, NH = 140, GX = 22, PG = 26, GY = 92, PAD = 44, NW_MAX = 300;
 const measureCtx = document.createElement('canvas').getContext('2d');
-let nodeWidths = {};                                  // largeur de chaque bulle : la bulle s'agrandit pour afficher le prénom en entier
+let nodeWidths = {}, EXSEQ = null;                   // 0.2.6i : EXSEQ = classes posées sur les bulles pendant une vidéo séquentielle                                  // largeur de chaque bulle : la bulle s'agrandit pour afficher le prénom en entier
 const bandTxt = p => S && S.creative && p.death != null && p.showCause !== false ? '✝ ' + cap(causeText(p)) : activity(p);   // 0.2.6g : la cause du décès sur la bulle (mode libre)
 function nodeWidthOf(p, fd){
   const tt = royalTitle(p), first = p.first || '…';
@@ -10108,6 +10136,7 @@ function nodeHTML(p, x, y){
   if(S.evQ && S.evQ.length && S.evQ[0].id === p.id) cls.push('evfocus');   // 0.2.0c : la personne dont parle l'événement
   if(p.lost) cls.push('tlost'); else if(isTT(p) && p.death == null) cls.push('chrono');
   if(p.id===S.activeId) cls.push('active');
+  if(EXSEQ && EXSEQ[p.id]) cls.push(EXSEQ[p.id]);
   if(TPICK){ cls.push(TPICK.ids.has(p.id) ? 'tpk' : 'tpx'); if(TPICK.armed === p.id) cls.push('tparm'); }   // 0.2.2b : choix dans l'arbre
   if(!p.blood) cls.push('partner');
   if(p.paraLink) cls.push('paranode');
@@ -13846,7 +13875,7 @@ function openExport(){                                  // 0.2.6f : une image, o
         <div class="exticks"><span>${t('exv_slow')}</span><span>${t('exv_fast')}</span></div>
         <div class="row2"><label class="field"><span class="lab">${t('exv_from')}</span><input class="inp" type="number" id="exVY0" value="${yF}"></label>
           <label class="field"><span class="lab">${t('exv_to')}</span><input class="inp" type="number" id="exVY1" value="${yNow}"></label></div>
-        <label class="cechk"><input type="checkbox" id="exVZoom" checked><span>${t('exv_zoom')}</span></label><p class="fieldhint">${t('exv_zoom_hint')}</p>
+        <div class="field"><span class="lab">${t('exv_mode')}</span><div class="pills exmodes" id="exVMode">${['all', 'smart', 'seq'].map(v => `<button type="button" data-act="exmode" data-v="${v}" aria-pressed="${v === 'all'}"><span>${t('exv_m_' + v)}</span></button>`).join('')}</div><p class="fieldhint" id="exVModeH"></p></div>
         <p class="setnote" id="exVInfo"></p>
         <div class="exprog" id="exProg" hidden><i></i></div><p class="setnote" id="exPhase" hidden></p>
       </div>
@@ -13856,13 +13885,19 @@ function openExport(){                                  // 0.2.6f : une image, o
     </form>`, {sound:false});
   const vid = () => !$('#exForm .exVid').classList.contains('ceoff');
   const exDur = () => { const y = Math.abs(Math.round(+$('#exVY1').value) - Math.round(+$('#exVY0').value)) || 1; return Math.max(3, Math.min(600, Math.round(y / EX_SPD[+$('#exVSpd').value]))); };
+  const vMode = () => { const b = $('#exVMode [aria-pressed="true"]'); return b ? b.dataset.v : 'all'; };
+  const durTx = d => d >= 60 ? `${Math.floor(d / 60)} min ${String(d % 60).padStart(2, '0')} s` : `${d} s`;
   const upd = () => {
     const [w2, h2] = exDims(sn, $('#exTitle').checked), m2 = exMaxScale(w2, h2), r = $('#exScale');
     r.max = m2; if(+r.value > m2) r.value = m2;
     const k = +r.value; $('#exSize').textContent = `${cynFmt(Math.round(w2 * k))} × ${cynFmt(Math.round(h2 * k))} px`;
     const d = exDur(), y0 = Math.round(+$('#exVY0').value), y1 = Math.round(+$('#exVY1').value), sp = EX_SPD[+$('#exVSpd').value];
     $('#exVDurT').textContent = t('exv_spd_v', String(sp).replace('.', LANG !== 'en' ? ',' : '.'));
-    $('#exVInfo').textContent = y1 - y0 > 1000 ? t('exv_max') : y1 <= y0 ? t('exv_order') : t('exv_info2', y1 - y0, d >= 60 ? `${Math.floor(d / 60)} min ${String(d % 60).padStart(2, '0')} s` : `${d} s`);
+    const md = vMode(); $('#exVModeH').textContent = t('exv_h_' + md);
+    let info = y1 - y0 > 1000 ? t('exv_max') : y1 <= y0 ? t('exv_order') : null;
+    if(!info){ if(md === 'seq'){ const pl = seqPlan({y0, y1, spd: sp}); info = pl && pl.n ? t('exv_info_seq', pl.n, durTx(Math.round(pl.total))) : t('ct_empty'); }
+      else info = t('exv_info2', y1 - y0, durTx(d)); }
+    $('#exVInfo').textContent = info;
     if(!exBusy) $('#exGo span').textContent = t(vid() ? 'exv_go' : 'ex_go');
   };
   $('#exForm').addEventListener('input', upd); $('#exForm').addEventListener('change', upd); upd();
@@ -13878,7 +13913,7 @@ function openExport(){                                  // 0.2.6f : une image, o
       bar.querySelector('i').style.width = (a / b * 100).toFixed(1) + '%'; bar.classList.toggle('rec', ph === 'rec'); tx.textContent = t(ph === 'rec' ? 'exv_rec' : ph === 'enc' ? 'exv_enc' : 'exv_prep', a, b); };
     try{
       const skin = $('#exSkin').value, title = $('#exTitle').checked;
-      const name = isVid ? await exportVideo({skin, title, res: $('#exVRes').value.split('x').map(Number), dur: exDur(), y0, y1, smart: $('#exVZoom').checked}, prog)
+      const name = isVid ? await exportVideo({skin, title, res: $('#exVRes').value.split('x').map(Number), dur: exDur(), y0, y1, mode: vMode(), smart: vMode() === 'smart', spd: EX_SPD[+$('#exVSpd').value]}, prog)
         : await exportTree({fmt: $('#exFmt').value, skin, scale: +$('#exScale').value, title});
       const ok = $('#exOk'); if(ok && name){ ok.textContent = t(isVid ? 'exv_done' : 'ex_done', name); ok.hidden = false; sfx.sparkle(); } }
     catch(err){ const er = $('#exErr'); if(er && !(err && err.message === 'stop')){ er.textContent = t(isVid ? 'exv_fail' : 'ex_fail'); er.hidden = false; sfx.refuse(); } console.warn(err); }
@@ -13933,13 +13968,15 @@ async function exStyle(skin){                           // les règles du jeu et
   const root = document.documentElement, sk0 = root.dataset.skin; let fam = '';
   root.dataset.skin = skin; try{ const cs = getComputedStyle(root); fam = cs.getPropertyValue('--font-display') + ',' + cs.getPropertyValue('--font-body'); } finally{ root.dataset.skin = sk0; }
   return exCSS() + '\n' + await exFonts(fam) + '\n.xport *,.xport *::before,.xport *::after{animation:none!important;transition:none!important}'
-    + '\nbody.xbare{background:none!important}body.xbare::before,body.xbare::after{display:none!important}';
+    + '\nbody.xbare{background:none!important}body.xbare::before,body.xbare::after{display:none!important}'
+    + '\n.xport .node.sqx{filter:brightness(.07) saturate(0)!important}.xport .node.sqd{filter:brightness(.42) saturate(.55)!important}';
 }
 function exInner(sn, o){                                 // la scène : fond, titre, arbre, petit logo
   const wm = Math.round(Math.max(18, Math.min(56, Math.min(o.w, o.h) * .035))), bigS = Math.round(Math.max(40, Math.min(o.w, o.h) * .085)), box = document.createElement('div');
   const tr = o.left != null;
   box.innerHTML = `${tr ? `<div class="tree-scroll" style="position:absolute;left:0;top:0;width:${o.w}px;height:${o.h}px;overflow:visible;border:0;cursor:default"></div>` : ''}
     ${o.title ? `<div class="xtitle" style="position:absolute;left:${EX_M}px;right:${o.big ? Math.round(EX_M + bigS * 4) : EX_M}px;top:${Math.round(EX_M * .7)}px;font:800 30px/1.25 var(--font-display);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(sn.title)}${o.big ? '' : `<span style="font-weight:600;font-size:18px;opacity:.65"> · ${esc(o.dateTxt)}</span>`}</div>` : ''}
+    ${o.title && o.sub ? `<div class="xsub" style="position:absolute;left:${EX_M}px;top:${Math.round(EX_M * .7 + 44)}px;font:700 20px/1.2 var(--font-display);color:var(--ink);opacity:.72;white-space:nowrap">${esc(o.sub)}</div>` : ''}
     ${o.big ? `<div class="xdate" style="position:absolute;right:${EX_M}px;top:${Math.round(EX_M * .55)}px;padding:${Math.round(bigS * .16)}px ${Math.round(bigS * .45)}px;border-radius:${Math.round(bigS * .4)}px;font:800 ${bigS}px/1 var(--font-display);color:#fff;letter-spacing:-.01em;background:rgba(0,22,60,.62);box-shadow:0 ${Math.round(bigS * .1)}px ${Math.round(bigS * .4)}px rgba(0,10,40,.35);text-shadow:0 2px 6px rgba(0,0,0,.35)">${esc(o.dateTxt)}</div>` : ''}
     ${tr ? `<div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${o.left}px;top:${o.top}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>` : ''}
     <div class="xwm" style="position:absolute;right:${Math.round(EX_M * .5)}px;bottom:${Math.round(EX_M * .4)}px;display:flex;align-items:center;gap:${Math.round(wm * .3)}px;opacity:.2">${emblem('xwm')}<span class="logo" style="margin:0;padding:0;font-size:${wm}px;line-height:1.1;letter-spacing:-.03em;text-align:left"><span>Cyn</span>genetic</span></div>`;
@@ -14034,27 +14071,70 @@ function mp4File(w, h, samples, avcC){                   // ftyp + mdat + moov, 
   const moov = mp4Box('moov', mvhd, mp4Box('trak', tkhd, mp4Box('mdia', mdhd, hdlr, mp4Box('minf', vmhd, dinf, stbl))));
   return new Blob([ftyp, mdatHead, ...samples.map(x => x.data), moov], {type: 'video/mp4'});
 }
-async function vidScene(o){                              // 0.2.6h : une caméra cadre l'arbre (vertical, carré…) ; zoom intelligent : elle s'approche et suit la vie de la famille
-  const root = document.documentElement, sk0 = root.dataset.skin, t0 = fromYMD(o.y0, 0, 1), t1 = fromYMD(o.y1, 11, 31);
-  const nF = Math.max(2, Math.min(o.y1 - o.y0 + 1, Math.round(o.dur * 12))), at = i => t0 + (t1 - t0) * i / (nF - 1);
-  const snap = VT => { root.dataset.skin = o.skin; try{ return exSnapAt(VT); } finally{ root.dataset.skin = sk0; } };
-  const fid = S.founderId, KS = [];
-  for(let i = 0; i < nF; i++){                            // 1. chaque année : taille de l'arbre et place de chacun (repérée par rapport au fondateur, qui ne bouge pas)
-    const sn = snap(at(i)); if(!sn || !sn.W){ KS.push(null); continue; }
-    const fn = sn.nodes.find(n => n.id === fid) || {x: 0, y: 0};
-    KS.push({W: sn.W, H: sn.H, ox: fn.x, oy: fn.y, nodes: sn.nodes});
-  }
-  if(!KS.some(Boolean)){ renderTree(); throw new Error('empty'); }
+function vidGeo(o){                                     // la place de chaque chose dans l'image (titre, date, zone de l'arbre)
   const [Vw, Vh] = o.res, u = Math.min(Vw, Vh) / 900, w = Vw / u, h = Vh / u;   // titre, date et logo : toujours la même taille à l'écran
-  const bigS = Math.round(Math.max(40, Math.min(w, h) * .085)), band = Math.round(Math.max(EX_M * .55 + bigS * 1.32, o.title ? EX_M * .7 + 40 : 0) + EX_M * .5);
-  const bx = EX_M * u, by = band * u, bw = Vw - 2 * bx, bh = Vh - by - EX_M * u, cxS = bx + bw / 2, cyS = by + bh / 2;
-  const sMax = Math.min(Vw, Vh) / 420, sRead = Math.min(Vw, Vh) / 780, PAD = 24;
+  const bigS = Math.round(Math.max(40, Math.min(w, h) * .085)), band = Math.round(Math.max(EX_M * .55 + bigS * 1.32, o.title ? EX_M * .7 + 70 : 0) + EX_M * .5);
+  const bx = EX_M * u, by = band * u, bw = Vw - 2 * bx, bh = Vh - by - EX_M * u;
+  return {Vw, Vh, u, w, h, bx, by, bw, bh, cxS: bx + bw / 2, cyS: by + bh / 2, sMax: Math.min(Vw, Vh) / 420, sRead: Math.min(Vw, Vh) / 780, PAD: 24};
+}
+function vidSnap(o){                                     // l'arbre à une date, dans le thème de la vidéo (et ses bulles assombries en mode séquentiel)
+  const root = document.documentElement, sk0 = root.dataset.skin;
+  return (VT, seq) => { root.dataset.skin = o.skin; EXSEQ = seq || null; try{ return exSnapAt(VT); } finally{ root.dataset.skin = sk0; EXSEQ = null; } };
+}
+const vidGeom = (sn, fid) => { if(!sn || !sn.W) return null; const fn = sn.nodes.find(n => n.id === fid) || {x: 0, y: 0}; return {W: sn.W, H: sn.H, ox: fn.x, oy: fn.y, nodes: sn.nodes}; };   // repéré par rapport au fondateur, qui ne bouge pas
+async function vidRender(o, G, KEYS, KS, CAM, snap){     // KEYS : les dates à dessiner ; CAM : la caméra de chaque image
+  const {Vw, Vh, u, w, h, by, cxS, cyS, PAD} = G;
+  const CR = KS.map(() => null);                         // pour chaque date, seulement le morceau d'arbre que la caméra verra, à la bonne netteté
+  for(const c of CAM){ const k = KS[c.ai]; if(!k) continue;
+    const x0 = c.cx + k.ox - cxS / c.z, x1 = c.cx + k.ox + (Vw - cxS) / c.z, y0 = c.cy + k.oy - cyS / c.z, y1 = c.cy + k.oy + (Vh - cyS) / c.z, r = CR[c.ai];
+    CR[c.ai] = r ? {x0: Math.min(r.x0, x0), y0: Math.min(r.y0, y0), x1: Math.max(r.x1, x1), y1: Math.max(r.y1, y1), z: Math.max(r.z, c.z)} : {x0, y0, x1, y1, z: c.z}; }
+  CR.forEach((r, i) => { if(!r) return; const k = KS[i];
+    r.x0 = Math.floor(Math.max(-PAD, r.x0 - 4)); r.y0 = Math.floor(Math.max(-PAD, r.y0 - 4)); r.x1 = Math.ceil(Math.min(k.W + PAD, r.x1 + 4)); r.y1 = Math.ceil(Math.min(k.H + PAD, r.y1 + 4));
+    const cw = r.x1 - r.x0, ch = r.y1 - r.y0; if(cw <= 0 || ch <= 0){ CR[i] = null; return; }
+    r.q = Math.min(r.z, Math.sqrt(3 * Vw * Vh / (cw * ch)), 16000 / Math.max(cw, ch)); });
+  const css = await exStyle(o.skin), fam0 = t('family', familyName(P(S.founderId))), bgs = {};
+  const svgImg = (inner, ow, oh, k, era, bare) => exImg(exSVG(inner, {w: ow, h: oh, k, skin: o.skin, era, css, bare}));
+  let lastKey = null, lastTree = null;
+  const key = async i => {
+    const K = KEYS[i], sn = snap(K.VT, K.seq) || {html:'', W:0, H:0, title: fam0, era:''}, era = sn.era || '', dateTxt = String(yD(K.VT)), r = CR[i];
+    if(!(era in bgs)) bgs[era] = await svgImg('', w, h, u, era, false);
+    let tree = null;
+    if(sn.W && r && KS[i]){
+      const kk = sn.html + '|' + [r.x0, r.y0, r.x1, r.y1, r.q.toFixed(3)].join(',');
+      if(kk === lastKey) tree = lastTree;
+      else { const bx0 = document.createElement('div');   // comme pour l'image : sérialisé en XML (sinon les fils de l'arbre disparaissent)
+        bx0.innerHTML = `<div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${-r.x0}px;top:${-r.y0}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>`;
+        tree = {img: await svgImg(new XMLSerializer().serializeToString(bx0.firstChild), r.x1 - r.x0, r.y1 - r.y0, r.q, era, true), r, ox: KS[i].ox, oy: KS[i].oy};
+        lastKey = kk; lastTree = tree; }
+    }
+    return {bg: bgs[era], tree, ov: await svgImg(exInner(sn, {w, h, title: o.title, big: true, dateTxt, sub: K.sub}), w, h, u, era, true)};
+  };
+  let tc = null;                                          // l'arbre s'efface doucement sous le titre et la date
+  const draw = (g, k, fi) => {
+    const c = CAM[Math.max(0, Math.min(CAM.length - 1, fi))];
+    g.clearRect(0, 0, Vw, Vh); g.drawImage(k.bg, 0, 0, Vw, Vh);
+    const tr = k.tree; if(tr){ const r = tr.r, X = cxS + (r.x0 - tr.ox - c.cx) * c.z, Y = cyS + (r.y0 - tr.oy - c.cy) * c.z, dw = (r.x1 - r.x0) * c.z, dh = (r.y1 - r.y0) * c.z;
+      if(Y >= by - 1) g.drawImage(tr.img, X, Y, dw, dh);
+      else { if(!tc){ tc = document.createElement('canvas'); tc.width = Vw; tc.height = Vh; } const t2 = tc.getContext('2d');
+        t2.globalCompositeOperation = 'source-over'; t2.clearRect(0, 0, Vw, Vh); t2.drawImage(tr.img, X, Y, dw, dh);
+        const gr = t2.createLinearGradient(0, by * .45, 0, by); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+        t2.globalCompositeOperation = 'destination-out'; t2.fillStyle = gr; t2.fillRect(0, 0, Vw, by); g.drawImage(tc, 0, 0); } }
+    g.drawImage(k.ov, 0, 0, Vw, Vh);
+  };
+  return {fam0, Vw, Vh, total: CAM.length, hold: 0, secs: Math.round(CAM.length / VID_FPS), ai: fi => CAM[Math.max(0, Math.min(CAM.length - 1, fi))].ai, key, draw};
+}
+async function vidScene(o){                              // 0.2.6h : « Tout l'arbre » (la caméra le cadre) ou « Zoom intelligent » (elle s'approche et suit la vie de la famille)
+  const t0 = fromYMD(o.y0, 0, 1), t1 = fromYMD(o.y1, 11, 31), nF = Math.max(2, Math.min(o.y1 - o.y0 + 1, Math.round(o.dur * 12)));
+  const KEYS = Array.from({length: nF}, (_, i) => ({VT: t0 + (t1 - t0) * i / (nF - 1)})), snap = vidSnap(o), fid = S.founderId;
+  const KS = KEYS.map(K => vidGeom(snap(K.VT), fid));
+  if(!KS.some(Boolean)){ renderTree(); throw new Error('empty'); }
+  const G = vidGeo(o), {bw, bh, sMax, sRead, PAD} = G;
   const fit = KS.map(k => k ? Math.min(sMax, bw / k.W, bh / k.H) : sMax);   // le zoom qui fait tenir tout l'arbre
   const whole = i => { const k = KS[i]; return {z: fit[i], cx: k.W / 2 - k.ox, cy: k.H / 2 - k.oy, whole: true}; };
-  // 2. où regarder, année par année
-  const TG = [], dwell = Math.max(1, Math.round(2.2 * nF / o.dur)); let prev = null, prevD = new Map(), moved = -1e9;   // la caméra reste au moins ~2 s au même endroit
+  // où regarder, année par année
+  const TG = [], dwell = Math.max(1, Math.round(3.5 * nF / o.dur)); let prev = null, prevD = new Map(), moved = -1e9;   // 0.2.6i : la caméra reste au moins 3,5 s au même endroit
   for(let i = 0; i < nF; i++){
-    const k = KS[i]; if(!k){ TG.push(prev || {z: sMax, cx: 0, cy: 0, whole: true}); continue; }
+    const k = KS[i]; if(!k){ TG.push(null); continue; }
     let tg;
     if(!o.smart || fit[i] >= sRead) tg = whole(i);         // l'arbre entier est lisible : on le montre en entier
     else {
@@ -14069,69 +14149,122 @@ async function vidScene(o){                              // 0.2.6h : une caméra
         const bb = grp.reduce((a, r) => ({x0: Math.min(a.x0, r.x0), y0: Math.min(a.y0, r.y0), x1: Math.max(a.x1, r.x1), y1: Math.max(a.y1, r.y1)}));
         cx = (bb.x0 + bb.x1) / 2; cy = (bb.y0 + bb.y1) / 2; moved = i; }
       if(cx == null){ const fn = k.nodes.find(n => n.id === fid); const r = fn ? rel(fn) : {x0: 0, y0: 0, x1: NW, y1: NH}; cx = (r.x0 + r.x1) / 2; cy = (r.y0 + r.y1) / 2; }
-      const vw = bw / 2 / z, vh = bh / 2 / z, X0 = -k.ox, X1 = k.W - k.ox, Y0 = -k.oy, Y1 = k.H - k.oy;   // sans montrer de vide au-delà de l'arbre
-      cx = X1 - X0 <= 2 * vw ? (X0 + X1) / 2 : Math.max(X0 + vw, Math.min(X1 - vw, cx));
-      cy = Y1 - Y0 <= 2 * vh ? (Y0 + Y1) / 2 : Math.max(Y0 + vh, Math.min(Y1 - vh, cy));
+      [cx, cy] = vidClamp(k, z, cx, cy, G);
       tg = {z, cx, cy, whole: false};
     }
     TG.push(tg); prev = tg; prevD = new Map(k.nodes.map(n => [n.id, n.d]));
   }
-  // 3. le mouvement de la caméra, image par image (doux, et à la fin on recule pour montrer tout l'arbre)
-  const zoomed = TG.some(x => !x.whole), total = Math.max(1, Math.round(o.dur * VID_FPS)), hold = Math.round(VID_FPS * (zoomed ? 2.5 : 1));
-  const L = Math.ceil(.6 * nF / o.dur), CAM = []; let z = null, cx = 0, cy = 0;
-  for(let fi = 0; fi < total + hold; fi++){
-    const ai = Math.min(nF - 1, Math.floor(fi * nF / total)), k = KS[ai], end = zoomed && fi >= total && !!k;
-    const tg = end ? whole(ai) : TG[ai];
-    let tz = tg.z; if(tg.whole && !end) for(let j = ai + 1; j <= Math.min(nF - 1, ai + L); j++) if(TG[j].whole) tz = Math.min(tz, TG[j].z);   // anticipe l'arbre qui grandit
-    if(z == null){ z = tz; cx = tg.cx; cy = tg.cy; }
-    else { const az = 1 - Math.exp(-1 / VID_FPS / .3), ac = 1 - Math.exp(-1 / VID_FPS / (end ? .35 : .5)); z += (tz - z) * az; cx += (tg.cx - cx) * ac; cy += (tg.cy - cy) * ac; }
-    if(tg.whole && k && !end){                             // l'arbre entier ne doit jamais être coupé
-      z = Math.min(z, fit[ai]); const hw = bw / 2 / z, hh = bh / 2 / z, X0 = -k.ox - PAD, X1 = k.W - k.ox + PAD, Y0 = -k.oy - PAD, Y1 = k.H - k.oy + PAD;
-      if(X1 - X0 <= 2 * hw) cx = Math.max(X1 - hw, Math.min(X0 + hw, cx)); if(Y1 - Y0 <= 2 * hh) cy = Math.max(Y1 - hh, Math.min(Y0 + hh, cy)); }
-    CAM.push({z, cx, cy, ai});
-  }
-  // 4. pour chaque année, seulement le morceau d'arbre que la caméra verra, à la bonne netteté
-  const CR = KS.map(() => null);
-  for(const c of CAM){ const k = KS[c.ai]; if(!k) continue;
-    const x0 = c.cx + k.ox - cxS / c.z, x1 = c.cx + k.ox + (Vw - cxS) / c.z, y0 = c.cy + k.oy - cyS / c.z, y1 = c.cy + k.oy + (Vh - cyS) / c.z, r = CR[c.ai];
-    CR[c.ai] = r ? {x0: Math.min(r.x0, x0), y0: Math.min(r.y0, y0), x1: Math.max(r.x1, x1), y1: Math.max(r.y1, y1), z: Math.max(r.z, c.z)} : {x0, y0, x1, y1, z: c.z}; }
-  CR.forEach((r, i) => { if(!r) return; const k = KS[i];
-    r.x0 = Math.floor(Math.max(-PAD, r.x0 - 4)); r.y0 = Math.floor(Math.max(-PAD, r.y0 - 4)); r.x1 = Math.ceil(Math.min(k.W + PAD, r.x1 + 4)); r.y1 = Math.ceil(Math.min(k.H + PAD, r.y1 + 4));
-    const cw = r.x1 - r.x0, ch = r.y1 - r.y0; if(cw <= 0 || ch <= 0){ CR[i] = null; return; }
-    r.q = Math.min(r.z, Math.sqrt(3 * Vw * Vh / (cw * ch)), 16000 / Math.max(cw, ch)); });
-  const css = await exStyle(o.skin), fam0 = t('family', familyName(P(S.founderId))), bgs = {};
-  const svgImg = (inner, ow, oh, k, era, bare) => exImg(exSVG(inner, {w: ow, h: oh, k, skin: o.skin, era, css, bare}));
-  let lastKey = null, lastTree = null;
-  const key = async i => {
-    const VT = at(i), sn = snap(VT) || {html:'', W:0, H:0, title: fam0, era:''}, era = sn.era || '', dateTxt = String(yD(VT)), r = CR[i];
-    if(!(era in bgs)) bgs[era] = await svgImg('', w, h, u, era, false);
-    let tree = null;
-    if(sn.W && r && KS[i]){
-      const kk = sn.html + '|' + [r.x0, r.y0, r.x1, r.y1, r.q.toFixed(3)].join(',');
-      if(kk === lastKey) tree = lastTree;
-      else { const bx0 = document.createElement('div');   // comme pour l'image : sérialisé en XML (sinon les fils de l'arbre disparaissent)
-        bx0.innerHTML = `<div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${-r.x0}px;top:${-r.y0}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>`;
-        tree = {img: await svgImg(new XMLSerializer().serializeToString(bx0.firstChild), r.x1 - r.x0, r.y1 - r.y0, r.q, era, true), r, ox: KS[i].ox, oy: KS[i].oy};
-        lastKey = kk; lastTree = tree; }
+  // le mouvement de la caméra, image par image (doux ; avec le zoom, on recule à la fin pour montrer tout l'arbre)
+  const zoomed = TG.some(x => x && !x.whole), total = Math.max(1, Math.round(o.dur * VID_FPS)), hold = Math.round(VID_FPS * (zoomed ? 2.5 : 1));
+  const L = Math.ceil(.6 * nF / o.dur), FR = Array.from({length: total + hold}, (_, fi) => Math.min(nF - 1, Math.floor(fi * nF / total)));
+  const CAM = vidCam(FR, KS, TG, (fi, ai) => {
+    const end = zoomed && fi >= total, tg = end ? whole(ai) : TG[ai];
+    let tz = tg.z; if(tg.whole && !end) for(let j = ai + 1; j <= Math.min(nF - 1, ai + L); j++) if(KS[j] && TG[j].whole) tz = Math.min(tz, TG[j].z);   // anticipe l'arbre qui grandit
+    return {z: tz, cx: tg.cx, cy: tg.cy, whole: tg.whole && !end, az: 1 - Math.exp(-1 / VID_FPS / .4), ac: 1 - Math.exp(-1 / VID_FPS / (end ? .4 : .85))};
+  }, (fi, ai, st, z, cx, cy) => {
+    const k = KS[ai]; if(!st.whole) return [z, cx, cy];   // l'arbre entier ne doit jamais être coupé
+    z = Math.min(z, fit[ai]); const hw = bw / 2 / z, hh = bh / 2 / z, X0 = -k.ox - PAD, X1 = k.W - k.ox + PAD, Y0 = -k.oy - PAD, Y1 = k.H - k.oy + PAD;
+    if(X1 - X0 <= 2 * hw) cx = Math.max(X1 - hw, Math.min(X0 + hw, cx)); if(Y1 - Y0 <= 2 * hh) cy = Math.max(Y1 - hh, Math.min(Y0 + hh, cy));
+    return [z, cx, cy];
+  });
+  return vidRender(o, G, KEYS, KS, CAM, snap);
+}
+function vidCam(FR, KS, TG, step, post){                // FR : la date de chaque image ; TG : où regarder (repère du fondateur)
+  const CAM = [], idx = new Map(); let z = null, ax = 0, ay = 0, cur = -1;   // ax, ay : centre de la caméra dans l'arbre de la date affichée
+  const byId = i => { if(!idx.has(i)) idx.set(i, new Map(KS[i].nodes.map(n => [n.id, n]))); return idx.get(i); };
+  FR.forEach((ai, fi) => {
+    const k = KS[ai], tg = TG[ai];
+    if(!k || !tg){ CAM.push(CAM.length ? Object.assign({}, CAM[CAM.length - 1], {ai}) : {z: 1, cx: 0, cy: 0, ai}); return; }
+    if(cur !== ai && cur >= 0 && KS[cur] && z != null){  // l'arbre a pu bouger : on suit la bulle la plus proche du centre
+      const nb = byId(ai); let best = null, bd = Infinity;
+      for(const n of KS[cur].nodes){ if(!nb.has(n.id)) continue; const d = Math.hypot(n.x + n.w / 2 - ax, n.y + NH / 2 - ay); if(d < bd){ bd = d; best = n; } }
+      if(best){ const m = nb.get(best.id); ax += m.x - best.x; ay += m.y - best.y; } else { ax += k.ox - KS[cur].ox; ay += k.oy - KS[cur].oy; }
     }
-    return {bg: bgs[era], tree, ov: await svgImg(exInner(sn, {w, h, title: o.title, big: true, dateTxt}), w, h, u, era, true)};
+    cur = ai;
+    const st = step(fi, ai, tg), tx = st.keep || z == null && st.cx == null ? ax : st.cx + k.ox, ty = st.keep || z == null && st.cy == null ? ay : st.cy + k.oy;
+    if(z == null){ z = st.z; ax = tx; ay = ty; }
+    else { z += (st.z - z) * st.az; ax += (tx - ax) * st.ac; ay += (ty - ay) * st.ac; }
+    let rc = [z, ax - k.ox, ay - k.oy]; if(post) rc = post(fi, ai, st, rc[0], rc[1], rc[2]);
+    z = rc[0]; ax = rc[1] + k.ox; ay = rc[2] + k.oy;
+    CAM.push({z, cx: rc[1], cy: rc[2], ai});
+  });
+  return CAM;
+}
+function vidClamp(k, z, cx, cy, G){                      // la caméra ne montre pas de vide au-delà de l'arbre
+  const vw = G.bw / 2 / z, vh = G.bh / 2 / z, X0 = -k.ox, X1 = k.W - k.ox, Y0 = -k.oy, Y1 = k.H - k.oy;
+  return [X1 - X0 <= 2 * vw ? (X0 + X1) / 2 : Math.max(X0 + vw, Math.min(X1 - vw, cx)), Y1 - Y0 <= 2 * vh ? (Y0 + Y1) / 2 : Math.max(Y0 + vh, Math.min(Y1 - vh, cy))];
+}
+/* ===== 0.2.6i : vidéo « séquentielle » — une lignée après l'autre, du fondateur jusqu'au bout ===== */
+// Chaque lignée se raconte du début à la fin, la caméra suit la génération la plus jeune. Les autres sont noirs tant qu'on ne les a pas
+// « découverts », puis sombres. Ensuite le temps rembobine jusqu'à l'embranchement, et la lignée suivante commence.
+function seqPlan(o){
+  const f = S && P(S.founderId); if(!f) return null;
+  const T0 = fromYMD(o.y0, 0, 1), T1 = fromYMD(o.y1, 11, 31), kids = {}, pt = {};
+  for(const c of Object.values(S.people)) if(c.parents) for(const q of c.parents) if(q != null) (kids[q] = kids[q] || []).push(c);
+  for(const u of S.unions){ (pt[u.a] = pt[u.a] || []).push(u.b); (pt[u.b] = pt[u.b] || []).push(u.a); }
+  const paths = [], desc = new Set();
+  const dfs = (p, path) => {                             // chaque chemin du fondateur jusqu'à un bout de branche, les aînés d'abord
+    desc.add(p.id); let any = false;
+    for(const c of (kids[p.id] || []).slice().sort((a, b) => bornD(a) - bornD(b))){ if(desc.has(c.id)) continue; any = true; dfs(c, path.concat(c.id)); }
+    if(!any) paths.push(path);
   };
-  let tc = null;                                          // zoom intelligent : l'arbre s'efface doucement sous le titre et la date
-  const draw = (g, k, fi) => {
-    const c = CAM[Math.max(0, Math.min(CAM.length - 1, fi))];
-    g.clearRect(0, 0, Vw, Vh); g.drawImage(k.bg, 0, 0, Vw, Vh);
-    const tr = k.tree; if(tr){ const r = tr.r, X = cxS + (r.x0 - tr.ox - c.cx) * c.z, Y = cyS + (r.y0 - tr.oy - c.cy) * c.z, dw = (r.x1 - r.x0) * c.z, dh = (r.y1 - r.y0) * c.z;
-      if(Y >= by - 1) g.drawImage(tr.img, X, Y, dw, dh);
-      else { if(!tc){ tc = document.createElement('canvas'); tc.width = Vw; tc.height = Vh; } const t2 = tc.getContext('2d');
-        t2.globalCompositeOperation = 'source-over'; t2.clearRect(0, 0, Vw, Vh); t2.drawImage(tr.img, X, Y, dw, dh);
-        const gr = t2.createLinearGradient(0, by * .45, 0, by); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
-        t2.globalCompositeOperation = 'destination-out'; t2.fillStyle = gr; t2.fillRect(0, 0, Vw, by); g.drawImage(tc, 0, 0); } }
-    g.drawImage(k.ov, 0, 0, Vw, Vh);
-  };
-  return {nF, fam0, Vw, Vh, total, hold, ai: fi => CAM[Math.max(0, Math.min(CAM.length - 1, fi))].ai, key, draw};
+  dfs(f, [f.id]);
+  const disc = new Set(), segs = [];
+  for(const path of paths){
+    const k0 = path.findIndex(id => !disc.has(id)); if(k0 < 0) continue;
+    const nw = path.slice(k0).map(P), last = nw[nw.length - 1], focus = new Set();
+    path.forEach(id => { focus.add(id); (pt[id] || []).forEach(x => focus.add(x)); });
+    const st = Math.max(T0, bornD(nw[0]) - 90);           // on ne repart que de l'embranchement : chacun n'est raconté qu'une fois
+    let en = Math.min(T1, Math.max(...nw.map(p => p.death != null && p.death > bornD(p) ? p.death : T1)));
+    en = Math.min(T1, Math.max(en, bornD(last) + 730, st + 365));
+    if(st < T1 - 365) segs.push({path, st, en, focus, prev: new Set(disc)});   // moins d'un an à raconter : pas la peine
+    focus.forEach(x => disc.add(x));
+  }
+  const outsider = id => !desc.has(id) && !(pt[id] || []).some(x => desc.has(x));   // parents des conjoints, ancêtres du fondateur… : toujours visibles, en sombre
+  const seqMap = sg => { const m = {}; for(const id in S.people){ const n = +id; if(sg.focus.has(n)) continue; m[n] = sg.prev.has(n) || outsider(n) ? 'sqd' : 'sqx'; } return m; };
+  const spd = o.spd || 3, END = 2.5, n = segs.length; let HOLD = .8, TR = 1.6;
+  const fx0 = n * HOLD + Math.max(0, n - 1) * TR; if(fx0 > 450){ const k = 450 / fx0; HOLD = Math.max(.25, HOLD * k); TR = Math.max(.5, TR * k); }   // beaucoup de lignées : pauses et retours en arrière plus courts
+  const fixed = n * HOLD + Math.max(0, n - 1) * TR + END;
+  let secs = segs.map(sg => (sg.en - sg.st) / 365.25 / spd), sum = secs.reduce((a, b) => a + b, 0);
+  if(fixed + sum > 900) secs = secs.map(x => Math.max(.5, x * Math.max(.02, (900 - fixed) / sum)));   // 15 minutes au plus : ça accélère
+  return {segs, secs, n, pt, seqMap, HOLD, TR, END, total: fixed + secs.reduce((a, b) => a + b, 0)};
+}
+async function vidSeqScene(o){
+  const pl = seqPlan(o); if(!pl || !pl.n){ renderTree(); throw new Error('empty'); }
+  const KEYS = [], FR = [], F = x => Math.max(1, Math.round(x * VID_FPS));   // FR : pour chaque image de la vidéo, la date affichée
+  pl.segs.forEach((sg, j) => {
+    const mp = pl.seqMap(sg), sub = t('exv_lin', j + 1, pl.n), nfr = Math.max(6, F(pl.secs[j]));
+    const nk = Math.max(2, Math.min(Math.ceil((sg.en - sg.st) / 365.25) + 1, Math.round(pl.secs[j] * 12))), b0 = KEYS.length;
+    for(let i = 0; i < nk; i++) KEYS.push({VT: sg.st + (sg.en - sg.st) * i / (nk - 1), seq: mp, path: sg.path, sub});
+    for(let fi = 0; fi < nfr; fi++) FR.push(b0 + Math.min(nk - 1, Math.floor(fi * nk / nfr)));
+    for(let fi = F(pl.HOLD); fi > 0; fi--) FR.push(b0 + nk - 1);
+    const nx = pl.segs[j + 1]; if(!nx) return;            // le temps rembobine jusqu'au début de la lignée suivante
+    const mp2 = pl.seqMap(nx), sub2 = t('exv_lin', j + 2, pl.n), RK = 10, RF = F(pl.TR), b1 = KEYS.length;
+    for(let i = 1; i <= RK; i++) KEYS.push({VT: sg.en + (nx.st - sg.en) * i / RK, seq: mp2, path: nx.path, sub: sub2});
+    for(let fi = 0; fi < RF; fi++) FR.push(b1 + Math.min(RK - 1, Math.floor(fi * RK / RF)));
+  });
+  const endF = FR.length, bE = KEYS.length;               // à la fin : tout l'arbre, enfin découvert
+  KEYS.push({VT: Math.max(...pl.segs.map(sg => sg.en)), seq: null, path: null, sub: ''});
+  for(let fi = F(pl.END); fi > 0; fi--) FR.push(bE);
+  const snap = vidSnap(o), fid = S.founderId, KS = KEYS.map(K => vidGeom(snap(K.VT), fid));
+  if(!KS.some(Boolean)){ renderTree(); throw new Error('empty'); }
+  const G = vidGeo(o), fit = KS.map(k => k ? Math.min(G.sMax, G.bw / k.W, G.bh / k.H) : G.sMax);
+  const TG = KEYS.map((K, i) => {                         // la caméra suit le plus jeune de la lignée, avec son parent et son conjoint
+    const k = KS[i]; if(!k) return null;
+    if(!K.path){ const zf = Math.max(fit[i], Math.min(G.sMax, G.sRead * .45));   // la fin : tout s'allume ; on recule, sans rendre les textes illisibles
+      return fit[i] >= zf ? {z: fit[i], cx: k.W / 2 - k.ox, cy: k.H / 2 - k.oy} : {z: zf, keep: true}; }
+    const at = new Map(k.nodes.map(n => [n.id, n])); let fr = -1; K.path.forEach((id, x) => { if(at.has(id)) fr = x; }); if(fr < 0) return null;
+    const ids = [K.path[fr]].concat(fr > 0 ? [K.path[fr - 1]] : [], pl.pt[K.path[fr]] || []), ns = ids.map(id => at.get(id)).filter(Boolean);
+    const x0 = Math.min(...ns.map(n => n.x)), x1 = Math.max(...ns.map(n => n.x + n.w)), y0 = Math.min(...ns.map(n => n.y)), y1 = Math.max(...ns.map(n => n.y + NH));
+    const z = Math.min(G.sMax, Math.max(G.sRead, fit[i])), [cx, cy] = vidClamp(k, z, (x0 + x1) / 2 - k.ox, (y0 + y1) / 2 - k.oy, G);
+    return {z, cx, cy};
+  });
+  const CAM = vidCam(FR, KS, TG, (fi, ai, tg) => { const end = fi >= endF;
+    return {z: tg.z, cx: tg.cx, cy: tg.cy, keep: tg.keep, az: 1 - Math.exp(-1 / VID_FPS / (end ? .55 : .45)), ac: 1 - Math.exp(-1 / VID_FPS / (end ? .5 : .4))}; });
+  return vidRender(o, G, KEYS, KS, CAM, snap);
 }
 async function exportVideoMP4(o, prog, cfg){
-  const sc = await vidScene(o), {nF, Vw, Vh, fam0} = sc;
+  const sc = await (o.mode === 'seq' ? vidSeqScene(o) : vidScene(o)), {Vw, Vh, fam0} = sc;
   const vc = document.createElement('canvas'); vc.width = Vw; vc.height = Vh; const g = vc.getContext('2d');
   const samples = []; let avcC = null, encErr = null;
   const enc = new VideoEncoder({output: (chunk, meta) => {
@@ -14151,41 +14284,39 @@ async function exportVideoMP4(o, prog, cfg){
       const fr = new VideoFrame(vc, {timestamp: Math.round(fi * 1e6 / VID_FPS), duration: Math.round(1e6 / VID_FPS)});
       enc.encode(fr, {keyFrame: fi % (VID_FPS * 2) === 0}); fr.close();
       while(enc.encodeQueueSize > 6) await exSleep(4);
-      if(fi % 15 === 0) prog('enc', Math.min(o.dur, Math.round(fi / VID_FPS)), o.dur);
+      if(fi % 15 === 0) prog('enc', Math.min(sc.secs, Math.round(fi / VID_FPS)), sc.secs);
     }
     await enc.flush();
   } finally{ try{ enc.close(); }catch(e){} renderTree(); }
   if(encErr) throw encErr;
   if(!avcC || !samples.length) throw new Error('noenc');
   const blob = mp4File(Vw, Vh, samples, avcC);
-  return exSave(blob, `cyngenetic-${exSlug(fam0)}-${o.y0}-${o.y1}.mp4`);
+  return exSave(blob, `cyngenetic-${exSlug(fam0)}-${o.y0}-${o.y1}${o.mode === 'seq' ? '-lignees' : ''}.mp4`);
 }
 async function exportVideoRec(o, prog){                  // 0.2.6f : l'arbre qui grandit, enregistré en direct (navigateurs sans encodeur vidéo)
   const MR = window.MediaRecorder; if(!MR) throw new Error('nomr');
   const mime = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm']
     .find(m => { try{ return MR.isTypeSupported(m); }catch(e){ return false; } }); if(!mime) throw new Error('nomime');
-  const sc = await vidScene(o), {nF, Vw, Vh, fam0} = sc;
+  const sc = await (o.mode === 'seq' ? vidSeqScene(o) : vidScene(o)), {Vw, Vh, fam0} = sc, N = sc.total + sc.hold;
   const vc = document.createElement('canvas'); vc.width = Vw; vc.height = Vh; const g = vc.getContext('2d');
-  let cur = await sc.key(0); await exSleep(200); sc.draw(g, cur, 0);   // le temps que les polices soient prêtes
+  let cur = await sc.key(0), shown = 0, loading = null; await exSleep(200); sc.draw(g, cur, 0);   // le temps que les polices soient prêtes
   const stream = vc.captureStream(30), rec = new MR(stream, {mimeType: mime, videoBitsPerSecond: Math.round(Math.min(40e6, Math.max(2e6, Vw * Vh * 4)))});
   const chunks = []; rec.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
   const stopped = new Promise(r => { rec.onstop = r; });
-  const fms = o.dur * 1000 / nF; rec.start(500);
-  const start = performance.now(); let acc = 0;
-  const tick = () => sc.draw(g, cur, Math.round((performance.now() - start) / 1000 * VID_FPS));
-  const hold = async until => { while(performance.now() < until){ if(EXSTOP.v) break; tick(); await exSleep(Math.max(0, Math.min(33, until - performance.now()))); } };
+  rec.start(500); const start = performance.now();
   try{
-    for(let i = 0; i < nF; i++){
-      const next = i + 1 < nF ? sc.key(i + 1) : null;
-      acc += fms; await hold(start + acc);
+    for(;;){
       if(EXSTOP.v) throw new Error('stop');
-      prog('rec', Math.min(o.dur, Math.round(acc / 1000)), o.dur);
-      if(next) cur = await next;
+      const fi = Math.round((performance.now() - start) / 1000 * VID_FPS); if(fi >= N) break;
+      const ai = sc.ai(fi);
+      if(ai !== shown && !loading){ const want = ai; loading = sc.key(want).then(k => { cur = k; shown = want; loading = null; }); }
+      sc.draw(g, cur, fi);
+      if(fi % 15 === 0) prog('rec', Math.round(fi / VID_FPS), sc.secs);
+      await exSleep(16);
     }
-    await hold(start + (sc.total + sc.hold) * 1000 / VID_FPS);   // la dernière image reste un instant
-  } finally{ rec.stop(); await stopped; stream.getTracks().forEach(x => x.stop()); renderTree(); }
+  } finally{ if(loading) await loading.catch(() => {}); rec.stop(); await stopped; stream.getTracks().forEach(x => x.stop()); renderTree(); }
   const blob = new Blob(chunks, {type: mime.split(';')[0]});
-  return exSave(blob, `cyngenetic-${exSlug(fam0)}-${o.y0}-${o.y1}.${mime.includes('mp4') ? 'mp4' : 'webm'}`);
+  return exSave(blob, `cyngenetic-${exSlug(fam0)}-${o.y0}-${o.y1}${o.mode === 'seq' ? '-lignees' : ''}.${mime.includes('mp4') ? 'mp4' : 'webm'}`);
 }
 const ACT = {
   pause(){ S.paused = !S.paused; if(S.creative && !S.paused){ ctStop(); if(S.cView != null){ S.cView = null; dirty = true; render(); } } renderControls(); },   // 0.2.6a : le temps repart du présent
@@ -14384,6 +14515,7 @@ const ACT = {
   vsmenu(){ vsDraft = Object.assign({mode:'normal', diff:'std', goal:'speed'}, VS_CFG || {}); openVsMenu(false); },
   calopen(){ openCal(); },
   caldef(){ CAL = {on:false}; store.del(CAL_KEY); calApplied(); sfx.pop(); openCustom(true); },   // le calendrier réel
+  exmode(d, b){ if(exBusy) return; $$('#exVMode button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); sfx.click(); const fm = $('#exForm'); if(fm) fm.dispatchEvent(new Event('change')); },
   extab(d){ if(exBusy) return; $$('#exForm .extabs button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === d.v)));
     $('#exForm .exImg').classList.toggle('ceoff', d.v !== 'img'); $('#exForm .exVid').classList.toggle('ceoff', d.v !== 'vid');
     $('#exForm').dispatchEvent(new Event('change')); },
