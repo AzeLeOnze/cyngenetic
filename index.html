@@ -2778,8 +2778,10 @@ const APP_VERSION = '0.2.6h';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.2.6h', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
-   fr:['Vidéo réparée : chaque image est maintenant encodée une par une, à 30 images par seconde exactement, dans un vrai fichier MP4 qui connaît sa durée. Toutes les années durent le même temps, les lecteurs (VLC compris) affichent la bonne durée, et la création va plus vite que le temps réel.'],
-   en:['Video fixed: each frame is now encoded one by one, at exactly 30 frames per second, into a proper MP4 file that knows its length. Every year lasts the same time, players (VLC included) show the right length, and creating it is faster than real time.']},
+   fr:['Mode libre : les déménagements se règlent aussi avec des dates, comme les métiers. L\'arbre et le curseur du temps montrent la ville où chacun vivait à ce moment-là.',
+       'Vidéo réparée : chaque image est maintenant encodée une par une, à 30 images par seconde exactement, dans un vrai fichier MP4 qui connaît sa durée. Toutes les années durent le même temps, les lecteurs (VLC compris) affichent la bonne durée, et la création va plus vite que le temps réel.'],
+   en:['Free mode: moves can also be set with dates, like jobs. The tree and the time slider show the city where each person lived at that moment.',
+       'Video fixed: each frame is now encoded one by one, at exactly 30 frames per second, into a proper MP4 file that knows its length. Every year lasts the same time, players (VLC included) show the right length, and creating it is faster than real time.']},
   {v:'0.2.6g', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
    fr:['Mode libre : nouveau « Parcours scolaire » dans la fiche (maternelle, primaire, collège, lycée, études supérieures, apprentissage, école au nom libre, fin des études), avec une date pour chaque étape. L\'arbre et le curseur du temps le suivent.',
        'Mode libre : entre la fin des études et le premier métier choisi, la personne est « Sans emploi ».',
@@ -4843,6 +4845,7 @@ fr:{
   noemp:'Sans emploi', ce_showc:'Afficher la cause sur la bulle', free_sel:'Personne sélectionnée',
   ce_u_mar:'Mariés le', ce_u_end:'Fin du couple', ce_ue_none:'Toujours ensemble', ce_ue_split:'Séparation', ce_ue_divorce:'Divorce', ce_ue_death:'Décès', ce_ue_prison:'Prison',
   exv_spd:'Vitesse', exv_spd_v:s=>`${s} an${+String(s).replace(',', '.') > 1 ? 's' : ''} par seconde`, exv_slow:'Plus lent', exv_fast:'Plus rapide', exv_info2:(y,d)=>`${y} ans d'histoire · durée de la vidéo : ${d}`,
+  ce_moves:'Déménagements', ce_moves_hint:"Chaque ligne : à partir de cette date, la personne vit dans cette ville. Avant le premier déménagement, c'est sa ville de naissance.", ce_m_add:'+ Ajouter un déménagement', ce_m_ph:'Ville',
   center:'Recentrer', lifex:'Espérance de vie :', lifex_tip:(a,n)=>`Espérance de vie de la famille : ${a} ans (âge moyen au décès de ${n} membre${n>1?'s':''})`, stats:(n,v,k)=>`${n} membre${n>1?'s':''} · ${v} en vie · ${k} génération${k>1?'s':''}`,
   you:'Vous', future_star:'★ Future star', star:'★ Star',
   you_play:'Vous incarnez', born_in:(p,d,c)=>`${g(p,'Né','Née')} le ${d} à ${c}`,
@@ -5352,6 +5355,7 @@ en:{
   noemp:'No job', ce_showc:'Show the cause on the bubble', free_sel:'Selected person',
   ce_u_mar:'Married on', ce_u_end:'End of the couple', ce_ue_none:'Still together', ce_ue_split:'Separation', ce_ue_divorce:'Divorce', ce_ue_death:'Death', ce_ue_prison:'Prison',
   exv_spd:'Speed', exv_spd_v:s=>`${s} year${+s > 1 ? 's' : ''} per second`, exv_slow:'Slower', exv_fast:'Faster', exv_info2:(y,d)=>`${y} years of history · video length: ${d}`,
+  ce_moves:'Moves', ce_moves_hint:'Each line: from this date on, the person lives in this city. Before the first move, it’s their birthplace.', ce_m_add:'+ Add a move', ce_m_ph:'City',
   center:'Recenter', lifex:'Life expectancy:', lifex_tip:(a,n)=>`Family life expectancy: ${a} (average age at death of ${n} member${n>1?'s':''})`, stats:(n,v,k)=>`${n} member${n>1?'s':''} · ${v} alive · ${k} generation${k>1?'s':''}`,
   you:'You', future_star:'★ Future star', star:'★ Star',
   you_play:'You are playing', born_in:(p,d,c)=>`Born ${d} in ${c}`,
@@ -5860,6 +5864,7 @@ TX.de = {
   noemp:'Ohne Arbeit', ce_showc:'Ursache auf der Blase zeigen', free_sel:'Ausgewählte Person',
   ce_u_mar:'Verheiratet am', ce_u_end:'Ende des Paares', ce_ue_none:'Immer noch zusammen', ce_ue_split:'Trennung', ce_ue_divorce:'Scheidung', ce_ue_death:'Tod', ce_ue_prison:'Gefängnis',
   exv_spd:'Geschwindigkeit', exv_spd_v:s=>`${s} Jahr${+String(s).replace(',', '.') > 1 ? 'e' : ''} pro Sekunde`, exv_slow:'Langsamer', exv_fast:'Schneller', exv_info2:(y,d)=>`${y} Jahre Geschichte · Videolänge: ${d}`,
+  ce_moves:'Umzüge', ce_moves_hint:'Jede Zeile: Ab diesem Datum lebt die Person in dieser Stadt. Vor dem ersten Umzug ist es ihr Geburtsort.', ce_m_add:'+ Umzug hinzufügen', ce_m_ph:'Stadt',
   center:'Zentrieren', lifex:'Lebenserwartung:', lifex_tip:(a,n)=>`Lebenserwartung der Familie: ${a} Jahre (Durchschnittsalter beim Tod von ${n} Mitglied${n>1?'ern':''})`, stats:(n,v,k)=>`${n} Mitglied${n>1?'er':''} · ${v} am Leben · ${k} Generation${k>1?'en':''}`,
   you:'Du', future_star:'★ Künftiger Star', star:'★ Star',
   you_play:'Du spielst', born_in:(p,d,c)=>`Geboren am ${d} in ${c}`,
@@ -6371,6 +6376,7 @@ TX.es = {
   noemp:'Sin empleo', ce_showc:'Mostrar la causa en la burbuja', free_sel:'Persona seleccionada',
   ce_u_mar:'Casados el', ce_u_end:'Fin de la pareja', ce_ue_none:'Siguen juntos', ce_ue_split:'Separación', ce_ue_divorce:'Divorcio', ce_ue_death:'Muerte', ce_ue_prison:'Cárcel',
   exv_spd:'Velocidad', exv_spd_v:s=>`${s} año${+String(s).replace(',', '.') > 1 ? 's' : ''} por segundo`, exv_slow:'Más lento', exv_fast:'Más rápido', exv_info2:(y,d)=>`${y} años de historia · duración del vídeo: ${d}`,
+  ce_moves:'Mudanzas', ce_moves_hint:'Cada línea: a partir de esa fecha, la persona vive en esa ciudad. Antes de la primera mudanza, es su lugar de nacimiento.', ce_m_add:'+ Añadir una mudanza', ce_m_ph:'Ciudad',
   center:'Centrar', lifex:'Esperanza de vida:', lifex_tip:(a,n)=>`Esperanza de vida de la familia: ${a} años (edad media al morir de ${n} miembro${n>1?'s':''})`, stats:(n,v,k)=>`${n} miembro${n>1?'s':''} · ${v} con vida · ${k} generaci${k>1?'ones':'ón'}`,
   you:'Tú', future_star:'★ Futura estrella', star:'★ Estrella',
   you_play:'Juegas con', born_in:(p,d,c)=>`${gs(p,'Nacido','Nacida')} el ${d} en ${c}`,
@@ -13362,7 +13368,7 @@ function ceOpen(id, k, of){
     d = {first: ed.first || '', last: ed.last || '', sex: ed.sex, birth: bornD(ed), bcity: ed.birthCity || ed.city, city: ed.city,
       state: ed.death == null ? 'alive' : c.vanished ? 'vanished' : 'dead', death: ed.death, dcity: ed.deathCity || ed.city,
       cause: ed.death == null || c.old ? 'old' : c.custom ? 'custom' : c.suicide ? 'suicide' : c.dz && DZ[c.dz] ? 'dz:' + c.dz : c.vanished ? 'old' : 'keep', causeTxt: c.custom || '',
-      workTxt: ed.work && ed.work.s === 'custom' ? ed.work.name : '', jobs: (ed.jobs || []).slice(), edu: (ed.edu || []).slice(), showC: ed.showCause !== false, work: ceWorkVal(ed), field: ed.work && ed.work.field || '', rank: ed.work && ed.work.s === 'mil' ? ed.work.rank : 0, atout: ed.atout || '',
+      workTxt: ed.work && ed.work.s === 'custom' ? ed.work.name : '', jobs: (ed.jobs || []).slice(), edu: (ed.edu || []).slice(), moves: (ed.moves || []).slice(), showC: ed.showCause !== false, work: ceWorkVal(ed), field: ed.work && ed.work.field || '', rank: ed.work && ed.work.s === 'mil' ? ed.work.rank : 0, atout: ed.atout || '',
       star: ed.star ? 'star' : 'none', sjob: ed.star && ed.star.job || '', starAt: ed.star ? (ed.star.famous ? ed.star.at ?? ed.star.day : ed.star.day) : day,
       crim: ed.crim ? (ed.crim.fate === 'prison' ? 'prison' : 'crim') : 'none', crimAt: ed.crim ? (ed.crim.declared ? ed.crim.at ?? ed.crim.day : ed.crim.day) : day,
       prisonAt: ed.crim && ed.crim.prisonAt != null ? ed.crim.prisonAt : ed.crim && ed.crim.fate === 'prison' ? ed.crim.at ?? day : day, bShow: ed.bShow || 'year', dShow: ed.dShow || 'year',
@@ -13370,7 +13376,7 @@ function ceOpen(id, k, of){
   } else {
     const df = ceDefaults(k, q);
     d = {first: df.first, last: df.last, sex: df.sex, birth: df.birth, bcity: q.city, city: q.city, state:'alive', death:null, dcity: q.city, cause:'old', causeTxt:'',
-      work:'auto', workTxt:'', jobs:[], edu:[], showC:true, field:'', rank:0, atout: pick(ATOUTS)[0], star:'none', sjob:'', crim:'none', int:'', adds:[], conds:[], race:'', photo:null, glasses:false, imm:false, other: df.other,
+      work:'auto', workTxt:'', jobs:[], edu:[], moves:[], showC:true, field:'', rank:0, atout: pick(ATOUTS)[0], star:'none', sjob:'', crim:'none', int:'', adds:[], conds:[], race:'', photo:null, glasses:false, imm:false, other: df.other,
       starAt: rday, crimAt: rday, prisonAt: rday, bShow:'year', dShow:'year'};
   }
   CE = {id: ed ? ed.id : null, k, of: q ? q.id : null, photo: d.photo, work0: ed ? d.work : null, field0: d.field, rank0: d.rank};
@@ -13393,6 +13399,9 @@ function ceOpen(id, k, of){
       <select class="inp cjF${e.k === 'uni' ? '' : ' ceoff'}">${fieldOpts(e.field)}</select>
       <button type="button" class="gel ghost cjDel" aria-label="${esc(t('ce_j_del'))}">✕</button></div>`;
   CE.eduRow = eduRow;
+  const moveRow = mv => `<div class="cejob cemove"><input class="inp cjAt" type="date" value="${isoDay(mv.at)}" aria-label="${esc(t('ce_j_from'))}"><input class="inp cmC" list="ceCities" maxlength="28" autocomplete="off" value="${esc(cityName(mv.city || ''))}" placeholder="${esc(t('ce_m_ph'))}" aria-label="${esc(t('ce_city'))}">
+      <button type="button" class="gel ghost cjDel" aria-label="${esc(t('ce_j_del'))}">✕</button></div>`;
+  CE.moveRow = moveRow;
   const fields = FIELDS.map(f => [fieldName(f[0]), f[0]]).sort(byName).map(([l, v]) => opt(v, l, v === d.field)).join('');
   const ranks = t('mil_ranks').map((l, i) => opt(i, l, i === d.rank)).join('');
   const sjobs = STARJOBS.map(r => [jobName(r[0], sx), r[0]]).sort(byName).map(([l, v]) => opt(v, l, v === d.sjob)).join('');
@@ -13441,6 +13450,9 @@ function ceOpen(id, k, of){
         <label class="field ceTxtF"><span class="lab">${t('ce_w_custom_lab')}</span><input class="inp" id="ceWorkTxt" maxlength="40" autocomplete="off" value="${esc(d.workTxt)}" placeholder="${esc(t('ce_w_custom_ph'))}"></label>
         <label class="field ceUniF"><span class="lab">${t('ce_field')}</span><select class="inp" id="ceField">${fields}</select></label>
         <label class="field ceMilF"><span class="lab">${t('ce_rank')}</span><select class="inp" id="ceRank">${ranks}</select></label></div>
+      <details class="cedet cejobs"${d.moves.length ? ' open' : ''}><summary><span class="lab">${t('ce_moves')}</span><b id="ceMoveN">${d.moves.length || ''}</b></summary>
+        <p class="fieldhint">${t('ce_moves_hint')}</p><div id="ceMoves">${d.moves.map(moveRow).join('')}</div>
+        <button type="button" class="gel ghost cjAdd" id="ceMoveAdd"><span>${t('ce_m_add')}</span></button></details>
       <details class="cedet cejobs"${d.edu.length ? ' open' : ''}><summary><span class="lab">${t('ce_edu')}</span><b id="ceEduN">${d.edu.length || ''}</b></summary>
         <p class="fieldhint">${t('ce_edu_hint')}</p><div id="ceEdu">${d.edu.map(eduRow).join('')}</div>
         <button type="button" class="gel ghost cjAdd" id="ceEduAdd"><span>${t('ce_e_add')}</span></button></details>
@@ -13474,7 +13486,8 @@ function ceOpen(id, k, of){
     $$('#ceJobs .cejob').forEach(r => r.querySelector('.cjTxt').classList.toggle('ceoff', r.querySelector('.cjW').value !== 'custom'));
     $('#ceJobN').textContent = $$('#ceJobs .cejob').length || '';
     $$('#ceEdu .cejob').forEach(r => { const v = r.querySelector('.ceK').value; r.querySelector('.cjTxt').classList.toggle('ceoff', v !== 'custom'); r.querySelector('.cjF').classList.toggle('ceoff', v !== 'uni'); });
-    $('#ceEduN').textContent = $$('#ceEdu .cejob').length || ''; off('.ceStarF', $('#ceStar').value === 'star');
+    $('#ceEduN').textContent = $$('#ceEdu .cejob').length || '';
+    $('#ceMoveN').textContent = $$('#ceMoves .cejob').length || ''; off('.ceStarF', $('#ceStar').value === 'star');
     off('.ceCrimF', $('#ceCrim').value !== 'none'); off('.cePrisF', $('#ceCrim').value === 'prison');
     const b = dayOfIso($('#ceDob').value), e = dead ? dayOfIso($('#ceDod').value) : today();
     $('#ceAge').textContent = b != null && e != null ? t('sp_age', ageAt({birth: b}, e)) : '';
@@ -13493,6 +13506,11 @@ function ceOpen(id, k, of){
     const nr = $$('#ceJobs .cejob').pop(); nr.querySelector('.cjW').focus(); });
   $('#ceJobs').addEventListener('click', e => { const b = e.target.closest('.cjDel'); if(b){ b.closest('.cejob').remove(); sync(); } });
   $('#ceEdu').addEventListener('click', e => { const b = e.target.closest('.cjDel'); if(b){ b.closest('.cejob').remove(); sync(); } });
+  $('#ceMoves').addEventListener('click', e => { const b = e.target.closest('.cjDel'); if(b){ b.closest('.cejob').remove(); sync(); } });
+  $('#ceMoveAdd').addEventListener('click', () => {         // un déménagement : par défaut au curseur du temps, sinon quelques années après le dernier
+    const rows = $$('#ceMoves .cejob'), last = rows.length ? dayOfIso(rows[rows.length - 1].querySelector('.cjAt').value) : null;
+    const at = S.cView != null ? Math.floor(S.cView) : last != null ? Math.round(last + 5 * 365.25) : Math.max((dayOfIso($('#ceDob').value) ?? today()) + Math.round(20 * 365.25), today() - 3650);
+    $('#ceMoves').insertAdjacentHTML('beforeend', CE.moveRow({at, city:''})); sync(); $$('#ceMoves .cmC').pop().focus(); });
   $('#ceEduAdd').addEventListener('click', () => {            // 0.2.6g : l'étape suivante, à peu près au bon âge
     const rows = $$('#ceEdu .cejob'), lr = rows[rows.length - 1], lk = lr ? lr.querySelector('.ceK').value : null, nxt = {mat:'prim', prim:'col', col:'lyc', lyc:'uni', uni:'end', app:'end'}[lk] || (lk ? 'end' : 'mat');
     const yrs = {mat:3, prim:5, col:4, lyc:3, uni:4, app:2, custom:3}[lk] || 3, last = lr ? dayOfIso(lr.querySelector('.cjAt').value) : null;
@@ -13575,6 +13593,10 @@ function ceSave(){
     if(k2 === 'custom'){ const n2 = r.querySelector('.cjTxt').value.trim().replace(/\s+/g, ' ').slice(0, 40); if(!n2) return null; e.name = n2; }
     if(k2 === 'uni') e.field = r.querySelector('.cjF').value; return e; }).filter(Boolean).sort((a, b) => a.at - b.at);
   if(edu.length) p.edu = edu; else delete p.edu;       // 0.2.6g : le parcours scolaire
+  const moves = $$('#ceMoves .cejob').map(r => { const at = dayOfIso(r.querySelector('.cjAt').value), c0 = ceCity(r.querySelector('.cmC').value); return at == null || !c0 ? null : {at, city: c0}; })
+    .filter(Boolean).sort((a, b) => a.at - b.at);
+  if(moves.length) p.moves = moves;                     // 0.2.6h : les déménagements
+  else delete p.moves;
   if($('#ceShowC').checked) delete p.showCause; else p.showCause = false;
   const afv = $('#ceAgeFix').value.trim();                // 0.2.6d : âge sur mesure
   if(afv === '') delete p.ageBase; else { const n = Math.round(+afv); if(isFinite(n) && Math.abs(n) < 1e15) p.ageBase = {a: n, at: today()}; }
@@ -13582,6 +13604,7 @@ function ceSave(){
   if(bs === 'year') delete p.bShow; else p.bShow = bs;
   if(dsh === 'year' || !dead) delete p.dShow; else p.dShow = dsh;
   p.city = ceCity($('#ceCity').value) || p.city;
+  if(p.moves && p.moves.length){ let c1 = p.birthCity || p.city; for(const mv of p.moves){ if(mv.at <= day) c1 = mv.city; else break; } p.city = c1; }   // la ville d'aujourd'hui suit les déménagements
   // ---- vie de couple ----
   for(const r of rows){
     if(r.uid === 'new') continue;
@@ -13658,6 +13681,7 @@ function cShadow(VT){
       }
     }
     if(aliveV && !('work' in m) && p.work && ageAt(p, VT) < 18) m.work = null;   // enfant : l'école
+    if(p.moves && p.moves.length && aliveV){ let c1 = p.birthCity || p.city; for(const mv of p.moves){ if(mv.at <= VT) c1 = mv.city; else break; } m.city = c1; }   // 0.2.6h : la ville de ce jour-là
     if(((p.jobs && p.jobs.length) || (p.edu && p.edu.length)) && !(m.work && m.work.s === 'prison')){   // 0.2.6e-g : l'école et le métier qu'il avait ce jour-là
       const ref = aliveV ? VT : p.death; let jj = null, ee = null;
       for(const j of p.jobs || []){ if(j.at <= ref) jj = j; else break; }
