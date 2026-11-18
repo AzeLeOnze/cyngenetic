@@ -2311,6 +2311,7 @@ body[data-era="3"] .treebox::before{content:"";position:absolute;inset:0;z-index
 /* ===== 0.2.6f : export vidéo ===== */
 .tree-head .lifex,.tree-head .stats .lxm{cursor:default}
 .extabs{display:flex}
+.devval{display:flex;align-items:center;gap:10px}.devval b{flex:none;font:700 18px var(--font-display);color:var(--ink)}.devval .inp{flex:1;min-width:0}
 .exmodes{display:flex;margin-top:6px}.exmodes button{flex:1;justify-content:center;text-align:center;line-height:1.15}
 .extabs button{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .extabs button svg{width:17px;height:17px;fill:currentColor}
@@ -2779,11 +2780,13 @@ const APP_VERSION = '0.2.6i';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.2.6i', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
-   fr:['Vidéo et arbre dans le passé (modes normaux) : chacun a de nouveau le métier qu\'il avait à cette date, au lieu d\'être « retraité » dès la fin de ses études. Les métiers sont retrouvés dans le journal pour les parties en cours, et chaque personne garde maintenant l\'historique de sa carrière.',
+   fr:['Mode Argent : nouvel article dans la boutique (2 000 Cyn), « Ta propre devise ». Choisis son nom, son signe et sa valeur en euros (par exemple Silua, Sl, 1 Sl = 18,05 €) : toutes les sommes s\'affichent dans ta monnaie. C\'est purement esthétique, ta fortune ne change pas.',
+       'Vidéo et arbre dans le passé (modes normaux) : chacun a de nouveau le métier qu\'il avait à cette date, au lieu d\'être « retraité » dès la fin de ses études. Les métiers sont retrouvés dans le journal pour les parties en cours (sinon : son métier d\'apprentissage, ou un métier de son époque, toujours le même), et chaque personne garde maintenant l\'historique de sa carrière.',
        'Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une branche après l\'autre, du fondateur jusqu\'au bout, assez près pour bien lire. À chaque génération, toute la fratrie s\'allume ; seuls ceux qui ont des enfants ouvrent une nouvelle branche. Ceux qu\'on n\'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l\'ombre, puis le temps rembobine jusqu\'à l\'embranchement suivant. Les années sans événement passent 4 fois plus vite, et la vidéo dure 10 minutes au plus. À la fin, tout l\'arbre s\'allume.',
        'Vidéo : le cadrage se choisit maintenant entre « Tout l\'arbre », « Zoom intelligent » et « Séquentiel ». Le zoom intelligent est plus calme : la caméra reste plus longtemps au même endroit et se déplace plus doucement.',
        'Les globe-trotteurs voyagent 20 fois plus souvent que les autres.'],
-   en:['Video and past tree (normal modes): everyone has the job they had on that date again, instead of being “retired” right after school. Jobs are recovered from the log for ongoing games, and each person now keeps a record of their career.',
+   en:['Money mode: new shop item (2,000 Cyn), “Your own currency”. Pick its name, its sign and its value in euros (for example Silua, Sl, 1 Sl = €18.05): every amount is shown in your money. It’s purely cosmetic, your fortune doesn’t change.',
+       'Video and past tree (normal modes): everyone has the job they had on that date again, instead of being “retired” right after school. Jobs are recovered from the log for ongoing games, and each person now keeps a record of their career.',
        'Video: new “Sequential” framing. The camera tells one branch after another, from the founder to its end, close enough to read. At each generation all the siblings light up; only those with children open a new branch. People not yet discovered stay in the dark, those already seen go into the shade, then time rewinds to the next fork. Quiet years go by 4 times faster, and the video lasts 10 minutes at most. At the end, the whole tree lights up.',
        'Video: framing is now a choice between “Whole tree”, “Smart zoom” and “Sequential”. Smart zoom is calmer: the camera stays longer in one place and moves more gently.',
        'Globetrotters travel 20 times more often than everyone else.']},
@@ -5196,6 +5199,10 @@ fr:{
   rg_title:'Règnes', rg_now:'en cours', rg_y:n=>`${n} an${n>1?'s':''}`, rg_now_y:n=>`${n} an${n>1?'s':''}, en cours`, rg_lost:'La couronne a quitté la famille : la dynastie est terminée.', f_reign:'Règne', span_ym:(y,m)=>`${y} an${y>1?'s':''}, ${m} mois`,
   reign_done:(a,b,d)=>`A régné du ${a} au ${b} (${d})`, reign_now:(a,d)=>`Règne depuis le ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^A/, 'a')}.`,
+  shopc_style:'Style', shop_devise:'Ta propre devise', shop_devise_d:"Invente ta monnaie pour le mode Argent : son nom, son signe et sa valeur en euros. Juste pour le style : ça ne change pas ta fortune.",
+  dev_title:'Ta devise', dev_hint:"Purement esthétique : ta famille gagne et dépense exactement la même chose, seule l'unité affichée change.", dev_name:'Nom', dev_sym:'Signe', dev_val:'Valeur (en euros d’aujourd’hui)',
+  dev_use:'Utiliser ma devise dans le mode Argent', dev_save:'Enregistrer', dev_edit:'Personnaliser', dev_my:'Ma devise', dev_ex:(a,b)=>`Exemple : un salaire moyen d'aujourd'hui de ${a} = ${b}`,
+  dev_err_name:'Donne un nom à ta devise.', dev_err_sym:'Choisis un signe (5 caractères au plus).', dev_err_val:'Indique une valeur en euros plus grande que 0.',
   shopc_survie:'Survie', shop_vaccin:'Vaccin', shop_vaccin_d:'Protège un membre de la famille de la contamination zombie pendant 20 ans.',
   shop_antidote:'Antidote', shop_antidote_d:'Guérit un zombie de la famille : il redevient humain et reste protégé pendant 20 ans.',
   shop_antidote_none:'Aucun zombie à soigner.', shop_antidote_wait:y=>`Disponible à partir de ${y} (120 ans après le début de la partie).`, pick_antidote:()=>'Quel zombie doit être soigné ?', shop_z_late:"Plus disponible après 2050.",
@@ -5709,6 +5716,10 @@ en:{
   rg_title:'Reigns', rg_now:'ongoing', rg_y:n=>`${n} year${n>1?'s':''}`, rg_now_y:n=>`${n} year${n>1?'s':''}, ongoing`, rg_lost:'The crown has left the family: the dynasty is over.', f_reign:'Reign', span_ym:(y,m)=>`${y} year${y>1?'s':''}, ${m} month${m>1?'s':''}`,
   reign_done:(a,b,d)=>`Reigned from ${a} to ${b} (${d})`, reign_now:(a,d)=>`Reigning since ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^R/, 'r')}.`,
+  shopc_style:'Style', shop_devise:'Your own currency', shop_devise_d:'Invent your money for Money mode: its name, its sign and its value in euros. Just for style: it doesn’t change your fortune.',
+  dev_title:'Your currency', dev_hint:'Purely cosmetic: your family earns and spends exactly the same, only the displayed unit changes.', dev_name:'Name', dev_sym:'Sign', dev_val:'Value (in today’s euros)',
+  dev_use:'Use my currency in Money mode', dev_save:'Save', dev_edit:'Customize', dev_my:'My currency', dev_ex:(a,b)=>`Example: an average salary today of ${a} = ${b}`,
+  dev_err_name:'Give your currency a name.', dev_err_sym:'Pick a sign (5 characters max).', dev_err_val:'Enter a value in euros greater than 0.',
   shopc_survie:'Survival', shop_vaccin:'Vaccine', shop_vaccin_d:'Protects a family member from zombie infection for 20 years.',
   shop_antidote:'Antidote', shop_antidote_d:'Cures a zombie in the family: they become human again and stay protected for 20 years.',
   shop_antidote_none:'No zombie to cure.', shop_antidote_wait:y=>`Available from ${y} (120 years into the game).`, pick_antidote:()=>'Which zombie should be cured?', shop_z_late:'No longer available after 2050.',
@@ -6223,6 +6234,10 @@ TX.de = {
   rg_title:'Herrschaften', rg_now:'laufend', rg_y:n=>`${n} Jahr${n>1?'e':''}`, rg_now_y:n=>`${n} Jahr${n>1?'e':''}, laufend`, rg_lost:'Die Krone hat die Familie verlassen: Die Dynastie ist zu Ende.', f_reign:'Herrschaft', span_ym:(y,m)=>`${y} Jahr${y>1?'e':''}, ${m} Monat${m>1?'e':''}`,
   reign_done:(a,b,d)=>`Herrschte vom ${a} bis ${b} (${d})`, reign_now:(a,d)=>`Herrscht seit ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last}: ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd))}.`,
+  shopc_style:'Stil', shop_devise:'Deine eigene Währung', shop_devise_d:'Erfinde dein Geld für den Geld-Modus: Name, Zeichen und Wert in Euro. Nur für den Stil: Dein Vermögen ändert sich nicht.',
+  dev_title:'Deine Währung', dev_hint:'Rein kosmetisch: Deine Familie verdient und gibt genau gleich viel aus, nur die angezeigte Einheit ändert sich.', dev_name:'Name', dev_sym:'Zeichen', dev_val:'Wert (in heutigen Euro)',
+  dev_use:'Meine Währung im Geld-Modus verwenden', dev_save:'Speichern', dev_edit:'Anpassen', dev_my:'Meine Währung', dev_ex:(a,b)=>`Beispiel: ein heutiges Durchschnittsgehalt von ${a} = ${b}`,
+  dev_err_name:'Gib deiner Währung einen Namen.', dev_err_sym:'Wähle ein Zeichen (höchstens 5 Zeichen).', dev_err_val:'Gib einen Wert in Euro größer als 0 ein.',
   shopc_survie:'Überleben', shop_vaccin:'Impfstoff', shop_vaccin_d:'Schützt ein Familienmitglied 20 Jahre lang vor der Zombie-Infektion.',
   shop_antidote:'Gegenmittel', shop_antidote_d:'Heilt einen Zombie der Familie: Er wird wieder ein Mensch und bleibt 20 Jahre geschützt.',
   shop_antidote_none:'Kein Zombie zu heilen.', shop_antidote_wait:y=>`Erhältlich ab ${y} (120 Jahre nach Spielbeginn).`, pick_antidote:()=>'Welcher Zombie soll geheilt werden?', shop_z_late:'Nach 2050 nicht mehr erhältlich.',
@@ -6740,6 +6755,10 @@ TX.es = {
   rg_title:'Reinados', rg_now:'en curso', rg_y:n=>`${n} año${n>1?'s':''}`, rg_now_y:n=>`${n} año${n>1?'s':''}, en curso`, rg_lost:'La corona ha salido de la familia: la dinastía ha terminado.', f_reign:'Reinado', span_ym:(y,m)=>`${y} año${y>1?'s':''}, ${m} mes${m>1?'es':''}`,
   reign_done:(a,b,d)=>`Reinó de ${a} a ${b} (${d})`, reign_now:(a,d)=>`Reina desde ${a} (${d})`,
   log_reign_end:p=>`${P(p).first} ${P(p).last} ${t('reign_done', fmt(P(p).reignStart), fmt(P(p).reignEnd), spanTxt(P(p).reignStart, P(p).reignEnd)).replace(/^R/, 'r')}.`,
+  shopc_style:'Estilo', shop_devise:'Tu propia moneda', shop_devise_d:'Inventa tu dinero para el modo Dinero: su nombre, su signo y su valor en euros. Solo por estilo: no cambia tu fortuna.',
+  dev_title:'Tu moneda', dev_hint:'Puramente estético: tu familia gana y gasta exactamente lo mismo, solo cambia la unidad que se muestra.', dev_name:'Nombre', dev_sym:'Signo', dev_val:'Valor (en euros de hoy)',
+  dev_use:'Usar mi moneda en el modo Dinero', dev_save:'Guardar', dev_edit:'Personalizar', dev_my:'Mi moneda', dev_ex:(a,b)=>`Ejemplo: un salario medio actual de ${a} = ${b}`,
+  dev_err_name:'Ponle un nombre a tu moneda.', dev_err_sym:'Elige un signo (5 caracteres como máximo).', dev_err_val:'Indica un valor en euros mayor que 0.',
   shopc_survie:'Supervivencia', shop_vaccin:'Vacuna', shop_vaccin_d:'Protege a un miembro de la familia de la infección zombi durante 20 años.',
   shop_antidote:'Antídoto', shop_antidote_d:'Cura a un zombi de la familia: vuelve a ser humano y queda protegido durante 20 años.',
   shop_antidote_none:'No hay ningún zombi que curar.', shop_antidote_wait:y=>`Disponible a partir de ${y} (120 años de partida).`, pick_antidote:()=>'¿A qué zombi hay que curar?', shop_z_late:'Ya no está disponible después de 2050.',
@@ -9484,7 +9503,11 @@ const CUR_T = {   // [année, monnaie, unités pour 1 € d'aujourd'hui] ; entre
     [1966,'cru',400],[1967,'ncr',.4],[1969,'ncr',.7],[1970,'cru2',.8],[1980,'cru2',20],[1985,'cru2',2500],[1986,'cz',3],[1988,'cz',150],[1989,'ncz',.5],[1990,'cru3',12],[1992,'cru3',1500],
     [1993,'crr',40],[1994,'brl',.4],[2000,'brl',1.4],[2010,'brl',2.4],[2020,'brl',6]],   // 0.2.5a : de l'hyperinflation au real
   no:[[1500,'rdl',.005],[1815,'rdl',.03],[1816,'spd',.02],[1874,'spd',.025],[1875,'nok',.1],[1914,'nok',.11],[1920,'nok',.3],[1950,'nok',.6],[1970,'nok',.9],[1980,'nok',1.8],[2000,'nok',3.8],[2020,'nok',10.7]]};
+const DEV_KEY = 'lignee.devise.v1';                    // 0.2.6i : sa propre devise (boutique) — purement esthétique
+let DEV = loadJSON(DEV_KEY);
+const devOn = () => !!(UNL.devise && DEV && DEV.on && DEV.val > 0 && DEV.sym);
 function curAt(y){                                     // la monnaie de l'époque et sa valeur
+  if(devOn()) return {code: 'dev', k: 1 / DEV.val, since: 1500};   // la devise perso : même argent, autre unité
   const base = CUR_T[CTRY] || CUR_T.fr, last = base[base.length - 1];
   const T = base.concat(FUT.map(([yy, cd, k]) => [yy, cd === '@' ? last[1] : cd, cd === '@' ? last[2] * k : k]));
   let i = 0; while(i < T.length - 1 && T[i + 1][0] <= y) i++;
@@ -9494,8 +9517,8 @@ function curAt(y){                                     // la monnaie de l'époqu
   let j = i; while(j > 0 && T[j - 1][1] === a[1]) j--;
   return {code: a[1], k, since: T[j][0]};
 }
-const curSym = cd => (CURS[cd] || CURS.eur)[0];
-const curName = cd => (CURS[cd] || CURS.eur)[{fr:1, en:2, de:3, es:4}[LANG] || 2];
+const curSym = cd => cd === 'dev' ? DEV.sym : (CURS[cd] || CURS.eur)[0];
+const curName = cd => cd === 'dev' ? DEV.name : (CURS[cd] || CURS.eur)[{fr:1, en:2, de:3, es:4}[LANG] || 2];
 const WAGE_T = [[1500,.08],[1780,.1],[1850,.15],[1900,.25],[1950,.45],[1975,.75],[2000,.9],[2020,1],[2100,1.35],[2300,2],[2500,2.5],[9999,2.5]];
 function medWage(y){                                   // salaire moyen net d'une année, en € d'aujourd'hui
   let i = 0; while(i < WAGE_T.length - 2 && WAGE_T[i + 1][0] <= y) i++;
@@ -9588,7 +9611,7 @@ function moneyYear(p, A, day){                         // chaque anniversaire : 
 }
 function moneyDay(day){                                // changement de monnaie (francs, nouveaux francs, euros…)
   const m = S.money, y = yearOf(day); if(m.y === y) return; m.y = y;
-  const cd = curAt(y).code; if(cd !== m.cur){ log('world', 'm_cur', [cd, m.cur], day, true); m.cur = cd; }
+  const cd = curAt(y).code; if(cd !== m.cur){ if(cd !== 'dev' && m.cur !== 'dev') log('world', 'm_cur', [cd, m.cur], day, true); m.cur = cd; }   // la devise perso : sans annonce
 }
 function moneyShow(){
   const box = $('#mBox'); if(!box) return;
@@ -9614,8 +9637,32 @@ function openMoney(){
   openModal(`<div class="m-head"><div class="eyebrow">${t('m_title')}</div><h2 class="mbig">${esc(mFull(m.bal * c.k))} ${esc(curSym(c.code))}</h2>
       <p>${esc(t('m_real', mFull(m.bal)))}<br>${esc(c.since > 1500 ? t('m_cur', curName(c.code), c.since) : t('m_cur0', curName(c.code)))}</p></div>
     <div class="mgoal"><b>${esc(t('m_goal', mEuro(m.goal)))}</b><span class="mbar big"><i style="width:${pct.toFixed(1)}%"></i></span><small>${esc(t('m_progress', pct < 10 ? pct.toLocaleString(mLoc(), {maximumFractionDigits:1}) : Math.floor(pct)))}</small></div>
-    <p class="hint">${esc(t('m_tip'))}</p>
+    <p class="hint">${esc(t('m_tip'))}</p>${UNL.devise ? `<div class="m-actions"><button type="button" class="gel ghost" data-act="devedit">${icon('coin')}<span>${t('dev_my')}</span></button></div>` : ''}
     ${fam.length ? `<div class="eyebrow sect">${t('m_list')}</div><ul class="mlist">${fam.map(p => `<li>${orb(p)}<span>${esc(nm(p))}<small>${esc(activity(p))}</small></span><b class="${p.mLast < 0 ? 'neg' : 'pos'}">${p.mLast < 0 ? '−' : '+'}${esc(mShort(Math.abs(p.mLast) * c.k))} ${esc(curSym(c.code))}</b></li>`).join('')}</ul>` : ''}`);
+}
+function openDevise(){                                 // 0.2.6i : nom, signe et valeur de sa devise (rien d'autre ne change)
+  const d = Object.assign({on: true, name: '', sym: '', val: 1}, DEV), loc = n => String(n).replace('.', LANG === 'en' ? '.' : ',');
+  openModal(`<div class="m-head"><div class="eyebrow">${t('shop_devise')}</div><h2>${t('dev_title')}</h2><p class="hint">${esc(t('dev_hint'))}</p></div>
+    <form id="devForm" class="spform" novalidate>
+      <div class="row2"><label class="field"><span class="lab">${t('dev_name')}</span><input class="inp" id="devName" maxlength="24" autocomplete="off" value="${esc(d.name)}" placeholder="Silua"></label>
+        <label class="field"><span class="lab">${t('dev_sym')}</span><input class="inp" id="devSym" maxlength="5" autocomplete="off" value="${esc(d.sym)}" placeholder="Sl"></label></div>
+      <label class="field"><span class="lab">${t('dev_val')}</span><span class="devval"><b id="devOne">1 ${esc(d.sym || 'Sl')} =</b><input class="inp" id="devVal" inputmode="decimal" autocomplete="off" value="${esc(DEV && DEV.val ? loc(DEV.val) : '')}" placeholder="${loc(18.05)}"><b>€</b></span></label>
+      <p class="setnote" id="devEx"></p>
+      <label class="cechk"><input type="checkbox" id="devOn" ${d.on ? 'checked' : ''}><span>${t('dev_use')}</span></label>
+      <p class="err" id="devErr" hidden></p>
+      <div class="m-actions"><button type="button" class="gel ghost" data-act="close"><span>${t('ce_cancel')}</span></button><button type="submit" class="gel lime big"><span>${t('dev_save')}</span></button></div>
+    </form>`);
+  const num = () => parseFloat(String($('#devVal').value).replace(/[\s\u202f\u00a0]/g, '').replace(',', '.'));
+  const upd = () => { const sy = $('#devSym').value.trim() || '?', v = num(); $('#devOne').textContent = `1 ${sy} =`;
+    $('#devEx').textContent = v > 0 ? t('dev_ex', mEuro(22000), `${mFull(22000 / v)} ${sy}`) : ''; };
+  $('#devForm').addEventListener('input', upd); upd();
+  $('#devForm').addEventListener('submit', e => {
+    e.preventDefault(); const name = $('#devName').value.trim(), sym = $('#devSym').value.trim(), v = num(), er = $('#devErr');
+    const why = !name ? 'dev_err_name' : !sym ? 'dev_err_sym' : !(v > 0 && v < 1e9) ? 'dev_err_val' : null;
+    if(why){ er.textContent = t(why); er.hidden = false; sfx.refuse(); return; }
+    DEV = {on: $('#devOn').checked, name, sym, val: +v.toPrecision(10)}; store.set(DEV_KEY, JSON.stringify(DEV));
+    sfx.sparkle(); closeModal(true); if(S){ dirty = true; render(); moneyShow(); }
+  });
 }
 function openMoneyWin(){
   const f = P(S.founderId); sfx.fame(); burst(['#ffd000','#ffffff','#3fd46b','#ffb300'], 60);
@@ -12427,6 +12474,7 @@ const SHOP_CATS = [
   ['self',   [['spouse',1100,'heart'],['immune',290,'pill'],['midlife',350,'hourglass'],['montre',1200,'clock']]],
   ['family', [['reveil',190,'bolt'],['decrim',310,'dove'],['potion',315,'potion'],['lueur',800,'sparkle']]],
   ['survie', [['vaccin',320,'pill'],['antidote',500,'potion']]],
+  ['style',  [['devise',2000,'coin']]],
   ['themes', [['pastel',500,'heart'],['orange',830,'sun'],['xp',2000,'computer'],['coral',3400,'wave'],['dark',5000,'moon'],['bain',10000,'sparkle']]]
 ];
 const SHOP = SHOP_CATS.flatMap(c => c[1]);
@@ -12450,6 +12498,7 @@ function ennoble(p, day){                             // devient noble (titre d�
 const sickList = () => S ? living().filter(p => inFamily(p) && (p.ill || p.onset != null || mildOn(p).length)) : [];
 function shopState(id, price){                        // 0.2.2a : on achète (les objets vont dans l'inventaire), seul le prix compte
   if(SHOP_THEMES.includes(id) && UNL[id]) return {dis:true, owned:true};
+  if(id === 'devise' && UNL.devise) return {dis:true, owned:true};
   if(CYN < price) return {dis:true, note:t('shop_missing', cynFmt(price - CYN))};
   return {dis:false};
 }
@@ -12492,9 +12541,10 @@ function openShop(re){                                // 0.2.1a : boutique en ca
     return `<article class="shc shc-${cat} ${id === 'bain' ? 'shc-star' : ''} ${st.owned ? 'owned' : ''} ${can ? 'can' : ''}">
       <div class="shc-top"><i class="si-${id}">${icon(ic)}</i>${st.owned ? `<span class="shc-own">✓ ${t('shop_owned')}</span>` : `<span class="shc-price">${cynFmt(price)} ${icon('dna')}</span>`}</div>
       <b>${t('shop_' + id)}${INV[id] ? `<span class="shc-stock">${t('shop_stock', INV[id])}</span>` : ''}</b><p>${t('shop_' + id + '_d')}</p>
-      ${st.note ? `<em class="shc-note">${esc(st.note)}</em>` : can ? `<em class="shc-ok">${t(SHOP_THEMES.includes(id) ? 'shop_avail' : 'shop_to_inv')}</em>` : ''}
+      ${st.note ? `<em class="shc-note">${esc(st.note)}</em>` : can ? `<em class="shc-ok">${t(SHOP_THEMES.includes(id) || id === 'devise' ? 'shop_avail' : 'shop_to_inv')}</em>` : ''}
       ${short ? `<span class="shc-bar" title="${Math.floor(CYN / price * 100)} %"><i style="width:${Math.min(100, CYN / price * 100).toFixed(0)}%"></i></span>` : ''}
-      <button class="gel ${can ? 'gold' : 'ghost'} wide" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : can ? t('shop_buy') : t('shop_unavail')}</span></button></article>`;
+      ${id === 'devise' && st.owned ? `<button class="gel lime wide" data-act="devedit"><span>${t('dev_edit')}</span></button>`
+        : `<button class="gel ${can ? 'gold' : 'ghost'} wide" data-act="buy" data-v="${id}" ${st.dis ? 'disabled' : ''}><span>${st.owned ? t('shop_owned') : can ? t('shop_buy') : t('shop_unavail')}</span></button>`}</article>`;
   };
   const shown = cats.filter(([c]) => shopCat === 'all' || c === shopCat);
   openModal(`<div class="m-head"><div class="eyebrow">${t('shop_eyebrow')}</div><h2>${t('shop')}</h2></div>
@@ -13721,9 +13771,19 @@ function workAtV(p, VT, H){
   if(any && cur && cur.s === 'travel' && ch.back != null && ch.back <= VT) cur = prev;   // rentré de voyage
   if(any) return cur || null;
   if(now && now.s === 'retired' && A >= (p.retireAge || 65)) return now;
-  const nx = (H || []).find(h => h.w && h.w.s === 'job');   // rien de connu avant : son premier métier connu
+  if(A < (p.firstJobAge || 18)) return null;               // pas encore de métier : études, petits boulots
+  if(p.school && p.school.job) return {s:'job', job: p.school.job};   // rien de connu : le métier de son apprentissage…
+  const nx = (H || []).find(h => h.w && h.w.s === 'job');   // … sinon son premier métier connu…
   if(nx) return nx.w;
-  return now && now.s === 'job' ? now : null;              // sinon « Petits boulots »
+  if(now && now.s === 'job') return now;
+  if(!SJOB.has(p.id)) SJOB.set(p.id, seededJob(p));        // … sinon un métier de son époque, toujours le même pour lui
+  const j = SJOB.get(p.id); return j ? {s:'job', job: j} : null;
+}
+const SJOB = new Map();
+function seededJob(p){                                   // 0.2.6i : tirage fixe (graine = la personne), à ses 22 ans
+  const R0 = Math.random; let a = (p.id * 2654435761 + 977) >>> 0;
+  Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let x = a; x = Math.imul(x ^ x >>> 15, x | 1); x ^= x + Math.imul(x ^ x >>> 7, x | 61); return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+  try{ return pickJob(yearOf(bornD(p)) + 22, p, true); }catch(e){ return null; } finally{ Math.random = R0; }
 }
 function cShadow(VT){
   const WH = S.creative ? null : workHistMap();
@@ -14484,7 +14544,8 @@ const ACT = {
     for(let i = 0; i < 4; i++){ const h = document.createElement('i'); h.className = 'cheart'; h.textContent = '♥'; h.style.setProperty('--dx', rnd(-26, 26) + 'px'); h.style.animationDelay = (i * .18) + 's'; b.appendChild(h); setTimeout(() => h.remove(), 1700 + i * 180); }
     sfx.purr(); S.cat.pets = (S.cat.pets || 0) + 1; unlock('treecat'); save();
   },
-  money(){ openMoney(); },                              // 0.2.4a
+  money(){ openMoney(); },
+  devedit(){ if(UNL.devise) openDevise(); },                              // 0.2.4a
   mpick(d){ mDiff = d.v; mSetup(); },
   mkeep(){ S.money.win = 2; closeModal(true); save(); },
   paraok(){ closeModal(true); dirty = true; render(); centerOn(S.activeId, true); },
@@ -14507,6 +14568,7 @@ const ACT = {
     const it = SHOP.find(x => x[0] === d.v); if(!it || shopState(d.v, it[1]).dis) return;
     if(!arm(b, t('shop_confirm'))) return;
     payCyn(it[1]);
+    if(d.v === 'devise'){ UNL.devise = true; store.set(UNL_KEY, JSON.stringify(UNL)); sfx.fame(); burst(['#ffd000','#ffffff','#3fd46b','#ffb300'], 40); if(S){ dirty = true; save(); } openDevise(); return; }   // 0.2.6i
     if(d.v === 'bain'){ UNL.bain = true; store.set(UNL_KEY, JSON.stringify(UNL)); sfx.fame(); setTimeout(() => sfx.stars(), 500); if(window.bainRain) window.bainRain(); }   // 0.2.3d
     else if(SHOP_THEMES.includes(d.v)){ UNL[d.v] = true; store.set(UNL_KEY, JSON.stringify(UNL)); sfx.fame(); burst(d.v === 'dark' ? ['#ff2a3a','#000000','#ffffff','#5a0010'] : ['#ff9a2e','#ffffff','#ffd27a'], 40); }
     else { invAdd(d.v, 1); sfx.pop(); burst(['#c9a8ff','#ffffff','#ffd23a','#7a2bd6'], 30); }
