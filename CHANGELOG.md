@@ -2,6 +2,17 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6g — 18 novembre 2026
+
+- Mode libre : nouveau « Parcours scolaire » dans la fiche (maternelle, primaire, collège, lycée, études supérieures, apprentissage, école au nom libre, fin des études), avec une date pour chaque étape. L'arbre et le curseur du temps le suivent.
+- Mode libre : entre la fin des études et le premier métier choisi, la personne est « Sans emploi ».
+- Mode libre : la vie de couple se règle entièrement, sans restriction : date de rencontre, mariage et sa date, fin du couple (séparation, divorce, décès ou prison) et sa date. Plusieurs conjoints sont possibles, rien n'est plus fermé automatiquement.
+- Mode libre : la cause du décès s'affiche sur la bulle (on peut la cacher personne par personne).
+- Mode libre : quand le curseur du temps est placé, il donne la date proposée pour une naissance, un décès, un mariage, un nouveau métier ou une étape scolaire, et pour un nouveau parent, enfant, frère, sœur ou conjoint.
+- Mode libre : on n'incarne plus personne. Toucher une bulle sélectionne la personne, qui s'affiche dans le panneau de droite.
+- Les photos PNG transparentes gardent leur transparence dans la bulle.
+- Vidéo : la date s'affiche en grand, et la vitesse se règle (de 0,25 à 100 ans par seconde), avec la durée qui s'en déduit.
+
 ## v0.2.6f — 18 novembre 2026
 
 - Nouveau : l'export peut aussi créer une vidéo de l'arbre qui grandit au fil du temps (1 000 ans au plus). Tout se règle : le thème (parmi tes thèmes débloqués), le format (de 720p à 4K, vertical ou carré), la durée, les années de début et de fin, et le titre. Le même petit logo Cyngenetic que sur les images est ajouté dans un coin.
