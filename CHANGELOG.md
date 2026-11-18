@@ -2,6 +2,10 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.2.6h — 18 novembre 2026
+
+- Vidéo réparée : chaque image est maintenant encodée une par une, à 30 images par seconde exactement, dans un vrai fichier MP4 qui connaît sa durée. Toutes les années durent le même temps, les lecteurs (VLC compris) affichent la bonne durée, et la création va plus vite que le temps réel.
+
 ## v0.2.6g — 18 novembre 2026
 
 - Mode libre : nouveau « Parcours scolaire » dans la fiche (maternelle, primaire, collège, lycée, études supérieures, apprentissage, école au nom libre, fin des études), avec une date pour chaque étape. L'arbre et le curseur du temps le suivent.

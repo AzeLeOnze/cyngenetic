@@ -2774,9 +2774,12 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BAIN_COLS = ['#3af4ff','#ff4fe0','#ffe84a','#ffffff','#b48cff'];   // 0.2.3d : les couleurs du thème Bain d'étoile
 const isBain = () => document.documentElement.dataset.skin === 'bain';
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.2.6g';
+const APP_VERSION = '0.2.6h';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.2.6h', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
+   fr:['Vidéo réparée : chaque image est maintenant encodée une par une, à 30 images par seconde exactement, dans un vrai fichier MP4 qui connaît sa durée. Toutes les années durent le même temps, les lecteurs (VLC compris) affichent la bonne durée, et la création va plus vite que le temps réel.'],
+   en:['Video fixed: each frame is now encoded one by one, at exactly 30 frames per second, into a proper MP4 file that knows its length. Every year lasts the same time, players (VLC included) show the right length, and creating it is faster than real time.']},
   {v:'0.2.6g', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
    fr:['Mode libre : nouveau « Parcours scolaire » dans la fiche (maternelle, primaire, collège, lycée, études supérieures, apprentissage, école au nom libre, fin des études), avec une date pour chaque étape. L\'arbre et le curseur du temps le suivent.',
        'Mode libre : entre la fin des études et le premier métier choisi, la personne est « Sans emploi ».',
@@ -4833,7 +4836,7 @@ fr:{
   lifex_tip15:(a,n)=>`Espérance de vie de la famille : ${a} ans (âge moyen au décès ${n>1?`des ${n} derniers membres disparus`:'du dernier membre disparu'})`,
   ex_tab_img:'Image', ex_tab_vid:'Vidéo', exv_res:'Format de la vidéo', exv_dur:'Durée', exv_from:"De l'année", exv_to:"À l'année", exv_vert:'Vertical', exv_square:'Carré',
   exv_max:'Une vidéo couvre 1 000 ans au plus : le début sera avancé.', exv_order:"L'année de fin doit venir après l'année de début.", exv_info:(y,s)=>`${y} ans d'histoire · environ ${s} s par année`,
-  exv_go:'Créer la vidéo', exv_stop:'Arrêter', exv_prep:(a,b)=>`Préparation des images… ${a} / ${b}`, exv_rec:(a,b)=>`Enregistrement de la vidéo… ${a} s / ${b} s`,
+  exv_go:'Créer la vidéo', exv_enc:(a,b)=>`Création de la vidéo… ${a} s / ${b} s`, exv_stop:'Arrêter', exv_prep:(a,b)=>`Préparation des images… ${a} / ${b}`, exv_rec:(a,b)=>`Enregistrement de la vidéo… ${a} s / ${b} s`,
   exv_done:n=>`Vidéo enregistrée : ${n}`, exv_fail:"La vidéo n'a pas pu être créée. Essaie un format plus petit.", exv_nosupport:'Ton navigateur ne sait pas fabriquer de vidéo.',
   sch_mat:'Maternelle', sch_prim:'École primaire', sch_col:'Collège', sch_lyc:'Lycée', sch_uni:'Études supérieures', sch_app:'Apprentissage', sch_custom:'Autre (nom libre)', sch_end:'Fin des études', sch_ph:'Ex. : École de sorcellerie',
   ce_edu:'Parcours scolaire', ce_edu_hint:"Chaque ligne : à partir de cette date, la personne suit cette école. « Fin des études » marque la sortie : sans métier ensuite, elle est « Sans emploi ».", ce_e_add:'+ Ajouter une étape scolaire',
@@ -5342,7 +5345,7 @@ en:{
   lifex_tip15:(a,n)=>`Family life expectancy: ${a} (average age at death of ${n>1?`the last ${n} members who died`:'the last member who died'})`,
   ex_tab_img:'Image', ex_tab_vid:'Video', exv_res:'Video format', exv_dur:'Length', exv_from:'From year', exv_to:'To year', exv_vert:'Vertical', exv_square:'Square',
   exv_max:'A video covers 1,000 years at most: the start will be moved forward.', exv_order:'The end year must come after the start year.', exv_info:(y,s)=>`${y} years of history · about ${s} s per year`,
-  exv_go:'Create the video', exv_stop:'Stop', exv_prep:(a,b)=>`Preparing frames… ${a} / ${b}`, exv_rec:(a,b)=>`Recording the video… ${a} s / ${b} s`,
+  exv_go:'Create the video', exv_enc:(a,b)=>`Creating the video… ${a} s / ${b} s`, exv_stop:'Stop', exv_prep:(a,b)=>`Preparing frames… ${a} / ${b}`, exv_rec:(a,b)=>`Recording the video… ${a} s / ${b} s`,
   exv_done:n=>`Video saved: ${n}`, exv_fail:"The video couldn't be created. Try a smaller format.", exv_nosupport:"Your browser can't make videos.",
   sch_mat:'Preschool', sch_prim:'Primary school', sch_col:'Middle school', sch_lyc:'High school', sch_uni:'Higher education', sch_app:'Apprenticeship', sch_custom:'Other (free name)', sch_end:'End of school', sch_ph:'E.g.: School of wizardry',
   ce_edu:'School path', ce_edu_hint:'Each line: from this date on, the person attends this school. « End of school » marks leaving it: with no job afterwards, they are « Unemployed ».', ce_e_add:'+ Add a school step',
@@ -5850,7 +5853,7 @@ TX.de = {
   lifex_tip15:(a,n)=>`Lebenserwartung der Familie: ${a} Jahre (Durchschnittsalter beim Tod ${n>1?`der letzten ${n} Verstorbenen`:'des zuletzt Verstorbenen'})`,
   ex_tab_img:'Bild', ex_tab_vid:'Video', exv_res:'Videoformat', exv_dur:'Dauer', exv_from:'Ab dem Jahr', exv_to:'Bis zum Jahr', exv_vert:'Hochformat', exv_square:'Quadrat',
   exv_max:'Ein Video umfasst höchstens 1.000 Jahre: Der Anfang wird vorverlegt.', exv_order:'Das Endjahr muss nach dem Startjahr liegen.', exv_info:(y,s)=>`${y} Jahre Geschichte · etwa ${s} s pro Jahr`,
-  exv_go:'Video erstellen', exv_stop:'Anhalten', exv_prep:(a,b)=>`Bilder werden vorbereitet… ${a} / ${b}`, exv_rec:(a,b)=>`Video wird aufgenommen… ${a} s / ${b} s`,
+  exv_go:'Video erstellen', exv_enc:(a,b)=>`Video wird erstellt… ${a} s / ${b} s`, exv_stop:'Anhalten', exv_prep:(a,b)=>`Bilder werden vorbereitet… ${a} / ${b}`, exv_rec:(a,b)=>`Video wird aufgenommen… ${a} s / ${b} s`,
   exv_done:n=>`Video gespeichert: ${n}`, exv_fail:'Das Video konnte nicht erstellt werden. Versuche ein kleineres Format.', exv_nosupport:'Dein Browser kann keine Videos erstellen.',
   sch_mat:'Kindergarten', sch_prim:'Grundschule', sch_col:'Mittelstufe', sch_lyc:'Oberstufe', sch_uni:'Studium', sch_app:'Ausbildung', sch_custom:'Andere (freier Name)', sch_end:'Schulende', sch_ph:'Z. B.: Zauberschule',
   ce_edu:'Schulweg', ce_edu_hint:'Jede Zeile: Ab diesem Datum besucht die Person diese Schule. „Schulende“ markiert den Abschluss: Ohne Beruf danach ist sie „Ohne Arbeit“.', ce_e_add:'+ Schulschritt hinzufügen',
@@ -6361,7 +6364,7 @@ TX.es = {
   lifex_tip15:(a,n)=>`Esperanza de vida de la familia: ${a} años (edad media al morir ${n>1?`de los últimos ${n} miembros fallecidos`:'del último miembro fallecido'})`,
   ex_tab_img:'Imagen', ex_tab_vid:'Vídeo', exv_res:'Formato del vídeo', exv_dur:'Duración', exv_from:'Desde el año', exv_to:'Hasta el año', exv_vert:'Vertical', exv_square:'Cuadrado',
   exv_max:'Un vídeo abarca 1000 años como máximo: el inicio se adelantará.', exv_order:'El año final debe ser posterior al inicial.', exv_info:(y,s)=>`${y} años de historia · unos ${s} s por año`,
-  exv_go:'Crear el vídeo', exv_stop:'Detener', exv_prep:(a,b)=>`Preparando las imágenes… ${a} / ${b}`, exv_rec:(a,b)=>`Grabando el vídeo… ${a} s / ${b} s`,
+  exv_go:'Crear el vídeo', exv_enc:(a,b)=>`Creando el vídeo… ${a} s / ${b} s`, exv_stop:'Detener', exv_prep:(a,b)=>`Preparando las imágenes… ${a} / ${b}`, exv_rec:(a,b)=>`Grabando el vídeo… ${a} s / ${b} s`,
   exv_done:n=>`Vídeo guardado: ${n}`, exv_fail:'No se pudo crear el vídeo. Prueba un formato más pequeño.', exv_nosupport:'Tu navegador no puede crear vídeos.',
   sch_mat:'Preescolar', sch_prim:'Primaria', sch_col:'Secundaria', sch_lyc:'Bachillerato', sch_uni:'Estudios superiores', sch_app:'Aprendizaje', sch_custom:'Otro (nombre libre)', sch_end:'Fin de los estudios', sch_ph:'P. ej.: Escuela de magia',
   ce_edu:'Trayectoria escolar', ce_edu_hint:'Cada línea: a partir de esa fecha, la persona va a esa escuela. «Fin de los estudios» marca la salida: sin oficio después, queda «Sin empleo».', ce_e_add:'+ Añadir una etapa escolar',
@@ -13843,7 +13846,7 @@ function openExport(){                                  // 0.2.6f : une image, o
     exBusy = true; EXSTOP.v = false;
     const go = $('#exGo'); go.querySelector('span').textContent = t(isVid ? 'exv_stop' : 'ex_wait'); go.disabled = !isVid; $('#exErr').hidden = true; $('#exOk').hidden = true;
     const prog = (ph, a, b) => { const bar = $('#exProg'), tx = $('#exPhase'); if(!bar) return; bar.hidden = false; tx.hidden = false;
-      bar.querySelector('i').style.width = (a / b * 100).toFixed(1) + '%'; bar.classList.toggle('rec', ph === 'rec'); tx.textContent = t(ph === 'rec' ? 'exv_rec' : 'exv_prep', a, b); };
+      bar.querySelector('i').style.width = (a / b * 100).toFixed(1) + '%'; bar.classList.toggle('rec', ph === 'rec'); tx.textContent = t(ph === 'rec' ? 'exv_rec' : ph === 'enc' ? 'exv_enc' : 'exv_prep', a, b); };
     try{
       const skin = $('#exSkin').value, title = $('#exTitle').checked;
       const name = isVid ? await exportVideo({skin, title, res: $('#exVRes').value.split('x').map(Number), dur: exDur(), y0, y1}, prog)
@@ -13943,7 +13946,110 @@ async function exportTree(o){
   const blob = await new Promise((res, rej) => { try{ c.toBlob(b => b ? res(b) : rej(new Error('blob')), o.fmt === 'jpeg' ? 'image/jpeg' : 'image/png', .92); }catch(e){ rej(e); } });
   return exSave(blob, `cyngenetic-${exSlug(sn.title)}-${sn.y}.${o.fmt === 'jpeg' ? 'jpg' : 'png'}`);
 }
-async function exportVideo(o, prog){                     // 0.2.6f : l'arbre qui grandit, de l'année y0 à l'année y1 (1 000 ans au plus)
+async function exportVideo(o, prog){                     // 0.2.6h : d'abord le vrai encodeur (cadence fixe, MP4 propre), sinon l'enregistrement en direct
+  const cfg = await vidCfg(o.res[0], o.res[1]);
+  if(cfg) return exportVideoMP4(o, prog, cfg);
+  return exportVideoRec(o, prog);
+}
+/* ================= 0.2.6h : vidéo encodée image par image (WebCodecs H.264) dans un vrai MP4 ================= */
+// Chaque année dure exactement le même temps, la durée totale est écrite dans le fichier, et ça va plus vite que le temps réel.
+const VID_FPS = 30, VID_TS = 30000, VID_D = VID_TS / VID_FPS;
+async function vidCfg(w, h){
+  if(!window.VideoEncoder || !window.VideoFrame) return null;
+  const mbs = Math.ceil(w / 16) * Math.ceil(h / 16), lvl = mbs <= 3600 ? '1f' : mbs <= 8192 ? '28' : mbs <= 22080 ? '32' : '33';
+  for(const prof of ['6400', '4d00', '4200']){
+    const c = {codec: `avc1.${prof}${lvl}`, width: w, height: h, bitrate: Math.round(Math.min(20e6, w * h * 2.4)), bitrateMode: 'variable', framerate: VID_FPS, avc: {format: 'avc'}, latencyMode: 'quality'};
+    try{ const r = await VideoEncoder.isConfigSupported(c); if(r && r.supported) return r.config || c; }catch(e){}
+  }
+  return null;
+}
+function mp4Box(type, ...parts){                         // une « boîte » MP4 : taille, nom, contenu
+  const len = parts.reduce((a, p) => a + p.byteLength, 0), out = new Uint8Array(8 + len), dv = new DataView(out.buffer);
+  dv.setUint32(0, 8 + len); for(let i = 0; i < 4; i++) out[4 + i] = type.charCodeAt(i);
+  let o = 8; for(const p of parts){ out.set(p instanceof Uint8Array ? p : new Uint8Array(p.buffer || p, p.byteOffset || 0, p.byteLength), o); o += p.byteLength; }
+  return out;
+}
+function mp4U(...vals){                                  // des entiers sur 8, 16 ou 32 bits : [taille, valeur]
+  const len = vals.reduce((a, [n]) => a + n, 0), out = new Uint8Array(len), dv = new DataView(out.buffer); let o = 0;
+  for(const [n, v] of vals){ if(n === 1) dv.setUint8(o, v); else if(n === 2) dv.setUint16(o, v); else dv.setUint32(o, v >>> 0); o += n; }
+  return out;
+}
+function mp4File(w, h, samples, avcC){                   // ftyp + mdat + moov, une seule piste vidéo, durée écrite
+  const n = samples.length, durTS = n * VID_D, durMS = Math.round(durTS / VID_TS * 1000);
+  const ftyp = mp4Box('ftyp', new TextEncoder().encode('isom'), mp4U([4, 512]), new TextEncoder().encode('isomiso2avc1mp41'));
+  const dataLen = samples.reduce((a, x) => a + x.data.byteLength, 0), big = dataLen + 8 > 0xFFFFFFFF;
+  const mdatHead = big ? (() => { const b = new Uint8Array(16), dv = new DataView(b.buffer); dv.setUint32(0, 1); b.set([109,100,97,116], 4); dv.setUint32(8, Math.floor((dataLen + 16) / 2 ** 32)); dv.setUint32(12, (dataLen + 16) >>> 0); return b; })()
+    : (() => { const b = new Uint8Array(8), dv = new DataView(b.buffer); dv.setUint32(0, dataLen + 8); b.set([109,100,97,116], 4); return b; })();
+  const off0 = ftyp.byteLength + mdatHead.byteLength;
+  const matrix = mp4U([4, 0x10000], [4, 0], [4, 0], [4, 0], [4, 0x10000], [4, 0], [4, 0], [4, 0], [4, 0x40000000]);
+  const mvhd = mp4Box('mvhd', mp4U([4, 0], [4, 0], [4, 0], [4, 1000], [4, durMS], [4, 0x10000], [2, 0x100], [2, 0], [4, 0], [4, 0]), matrix, new Uint8Array(24), mp4U([4, 2]));
+  const tkhd = mp4Box('tkhd', mp4U([4, 3], [4, 0], [4, 0], [4, 1], [4, 0], [4, durMS], [4, 0], [4, 0], [2, 0], [2, 0], [2, 0], [2, 0]), matrix, mp4U([4, w * 65536], [4, h * 65536]));
+  const mdhd = mp4Box('mdhd', mp4U([4, 0], [4, 0], [4, 0], [4, VID_TS], [4, durTS], [2, 0x55C4], [2, 0]));
+  const hdlr = mp4Box('hdlr', mp4U([4, 0], [4, 0]), new TextEncoder().encode('vide'), new Uint8Array(12), new TextEncoder().encode('Cyngenetic\0'));
+  const vmhd = mp4Box('vmhd', mp4U([4, 1], [2, 0], [2, 0], [2, 0], [2, 0]));
+  const dinf = mp4Box('dinf', mp4Box('dref', mp4U([4, 0], [4, 1]), mp4Box('url ', mp4U([4, 1]))));
+  const avc1 = mp4Box('avc1', new Uint8Array(6), mp4U([2, 1], [2, 0], [2, 0], [4, 0], [4, 0], [4, 0], [2, w], [2, h], [4, 0x480000], [4, 0x480000], [4, 0], [2, 1]), new Uint8Array(32), mp4U([2, 0x18], [2, 0xFFFF]), mp4Box('avcC', avcC));
+  const stsd = mp4Box('stsd', mp4U([4, 0], [4, 1]), avc1);
+  const stts = mp4Box('stts', mp4U([4, 0], [4, 1], [4, n], [4, VID_D]));
+  const pts = samples.map(x => Math.round(x.ts * VID_TS / 1e6)), cto = pts.map((p, i) => p - i * VID_D);
+  const ctts = cto.some(x => x !== 0) ? mp4Box('ctts', mp4U([4, 0x01000000], [4, n]), ...cto.map(x => mp4U([4, 1], [4, x]))) : null;
+  const keys = samples.map((x, i) => x.key ? i + 1 : 0).filter(Boolean);
+  const stss = mp4Box('stss', mp4U([4, 0], [4, keys.length]), ...keys.map(k => mp4U([4, k])));
+  const stsc = mp4Box('stsc', mp4U([4, 0], [4, 1], [4, 1], [4, n], [4, 1]));
+  const stsz = mp4Box('stsz', mp4U([4, 0], [4, 0], [4, n]), ...samples.map(x => mp4U([4, x.data.byteLength])));
+  const stco = big ? mp4Box('co64', mp4U([4, 0], [4, 1], [4, Math.floor(off0 / 2 ** 32)], [4, off0 >>> 0])) : mp4Box('stco', mp4U([4, 0], [4, 1], [4, off0]));
+  const stbl = mp4Box('stbl', ...[stsd, stts, ctts, stss, stsc, stsz, stco].filter(Boolean));
+  const moov = mp4Box('moov', mvhd, mp4Box('trak', tkhd, mp4Box('mdia', mdhd, hdlr, mp4Box('minf', vmhd, dinf, stbl))));
+  return new Blob([ftyp, mdatHead, ...samples.map(x => x.data), moov], {type: 'video/mp4'});
+}
+async function exportVideoMP4(o, prog, cfg){
+  const root = document.documentElement, sk0 = root.dataset.skin, t0 = fromYMD(o.y0, 0, 1), t1 = fromYMD(o.y1, 11, 31);
+  const nF = Math.max(2, Math.min(o.y1 - o.y0 + 1, Math.round(o.dur * 12))), at = i => t0 + (t1 - t0) * i / (nF - 1);
+  let mW = 0, mH = 0;                                    // la taille de la scène : celle du plus grand arbre de la vidéo
+  root.dataset.skin = o.skin;
+  try{ for(let i = 0; i < nF; i++){ const sn = exSnapAt(at(i)); if(sn){ mW = Math.max(mW, sn.W); mH = Math.max(mH, sn.H); } } }
+  finally{ root.dataset.skin = sk0; }
+  if(!mW){ renderTree(); throw new Error('empty'); }
+  const [Vw, Vh] = o.res, th = o.title ? 64 : 0; let cw = mW + EX_M * 2, ch = mH + EX_M * 2 + th, bigTop = o.title ? 0 : Math.round(Math.max(40, Math.min(mW, mH) * .085) * 1.4);
+  ch += bigTop;
+  if(cw / ch < Vw / Vh) cw = ch * Vw / Vh; else ch = cw * Vh / Vw;
+  const k = Vw / cw, css = await exStyle(o.skin), fam0 = t('family', familyName(P(S.founderId)));
+  let lastKey = null;
+  const mk = async i => {
+    const VT = at(i); let sn;
+    root.dataset.skin = o.skin; try{ sn = exSnapAt(VT); } finally{ root.dataset.skin = sk0; }
+    if(!sn) sn = {html:'', W:0, H:0, title: fam0, era:''};
+    const dateTxt = String(yD(VT)), key = sn.html + '|' + dateTxt;
+    if(key === lastKey) return null; lastKey = key;
+    return exImg(exSVG(exInner(sn, {w: cw, h: ch, title: o.title, big: true, left: Math.round((cw - sn.W) / 2), top: EX_M + th + bigTop, dateTxt}), {w: cw, h: ch, k, skin: o.skin, era: sn.era, css}));
+  };
+  const vc = document.createElement('canvas'); vc.width = Vw; vc.height = Vh; const g = vc.getContext('2d');
+  const samples = []; let avcC = null, encErr = null;
+  const enc = new VideoEncoder({output: (chunk, meta) => {
+      if(meta && meta.decoderConfig && meta.decoderConfig.description && !avcC){ const d0 = meta.decoderConfig.description; avcC = new Uint8Array(d0.buffer ? d0.buffer.slice(d0.byteOffset, d0.byteOffset + d0.byteLength) : d0.slice(0)); }
+      const data = new Uint8Array(chunk.byteLength); chunk.copyTo(data); samples.push({data, ts: chunk.timestamp, key: chunk.type === 'key'}); },
+    error: e => { encErr = e; }});
+  enc.configure(cfg);
+  const total = Math.max(1, Math.round(o.dur * VID_FPS)), hold = VID_FPS;   // + 1 s sur la dernière image
+  let cur = await mk(0), shown = 0; await exSleep(200); g.drawImage(cur, 0, 0, Vw, Vh);   // le temps que les polices soient prêtes
+  try{
+    for(let fi = 0; fi < total + hold; fi++){
+      if(EXSTOP.v) throw new Error('stop'); if(encErr) throw encErr;
+      const ai = Math.min(nF - 1, Math.floor(fi * nF / total));            // chaque année : exactement le même nombre d'images
+      if(ai !== shown){ shown = ai; const im = await mk(ai); if(im) cur = im; g.drawImage(cur, 0, 0, Vw, Vh); }
+      const fr = new VideoFrame(vc, {timestamp: Math.round(fi * 1e6 / VID_FPS), duration: Math.round(1e6 / VID_FPS)});
+      enc.encode(fr, {keyFrame: fi % (VID_FPS * 2) === 0}); fr.close();
+      while(enc.encodeQueueSize > 6) await exSleep(4);
+      if(fi % 15 === 0) prog('enc', Math.min(o.dur, Math.round(fi / VID_FPS)), o.dur);
+    }
+    await enc.flush();
+  } finally{ try{ enc.close(); }catch(e){} renderTree(); }
+  if(encErr) throw encErr;
+  if(!avcC || !samples.length) throw new Error('noenc');
+  const blob = mp4File(Vw, Vh, samples, avcC);
+  return exSave(blob, `cyngenetic-${exSlug(fam0)}-${o.y0}-${o.y1}.mp4`);
+}
+async function exportVideoRec(o, prog){                  // 0.2.6f : l'arbre qui grandit, de l'année y0 à l'année y1 (1 000 ans au plus)
   const MR = window.MediaRecorder; if(!MR) throw new Error('nomr');
   const mime = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm']
     .find(m => { try{ return MR.isTypeSupported(m); }catch(e){ return false; } }); if(!mime) throw new Error('nomime');
