@@ -4,7 +4,8 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 
 ## v0.2.6i — 18 novembre 2026
 
-- Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une lignée après l'autre, du fondateur jusqu'au bout de la branche, assez près pour bien lire. Ceux qu'on n'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l'ombre, puis le temps rembobine jusqu'à l'embranchement suivant. À la fin, tout l'arbre s'allume.
+- Vidéo et arbre dans le passé (modes normaux) : chacun a de nouveau le métier qu'il avait à cette date, au lieu d'être « retraité » dès la fin de ses études. Les métiers sont retrouvés dans le journal pour les parties en cours, et chaque personne garde maintenant l'historique de sa carrière.
+- Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une branche après l'autre, du fondateur jusqu'au bout, assez près pour bien lire. À chaque génération, toute la fratrie s'allume ; seuls ceux qui ont des enfants ouvrent une nouvelle branche. Ceux qu'on n'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l'ombre, puis le temps rembobine jusqu'à l'embranchement suivant. Les années sans événement passent 4 fois plus vite, et la vidéo dure 10 minutes au plus. À la fin, tout l'arbre s'allume.
 - Vidéo : le cadrage se choisit maintenant entre « Tout l'arbre », « Zoom intelligent » et « Séquentiel ». Le zoom intelligent est plus calme : la caméra reste plus longtemps au même endroit et se déplace plus doucement.
 - Les globe-trotteurs voyagent 20 fois plus souvent que les autres.
 

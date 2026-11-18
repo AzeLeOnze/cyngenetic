@@ -2779,10 +2779,12 @@ const APP_VERSION = '0.2.6i';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.2.6i', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
-   fr:['Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une lignée après l\'autre, du fondateur jusqu\'au bout de la branche, assez près pour bien lire. Ceux qu\'on n\'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l\'ombre, puis le temps rembobine jusqu\'à l\'embranchement suivant. À la fin, tout l\'arbre s\'allume.',
+   fr:['Vidéo et arbre dans le passé (modes normaux) : chacun a de nouveau le métier qu\'il avait à cette date, au lieu d\'être « retraité » dès la fin de ses études. Les métiers sont retrouvés dans le journal pour les parties en cours, et chaque personne garde maintenant l\'historique de sa carrière.',
+       'Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une branche après l\'autre, du fondateur jusqu\'au bout, assez près pour bien lire. À chaque génération, toute la fratrie s\'allume ; seuls ceux qui ont des enfants ouvrent une nouvelle branche. Ceux qu\'on n\'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l\'ombre, puis le temps rembobine jusqu\'à l\'embranchement suivant. Les années sans événement passent 4 fois plus vite, et la vidéo dure 10 minutes au plus. À la fin, tout l\'arbre s\'allume.',
        'Vidéo : le cadrage se choisit maintenant entre « Tout l\'arbre », « Zoom intelligent » et « Séquentiel ». Le zoom intelligent est plus calme : la caméra reste plus longtemps au même endroit et se déplace plus doucement.',
        'Les globe-trotteurs voyagent 20 fois plus souvent que les autres.'],
-   en:['Video: new “Sequential” framing. The camera tells one lineage after another, from the founder to the end of the branch, close enough to read. People not yet discovered stay in the dark, those already seen go into the shade, then time rewinds to the next fork. At the end, the whole tree lights up.',
+   en:['Video and past tree (normal modes): everyone has the job they had on that date again, instead of being “retired” right after school. Jobs are recovered from the log for ongoing games, and each person now keeps a record of their career.',
+       'Video: new “Sequential” framing. The camera tells one branch after another, from the founder to its end, close enough to read. At each generation all the siblings light up; only those with children open a new branch. People not yet discovered stay in the dark, those already seen go into the shade, then time rewinds to the next fork. Quiet years go by 4 times faster, and the video lasts 10 minutes at most. At the end, the whole tree lights up.',
        'Video: framing is now a choice between “Whole tree”, “Smart zoom” and “Sequential”. Smart zoom is calmer: the camera stays longer in one place and moves more gently.',
        'Globetrotters travel 20 times more often than everyone else.']},
   {v:'0.2.6h', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
@@ -4852,8 +4854,8 @@ fr:{
   exv_mode:'Cadrage', exv_m_all:"Tout l'arbre", exv_m_smart:'Zoom intelligent', exv_m_seq:'Séquentiel',
   exv_h_all:"La caméra montre l'arbre en entier et recule à mesure qu'il grandit.",
   exv_h_smart:"Quand l'arbre devient trop grand pour être lu, la caméra s'approche et suit tranquillement les naissances et les décès, puis recule à la fin.",
-  exv_h_seq:"Une lignée après l'autre : la caméra suit chaque branche, du fondateur jusqu'au bout. Ceux qu'on n'a pas encore découverts restent dans le noir. Puis le temps rembobine jusqu'à l'embranchement suivant.",
-  exv_lin:(a,b)=>`Lignée ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} lignée${n>1?'s':''} · durée de la vidéo : ${d}`, exv_zoom:'Zoom intelligent', exv_zoom_hint:"Quand l'arbre devient trop grand pour être lu, la caméra s'approche et suit les naissances et les décès, puis recule à la fin pour montrer tout l'arbre.", 
+  exv_h_seq:"Une branche après l'autre, fratrie par fratrie : la caméra suit chaque branche du fondateur jusqu'au bout, et à chaque génération toute la fratrie s'allume. Ceux qu'on n'a pas encore découverts restent dans le noir. Puis le temps rembobine jusqu'à l'embranchement suivant. Les années sans événement passent plus vite.",
+  exv_lin:(a,b)=>`Branche ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} branche${n>1?'s':''} · durée de la vidéo : ${d}`, exv_zoom:'Zoom intelligent', exv_zoom_hint:"Quand l'arbre devient trop grand pour être lu, la caméra s'approche et suit les naissances et les décès, puis recule à la fin pour montrer tout l'arbre.", 
   exv_max:'Une vidéo couvre 1 000 ans au plus : le début sera avancé.', exv_order:"L'année de fin doit venir après l'année de début.", exv_info:(y,s)=>`${y} ans d'histoire · environ ${s} s par année`,
   exv_go:'Créer la vidéo', exv_enc:(a,b)=>`Création de la vidéo… ${a} s / ${b} s`, exv_stop:'Arrêter', exv_prep:(a,b)=>`Préparation des images… ${a} / ${b}`, exv_rec:(a,b)=>`Enregistrement de la vidéo… ${a} s / ${b} s`,
   exv_done:n=>`Vidéo enregistrée : ${n}`, exv_fail:"La vidéo n'a pas pu être créée. Essaie un format plus petit.", exv_nosupport:'Ton navigateur ne sait pas fabriquer de vidéo.',
@@ -5367,8 +5369,8 @@ en:{
   exv_mode:'Framing', exv_m_all:'Whole tree', exv_m_smart:'Smart zoom', exv_m_seq:'Sequential',
   exv_h_all:'The camera shows the whole tree and pulls back as it grows.',
   exv_h_smart:'When the tree gets too big to read, the camera moves in and calmly follows births and deaths, then pulls back at the end.',
-  exv_h_seq:'One lineage after another: the camera follows each branch from the founder to its end. People not yet discovered stay in the dark. Then time rewinds to the next fork.',
-  exv_lin:(a,b)=>`Lineage ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} lineage${n>1?'s':''} · video length: ${d}`, exv_zoom:'Smart zoom', exv_zoom_hint:'When the tree gets too big to read, the camera moves in and follows births and deaths, then pulls back at the end to show the whole tree.', 
+  exv_h_seq:'One branch after another, sibling group by sibling group: the camera follows each branch from the founder to its end, and at each generation all the siblings light up. People not yet discovered stay in the dark. Then time rewinds to the next fork. Quiet years go by faster.',
+  exv_lin:(a,b)=>`Branch ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} branch${n>1?'es':''} · video length: ${d}`, exv_zoom:'Smart zoom', exv_zoom_hint:'When the tree gets too big to read, the camera moves in and follows births and deaths, then pulls back at the end to show the whole tree.', 
   exv_max:'A video covers 1,000 years at most: the start will be moved forward.', exv_order:'The end year must come after the start year.', exv_info:(y,s)=>`${y} years of history · about ${s} s per year`,
   exv_go:'Create the video', exv_enc:(a,b)=>`Creating the video… ${a} s / ${b} s`, exv_stop:'Stop', exv_prep:(a,b)=>`Preparing frames… ${a} / ${b}`, exv_rec:(a,b)=>`Recording the video… ${a} s / ${b} s`,
   exv_done:n=>`Video saved: ${n}`, exv_fail:"The video couldn't be created. Try a smaller format.", exv_nosupport:"Your browser can't make videos.",
@@ -5881,8 +5883,8 @@ TX.de = {
   exv_mode:'Bildausschnitt', exv_m_all:'Ganzer Baum', exv_m_smart:'Intelligenter Zoom', exv_m_seq:'Sequenziell',
   exv_h_all:'Die Kamera zeigt den ganzen Baum und fährt zurück, während er wächst.',
   exv_h_smart:'Wird der Baum zu groß zum Lesen, fährt die Kamera heran und folgt ruhig Geburten und Todesfällen; am Ende zeigt sie alles.',
-  exv_h_seq:'Eine Linie nach der anderen: Die Kamera folgt jedem Zweig vom Gründer bis zum Ende. Noch nicht Entdeckte bleiben im Dunkeln. Dann spult die Zeit bis zur nächsten Gabelung zurück.',
-  exv_lin:(a,b)=>`Linie ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} Linie${n>1?'n':''} · Videolänge: ${d}`, exv_zoom:'Intelligenter Zoom', exv_zoom_hint:'Wird der Baum zu groß zum Lesen, fährt die Kamera näher heran und folgt Geburten und Todesfällen; am Ende zeigt sie den ganzen Baum.', 
+  exv_h_seq:'Ein Zweig nach dem anderen, Geschwister für Geschwister: Die Kamera folgt jedem Zweig vom Gründer bis zum Ende, und in jeder Generation leuchten alle Geschwister auf. Noch nicht Entdeckte bleiben im Dunkeln. Dann spult die Zeit bis zur nächsten Gabelung zurück. Ruhige Jahre vergehen schneller.',
+  exv_lin:(a,b)=>`Zweig ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} Zweig${n>1?'e':''} · Videolänge: ${d}`, exv_zoom:'Intelligenter Zoom', exv_zoom_hint:'Wird der Baum zu groß zum Lesen, fährt die Kamera näher heran und folgt Geburten und Todesfällen; am Ende zeigt sie den ganzen Baum.', 
   exv_max:'Ein Video umfasst höchstens 1.000 Jahre: Der Anfang wird vorverlegt.', exv_order:'Das Endjahr muss nach dem Startjahr liegen.', exv_info:(y,s)=>`${y} Jahre Geschichte · etwa ${s} s pro Jahr`,
   exv_go:'Video erstellen', exv_enc:(a,b)=>`Video wird erstellt… ${a} s / ${b} s`, exv_stop:'Anhalten', exv_prep:(a,b)=>`Bilder werden vorbereitet… ${a} / ${b}`, exv_rec:(a,b)=>`Video wird aufgenommen… ${a} s / ${b} s`,
   exv_done:n=>`Video gespeichert: ${n}`, exv_fail:'Das Video konnte nicht erstellt werden. Versuche ein kleineres Format.', exv_nosupport:'Dein Browser kann keine Videos erstellen.',
@@ -6398,8 +6400,8 @@ TX.es = {
   exv_mode:'Encuadre', exv_m_all:'Todo el árbol', exv_m_smart:'Zoom inteligente', exv_m_seq:'Secuencial',
   exv_h_all:'La cámara muestra todo el árbol y se aleja a medida que crece.',
   exv_h_smart:'Cuando el árbol es demasiado grande para leerse, la cámara se acerca y sigue con calma los nacimientos y las muertes, y al final se aleja.',
-  exv_h_seq:'Un linaje tras otro: la cámara sigue cada rama del fundador hasta el final. Quienes aún no se han descubierto quedan en la oscuridad. Luego el tiempo rebobina hasta la siguiente bifurcación.',
-  exv_lin:(a,b)=>`Linaje ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} linaje${n>1?'s':''} · duración del vídeo: ${d}`, exv_zoom:'Zoom inteligente', exv_zoom_hint:'Cuando el árbol es demasiado grande para leerse, la cámara se acerca y sigue los nacimientos y las muertes, y al final se aleja para mostrar todo el árbol.', 
+  exv_h_seq:'Una rama tras otra, hermanos por hermanos: la cámara sigue cada rama del fundador hasta el final y, en cada generación, se iluminan todos los hermanos. Quienes aún no se han descubierto quedan en la oscuridad. Luego el tiempo rebobina hasta la siguiente bifurcación. Los años tranquilos pasan más rápido.',
+  exv_lin:(a,b)=>`Rama ${a} / ${b}`, exv_info_seq:(n,d)=>`${n} rama${n>1?'s':''} · duración del vídeo: ${d}`, exv_zoom:'Zoom inteligente', exv_zoom_hint:'Cuando el árbol es demasiado grande para leerse, la cámara se acerca y sigue los nacimientos y las muertes, y al final se aleja para mostrar todo el árbol.', 
   exv_max:'Un vídeo abarca 1000 años como máximo: el inicio se adelantará.', exv_order:'El año final debe ser posterior al inicial.', exv_info:(y,s)=>`${y} años de historia · unos ${s} s por año`,
   exv_go:'Crear el vídeo', exv_enc:(a,b)=>`Creando el vídeo… ${a} s / ${b} s`, exv_stop:'Detener', exv_prep:(a,b)=>`Preparando las imágenes… ${a} / ${b}`, exv_rec:(a,b)=>`Grabando el vídeo… ${a} s / ${b} s`,
   exv_done:n=>`Vídeo guardado: ${n}`, exv_fail:'No se pudo crear el vídeo. Prueba un formato más pequeño.', exv_nosupport:'Tu navegador no puede crear vídeos.',
@@ -8152,7 +8154,14 @@ const saveSoon = () => { if(performance.now() - lastSave > 4000) save(); };
 document.addEventListener('visibilitychange', () => { if(document.hidden) save(); });
 addEventListener('pagehide', () => save());
 const TOAST_KINDS = new Set(['birth','death','love','wed','break','sad','world','ill','cure','star','crime','tt']);
+function recWork(p, d){                                // 0.2.6i : l'historique du métier (pour revoir l'arbre à une date passée : vidéo, voyage dans le temps)
+  if(!p || S.creative) return;
+  const w = p.work || null, h = p.wh || (p.wh = []), last = h[h.length - 1];
+  if(last && JSON.stringify(last.w) === JSON.stringify(w)) return;
+  h.push({at: d, w: w ? JSON.parse(JSON.stringify(w)) : null}); if(h.length > 80) h.splice(0, h.length - 80);
+}
 function log(kind, k, a, d, forceToast){
+  if((kind === 'work' || (kind === 'move' && (k === 'travel' || k === 'travel_back'))) && a && a[0] != null && S.people) recWork(S.people[a[0]], d ?? today());
   if((S.auto || S.familyAuto) && (kind === 'work' || kind === 'move' || kind === 'interest') && a && a[0] !== S.activeId) return;   // mode auto : journal centré sur l'essentiel
   const e = {d: d ?? today(), kind, k, a: a || []};
   S.log.push(e); if(S.log.length > 500) S.log.splice(0, S.log.length-500);
@@ -8833,7 +8842,7 @@ function evYear(p, A, day){                            // à chaque anniversaire
   }
 }
 function onBirthday(p, A, day){
-  dirty = true;
+  dirty = true; if(A >= 14) recWork(p, day);            // 0.2.6i : rattrape les changements sans ligne au journal
   if(ttYear(p, A, day)) return;                        // 0.2.0a : parti dans le futur
   if(S.money && !p.lost && inFamily(p) && moneyIn(p)) moneyYear(p, A, day);   // 0.2.4a : mode Argent
   milYear(p, A, day);                                  // 0.2.0b : carrière militaire
@@ -13693,7 +13702,31 @@ function ceSave(){
   closeModal(true); render(); openFiche(p.id);
 }
 /* L'arbre à une autre date : une copie de la famille telle qu'elle était (ou sera) ce jour-là */
+function workHistMap(){                                // 0.2.6i : métiers retrouvés dans le journal + historique enregistré, par personne
+  const M = new Map(), add = (id, h) => { if(!M.has(id)) M.set(id, []); M.get(id).push(h); };
+  for(const e of S.log || []){ const a = e.a; if(!a || a[0] == null) continue;
+    if(e.kind === 'work'){ const k = e.k;
+      const w = k === 'uni' ? {s:'uni', field: a[1]} : (k === 'first_job' || k === 'back_to_work' || k === 'job_change') ? {s:'job', job: a[1]}
+        : k === 'graduate' ? {s:'job', job: a[2]} : k === 'retired' ? {s:'retired'} : k === 'unemployed' ? {s:'unemp'} : null;
+      if(w) add(a[0], {at: e.d, w}); }
+    else if(e.kind === 'move' && e.k === 'travel') add(a[0], {at: e.d, w: {s:'travel', ctry: a[1]}, back: e.d + Math.round((+a[2] || 6) * 30.44)}); }
+  for(const p of Object.values(S.people)) if(p.wh) for(const h of p.wh) add(p.id, h);
+  M.forEach(l => l.sort((x, y) => x.at - y.at));
+  return M;
+}
+const WORK_PAST = new Set(['job', 'retired', 'unemp', 'uni', 'odd', 'travel']);   // les métiers « ordinaires » qu'on peut remonter dans le temps
+function workAtV(p, VT, H){
+  const A = ageAt(p, VT), now = p.work; let cur, prev = null, ch = null, any = false;
+  for(const h of H || []){ if(h.at > VT) break; any = true; if(cur && cur.s !== 'travel') prev = cur; cur = h.w; ch = h; }
+  if(any && cur && cur.s === 'travel' && ch.back != null && ch.back <= VT) cur = prev;   // rentré de voyage
+  if(any) return cur || null;
+  if(now && now.s === 'retired' && A >= (p.retireAge || 65)) return now;
+  const nx = (H || []).find(h => h.w && h.w.s === 'job');   // rien de connu avant : son premier métier connu
+  if(nx) return nx.w;
+  return now && now.s === 'job' ? now : null;              // sinon « Petits boulots »
+}
 function cShadow(VT){
+  const WH = S.creative ? null : workHistMap();
   const ppl = {}, born = new Set(Object.values(S.people).filter(p => bornD(p) <= VT).map(p => p.id));   // pas encore né : il disparaît
   for(let ch = true; ch;){ ch = false;                   // … et ses descendants aussi (les dates sont libres : un enfant peut naître avant ses parents)
     for(const id of [...born]){ const p = S.people[id];
@@ -13714,6 +13747,8 @@ function cShadow(VT){
       }
     }
     if(aliveV && !('work' in m) && p.work && ageAt(p, VT) < 18) m.work = null;   // enfant : l'école
+    else if(WH && aliveV && !('work' in m) && !(p.star && p.star.famous) && (!p.work || WORK_PAST.has(p.work.s)) && (p.death == null ? S.t : p.death) > VT)
+      m.work = workAtV(p, VT, WH.get(p.id));               // 0.2.6i : modes normaux, le métier qu'il avait ce jour-là (avant : retraité toute sa vie)
     if(p.moves && p.moves.length && aliveV){ let c1 = p.birthCity || p.city; for(const mv of p.moves){ if(mv.at <= VT) c1 = mv.city; else break; } m.city = c1; }   // 0.2.6h : la ville de ce jour-là
     if(((p.jobs && p.jobs.length) || (p.edu && p.edu.length)) && !(m.work && m.work.s === 'prison')){   // 0.2.6e-g : l'école et le métier qu'il avait ce jour-là
       const ref = aliveV ? VT : p.death; let jj = null, ee = null;
@@ -14194,53 +14229,71 @@ function vidClamp(k, z, cx, cy, G){                      // la caméra ne montre
   const vw = G.bw / 2 / z, vh = G.bh / 2 / z, X0 = -k.ox, X1 = k.W - k.ox, Y0 = -k.oy, Y1 = k.H - k.oy;
   return [X1 - X0 <= 2 * vw ? (X0 + X1) / 2 : Math.max(X0 + vw, Math.min(X1 - vw, cx)), Y1 - Y0 <= 2 * vh ? (Y0 + Y1) / 2 : Math.max(Y0 + vh, Math.min(Y1 - vh, cy))];
 }
-/* ===== 0.2.6i : vidéo « séquentielle » — une lignée après l'autre, du fondateur jusqu'au bout ===== */
-// Chaque lignée se raconte du début à la fin, la caméra suit la génération la plus jeune. Les autres sont noirs tant qu'on ne les a pas
-// « découverts », puis sombres. Ensuite le temps rembobine jusqu'à l'embranchement, et la lignée suivante commence.
+/* ===== 0.2.6i : vidéo « séquentielle » — une branche après l'autre, fratrie par fratrie ===== */
+// La caméra suit une branche du fondateur jusqu'au bout : à chaque génération, toute la fratrie s'allume (frères et sœurs, conjoints).
+// Seuls les enfants qui ont eux-mêmes des enfants ouvrent une nouvelle branche. Les autres restent noirs tant qu'on ne les a pas
+// « découverts », puis sombres. Ensuite le temps rembobine jusqu'à l'embranchement suivant. Les années calmes passent 4 fois plus vite.
 function seqPlan(o){
   const f = S && P(S.founderId); if(!f) return null;
-  const T0 = fromYMD(o.y0, 0, 1), T1 = fromYMD(o.y1, 11, 31), kids = {}, pt = {};
+  const T0 = fromYMD(o.y0, 0, 1), T1 = fromYMD(o.y1, 11, 31), Y = 365.25, kids = {}, pt = {}, US = {};
   for(const c of Object.values(S.people)) if(c.parents) for(const q of c.parents) if(q != null) (kids[q] = kids[q] || []).push(c);
-  for(const u of S.unions){ (pt[u.a] = pt[u.a] || []).push(u.b); (pt[u.b] = pt[u.b] || []).push(u.a); }
-  const paths = [], desc = new Set();
-  const dfs = (p, path) => {                             // chaque chemin du fondateur jusqu'à un bout de branche, les aînés d'abord
-    desc.add(p.id); let any = false;
-    for(const c of (kids[p.id] || []).slice().sort((a, b) => bornD(a) - bornD(b))){ if(desc.has(c.id)) continue; any = true; dfs(c, path.concat(c.id)); }
-    if(!any) paths.push(path);
+  for(const k in kids) kids[k].sort((a, b) => bornD(a) - bornD(b));
+  for(const u of S.unions){ (pt[u.a] = pt[u.a] || []).push(u.b); (pt[u.b] = pt[u.b] || []).push(u.a);
+    for(const x of [u.a, u.b]) (US[x] = US[x] || []).push(u.start, u.marriedAt); }
+  const paths = [], desc = new Set([f.id]);
+  const dfs = (p, path) => {                             // seules les branches qui continuent (enfants qui ont des enfants) : les aînés d'abord
+    const ks = (kids[p.id] || []).filter(c => !desc.has(c.id)); ks.forEach(c => desc.add(c.id));
+    const br = ks.filter(c => (kids[c.id] || []).length);
+    if(!br.length) paths.push(path); else br.forEach(c => dfs(c, path.concat(c.id)));
   };
   dfs(f, [f.id]);
-  const disc = new Set(), segs = [];
+  const expl = new Set(), disc = new Set(), segs = [], life = p => p.death != null && p.death > bornD(p) ? p.death : T1;
   for(const path of paths){
-    const k0 = path.findIndex(id => !disc.has(id)); if(k0 < 0) continue;
-    const nw = path.slice(k0).map(P), last = nw[nw.length - 1], focus = new Set();
-    path.forEach(id => { focus.add(id); (pt[id] || []).forEach(x => focus.add(x)); });
-    const st = Math.max(T0, bornD(nw[0]) - 90);           // on ne repart que de l'embranchement : chacun n'est raconté qu'une fois
-    let en = Math.min(T1, Math.max(...nw.map(p => p.death != null && p.death > bornD(p) ? p.death : T1)));
-    en = Math.min(T1, Math.max(en, bornD(last) + 730, st + 365));
-    if(st < T1 - 365) segs.push({path, st, en, focus, prev: new Set(disc)});   // moins d'un an à raconter : pas la peine
-    focus.forEach(x => disc.add(x));
+    const k0 = path.findIndex(id => !expl.has(id)); if(k0 < 0) continue;
+    const focus = new Set(), nw = path.slice(k0), fresh = k0 === 0 ? [f.id] : [];
+    path.forEach(id => { focus.add(id); (pt[id] || []).forEach(x => focus.add(x));
+      (kids[id] || []).forEach(c => { focus.add(c.id); (pt[c.id] || []).forEach(x => focus.add(x)); }); });   // la fratrie de chaque génération
+    nw.forEach(id => (kids[id] || []).forEach(c => fresh.push(c.id)));
+    const kb = (kids[path[k0]] || []).map(bornD);
+    const st = Math.max(T0, k0 === 0 ? bornD(f) - 90 : Math.min(...kb) - 2 * Y);   // on repart du couple, un peu avant son premier enfant
+    let en = Math.min(T1, Math.max(...fresh.concat(nw).map(P).filter(Boolean).map(life)));
+    en = Math.min(T1, Math.max(en, st + Y));
+    const ev = [];                                         // naissances, unions, décès : là, le temps ralentit
+    for(const id of new Set(fresh.concat(nw))){ const p = P(id); if(!p) continue; ev.push(bornD(p)); if(p.death != null) ev.push(p.death);
+      for(const x of US[id] || []) if(x != null) ev.push(x); }
+    if(st < T1 - Y) segs.push({path, st, en, focus, prev: new Set(disc), ev: ev.filter(x => x >= st - 2 * Y && x <= en + 2 * Y).sort((a, b) => a - b)});
+    path.forEach(id => expl.add(id)); focus.forEach(x => disc.add(x));
   }
   const outsider = id => !desc.has(id) && !(pt[id] || []).some(x => desc.has(x));   // parents des conjoints, ancêtres du fondateur… : toujours visibles, en sombre
   const seqMap = sg => { const m = {}; for(const id in S.people){ const n = +id; if(sg.focus.has(n)) continue; m[n] = sg.prev.has(n) || outsider(n) ? 'sqd' : 'sqx'; } return m; };
-  const spd = o.spd || 3, END = 2.5, n = segs.length; let HOLD = .8, TR = 1.6;
-  const fx0 = n * HOLD + Math.max(0, n - 1) * TR; if(fx0 > 450){ const k = 450 / fx0; HOLD = Math.max(.25, HOLD * k); TR = Math.max(.5, TR * k); }   // beaucoup de lignées : pauses et retours en arrière plus courts
+  const n = segs.length, END = 2.5; let HOLD = .8, TR = 1.6;
+  const fx0 = n * HOLD + Math.max(0, n - 1) * TR; if(fx0 > 200){ const k = 200 / fx0; HOLD = Math.max(.25, HOLD * k); TR = Math.max(.5, TR * k); }   // beaucoup de branches : pauses et retours en arrière plus courts
   const fixed = n * HOLD + Math.max(0, n - 1) * TR + END;
-  let secs = segs.map(sg => (sg.en - sg.st) / 365.25 / spd), sum = secs.reduce((a, b) => a + b, 0);
-  if(fixed + sum > 900) secs = secs.map(x => Math.max(.5, x * Math.max(.02, (900 - fixed) / sum)));   // 15 minutes au plus : ça accélère
-  return {segs, secs, n, pt, seqMap, HOLD, TR, END, total: fixed + secs.reduce((a, b) => a + b, 0)};
+  const frames = (sg, spd) => {                          // la date de chaque image : vitesse choisie près d'un événement, 4 fois plus vite sinon
+    const F = [], ev = sg.ev, W = 1.2 * Y; let cur = sg.st, j = 0;
+    while(cur < sg.en && F.length < 60000){ F.push(cur); while(j < ev.length && ev[j] < cur - W) j++;
+      cur += (j < ev.length && ev[j] <= cur + W ? spd : spd * 4) * Y / VID_FPS; }
+    F.push(sg.en); return F;
+  };
+  let spd = o.spd || 3, cnt = 0;
+  for(let tries = 0; tries < 4; tries++){                // 10 minutes au plus : ça accélère
+    segs.forEach(sg => { sg.F = frames(sg, spd); }); cnt = segs.reduce((a, sg) => a + sg.F.length, 0);
+    if(fixed + cnt / VID_FPS <= 600 || !cnt) break; spd *= (cnt / VID_FPS) / Math.max(60, 600 - fixed) * 1.05;
+  }
+  return {segs, n, pt, kids, seqMap, HOLD, TR, END, total: fixed + cnt / VID_FPS};
 }
 async function vidSeqScene(o){
   const pl = seqPlan(o); if(!pl || !pl.n){ renderTree(); throw new Error('empty'); }
   const KEYS = [], FR = [], F = x => Math.max(1, Math.round(x * VID_FPS));   // FR : pour chaque image de la vidéo, la date affichée
   pl.segs.forEach((sg, j) => {
-    const mp = pl.seqMap(sg), sub = t('exv_lin', j + 1, pl.n), nfr = Math.max(6, F(pl.secs[j]));
-    const nk = Math.max(2, Math.min(Math.ceil((sg.en - sg.st) / 365.25) + 1, Math.round(pl.secs[j] * 12))), b0 = KEYS.length;
-    for(let i = 0; i < nk; i++) KEYS.push({VT: sg.st + (sg.en - sg.st) * i / (nk - 1), seq: mp, path: sg.path, sub});
-    for(let fi = 0; fi < nfr; fi++) FR.push(b0 + Math.min(nk - 1, Math.floor(fi * nk / nfr)));
-    for(let fi = F(pl.HOLD); fi > 0; fi--) FR.push(b0 + nk - 1);
-    const nx = pl.segs[j + 1]; if(!nx) return;            // le temps rembobine jusqu'au début de la lignée suivante
-    const mp2 = pl.seqMap(nx), sub2 = t('exv_lin', j + 2, pl.n), RK = 10, RF = F(pl.TR), b1 = KEYS.length;
-    for(let i = 1; i <= RK; i++) KEYS.push({VT: sg.en + (nx.st - sg.en) * i / RK, seq: mp2, path: nx.path, sub: sub2});
+    const mp = pl.seqMap(sg), sub = t('exv_lin', j + 1, pl.n); let lf = -99, ld = -1e9;
+    sg.F.forEach((d, i) => {                              // une nouvelle image de l'arbre au plus tous les 6 mois (et toutes les 3 images)
+      if(i === 0 || (i - lf >= 3 && d - ld >= 182)){ KEYS.push({VT: d, seq: mp, path: sg.path, sub}); lf = i; ld = d; }
+      FR.push(KEYS.length - 1); });
+    for(let fi = F(pl.HOLD); fi > 0; fi--) FR.push(KEYS.length - 1);
+    const nx = pl.segs[j + 1]; if(!nx) return;            // le temps rembobine jusqu'au début de la branche suivante
+    const mp2 = pl.seqMap(nx), sub2 = t('exv_lin', j + 2, pl.n), en = sg.F[sg.F.length - 1], RK = 10, RF = F(pl.TR), b1 = KEYS.length;
+    for(let i = 1; i <= RK; i++) KEYS.push({VT: en + (nx.st - en) * i / RK, seq: mp2, path: nx.path, sub: sub2});
     for(let fi = 0; fi < RF; fi++) FR.push(b1 + Math.min(RK - 1, Math.floor(fi * RK / RF)));
   });
   const endF = FR.length, bE = KEYS.length;               // à la fin : tout l'arbre, enfin découvert
@@ -14254,7 +14307,8 @@ async function vidSeqScene(o){
     if(!K.path){ const zf = Math.max(fit[i], Math.min(G.sMax, G.sRead * .45));   // la fin : tout s'allume ; on recule, sans rendre les textes illisibles
       return fit[i] >= zf ? {z: fit[i], cx: k.W / 2 - k.ox, cy: k.H / 2 - k.oy} : {z: zf, keep: true}; }
     const at = new Map(k.nodes.map(n => [n.id, n])); let fr = -1; K.path.forEach((id, x) => { if(at.has(id)) fr = x; }); if(fr < 0) return null;
-    const ids = [K.path[fr]].concat(fr > 0 ? [K.path[fr - 1]] : [], pl.pt[K.path[fr]] || []), ns = ids.map(id => at.get(id)).filter(Boolean);
+    const ki = (pl.kids[K.path[fr]] || []).map(c => c.id).filter(id => at.has(id));
+    const ids = [K.path[fr]].concat(pl.pt[K.path[fr]] || [], ki.length ? ki : fr > 0 ? [K.path[fr - 1]] : []), ns = ids.map(id => at.get(id)).filter(Boolean);
     const x0 = Math.min(...ns.map(n => n.x)), x1 = Math.max(...ns.map(n => n.x + n.w)), y0 = Math.min(...ns.map(n => n.y)), y1 = Math.max(...ns.map(n => n.y + NH));
     const z = Math.min(G.sMax, Math.max(G.sRead, fit[i])), [cx, cy] = vidClamp(k, z, (x0 + x1) / 2 - k.ox, (y0 + y1) / 2 - k.oy, G);
     return {z, cx, cy};
