@@ -4,6 +4,7 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 
 ## v0.2.6h — 18 novembre 2026
 
+- Vidéo : nouvelle case « Zoom intelligent ». Quand l'arbre devient trop grand pour être lu, la caméra s'approche, suit les naissances et les décès, puis recule à la fin pour montrer tout l'arbre.
 - Vidéo : la caméra cadre maintenant l'arbre au centre de l'écran et zoome en douceur à mesure qu'il grandit, en vertical, en carré comme en paysage. Le titre et la date gardent la même taille quelle que soit la taille de l'arbre.
 - Mode libre : les déménagements se règlent aussi avec des dates, comme les métiers. L'arbre et le curseur du temps montrent la ville où chacun vivait à ce moment-là.
 - Vidéo réparée : chaque image est maintenant encodée une par une, à 30 images par seconde exactement, dans un vrai fichier MP4 qui connaît sa durée. Toutes les années durent le même temps, les lecteurs (VLC compris) affichent la bonne durée, et la création va plus vite que le temps réel.

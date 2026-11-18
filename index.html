@@ -2778,10 +2778,12 @@ const APP_VERSION = '0.2.6h';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.2.6h', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
-   fr:['Vidéo : la caméra cadre maintenant l\'arbre au centre de l\'écran et zoome en douceur à mesure qu\'il grandit, en vertical, en carré comme en paysage. Le titre et la date gardent la même taille quelle que soit la taille de l\'arbre.',
+   fr:['Vidéo : nouvelle case « Zoom intelligent ». Quand l\'arbre devient trop grand pour être lu, la caméra s\'approche, suit les naissances et les décès, puis recule à la fin pour montrer tout l\'arbre.',
+       'Vidéo : la caméra cadre maintenant l\'arbre au centre de l\'écran et zoome en douceur à mesure qu\'il grandit, en vertical, en carré comme en paysage. Le titre et la date gardent la même taille quelle que soit la taille de l\'arbre.',
        'Mode libre : les déménagements se règlent aussi avec des dates, comme les métiers. L\'arbre et le curseur du temps montrent la ville où chacun vivait à ce moment-là.',
        'Vidéo réparée : chaque image est maintenant encodée une par une, à 30 images par seconde exactement, dans un vrai fichier MP4 qui connaît sa durée. Toutes les années durent le même temps, les lecteurs (VLC compris) affichent la bonne durée, et la création va plus vite que le temps réel.'],
-   en:['Video: the camera now frames the tree in the middle of the screen and zooms out smoothly as it grows, in portrait, square or landscape. The title and date keep the same size whatever the tree\'s size.',
+   en:['Video: new “Smart zoom” option. When the tree gets too big to read, the camera moves in, follows births and deaths, then pulls back at the end to show the whole tree.',
+       'Video: the camera now frames the tree in the middle of the screen and zooms out smoothly as it grows, in portrait, square or landscape. The title and date keep the same size whatever the tree\'s size.',
        'Free mode: moves can also be set with dates, like jobs. The tree and the time slider show the city where each person lived at that moment.',
        'Video fixed: each frame is now encoded one by one, at exactly 30 frames per second, into a proper MP4 file that knows its length. Every year lasts the same time, players (VLC included) show the right length, and creating it is faster than real time.']},
   {v:'0.2.6g', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
@@ -4838,7 +4840,7 @@ fr:{
   cal_prev:(d,n)=>`Aujourd'hui : ${d} · ${n} jours par an`, cal_ach:'Un calendrier sur mesure désactive les succès, comme les autres personnalisations.',
   cal_default:'Remettre le calendrier réel', cal_err:'Il faut entre 1 et 60 mois.',
   lifex_tip15:(a,n)=>`Espérance de vie de la famille : ${a} ans (âge moyen au décès ${n>1?`des ${n} derniers membres disparus`:'du dernier membre disparu'})`,
-  ex_tab_img:'Image', ex_tab_vid:'Vidéo', exv_res:'Format de la vidéo', exv_dur:'Durée', exv_from:"De l'année", exv_to:"À l'année", exv_vert:'Vertical', exv_square:'Carré',
+  ex_tab_img:'Image', ex_tab_vid:'Vidéo', exv_res:'Format de la vidéo', exv_dur:'Durée', exv_from:"De l'année", exv_to:"À l'année", exv_vert:'Vertical', exv_square:'Carré', exv_zoom:'Zoom intelligent', exv_zoom_hint:"Quand l'arbre devient trop grand pour être lu, la caméra s'approche et suit les naissances et les décès, puis recule à la fin pour montrer tout l'arbre.", 
   exv_max:'Une vidéo couvre 1 000 ans au plus : le début sera avancé.', exv_order:"L'année de fin doit venir après l'année de début.", exv_info:(y,s)=>`${y} ans d'histoire · environ ${s} s par année`,
   exv_go:'Créer la vidéo', exv_enc:(a,b)=>`Création de la vidéo… ${a} s / ${b} s`, exv_stop:'Arrêter', exv_prep:(a,b)=>`Préparation des images… ${a} / ${b}`, exv_rec:(a,b)=>`Enregistrement de la vidéo… ${a} s / ${b} s`,
   exv_done:n=>`Vidéo enregistrée : ${n}`, exv_fail:"La vidéo n'a pas pu être créée. Essaie un format plus petit.", exv_nosupport:'Ton navigateur ne sait pas fabriquer de vidéo.',
@@ -5348,7 +5350,7 @@ en:{
   cal_prev:(d,n)=>`Today: ${d} · ${n} days a year`, cal_ach:'A custom calendar turns achievements off, like other customisations.',
   cal_default:'Back to the real calendar', cal_err:'You need between 1 and 60 months.',
   lifex_tip15:(a,n)=>`Family life expectancy: ${a} (average age at death of ${n>1?`the last ${n} members who died`:'the last member who died'})`,
-  ex_tab_img:'Image', ex_tab_vid:'Video', exv_res:'Video format', exv_dur:'Length', exv_from:'From year', exv_to:'To year', exv_vert:'Vertical', exv_square:'Square',
+  ex_tab_img:'Image', ex_tab_vid:'Video', exv_res:'Video format', exv_dur:'Length', exv_from:'From year', exv_to:'To year', exv_vert:'Vertical', exv_square:'Square', exv_zoom:'Smart zoom', exv_zoom_hint:'When the tree gets too big to read, the camera moves in and follows births and deaths, then pulls back at the end to show the whole tree.', 
   exv_max:'A video covers 1,000 years at most: the start will be moved forward.', exv_order:'The end year must come after the start year.', exv_info:(y,s)=>`${y} years of history · about ${s} s per year`,
   exv_go:'Create the video', exv_enc:(a,b)=>`Creating the video… ${a} s / ${b} s`, exv_stop:'Stop', exv_prep:(a,b)=>`Preparing frames… ${a} / ${b}`, exv_rec:(a,b)=>`Recording the video… ${a} s / ${b} s`,
   exv_done:n=>`Video saved: ${n}`, exv_fail:"The video couldn't be created. Try a smaller format.", exv_nosupport:"Your browser can't make videos.",
@@ -5857,7 +5859,7 @@ TX.de = {
   cal_prev:(d,n)=>`Heute: ${d} · ${n} Tage pro Jahr`, cal_ach:'Ein eigener Kalender schaltet die Erfolge ab, wie andere Anpassungen.',
   cal_default:'Zurück zum echten Kalender', cal_err:'Es braucht zwischen 1 und 60 Monate.',
   lifex_tip15:(a,n)=>`Lebenserwartung der Familie: ${a} Jahre (Durchschnittsalter beim Tod ${n>1?`der letzten ${n} Verstorbenen`:'des zuletzt Verstorbenen'})`,
-  ex_tab_img:'Bild', ex_tab_vid:'Video', exv_res:'Videoformat', exv_dur:'Dauer', exv_from:'Ab dem Jahr', exv_to:'Bis zum Jahr', exv_vert:'Hochformat', exv_square:'Quadrat',
+  ex_tab_img:'Bild', ex_tab_vid:'Video', exv_res:'Videoformat', exv_dur:'Dauer', exv_from:'Ab dem Jahr', exv_to:'Bis zum Jahr', exv_vert:'Hochformat', exv_square:'Quadrat', exv_zoom:'Intelligenter Zoom', exv_zoom_hint:'Wird der Baum zu groß zum Lesen, fährt die Kamera näher heran und folgt Geburten und Todesfällen; am Ende zeigt sie den ganzen Baum.', 
   exv_max:'Ein Video umfasst höchstens 1.000 Jahre: Der Anfang wird vorverlegt.', exv_order:'Das Endjahr muss nach dem Startjahr liegen.', exv_info:(y,s)=>`${y} Jahre Geschichte · etwa ${s} s pro Jahr`,
   exv_go:'Video erstellen', exv_enc:(a,b)=>`Video wird erstellt… ${a} s / ${b} s`, exv_stop:'Anhalten', exv_prep:(a,b)=>`Bilder werden vorbereitet… ${a} / ${b}`, exv_rec:(a,b)=>`Video wird aufgenommen… ${a} s / ${b} s`,
   exv_done:n=>`Video gespeichert: ${n}`, exv_fail:'Das Video konnte nicht erstellt werden. Versuche ein kleineres Format.', exv_nosupport:'Dein Browser kann keine Videos erstellen.',
@@ -6369,7 +6371,7 @@ TX.es = {
   cal_prev:(d,n)=>`Hoy: ${d} · ${n} días al año`, cal_ach:'Un calendario a medida desactiva los logros, como las demás personalizaciones.',
   cal_default:'Volver al calendario real', cal_err:'Hacen falta entre 1 y 60 meses.',
   lifex_tip15:(a,n)=>`Esperanza de vida de la familia: ${a} años (edad media al morir ${n>1?`de los últimos ${n} miembros fallecidos`:'del último miembro fallecido'})`,
-  ex_tab_img:'Imagen', ex_tab_vid:'Vídeo', exv_res:'Formato del vídeo', exv_dur:'Duración', exv_from:'Desde el año', exv_to:'Hasta el año', exv_vert:'Vertical', exv_square:'Cuadrado',
+  ex_tab_img:'Imagen', ex_tab_vid:'Vídeo', exv_res:'Formato del vídeo', exv_dur:'Duración', exv_from:'Desde el año', exv_to:'Hasta el año', exv_vert:'Vertical', exv_square:'Cuadrado', exv_zoom:'Zoom inteligente', exv_zoom_hint:'Cuando el árbol es demasiado grande para leerse, la cámara se acerca y sigue los nacimientos y las muertes, y al final se aleja para mostrar todo el árbol.', 
   exv_max:'Un vídeo abarca 1000 años como máximo: el inicio se adelantará.', exv_order:'El año final debe ser posterior al inicial.', exv_info:(y,s)=>`${y} años de historia · unos ${s} s por año`,
   exv_go:'Crear el vídeo', exv_enc:(a,b)=>`Creando el vídeo… ${a} s / ${b} s`, exv_stop:'Detener', exv_prep:(a,b)=>`Preparando las imágenes… ${a} / ${b}`, exv_rec:(a,b)=>`Grabando el vídeo… ${a} s / ${b} s`,
   exv_done:n=>`Vídeo guardado: ${n}`, exv_fail:'No se pudo crear el vídeo. Prueba un formato más pequeño.', exv_nosupport:'Tu navegador no puede crear vídeos.',
@@ -13844,6 +13846,7 @@ function openExport(){                                  // 0.2.6f : une image, o
         <div class="exticks"><span>${t('exv_slow')}</span><span>${t('exv_fast')}</span></div>
         <div class="row2"><label class="field"><span class="lab">${t('exv_from')}</span><input class="inp" type="number" id="exVY0" value="${yF}"></label>
           <label class="field"><span class="lab">${t('exv_to')}</span><input class="inp" type="number" id="exVY1" value="${yNow}"></label></div>
+        <label class="cechk"><input type="checkbox" id="exVZoom" checked><span>${t('exv_zoom')}</span></label><p class="fieldhint">${t('exv_zoom_hint')}</p>
         <p class="setnote" id="exVInfo"></p>
         <div class="exprog" id="exProg" hidden><i></i></div><p class="setnote" id="exPhase" hidden></p>
       </div>
@@ -13875,7 +13878,7 @@ function openExport(){                                  // 0.2.6f : une image, o
       bar.querySelector('i').style.width = (a / b * 100).toFixed(1) + '%'; bar.classList.toggle('rec', ph === 'rec'); tx.textContent = t(ph === 'rec' ? 'exv_rec' : ph === 'enc' ? 'exv_enc' : 'exv_prep', a, b); };
     try{
       const skin = $('#exSkin').value, title = $('#exTitle').checked;
-      const name = isVid ? await exportVideo({skin, title, res: $('#exVRes').value.split('x').map(Number), dur: exDur(), y0, y1}, prog)
+      const name = isVid ? await exportVideo({skin, title, res: $('#exVRes').value.split('x').map(Number), dur: exDur(), y0, y1, smart: $('#exVZoom').checked}, prog)
         : await exportTree({fmt: $('#exFmt').value, skin, scale: +$('#exScale').value, title});
       const ok = $('#exOk'); if(ok && name){ ok.textContent = t(isVid ? 'exv_done' : 'ex_done', name); ok.hidden = false; sfx.sparkle(); } }
     catch(err){ const er = $('#exErr'); if(er && !(err && err.message === 'stop')){ er.textContent = t(isVid ? 'exv_fail' : 'ex_fail'); er.hidden = false; sfx.refuse(); } console.warn(err); }
@@ -13922,7 +13925,8 @@ const EXSTOP = {v:false}, EX_SPD = [.25, .5, 1, 2, 3, 5, 8, 10, 15, 20, 30, 50, 
 const exSleep = ms => new Promise(r => setTimeout(r, ms));
 function exSnapAt(VT){                                  // l'arbre tel qu'il était (ou sera) à cette date
   const S0 = S, sh = cShadow(VT); if(!sh) return null; S = sh;
-  try{ const b = buildTree(); return {html: b.html.split('@T@').join('0s'), W: b.W, H: b.H, title: t('family', familyName(P(S.founderId))), date: fmt(VT), y: yearOf(VT), era: eraLvl(yearOf(VT)) || ''}; }
+  try{ const b = buildTree(), nodes = Object.keys(b.pos).map(id => ({id: +id, x: b.pos[id].x, y: b.pos[id].y, w: nodeWidths[id] || NW, d: !!(P(+id) && P(+id).death != null)}));
+    return {html: b.html.split('@T@').join('0s'), W: b.W, H: b.H, nodes, title: t('family', familyName(P(S.founderId))), date: fmt(VT), y: yearOf(VT), era: eraLvl(yearOf(VT)) || ''}; }
   finally{ S = S0; }
 }
 async function exStyle(skin){                           // les règles du jeu et les polices du thème choisi
@@ -14030,42 +14034,101 @@ function mp4File(w, h, samples, avcC){                   // ftyp + mdat + moov, 
   const moov = mp4Box('moov', mvhd, mp4Box('trak', tkhd, mp4Box('mdia', mdhd, hdlr, mp4Box('minf', vmhd, dinf, stbl))));
   return new Blob([ftyp, mdatHead, ...samples.map(x => x.data), moov], {type: 'video/mp4'});
 }
-async function vidScene(o){                              // 0.2.6h : une caméra cadre l'arbre, quelle que soit la forme de la vidéo (verticale, carrée…)
+async function vidScene(o){                              // 0.2.6h : une caméra cadre l'arbre (vertical, carré…) ; zoom intelligent : elle s'approche et suit la vie de la famille
   const root = document.documentElement, sk0 = root.dataset.skin, t0 = fromYMD(o.y0, 0, 1), t1 = fromYMD(o.y1, 11, 31);
   const nF = Math.max(2, Math.min(o.y1 - o.y0 + 1, Math.round(o.dur * 12))), at = i => t0 + (t1 - t0) * i / (nF - 1);
   const snap = VT => { root.dataset.skin = o.skin; try{ return exSnapAt(VT); } finally{ root.dataset.skin = sk0; } };
-  const sz = []; for(let i = 0; i < nF; i++){ const sn = snap(at(i)); sz.push(sn && sn.W ? [sn.W, sn.H] : null); }
-  if(!sz.some(Boolean)){ renderTree(); throw new Error('empty'); }
+  const fid = S.founderId, KS = [];
+  for(let i = 0; i < nF; i++){                            // 1. chaque année : taille de l'arbre et place de chacun (repérée par rapport au fondateur, qui ne bouge pas)
+    const sn = snap(at(i)); if(!sn || !sn.W){ KS.push(null); continue; }
+    const fn = sn.nodes.find(n => n.id === fid) || {x: 0, y: 0};
+    KS.push({W: sn.W, H: sn.H, ox: fn.x, oy: fn.y, nodes: sn.nodes});
+  }
+  if(!KS.some(Boolean)){ renderTree(); throw new Error('empty'); }
   const [Vw, Vh] = o.res, u = Math.min(Vw, Vh) / 900, w = Vw / u, h = Vh / u;   // titre, date et logo : toujours la même taille à l'écran
   const bigS = Math.round(Math.max(40, Math.min(w, h) * .085)), band = Math.round(Math.max(EX_M * .55 + bigS * 1.32, o.title ? EX_M * .7 + 40 : 0) + EX_M * .5);
-  const bx = EX_M * u, by = band * u, bw = Vw - 2 * bx, bh = Vh - by - EX_M * u, sMax = Math.min(Vw, Vh) / 420, PAD = 24;
-  const fit = sz.map(d => d ? Math.min(sMax, bw / d[0], bh / d[1]) : sMax);   // le zoom qui fait tenir l'arbre de chaque année
+  const bx = EX_M * u, by = band * u, bw = Vw - 2 * bx, bh = Vh - by - EX_M * u, cxS = bx + bw / 2, cyS = by + bh / 2;
+  const sMax = Math.min(Vw, Vh) / 420, sRead = Math.min(Vw, Vh) / 780, PAD = 24;
+  const fit = KS.map(k => k ? Math.min(sMax, bw / k.W, bh / k.H) : sMax);   // le zoom qui fait tenir tout l'arbre
+  const whole = i => { const k = KS[i]; return {z: fit[i], cx: k.W / 2 - k.ox, cy: k.H / 2 - k.oy, whole: true}; };
+  // 2. où regarder, année par année
+  const TG = [], dwell = Math.max(1, Math.round(2.2 * nF / o.dur)); let prev = null, prevD = new Map(), moved = -1e9;   // la caméra reste au moins ~2 s au même endroit
+  for(let i = 0; i < nF; i++){
+    const k = KS[i]; if(!k){ TG.push(prev || {z: sMax, cx: 0, cy: 0, whole: true}); continue; }
+    let tg;
+    if(!o.smart || fit[i] >= sRead) tg = whole(i);         // l'arbre entier est lisible : on le montre en entier
+    else {
+      const rel = n => ({x0: n.x - k.ox, y0: n.y - k.oy, x1: n.x + n.w - k.ox, y1: n.y + NH - k.oy});
+      const ev = k.nodes.filter(n => !prevD.has(n.id) || prevD.get(n.id) !== n.d).map(rel);   // naissances, arrivées, décès
+      const z = sRead, hw = bw / 2 / z * .85, hh = bh / 2 / z * .85, mid = r => [(r.x0 + r.x1) / 2, (r.y0 + r.y1) / 2];
+      let cx = prev && !prev.whole ? prev.cx : null, cy = prev && !prev.whole ? prev.cy : null;
+      const out = ev.filter(r => cx == null || r.x0 < cx - hw || r.x1 > cx + hw || r.y0 < cy - hh || r.y1 > cy + hh);
+      if(out.length && (cx == null || i - moved >= dwell)){   // ce qui arrive hors du cadre : la caméra va au plus proche, avec ce qui se passe autour
+        const [ax, ay] = cx == null ? mid(out[0]) : mid(out.reduce((a, r) => { const [x1, y1] = mid(r), [x2, y2] = mid(a); return Math.hypot(x1 - cx, y1 - cy) < Math.hypot(x2 - cx, y2 - cy) ? r : a; }));
+        const grp = ev.filter(r => { const [x, y] = mid(r); return Math.abs(x - ax) < hw * .8 && Math.abs(y - ay) < hh * .8; });
+        const bb = grp.reduce((a, r) => ({x0: Math.min(a.x0, r.x0), y0: Math.min(a.y0, r.y0), x1: Math.max(a.x1, r.x1), y1: Math.max(a.y1, r.y1)}));
+        cx = (bb.x0 + bb.x1) / 2; cy = (bb.y0 + bb.y1) / 2; moved = i; }
+      if(cx == null){ const fn = k.nodes.find(n => n.id === fid); const r = fn ? rel(fn) : {x0: 0, y0: 0, x1: NW, y1: NH}; cx = (r.x0 + r.x1) / 2; cy = (r.y0 + r.y1) / 2; }
+      const vw = bw / 2 / z, vh = bh / 2 / z, X0 = -k.ox, X1 = k.W - k.ox, Y0 = -k.oy, Y1 = k.H - k.oy;   // sans montrer de vide au-delà de l'arbre
+      cx = X1 - X0 <= 2 * vw ? (X0 + X1) / 2 : Math.max(X0 + vw, Math.min(X1 - vw, cx));
+      cy = Y1 - Y0 <= 2 * vh ? (Y0 + Y1) / 2 : Math.max(Y0 + vh, Math.min(Y1 - vh, cy));
+      tg = {z, cx, cy, whole: false};
+    }
+    TG.push(tg); prev = tg; prevD = new Map(k.nodes.map(n => [n.id, n.d]));
+  }
+  // 3. le mouvement de la caméra, image par image (doux, et à la fin on recule pour montrer tout l'arbre)
+  const zoomed = TG.some(x => !x.whole), total = Math.max(1, Math.round(o.dur * VID_FPS)), hold = Math.round(VID_FPS * (zoomed ? 2.5 : 1));
+  const L = Math.ceil(.6 * nF / o.dur), CAM = []; let z = null, cx = 0, cy = 0;
+  for(let fi = 0; fi < total + hold; fi++){
+    const ai = Math.min(nF - 1, Math.floor(fi * nF / total)), k = KS[ai], end = zoomed && fi >= total && !!k;
+    const tg = end ? whole(ai) : TG[ai];
+    let tz = tg.z; if(tg.whole && !end) for(let j = ai + 1; j <= Math.min(nF - 1, ai + L); j++) if(TG[j].whole) tz = Math.min(tz, TG[j].z);   // anticipe l'arbre qui grandit
+    if(z == null){ z = tz; cx = tg.cx; cy = tg.cy; }
+    else { const az = 1 - Math.exp(-1 / VID_FPS / .3), ac = 1 - Math.exp(-1 / VID_FPS / (end ? .35 : .5)); z += (tz - z) * az; cx += (tg.cx - cx) * ac; cy += (tg.cy - cy) * ac; }
+    if(tg.whole && k && !end){                             // l'arbre entier ne doit jamais être coupé
+      z = Math.min(z, fit[ai]); const hw = bw / 2 / z, hh = bh / 2 / z, X0 = -k.ox - PAD, X1 = k.W - k.ox + PAD, Y0 = -k.oy - PAD, Y1 = k.H - k.oy + PAD;
+      if(X1 - X0 <= 2 * hw) cx = Math.max(X1 - hw, Math.min(X0 + hw, cx)); if(Y1 - Y0 <= 2 * hh) cy = Math.max(Y1 - hh, Math.min(Y0 + hh, cy)); }
+    CAM.push({z, cx, cy, ai});
+  }
+  // 4. pour chaque année, seulement le morceau d'arbre que la caméra verra, à la bonne netteté
+  const CR = KS.map(() => null);
+  for(const c of CAM){ const k = KS[c.ai]; if(!k) continue;
+    const x0 = c.cx + k.ox - cxS / c.z, x1 = c.cx + k.ox + (Vw - cxS) / c.z, y0 = c.cy + k.oy - cyS / c.z, y1 = c.cy + k.oy + (Vh - cyS) / c.z, r = CR[c.ai];
+    CR[c.ai] = r ? {x0: Math.min(r.x0, x0), y0: Math.min(r.y0, y0), x1: Math.max(r.x1, x1), y1: Math.max(r.y1, y1), z: Math.max(r.z, c.z)} : {x0, y0, x1, y1, z: c.z}; }
+  CR.forEach((r, i) => { if(!r) return; const k = KS[i];
+    r.x0 = Math.floor(Math.max(-PAD, r.x0 - 4)); r.y0 = Math.floor(Math.max(-PAD, r.y0 - 4)); r.x1 = Math.ceil(Math.min(k.W + PAD, r.x1 + 4)); r.y1 = Math.ceil(Math.min(k.H + PAD, r.y1 + 4));
+    const cw = r.x1 - r.x0, ch = r.y1 - r.y0; if(cw <= 0 || ch <= 0){ CR[i] = null; return; }
+    r.q = Math.min(r.z, Math.sqrt(3 * Vw * Vh / (cw * ch)), 16000 / Math.max(cw, ch)); });
   const css = await exStyle(o.skin), fam0 = t('family', familyName(P(S.founderId))), bgs = {};
   const svgImg = (inner, ow, oh, k, era, bare) => exImg(exSVG(inner, {w: ow, h: oh, k, skin: o.skin, era, css, bare}));
-  let lastHtml = null, lastTree = null;
+  let lastKey = null, lastTree = null;
   const key = async i => {
-    const VT = at(i), sn = snap(VT) || {html:'', W:0, H:0, title: fam0, era:''}, era = sn.era || '', dateTxt = String(yD(VT));
+    const VT = at(i), sn = snap(VT) || {html:'', W:0, H:0, title: fam0, era:''}, era = sn.era || '', dateTxt = String(yD(VT)), r = CR[i];
     if(!(era in bgs)) bgs[era] = await svgImg('', w, h, u, era, false);
-    if(sn.html !== lastHtml){ lastHtml = sn.html;
-      let tx = ''; if(sn.W){ const bx0 = document.createElement('div');   // comme pour l'image : sérialisé en XML (sinon les fils de l'arbre disparaissent)
-        bx0.innerHTML = `<div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${PAD}px;top:${PAD}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>`;
-        tx = new XMLSerializer().serializeToString(bx0.firstChild); }
-      lastTree = sn.W ? {img: await svgImg(tx, sn.W + PAD * 2, sn.H + PAD * 2, fit[i], era, true), W: sn.W, H: sn.H} : null; }
-    return {bg: bgs[era], tree: lastTree, ov: await svgImg(exInner(sn, {w, h, title: o.title, big: true, dateTxt}), w, h, u, era, true)};
+    let tree = null;
+    if(sn.W && r && KS[i]){
+      const kk = sn.html + '|' + [r.x0, r.y0, r.x1, r.y1, r.q.toFixed(3)].join(',');
+      if(kk === lastKey) tree = lastTree;
+      else { const bx0 = document.createElement('div');   // comme pour l'image : sérialisé en XML (sinon les fils de l'arbre disparaissent)
+        bx0.innerHTML = `<div class="tree-canvas" id="treeCanvas" style="position:absolute;left:${-r.x0}px;top:${-r.y0}px;width:${sn.W}px;height:${sn.H}px;transform:none">${sn.html}</div>`;
+        tree = {img: await svgImg(new XMLSerializer().serializeToString(bx0.firstChild), r.x1 - r.x0, r.y1 - r.y0, r.q, era, true), r, ox: KS[i].ox, oy: KS[i].oy};
+        lastKey = kk; lastTree = tree; }
+    }
+    return {bg: bgs[era], tree, ov: await svgImg(exInner(sn, {w, h, title: o.title, big: true, dateTxt}), w, h, u, era, true)};
   };
-  let z = null;
-  const cam = (aF, dt) => {                               // le zoom glisse, anticipe l'arbre qui grandit, et ne coupe jamais l'arbre affiché
-    const ai = Math.min(nF - 1, Math.max(0, Math.floor(aF))), L = Math.ceil(.6 * nF / o.dur);
-    let tg = fit[ai]; for(let j = ai + 1; j <= Math.min(nF - 1, ai + L); j++) tg = Math.min(tg, fit[j]);
-    z = z == null ? tg : z + (tg - z) * (1 - Math.exp(-dt / .3));
-    return z = Math.min(z, fit[ai]);
-  };
-  const draw = (g, k, sc) => {
+  let tc = null;                                          // zoom intelligent : l'arbre s'efface doucement sous le titre et la date
+  const draw = (g, k, fi) => {
+    const c = CAM[Math.max(0, Math.min(CAM.length - 1, fi))];
     g.clearRect(0, 0, Vw, Vh); g.drawImage(k.bg, 0, 0, Vw, Vh);
-    const tr = k.tree; if(tr) g.drawImage(tr.img, bx + (bw - tr.W * sc) / 2 - PAD * sc, by + (bh - tr.H * sc) / 2 - PAD * sc, (tr.W + PAD * 2) * sc, (tr.H + PAD * 2) * sc);
+    const tr = k.tree; if(tr){ const r = tr.r, X = cxS + (r.x0 - tr.ox - c.cx) * c.z, Y = cyS + (r.y0 - tr.oy - c.cy) * c.z, dw = (r.x1 - r.x0) * c.z, dh = (r.y1 - r.y0) * c.z;
+      if(Y >= by - 1) g.drawImage(tr.img, X, Y, dw, dh);
+      else { if(!tc){ tc = document.createElement('canvas'); tc.width = Vw; tc.height = Vh; } const t2 = tc.getContext('2d');
+        t2.globalCompositeOperation = 'source-over'; t2.clearRect(0, 0, Vw, Vh); t2.drawImage(tr.img, X, Y, dw, dh);
+        const gr = t2.createLinearGradient(0, by * .45, 0, by); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+        t2.globalCompositeOperation = 'destination-out'; t2.fillStyle = gr; t2.fillRect(0, 0, Vw, by); g.drawImage(tc, 0, 0); } }
     g.drawImage(k.ov, 0, 0, Vw, Vh);
   };
-  return {nF, fam0, Vw, Vh, key, cam, draw};
+  return {nF, fam0, Vw, Vh, total, hold, ai: fi => CAM[Math.max(0, Math.min(CAM.length - 1, fi))].ai, key, draw};
 }
 async function exportVideoMP4(o, prog, cfg){
   const sc = await vidScene(o), {nF, Vw, Vh, fam0} = sc;
@@ -14076,15 +14139,15 @@ async function exportVideoMP4(o, prog, cfg){
       const data = new Uint8Array(chunk.byteLength); chunk.copyTo(data); samples.push({data, ts: chunk.timestamp, key: chunk.type === 'key'}); },
     error: e => { encErr = e; }});
   enc.configure(cfg);
-  const total = Math.max(1, Math.round(o.dur * VID_FPS)), hold = VID_FPS;   // + 1 s sur la dernière image
+  const {total, hold} = sc;                              // + 1 s (2,5 s avec le zoom intelligent) sur la dernière année
   let cur, shown = 0;
   try{
     cur = await sc.key(0); await exSleep(200);            // le temps que les polices soient prêtes
     for(let fi = 0; fi < total + hold; fi++){
       if(EXSTOP.v) throw new Error('stop'); if(encErr) throw encErr;
-      const aF = fi * nF / total, ai = Math.min(nF - 1, Math.floor(aF));   // chaque année : exactement le même nombre d'images
+      const ai = sc.ai(fi);                                // chaque année : exactement le même nombre d'images
       if(ai !== shown){ shown = ai; cur = await sc.key(ai); }
-      sc.draw(g, cur, sc.cam(aF, 1 / VID_FPS));
+      sc.draw(g, cur, fi);
       const fr = new VideoFrame(vc, {timestamp: Math.round(fi * 1e6 / VID_FPS), duration: Math.round(1e6 / VID_FPS)});
       enc.encode(fr, {keyFrame: fi % (VID_FPS * 2) === 0}); fr.close();
       while(enc.encodeQueueSize > 6) await exSleep(4);
@@ -14103,13 +14166,13 @@ async function exportVideoRec(o, prog){                  // 0.2.6f : l'arbre qui
     .find(m => { try{ return MR.isTypeSupported(m); }catch(e){ return false; } }); if(!mime) throw new Error('nomime');
   const sc = await vidScene(o), {nF, Vw, Vh, fam0} = sc;
   const vc = document.createElement('canvas'); vc.width = Vw; vc.height = Vh; const g = vc.getContext('2d');
-  let cur = await sc.key(0); await exSleep(200); sc.draw(g, cur, sc.cam(0, 0));   // le temps que les polices soient prêtes
+  let cur = await sc.key(0); await exSleep(200); sc.draw(g, cur, 0);   // le temps que les polices soient prêtes
   const stream = vc.captureStream(30), rec = new MR(stream, {mimeType: mime, videoBitsPerSecond: Math.round(Math.min(40e6, Math.max(2e6, Vw * Vh * 4)))});
   const chunks = []; rec.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
   const stopped = new Promise(r => { rec.onstop = r; });
   const fms = o.dur * 1000 / nF; rec.start(500);
-  const start = performance.now(); let acc = 0, last = start;
-  const tick = () => { const now = performance.now(); sc.draw(g, cur, sc.cam((now - start) / fms, (now - last) / 1000)); last = now; };
+  const start = performance.now(); let acc = 0;
+  const tick = () => sc.draw(g, cur, Math.round((performance.now() - start) / 1000 * VID_FPS));
   const hold = async until => { while(performance.now() < until){ if(EXSTOP.v) break; tick(); await exSleep(Math.max(0, Math.min(33, until - performance.now()))); } };
   try{
     for(let i = 0; i < nF; i++){
@@ -14119,7 +14182,7 @@ async function exportVideoRec(o, prog){                  // 0.2.6f : l'arbre qui
       prog('rec', Math.min(o.dur, Math.round(acc / 1000)), o.dur);
       if(next) cur = await next;
     }
-    await hold(performance.now() + 1200);                // la dernière image reste un instant
+    await hold(start + (sc.total + sc.hold) * 1000 / VID_FPS);   // la dernière image reste un instant
   } finally{ rec.stop(); await stopped; stream.getTracks().forEach(x => x.stop()); renderTree(); }
   const blob = new Blob(chunks, {type: mime.split(';')[0]});
   return exSave(blob, `cyngenetic-${exSlug(fam0)}-${o.y0}-${o.y1}.${mime.includes('mp4') ? 'mp4' : 'webm'}`);
