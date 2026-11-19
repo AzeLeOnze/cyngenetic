@@ -2780,13 +2780,17 @@ const APP_VERSION = '0.2.6i';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
   {v:'0.2.6i', date:{fr:'18 novembre 2026', en:'November 18, 2026', de:'18. November 2026', es:'18 de noviembre de 2026'},
-   fr:['Nouveau succès « Quatre générations plus bas » (or) : un membre de la famille devient arrière-arrière-grand-parent de son vivant.',
+   fr:['Mode libre : le bouton ▶ du curseur du temps se remet bien en pause d’un clic pendant l’animation (avant, son icône était redessinée à chaque image et le clic se perdait).',
+       'Mode libre : quand le temps passe, la filière des ados (lycée, CAP, apprentissage…) ne change plus à chaque image. Avant, toutes les études défilaient à toute vitesse, surtout à 15 ans.',
+       'Nouveau succès « Quatre générations plus bas » (or) : un membre de la famille devient arrière-arrière-grand-parent de son vivant.',
        'Mode Argent : nouvel article dans la boutique (2 000 Cyn), « Ta propre devise ». Choisis son nom, son signe et sa valeur en euros (par exemple Silua, Sl, 1 Sl = 18,05 €) : toutes les sommes s\'affichent dans ta monnaie. C\'est purement esthétique, ta fortune ne change pas.',
        'Vidéo et arbre dans le passé (modes normaux) : chacun a de nouveau le métier qu\'il avait à cette date, au lieu d\'être « retraité » dès la fin de ses études. Les métiers sont retrouvés dans le journal pour les parties en cours (sinon : son métier d\'apprentissage, ou un métier de son époque, toujours le même), et chaque personne garde maintenant l\'historique de sa carrière.',
        'Vidéo : nouveau cadrage « Séquentiel ». La caméra raconte une branche après l\'autre, du fondateur jusqu\'au bout, assez près pour bien lire. À chaque génération, toute la fratrie s\'allume ; seuls ceux qui ont des enfants ouvrent une nouvelle branche. Ceux qu\'on n\'a pas encore découverts restent dans le noir, ceux déjà vus passent dans l\'ombre, puis le temps rembobine jusqu\'à l\'embranchement suivant. Les années sans événement passent 4 fois plus vite, et la vidéo dure 10 minutes au plus. À la fin, tout l\'arbre s\'allume.',
        'Vidéo : le cadrage se choisit maintenant entre « Tout l\'arbre », « Zoom intelligent » et « Séquentiel ». Le zoom intelligent est plus calme : la caméra reste plus longtemps au même endroit et se déplace plus doucement.',
        'Les globe-trotteurs voyagent 20 fois plus souvent que les autres.'],
-   en:['New achievement “Four generations down” (gold): a family member becomes a great-great-grandparent while still alive.',
+   en:['Free mode: the time slider’s ▶ button pauses again with one click during the animation (its icon used to be redrawn every frame, which swallowed the click).',
+       'Free mode: while time runs, teenagers’ school track (high school, vocational, apprenticeship…) no longer changes every frame. Before, every course flashed by, especially at 15.',
+       'New achievement “Four generations down” (gold): a family member becomes a great-great-grandparent while still alive.',
        'Money mode: new shop item (2,000 Cyn), “Your own currency”. Pick its name, its sign and its value in euros (for example Silua, Sl, 1 Sl = €18.05): every amount is shown in your money. It’s purely cosmetic, your fortune doesn’t change.',
        'Video and past tree (normal modes): everyone has the job they had on that date again, instead of being “retired” right after school. Jobs are recovered from the log for ongoing games, and each person now keeps a record of their career.',
        'Video: new “Sequential” framing. The camera tells one branch after another, from the founder to its end, close enough to read. At each generation all the siblings light up; only those with children open a new branch. People not yet discovered stay in the dark, those already seen go into the shade, then time rewinds to the next fork. Quiet years go by 4 times faster, and the video lasts 10 minutes at most. At the end, the whole tree lights up.',
@@ -13800,6 +13804,7 @@ function cShadow(VT){
       if((p.parents && p.parents.some(x => x != null && !born.has(x))) || (p.paraLink && !born.has(p.paraLink.to))){ born.delete(id); ch = true; } } }
   for(const id of born){
     const p = S.people[id];
+    if(!p.school) p.school = {};                        // 0.2.6i : l'école (filière, apprentissage…) se décide sur la vraie personne, pas sur la copie (sinon, une nouvelle à chaque image)
     const m = {}, aliveV = p.death == null || p.death > VT;
     if(p.death != null && p.death > VT){ m.death = null; m.cause = null; m.deathCity = null; }
     if(p.ill && p.ill.start > VT) m.ill = null;
@@ -13869,7 +13874,8 @@ function ctLabel(){
   $('#ctRel').textContent = Math.abs(v) < 1 ? t('ct_now') : v < 0 ? t('ct_past', n) : t('ct_fut', n);
   r.style.setProperty('--z', ((0 - mn) / ((mx - mn) || 1) * 100).toFixed(2) + '%');   // le repère du présent
   const tb = $('#ctime').closest('.treebox'); tb.classList.toggle('cpast', v < -.5); tb.classList.toggle('cfut', v > .5);
-  const pl = $('#ctPlay'); pl.innerHTML = ctAnim ? '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>' : '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  const pl = $('#ctPlay'), pst = ctAnim ? 'pause' : 'play';   // 0.2.6i : l'icône n'est réécrite que si elle change (sinon, refaite à chaque image, elle avalait les clics)
+  if(pl.dataset.st !== pst){ pl.dataset.st = pst; pl.innerHTML = ctAnim ? '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>' : '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; }
   pl.setAttribute('aria-label', t('ct_play')); pl.title = t('ct_play'); pl.classList.toggle('on', !!ctAnim);
   const rs = $('#ctReset'); rs.setAttribute('aria-label', t('ct_reset')); rs.title = t('ct_reset'); rs.disabled = Math.abs(v) < 1 && !ctAnim;
 }

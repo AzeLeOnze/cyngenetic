@@ -4,6 +4,8 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 
 ## v0.2.6i — 18 novembre 2026
 
+- Mode libre : le bouton ▶ du curseur du temps se remet bien en pause d'un clic pendant l'animation (avant, son icône était redessinée à chaque image et le clic se perdait).
+- Mode libre : quand le temps passe, la filière des ados (lycée, CAP, apprentissage…) ne change plus à chaque image. Avant, toutes les études défilaient à toute vitesse, surtout à 15 ans.
 - Nouveau succès « Quatre générations plus bas » (or) : un membre de la famille devient arrière-arrière-grand-parent de son vivant.
 - Mode Argent : nouvel article dans la boutique (2 000 Cyn), « Ta propre devise ». Choisis son nom, son signe et sa valeur en euros (par exemple Silua, Sl, 1 Sl = 18,05 €) : toutes les sommes s'affichent dans ta monnaie. C'est purement esthétique, ta fortune ne change pas.
 - Vidéo et arbre dans le passé (modes normaux) : chacun a de nouveau le métier qu'il avait à cette date, au lieu d'être « retraité » dès la fin de ses études. Les métiers sont retrouvés dans le journal pour les parties en cours (sinon : son métier d'apprentissage, ou un métier de son époque, toujours le même), et chaque personne garde maintenant l'historique de sa carrière.
