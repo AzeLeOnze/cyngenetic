@@ -2,6 +2,17 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.3.0a — 20 novembre 2026
+
+- Nouveau mode : Fictif ! Une lignée de créatures fantastiques qui commence en l'an 0. Choisis ta race parmi 12 (elfes, nains, gobelins, trolls, gnomes, orques, fées, centaures, satyres, drakéides, griffons et dragons) : toute la famille en fait partie, et un clic sur la race affiche sa description et son espérance de vie.
+- Mode Fictif : seules les années défilent, à un rythme proportionnel à la longévité de la race (1 an = 4 s pour une vie humaine ; les dragons traversent les siècles). L'âge adulte et l'âge des enfants suivent la même règle.
+- Mode Fictif façon jeu de rôle : chaque personnage a six caractéristiques (Force, Dextérité, Constitution, Intelligence, Sagesse, Charisme). Les aventures se jouent au d20 contre un degré de difficulté, avec réussites et échecs critiques. Même l'âme sœur se gagne aux dés.
+- Mode Fictif : chaque race a sa particularité, ses noms, ses lieux, sa couleur de bulle, 10 métiers et 10 centres d'intérêt, réunis dans un album à part. Des guerres éclatent entre les races, et une nouvelle musique médiévale fantastique accompagne la partie.
+- Les dates savent maintenant compter les années 0 à 99 (et avant l'an 0).
+- Mode Fictif : la carte du monde dessinée par le créateur ! Chaque race a sa région et ses villes (une zone par couleur), et la vue Carte montre où vit la famille.
+- Mode Fictif : un bouton « Avoir un enfant » (un jet de Constitution) en plus des naissances qui arrivent toutes seules. Deux nouvelles aventures : le festin piégé des dragons, et le dragon affamé pour toutes les autres races.
+- Mode Fictif : meilleure lisibilité dans les thèmes sombres, et pour les races qui vivent longtemps, la barre du temps compte par décennie ou par siècle (fini le tic-tac en rafale).
+
 ## v0.2.6i — 18 novembre 2026
 
 - Mode libre : le bouton ▶ du curseur du temps se remet bien en pause d'un clic pendant l'animation (avant, son icône était redessinée à chaque image et le clic se perdait).
