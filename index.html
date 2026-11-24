@@ -2452,7 +2452,7 @@ body[data-race="satyre"]{--rc:#c6639a}body[data-race="drakeide"]{--rc:#cf5338}bo
 
 /* la fée dans la gueule du monstre (QTE) */
 .fq-fairy{position:absolute;left:0;top:0;z-index:3;pointer-events:none;will-change:transform}
-.fq-mouth{position:absolute;z-index:3;width:70px;height:44px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,#1a0006 0 45%,#5a0016 70%,#a0283c 100%);box-shadow:0 0 0 3px #f5f0e6,0 4px 10px rgba(0,0,0,.4)}.fq-fairy .orb{display:block;width:80px;height:80px;box-shadow:0 0 0 3px #ffd6ff,0 0 18px rgba(255,180,255,.8)}
+.fq-mouth{position:absolute;z-index:3;width:160px;height:110px;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}.fq-mouth svg{width:100%;height:100%;overflow:visible}.fq-teeth{z-index:4;filter:none}.fq-fairy{z-index:3}.fq-fairy .orb{display:block;width:80px;height:80px;box-shadow:0 0 0 3px #ffd6ff,0 0 18px rgba(255,180,255,.8)}
 .fq{text-align:center}.fq-t{margin:0 0 8px;font-weight:700;font-size:13.5px}
 .fq-depth{display:flex;align-items:center;gap:8px;margin:0 0 10px;font:800 11px var(--font-display);white-space:nowrap}
 .fq-dbar{position:relative;flex:1;height:14px;border-radius:99px;background:linear-gradient(90deg,#3fdc6a,#ffd000 55%,#e0243c);box-shadow:inset 0 1px 3px rgba(0,0,0,.3)}
@@ -16355,6 +16355,23 @@ function ficFbEnd(){
 
 /* ---------- les fées, si petites, peuvent se faire gober : un QTE pour s'en sortir ---------- */
 let FQ = null;
+function fqMouthSVG(front){                               // une vraie gueule grande ouverte : le fond, ou les dents qui passent devant la fée
+  const W = 160, H = 110, q = (a, c, b, t) => [(1 - t) * (1 - t) * a[0] + 2 * (1 - t) * t * c[0] + t * t * b[0], (1 - t) * (1 - t) * a[1] + 2 * (1 - t) * t * c[1] + t * t * b[1]];
+  if(!front) return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true"><defs>
+      <radialGradient id="fqThroat" cx="50%" cy="38%" r="60%"><stop offset="0" stop-color="#050002"/><stop offset=".45" stop-color="#1c0408"/><stop offset=".8" stop-color="#4a0c18"/><stop offset="1" stop-color="#6e1a28"/></radialGradient>
+      <radialGradient id="fqTongue" cx="50%" cy="30%" r="70%"><stop offset="0" stop-color="#ff8f86"/><stop offset=".55" stop-color="#e2574f"/><stop offset="1" stop-color="#9c2a2e"/></radialGradient>
+      <linearGradient id="fqLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7485a"/><stop offset="1" stop-color="#5e1828"/></linearGradient></defs>
+    <path d="M4 40 Q80 -14 156 40 Q150 104 80 108 Q10 104 4 40Z" fill="url(#fqLip)"/>
+    <path d="M14 42 Q80 2 146 42 Q138 94 80 98 Q22 94 14 42Z" fill="url(#fqThroat)"/>
+    <ellipse cx="80" cy="78" rx="44" ry="19" fill="url(#fqTongue)"/><path d="M80 63 Q78 76 80 92" stroke="#a83236" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".7"/>
+    <ellipse cx="66" cy="71" rx="12" ry="5" fill="#fff" opacity=".18"/></svg>`;
+  const tooth = (x, y, rx, ry) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx}" ry="${ry}" fill="url(#fqTooth)" stroke="#b39f62" stroke-width=".8"/><ellipse cx="${(x - rx * .3).toFixed(1)}" cy="${(y - ry * .3).toFixed(1)}" rx="${(rx * .35).toFixed(1)}" ry="${(ry * .3).toFixed(1)}" fill="#fff" opacity=".55"/>`;
+  let up = '', low = '';
+  for(let i = 0; i < 9; i++){ const [x, y] = q([16, 42], [80, 3], [144, 42], .08 + i * .105), big = i === 1 || i === 7, ry = big ? 11 : 8.5; up += tooth(x, y + ry - 3, big ? 6.4 : 5.6, ry); }
+  for(let i = 0; i < 8; i++){ const [x, y] = q([20, 74], [80, 118], [140, 74], .1 + i * .114), big = i === 0 || i === 7, ry = big ? 12 : 8; low += tooth(x, y - ry + 3, big ? 6.6 : 5.8, ry); }
+  return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true"><defs><radialGradient id="fqTooth" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fffbe6"/><stop offset=".6" stop-color="#efe3ac"/><stop offset="1" stop-color="#c9b46e"/></radialGradient></defs>
+    <g class="fq-up">${up}</g><g class="fq-low">${low}</g></svg>`;
+}
 const fDe = n => (/^[AEIOUÉÈÊY]/.test(n) ? 'd’' : 'de ') + n;   // « la gueule d’Ogre », « de Loup affamé »
 const ficSwallowChance = f => S.fic.race === 'fee' && f.id && f.sz !== 'm' ? (f.sz === 'g' ? .25 : .08) : 0;   // surtout par les grosses bêtes
 function ficSwallowQTE(){
@@ -16362,11 +16379,16 @@ function ficSwallowQTE(){
   if(!st || !meEl || !foeEl || !menu) return Promise.resolve();
   const [x0, y0] = faCenter('me'), [x1, y1] = faCenter('foe');
   const mx = x1 - 4, my = y1 + 22;                         // la gueule du monstre
-  const pos = d => { const k = 1 - d / 100; return {x: mx + (x0 - mx) * .13 * k, y: my - 16 * k + d * .1, s: .62 - d * .0042}; };
-  const mouth = document.createElement('i'); mouth.className = 'fq-mouth'; mouth.style.left = mx + 'px'; mouth.style.top = my + 'px'; st.appendChild(mouth);
+  const pos = d => { const k = 1 - d / 100; return {x: mx - 14 * k, y: my + 16 * k - 8 * (1 - k), s: .55 - d * .0038}; };
+  const mouth = document.createElement('div'); mouth.className = 'fq-mouth'; mouth.innerHTML = fqMouthSVG(false); mouth.style.left = mx + 'px'; mouth.style.top = my + 'px'; st.appendChild(mouth);
   const fairy = document.createElement('div'); fairy.className = 'fq-fairy'; fairy.innerHTML = orb(me, 'lg'); st.appendChild(fairy);
-  const place = (d, wig) => { const p = pos(d); fairy.style.transform = `translate(${p.x}px,${p.y}px) translate(-50%,-50%) scale(${p.s}) rotate(${wig || 0}deg)`; fairy.style.opacity = d >= 99 ? 0 : Math.max(.35, 1 - d / 160);
-    mouth.style.transform = `translate(-50%,-50%) scale(${.8 + d / 220},${.7 + d / 160})`; };
+  const teeth = document.createElement('div'); teeth.className = 'fq-mouth fq-teeth'; teeth.innerHTML = fqMouthSVG(true); teeth.style.left = mx + 'px'; teeth.style.top = my + 'px'; st.appendChild(teeth);
+  const jaws = (k, dur) => { const u = teeth.querySelector('.fq-up'), l = teeth.querySelector('.fq-low');   // les mâchoires se resserrent
+    faAnim(u, [{transform: 'none'}, {transform: `translateY(${k}px)`}, {transform: 'none'}], {duration: dur}); faAnim(l, [{transform: 'none'}, {transform: `translateY(${-k}px)`}, {transform: 'none'}], {duration: dur}); };
+  faAnim(mouth, [{transform: 'translate(-50%,-50%) scale(.2,.05)', opacity: 0}, {transform: 'translate(-50%,-50%) scale(.85,.75)', opacity: 1}], {duration: 420, easing: 'cubic-bezier(.3,1.5,.5,1)'});
+  faAnim(teeth, [{transform: 'translate(-50%,-50%) scale(.2,.05)', opacity: 0}, {transform: 'translate(-50%,-50%) scale(.85,.75)', opacity: 1}], {duration: 420, easing: 'cubic-bezier(.3,1.5,.5,1)'});
+  const place = (d, wig) => { const p = pos(d); fairy.style.transform = `translate(${p.x}px,${p.y}px) translate(-50%,-50%) scale(${p.s}) rotate(${wig || 0}deg)`; fairy.style.opacity = d >= 99 ? 0 : 1; fairy.style.filter = `brightness(${1 - d * .0065})`;
+    const tf = `translate(-50%,-50%) scale(${.85 + d / 400},${.75 + d / 330 - Math.max(0, d - 70) / 250})`; mouth.style.transform = tf; teeth.style.transform = tf; };
   const dexM = fMod(me.st[1]), zw = Math.max(10, Math.min(30, 18 + 3 * dexM));
   const pull = Math.min(20, (f.sz === 'g' ? 10 : 7) + 2 * Math.max(0, f.lv - me.lv)), speed = 85 + Math.min(60, f.lv * 4);
   FQ = {d: 35, cur: 0, dir: 1, zone: rnd(8, 92 - zw), zw, last: 0, lock: false, hit: null};
@@ -16396,7 +16418,7 @@ function ficSwallowQTE(){
           if(FQ.d <= 0) finish(true);
         } else {
           FQ.d = Math.min(100, FQ.d + 12); sfx.bite(); say(FL('Raté… la bête t’aspire !', 'Missed… it sucks you in!'), 'ko');
-          faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.15,.82)'}, {transform: 'none'}], {duration: 260});
+          faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.15,.82)'}, {transform: 'none'}], {duration: 260}); jaws(9, 280);
           if(FQ.d >= 100) finish(false);
         }
       };
@@ -16413,12 +16435,12 @@ function ficSwallowQTE(){
           const p = pos(0);
           await faAnim(fairy, [{transform: `translate(${p.x}px,${p.y}px) translate(-50%,-50%) scale(${p.s})`}, {transform: `translate(${(x0 + p.x) / 2}px,${Math.min(y0, p.y) - 60}px) translate(-50%,-50%) scale(1.1) rotate(360deg)`, offset: .55},
             {transform: `translate(${x0}px,${y0}px) translate(-50%,-50%) scale(1) rotate(720deg)`}], {duration: 700, easing: 'ease-out'});
-          fairy.remove(); mouth.remove(); meEl.style.opacity = ''; faRise('me', '✦', '#ffd6ff', 8); faPop('me', '−' + dmg, 'dmg'); sfx.sparkle();
+          fairy.remove(); mouth.remove(); teeth.remove(); meEl.style.opacity = ''; faRise('me', '✦', '#ffd6ff', 8); faPop('me', '−' + dmg, 'dmg'); sfx.sparkle();
           FB.vmh = me.hp; FB.shown = FB.log.length; faSync(); await faSleep(600);
         } else {
           say(FL('Avalée…', 'Swallowed…'), 'ko'); sfx.gulp();
           await faAnim(fairy, [{transform: fairy.style.transform, opacity: 1}, {transform: `translate(${x1}px,${y1}px) translate(-50%,-50%) scale(.05) rotate(200deg)`, opacity: 0}], {duration: 500, easing: 'ease-in'});
-          fairy.remove(); mouth.remove(); await faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.3,.8)'}, {transform: 'scale(.92,1.12)'}, {transform: 'none'}], {duration: 520});
+          jaws(22, 420); await faSleep(300); fairy.remove(); mouth.remove(); teeth.remove(); await faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.3,.8)'}, {transform: 'scale(.92,1.12)'}, {transform: 'none'}], {duration: 520});
           sfx.burp(); me.hp = 0;
           ficFbLog(FL(`💀 ${f.name} avale ${me.first} tout rond…`, `💀 ${f.name} swallows ${me.first} whole…`));
           FB.over = 'dead'; FB.res.push(FL(`${me.first} a été ${gx(me, 'dévoré', 'dévorée')} par ${f.name}…`, `${me.first} was devoured by ${f.name}…`));
@@ -16432,7 +16454,7 @@ function ficSwallowQTE(){
         const dt = Math.min(.05, (now - t0) / 1000); t0 = now;
         FQ.cur += FQ.dir * speed * dt; if(FQ.cur >= 100){ FQ.cur = 100; FQ.dir = -1; } if(FQ.cur <= 0){ FQ.cur = 0; FQ.dir = 1; }
         FQ.d = Math.min(100, FQ.d + pull * dt);
-        chomp += dt; if(chomp > 1.1){ chomp = 0; faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.06,.93)'}, {transform: 'none'}], {duration: 380}); }
+        chomp += dt; if(chomp > 1.1){ chomp = 0; jaws(5, 380); faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.06,.93)'}, {transform: 'none'}], {duration: 380}); }
         const cu = $('#fqCur'), zo = $('#fqZone'), de = $('#fqDepth');
         if(cu) cu.style.left = FQ.cur + '%'; if(zo){ zo.style.left = FQ.zone + '%'; zo.style.width = FQ.zw + '%'; } if(de) de.style.left = FQ.d + '%';
         place(FQ.d, Math.sin(now / 90) * (6 + FQ.d / 10));
