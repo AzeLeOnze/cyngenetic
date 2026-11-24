@@ -16,6 +16,7 @@ Jouer : https://azeleonze.github.io/cyngenetic/
 - Mode Fictif : les dragons naissent avec un prénom seulement. Leur nom de dragon (« le Terrifiant », « Dame des Ciels »…) leur vient entre 200 et 800 ans.
 - Mode Fictif : nouveau pouvoir des dragons, « Le manger tout cru », contre un petit monstre de niveau inférieur. Réussi : le monstre est avalé et meurt, non sans blesser le dragon de l'intérieur. Raté : le dragon le recrache, le monstre s'en tire presque indemne et le dragon souffre beaucoup.
 - Application Windows : le statut Discord affiche aussi le mode Fictif (famille, race, année, héros, combat ou expédition en cours).
+- Mode Fictif : les fées sont si petites que les monstres, surtout les gros, peuvent les gober en plein combat. Un QTE se lance : appuie quand le curseur passe dans la zone verte pour te débattre. Plus tu rates, plus la fée s'enfonce dans la gueule… jusqu'à être avalée. Réussi, elle s'échappe avec quelques égratignures.
 
 ## v0.3.1a — 24 novembre 2026
 

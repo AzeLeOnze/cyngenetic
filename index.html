@@ -2435,6 +2435,20 @@ body[data-race="satyre"]{--rc:#c6639a}body[data-race="drakeide"]{--rc:#cf5338}bo
 
 /* 0.3.2a : l'arène de combat */
 .modal.fa-modal{width:min(720px,100%)}
+/* la fée dans la gueule du monstre (QTE) */
+.fq-fairy{position:absolute;left:0;top:0;z-index:3;pointer-events:none;will-change:transform}
+.fq-mouth{position:absolute;z-index:3;width:70px;height:44px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,#1a0006 0 45%,#5a0016 70%,#a0283c 100%);box-shadow:0 0 0 3px #f5f0e6,0 4px 10px rgba(0,0,0,.4)}.fq-fairy .orb{display:block;width:80px;height:80px;box-shadow:0 0 0 3px #ffd6ff,0 0 18px rgba(255,180,255,.8)}
+.fq{text-align:center}.fq-t{margin:0 0 8px;font-weight:700;font-size:13.5px}
+.fq-depth{display:flex;align-items:center;gap:8px;margin:0 0 10px;font:800 11px var(--font-display);white-space:nowrap}
+.fq-dbar{position:relative;flex:1;height:14px;border-radius:99px;background:linear-gradient(90deg,#3fdc6a,#ffd000 55%,#e0243c);box-shadow:inset 0 1px 3px rgba(0,0,0,.3)}
+.fq-dbar i{position:absolute;top:50%;transform:translate(-50%,-50%);font-style:normal;font-size:22px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.fq-bar{position:relative;height:34px;margin:0 0 6px;border-radius:12px;overflow:hidden;background:rgba(0,0,0,.28);box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}
+.fq-bar .zone{position:absolute;top:0;bottom:0;background:linear-gradient(180deg,#7dff9e,#1db954);box-shadow:0 0 14px #3fdc6a;transition:left .18s ease-out}
+.fq-bar .zone::after{content:"";position:absolute;left:50%;top:4px;bottom:4px;width:2px;margin-left:-1px;background:rgba(255,255,255,.85)}
+.fq-bar .cur{position:absolute;top:-2px;bottom:-2px;width:6px;margin-left:-3px;border-radius:3px;background:#fff;box-shadow:0 0 10px #fff,0 0 3px #000}
+.fq-msg{margin:0 0 6px;min-height:1.3em;font:900 17px var(--font-display)}.fq-msg.ok{color:#1d9a3a}.fq-msg.perf{color:#e8a800}.fq-msg.ko{color:#c8243c}
+.fq-btn{width:100%;max-width:340px;touch-action:manipulation}.fq-key{display:block;margin-top:4px;font-size:11px;opacity:.65}
+
 .fa-head{margin-bottom:6px}.fa-head h2{margin:0}
 .fa-stage{position:relative;height:250px;border-radius:20px;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),inset 0 -40px 60px rgba(0,0,0,.18)}
 .fa-stage.bg-wild{background:radial-gradient(ellipse 80% 40% at 72% 42%,rgba(255,255,255,.5),transparent 70%),linear-gradient(180deg,#8fd6ff 0%,#c9ecff 42%,#8fd86a 43%,#5cb840 70%,#3f9a2c 100%)}
@@ -3066,7 +3080,8 @@ const PATCHNOTES = [
        'Mode Fictif : les combats ont leur arène animée, avec un décor selon le lieu (plaine, donjon, champ de bataille, arène de duel). Le héros et le monstre s’élancent, les sorts traversent l’écran (flèche lunaire, boule de feu, souffle de dragon…), les coups font trembler, les critiques flashent, les barres de vie fondent, et chaque action a son son. Les choix d’attaque sont des cartes claires, avec la chance de toucher, les dégâts et ce que fait chaque pouvoir.',
        'Mode Fictif : les dragons naissent avec un prénom seulement. Leur nom de dragon (« le Terrifiant », « Dame des Ciels »…) leur vient entre 200 et 800 ans.',
        'Mode Fictif : nouveau pouvoir des dragons, « Le manger tout cru », contre un petit monstre de niveau inférieur. Réussi : le monstre est avalé et meurt, non sans blesser le dragon de l’intérieur. Raté : le dragon le recrache, le monstre s’en tire presque indemne et le dragon souffre beaucoup.',
-       'Application Windows : le statut Discord affiche aussi le mode Fictif (famille, race, année, héros, combat ou expédition en cours).'],
+       'Application Windows : le statut Discord affiche aussi le mode Fictif (famille, race, année, héros, combat ou expédition en cours).',
+       'Mode Fictif : les fées sont si petites que les monstres, surtout les gros, peuvent les gober en plein combat. Un QTE se lance : appuie quand le curseur passe dans la zone verte pour te débattre. Plus tu rates, plus la fée s’enfonce dans la gueule… jusqu’à être avalée. Réussi, elle s’échappe avec quelques égratignures.'],
    en:['Fictional mode: role-playing is here! At adulthood, your character picks a class (warrior, ranger, paladin, mage, cleric or bard). Each has its own HP, mana and powers, and every race has a power of its own (dragon fire breath, orc rage, fairy dream dust…).',
        'Fictional mode: experience and levels (up to level 20). Each level brings more HP and mana, and an ability point you spend yourself. At levels 3, 5, 6, 10, 15 and 20: new powers, an extra attack, crits on 19, legendary hero, then mythic. Levels also help with adventure rolls, and children inherit part of their parents’ experience.',
        'Fictional mode: turn-based fights with health and mana bars, against 29 monsters (wolves, ghouls, minotaurs, vampires, hydras, liches, ancient dragons…). Attacks, powers, potions, fleeing: your call. They show up during adventures, and wars between races are fought against the enemy champion.',
@@ -3078,7 +3093,8 @@ const PATCHNOTES = [
        'Fictional mode: fights have an animated arena, with scenery to match the place (plains, dungeon, battlefield, duelling arena). Hero and monster lunge, spells fly across the screen (moon arrow, fireball, dragon breath…), blows shake, crits flash, health bars drain, and every action has its sound. Attack choices are clear cards showing the chance to hit, the damage and what each power does.',
        'Fictional mode: dragons are born with a first name only. Their dragon name (“the Terrifying”, “Lady of the Skies”…) comes to them between 200 and 800 years old.',
        'Fictional mode: a new dragon power, “Swallow it whole”, against a small, lower-level monster. On a hit, the monster is swallowed and dies, though it hurts the dragon from inside. On a miss, the dragon spits it back out: the monster gets away almost unharmed and the dragon suffers a lot.',
-       'Windows app: the Discord status now shows Fictional mode too (family, race, year, hero, fight or expedition in progress).']},
+       'Windows app: the Discord status now shows Fictional mode too (family, race, year, hero, fight or expedition in progress).',
+       'Fictional mode: fairies are so small that monsters, especially big ones, can gulp them down mid-fight. A QTE starts: tap when the cursor is in the green zone to struggle. The more you miss, the deeper the fairy sinks into the jaws… until she is swallowed. Succeed and she escapes with a few scratches.']},
   {v:'0.3.1a', date:{fr:'24 novembre 2026', en:'November 24, 2026', de:'24. November 2026', es:'24 de noviembre de 2026'},
    fr:['Nouveau pays : la Belgique ! Prénoms wallons et flamands, noms de famille (avec les Italiens des charbonnages après 1946), 47 villes sur une nouvelle carte, l’histoire du pays de Charles Quint à la Belgique fédérale, ses guerres, le franc belge, les humanités et le CEB, 14 métiers (dentellière de Bruges, friturier, moine brasseur trappiste, diamantaire anversois, dessinateur de BD, pêcheur de crevettes à cheval…) et 10 centres d’intérêt (colombophilie, balle pelote, carnaval de Binche, Diables rouges…).',
        'Nouveaux métiers : 5 en Suisse (horloger en grandes complications, chauffeur de CarPostal, machiniste de funiculaire, coutelier de couteaux suisses, gardien de cabane), 8 en Allemagne (bretzelier, horloger de coucous, pilote de Zeppelin, serveur de l’Oktoberfest, vendeur de currywurst, souffleur de boules de Noël, marchand de marché de Noël, mineur de la Ruhr) et 3 en France (Compagnon du Devoir, paludier de Guérande, garçon de café parisien).',
@@ -16034,7 +16050,7 @@ function faMenu(){
       <button class="gel lime big" data-act="fbend"><span>${FL('Continuer', 'Continue')}</span></button></div>`;
     return;
   }
-  if(FB.busy){ el.innerHTML = `<div class="fa-turn ${FB.turn === 'foe' ? 'foe' : ''}"><span class="fa-dots"><i></i><i></i><i></i></span>${esc(FB.turn === 'foe' ? FL(`Tour de ${f.name}…`, `${f.name}’s turn…`) : FB.turn === 'start' ? FL('Le combat commence…', 'The fight begins…') : FL(`${me.first} agit…`, `${me.first} acts…`))}</div>`; return; }
+  if(FB.busy){ el.innerHTML = `<div class="fa-turn ${FB.turn === 'foe' ? 'foe' : ''}"><span class="fa-dots"><i></i><i></i><i></i></span>${esc(FB.turn === 'foe' ? FL(`Tour ${fDe(f.name)}…`, `${f.name}’s turn…`) : FB.turn === 'start' ? FL('Le combat commence…', 'The fight begins…') : FL(`${me.first} agit…`, `${me.first} acts…`))}</div>`; return; }
   const atk = ficAtk(me) - (f.sp === 'vol' ? 2 : 0), extra = (me.lv || 1) >= 6 && FIC_MARTIAL.includes(me.cl);
   const card = (v, e, name, sub, desc, cls, dis, why) => `<button class="fa-card ${cls || ''}" data-act="fba" data-v="${v}" ${dis ? 'disabled' : ''}><span class="fa-ce">${e}</span><b>${esc(name)}</b><em>${esc(sub)}</em><small>${esc(dis && why ? why : desc)}</small></button>`;
   const abs = ficAbs(me).map(id => { const a = FIC_AB[id], used = a.once && FB.once[id], poor = a.mp && me.mp < a.mp;
@@ -16134,6 +16150,7 @@ async function faEvent(e){                                 // rejoue un moment d
     else if(e.k === 'adv' || e.k === 'multi'){ sfx.charge(); faRing('me', '#ffd000'); faRise('me', a.e, '#ffd000', 3); }
     await faSleep(e.k === 'adv' || e.k === 'multi' ? 380 : 700); return;
   }
+  if(e.t === 'swallow'){ faSync(e); await ficSwallowQTE(); return; }
   if(e.t === 'potion'){ sfx.potion(); faSync(e); faRise('me', '○', e.k === 'mpot' ? '#5fa8ff' : '#3fdc6a', 9); faPop('me', '+' + e.v, e.k === 'mpot' ? 'mana' : 'heal'); await faSleep(650); return; }
   if(e.t === 'regen'){ faSync(e); faRise(e.who, '✚', '#3fdc6a', 5); faPop(e.who, '+' + e.v, 'heal'); await faSleep(450); return; }
   if(e.t === 'stunned'){ faSync(e); faRise('foe', 'z', '#b8c8ff', 6); faAnim(faEl('foe'), [{transform: 'rotate(0)'}, {transform: 'rotate(-6deg)'}, {transform: 'rotate(6deg)'}, {transform: 'none'}], {duration: 700}); await faSleep(700); return; }
@@ -16205,6 +16222,9 @@ function ficFbFoeTurn(){                                   // le tour de l'adver
   if(!FB || FB.over) return; const me = active(), f = FB.foe, sp = FIC_R[S.fic.race].sp;
   if(f.sp === 'regen' && f.hp < f.hpMax){ const h = Math.min(f.hpMax - f.hp, 1 + Math.floor(f.lv / 2)); f.hp += h; ficFbLog(FL(`💚 ${f.name} se régénère : +${h} PV.`, `💚 ${f.name} regenerates: +${h} HP.`)); fbPush({t: 'regen', who: 'foe', v: h}); }
   if(FB.stun > 0){ FB.stun--; ficFbLog(FL(`💤 ${f.name} ne peut pas agir.`, `💤 ${f.name} cannot act.`)); fbPush({t: 'stunned'}); }
+  else if(!FB.gobbled && Math.random() < ficSwallowChance(f)){   // une fée, si petite… gobée !
+    FB.gobbled = 1; ficFbLog(FL(`😱 ${f.name} attrape ${me.first} et ${gx(me, 'l’', 'l’')}enfourne dans sa gueule !`, `😱 ${f.name} grabs ${me.first} and stuffs ${gx(me, 'him', 'her')} into its mouth!`)); fbPush({t: 'swallow'});
+  }
   else {
     const n = f.sp === 'frappe' ? 2 : 1, ac = ficAC(me) + FB.ac + (FB.shield ? FB.shield.v : 0), atk = f.atk - FB.deb;
     for(let i = 0; i < n && me.hp > 0; i++){
@@ -16216,7 +16236,7 @@ function ficFbFoeTurn(){                                   // le tour de l'adver
         me.hp -= d; if(f.sp === 'drain') f.hp = Math.min(f.hpMax, f.hp + Math.ceil(d / 2));
         ficFbLog(FL(`${crit ? '💥 ' : '🩸 '}${f.name} touche${crit ? ' (critique)' : ''} : ${d} dégâts${f.sp === 'poison' ? ' (poison)' : f.sp === 'drain' ? ' (et se soigne)' : ''}.`, `${crit ? '💥 ' : '🩸 '}${f.name} hits${crit ? ' (critical)' : ''}: ${d} damage${f.sp === 'poison' ? ' (poison)' : f.sp === 'drain' ? ' (and heals)' : ''}.`));
         fbPush({t: 'hit', who: 'foe', ok: true, crit, v: d, poison: f.sp === 'poison', drain: f.sp === 'drain'});
-      } else { ficFbLog(FL(`🛡️ ${me.first} esquive l’attaque de ${f.name}.`, `🛡️ ${me.first} dodges ${f.name}’s attack.`)); fbPush({t: 'hit', who: 'foe', ok: false}); }
+      } else { ficFbLog(FL(`🛡️ ${me.first} esquive l’attaque ${fDe(f.name)}.`, `🛡️ ${me.first} dodges ${f.name}’s attack.`)); fbPush({t: 'hit', who: 'foe', ok: false}); }
     }
   }
   if(FB.shield && --FB.shield.t <= 0) FB.shield = null;
@@ -16243,6 +16263,7 @@ async function ficFba(v){                                  // le tour du héros,
   if(me.hp <= 0){ await ficFbDown(); return; }
   await faSleep(250); FB.turn = 'foe'; faMenu(); await faSleep(450); if(!FB) return;
   ficFbFoeTurn(); await faPlay(); if(!FB) return;
+  if(FB.over === 'dead'){ FB.busy = false; faSync(); faMenu(); save(); return; }   // la fée a été avalée
   if(f.hp <= 0){ await faKO('foe'); ficFbWin(); return; }
   if(me.hp <= 0){ await ficFbDown(); return; }
   FB.busy = false; FB.turn = 'me'; faSync(); faMenu(); dirty = true;
@@ -16302,6 +16323,98 @@ function ficFbEnd(){
   if(res === 'flee' && o.duel) ficFame(-10);
   FB = null; $('#modal').classList.remove('fa-modal'); closeModal(true); dirty = true; render(); save();
   ficChain(() => { if(o.onEnd) o.onEnd(res); dirty = true; render(); save(); });
+}
+
+/* ---------- les fées, si petites, peuvent se faire gober : un QTE pour s'en sortir ---------- */
+let FQ = null;
+const fDe = n => (/^[AEIOUÉÈÊY]/.test(n) ? 'd’' : 'de ') + n;   // « la gueule d’Ogre », « de Loup affamé »
+const ficSwallowChance = f => S.fic.race === 'fee' && f.id && f.sz !== 'm' ? (f.sz === 'g' ? .25 : .08) : 0;   // surtout par les grosses bêtes
+function ficSwallowQTE(){
+  const me = active(), f = FB.foe, st = $('#faStage'), meEl = faEl('me'), foeEl = faEl('foe'), menu = $('#faMenu');
+  if(!st || !meEl || !foeEl || !menu) return Promise.resolve();
+  const [x0, y0] = faCenter('me'), [x1, y1] = faCenter('foe');
+  const mx = x1 - 4, my = y1 + 22;                         // la gueule du monstre
+  const pos = d => { const k = 1 - d / 100; return {x: mx + (x0 - mx) * .13 * k, y: my - 16 * k + d * .1, s: .62 - d * .0042}; };
+  const mouth = document.createElement('i'); mouth.className = 'fq-mouth'; mouth.style.left = mx + 'px'; mouth.style.top = my + 'px'; st.appendChild(mouth);
+  const fairy = document.createElement('div'); fairy.className = 'fq-fairy'; fairy.innerHTML = orb(me, 'lg'); st.appendChild(fairy);
+  const place = (d, wig) => { const p = pos(d); fairy.style.transform = `translate(${p.x}px,${p.y}px) translate(-50%,-50%) scale(${p.s}) rotate(${wig || 0}deg)`; fairy.style.opacity = d >= 99 ? 0 : Math.max(.35, 1 - d / 160);
+    mouth.style.transform = `translate(-50%,-50%) scale(${.8 + d / 220},${.7 + d / 160})`; };
+  const dexM = fMod(me.st[1]), zw = Math.max(10, Math.min(30, 18 + 3 * dexM));
+  const pull = Math.min(20, (f.sz === 'g' ? 10 : 7) + 2 * Math.max(0, f.lv - me.lv)), speed = 85 + Math.min(60, f.lv * 4);
+  FQ = {d: 35, cur: 0, dir: 1, zone: rnd(8, 92 - zw), zw, last: 0, lock: false, hit: null};
+  return new Promise(resolve => {
+    (async () => {
+      sfx.roar(); meEl.style.opacity = '0';
+      fairy.style.transform = `translate(${x0}px,${y0}px) translate(-50%,-50%) scale(1)`;
+      const p = pos(35);
+      await faAnim(fairy, [{transform: `translate(${x0}px,${y0}px) translate(-50%,-50%) scale(1)`}, {transform: `translate(${(x0 + p.x) / 2}px,${Math.min(y0, p.y) - 40}px) translate(-50%,-50%) scale(.9) rotate(-30deg)`, offset: .5},
+        {transform: `translate(${p.x}px,${p.y}px) translate(-50%,-50%) scale(${p.s}) rotate(-20deg)`}], {duration: 600, easing: 'cubic-bezier(.5,0,.7,1)'});
+      place(35, -20); sfx.bite(); faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.12,.86)'}, {transform: 'none'}], {duration: 300});
+      menu.innerHTML = `<div class="fq"><p class="fq-t">😱 ${esc(FL(`${me.first} est dans la gueule ${fDe(f.name)} ! Appuie quand le curseur passe dans la zone verte pour te débattre.`, `${me.first} is in ${f.name}’s mouth! Tap when the cursor is in the green zone to struggle free.`))}</p>
+        <div class="fq-depth"><span>🌤️ ${FL('Liberté', 'Freedom')}</span><div class="fq-dbar"><i id="fqDepth">${FIC_R.fee.e}</i></div><span>☠️ ${FL('Avalée', 'Swallowed')}</span></div>
+        <div class="fq-bar"><i class="zone" id="fqZone"></i><i class="cur" id="fqCur"></i></div>
+        <p class="fq-msg" id="fqMsg">&nbsp;</p>
+        <button type="button" class="gel lime big fq-btn" id="fqBtn"><span>💪 ${FL('Débats-toi !', 'Struggle!')}</span></button><small class="fq-key">${FL('ou la barre d’espace', 'or the space bar')}</small></div>`;
+      const btn = $('#fqBtn'), msg = $('#fqMsg');
+      const say = (t, c) => { if(!msg) return; msg.textContent = t; msg.className = 'fq-msg ' + c; msg.getAnimations().forEach(a => a.cancel()); msg.animate([{transform: 'scale(1.5)', opacity: 0}, {transform: 'scale(1)', opacity: 1}], {duration: 220}); };
+      FQ.hit = () => {
+        if(!FQ || FQ.lock) return; const now = performance.now(); if(now - FQ.last < 140) return; FQ.last = now;
+        const c = FQ.cur, mid = FQ.zone + FQ.zw / 2;
+        if(c >= FQ.zone && c <= FQ.zone + FQ.zw){
+          const perfect = Math.abs(c - mid) <= 2.5; FQ.d = Math.max(0, FQ.d - (perfect ? 30 : 20)); FQ.zone = rnd(4, 96 - FQ.zw);
+          sfx.hit(); say(perfect ? FL('Parfait !', 'Perfect!') : FL('Bien !', 'Good!'), perfect ? 'perf' : 'ok');
+          faAnim(fairy, [{filter: 'brightness(1)'}, {filter: 'brightness(1.8) drop-shadow(0 0 10px #fff)'}, {filter: 'brightness(1)'}], {duration: 300});
+          faAnim(foeEl, [{transform: 'none'}, {transform: 'translateX(8px) rotate(4deg)'}, {transform: 'translateX(-6px) rotate(-3deg)'}, {transform: 'none'}], {duration: 320});
+          if(FQ.d <= 0) finish(true);
+        } else {
+          FQ.d = Math.min(100, FQ.d + 12); sfx.bite(); say(FL('Raté… la bête t’aspire !', 'Missed… it sucks you in!'), 'ko');
+          faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.15,.82)'}, {transform: 'none'}], {duration: 260});
+          if(FQ.d >= 100) finish(false);
+        }
+      };
+      const key = e => { if(e.code === 'Space' || e.key === ' '){ e.preventDefault(); FQ && FQ.hit && FQ.hit(); } };
+      if(btn) btn.addEventListener('pointerdown', e => { e.preventDefault(); FQ && FQ.hit && FQ.hit(); });
+      document.addEventListener('keydown', key);
+      let t0 = performance.now(), chomp = 0;
+      const finish = async won => {
+        FQ.lock = true; document.removeEventListener('keydown', key);
+        if(won){
+          const dmg = Math.max(1, rollD('1d4') + Math.floor(f.lv / 3)); me.hp = Math.max(1, me.hp - dmg);
+          ficFbLog(FL(`✨ ${me.first} se dégage de la gueule ${fDe(f.name)} ! Quelques égratignures seulement : ${dmg} dégâts.`, `✨ ${me.first} wriggles out of ${f.name}’s mouth! Only a few scratches: ${dmg} damage.`));
+          say(FL('Libre !', 'Free!'), 'perf'); sfx.flee(); faBurst('foe', ['#7ddc3a', '#c8ff6a', '#ffffff', '#ffd6ff'], 18, 70);
+          const p = pos(0);
+          await faAnim(fairy, [{transform: `translate(${p.x}px,${p.y}px) translate(-50%,-50%) scale(${p.s})`}, {transform: `translate(${(x0 + p.x) / 2}px,${Math.min(y0, p.y) - 60}px) translate(-50%,-50%) scale(1.1) rotate(360deg)`, offset: .55},
+            {transform: `translate(${x0}px,${y0}px) translate(-50%,-50%) scale(1) rotate(720deg)`}], {duration: 700, easing: 'ease-out'});
+          fairy.remove(); mouth.remove(); meEl.style.opacity = ''; faRise('me', '✦', '#ffd6ff', 8); faPop('me', '−' + dmg, 'dmg'); sfx.sparkle();
+          FB.vmh = me.hp; FB.shown = FB.log.length; faSync(); await faSleep(600);
+        } else {
+          say(FL('Avalée…', 'Swallowed…'), 'ko'); sfx.gulp();
+          await faAnim(fairy, [{transform: fairy.style.transform, opacity: 1}, {transform: `translate(${x1}px,${y1}px) translate(-50%,-50%) scale(.05) rotate(200deg)`, opacity: 0}], {duration: 500, easing: 'ease-in'});
+          fairy.remove(); mouth.remove(); await faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.3,.8)'}, {transform: 'scale(.92,1.12)'}, {transform: 'none'}], {duration: 520});
+          sfx.burp(); me.hp = 0;
+          ficFbLog(FL(`💀 ${f.name} avale ${me.first} tout rond…`, `💀 ${f.name} swallows ${me.first} whole…`));
+          FB.over = 'dead'; FB.res.push(FL(`${me.first} a été ${gx(me, 'dévoré', 'dévorée')} par ${f.name}…`, `${me.first} was devoured by ${f.name}…`));
+          ficDie(me, Math.floor(S.t), FL(`dévoré par ${f.name}`, `devoured by ${f.name}`)); if(S.fic.dj) S.fic.dj = null;
+          setTimeout(() => sfx.death(), 500); FB.vmh = 0; FB.shown = FB.log.length; faSync(); await faSleep(700);
+        }
+        FQ = null; resolve();
+      };
+      const frame = now => {
+        if(!FB || !FQ || FQ.lock) return;
+        const dt = Math.min(.05, (now - t0) / 1000); t0 = now;
+        FQ.cur += FQ.dir * speed * dt; if(FQ.cur >= 100){ FQ.cur = 100; FQ.dir = -1; } if(FQ.cur <= 0){ FQ.cur = 0; FQ.dir = 1; }
+        FQ.d = Math.min(100, FQ.d + pull * dt);
+        chomp += dt; if(chomp > 1.1){ chomp = 0; faAnim(foeEl, [{transform: 'none'}, {transform: 'scale(1.06,.93)'}, {transform: 'none'}], {duration: 380}); }
+        const cu = $('#fqCur'), zo = $('#fqZone'), de = $('#fqDepth');
+        if(cu) cu.style.left = FQ.cur + '%'; if(zo){ zo.style.left = FQ.zone + '%'; zo.style.width = FQ.zw + '%'; } if(de) de.style.left = FQ.d + '%';
+        place(FQ.d, Math.sin(now / 90) * (6 + FQ.d / 10));
+        if(FQ.d <= 0) return finish(true);
+        if(FQ.d >= 100) return finish(false);
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    })();
+  });
 }
 
 /* ---------- les rencontres, la guerre ---------- */
