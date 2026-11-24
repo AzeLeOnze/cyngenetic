@@ -2,6 +2,17 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.3.1a — 24 novembre 2026
+
+- Nouveau pays : la Belgique ! Prénoms wallons et flamands, noms de famille (avec les Italiens des charbonnages après 1946), 47 villes sur une nouvelle carte, l'histoire du pays de Charles Quint à la Belgique fédérale, ses guerres, le franc belge, les humanités et le CEB, 14 métiers (dentellière de Bruges, friturier, moine brasseur trappiste, diamantaire anversois, dessinateur de BD, pêcheur de crevettes à cheval…) et 10 centres d'intérêt (colombophilie, balle pelote, carnaval de Binche, Diables rouges…).
+- Nouveaux métiers : 5 en Suisse (horloger en grandes complications, chauffeur de CarPostal, machiniste de funiculaire, coutelier de couteaux suisses, gardien de cabane), 8 en Allemagne (bretzelier, horloger de coucous, pilote de Zeppelin, serveur de l'Oktoberfest, vendeur de currywurst, souffleur de boules de Noël, marchand de marché de Noël, mineur de la Ruhr) et 3 en France (Compagnon du Devoir, paludier de Guérande, garçon de café parisien).
+- 8 nouvelles particularités : synesthésie, daltonisme, oreille absolue, ambidextre, somnambule, prosopagnosie, aphantasie et albinisme.
+- Nouveaux thèmes « Minimaliste » et « Minimaliste sombre » : sobres, à plat, sans décor ni reflets. Ils se débloquent en gagnant une partie en Versus.
+- Mode Argent : un conjoint ne gagne et ne dépense en commun qu'une fois marié.
+- Mode Fictif (en bêta) : la carte du monde est redessinée en vectoriel, dans le style des cartes des pays : une région colorée par race et un point par ville. Elle se zoome comme les autres.
+- Mode Fictif : on peut incarner n'importe quel membre vivant de la partie depuis sa fiche, conjoints compris.
+- Mode Fictif : le ticket doré, l'étoile et le chronomètre ne sont plus utilisables.
+
 ## v0.3.0a — 20 novembre 2026
 
 - Nouveau mode : Fictif ! Une lignée de créatures fantastiques qui commence en l'an 0. Choisis ta race parmi 12 (elfes, nains, gobelins, trolls, gnomes, orques, fées, centaures, satyres, drakéides, griffons et dragons) : toute la famille en fait partie, et un clic sur la race affiche sa description et son espérance de vie.
