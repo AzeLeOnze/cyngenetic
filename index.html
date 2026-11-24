@@ -2435,6 +2435,21 @@ body[data-race="satyre"]{--rc:#c6639a}body[data-race="drakeide"]{--rc:#cf5338}bo
 
 /* 0.3.2a : l'arène de combat */
 .modal.fa-modal{width:min(720px,100%)}
+/* les raretés brillantes (Aze, Rypoint) */
+.fa-em.orange,.fbest .orange{filter:sepia(1) saturate(6) hue-rotate(-12deg) brightness(1.05) drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.fa-foe.shiny .fa-em{animation:faidle 2.6s ease-in-out infinite,fashine 2.2s ease-in-out infinite}
+.fa-foe.shiny .fa-em.orange{animation:faidle 2.6s ease-in-out infinite,fashineo 2.2s ease-in-out infinite}
+.fa-aura{position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg,rgba(255,230,90,.0),rgba(255,230,90,.75),rgba(255,120,220,.6),rgba(120,220,255,.7),rgba(255,230,90,.0),rgba(255,255,255,.7),rgba(255,230,90,0));
+  filter:blur(10px);animation:faaura 3s linear infinite;mix-blend-mode:screen}
+.fa-foe.shiny::after{content:"✦ ✧ ✦";position:absolute;left:50%;top:-6px;transform:translateX(-50%);font-size:16px;color:#fff6b0;letter-spacing:12px;text-shadow:0 0 8px #ffd000;animation:fasparkle 1.4s ease-in-out infinite;white-space:nowrap}
+@keyframes faaura{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes fashine{0%,100%{filter:drop-shadow(0 0 8px #ffe14d) drop-shadow(0 6px 8px rgba(0,0,0,.35))}50%{filter:drop-shadow(0 0 22px #fff) drop-shadow(0 0 12px #ff7ad9) brightness(1.2)}}
+@keyframes fashineo{0%,100%{filter:sepia(1) saturate(6) hue-rotate(-12deg) drop-shadow(0 0 8px #ffb300)}50%{filter:sepia(1) saturate(6) hue-rotate(-12deg) brightness(1.25) drop-shadow(0 0 22px #ffd000)}}
+@keyframes fasparkle{0%,100%{opacity:.4;transform:translateX(-50%) scale(.9)}50%{opacity:1;transform:translateX(-50%) scale(1.1)}}
+.fa-tag.rare{background:linear-gradient(90deg,#ffd000,#ff7ad9,#7fd0ff);color:#3a2a00}
+.fbest li.rare.on{background:linear-gradient(90deg,rgba(255,208,0,.35),rgba(255,122,217,.3),rgba(127,208,255,.35));box-shadow:0 0 12px rgba(255,208,0,.5);font-weight:800}
+
 /* la fée dans la gueule du monstre (QTE) */
 .fq-fairy{position:absolute;left:0;top:0;z-index:3;pointer-events:none;will-change:transform}
 .fq-mouth{position:absolute;z-index:3;width:70px;height:44px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,#1a0006 0 45%,#5a0016 70%,#a0283c 100%);box-shadow:0 0 0 3px #f5f0e6,0 4px 10px rgba(0,0,0,.4)}.fq-fairy .orb{display:block;width:80px;height:80px;box-shadow:0 0 0 3px #ffd6ff,0 0 18px rgba(255,180,255,.8)}
@@ -3071,7 +3086,7 @@ const PATCHNOTES = [
   {v:'0.3.2a', date:{fr:'24 novembre 2026', en:'November 24, 2026', de:'24. November 2026', es:'24 de noviembre de 2026'},
    fr:['Mode Fictif : le jeu de rôle arrive ! À l’âge adulte, ton personnage choisit sa classe (guerrier, rôdeur, paladin, mage, clerc ou barde). Chacune a ses PV, sa mana et ses pouvoirs, et chaque race a un pouvoir à elle (souffle de feu des dragons, rage des orques, poussière de rêve des fées…).',
        'Mode Fictif : l’expérience et les niveaux (jusqu’au niveau 20). Chaque niveau donne plus de PV et de mana, et un point de caractéristique à placer soi-même. Aux niveaux 3, 5, 6, 10, 15 et 20 : nouveaux pouvoirs, attaque en plus, critiques sur 19, héros légendaire, puis mythique. Le niveau aide aussi aux jets d’aventure, et les enfants héritent d’une partie de l’expérience de leurs parents.',
-       'Mode Fictif : des combats au tour par tour, avec barres de vie et de mana, contre 29 monstres (loups, goules, minotaures, vampires, hydres, liches, dragons ancestraux…). Attaques, pouvoirs, potions, fuite : à toi de jouer. Ils surgissent pendant les aventures, et les guerres entre races se jouent contre le champion ennemi.',
+       'Mode Fictif : des combats au tour par tour, avec barres de vie et de mana, contre 42 monstres (loups, goules, minotaures, vampires, hydres, liches, dragons ancestraux…). Attaques, pouvoirs, potions, fuite : à toi de jouer. Ils surgissent pendant les aventures, et les guerres entre races se jouent contre le champion ennemi.',
        'Mode Fictif : les expéditions. Choisis un donjon (facile, normal, difficile dès le niveau 3, légendaire dès le niveau 6), puis avance de salle en salle : monstres, pièges aux dés, coffres (attention aux mimiques), feux de camp, et le maître des lieux au bout. L’or reste dans le sac jusqu’au retour, et dans un donjon, tomber peut être mortel : trois jets contre la mort (8 ou plus) décident du sort de ton héros.',
        'Mode Fictif : le marché. L’or sert à acheter l’équipement de la famille (armes, armures, amulettes, qui passent d’une génération à l’autre), des potions et une plume de phénix, à bâtir le domaine (ferme, taverne, forge, tour de mage, caserne, temple) et à acheter des titres de noblesse, de l’écuyer jusqu’au roi ou à la reine de ta race, quand la renommée suffit.',
        'Mode Fictif : une famille rivale ! Une maison jalouse se dresse contre la tienne : duels d’honneur, voleurs, complots, et parfois une alliance par le mariage. Rends-lui la pareille (duel, espionnage, sabotage, trêve) et fais tomber sa renommée à zéro pour la ruiner et récupérer sa fortune… jusqu’à ce qu’une nouvelle rivale se lève.',
@@ -3081,10 +3096,11 @@ const PATCHNOTES = [
        'Mode Fictif : les dragons naissent avec un prénom seulement. Leur nom de dragon (« le Terrifiant », « Dame des Ciels »…) leur vient entre 200 et 800 ans.',
        'Mode Fictif : nouveau pouvoir des dragons, « Le manger tout cru », contre un petit monstre de niveau inférieur. Réussi : le monstre est avalé et meurt, non sans blesser le dragon de l’intérieur. Raté : le dragon le recrache, le monstre s’en tire presque indemne et le dragon souffre beaucoup.',
        'Application Windows : le statut Discord affiche aussi le mode Fictif (famille, race, année, héros, combat ou expédition en cours).',
-       'Mode Fictif : les fées sont si petites que les monstres, surtout les gros, peuvent les gober en plein combat. Un QTE se lance : appuie quand le curseur passe dans la zone verte pour te débattre. Plus tu rates, plus la fée s’enfonce dans la gueule… jusqu’à être avalée. Réussi, elle s’échappe avec quelques égratignures.'],
+       'Mode Fictif : les fées sont si petites que les monstres, surtout les gros, peuvent les gober en plein combat. Un QTE se lance : appuie quand le curseur passe dans la zone verte pour te débattre. Plus tu rates, plus la fée s’enfonce dans la gueule… jusqu’à être avalée. Réussi, elle s’échappe avec quelques égratignures.',
+       'Mode Fictif : 13 nouveaux méchants dans les combats et le bestiaire : Champignon Terrifié, Lynx maudit, Breakdancer Momifié, Sorcière Voodoo, Renard de Satan, Vampire satyre, Renifleur des Abymes, Golem d’Émeraude, Loup-Garou Éternel, Démon des Ténèbres, Dragon des Enfers… et deux raretés qui brillent d’une aura dorée : Aze et Rypoint, le Protogen orange. Plus coriaces, mais bien plus généreux.'],
    en:['Fictional mode: role-playing is here! At adulthood, your character picks a class (warrior, ranger, paladin, mage, cleric or bard). Each has its own HP, mana and powers, and every race has a power of its own (dragon fire breath, orc rage, fairy dream dust…).',
        'Fictional mode: experience and levels (up to level 20). Each level brings more HP and mana, and an ability point you spend yourself. At levels 3, 5, 6, 10, 15 and 20: new powers, an extra attack, crits on 19, legendary hero, then mythic. Levels also help with adventure rolls, and children inherit part of their parents’ experience.',
-       'Fictional mode: turn-based fights with health and mana bars, against 29 monsters (wolves, ghouls, minotaurs, vampires, hydras, liches, ancient dragons…). Attacks, powers, potions, fleeing: your call. They show up during adventures, and wars between races are fought against the enemy champion.',
+       'Fictional mode: turn-based fights with health and mana bars, against 42 monsters (wolves, ghouls, minotaurs, vampires, hydras, liches, ancient dragons…). Attacks, powers, potions, fleeing: your call. They show up during adventures, and wars between races are fought against the enemy champion.',
        'Fictional mode: expeditions. Pick a dungeon (easy, normal, hard from level 3, legendary from level 6), then move from room to room: monsters, dice traps, chests (beware of mimics), campfires, and the master of the place at the end. Gold stays in your bag until you get home, and in a dungeon, falling can be deadly: three death saves decide your hero’s fate.',
        'Fictional mode: the market. Gold buys the family’s gear (weapons, armour, amulets, handed down through the generations), potions and a phoenix feather, builds the estate (farm, tavern, forge, mage tower, barracks, temple) and buys noble titles, from squire up to monarch of your race, once your fame is high enough.',
        'Fictional mode: a rival family! A jealous house rises against yours: duels of honour, thieves, plots, and sometimes an alliance through marriage. Strike back (duel, spying, sabotage, truce) and bring their fame down to zero to ruin them and seize their fortune… until a new rival rises.',
@@ -3094,7 +3110,8 @@ const PATCHNOTES = [
        'Fictional mode: dragons are born with a first name only. Their dragon name (“the Terrifying”, “Lady of the Skies”…) comes to them between 200 and 800 years old.',
        'Fictional mode: a new dragon power, “Swallow it whole”, against a small, lower-level monster. On a hit, the monster is swallowed and dies, though it hurts the dragon from inside. On a miss, the dragon spits it back out: the monster gets away almost unharmed and the dragon suffers a lot.',
        'Windows app: the Discord status now shows Fictional mode too (family, race, year, hero, fight or expedition in progress).',
-       'Fictional mode: fairies are so small that monsters, especially big ones, can gulp them down mid-fight. A QTE starts: tap when the cursor is in the green zone to struggle. The more you miss, the deeper the fairy sinks into the jaws… until she is swallowed. Succeed and she escapes with a few scratches.']},
+       'Fictional mode: fairies are so small that monsters, especially big ones, can gulp them down mid-fight. A QTE starts: tap when the cursor is in the green zone to struggle. The more you miss, the deeper the fairy sinks into the jaws… until she is swallowed. Succeed and she escapes with a few scratches.',
+       'Fictional mode: 13 new villains in fights and the bestiary: Terrified Mushroom, Cursed Lynx, Mummified Breakdancer, Voodoo Witch, Satan’s Fox, Satyr Vampire, Abyss Sniffer, Emerald Golem, Eternal Werewolf, Demon of Darkness, Hell Dragon… and two shiny rarities wrapped in a golden aura: Aze and Rypoint, the orange Protogen. Tougher, but far more generous.']},
   {v:'0.3.1a', date:{fr:'24 novembre 2026', en:'November 24, 2026', de:'24. November 2026', es:'24 de noviembre de 2026'},
    fr:['Nouveau pays : la Belgique ! Prénoms wallons et flamands, noms de famille (avec les Italiens des charbonnages après 1946), 47 villes sur une nouvelle carte, l’histoire du pays de Charles Quint à la Belgique fédérale, ses guerres, le franc belge, les humanités et le CEB, 14 métiers (dentellière de Bruges, friturier, moine brasseur trappiste, diamantaire anversois, dessinateur de BD, pêcheur de crevettes à cheval…) et 10 centres d’intérêt (colombophilie, balle pelote, carnaval de Binche, Diables rouges…).',
        'Nouveaux métiers : 5 en Suisse (horloger en grandes complications, chauffeur de CarPostal, machiniste de funiculaire, coutelier de couteaux suisses, gardien de cabane), 8 en Allemagne (bretzelier, horloger de coucous, pilote de Zeppelin, serveur de l’Oktoberfest, vendeur de currywurst, souffleur de boules de Noël, marchand de marché de Noël, mineur de la Ruhr) et 3 en France (Compagnon du Devoir, paludier de Guérande, garçon de café parisien).',
@@ -15404,7 +15421,7 @@ function ficAlbum(re){
       return `<button type="button" data-act="ficalbr" data-v="${x}" aria-pressed="${x === r}" style="--rc:${FIC_R[x].c}" title="${esc(ficRaceName(x))}">${FIC_R[x].e}<small>${n}/20</small></button>`; }).join('')}</div>
     <div class="eyebrow sect">${FL('Métiers', 'Jobs')} · ${nJ}/10</div><ul class="ficalb">${R0.jobs.map((j, i) => cell(a.j[i], LANG === 'fr' ? (j[0] === j[1] ? j[0] : `${j[0]} / ${j[1]}`) : j[2])).join('')}</ul>
     <div class="eyebrow sect">${FL('Centres d’intérêt', 'Interests')} · ${nI}/10</div><ul class="ficalb">${R0.ints.map((x, i) => cell(a.i[i], FL(x[0], x[1]))).join('')}</ul>
-    <div class="eyebrow sect">${FL('Bestiaire (toutes races)', 'Bestiary (all races)')} · ${FIC_MOB.filter(m => (FICALB.mob || {})[m[0]]).length}/${FIC_MOB.length}</div><ul class="ficalb fbest">${FIC_MOB.map(m => { const n = (FICALB.mob || {})[m[0]]; return `<li class="${n ? 'on' : ''}">${n ? `${m[1]} ${esc(FL(m[2], m[3]))} <small>×${n}</small>` : '???'}</li>`; }).join('')}</ul>`, {sound: !re});
+    <div class="eyebrow sect">${FL('Bestiaire (toutes races)', 'Bestiary (all races)')} · ${FIC_MOB.filter(m => (FICALB.mob || {})[m[0]]).length}/${FIC_MOB.length}</div><ul class="ficalb fbest">${FIC_MOB.map(m => { const n = (FICALB.mob || {})[m[0]]; return `<li class="${n ? 'on' : ''} ${(m[6] || '').includes('rare') ? 'rare' : ''}">${n ? `<span class="${(m[6] || '').includes('orange') ? 'orange' : ''}">${m[1]}</span> ${esc(FL(m[2], m[3]))} <small>×${n}</small>` : (m[6] || '').includes('rare') ? '✨ ???' : '???'}</li>`; }).join('')}</ul>`, {sound: !re});
   $('#modal').classList.add('wide');
 }
 
@@ -15807,8 +15824,15 @@ const FIC_MOB = [
   ['liche', '☠️', 'Liche', 'Lich', 9, 'magie'], ['kraken', '🦑', 'Kraken', 'Kraken', 9, 'frappe'],
   ['demon', '😈', 'Démon des abysses', 'Abyssal demon', 10, 'drain'], ['ancien', '🐲', 'Dragon ancestral', 'Ancient dragon', 11, 'vol'],
   ['mimique', '📦', 'Mimique', 'Mimic', 0, 'frappe'],
+  ['champi', '🍄', 'Champignon Terrifié', 'Terrified Mushroom', 1, 'poison'], ['lynx', '🐈‍⬛', 'Lynx maudit', 'Cursed Lynx', 3, 'frappe'],
+  ['breakdancer', '🕺', 'Breakdancer Momifié', 'Mummified Breakdancer', 4, 'frappe'], ['voodoo', '🪆', 'Sorcière Voodoo', 'Voodoo Witch', 5, 'drain'],
+  ['renardsatan', '🦊', 'Renard de Satan', 'Satan’s Fox', 6, 'frappe'], ['vampsatyre', '🦇', 'Vampire satyre', 'Satyr Vampire', 6, 'drain'],
+  ['renifleur', '👃', 'Renifleur des Abymes', 'Abyss Sniffer', 7, 'regen'], ['golememeraude', '💎', 'Golem d’Émeraude', 'Emerald Golem', 8, 'magie'],
+  ['lgeternel', '🐺', 'Loup-Garou Éternel', 'Eternal Werewolf', 9, 'regen'], ['demontenebres', '👿', 'Démon des Ténèbres', 'Demon of Darkness', 9, 'drain'],
+  ['dragonenfers', '🐉', 'Dragon des Enfers', 'Hell Dragon', 10, 'vol'],
+  ['aze', '🌟', 'Aze', 'Aze', 0, 'magie', 'rare'], ['rypoint', '🤖', 'Rypoint', 'Rypoint', 0, 'frappe', 'rare orange'],   // les deux raretés brillantes
 ];
-const FIC_BIG = new Set(['ourshibou', 'ogre', 'basilic', 'minotaure', 'trollcav', 'wyverne', 'golem', 'manticore', 'hydre', 'geant', 'kraken', 'demon', 'ancien']);
+const FIC_BIG = new Set(['golememeraude', 'lgeternel', 'demontenebres', 'dragonenfers', 'aze', 'rypoint', 'ourshibou', 'ogre', 'basilic', 'minotaure', 'trollcav', 'wyverne', 'golem', 'manticore', 'hydre', 'geant', 'kraken', 'demon', 'ancien']);
 const FIC_MOBSP = {regen: ['Se régénère', 'Regenerates'], poison: ['Venimeux', 'Venomous'], frappe: ['Frappe deux fois', 'Strikes twice'], vol: ['Vole (−2 pour le toucher)', 'Flies (−2 to hit it)'], magie: ['Résiste à la magie', 'Resists magic'], drain: ['Draine la vie', 'Drains life']};
 const FIC_DJ = [['La crypte oubliée', 'The forgotten crypt', '💀'], ['La mine abandonnée', 'The abandoned mine', '⛏️'], ['La tour du sorcier', 'The wizard’s tower', '🗼'], ['La grotte aux échos', 'The echoing cave', '🕳️'],
   ['Les ruines englouties', 'The sunken ruins', '🏛️'], ['La forteresse noire', 'The black fortress', '🏰'], ['Le temple maudit', 'The cursed temple', '⛩️'], ['Le marais des brumes', 'The misty marsh', '🌫️'],
@@ -15915,11 +15939,15 @@ function ficAbDesc(id, p){
 function ficMob(c, o = {}){                                // un monstre à la mesure du héros (c : son niveau)
   c = Math.max(1, Math.min(24, Math.round(c)));
   let m = o.id && FIC_MOB.find(x => x[0] === o.id);
+  if(!m && !o.boss && Math.random() < .025) m = pick(FIC_MOB.filter(x => (x[6] || '').includes('rare')));   // rarissime : Aze ou Rypoint
   if(!m){ const t = Math.min(c, 11), pool = FIC_MOB.filter(x => x[4] && Math.abs(x[4] - t) <= 1); m = pick(pool.length ? pool : FIC_MOB.filter(x => x[4])); }
   const boss = !!o.boss, n = Math.max(1, Math.floor((c + 1) / 3)), hp = Math.round((5 + 5.5 * c) * (boss ? 1.4 : 1) * (.9 + Math.random() * .2));
-  return {id: m[0], e: m[1], name: (boss ? FL('Seigneur ', 'Lord ') : '') + FL(m[2], m[3]), boss, sz: FIC_BIG.has(m[0]) || boss ? 'g' : 'p', lv: c, hp, hpMax: hp, ac: 11 + Math.floor(c / 2) + (boss ? 1 : 0),
+  const r = {id: m[0], e: m[1], name: (boss ? FL('Seigneur ', 'Lord ') : '') + FL(m[2], m[3]), boss, sz: FIC_BIG.has(m[0]) || boss ? 'g' : 'p', lv: c, hp, hpMax: hp, ac: 11 + Math.floor(c / 2) + (boss ? 1 : 0),
     atk: 2 + Math.floor(c * .7) + (boss ? 1 : 0), dmg: n + 'd6', dmgB: Math.floor(c / 2) + (boss ? 1 : 0), sp: m[5],
     xp: Math.round((30 + 30 * c) * (boss ? 2 : 1)), gold: Math.round((rnd(4, 12) * c + 5) * (boss ? 3 : 1)), fame: Math.max(1, Math.round(c * (boss ? 3 : 1) / 2))};
+  const fl = m[6] || ''; if(fl.includes('orange')) r.cls = 'orange';
+  if(fl.includes('rare')){ r.shiny = true; r.hp = r.hpMax = Math.round(r.hp * 1.5); r.atk += 1; r.xp *= 3; r.gold *= 5; r.fame *= 4; }   // rare : plus coriace, bien plus généreux
+  return r;
 }
 function ficFoeP(q, e, name, race){                       // un adversaire qui a des caractéristiques (rival, champion ennemi)
   const c = FIC_CL[q.cl] || FIC_CL.guerrier, L = q.lv || 1, sm = fMod(q.st[c.st]), cm = fMod(q.st[2]);
@@ -15989,7 +16017,7 @@ function ficFight(foe, o){                                 // o : {eyebrow, titl
   const me = active(); ficEnsure(me); ficEnsureF();
   FB = {foe, o, log: [], q: [], once: {}, busy: true, turn: 'start', ac: 0, shield: null, buff: 0, buffD: null, smite: null, stun: 0, deb: 0, over: null, ds: null, res: [], shown: 0, shownOld: 0,
     vfh: foe.hp, vmh: me.hp, vmm: me.mp};
-  ficFbLog(o.intro || FL(`${foe.e} ${foe.name} surgit !`, `${foe.e} ${foe.name} appears!`)); FB.shown = FB.log.length;
+  ficFbLog(foe.shiny ? FL(`✨ Rencontre rarissime ! ${foe.name} apparaît dans un éclat de lumière !`, `✨ An ultra-rare encounter! ${foe.name} appears in a burst of light!`) : o.intro || FL(`${foe.e} ${foe.name} surgit !`, `${foe.e} ${foe.name} appears!`)); FB.shown = FB.log.length;
   ficFbRender(); faEnter();
 }
 const ficFbLog = s => { FB.log.push(s); if(FB.log.length > 60){ FB.log.shift(); FB.shown = Math.max(0, FB.shown - 1); FB.shownOld = Math.max(0, FB.shownOld - 1); } };
@@ -15999,12 +16027,12 @@ const fbPush = e => FB.q.push(Object.assign(e, fbSnap()));
 /* ----- l'arène ----- */
 function ficFbRender(){
   if(!FB) return; const me = active(), f = FB.foe, o = FB.o, bg = o.bg || 'wild';
-  const tag = f.sz ? `<em class="fa-tag">${f.sz === 'g' ? FL('Grand', 'Large') : f.sz === 'p' ? FL('Petit', 'Small') : FL('Humanoïde', 'Humanoid')}</em>` : '';
+  const tag = f.shiny ? `<em class="fa-tag rare">✨ ${FL('Rare', 'Rare')}</em>` : f.sz ? `<em class="fa-tag">${f.sz === 'g' ? FL('Grand', 'Large') : f.sz === 'p' ? FL('Petit', 'Small') : FL('Humanoïde', 'Humanoid')}</em>` : '';
   openModal(`<div class="m-head fa-head"><div class="eyebrow">${esc(o.eyebrow || FL('Combat', 'Fight'))}</div><h2>${esc(o.title || f.name)}</h2></div>
     <div class="fa-stage bg-${bg}" id="faStage">
       <div class="fa-plate fa-pfoe"><b>${esc(f.name)}</b><small>${FL('Niv.', 'Lv')} ${f.lv} · ${FL('CA', 'AC')} ${f.ac}${f.sp ? ' · ' + esc(FL(FIC_MOBSP[f.sp][0], FIC_MOBSP[f.sp][1])) : ''}</small>${tag}
         <div class="fbar hp" id="faFoeHp"><i class="lag"></i><i class="v"></i><span></span></div><div class="fa-st" id="faFoeSt"></div></div>
-      <div class="fa-sp fa-foe" id="faFoe"><i class="fa-shadow"></i><span class="fa-em">${f.e}</span></div>
+      <div class="fa-sp fa-foe ${f.shiny ? 'shiny' : ''}" id="faFoe"><i class="fa-shadow"></i>${f.shiny ? '<i class="fa-aura"></i>' : ''}<span class="fa-em ${f.cls || ''}">${f.e}</span></div>
       <div class="fa-sp fa-me" id="faMe"><i class="fa-shadow"></i>${orb(me, 'xl')}<span class="fa-cl">${ficCl(me).e}</span></div>
       <div class="fa-plate fa-pme"><b>${esc(me.first)}</b><small>${esc(ficClName(me))} ${FL('niv.', 'lv')} ${me.lv} · ${FL('CA', 'AC')} <span id="faMeAc"></span></small>
         <div class="fbar hp" id="faMeHp"><i class="lag"></i><i class="v"></i><span></span></div>${ficMpMax(me) ? `<div class="fbar mp" id="faMeMp"><i class="lag"></i><i class="v"></i><span></span></div>` : ''}<div class="fa-st" id="faMeSt"></div></div>
