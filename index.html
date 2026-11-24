@@ -2629,6 +2629,10 @@ body[data-race="satyre"]{--rc:#c6639a}body[data-race="drakeide"]{--rc:#cf5338}bo
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"],[data-skin="minidark"]) .cedet,:root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"],[data-skin="minidark"]) .ceu{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"],[data-skin="minidark"]) .cechk{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
 :root:is([data-skin="dark"],[data-skin="goth"],[data-skin="moon"],[data-skin="galaxy"],[data-skin="hacker"],[data-skin="cyber"],[data-skin="vwave"],[data-skin="coral"],[data-skin="arcade"],[data-skin="bain"],[data-skin="minidark"]) .cechk:has(input:checked){background:rgba(164,60,255,.35);border-color:#b07aff}
+.orbed{position:relative;display:block;flex:none;align-self:center}.orbed>.orb{display:block}
+.orbpen{position:absolute;right:-6px;bottom:-4px;z-index:2;width:32px;height:32px;padding:0;display:grid;place-items:center;border-radius:50%;border:2px solid #fff;cursor:pointer;font-size:15px;line-height:1;
+  background:linear-gradient(180deg,#ffffff,#dcefff);box-shadow:0 3px 8px rgba(0,60,140,.35);transition:transform .12s}
+.orbpen:hover{transform:scale(1.12)}.orbdel{right:auto;left:-6px;font-size:13px;font-weight:900;color:#c8243c}
 .orb img.oph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;-webkit-user-drag:none;pointer-events:none}
 .rib.race{top:auto;bottom:-10px;left:auto;right:8px;max-width:calc(100% - 16px);overflow:hidden;text-overflow:ellipsis;text-transform:none;letter-spacing:0;font-size:9.5px;
   color:#6c1fc4;background:linear-gradient(180deg,#fcf6ff,#ead6ff);border:1px solid #c9a2ff}
@@ -3080,9 +3084,12 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BAIN_COLS = ['#3af4ff','#ff4fe0','#ffe84a','#ffffff','#b48cff'];   // 0.2.3d : les couleurs du thème Bain d'étoile
 const isBain = () => document.documentElement.dataset.skin === 'bain';
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.3.2a';
+const APP_VERSION = '0.3.2b';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.3.2b', date:{fr:'25 novembre 2026', en:'November 25, 2026', de:'25. November 2026', es:'25 de noviembre de 2026'},
+   fr:['Dans tous les modes : une petite icône de crayon ✏️ sur la photo de la fiche d’une personne permet de lui choisir une image personnalisée (et la croix ✕ pour la retirer). Elle s’affiche dans sa bulle de l’arbre.'],
+   en:['In every mode: a small pencil icon ✏️ on the picture in a person’s sheet lets you choose a custom image for them (and the ✕ to remove it). It shows in their bubble on the tree.']},
   {v:'0.3.2a', date:{fr:'24 novembre 2026', en:'November 24, 2026', de:'24. November 2026', es:'24 de noviembre de 2026'},
    fr:['Mode Fictif : le jeu de rôle arrive ! À l’âge adulte, ton personnage choisit sa classe (guerrier, rôdeur, paladin, mage, clerc ou barde). Chacune a ses PV, sa mana et ses pouvoirs, et chaque race a un pouvoir à elle (souffle de feu des dragons, rage des orques, poussière de rêve des fées…).',
        'Mode Fictif : l’expérience et les niveaux (jusqu’au niveau 20). Chaque niveau donne plus de PV et de mana, et un point de caractéristique à placer soi-même. Aux niveaux 3, 5, 6, 10, 15 et 20 : nouveaux pouvoirs, attaque en plus, critiques sur 19, héros légendaire, puis mythique. Le niveau aide aussi aux jets d’aventure, et les enfants héritent d’une partie de l’expérience de leurs parents.',
@@ -12805,7 +12812,7 @@ function openFiche0(id, extra){
   const fame = p.star ? `<div class="goldf span2"><dt>${t('f_fame')}</dt><dd>★ ${p.star.famous ? t('fame_now') : t('fame_future')}</dd></div>`
     : p.starKid ? `<div class="skf span2"><dt>${t('f_starkid')}</dt><dd>★ ${t('starkid_val')}</dd></div>` : '';
   const crime = p.crim ? `<div class="crf span2"><dt>${t('f_crime')}</dt><dd>☠ ${esc(!p.crim.declared ? t('crime_future', p) : p.crim.fate === 'prison' ? t('crime_fate_prison', p) : t('crime_now', p))}</dd></div>` : '';
-  openModal(`<div class="who">${orb(p,'xl')}<div><div class="eyebrow">${eyebrow}</div><h2${p.egg === 'ryp' ? ' class="ryptxt"' : ''}>${corLvl(p) ? `<span class="cname cor c${corLvl(p)}" data-g="${esc(nm(p))}" style="${corVars(p, corLvl(p)).slice(1)}">${esc(nm(p))}</span>` : esc(nm(p))}<button class="pen" data-act="rename" data-id="${p.id}" aria-label="${esc(t('rename', p.first))}" title="${esc(t('rename', p.first))}">${icon('pencil')}</button></h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
+  openModal(`<div class="who">${orbEd(p)}<div><div class="eyebrow">${eyebrow}</div><h2${p.egg === 'ryp' ? ' class="ryptxt"' : ''}>${corLvl(p) ? `<span class="cname cor c${corLvl(p)}" data-g="${esc(nm(p))}" style="${corVars(p, corLvl(p)).slice(1)}">${esc(nm(p))}</span>` : esc(nm(p))}<button class="pen" data-act="rename" data-id="${p.id}" aria-label="${esc(t('rename', p.first))}" title="${esc(t('rename', p.first))}">${icon('pencil')}</button></h2>${p.maiden ? `<p class="maiden">${esc(t('maiden_line', p.maiden))}</p>` : ''}<p>${sub}</p></div></div>
     <dl class="facts">
       <div><dt>${t('f_age')}</dt><dd>${ageTx(p, a)}${leapTxt(p)}</dd></div>
       ${p.death!=null ? `<div><dt>${t('f_status')}</dt><dd>${p.cause && p.cause.vanished ? t('vanished_short', p) : t('deceased', p)}</dd></div>` : riskTile(p, true) + mildTile(p)}
@@ -14304,6 +14311,8 @@ function ceOpen(id, k, of){
     $('#ceEdu').insertAdjacentHTML('beforeend', CE.eduRow({at, k: nxt})); sync(); });
   F.addEventListener('submit', e => { e.preventDefault(); ceSave(); });
 }
+const orbEd = p => `<span class="orbed">${orb(p, 'xl')}<button type="button" class="orbpen" data-act="phpick" data-id="${p.id}" title="${esc(t('ce_photo_pick'))}" aria-label="${esc(t('ce_photo_pick'))}">✏️</button>${p.photo ? `<button type="button" class="orbpen orbdel" data-act="phdel" data-id="${p.id}" title="${esc(t('ce_photo_del'))}" aria-label="${esc(t('ce_photo_del'))}">✕</button>` : ''}</span>`;   // 0.3.2b : une photo pour n'importe qui, dans tous les modes
+function phReopen(id){ dirty = true; save(); render(); if(S.fic) ficFiche(id); else openFiche(id); }
 function cePhotoOf(file, cb){                          // l'image du joueur, recadrée et très réduite : elle tient dans la bulle (et dans la sauvegarde)
   if(!file || (file.type && !/^image\//.test(file.type))) return cb(null);
   const rd = new FileReader();
@@ -15740,7 +15749,7 @@ function ficFiche(id){
   const par = (p.parents || []).map(P).filter(Boolean), sp = S.unions.filter(x => x.a === p.id || x.b === p.id).map(x => P(x.a === p.id ? x.b : x.a)).filter(Boolean);
   const kids = Object.values(S.people).filter(c => c.parents && c.parents.includes(p.id));
   const died = p.death != null ? FL(`${gx(p, 'Mort', 'Morte')} en l’an ${ficY(yearOf(p.death))} à ${tA(A)}, ${lc(p.cause && p.cause.custom || '')}.`, `Died in year ${ficY(yearOf(p.death))} aged ${A}, ${lc(p.cause && p.cause.custom || '')}.`) : '';
-  openModal(`<div class="who">${orb(p, 'xl')}<div><div class="eyebrow">${R0.e} ${esc(ficRaceName(F.race, false))}${p.id === S.activeId ? ' · ' + esc(t('you')) : ''}</div><h2>${esc(nm(p))}</h2><p>${esc(ficBornLine(p))}${died ? '<br>' + esc(died) : ''}</p></div></div>
+  openModal(`<div class="who">${orbEd(p)}<div><div class="eyebrow">${R0.e} ${esc(ficRaceName(F.race, false))}${p.id === S.activeId ? ' · ' + esc(t('you')) : ''}</div><h2>${esc(nm(p))}</h2><p>${esc(ficBornLine(p))}${died ? '<br>' + esc(died) : ''}</p></div></div>
     <dl class="facts">
       <div><dt>${t('f_age')}</dt><dd>${tA(A)}</dd></div>
       <div><dt>${t('f_activity')}</dt><dd>${esc(ficActivity(p))}</dd></div>
@@ -17029,6 +17038,9 @@ const ACT = {
   ficroll(){ ficRollGo(); },
   ficdone(){ ficDone(); },
   ficalbr(d){ FIC_ALBR = d.v; sfx.click(); ficAlbum(true); },
+  phpick(d){ const p = P(+d.id); if(!p) return; const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';   // 0.3.2b : photo personnalisée
+    inp.addEventListener('change', () => cePhotoOf(inp.files && inp.files[0], url => { if(!url){ sfx.refuse(); return; } p.photo = url; sfx.pop(); phReopen(p.id); })); inp.click(); },
+  phdel(d){ const p = P(+d.id); if(!p) return; delete p.photo; sfx.click(); phReopen(p.id); },
   fba(d){ ficFba(d.v); }, fbds(){ ficFbDs(); }, fbphx(){ ficFbPhx(); }, fbend(){ ficFbEnd(); },   // 0.3.2a : le jeu de rôle du mode Fictif
   ficcl(d){ ficSetClass(d.v); }, ficclpick(){ const me = S && S.fic && active(); if(me && !me.cl && ageAt(me, S.t) >= ficMat()) ficClassPick(); },
   ficpt(d){ ficPt(+d.v); }, ficlvup(){ if(S && S.fic) ficChain(null); },

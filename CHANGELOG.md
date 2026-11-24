@@ -2,6 +2,10 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.3.2b — 25 novembre 2026
+
+- Dans tous les modes : une petite icône de crayon ✏️ sur la photo de la fiche d'une personne permet de lui choisir une image personnalisée (et la croix ✕ pour la retirer). Elle s'affiche dans sa bulle de l'arbre.
+
 ## v0.3.2a — 24 novembre 2026
 
 - Mode Fictif : le jeu de rôle arrive ! À l'âge adulte, ton personnage choisit sa classe (guerrier, rôdeur, paladin, mage, clerc ou barde). Chacune a ses PV, sa mana et ses pouvoirs, et chaque race a un pouvoir à elle (souffle de feu des dragons, rage des orques, poussière de rêve des fées…).
