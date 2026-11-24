@@ -2,6 +2,21 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.3.2a — 24 novembre 2026
+
+- Mode Fictif : le jeu de rôle arrive ! À l'âge adulte, ton personnage choisit sa classe (guerrier, rôdeur, paladin, mage, clerc ou barde). Chacune a ses PV, sa mana et ses pouvoirs, et chaque race a un pouvoir à elle (souffle de feu des dragons, rage des orques, poussière de rêve des fées…).
+- Mode Fictif : l'expérience et les niveaux (jusqu'au niveau 20). Chaque niveau donne plus de PV et de mana, et un point de caractéristique à placer soi-même. Aux niveaux 3, 5, 6, 10, 15 et 20 : nouveaux pouvoirs, attaque en plus, critiques sur 19, héros légendaire, puis mythique. Le niveau aide aussi aux jets d'aventure, et les enfants héritent d'une partie de l'expérience de leurs parents.
+- Mode Fictif : des combats au tour par tour, avec barres de vie et de mana, contre 29 monstres (loups, goules, minotaures, vampires, hydres, liches, dragons ancestraux…). Attaques, pouvoirs, potions, fuite : à toi de jouer. Ils surgissent pendant les aventures, et les guerres entre races se jouent contre le champion ennemi.
+- Mode Fictif : les expéditions. Choisis un donjon (facile, normal, difficile dès le niveau 3, légendaire dès le niveau 6), puis avance de salle en salle : monstres, pièges aux dés, coffres (attention aux mimiques), feux de camp, et le maître des lieux au bout. L'or reste dans le sac jusqu'au retour, et dans un donjon, tomber peut être mortel : trois jets contre la mort (8 ou plus) décident du sort de ton héros.
+- Mode Fictif : le marché. L'or sert à acheter l'équipement de la famille (armes, armures, amulettes, qui passent d'une génération à l'autre), des potions et une plume de phénix, à bâtir le domaine (ferme, taverne, forge, tour de mage, caserne, temple) et à acheter des titres de noblesse, de l'écuyer jusqu'au roi ou à la reine de ta race, quand la renommée suffit.
+- Mode Fictif : une famille rivale ! Une maison jalouse se dresse contre la tienne : duels d'honneur, voleurs, complots, et parfois une alliance par le mariage. Rends-lui la pareille (duel, espionnage, sabotage, trêve) et fais tomber sa renommée à zéro pour la ruiner et récupérer sa fortune… jusqu'à ce qu'une nouvelle rivale se lève.
+- Mode Fictif : un bestiaire dans l'album, et la renommée de la famille s'affiche face à celle des rivaux.
+- Mode Fictif : la barre du héros s'affiche maintenant au-dessus de l'arbre, toujours à portée : niveau, PV, mana et expérience, l'or et la renommée, et les gros boutons Expédition, Marché et Famille rivale.
+- Mode Fictif : les combats ont leur arène animée, avec un décor selon le lieu (plaine, donjon, champ de bataille, arène de duel). Le héros et le monstre s'élancent, les sorts traversent l'écran (flèche lunaire, boule de feu, souffle de dragon…), les coups font trembler, les critiques flashent, les barres de vie fondent, et chaque action a son son. Les choix d'attaque sont des cartes claires, avec la chance de toucher, les dégâts et ce que fait chaque pouvoir.
+- Mode Fictif : les dragons naissent avec un prénom seulement. Leur nom de dragon (« le Terrifiant », « Dame des Ciels »…) leur vient entre 200 et 800 ans.
+- Mode Fictif : nouveau pouvoir des dragons, « Le manger tout cru », contre un petit monstre de niveau inférieur. Réussi : le monstre est avalé et meurt, non sans blesser le dragon de l'intérieur. Raté : le dragon le recrache, le monstre s'en tire presque indemne et le dragon souffre beaucoup.
+- Application Windows : le statut Discord affiche aussi le mode Fictif (famille, race, année, héros, combat ou expédition en cours).
+
 ## v0.3.1a — 24 novembre 2026
 
 - Nouveau pays : la Belgique ! Prénoms wallons et flamands, noms de famille (avec les Italiens des charbonnages après 1946), 47 villes sur une nouvelle carte, l'histoire du pays de Charles Quint à la Belgique fédérale, ses guerres, le franc belge, les humanités et le CEB, 14 métiers (dentellière de Bruges, friturier, moine brasseur trappiste, diamantaire anversois, dessinateur de BD, pêcheur de crevettes à cheval…) et 10 centres d'intérêt (colombophilie, balle pelote, carnaval de Binche, Diables rouges…).

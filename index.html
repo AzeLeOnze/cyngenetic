@@ -2361,6 +2361,155 @@ body[data-race="satyre"]{--rc:#c6639a}body[data-race="drakeide"]{--rc:#cf5338}bo
 .ficcheck{margin:0;font-weight:700;text-align:center}.ficcheck small{display:block;font-weight:500;opacity:.75}
 .ficres{margin:0;text-align:center}.ficres small{display:block;opacity:.8}.ficres span{font:800 20px var(--font-display)}.ficres.ok span{color:#1d9a3a}.ficres.ko span{color:#c8243c}
 .ficout{margin:0;padding-left:20px;max-width:440px}.ficout li{margin:2px 0}
+/* 0.3.2a : le jeu de rôle du mode Fictif */
+.fbar{position:relative;height:18px;margin:4px 0;border-radius:99px;overflow:hidden;background:color-mix(in srgb,var(--ink) 14%,transparent);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
+.fbar i{position:absolute;inset:0 auto 0 0;border-radius:99px;transition:width .45s cubic-bezier(.2,.8,.3,1)}
+.fbar.hp i{background:linear-gradient(180deg,#8ef06a,#2fb24a 55%,#1b8a35)}
+.fbar.mp i{background:linear-gradient(180deg,#8fd0ff,#2f7fe8 55%,#1d55b8)}
+.fbar.xp i{background:linear-gradient(180deg,#ffe58a,#f0b400 55%,#c98a00)}
+.fbar span{position:relative;display:block;text-align:center;font:800 11px/16px var(--font-display);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.75);font-variant-numeric:tabular-nums}
+.fb{display:grid;gap:10px;margin:4px 0 8px}
+.fb-side{position:relative;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;background:color-mix(in srgb,var(--ink) 6%,transparent);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.fb-foe{background:color-mix(in srgb,#ff3d4d 10%,transparent);border-color:color-mix(in srgb,#ff3d4d 28%,transparent)}
+.fb-e{flex:none;width:64px;height:64px;display:grid;place-items:center;font-size:46px;line-height:1;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
+.fb-info{flex:1;min-width:0}.fb-info b{font:800 16px var(--font-display)}.fb-info small{display:block;font-size:12px;opacity:.8}
+.fb-side.hit.dmg,.fb-side.hit.crit{animation:fbshake .45s ease}.fb-side.hit.crit .fb-e{animation:fbflash .5s ease}
+.fb-side.hit.heal,.fb-side.hit.mana{animation:fbglow .6s ease}.fb-side.hit.mag .fb-e{animation:fbmag .6s ease}
+.fb-side.ko{filter:grayscale(.8);opacity:.6}
+@keyframes fbshake{0%,100%{transform:none}20%{transform:translateX(-9px) rotate(-1.5deg)}40%{transform:translateX(8px) rotate(1deg)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+@keyframes fbflash{0%,100%{filter:none}30%{filter:brightness(2.4) drop-shadow(0 0 12px #ffd000)}}
+@keyframes fbmag{0%,100%{transform:none;filter:none}40%{transform:scale(1.18);filter:drop-shadow(0 0 14px #b07bff) hue-rotate(40deg)}}
+@keyframes fbglow{0%,100%{box-shadow:none}40%{box-shadow:0 0 0 3px rgba(80,220,120,.55),0 0 22px rgba(80,220,120,.5)}}
+.fb-pop{position:absolute;right:14px;top:4px;font:900 26px var(--font-display);font-style:normal;pointer-events:none;animation:fbpop 1.1s ease-out forwards;text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.fb-pop.dmg{color:#ff3d4d}.fb-pop.crit{color:#ffb300;font-size:32px}.fb-pop.heal{color:#2fbf5a}.fb-pop.mana{color:#3f8fff}.fb-pop.mag{color:#a36bff}.fb-pop.miss{color:var(--ink-soft);font-size:18px}
+@keyframes fbpop{0%{opacity:0;transform:translateY(10px) scale(.6)}20%{opacity:1;transform:translateY(0) scale(1.15)}100%{opacity:0;transform:translateY(-26px) scale(1)}}
+.fb-log{margin:0;list-style:none;padding:8px 12px;border-radius:12px;font-size:12.5px;line-height:1.45;background:color-mix(in srgb,var(--ink) 5%,transparent);min-height:5.6em}
+.fb-log li{opacity:.7}.fb-log li.new{opacity:1;font-weight:700}
+.fb-acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px}
+.fb-acts .gel{min-height:46px;padding:6px 10px;font-size:13.5px}.fb-acts .gel span{display:flex;flex-direction:column;align-items:center;line-height:1.15;text-align:center}
+.fb-acts .gel small{font:600 10.5px var(--font-body);opacity:.85}
+.fb-ds{text-align:center}.fb-ds p{margin:4px 0}.ds-pips{display:flex;justify-content:center;gap:22px;font-size:24px;letter-spacing:4px}.ds-pips .ok{color:#2fbf5a}.ds-pips .ko{color:#e0243c}.ds-last{font-weight:700}
+.fb-end{text-align:center;padding:6px 0}.fb-end b{font:800 22px var(--font-display)}.fb-end.win b{color:#1d9a3a}.fb-end.lose b,.fb-end.dead b{color:#c8243c}
+.fb-end ul{text-align:left;margin:6px auto 0;max-width:440px;padding-left:20px}
+.fic-cls,.fic-lvst{display:grid;gap:8px}.fic-lvst{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.fic-cls .pickrow small{display:block}.fic-cls .fe,.fic-exps .fe,.fs-it .fe{font-size:28px}
+.pickrow.rec{box-shadow:0 0 0 2px #f0b400,0 4px 12px rgba(240,180,0,.25)}
+.fic-lvst .pickrow{grid-template-columns:auto 1fr auto}.fic-lvsum{font-size:13.5px}.fic-unl{font-weight:700;color:#8a5cff}
+.fic-exps .pickrow em{font-style:normal;color:#f0b400;letter-spacing:1px}.fic-exps .d3{box-shadow:0 0 0 2px #b07bff}
+.dj-path{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;list-style:none;margin:6px 0;padding:0}
+.dj-path li{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;font-size:20px;background:color-mix(in srgb,var(--ink) 8%,transparent);border:2px solid transparent;opacity:.6}
+.dj-path li.done{opacity:.9;color:#1d9a3a;font-weight:900}.dj-path li.cur{opacity:1;border-color:#f0b400;transform:scale(1.12);box-shadow:0 0 14px rgba(240,180,0,.45)}.dj-path li.boss{border-style:dashed;border-color:#e0243c}
+.dj-me{display:flex;align-items:center;gap:12px;margin:8px 0}.dj-me>div{flex:1}.dj-loot{text-align:center;margin:6px 0;font-size:14px}
+.dj-msg{margin:6px 0;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,#f0b400 16%,transparent);font-weight:700;text-align:center}
+.dj-acts{flex-wrap:wrap}
+.fs-tabs{display:flex;gap:6px;margin:0 0 10px}.fs-tabs button{flex:1;min-height:38px;border-radius:12px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);background:transparent;cursor:pointer;font:800 13px var(--font-display);color:var(--ink)}
+.fs-tabs button[aria-pressed="true"]{background:var(--g2);color:#fff;border-color:var(--g3)}
+.fs-list{display:grid;gap:8px}.fs-it{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:8px 12px;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.fs-it b{font:800 14px var(--font-display)}.fs-it em{margin-left:6px;font-style:normal;font-size:11.5px;opacity:.75}.fs-it small{display:block;font-size:12px;opacity:.8}
+.fs-max{font-size:12px;font-weight:700;opacity:.7}.fs-inc{text-align:center;font-weight:700;margin:6px 0 0}
+.fichero .fh-top{display:flex;align-items:center;gap:10px;margin:2px 0 4px}.fh-cl{font-size:30px}.fichero .fh-top b{font:800 15px var(--font-display);display:block}.fichero .fh-top small{font-size:12px;opacity:.8}
+.fh-eq{margin:6px 0;font-size:12.5px;opacity:.9}.fh-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}.fh-btns .gel{padding:8px 10px;font-size:14px}
+.ficrv .rv-bl{font-size:30px;width:44px;text-align:center}.rv-big{font-size:72px;text-align:center;line-height:1.1;animation:evbob 2.4s ease-in-out infinite}
+.rv-meter{display:flex;align-items:center;gap:8px;margin:8px 0 2px;font:800 12px var(--font-display)}
+.rv-bar{flex:1;height:12px;border-radius:99px;overflow:hidden;background:linear-gradient(90deg,#e0243c,#ff6b7a)}.rv-bar i{display:block;height:100%;background:linear-gradient(90deg,#f0b400,#ffd84a);transition:width .5s}
+.fbest li small{opacity:.7}
+/* 0.3.2a : la barre du héros (au-dessus de l'arbre) */
+@media (min-width:901px){ .treebox.fichud .tree-head .hud{top:calc(100% + 17px + var(--fhh, 84px))} }
+.fhud{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;margin:0 14px 8px;padding:8px 10px;border-radius:18px;background:color-mix(in srgb,var(--ink) 6%,transparent);border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.fh-me{display:flex;align-items:center;gap:10px;flex:1 1 260px;min-width:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.fh-av{position:relative;flex:none;display:block}.fh-av .orb,.fh-me>.orb{display:block;width:52px;height:52px}
+.fh-cl{position:absolute;left:-6px;bottom:-4px;font-size:18px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.fh-lv{position:absolute;right:-6px;top:-6px;min-width:22px;height:22px;padding:0 5px;border-radius:99px;display:grid;place-items:center;font:900 12px var(--font-display);color:#5a3a00;background:linear-gradient(180deg,#fff3a0,#ffc400);border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,.3)}
+.fh-id{flex:1;min-width:0;display:flex;flex-direction:column}.fh-id b{font:800 14px var(--font-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fh-id b small{font-weight:600;opacity:.75;font-size:12px}
+.fh-id>small{font-size:12px;opacity:.8}
+.fh-id .fbar{height:13px;margin:2px 0}.fh-id .fbar span{font-size:9.5px;line-height:11px}
+.fh-res{display:flex;flex-direction:column;gap:2px;font-size:13px;white-space:nowrap}.fh-res b{font:800 14px var(--font-display)}
+.fh-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+.fh-btn{flex-direction:column;gap:0;min-width:86px;min-height:58px;padding:5px 10px;border-radius:16px}
+.fh-btn .ic{font-size:22px;line-height:1.1}.fh-btn b{font:800 13px/1.1 var(--font-display)}.fh-btn small{font:600 10.5px var(--font-body);opacity:.9;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.fh-btn.pulse:not(:disabled){animation:fhpulse 2s ease-in-out infinite}
+@keyframes fhpulse{0%,100%{box-shadow:0 5px 14px rgba(0,80,190,.32)}50%{box-shadow:0 0 0 4px rgba(255,214,0,.45),0 0 20px rgba(255,190,0,.7)}}
+.fh-rvm{display:block;width:64px;height:7px;margin-top:3px;border-radius:99px;overflow:hidden;background:rgba(0,0,0,.35)}.fh-rvm i{display:block;height:100%;background:linear-gradient(90deg,#ffd84a,#f0b400);transition:width .5s}
+.fh-wait{flex:1;text-align:center;font-weight:700;padding:8px}
+@media (max-width:640px){ .fhud{margin:0 8px 6px;padding:8px} .fh-acts{width:100%} .fh-btn{flex:1;min-width:0} .fh-res{flex-direction:row;gap:12px} }
+
+/* 0.3.2a : l'arène de combat */
+.modal.fa-modal{width:min(720px,100%)}
+.fa-head{margin-bottom:6px}.fa-head h2{margin:0}
+.fa-stage{position:relative;height:250px;border-radius:20px;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),inset 0 -40px 60px rgba(0,0,0,.18)}
+.fa-stage.bg-wild{background:radial-gradient(ellipse 80% 40% at 72% 42%,rgba(255,255,255,.5),transparent 70%),linear-gradient(180deg,#8fd6ff 0%,#c9ecff 42%,#8fd86a 43%,#5cb840 70%,#3f9a2c 100%)}
+.fa-stage.bg-dj{background:radial-gradient(circle at 18% 22%,rgba(255,170,60,.45),transparent 30%),radial-gradient(circle at 85% 18%,rgba(255,150,50,.35),transparent 28%),linear-gradient(180deg,#2a2236 0%,#3b3148 42%,#4a4052 43%,#2d2633 100%)}
+.fa-stage.bg-war{background:radial-gradient(circle at 75% 25%,rgba(255,210,120,.6),transparent 30%),linear-gradient(180deg,#ff9a5a 0%,#ffcf8a 40%,#8a5a3a 41%,#5a3a26 100%)}
+.fa-stage.bg-duel{background:radial-gradient(ellipse 70% 35% at 50% 75%,rgba(255,255,255,.35),transparent 70%),linear-gradient(180deg,#ffd9a0 0%,#ffe9c4 40%,#e6c08a 41%,#c79a5c 100%)}
+.fa-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.25) 100%)}
+.fa-plate{position:absolute;z-index:3;width:46%;max-width:270px;padding:7px 10px 6px;border-radius:14px;background:rgba(255,255,255,.88);color:#123;box-shadow:0 4px 12px rgba(0,0,0,.25);border:1px solid #fff}
+.fa-plate b{font:800 14px var(--font-display)}.fa-plate small{display:block;font-size:11px;opacity:.75}
+.fa-plate .fbar{height:15px;margin:4px 0 0}.fa-plate .fbar span{font-size:10px;line-height:13px}
+.fa-pfoe{left:10px;top:10px}.fa-pme{right:10px;bottom:10px}
+.fa-tag{position:absolute;right:8px;top:6px;font-style:normal;font:800 9.5px var(--font-display);text-transform:uppercase;letter-spacing:.05em;padding:1px 6px;border-radius:99px;background:rgba(0,0,0,.08)}
+.fa-st{display:flex;gap:4px;flex-wrap:wrap;min-height:0}.fa-st i{font-style:normal;font:800 10.5px var(--font-display);padding:1px 6px;margin-top:3px;border-radius:99px;background:rgba(0,0,0,.08)}
+.fa-sp{position:absolute;z-index:2;display:grid;place-items:center}
+.fa-foe{right:9%;top:22px;width:128px;height:128px}.fa-me{left:9%;bottom:16px;width:110px;height:110px}
+.fa-em{font-size:92px;line-height:1;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35));animation:faidle 2.6s ease-in-out infinite}
+.fa-me .orb{width:92px;height:92px;animation:faidle 2.2s ease-in-out infinite;box-shadow:0 6px 14px rgba(0,0,0,.35),0 0 0 3px #fff}
+.fa-cl{position:absolute;right:2px;top:0;font-size:30px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
+.fa-shadow{position:absolute;left:50%;bottom:-2px;width:80%;height:16px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.4),transparent 70%)}
+@keyframes faidle{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.fa-sp.stun .fa-em{filter:grayscale(.5) drop-shadow(0 6px 8px rgba(0,0,0,.35));animation-duration:5s}
+.fa-sp.cursed .fa-em{filter:drop-shadow(0 0 10px #b07bff) drop-shadow(0 6px 8px rgba(0,0,0,.35))}
+.fa-me.shielded::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:3px solid rgba(127,208,255,.9);box-shadow:0 0 18px rgba(127,208,255,.8),inset 0 0 16px rgba(127,208,255,.6);animation:fashield 1.6s ease-in-out infinite}
+.fa-me.raging .orb{box-shadow:0 0 0 3px #ff5a3d,0 0 22px 6px rgba(255,90,61,.6)}
+.fa-me.charged .orb{box-shadow:0 0 0 3px #ffe14d,0 0 22px 6px rgba(255,225,77,.7)}
+.fa-me.ko{filter:grayscale(.9);opacity:.75}
+@keyframes fashield{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.06);opacity:1}}
+.fa-fx{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:visible}
+.fa-f{position:absolute;left:0;top:0;transform:translate(-50%,-50%);pointer-events:none;will-change:transform,opacity}
+.fa-proj{font-size:38px;line-height:1;filter:drop-shadow(0 0 10px rgba(255,255,255,.9))}.fa-proj.big{font-size:64px}
+.fa-trail,.fa-pt{width:12px;height:12px;border-radius:50%}
+.fa-pop{font:900 28px var(--font-display);white-space:nowrap;color:#ff3d4d;-webkit-text-stroke:1.5px rgba(0,0,0,.55);text-shadow:0 3px 0 rgba(0,0,0,.3)}
+.fa-pop.crit{color:#ffc400;font-size:38px}.fa-pop.heal{color:#3fdc6a}.fa-pop.mana{color:#5fa8ff}.fa-pop.mag{color:#c08bff;font-size:32px}.fa-pop.miss{color:#fff;font-size:20px}
+.fa-rise{font:900 18px var(--font-display);text-shadow:0 0 6px rgba(255,255,255,.8)}
+.fa-ring{width:110px;height:110px;border-radius:50%;border:4px solid #fff}
+.fa-slash{width:120px;height:120px}.fa-slash i{position:absolute;left:0;top:50%;width:100%;height:5px;margin-top:-2px;border-radius:99px;background:linear-gradient(90deg,transparent,#fff 30%,#fff 70%,transparent);box-shadow:0 0 12px #fff}
+.fa-slash i+i{transform:rotate(55deg)}.fa-slash.crit i{height:8px;background:linear-gradient(90deg,transparent,#ffe14d 30%,#fff 50%,#ffe14d 70%,transparent);box-shadow:0 0 18px #ffb300}
+.fa-flash{position:absolute;inset:0;z-index:5;background:#fff;pointer-events:none}
+.fa-vs{position:absolute;left:50%;top:50%;z-index:6;font:900 64px var(--font-display);color:#fff;-webkit-text-stroke:3px #c8243c;text-shadow:0 6px 0 rgba(0,0,0,.3);pointer-events:none}
+.fa-log{list-style:none;margin:8px 0 0;padding:6px 12px;min-height:3.9em;border-radius:12px;font-size:12.5px;line-height:1.35;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.fa-log li{opacity:.55}.fa-log li.last{opacity:1;font-weight:700}.fa-log li.new{animation:falog .35s ease-out}
+@keyframes falog{from{opacity:0;transform:translateX(-10px)}}
+.fa-menu{margin-top:8px;min-height:120px}
+.fa-ask{font:800 13px var(--font-display);margin:0 0 6px;opacity:.8}
+.fa-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.fa-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:8px 10px 8px 46px;min-height:62px;border-radius:14px;border:1px solid color-mix(in srgb,var(--ink) 15%,transparent);background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink);cursor:pointer;text-align:left;font:inherit;transition:transform .12s,box-shadow .15s,background .15s}
+.fa-card:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.fa-card:active:not(:disabled){transform:translateY(1px) scale(.98)}
+.fa-card:disabled{opacity:.45;cursor:default}
+.fa-ce{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:28px}
+.fa-card b{font:800 13.5px/1.15 var(--font-display)}.fa-card em{font-style:normal;font:700 11px var(--font-display);opacity:.85}.fa-card small{font-size:10.5px;line-height:1.25;opacity:.75}
+.fa-card.atk{background:linear-gradient(180deg,rgba(120,228,0,.25),rgba(58,166,0,.18));border-color:rgba(58,166,0,.5)}
+.fa-card.mag{background:linear-gradient(180deg,rgba(161,96,255,.22),rgba(106,43,214,.14));border-color:rgba(106,43,214,.45)}
+.fa-card.pow{background:linear-gradient(180deg,rgba(255,200,0,.25),rgba(255,149,0,.15));border-color:rgba(217,115,0,.45)}
+.fa-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;justify-content:center}
+.fa-chip{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:99px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink);font:600 12.5px var(--font-body);cursor:pointer}
+.fa-chip:disabled{opacity:.45;cursor:default}.fa-chip b{font-weight:800}.fa-chip.flee{margin-left:auto}
+.fa-turn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:110px;font:800 15px var(--font-display);opacity:.85}.fa-turn.foe{color:#e0243c}
+.fa-dots{display:inline-flex;gap:4px}.fa-dots i{width:8px;height:8px;border-radius:50%;background:currentColor;animation:fadot 1s ease-in-out infinite}.fa-dots i:nth-child(2){animation-delay:.15s}.fa-dots i:nth-child(3){animation-delay:.3s}
+@keyframes fadot{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-6px);opacity:1}}
+.fa-end{text-align:center}.fa-end ul{list-style:none;margin:6px auto 10px;padding:0;max-width:440px}.fa-end li{margin:3px 0;opacity:0;animation:faitem .45s ease-out forwards}
+@keyframes faitem{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:none}}
+.fa-banner{display:inline-flex;align-items:center;gap:10px;animation:fabanner .6s cubic-bezier(.2,1.4,.4,1)}.fa-banner span{font-size:40px}.fa-banner b{font:900 26px var(--font-display)}
+.fa-end.win .fa-banner b{color:#1d9a3a}.fa-end.lose .fa-banner b,.fa-end.dead .fa-banner b{color:#c8243c}
+@keyframes fabanner{from{transform:scale(.3);opacity:0}}
+.fa-ds{text-align:center}.fa-ds p{margin:4px 0}.fa-heart{font-size:40px;animation:faheart 1s ease-in-out infinite}
+@keyframes faheart{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
+.ds-pips{display:flex;justify-content:center;gap:26px}.ds-pips i{display:inline-grid;place-items:center;width:30px;height:30px;margin:0 2px;border-radius:50%;font-style:normal;font-weight:900;background:color-mix(in srgb,var(--ink) 10%,transparent);color:transparent;transition:all .3s}
+.ds-pips .ok i.on{background:#2fbf5a;color:#fff;transform:scale(1.1)}.ds-pips .ko i.on{background:#e0243c;color:#fff;transform:scale(1.1)}
+.ds-last{font:800 16px var(--font-display);min-height:1.4em}
+@media (max-width:640px){ .fa-stage{height:220px} .fa-em{font-size:72px} .fa-foe{width:100px;height:100px;right:4%} .fa-me{width:90px;height:90px;left:4%} .fa-me .orb{width:74px;height:74px}
+  .fa-plate{width:52%} .fa-cards{grid-template-columns:repeat(2,1fr)} .fa-card{padding-left:40px} .fa-ce{font-size:24px} .fa-vs{font-size:48px} }
+
+@media (max-width:640px){ .fb-e{width:52px;height:52px;font-size:38px} .fb-acts{grid-template-columns:repeat(2,1fr)} .fb-log{min-height:4.4em;font-size:12px} }
+
 .ficalbtabs{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 8px}
 .ficalbtabs button{display:flex;flex-direction:column;align-items:center;min-width:46px;padding:4px 6px;border-radius:12px;border:2px solid transparent;background:color-mix(in srgb,var(--rc) 22%,transparent);font-size:19px;cursor:pointer;color:var(--ink)}
 .ficalbtabs button small{font-size:10px}.ficalbtabs button[aria-pressed="true"]{border-color:var(--rc)}
@@ -2846,6 +2995,7 @@ html:root[data-skin="minidark"] .ln-wire-under{stroke:rgba(255,255,255,.06)}
         <button class="gel ghost" data-act="center"><span data-t="center"></span></button>
         <button class="gel ghost ctrico" data-act="center" data-ta="center"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M11 1.5h2v2.6a8 8 0 0 1 6.9 6.9h2.6v2h-2.6a8 8 0 0 1-6.9 6.9v2.6h-2v-2.6A8 8 0 0 1 4.1 13H1.5v-2h2.6A8 8 0 0 1 11 4.1zM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 3.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/></svg></button></div>
       </div>
+      <div class="fhud" id="ficHud" hidden></div>
       <div id="treeScroll" class="tree-scroll"><div id="treeSizer" class="tree-sizer"><div id="treeCanvas" class="tree-canvas"></div><div id="mpopl" class="mpopl" aria-hidden="true"></div></div></div>
       <div class="ctime" id="ctime" hidden>
         <button class="gel round ctplay" id="ctPlay" data-act="ctplay"></button>
@@ -2901,9 +3051,34 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BAIN_COLS = ['#3af4ff','#ff4fe0','#ffe84a','#ffffff','#b48cff'];   // 0.2.3d : les couleurs du thème Bain d'étoile
 const isBain = () => document.documentElement.dataset.skin === 'bain';
 let CTRY = 'fr';                                        // pays de la partie : 'fr' ou 'uk' (voir « Pays de la lignée »)
-const APP_VERSION = '0.3.1a';
+const APP_VERSION = '0.3.2a';
 /* Notes de mise à jour (la plus récente en premier) */
 const PATCHNOTES = [
+  {v:'0.3.2a', date:{fr:'24 novembre 2026', en:'November 24, 2026', de:'24. November 2026', es:'24 de noviembre de 2026'},
+   fr:['Mode Fictif : le jeu de rôle arrive ! À l’âge adulte, ton personnage choisit sa classe (guerrier, rôdeur, paladin, mage, clerc ou barde). Chacune a ses PV, sa mana et ses pouvoirs, et chaque race a un pouvoir à elle (souffle de feu des dragons, rage des orques, poussière de rêve des fées…).',
+       'Mode Fictif : l’expérience et les niveaux (jusqu’au niveau 20). Chaque niveau donne plus de PV et de mana, et un point de caractéristique à placer soi-même. Aux niveaux 3, 5, 6, 10, 15 et 20 : nouveaux pouvoirs, attaque en plus, critiques sur 19, héros légendaire, puis mythique. Le niveau aide aussi aux jets d’aventure, et les enfants héritent d’une partie de l’expérience de leurs parents.',
+       'Mode Fictif : des combats au tour par tour, avec barres de vie et de mana, contre 29 monstres (loups, goules, minotaures, vampires, hydres, liches, dragons ancestraux…). Attaques, pouvoirs, potions, fuite : à toi de jouer. Ils surgissent pendant les aventures, et les guerres entre races se jouent contre le champion ennemi.',
+       'Mode Fictif : les expéditions. Choisis un donjon (facile, normal, difficile dès le niveau 3, légendaire dès le niveau 6), puis avance de salle en salle : monstres, pièges aux dés, coffres (attention aux mimiques), feux de camp, et le maître des lieux au bout. L’or reste dans le sac jusqu’au retour, et dans un donjon, tomber peut être mortel : trois jets contre la mort (8 ou plus) décident du sort de ton héros.',
+       'Mode Fictif : le marché. L’or sert à acheter l’équipement de la famille (armes, armures, amulettes, qui passent d’une génération à l’autre), des potions et une plume de phénix, à bâtir le domaine (ferme, taverne, forge, tour de mage, caserne, temple) et à acheter des titres de noblesse, de l’écuyer jusqu’au roi ou à la reine de ta race, quand la renommée suffit.',
+       'Mode Fictif : une famille rivale ! Une maison jalouse se dresse contre la tienne : duels d’honneur, voleurs, complots, et parfois une alliance par le mariage. Rends-lui la pareille (duel, espionnage, sabotage, trêve) et fais tomber sa renommée à zéro pour la ruiner et récupérer sa fortune… jusqu’à ce qu’une nouvelle rivale se lève.',
+       'Mode Fictif : un bestiaire dans l’album, et la renommée de la famille s’affiche face à celle des rivaux.',
+       'Mode Fictif : la barre du héros s’affiche maintenant au-dessus de l’arbre, toujours à portée : niveau, PV, mana et expérience, l’or et la renommée, et les gros boutons Expédition, Marché et Famille rivale.',
+       'Mode Fictif : les combats ont leur arène animée, avec un décor selon le lieu (plaine, donjon, champ de bataille, arène de duel). Le héros et le monstre s’élancent, les sorts traversent l’écran (flèche lunaire, boule de feu, souffle de dragon…), les coups font trembler, les critiques flashent, les barres de vie fondent, et chaque action a son son. Les choix d’attaque sont des cartes claires, avec la chance de toucher, les dégâts et ce que fait chaque pouvoir.',
+       'Mode Fictif : les dragons naissent avec un prénom seulement. Leur nom de dragon (« le Terrifiant », « Dame des Ciels »…) leur vient entre 200 et 800 ans.',
+       'Mode Fictif : nouveau pouvoir des dragons, « Le manger tout cru », contre un petit monstre de niveau inférieur. Réussi : le monstre est avalé et meurt, non sans blesser le dragon de l’intérieur. Raté : le dragon le recrache, le monstre s’en tire presque indemne et le dragon souffre beaucoup.',
+       'Application Windows : le statut Discord affiche aussi le mode Fictif (famille, race, année, héros, combat ou expédition en cours).'],
+   en:['Fictional mode: role-playing is here! At adulthood, your character picks a class (warrior, ranger, paladin, mage, cleric or bard). Each has its own HP, mana and powers, and every race has a power of its own (dragon fire breath, orc rage, fairy dream dust…).',
+       'Fictional mode: experience and levels (up to level 20). Each level brings more HP and mana, and an ability point you spend yourself. At levels 3, 5, 6, 10, 15 and 20: new powers, an extra attack, crits on 19, legendary hero, then mythic. Levels also help with adventure rolls, and children inherit part of their parents’ experience.',
+       'Fictional mode: turn-based fights with health and mana bars, against 29 monsters (wolves, ghouls, minotaurs, vampires, hydras, liches, ancient dragons…). Attacks, powers, potions, fleeing: your call. They show up during adventures, and wars between races are fought against the enemy champion.',
+       'Fictional mode: expeditions. Pick a dungeon (easy, normal, hard from level 3, legendary from level 6), then move from room to room: monsters, dice traps, chests (beware of mimics), campfires, and the master of the place at the end. Gold stays in your bag until you get home, and in a dungeon, falling can be deadly: three death saves decide your hero’s fate.',
+       'Fictional mode: the market. Gold buys the family’s gear (weapons, armour, amulets, handed down through the generations), potions and a phoenix feather, builds the estate (farm, tavern, forge, mage tower, barracks, temple) and buys noble titles, from squire up to monarch of your race, once your fame is high enough.',
+       'Fictional mode: a rival family! A jealous house rises against yours: duels of honour, thieves, plots, and sometimes an alliance through marriage. Strike back (duel, spying, sabotage, truce) and bring their fame down to zero to ruin them and seize their fortune… until a new rival rises.',
+       'Fictional mode: a bestiary in the album, and the family’s fame is shown against the rivals’.',
+       'Fictional mode: the hero bar now sits above the tree, always within reach: level, HP, mana and experience, gold and fame, and big Expedition, Market and Rival family buttons.',
+       'Fictional mode: fights have an animated arena, with scenery to match the place (plains, dungeon, battlefield, duelling arena). Hero and monster lunge, spells fly across the screen (moon arrow, fireball, dragon breath…), blows shake, crits flash, health bars drain, and every action has its sound. Attack choices are clear cards showing the chance to hit, the damage and what each power does.',
+       'Fictional mode: dragons are born with a first name only. Their dragon name (“the Terrifying”, “Lady of the Skies”…) comes to them between 200 and 800 years old.',
+       'Fictional mode: a new dragon power, “Swallow it whole”, against a small, lower-level monster. On a hit, the monster is swallowed and dies, though it hurts the dragon from inside. On a miss, the dragon spits it back out: the monster gets away almost unharmed and the dragon suffers a lot.',
+       'Windows app: the Discord status now shows Fictional mode too (family, race, year, hero, fight or expedition in progress).']},
   {v:'0.3.1a', date:{fr:'24 novembre 2026', en:'November 24, 2026', de:'24. November 2026', es:'24 de noviembre de 2026'},
    fr:['Nouveau pays : la Belgique ! Prénoms wallons et flamands, noms de famille (avec les Italiens des charbonnages après 1946), 47 villes sur une nouvelle carte, l’histoire du pays de Charles Quint à la Belgique fédérale, ses guerres, le franc belge, les humanités et le CEB, 14 métiers (dentellière de Bruges, friturier, moine brasseur trappiste, diamantaire anversois, dessinateur de BD, pêcheur de crevettes à cheval…) et 10 centres d’intérêt (colombophilie, balle pelote, carnaval de Binche, Diables rouges…).',
        'Nouveaux métiers : 5 en Suisse (horloger en grandes complications, chauffeur de CarPostal, machiniste de funiculaire, coutelier de couteaux suisses, gardien de cabane), 8 en Allemagne (bretzelier, horloger de coucous, pilote de Zeppelin, serveur de l’Oktoberfest, vendeur de currywurst, souffleur de boules de Noël, marchand de marché de Noël, mineur de la Ruhr) et 3 en France (Compagnon du Devoir, paludier de Guérande, garçon de café parisien).',
@@ -7851,6 +8026,15 @@ const sfx = (() => {
     osc.connect(gn); gn.connect(master); osc.start(tt); osc.stop(tt + dur + .05);
   }
   const bell = (f,t0) => [1,2.4,3.9,5.4].forEach((h,k) => note(f*h, t0, 1.7/(k+1), {vol:.07/(k+1.3)}));
+  function noise(t0, dur, o = {}){                 // 0.3.2a : un souffle filtré (coups, flammes, déglutitions)
+    if(muted) return; const c = init(); if(!c) return;
+    const tt = c.currentTime + t0, n = c.createBufferSource(), buf = c.createBuffer(1, Math.ceil(c.sampleRate * dur), c.sampleRate), d = buf.getChannelData(0);
+    for(let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    n.buffer = buf; const flt = c.createBiquadFilter(), g = c.createGain();
+    flt.type = o.type || 'bandpass'; flt.Q.value = o.q ?? 1; flt.frequency.setValueAtTime(o.f || 1200, tt); if(o.to) flt.frequency.exponentialRampToValueAtTime(o.to, tt + dur);
+    g.gain.setValueAtTime(.0001, tt); g.gain.exponentialRampToValueAtTime(o.vol ?? .2, tt + (o.att || .005)); g.gain.exponentialRampToValueAtTime(.0001, tt + dur);
+    n.connect(flt); flt.connect(g); g.connect(master); n.start(tt); n.stop(tt + dur + .05);
+  }
   return {
     init, get muted(){ return muted; }, setMuted(m){ muted = m; }, setVolume(v){ vol = v; if(master) master.gain.value = .55 * v; },
     click(){ note(1046,0,.09,{to:1568,vol:.06}); note(2093,0,.05,{vol:.02,type:'triangle'}); },
@@ -7889,6 +8073,31 @@ const sfx = (() => {
       [4699,3951,3136,2637,2093,1568,1175].forEach((f,i) => note(f,1.25+i*.07,.8,{vol:.022,type:'triangle'}));
       [[220,277,330],[208,262,311]].forEach((ch,i) => ch.forEach(f => note(f,2.1+i*.5,1.4,{vol:.03,att:.1,type:'sawtooth'})));
     },
+    // 0.3.2a : les sons des combats du mode Fictif
+    swing(){ noise(0,.2,{f:500,to:3200,q:.7,vol:.13}); },
+    bow(){ note(880,0,.08,{to:220,type:'triangle',vol:.07}); noise(.02,.22,{f:2500,to:6000,q:1.5,vol:.06}); },
+    hit(){ noise(0,.14,{type:'lowpass',f:1400,to:180,vol:.42}); note(120,0,.2,{to:52,type:'triangle',vol:.2}); noise(.01,.08,{f:3800,q:3,vol:.05}); },
+    crit(){ noise(0,.22,{type:'lowpass',f:2200,to:120,vol:.5}); note(90,0,.35,{to:40,type:'triangle',vol:.25}); [1568,2093,3136].forEach((f,i) => note(f,.05+i*.05,.35,{vol:.04,type:'triangle'})); },
+    miss(){ noise(0,.25,{f:900,to:2600,q:.6,vol:.08}); note(520,.05,.18,{to:300,type:'triangle',vol:.03}); },
+    zap(){ [880,1175,1568].forEach((f,i) => note(f,i*.05,.22,{to:f*1.6,type:'square',vol:.025})); noise(0,.3,{f:4000,to:9000,q:2,vol:.05}); },
+    fire(){ noise(0,.85,{type:'lowpass',f:300,to:2600,vol:.34,att:.05}); note(70,0,.8,{to:45,type:'sawtooth',vol:.09}); noise(.35,.6,{type:'lowpass',f:1800,to:200,vol:.25}); },
+    heal(){ [659,880,1046,1318,1760].forEach((f,i) => note(f,i*.07,.55,{vol:.05,type:'triangle'})); note(2637,.38,.6,{vol:.02}); },
+    shield(){ note(392,0,.5,{to:784,glide:.3,vol:.07,type:'triangle'}); noise(.05,.45,{f:3200,q:6,vol:.07}); bell(1568,.2); },
+    sleep(){ [1318,1175,988,784].forEach((f,i) => note(f,i*.12,.5,{vol:.045})); },
+    charge(){ note(220,0,.45,{to:880,glide:.4,type:'sawtooth',vol:.05}); [1318,1760].forEach((f,i) => note(f,.35+i*.06,.3,{vol:.04,type:'triangle'})); },
+    rage(){ note(110,0,.5,{to:82,type:'sawtooth',vol:.12}); note(165,.05,.45,{to:110,type:'square',vol:.06}); noise(0,.4,{type:'lowpass',f:700,vol:.2}); },
+    mock(){ [523,659,494,622].forEach((f,i) => note(f,i*.09,.18,{type:'square',vol:.04})); },
+    roar(){ note(98,0,.9,{to:62,type:'sawtooth',vol:.12,att:.06}); note(104,.02,.85,{to:65,type:'square',vol:.05,att:.06}); noise(0,.9,{type:'lowpass',f:600,to:250,vol:.22,att:.08}); },
+    bite(){ noise(0,.1,{type:'lowpass',f:1000,to:200,vol:.35}); note(160,0,.15,{to:70,type:'triangle',vol:.16}); noise(.08,.1,{f:2000,q:2,vol:.08}); },
+    potion(){ [330,392,523,659].forEach((f,i) => note(f,i*.08,.12,{to:f*1.3,vol:.06})); note(1046,.34,.4,{vol:.04,type:'triangle'}); },
+    gulp(){ note(260,0,.55,{to:55,glide:.5,type:'sawtooth',vol:.11}); noise(0,.5,{type:'lowpass',f:500,to:120,vol:.25}); [180,140,110].forEach((f,i) => note(f,.5+i*.09,.08,{to:f*.6,vol:.08})); },
+    burp(){ for(let i = 0; i < 7; i++) note(95 + (i % 2) * 18, i * .05, .06, {type:'sawtooth', vol:.07}); noise(0,.4,{type:'lowpass',f:400,vol:.15}); },
+    heart(){ note(62,0,.16,{type:'sine',vol:.3}); note(58,.2,.18,{type:'sine',vol:.24}); },
+    coin(){ note(1976,0,.12,{vol:.05,type:'triangle'}); note(2637,.08,.35,{vol:.05,type:'triangle'}); },
+    flee(){ noise(0,.35,{f:600,to:300,q:.6,vol:.08}); [784,659,523].forEach((f,i) => note(f,i*.06,.12,{vol:.04,type:'triangle'})); },
+    vanquish(){ note(392,0,.5,{to:98,glide:.45,type:'sawtooth',vol:.07}); noise(.1,.6,{type:'lowpass',f:1200,to:100,vol:.2}); },
+    lvup(){ [523,659,784,1046,1318,1568].forEach((f,i) => { note(f,i*.07,.45,{vol:.06,type:'triangle'}); note(f*2,i*.07,.2,{vol:.015,type:'square'}); }); bell(2093,.45); bell(2637,.6); },
+    vs(){ note(196,0,.3,{type:'sawtooth',vol:.06}); note(294,.12,.45,{type:'sawtooth',vol:.06}); noise(0,.3,{f:1500,to:300,q:1,vol:.08}); },
     war(){ note(110,0,.9,{to:82,vol:.12,type:'triangle'}); note(98,.35,1.1,{to:73,vol:.1,type:'triangle'}); note(147,.7,1,{vol:.05}); },
     growl(){                                         // contamination : un accord grave et mystérieux qui frissonne, avec un souffle
       if(muted) return; const c = init(); if(!c) return;
@@ -10679,7 +10888,8 @@ function riskTile(p, short){
   return `<div><dt>${t(short ? 'f_risk_short' : 'f_risk')}</dt><dd>${pctTxt(riskOf(p))}</dd></div>`;
 }
 function renderSide(){                                  // 0.2.6b : en mode libre, le panneau suit la date du jeu
-  if(S && S.fic){ ficSide(); return; }
+  const hud = $('#ficHud'); if(hud && !(S && S.fic)){ hud.hidden = true; const bx = hud.closest('.treebox'); if(bx) bx.classList.remove('fichud'); }   // 0.3.2a : la barre du héros du mode Fictif
+  if(S && S.fic){ ficHud(); ficSide(); return; }
   if(S && S.creative){ const sh = cShadow(S.t); if(sh && sh.people[S.activeId]){ const S0 = S; S = sh; try{ renderSide0(); } finally { S = S0; } return; } }
   renderSide0();
 }
@@ -12391,7 +12601,7 @@ function runFx(){
 /* ================= Modales ================= */
 function openModal(html, {locked=false, sound=true} = {}){
   if(TPICK) tpEnd();
-  const m = $('#modal'); m.classList.remove('wide', 'devcon'); achOpen = false;
+  const m = $('#modal'); m.classList.remove('wide', 'devcon', 'fa-modal'); achOpen = false;
   m.innerHTML = (locked ? '' : '<button class="gel round ghost x" data-act="close" aria-label="×"><svg viewBox="0 0 24 24"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7l-1.4-1.4L9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>') + html;
   const wasOpen = modalOpen;
   $('#overlay').hidden = false; modalOpen = true; modalLocked = locked;
@@ -12400,7 +12610,7 @@ function openModal(html, {locked=false, sound=true} = {}){
 }
 function closeModal(force){
   if(modalLocked && !force) return;
-  $('#overlay').hidden = true; $('#modal').innerHTML = ''; $('#modal').classList.remove('wide', 'devcon'); achOpen = false; modalOpen = false; modalLocked = false; namingId = null;
+  $('#overlay').hidden = true; $('#modal').innerHTML = ''; $('#modal').classList.remove('wide', 'devcon', 'fa-modal'); achOpen = false; modalOpen = false; modalLocked = false; namingId = null;
   if(S && dirty && !$('#game').hidden) render();
   updateClock();
 }
@@ -13519,6 +13729,13 @@ document.addEventListener('change', e => {        // âge préféré : nouvelles
 function desktopPresence(){
   const fr = LANG === 'fr', de = LANG === 'de', es = LANG === 'es', L3 = (a, b, c, d) => fr ? a : de ? c : es ? d : b, gn = n => n > 1 ? L3('générations', 'generations', 'Generationen', 'generaciones') : L3('génération', 'generation', 'Generation', 'generación');
   if(!S || $('#game').hidden) return {details: L3('Crée sa lignée', 'Starting a bloodline', 'Gründet eine Blutlinie', 'Funda su linaje'), state: L3('Écran de départ', 'Start screen', 'Startbildschirm', 'Pantalla de inicio')};
+  if(S.fic){                                           // 0.3.2a : le mode Fictif
+    const F = S.fic, me = active(), R0 = FIC_R[F.race], race = (fr ? R0.n[1] : R0.n[3]);
+    const details = L3(`Mode Fictif · Famille ${F.clan}`, `Fictional mode · The ${F.clan} family`, `Fiktiver Modus · Familie ${F.clan}`, `Modo Ficticio · Familia ${F.clan}`) + ` · ${R0.e} ${race}`;
+    const what = FB ? L3('en plein combat', 'in a fight', 'im Kampf', 'en combate') : F.dj ? L3('en expédition', 'on an expedition', 'auf Expedition', 'de expedición') : '';
+    const who = me && me.death == null ? `${me.first}${me.cl ? ` · ${ficClName(me)} ${L3('niv.', 'lv', 'St.', 'niv.')} ${me.lv}` : ''}` : '';
+    return {details, state: [L3('An', 'Year', 'Jahr', 'Año') + ' ' + ficY(yearOf(S.t)), who, what, F.fame ? `⭐ ${F.fame}` : ''].filter(Boolean).join(' · ')};
+  }
   const f = P(S.founderId), all = Object.values(S.people), gens = Math.max(1, ...all.filter(p => p.blood).map(genOf));
   const fam = living().filter(p => inFamily(p)), details = L3(`Famille ${familyName(f)}`, `The ${familyName(f)} family`, `Familie ${familyName(f)}`, `Familia ${familyName(f)}`) + ' · ' + yearOf(S.t);
   let state;
@@ -15132,7 +15349,11 @@ function ficStats(r, par){                                 // les caractéristiq
   if(par && par.length === 2 && par.every(x => x && x.st)) return R0.mods.map((m, i) => Math.max(3, Math.min(22, Math.round((par[0].st[i] + par[1].st[i]) / 2 + rnd(-2, 2)))));
   return R0.mods.map(m => Math.max(3, Math.min(22, d6() + d6() + d6() + m)));
 }
-function ficInit(p, par){ const r = S.fic.race; p.st = ficStats(r, par); p.lifeEnd = ficLifeEnd(r); p.fint = p.fint || []; p.appr = rnd(0, 9); return p; }
+function ficInit(p, par){ const r = S.fic.race; p.st = ficStats(r, par); p.lifeEnd = ficLifeEnd(r); p.fint = p.fint || []; p.appr = rnd(0, 9); ficEpi(p, r); return p; }
+function ficEpi(p, r){                                     // 0.3.2a : un dragon naît avec un prénom seulement ; son titre lui vient entre 200 et 800 ans
+  if(FIC_R[r].sur !== 'epithet' || p.epiAt != null) return; p.epiAt = rnd(200, 800);
+  if(p.last && ageAt(p, S.t) < p.epiAt){ p.epi = p.last; p.last = ''; }
+}
 function ficJob(p, d, change){
   let j = rnd(0, 9); if(change && p.work && p.work.s === 'fjob') while(j === p.work.j) j = rnd(0, 9);
   p.work = {s: 'fjob', j, since: d}; ficAlbMark('j', j);
@@ -15166,7 +15387,8 @@ function ficAlbum(re){
     <div class="ficalbtabs">${FIC_IDS.map(x => { const b = FICALB[x] || {j: {}, i: {}}, n = Object.keys(b.j).length + Object.keys(b.i).length;
       return `<button type="button" data-act="ficalbr" data-v="${x}" aria-pressed="${x === r}" style="--rc:${FIC_R[x].c}" title="${esc(ficRaceName(x))}">${FIC_R[x].e}<small>${n}/20</small></button>`; }).join('')}</div>
     <div class="eyebrow sect">${FL('Métiers', 'Jobs')} · ${nJ}/10</div><ul class="ficalb">${R0.jobs.map((j, i) => cell(a.j[i], LANG === 'fr' ? (j[0] === j[1] ? j[0] : `${j[0]} / ${j[1]}`) : j[2])).join('')}</ul>
-    <div class="eyebrow sect">${FL('Centres d’intérêt', 'Interests')} · ${nI}/10</div><ul class="ficalb">${R0.ints.map((x, i) => cell(a.i[i], FL(x[0], x[1]))).join('')}</ul>`, {sound: !re});
+    <div class="eyebrow sect">${FL('Centres d’intérêt', 'Interests')} · ${nI}/10</div><ul class="ficalb">${R0.ints.map((x, i) => cell(a.i[i], FL(x[0], x[1]))).join('')}</ul>
+    <div class="eyebrow sect">${FL('Bestiaire (toutes races)', 'Bestiary (all races)')} · ${FIC_MOB.filter(m => (FICALB.mob || {})[m[0]]).length}/${FIC_MOB.length}</div><ul class="ficalb fbest">${FIC_MOB.map(m => { const n = (FICALB.mob || {})[m[0]]; return `<li class="${n ? 'on' : ''}">${n ? `${m[1]} ${esc(FL(m[2], m[3]))} <small>×${n}</small>` : '???'}</li>`; }).join('')}</ul>`, {sound: !re});
   $('#modal').classList.add('wide');
 }
 
@@ -15213,6 +15435,7 @@ function ficStart(){
   S = newState(0); S.country = CTRY; S.noAch = true; S.familyAuto = true;
   S.fic = {race, gold: 25, war: null, nextWar: Math.round(rnd(8, 25) * k), nextEv: Math.max(1, Math.round(rnd(2, 4) * k)), smCool: -1e9,
     clan: R0.sur === 'epithet' ? cap(first) : cap(last || first)};
+  ficEnsureF();
   const city = pick(R0.places.split('|'));
   const p = addPerson({first: cap(first), last: R0.sur === 'epithet' ? last : cap(last), sex: fSex(), birth: fromYMD(-mat - 1, rnd(0, 11), rnd(1, 28)), blood: true, city, birthCity: city});
   ficInit(p); if(p.lifeEnd < mat + 2) p.lifeEnd = mat + Math.max(2, Math.round(rnd(20, 50) * k));   // le fondateur vit au moins un peu
@@ -15241,7 +15464,7 @@ function ficSpouseDraft(p){                                // un(e) prétendant(
   const sA = Math.max(mat, Math.round(A + rnd(-6, 6) * k)), n = ficName(sex);
   const last = R0.sur === 'clan' ? ficName(pick(['M', 'F'])).first : n.last;
   const q = {first: n.first, last, sex, birth: Math.floor(S.t) - Math.round(sA * 365.25) - rnd(0, 300), blood: false, city: pick(R0.places.split('|'))};
-  q.birthCity = q.city; q.st = ficStats(r); q.lifeEnd = ficLifeEnd(r); q.fint = []; q.appr = rnd(0, 9);
+  q.birthCity = q.city; q.st = ficStats(r); q.lifeEnd = ficLifeEnd(r); q.fint = []; q.appr = rnd(0, 9); ficEpi(q, r);
   if(q.lifeEnd <= sA + 1) q.lifeEnd = sA + Math.max(2, Math.round(rnd(5, 40) * k));
   q.work = {s: 'fjob', j: rnd(0, 9), since: S.t};
   return q;
@@ -15259,7 +15482,7 @@ function ficBirth(u, d){
   let n = ficName(sex); for(let i = 0; i < 8 && used.has(n.first); i++) n = ficName(sex);
   const mom = a.sex === 'F' ? a : b;
   const c = addPerson({first: n.first, last: R0.sur === 'epithet' ? n.last : a.last, sex, birth: Math.min(d, Math.floor(S.t)), blood: true, parents: [u.a, u.b], city: mom.city, birthCity: mom.city});
-  ficInit(c, [a, b]);
+  ficInit(c, [a, b]); const x0 = Math.round(Math.max(ficTotXP(a), ficTotXP(b)) * .15); if(x0) c.xp0 = x0;   // 0.3.2a : les leçons des parents
   log('birth', 'fic_birth', [c.id, a.id, b.id], c.birth, ficClose(c) ? undefined : false);
   return c;
 }
@@ -15278,7 +15501,7 @@ function ficYear(y){
   for(const p of fam){
     const A = ageAt(p, S.t); let cause = null;
     if(A >= p.lifeEnd) cause = A < mat * .6 ? FL('d’une maladie infantile', 'of a childhood illness') : p.hurt && A < R0.life[0] ? FL('des suites de ses blessures', 'of their old wounds') : FL('de vieillesse', 'of old age');
-    else if(F.war && p.id !== S.activeId && A >= mat && A <= fe * 1.5 && Math.random() < .03 / k * (R0.sp === 'warrior' ? .5 : 1))
+    else if(F.war && p.id !== S.activeId && A >= mat && A <= fe * 1.5 && Math.random() < .03 / k * (R0.sp === 'warrior' ? .5 : 1) * (1 - .25 * ((F.dom || {}).caserne || 0)))
       cause = FL(`au combat contre les ${ficRaceName(F.war.e)}`, `in battle against the ${ficRaceName(F.war.e)}`);
     else if(Math.random() < .002 / k) cause = pick(FL(['d’une fièvre', 'd’un accident', 'emporté par une bête sauvage'], ['of a fever', 'in an accident', 'taken by a wild beast']));
     if(cause) ficDie(p, dIn(), cause);
@@ -15287,6 +15510,7 @@ function ficYear(y){
   // 3. métiers et centres d'intérêt
   for(const p of alive){
     const A = ageAt(p, S.t);
+    if(p.epi && A >= p.epiAt){ p.last = p.epi; delete p.epi; log('star', 'fic_msg', [FL(`🐉 À ${A} ans, ${p.first} reçoit enfin son nom de dragon : ${p.first}, ${p.last} !`, `🐉 At ${A}, ${p.first} finally earns a dragon name: ${p.first}, ${p.last}!`)], dIn(), ficClose(p) ? undefined : false); }
     if(A >= Math.round(mat * .9)){ if(!p.work || p.work.s !== 'fjob') ficJob(p, dIn()); else if(Math.random() < .02 / k) ficJob(p, dIn(), true); }
     if(A >= Math.round(mat * .6) && (p.fint || []).length < 3 && Math.random() < ((p.fint || []).length ? .02 : .35) / k) ficInterest(p);
   }
@@ -15306,11 +15530,19 @@ function ficYear(y){
     const pr = .11 / k * R0.fert * cap0 * (nk >= (R0.sp === 'prolific' ? 9 : 6) ? .25 : 1);
     if(Math.random() < pr){ const d = dIn(), n = Math.random() < (R0.sp === 'prolific' ? .14 : .03) ? 2 : 1; for(let i = 0; i < n; i++) ficBirth(u, d); }
   }
-  // 6. une aventure pour le personnage joué (un jet de d20), de temps en temps
+  // 0.3.2a : le jeu de rôle — classes des adultes, expérience, repos (PV et mana), revenus du domaine, la maison rivale
+  ficEnsureF();
+  for(const p of alive){ if(p.death != null || !p.st) continue;
+    if(ageAt(p, S.t) >= mat){ ficEnsure(p); if(!p.cl && p.id !== S.activeId) p.cl = ficAutoClass(p); if(p.cl && p.id !== S.activeId) ficXP(p, Math.max(1, Math.round(20 / k)), null, true); }
+    if(p.hp != null){ p.hp = ficHpMax(p); p.mp = ficMpMax(p); } }
+  F.goldF += ficIncome(); const gi = Math.floor(F.goldF); if(gi > 0){ F.gold += gi; F.goldF -= gi; }
+  const me0 = active(); if(me0 && me0.death == null && !F.ev && !me0.cl && ageAt(me0, S.t) >= mat) F.ev = {id: 'class'};
+  ficRvYear(y);
+  // 6. une aventure pour le personnage joué (un jet de d20, ou un monstre à combattre), de temps en temps
   const me = active();
   if(me && me.death == null && !F.ev && y >= F.nextEv && ageAt(me, S.t) >= Math.round(mat * .6)){
     const pool = FIC_EV.filter(e => !e.only && (!e.race || e.race === F.race) && (!e.nr || e.nr !== F.race)).flatMap(e => Array(e.w || 1).fill(e));
-    F.ev = {id: pick(pool).id, r: pick(FIC_IDS.filter(x => x !== F.race && x !== 'dragon'))}; F.nextEv = y + Math.max(1, Math.round(rnd(6, 14) * k));
+    F.ev = me.cl && Math.random() < .32 ? {id: 'mob', c: (me.lv || 1) + rnd(-1, 1)} : {id: pick(pool).id, r: pick(FIC_IDS.filter(x => x !== F.race && x !== 'dragon'))}; F.nextEv = y + Math.max(1, Math.round(rnd(6, 14) * k));
   }
   ficAlbSave(); dirty = true;
 }
@@ -15320,15 +15552,15 @@ function ficRoll(p, st, dc){
   const sp = FIC_R[S.fic.race].sp, adv = (sp === 'archer' && st === 1) || (sp === 'charm' && st === 5) || (sp === 'breath' && st === 0) || (sp === 'ancient' && st === 2);
   const a = d20(), b = adv ? d20() : null; let nat = adv ? Math.max(a, b) : a, rer = null;
   if(sp === 'reroll1' && nat === 1){ rer = d20(); nat = rer; }
-  const mod = fMod(p.st[st]) + (sp === 'warrior' && st === 0 ? 2 : 0), tot = nat + mod;
+  const mod = fMod(p.st[st]) + (sp === 'warrior' && st === 0 ? 2 : 0) + ficLvB(p), tot = nat + mod;
   const crit = nat >= (sp === 'magic' ? 18 : 20), fumble = nat === 1;
   return {a, b, rer, nat, mod, tot, dc, ok: crit || (!fumble && tot >= dc), crit, fumble, adv};
 }
 function ficDiceModal(o){                                  // la fenêtre du jet : on lance, le d20 roule, le résultat s'affiche
-  FIC_DICE = o; const p = o.who, mod = fMod(p.st[o.st]) + (FIC_R[S.fic.race].sp === 'warrior' && o.st === 0 ? 2 : 0);
+  FIC_DICE = o; const p = o.who, mod = fMod(p.st[o.st]) + (FIC_R[S.fic.race].sp === 'warrior' && o.st === 0 ? 2 : 0) + ficLvB(p);
   openModal(`<div class="m-head"><div class="eyebrow">🎲 ${esc(o.eyebrow)} · ${esc(fmt(S.t))}</div><h2>${esc(o.title)}</h2><p>${esc(o.text)}</p></div>
     <div class="ficdice"><div class="d20" id="ficD20"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,3 94,27 94,73 50,97 6,73 6,27"/><polygon class="in" points="50,24 75,66 25,66"/><path class="ln" d="M50 3 50 24M94 27 75 66M94 73 75 66M50 97 50 66M6 73 25 66M6 27 25 66M50 24 25 66M50 24 75 66"/></svg><b id="ficDN">20</b></div>
-      <p class="ficcheck">${esc(FL(`Jet de ${fStatN(o.st)}`, `${fStatN(o.st)} check`))} · ${FL('DD', 'DC')} ${o.dc}<small>${esc(`${p.first} : d20 ${fModT(mod)} (${fStat(o.st)} ${p.st[o.st]})`)}</small></p>
+      <p class="ficcheck">${esc(FL(`Jet ${/^[AEIOU]/.test(fStatN(o.st)) ? 'd’' : 'de '}${fStatN(o.st)}`, `${fStatN(o.st)} check`))} · ${FL('DD', 'DC')} ${o.dc}<small>${esc(`${p.first} : d20 ${fModT(mod)} (${fStat(o.st)} ${p.st[o.st]}${ficLvB(p) ? ` · ${FL('niv.', 'lv')} ${p.lv} : +${ficLvB(p)}` : ''})`)}</small></p>
       <p class="ficres" id="ficRes" hidden></p><ul class="ficout" id="ficOut" hidden></ul></div>
     <div class="m-actions"><button class="gel lime big" data-act="ficroll" id="ficRollB"><span>🎲 ${FL('Lancer le d20', 'Roll the d20')}</span></button></div>`, {locked: true});
 }
@@ -15350,16 +15582,23 @@ function ficRollGo(){
     dirty = true; save();
   }, 950);
 }
-function ficDone(){ const o = FIC_DICE; FIC_DICE = null; closeModal(true); if(o && o.onDone) o.onDone(); dirty = true; render(); save(); }
+function ficDone(){ const o = FIC_DICE; FIC_DICE = null; closeModal(true); ficChain(() => { if(o && o.onDone) o.onDone(); dirty = true; render(); save(); }); }   // 0.3.2a : les points de niveau d'abord
 
 /* ---------- les aventures ---------- */
 function ficOpenEvent(){
+  const id = S.fic.ev && S.fic.ev.id;                      // 0.3.2a : classes, monstres, donjons, guerre et maison rivale
+  if(id === 'class') return ficClassPick();
+  if(id === 'mob') return ficMobEvent();
+  if(id === 'dj') return ficDjOpen();
+  if(id === 'rvintro') return ficRvIntro();
+  if(id === 'rv') return ficRvEvent();
+  if(id === 'guerre' && active() && active().cl) return ficWarBattle();
   const F = S.fic, me = active(), ev = FIC_EV.find(e => e.id === (F.ev && F.ev.id)) || FIC_EV[0];
   if(!me || me.death != null){ F.ev = null; return; }
   const rr = (F.ev && F.ev.r) || pick(FIC_IDS.filter(x => x !== F.race && x !== 'dragon'));
   const tx = a => FL(a[0], a[1]).replace(/\{n\}/g, me.first).replace(/\{e\}/g, F.war ? ficRaceName(F.war.e) : ficRaceName(rr)).replace(/\{r\}/g, ficOne(rr)).replace(/\{d\}/g, gx(me, '', 'e'));
   ficDiceModal({who: me, st: ev.st, dc: ev.dc, eyebrow: FL('Aventure', 'Adventure'), title: tx(ev.t), text: tx(ev.x),
-    onResult: r => { const out = [tx(r.ok ? ev.ok : ev.ko)].concat(ficApply(ev, me, r)); log(r.ok ? 'star' : 'crime', 'fic_roll', [me.id, tx(ev.t), r.ok ? 1 : 0, r.nat, r.tot], Math.floor(S.t), false); return out; },
+    onResult: r => { const out = [tx(r.ok ? ev.ok : ev.ko)].concat(ficApply(ev, me, r)); if(me.death == null){ ficEnsure(me); if(r.ok){ ficXP(me, (15 + 10 * me.lv) * (r.crit ? 2 : 1), out); ficFame(2); } else ficXP(me, 5, out); } log(r.ok ? 'star' : 'crime', 'fic_roll', [me.id, tx(ev.t), r.ok ? 1 : 0, r.nat, r.tot], Math.floor(S.t), false); return out; },
     onDone: () => { F.ev = null; }});
 }
 function ficApply(ev, p, r){                               // les effets du jet, et ce qu'on en dit
@@ -15391,7 +15630,7 @@ function ficApply(ev, p, r){                               // les effets du jet,
 /* ---------- trouver l'âme sœur, aux dés ---------- */
 function ficSoulmate(){
   const me = active(); if(!me || me.death != null || householdUnion(me.id)) return;
-  FIC_SM = [0, 1, 2].map(() => Object.assign(ficSpouseDraft(me), {dc: rnd(8, 15)}));
+  FIC_SM = [0, 1, 2].map(() => Object.assign(ficSpouseDraft(me), {dc: Math.max(5, rnd(8, 15) - ((S.fic.title) || 0))}));
   openModal(`<div class="m-head"><div class="eyebrow">🎲 ${FL('L’âme sœur', 'True love')}</div><h2>${t('find')}</h2>
       <p class="hint">${FL('Choisis quelqu’un, puis tente ta chance : un jet de Charisme contre la difficulté de la personne.', 'Pick someone, then try your luck: a Charisma check against how hard they are to win over.')}</p></div>
     <div class="pastppl ficcands">${FIC_SM.map((q, i) => { const A = Math.round((S.t - q.birth) / 365.25);
@@ -15475,6 +15714,7 @@ function ficFiche(id){
       <div><dt>${t('f_city')}</dt><dd>${esc(p.city || '')}</dd></div>
       <div><dt>${t('f_kids')}</dt><dd>${kids.length}</dd></div>
       <div class="span2"><dt>${FL('Caractéristiques', 'Abilities')}</dt><dd>${ficStatsHTML(p)}</dd></div>
+      ${p.cl ? `<div class="span2"><dt>${FL('Classe', 'Class')}</dt><dd>${ficCl(p).e} ${esc(ficClName(p))} · ${FL('niveau', 'level')} ${p.lv || 1}${p.hp != null && p.death == null ? ` · ❤️ ${p.hp}/${ficHpMax(p)}` : ''}</dd></div>` : ''}
       ${p.fint && p.fint.length ? `<div class="span2"><dt>${FL('Centres d’intérêt', 'Interests')}</dt><dd>${esc(p.fint.map(i => ficIntName(i)).join(' · '))}</dd></div>` : ''}
       ${par.length ? `<div class="span2"><dt>${FL('Parents', 'Parents')}</dt><dd>${par.map(x => esc(nm(x))).join(' & ')}</dd></div>` : ''}
       ${sp.length ? `<div class="span2"><dt>${FL('Conjoint', 'Spouse')}</dt><dd>${sp.map(x => esc(nm(x))).join(', ')}</dd></div>` : ''}
@@ -15492,8 +15732,894 @@ function ficPills(){
 const ficPer = () => { const y = ficK() / 4 * S.speed; return y < 1.6 ? 1 : y < 16 ? 10 : 100; };
 const ficRate = () => { const y = ficK() / 4 * S.speed; return y >= 1 ? FL(`${y.toLocaleString(mLoc(), {maximumFractionDigits: 1})} ans / s`, `${y.toLocaleString(mLoc(), {maximumFractionDigits: 1})} yrs / s`) : FL(`1 an = ${(1 / y).toLocaleString(mLoc(), {maximumFractionDigits: 1})} s`, `1 yr = ${(1 / y).toLocaleString(mLoc(), {maximumFractionDigits: 1})} s`); };
 
+/* ================= 0.3.2a : LE JEU DE RÔLE DU MODE FICTIF ================= */
+// Classes et niveaux (XP), PV et mana, combats au tour par tour contre des monstres, donjons à plusieurs salles,
+// marché (équipement de famille, potions), domaine (bâtiments qui rapportent), titres de noblesse, renommée, et une famille rivale.
+const FIC_CL = {
+  guerrier: {e: '⚔️', n: ['Guerrier', 'Guerrière', 'Warrior'], st: 0, hd: 10, mp: [0, .5], d: ['Robuste et redoutable au corps à corps.', 'Tough and deadly up close.']},
+  rodeur: {e: '🏹', n: ['Rôdeur', 'Rôdeuse', 'Ranger'], st: 1, hd: 8, mp: [1, .5], d: ['Précis et rapide : un chasseur de monstres.', 'Precise and swift: a monster hunter.']},
+  paladin: {e: '🛡️', n: ['Paladin', 'Paladine', 'Paladin'], st: 0, hd: 10, mp: [2, 1], d: ['Un guerrier béni qui soigne et châtie.', 'A blessed warrior who heals and smites.']},
+  mage: {e: '🔮', n: ['Mage', 'Mage', 'Mage'], st: 3, hd: 6, mp: [4, 2], d: ['Fragile, mais ses sorts dévastent tout.', 'Fragile, but their spells wreck everything.']},
+  clerc: {e: '✨', n: ['Clerc', 'Clerc', 'Cleric'], st: 4, hd: 8, mp: [3, 1.5], d: ['Soigne, protège et foudroie les ténèbres.', 'Heals, protects and smites the darkness.']},
+  barde: {e: '🎻', n: ['Barde', 'Barde', 'Bard'], st: 5, hd: 8, mp: [3, 1.5], d: ['Charme, ruse et magie : un touche-à-tout.', 'Charm, wit and magic: a jack of all trades.']},
+};
+const FIC_CLS = Object.keys(FIC_CL), FIC_MARTIAL = ['guerrier', 'rodeur', 'paladin', 'barde'];   // ceux qui gagnent une attaque en plus au niveau 6
+const FIC_RMP = {fee: 8, elfe: 6, gnome: 6, dragon: 6, drakeide: 4, satyre: 4, griffon: 2, centaure: 2, gobelin: 2, nain: 2, orque: 0, troll: 0};   // la mana de base de chaque race
+const FIC_RHP = {dragon: 2, troll: 1, nain: 1, drakeide: 1, orque: 1, centaure: 1};                                                        // des PV en plus par niveau
+// Les pouvoirs : k = dmg (dégâts magiques qui touchent toujours), heal, ac (bonus de CA), stun (tours d'étourdissement), smite (dégâts en plus au prochain coup),
+// adv (attaque avec avantage + dés en plus), buff (dégâts en plus à chaque coup), deb (malus d'attaque du monstre), multi (plusieurs attaques)
+const FIC_AB = {
+  r_elfe: {e: '🌙', n: ['Flèche lunaire', 'Moon arrow'], mp: 3, k: 'dmg', d: '2d8', s: 3},
+  r_nain: {e: '🪨', n: ['Rune de pierre', 'Stone rune'], mp: 2, once: 1, k: 'ac', v: 4},
+  r_gobelin: {e: '🗡️', n: ['Coup bas', 'Low blow'], once: 1, k: 'adv', d: '2d6'},
+  r_troll: {e: '💚', n: ['Régénération', 'Regeneration'], once: 1, k: 'heal', d: '3d8', s: 2},
+  r_gnome: {e: '⚡', n: ['Éclair arcanique', 'Arcane bolt'], mp: 3, k: 'dmg', d: '3d6'},
+  r_orque: {e: '💢', n: ['Rage', 'Rage'], once: 1, k: 'buff', v: 4},
+  r_fee: {e: '💤', n: ['Poussière de rêve', 'Dream dust'], mp: 4, k: 'stun', v: 2},
+  r_centaure: {e: '🐎', n: ['Charge', 'Charge'], once: 1, k: 'adv', d: '2d8'},
+  r_satyre: {e: '🎶', n: ['Chant envoûtant', 'Enchanting song'], mp: 3, k: 'deb', v: 3, stun: 1},
+  r_drakeide: {e: '🔥', n: ['Souffle ardent', 'Fiery breath'], mp: 4, k: 'dmg', d: '4d6'},
+  r_griffon: {e: '🦅', n: ['Piqué', 'Dive'], once: 1, k: 'adv', d: '2d6'},
+  r_dragon: {e: '🐉', n: ['Souffle de feu', 'Fire breath'], mp: 5, k: 'dmg', d: '6d6'},
+  r_dragon2: {e: '🍖', n: ['Le manger tout cru', 'Swallow it whole'], once: 1, k: 'eat'},
+  guerrier1: {e: '💪', n: ['Coup puissant', 'Power strike'], once: 1, k: 'adv', d: '1d10', lv: 1},
+  guerrier3: {e: '❤️', n: ['Second souffle', 'Second wind'], once: 1, k: 'heal', d: '1d10', lvAdd: 1, lv: 3},
+  rodeur1: {e: '🎯', n: ['Marque du chasseur', 'Hunter’s mark'], once: 1, k: 'buff', d: '1d6', lv: 1},
+  rodeur3: {e: '🏹', n: ['Tir double', 'Double shot'], once: 1, k: 'multi', v: 2, lv: 3},
+  paladin1: {e: '⚡', n: ['Châtiment', 'Smite'], mp: 2, k: 'smite', d: '2d8', lv: 1},
+  paladin3: {e: '🙌', n: ['Imposition des mains', 'Lay on hands'], once: 1, k: 'heal', lvMul: 5, lv: 3},
+  mage1: {e: '✴️', n: ['Projectile magique', 'Magic missile'], mp: 2, k: 'dmg', d: '3d4', add: 1, s: 3, lv: 1},
+  mage3: {e: '🛡️', n: ['Bouclier', 'Shield'], mp: 2, k: 'ac', v: 5, turns: 2, lv: 3},
+  mage6: {e: '☄️', n: ['Boule de feu', 'Fireball'], mp: 5, k: 'dmg', d: '8d6', s: 3, lv: 6},
+  clerc1: {e: '💖', n: ['Soin', 'Cure'], mp: 2, k: 'heal', d: '2d8', s: 4, lv: 1},
+  clerc3: {e: '🔨', n: ['Arme spirituelle', 'Spiritual weapon'], mp: 2, k: 'buff', d: '1d8', lv: 3},
+  clerc6: {e: '☀️', n: ['Flamme sacrée', 'Sacred flame'], mp: 3, k: 'dmg', d: '4d8', s: 4, lv: 6},
+  barde1: {e: '😜', n: ['Moquerie cruelle', 'Vicious mockery'], mp: 1, k: 'deb', v: 2, d: '2d4', lv: 1},
+  barde3: {e: '🎵', n: ['Inspiration', 'Inspiration'], once: 1, k: 'adv', d: '1d8', lv: 3},
+  barde6: {e: '🌀', n: ['Mot de pouvoir', 'Power word'], mp: 4, k: 'stun', v: 2, lv: 6},
+};
+// Le bestiaire : [id, emoji, nom fr, nom en, puissance de base, particularité]
+const FIC_MOB = [
+  ['rat', '🐀', 'Rat géant', 'Giant rat', 1, ''], ['loup', '🐺', 'Loup affamé', 'Hungry wolf', 1, ''], ['squelette', '💀', 'Squelette', 'Skeleton', 1, ''], ['gelee', '🟢', 'Gelée verte', 'Green ooze', 1, 'regen'],
+  ['bandit', '🗡️', 'Bandit des grands chemins', 'Highway bandit', 2, ''], ['araignee', '🕷️', 'Araignée géante', 'Giant spider', 2, 'poison'], ['zombie', '🧟', 'Zombie', 'Zombie', 2, ''], ['kobold', '🦎', 'Kobold sournois', 'Sneaky kobold', 2, 'frappe'],
+  ['harpie', '🪶', 'Harpie', 'Harpy', 3, 'vol'], ['goule', '👻', 'Goule', 'Ghoul', 3, 'poison'], ['ourshibou', '🦉', 'Ours-hibou', 'Owlbear', 3, 'frappe'],
+  ['loupgarou', '🌕', 'Loup-garou', 'Werewolf', 4, 'regen'], ['ogre', '👹', 'Ogre', 'Ogre', 4, ''], ['banshee', '😱', 'Banshie', 'Banshee', 4, 'magie'],
+  ['basilic', '🐊', 'Basilic', 'Basilisk', 5, 'poison'], ['minotaure', '🐂', 'Minotaure', 'Minotaur', 5, 'frappe'], ['trollcav', '🗻', 'Troll des cavernes', 'Cave troll', 5, 'regen'],
+  ['wyverne', '🦖', 'Wyverne', 'Wyvern', 6, 'vol'], ['golem', '🗿', 'Golem de pierre', 'Stone golem', 6, 'magie'], ['sorciere', '🧙', 'Sorcière des marais', 'Swamp witch', 6, 'drain'],
+  ['manticore', '🦁', 'Manticore', 'Manticore', 7, 'frappe'], ['vampire', '🧛', 'Vampire', 'Vampire', 7, 'drain'],
+  ['hydre', '🐍', 'Hydre', 'Hydra', 8, 'regen'], ['geant', '❄️', 'Géant des glaces', 'Frost giant', 8, ''],
+  ['liche', '☠️', 'Liche', 'Lich', 9, 'magie'], ['kraken', '🦑', 'Kraken', 'Kraken', 9, 'frappe'],
+  ['demon', '😈', 'Démon des abysses', 'Abyssal demon', 10, 'drain'], ['ancien', '🐲', 'Dragon ancestral', 'Ancient dragon', 11, 'vol'],
+  ['mimique', '📦', 'Mimique', 'Mimic', 0, 'frappe'],
+];
+const FIC_BIG = new Set(['ourshibou', 'ogre', 'basilic', 'minotaure', 'trollcav', 'wyverne', 'golem', 'manticore', 'hydre', 'geant', 'kraken', 'demon', 'ancien']);
+const FIC_MOBSP = {regen: ['Se régénère', 'Regenerates'], poison: ['Venimeux', 'Venomous'], frappe: ['Frappe deux fois', 'Strikes twice'], vol: ['Vole (−2 pour le toucher)', 'Flies (−2 to hit it)'], magie: ['Résiste à la magie', 'Resists magic'], drain: ['Draine la vie', 'Drains life']};
+const FIC_DJ = [['La crypte oubliée', 'The forgotten crypt', '💀'], ['La mine abandonnée', 'The abandoned mine', '⛏️'], ['La tour du sorcier', 'The wizard’s tower', '🗼'], ['La grotte aux échos', 'The echoing cave', '🕳️'],
+  ['Les ruines englouties', 'The sunken ruins', '🏛️'], ['La forteresse noire', 'The black fortress', '🏰'], ['Le temple maudit', 'The cursed temple', '⛩️'], ['Le marais des brumes', 'The misty marsh', '🌫️'],
+  ['Le nid du dragon', 'The dragon’s nest', '🐲'], ['La forêt des murmures', 'The whispering forest', '🌲'], ['Le labyrinthe', 'The labyrinth', '🌀'], ['Le cimetière des géants', 'The giants’ graveyard', '🦴']];
+const FIC_DIFF = [{n: ['Facile', 'Easy'], dl: -1, rooms: 3, g: 1, fame: 5}, {n: ['Normal', 'Normal'], dl: 0, rooms: 4, g: 1.5, fame: 12},
+  {n: ['Difficile', 'Hard'], dl: 1, rooms: 5, g: 2.5, fame: 30}, {n: ['Légendaire', 'Legendary'], dl: 2, rooms: 6, g: 4, fame: 80}];
+const FIC_ROOM = {mob: '⚔️', trap: '🪤', chest: '💰', camp: '🔥', boss: '👑'};
+// Le marché : l'équipement appartient à la famille et passe d'une génération à l'autre
+const FIC_GEAR = {
+  wpn: {e: '🗡️', n: [['Arme de base', 'Basic weapon'], ['Arme en acier', 'Steel weapon'], ['Arme enchantée', 'Enchanted weapon'], ['Arme runique', 'Runic weapon'], ['Arme légendaire', 'Legendary weapon']],
+    cost: [0, 150, 500, 1500, 4000], die: ['1d6', '1d8', '1d10', '1d12', '2d8'], d: t => FL(`+${t} au toucher et aux dégâts`, `+${t} to hit and damage`)},
+  arm: {e: '🛡️', n: [['Vêtements', 'Clothes'], ['Armure de cuir', 'Leather armour'], ['Cotte de mailles', 'Chain mail'], ['Armure de plates', 'Plate armour'], ['Armure de mithril', 'Mithril armour']],
+    cost: [0, 120, 450, 1300, 3500], d: t => FL(`+${t} à la classe d’armure (CA)`, `+${t} armour class (AC)`)},
+  amu: {e: '📿', n: [['Aucune amulette', 'No amulet'], ['Amulette de mana', 'Mana amulet'], ['Amulette arcanique', 'Arcane amulet'], ['Cœur d’étoile', 'Star heart']],
+    cost: [0, 200, 700, 2000], d: t => FL(`+${[0, 3, 6, 10][t]} de mana max`, `+${[0, 3, 6, 10][t]} max mana`)},
+};
+const FIC_POT = {pot: {e: '🧪', n: ['Potion de soin', 'Healing potion'], d: ['Rend la moitié des PV.', 'Restores half your HP.'], cost: 30, max: 9},
+  gpot: {e: '🍷', n: ['Grande potion de soin', 'Greater healing potion'], d: ['Rend tous les PV.', 'Restores all HP.'], cost: 90, max: 9},
+  mpot: {e: '💙', n: ['Potion de mana', 'Mana potion'], d: ['Rend toute la mana.', 'Restores all mana.'], cost: 45, max: 9},
+  phx: {e: '🪶', n: ['Plume de phénix', 'Phoenix feather'], d: ['À terre, elle relève son porteur avec la moitié de ses PV. Une seule à la fois.', 'When you fall, it brings you back with half your HP. Only one at a time.'], cost: 1500, max: 1}};
+const FIC_DOM = {
+  ferme: {e: '🌾', n: ['Ferme', 'Farm'], m: 1, d: l => FL(`Rapporte ${ficIncTxt([0, 3, 6, 10][l])}.`, `Earns ${ficIncTxt([0, 3, 6, 10][l])}.`)},
+  taverne: {e: '🍺', n: ['Taverne', 'Tavern'], m: .8, d: l => FL(`+${ficIncTxt([0, 2, 4, 6][l])}, et les expéditions reviennent ${[0, 20, 35, 50][l]} % plus vite.`, `+${ficIncTxt([0, 2, 4, 6][l])}, and expeditions come back ${[0, 20, 35, 50][l]}% sooner.`)},
+  forge: {e: '⚒️', n: ['Forge', 'Forge'], m: 1.2, d: l => FL(`−${l * 10} % sur tout le marché.`, `−${l * 10}% on the whole market.`)},
+  tour: {e: '🗼', n: ['Tour de mage', 'Mage tower'], m: 1.3, d: l => FL(`+${[0, 3, 6, 10][l]} de mana max pour le héros.`, `+${[0, 3, 6, 10][l]} max mana for the hero.`)},
+  caserne: {e: '🏰', n: ['Caserne', 'Barracks'], m: 1.2, d: l => FL(`+${l * 4} PV max, moins de morts à la guerre, et les voleurs rivaux sont mieux repérés.`, `+${l * 4} max HP, fewer deaths in wars, and rival thieves are easier to spot.`)},
+  temple: {e: '⛪', n: ['Temple', 'Temple'], m: 1.5, d: l => FL(`+${l} aux jets contre la mort, et les feux de camp soignent mieux.`, `+${l} to death saves, and campfires heal more.`)},
+};
+const FIC_DOMC = [200, 600, 1800];
+const ficIncPer = () => { const k = ficK(); return k >= 40 ? 100 : k >= 4 ? 10 : 1; };   // la période d'affichage des revenus, selon la longévité de la race
+const ficIncTxt = x => { const p = ficIncPer(), v = (x / ficK() * p).toLocaleString(mLoc(), {maximumFractionDigits: 1}); return FL(`${v} or ${p > 1 ? `tous les ${p} ans` : 'par an'}`, `${v} gold ${p > 1 ? `every ${p} years` : 'a year'}`); };
+const FIC_TIT = [[0, 0, ['Roturier', 'Roturière', 'Commoner']], [40, 100, ['Écuyer', 'Écuyère', 'Squire']], [120, 300, ['Chevalier', 'Chevalière', 'Knight']], [300, 800, ['Baron', 'Baronne', 'Baron']],
+  [700, 2000, ['Comte', 'Comtesse', 'Count']], [1500, 5000, ['Duc', 'Duchesse', 'Duke']], [3000, 12000, ['Roi', 'Reine', 'Monarch']]];   // [renommée requise, prix en or, noms]
+const FIC_BLASON = ['🦂', '🐍', '🦇', '🐺', '🦅', '🐗', '🦊', '🕷️', '🦁', '🐻', '🦉', '🌹', '💀', '⚜️', '🗝️', '🌑'];
+let FB = null, FIC_EXP = null, FIC_LVNEXT = null, FIC_SHOPT = 'eq', FIC_RVMSG = '';
+
+/* ---------- les règles ---------- */
+const rollD = s => { const m = /^(\d+)d(\d+)$/.exec(s || '1d4'); let t = 0; for(let i = 0; i < +m[1]; i++) t += 1 + Math.floor(Math.random() * +m[2]); return t; };
+const addDice = (s, n) => { if(!n) return s; const m = /^(\d+)d(\d+)$/.exec(s); return `${+m[1] + n}d${m[2]}`; };
+const ficProf = p => 2 + Math.floor(((p.lv || 1) - 1) / 4);                  // le bonus de maîtrise (combats)
+const ficLvB = p => Math.floor((p.lv || 1) / 3);                           // le bonus d'expérience (aventures aux dés)
+const ficCl = p => FIC_CL[p && p.cl] || FIC_CL.guerrier;
+const ficClName = p => { const c = ficCl(p); return LANG === 'fr' ? c.n[p.sex === 'F' ? 1 : 0] : c.n[2]; };
+const ficNeed = L => 150 * L;                                              // XP pour passer du niveau L au suivant
+const ficTotXP = p => p && p.lv ? 75 * p.lv * (p.lv - 1) + (p.xp || 0) : 0;
+function ficEnsureF(){
+  const F = S.fic; F.inv = Object.assign({wpn: 0, arm: 0, amu: 0, pot: 2, gpot: 0, mpot: 1, phx: 0}, F.inv || {}); F.dom = F.dom || {};
+  if(F.fame == null) F.fame = 0; if(F.title == null) F.title = 0; if(F.goldF == null) F.goldF = 0; if(F.expCool == null) F.expCool = -1e9; if(F.rvCool == null) F.rvCool = -1e9;
+  return F;
+}
+function ficHpMax(p){
+  const c = ficCl(p), L = p.lv || 1, cm = fMod(p.st[2]), F = S.fic;
+  let h = c.hd + Math.max(0, cm) + (L - 1) * Math.max(2, c.hd / 2 + 1 + cm) + (FIC_RHP[F.race] || 0) * L + 4 * ((F.dom || {}).caserne || 0);   // au niveau 1, au moins le dé de vie entier
+  if(L >= 15) h *= 1.1; return Math.max(4, Math.round(h));
+}
+function ficMpMax(p){
+  const c = ficCl(p), L = p.lv || 1, F = S.fic;
+  if(!ficAbs(p).some(id => FIC_AB[id].mp)) return 0;   // pas de sort à lancer : pas de mana
+  const m = (FIC_RMP[F.race] || 0) + c.mp[0] + c.mp[1] * (L - 1) + Math.max(0, fMod(p.st[c.st])) + [0, 3, 6, 10][(F.inv || {}).amu || 0] + [0, 3, 6, 10][(F.dom || {}).tour || 0];
+  return Math.max(0, Math.round(m));
+}
+const ficAC = p => 10 + fMod(p.st[1]) + ((S.fic.inv || {}).arm || 0) + ({paladin: 1, clerc: 1, mage: 2, barde: 1}[p.cl] || 0) + ((p.lv || 1) >= 15 ? 2 : 0);   // mage : armure du mage
+const ficAtk = p => fMod(p.st[ficCl(p).st]) + ficProf(p) + ((S.fic.inv || {}).wpn || 0);
+const ficDmgTxt = p => { const t = (S.fic.inv || {}).wpn || 0, b = fMod(p.st[ficCl(p).st]) + t + Math.floor((p.lv || 1) / 3); return `${FIC_GEAR.wpn.die[t]}${b ? fModT(b) : ''}`; };
+function ficEnsure(p){                                     // donne un niveau, des PV et de la mana à quelqu'un qui n'en a pas encore
+  if(!p || !p.st) return p;
+  if(p.lv == null){ p.lv = 1; p.xp = 0; p.pts = 0; if(p.xp0){ const x = p.xp0; delete p.xp0; ficXP(p, x, null, true); } }
+  if(p.hp == null || p.hp > ficHpMax(p)) p.hp = ficHpMax(p); if(p.mp == null || p.mp > ficMpMax(p)) p.mp = ficMpMax(p);
+  return p;
+}
+function ficAutoClass(p){ const i = p.st.indexOf(Math.max(...p.st)); return [pick(['guerrier', 'paladin']), 'rodeur', 'paladin', 'mage', 'clerc', 'barde'][i]; }
+function ficAutoPts(p){ while(p.pts > 0){ const i = ficCl(p).st, j = p.st[i] < 20 ? i : p.st.indexOf(Math.min(...p.st)); p.st[j] = Math.min(24, p.st[j] + 1); p.pts--; } }
+function ficXP(p, x, out, silent){                         // de l'expérience ; chaque niveau donne un point de caractéristique
+  if(!p || !x || (p.lv || 1) >= 20) return; if(p.lv == null){ p.lv = 1; p.xp = 0; p.pts = 0; }
+  p.xp += x; if(out) out.push(`✨ +${x} XP`);
+  while(p.lv < 20 && p.xp >= ficNeed(p.lv)){
+    p.xp -= ficNeed(p.lv); p.lv++; p.pts = (p.pts || 0) + 1;
+    if(p.lv === 20) p.lifeEnd += Math.round(FIC_R[S.fic.race].life[1] * .1);
+    if(p.id !== S.activeId || silent) ficAutoPts(p);
+    p.hp = ficHpMax(p); p.mp = ficMpMax(p);
+    if(out) out.push(FL(`⬆️ ${p.first} passe au niveau ${p.lv} !`, `⬆️ ${p.first} reaches level ${p.lv}!`));
+    if(!silent && p.id === S.activeId) log('star', 'fic_msg', [FL(`⬆️ ${p.first} passe au niveau ${p.lv}.`, `⬆️ ${p.first} reaches level ${p.lv}.`)], Math.floor(S.t), false);
+  }
+  if(p.lv >= 20) p.xp = 0;
+}
+function ficAbs(p){                                       // les pouvoirs que le héros peut utiliser en combat
+  const r = 'r_' + S.fic.race, out = FIC_AB[r] ? [r] : []; if(S.fic.race === 'dragon') out.push('r_dragon2');
+  return out.concat([1, 3, 6].map(l => (p.cl || 'guerrier') + l).filter(id => FIC_AB[id] && FIC_AB[id].lv <= (p.lv || 1)));
+}
+const ficAbUp = (id, p) => { const a = FIC_AB[id], L = (p && p.lv) || 1; return (id.startsWith('r_') && L >= 5 ? 1 : 0) + (a.k === 'dmg' || (a.k === 'deb' && a.d) ? Math.floor((L - 1) / 4) : a.k === 'heal' && a.d ? Math.floor((L - 1) / 6) : 0); };
+const ficAbName = id => FL(FIC_AB[id].n[0], FIC_AB[id].n[1]);
+function ficAbDesc(id, p){
+  const a = FIC_AB[id], up = p ? ficAbUp(id, p) : 0, d = a.d ? addDice(a.d, up) : '';
+  const tx = {dmg: FL(`${d}${a.add ? '+' + a.add : ''} dégâts magiques, qui touchent toujours`, `${d}${a.add ? '+' + a.add : ''} magic damage that always hits`),
+    heal: a.lvMul ? FL(`Soigne ${a.lvMul} PV par niveau`, `Heals ${a.lvMul} HP per level`) : FL(`Soigne ${d}${a.lvAdd ? ' + le niveau' : ''}`, `Heals ${d}${a.lvAdd ? ' + level' : ''}`),
+    ac: FL(`+${a.v} CA${a.turns ? ` pendant ${a.turns} tours` : ' pour le combat'}`, `+${a.v} AC${a.turns ? ` for ${a.turns} turns` : ' for the fight'}`),
+    stun: FL(`Étourdit l’ennemi ${a.v + (id.startsWith('r_') && p && p.lv >= 5 ? 1 : 0)} tours`, `Stuns the enemy for ${a.v + (id.startsWith('r_') && p && p.lv >= 5 ? 1 : 0)} turns`), smite: FL(`Le prochain coup inflige ${d} en plus`, `Your next hit deals ${d} more`),
+    adv: FL(`Une attaque avec avantage, +${d} dégâts`, `An attack with advantage, +${d} damage`), buff: FL(`+${a.v || d} dégâts à chaque coup pour le combat`, `+${a.v || d} damage on every hit for the fight`),
+    deb: FL(`L’ennemi a −${a.v} pour toucher${a.d ? `, et prend ${d} dégâts` : ''}${a.stun ? ', et perd son tour' : ''}`, `The enemy gets −${a.v} to hit${a.d ? `, and takes ${d} damage` : ''}${a.stun ? ', and loses its turn' : ''}`),
+    multi: FL(`${a.v} attaques d’un coup`, `${a.v} attacks at once`),
+    eat: FL('Avale tout rond un petit monstre plus faible : il meurt, mais blesse le dragon de l’intérieur. Raté, il est recraché', 'Swallows a small, weaker monster whole: it dies, but hurts the dragon from inside. On a miss, it gets spat back out')}[a.k];
+  return tx + ' · ' + (a.mp ? `${a.mp} ${FL('mana', 'mana')}` : FL('1 fois par combat', 'once per fight'));
+}
+function ficMob(c, o = {}){                                // un monstre à la mesure du héros (c : son niveau)
+  c = Math.max(1, Math.min(24, Math.round(c)));
+  let m = o.id && FIC_MOB.find(x => x[0] === o.id);
+  if(!m){ const t = Math.min(c, 11), pool = FIC_MOB.filter(x => x[4] && Math.abs(x[4] - t) <= 1); m = pick(pool.length ? pool : FIC_MOB.filter(x => x[4])); }
+  const boss = !!o.boss, n = Math.max(1, Math.floor((c + 1) / 3)), hp = Math.round((5 + 5.5 * c) * (boss ? 1.4 : 1) * (.9 + Math.random() * .2));
+  return {id: m[0], e: m[1], name: (boss ? FL('Seigneur ', 'Lord ') : '') + FL(m[2], m[3]), boss, sz: FIC_BIG.has(m[0]) || boss ? 'g' : 'p', lv: c, hp, hpMax: hp, ac: 11 + Math.floor(c / 2) + (boss ? 1 : 0),
+    atk: 2 + Math.floor(c * .7) + (boss ? 1 : 0), dmg: n + 'd6', dmgB: Math.floor(c / 2) + (boss ? 1 : 0), sp: m[5],
+    xp: Math.round((30 + 30 * c) * (boss ? 2 : 1)), gold: Math.round((rnd(4, 12) * c + 5) * (boss ? 3 : 1)), fame: Math.max(1, Math.round(c * (boss ? 3 : 1) / 2))};
+}
+function ficFoeP(q, e, name, race){                       // un adversaire qui a des caractéristiques (rival, champion ennemi)
+  const c = FIC_CL[q.cl] || FIC_CL.guerrier, L = q.lv || 1, sm = fMod(q.st[c.st]), cm = fMod(q.st[2]);
+  const hp = Math.max(8, Math.round(c.hd + cm + (L - 1) * Math.max(1, c.hd / 2 + 1 + cm) + (FIC_RHP[race] || 0) * L));
+  return {e, name, sz: 'm', lv: L, hp, hpMax: hp, ac: 10 + fMod(q.st[1]) + Math.min(4, Math.floor(L / 4)), atk: sm + 2 + Math.floor((L - 1) / 4) + Math.floor(L / 5),
+    dmg: L >= 10 ? '1d12' : L >= 5 ? '1d10' : '1d8', dmgB: Math.max(0, sm) + Math.floor(L / 3), sp: L >= 6 && FIC_MARTIAL.includes(q.cl) ? 'frappe' : c.st >= 3 ? 'magie' : '',
+    xp: 40 + 40 * L, gold: 0, fame: 0, cl: q.cl};
+}
+const ficBar = (v, m, cls, lab) => `<div class="fbar ${cls}"><i style="width:${m ? Math.max(0, Math.min(100, v / m * 100)) : 0}%"></i><span>${lab ? lab + ' ' : ''}${Math.max(0, Math.round(v))} / ${m}</span></div>`;
+function ficChain(fn){                                     // les points de niveau à placer passent avant la suite
+  const me = active();
+  if(me && me.death == null && me.cl && me.pts > 0){ FIC_LVNEXT = fn; sfx.lvup(); burst(['#ffd000', '#ffffff', '#8fd0ff'], 36); ficLvUp(); } else if(fn) fn();
+}
+const ficPrice = c => Math.round(c * (1 - .1 * ((S.fic.dom || {}).forge || 0)));
+const ficTitName = (r, p) => { const x = FIC_TIT[r][2], b = LANG === 'fr' ? x[p && p.sex === 'F' ? 1 : 0] : x[2]; return r === 6 ? FL(`${b} des ${ficRaceName(S.fic.race)}`, `${b} of the ${ficRaceName(S.fic.race)}`) : b; };
+const ficIncome = () => { const F = S.fic, d = F.dom || {}; return ([0, 3, 6, 10][d.ferme || 0] + [0, 2, 4, 6][d.taverne || 0] + 2 * (F.title || 0) + 1) / ficK(); };
+const ficExpGap = () => Math.max(1, Math.round(2 * ficK() * (1 - [0, .2, .35, .5][(S.fic.dom || {}).taverne || 0])));
+function ficMsg(s, kind){ log(kind || 'star', 'fic_msg', [s], Math.floor(S.t), false); }
+function ficFame(n){ const F = S.fic; F.fame = Math.max(0, Math.round((F.fame || 0) + n)); }
+
+/* ---------- la classe (à l'âge adulte) et les niveaux ---------- */
+function ficClassPick(){
+  const me = active(); if(!me || me.death != null){ S.fic.ev = null; return; } ficEnsure(me);
+  const best = ficAutoClass(me), bi = me.st.indexOf(Math.max(...me.st));
+  openModal(`<div class="m-head"><div class="eyebrow">🧭 ${FL('Le choix d’une vie', 'A life choice')}</div><h2>${FL('Choisis ta voie', 'Choose your path')}</h2>
+      <p>${esc(FL(`${me.first} est ${gx(me, 'adulte', 'adulte')} : quelle sera sa classe ? Elle décide de ses PV, de sa mana et de ses pouvoirs en combat.`, `${me.first} is an adult: which class will they follow? It sets their HP, mana and combat powers.`))}</p></div>
+    <div class="fic-cls">${FIC_CLS.map(id => { const c = FIC_CL[id], rec = c.st === bi || id === best;
+      return `<button class="pickrow ${rec ? 'rec' : ''}" data-act="ficcl" data-v="${id}"><span class="fe">${c.e}</span><span><b>${esc(LANG === 'fr' ? c.n[me.sex === 'F' ? 1 : 0] : c.n[2])}${rec ? ` · ${FL('conseillé', 'suggested')}` : ''}</b><small>${esc(FL(c.d[0], c.d[1]))}</small><small>${esc(`${fStatN(c.st)} · ${FL('PV', 'HP')} d${c.hd}`)} · ${esc(ficAbName(id + 1))}</small></span><em>${fStat(c.st)} ${me.st[c.st]}</em></button>`; }).join('')}</div>`, {locked: true});
+}
+function ficSetClass(c){
+  const me = active(), F = ficEnsureF(); if(!me || !FIC_CL[c]) return;
+  me.cl = c; me.hp = ficHpMax(me); me.mp = ficMpMax(me); if(F.ev && F.ev.id === 'class') F.ev = null;
+  if(F.rvNext == null) F.rvNext = yearOf(S.t) + Math.max(1, Math.round(rnd(3, 6) * ficK()));
+  ficMsg(FL(`🧭 ${me.first} devient ${lc(ficClName(me))}.`, `🧭 ${me.first} becomes a ${lc(ficClName(me))}.`));
+  sfx.fame(); closeModal(true); dirty = true; render(); save();
+}
+const FIC_UNL = {3: ['Un nouveau pouvoir de classe', 'A new class power'], 5: ['Le pouvoir de ta race devient plus fort', 'Your race power grows stronger'], 6: ['Une attaque en plus (combattants) ou un grand sort', 'An extra attack (fighters) or a great spell'],
+  10: ['Coups critiques sur 19 et 20', 'Critical hits on 19 and 20'], 15: ['Héros légendaire : +2 CA et +10 % de PV', 'Legendary hero: +2 AC and +10% HP'], 20: ['Mythique : +10 % d’espérance de vie', 'Mythic: +10% life expectancy']};
+function ficLvUp(){
+  const me = active(); if(!me || !me.pts){ closeModal(true); const f = FIC_LVNEXT; FIC_LVNEXT = null; if(f) f(); return; }
+  const u = FIC_UNL[me.lv], nab = [1, 3, 6].map(l => me.cl + l).find(id => FIC_AB[id] && FIC_AB[id].lv === me.lv);
+  openModal(`<div class="m-head"><div class="eyebrow">⬆️ ${FL('Niveau supérieur', 'Level up')}</div><h2>${esc(me.first)} · ${FL('niveau', 'level')} ${me.lv}</h2>
+      <p class="fic-lvsum">❤️ ${FL('PV max', 'Max HP')} <b>${ficHpMax(me)}</b> · 💙 ${FL('Mana', 'Mana')} <b>${ficMpMax(me)}</b> · 🎯 ${FL('Maîtrise', 'Proficiency')} <b>+${ficProf(me)}</b> · 🎲 ${FL('Aventures', 'Adventures')} <b>+${ficLvB(me)}</b></p>
+      ${u ? `<p class="fic-unl">🔓 ${esc(FL(u[0], u[1]))}${nab ? ` : <b>${FIC_AB[nab].e} ${esc(ficAbName(nab))}</b>` : ''}</p>` : ''}
+      <p class="hint">${esc(FL(`Choisis une caractéristique à augmenter de 1${me.pts > 1 ? ` (${me.pts} points à placer)` : ''}.`, `Pick an ability to raise by 1${me.pts > 1 ? ` (${me.pts} points to spend)` : ''}.`))}</p></div>
+    <div class="fic-lvst">${me.st.map((v, i) => `<button class="pickrow ${i === ficCl(me).st ? 'rec' : ''}" data-act="ficpt" data-v="${i}" ${v >= 24 ? 'disabled' : ''}><b>${fStat(i)}</b><span>${esc(fStatN(i))}</span><em>${v} → ${v + 1}</em></button>`).join('')}</div>`, {locked: true});
+}
+function ficPt(i){
+  const me = active(); if(!me || !me.pts || me.st[i] >= 24) return;
+  me.st[i]++; me.pts--; me.hp = ficHpMax(me); me.mp = ficMpMax(me); sfx.sparkle(); dirty = true; save(); ficLvUp();
+}
+
+/* ---------- le combat au tour par tour : une arène animée ---------- */
+// La logique (ficFbAttack, ficFbAbility, ficFbFoeTurn) applique les effets tout de suite et empile des « moments » dans FB.q ;
+// l'arène les rejoue ensuite un par un (élan, projectile, impact, particules, chiffres), puis met à jour les barres et le récit.
+const faSleep = ms => new Promise(r => setTimeout(r, ms));
+const FIC_RANGED = new Set(['rodeur']);
+const FIC_FX = {   // l'allure des pouvoirs : [projectile, couleur de la traînée, couleurs de l'impact, son, effet spécial]
+  r_elfe: ['🌙', '#cfd8ff', ['#ffffff', '#c9d4ff', '#8fa6ff'], 'zap'], r_gnome: ['⚡', '#7fe3ff', ['#ffffff', '#7fe3ff', '#ffe14d'], 'zap'],
+  r_drakeide: ['🔥', '#ff8a00', ['#ffe14d', '#ff8a00', '#ff3b1f'], 'fire'], r_dragon: ['🔥', '#ff6a00', ['#ffe14d', '#ff8a00', '#ff3b1f', '#5a1a00'], 'fire', 'big'],
+  mage1: ['✦', '#c08bff', ['#ffffff', '#c08bff', '#7b4dff'], 'zap', 'tri'], mage6: ['☄️', '#ff7a00', ['#ffe14d', '#ff8a00', '#ff3b1f', '#ffffff'], 'fire', 'big'],
+  clerc6: ['☀️', '#ffe14d', ['#ffffff', '#ffe14d', '#ffb300'], 'zap', 'sky'], barde1: ['♪', '#ff7ad9', ['#ff7ad9', '#ffffff'], 'mock'], r_satyre: ['♫', '#ff7ad9', ['#ff7ad9', '#b07bff'], 'mock'],
+  r_fee: ['✨', '#ffd6ff', ['#ffd6ff', '#ffffff', '#b8f4ff'], 'sleep'], barde6: ['🌀', '#b07bff', ['#b07bff', '#ffffff'], 'sleep'],
+};
+const FIC_BG = {wild: ['Plaine', 'Plains'], dj: ['Donjon', 'Dungeon'], war: ['Champ de bataille', 'Battlefield'], duel: ['Arène', 'Arena']};
+function ficFight(foe, o){                                 // o : {eyebrow, title, intro, lethal, bank, bg, duel, onWin, onLose, onEnd(résultat), death}
+  const me = active(); ficEnsure(me); ficEnsureF();
+  FB = {foe, o, log: [], q: [], once: {}, busy: true, turn: 'start', ac: 0, shield: null, buff: 0, buffD: null, smite: null, stun: 0, deb: 0, over: null, ds: null, res: [], shown: 0, shownOld: 0,
+    vfh: foe.hp, vmh: me.hp, vmm: me.mp};
+  ficFbLog(o.intro || FL(`${foe.e} ${foe.name} surgit !`, `${foe.e} ${foe.name} appears!`)); FB.shown = FB.log.length;
+  ficFbRender(); faEnter();
+}
+const ficFbLog = s => { FB.log.push(s); if(FB.log.length > 60){ FB.log.shift(); FB.shown = Math.max(0, FB.shown - 1); FB.shownOld = Math.max(0, FB.shownOld - 1); } };
+const fbSnap = () => ({fh: FB.foe.hp, mh: active().hp, mm: active().mp, ln: FB.log.length});
+const fbPush = e => FB.q.push(Object.assign(e, fbSnap()));
+
+/* ----- l'arène ----- */
+function ficFbRender(){
+  if(!FB) return; const me = active(), f = FB.foe, o = FB.o, bg = o.bg || 'wild';
+  const tag = f.sz ? `<em class="fa-tag">${f.sz === 'g' ? FL('Grand', 'Large') : f.sz === 'p' ? FL('Petit', 'Small') : FL('Humanoïde', 'Humanoid')}</em>` : '';
+  openModal(`<div class="m-head fa-head"><div class="eyebrow">${esc(o.eyebrow || FL('Combat', 'Fight'))}</div><h2>${esc(o.title || f.name)}</h2></div>
+    <div class="fa-stage bg-${bg}" id="faStage">
+      <div class="fa-plate fa-pfoe"><b>${esc(f.name)}</b><small>${FL('Niv.', 'Lv')} ${f.lv} · ${FL('CA', 'AC')} ${f.ac}${f.sp ? ' · ' + esc(FL(FIC_MOBSP[f.sp][0], FIC_MOBSP[f.sp][1])) : ''}</small>${tag}
+        <div class="fbar hp" id="faFoeHp"><i class="lag"></i><i class="v"></i><span></span></div><div class="fa-st" id="faFoeSt"></div></div>
+      <div class="fa-sp fa-foe" id="faFoe"><i class="fa-shadow"></i><span class="fa-em">${f.e}</span></div>
+      <div class="fa-sp fa-me" id="faMe"><i class="fa-shadow"></i>${orb(me, 'xl')}<span class="fa-cl">${ficCl(me).e}</span></div>
+      <div class="fa-plate fa-pme"><b>${esc(me.first)}</b><small>${esc(ficClName(me))} ${FL('niv.', 'lv')} ${me.lv} · ${FL('CA', 'AC')} <span id="faMeAc"></span></small>
+        <div class="fbar hp" id="faMeHp"><i class="lag"></i><i class="v"></i><span></span></div>${ficMpMax(me) ? `<div class="fbar mp" id="faMeMp"><i class="lag"></i><i class="v"></i><span></span></div>` : ''}<div class="fa-st" id="faMeSt"></div></div>
+      <div class="fa-fx" id="faFx"></div>
+    </div>
+    <ol class="fa-log" id="faLog"></ol>
+    <div class="fa-menu" id="faMenu"></div>`, {locked: true, sound: false});
+  $('#modal').classList.add('fa-modal');
+  faSync(); faMenu();
+}
+function faBar(id, v, m){ const el = $('#' + id); if(!el) return; const w = m ? Math.max(0, Math.min(100, v / m * 100)) : 0;
+  el.querySelector('.v').style.width = w + '%'; el.querySelector('.lag').style.width = w + '%'; el.querySelector('span').textContent = `${el.classList.contains('mp') ? '💙' : '❤️'} ${Math.max(0, Math.round(v))} / ${m}`;
+  el.classList.toggle('low', el.classList.contains('hp') && w <= 25); }
+function faSync(e){
+  if(!FB) return; const me = active(), f = FB.foe;
+  if(e){ FB.vfh = e.fh; FB.vmh = e.mh; FB.vmm = e.mm; FB.shown = e.ln; }
+  faBar('faFoeHp', FB.vfh, f.hpMax); faBar('faMeHp', FB.vmh, ficHpMax(me)); faBar('faMeMp', FB.vmm, ficMpMax(me));
+  const ac = $('#faMeAc'); if(ac) ac.textContent = ficAC(me) + FB.ac + (FB.shield ? FB.shield.v : 0);
+  const fs = [], ms = [];
+  if(FB.stun) fs.push(`💤 ${FB.stun}`); if(FB.deb) fs.push(`🎯 −${FB.deb}`);
+  if(FB.ac || FB.shield) ms.push(`🛡️ +${FB.ac + (FB.shield ? FB.shield.v : 0)}`); if(FB.buff || FB.buffD) ms.push(`💢 +${FB.buff || ''}${FB.buffD ? (FB.buff ? '+' : '') + FB.buffD : ''}`); if(FB.smite) ms.push(`⚡ +${FB.smite}`);
+  const a = $('#faFoeSt'), b = $('#faMeSt'); if(a) a.innerHTML = fs.map(x => `<i>${x}</i>`).join(''); if(b) b.innerHTML = ms.map(x => `<i>${x}</i>`).join('');
+  const fe = $('#faFoe'), mee = $('#faMe');
+  if(fe){ fe.classList.toggle('stun', FB.stun > 0); fe.classList.toggle('cursed', FB.deb > 0); }
+  if(mee){ mee.classList.toggle('shielded', !!(FB.ac || FB.shield)); mee.classList.toggle('raging', !!(FB.buff || FB.buffD)); mee.classList.toggle('charged', !!FB.smite); }
+  const lg = $('#faLog'); if(lg){ const from = Math.max(0, FB.shown - 3), old = FB.shownOld;
+    lg.innerHTML = FB.log.slice(from, FB.shown).map((x, i) => `<li class="${from + i >= old ? 'new' : ''} ${from + i === FB.shown - 1 ? 'last' : ''}">${esc(x)}</li>`).join(''); FB.shownOld = FB.shown; }
+}
+function faHitChance(atk, ac){ return Math.max(5, Math.min(95, Math.round((21 - (ac - atk)) / 20 * 100))); }
+function faMenu(){
+  const el = $('#faMenu'); if(!el || !FB) return; const me = active(), f = FB.foe, inv = S.fic.inv, hpM = ficHpMax(me), mpM = ficMpMax(me);
+  if(FB.over === 'ds'){
+    const ds = FB.ds;
+    el.innerHTML = `<div class="fa-ds"><div class="fa-heart">💔</div><p>${esc(FL(`${me.first} est à terre ! Trois jets contre la mort : 8 ou plus pour tenir bon, trois échecs et c’est la fin.`, `${me.first} is down! Three death saves: 8 or more to hold on, three failures and it’s over.`))}</p>
+      <div class="ds-pips"><span class="ok">${[0, 1, 2].map(i => `<i class="${i < ds.ok ? 'on' : ''}">✔</i>`).join('')}</span><span class="ko">${[0, 1, 2].map(i => `<i class="${i < ds.ko ? 'on' : ''}">✖</i>`).join('')}</span></div>
+      <p class="ds-last" id="faDsLast">${esc(ds.last || '')}</p>
+      <div class="fa-row">${inv.phx ? `<button class="gel gold" data-act="fbphx" ${FB.busy ? 'disabled' : ''}><span>🪶 ${esc(FL(FIC_POT.phx.n[0], FIC_POT.phx.n[1]))}</span></button>` : ''}<button class="gel danger big" data-act="fbds" ${FB.busy ? 'disabled' : ''}><span>🎲 ${FL('Jet contre la mort', 'Death save')}</span></button></div></div>`;
+    return;
+  }
+  if(FB.over){
+    const T = {win: ['🏆', FL('Victoire !', 'Victory!')], lose: ['🩹', FL('Défaite…', 'Defeat…')], flee: ['🏃', FL('Tu as pris la fuite', 'You fled')], dead: ['🕯️', FL('La fin d’une légende', 'The end of a legend')]}[FB.over];
+    el.innerHTML = `<div class="fa-end ${FB.over}"><div class="fa-banner"><span>${T[0]}</span><b>${T[1]}</b></div>${FB.res.length ? `<ul>${FB.res.map((x, i) => `<li style="animation-delay:${.25 + i * .18}s">${esc(x)}</li>`).join('')}</ul>` : ''}
+      <button class="gel lime big" data-act="fbend"><span>${FL('Continuer', 'Continue')}</span></button></div>`;
+    return;
+  }
+  if(FB.busy){ el.innerHTML = `<div class="fa-turn ${FB.turn === 'foe' ? 'foe' : ''}"><span class="fa-dots"><i></i><i></i><i></i></span>${esc(FB.turn === 'foe' ? FL(`Tour de ${f.name}…`, `${f.name}’s turn…`) : FB.turn === 'start' ? FL('Le combat commence…', 'The fight begins…') : FL(`${me.first} agit…`, `${me.first} acts…`))}</div>`; return; }
+  const atk = ficAtk(me) - (f.sp === 'vol' ? 2 : 0), extra = (me.lv || 1) >= 6 && FIC_MARTIAL.includes(me.cl);
+  const card = (v, e, name, sub, desc, cls, dis, why) => `<button class="fa-card ${cls || ''}" data-act="fba" data-v="${v}" ${dis ? 'disabled' : ''}><span class="fa-ce">${e}</span><b>${esc(name)}</b><em>${esc(sub)}</em><small>${esc(dis && why ? why : desc)}</small></button>`;
+  const abs = ficAbs(me).map(id => { const a = FIC_AB[id], used = a.once && FB.once[id], poor = a.mp && me.mp < a.mp;
+    const eat = a.k === 'eat', bad = eat && !(f.sz === 'p' && f.lv < me.lv);
+    return card('ab:' + id, a.e, ficAbName(id), a.mp ? `💙 ${a.mp}` : used ? FL('déjà utilisé', 'used') : FL('1 fois / combat', 'once / fight'), ficAbDesc(id, me).split(' · ')[0], a.mp ? 'mag' : 'pow',
+      used || poor || bad, used ? FL('Déjà utilisé dans ce combat.', 'Already used in this fight.') : poor ? FL('Pas assez de mana.', 'Not enough mana.') : FL('Seulement contre un petit monstre de niveau inférieur.', 'Only against a small, lower-level monster.')); }).join('');
+  const pots = ['pot', 'gpot', 'mpot'].filter(k => inv[k] && (k !== 'mpot' || mpM)).map(k => `<button class="fa-chip" data-act="fba" data-v="${k}" ${(k === 'mpot' ? me.mp >= mpM : me.hp >= hpM) ? 'disabled' : ''} title="${esc(FL(FIC_POT[k].d[0], FIC_POT[k].d[1]))}">${FIC_POT[k].e} <b>${esc(FL(FIC_POT[k].n[0], FIC_POT[k].n[1]))}</b> ×${inv[k]}</button>`).join('');
+  el.innerHTML = `<div class="fa-ask">${esc(FL(`À toi : que fait ${me.first} ?`, `Your turn: what will ${me.first} do?`))}</div>
+    <div class="fa-cards">${card('atk', FIC_RANGED.has(me.cl) ? '🏹' : '⚔️', FL('Attaquer', 'Attack'), `${ficDmgTxt(me)} · ${faHitChance(atk, f.ac)} %`, extra ? FL('Deux coups d’affilée', 'Two strikes in a row') : FL('Chance de toucher, puis les dégâts de ton arme', 'Chance to hit, then your weapon damage'), 'atk')}${abs}</div>
+    <div class="fa-row">${pots}<button class="fa-chip flee" data-act="fba" data-v="flee">🏃 <b>${FL('Fuir', 'Flee')}</b></button></div>`;
+}
+
+/* ----- les effets visuels ----- */
+const faEl = w => $(w === 'me' ? '#faMe' : '#faFoe');
+function faCenter(w){ const st = $('#faStage'), el = faEl(w); if(!st || !el) return [0, 0]; const s = st.getBoundingClientRect(), r = el.getBoundingClientRect(); return [r.left - s.left + r.width / 2, r.top - s.top + r.height / 2]; }
+function faAdd(html, x, y, cls){ const L = $('#faFx'); if(!L) return null; const d = document.createElement('div'); d.className = 'fa-f ' + (cls || ''); d.innerHTML = html; d.style.left = x + 'px'; d.style.top = y + 'px'; L.appendChild(d); return d; }
+const faAnim = (el, kf, o) => el ? Promise.race([el.animate(kf, o).finished.catch(() => {}), faSleep((o.duration || 0) + (o.delay || 0) + 150)]) : Promise.resolve();   // jamais bloqué, même onglet caché
+function faPop(w, txt, cls){ const [x, y] = faCenter(w), p = faAdd(esc(txt), x + rnd(-14, 14), y - 26, 'fa-pop ' + (cls || '')); if(!p) return;
+  faAnim(p, [{transform: 'translate(-50%,-50%) scale(.4)', opacity: 0}, {transform: 'translate(-50%,-95%) scale(1.3)', opacity: 1, offset: .18}, {transform: 'translate(-50%,-120%) scale(1)', opacity: 1, offset: .55}, {transform: 'translate(-50%,-230%) scale(.9)', opacity: 0}], {duration: 1250, easing: 'ease-out'}).then(() => p.remove()); }
+function faBurst(w, cols, n = 12, sp = 70){ const [x, y] = faCenter(w);
+  for(let i = 0; i < n; i++){ const p = faAdd('', x, y, 'fa-pt'); if(!p) return; const c = cols[i % cols.length], a = Math.random() * Math.PI * 2, r = sp * (.45 + Math.random() * .75), s = 4 + Math.random() * 7;
+    p.style.width = p.style.height = s + 'px'; p.style.background = c; p.style.boxShadow = `0 0 8px ${c}`;
+    faAnim(p, [{transform: 'translate(-50%,-50%) scale(1)', opacity: 1}, {transform: `translate(calc(-50% + ${Math.cos(a) * r}px), calc(-50% + ${Math.sin(a) * r}px)) scale(.2)`, opacity: 0}], {duration: 420 + Math.random() * 380, easing: 'cubic-bezier(.15,.8,.3,1)'}).then(() => p.remove()); } }
+function faRise(w, sym, col, n = 8){ const [x, y] = faCenter(w);
+  for(let i = 0; i < n; i++){ const p = faAdd(sym, x + rnd(-34, 34), y + rnd(-4, 26), 'fa-rise'); if(!p) return; p.style.color = col;
+    faAnim(p, [{transform: 'translate(-50%,-50%) scale(.5)', opacity: 0}, {transform: 'translate(-50%,-90%) scale(1.1)', opacity: 1, offset: .3}, {transform: `translate(-50%,${-160 - rnd(0, 60)}%) scale(.7)`, opacity: 0}], {duration: 900 + rnd(0, 400), delay: i * 60, easing: 'ease-out'}).then(() => p.remove()); } }
+function faRing(w, col){ const [x, y] = faCenter(w), p = faAdd('', x, y, 'fa-ring'); if(!p) return; p.style.borderColor = col; p.style.boxShadow = `0 0 18px ${col}, inset 0 0 14px ${col}`;
+  faAnim(p, [{transform: 'translate(-50%,-50%) scale(.2)', opacity: 1}, {transform: 'translate(-50%,-50%) scale(1.6)', opacity: 0}], {duration: 650, easing: 'ease-out'}).then(() => p.remove()); }
+function faSlash(w, crit){ const [x, y] = faCenter(w), p = faAdd('<i></i><i></i>', x, y, 'fa-slash' + (crit ? ' crit' : '')); if(!p) return;
+  faAnim(p, [{transform: 'translate(-50%,-50%) rotate(-25deg) scale(.2,1)', opacity: 1}, {transform: 'translate(-50%,-50%) rotate(-25deg) scale(1.15,1)', opacity: 1, offset: .45}, {transform: 'translate(-50%,-50%) rotate(-25deg) scale(1.3,.6)', opacity: 0}], {duration: 380, easing: 'ease-out'}).then(() => p.remove()); }
+function faShake(w, big){ const el = w === 'stage' ? $('#faStage') : faEl(w), a = big ? 12 : 7;
+  return faAnim(el, [{transform: 'none'}, {transform: `translate(${-a}px,${a / 3}px) rotate(-2deg)`}, {transform: `translate(${a}px,${-a / 3}px) rotate(2deg)`}, {transform: `translate(${-a / 2}px,0)`}, {transform: `translate(${a / 3}px,0)`}, {transform: 'none'}], {duration: big ? 520 : 380, easing: 'ease-out'}); }
+function faFlash(col){ const st = $('#faStage'); if(!st) return; const p = document.createElement('i'); p.className = 'fa-flash'; if(col) p.style.background = col; st.appendChild(p);
+  faAnim(p, [{opacity: .85}, {opacity: 0}], {duration: 420, easing: 'ease-out'}).then(() => p.remove()); }
+function faLunge(w, far){ const el = faEl(w), s = w === 'me' ? 1 : -1, dx = (far ? 120 : 48) * s, dy = (far ? -55 : -20) * s;
+  return faAnim(el, [{transform: 'none'}, {transform: `translate(${-dx * .18}px,${-dy * .18}px) scale(.94)`, offset: .3}, {transform: `translate(${dx}px,${dy}px) scale(1.08)`, offset: .62}, {transform: 'none'}], {duration: far ? 560 : 420, easing: 'ease-in-out'}); }
+async function faProj(from, to, html, o = {}){
+  const st = $('#faStage'); if(!st) return; let [x0, y0] = faCenter(from); const [x1, y1] = faCenter(to);
+  if(o.sky){ x0 = x1 + 10; y0 = -40; }
+  const d = faAdd(html, x0, y0, 'fa-proj' + (o.big ? ' big' : '')); if(!d) return;
+  const mx = (x0 + x1) / 2, my = Math.min(y0, y1) - (o.sky ? 0 : (o.arc ?? 45)), rot = o.rot ? Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI : 0;
+  const an = d.animate([{transform: `translate(-50%,-50%) rotate(${rot}deg) scale(.5)`, opacity: .2}, {transform: `translate(calc(-50% + ${mx - x0}px), calc(-50% + ${my - y0}px)) rotate(${rot}deg) scale(1.15)`, opacity: 1, offset: .5},
+    {transform: `translate(calc(-50% + ${x1 - x0}px), calc(-50% + ${y1 - y0}px)) rotate(${rot}deg) scale(1)`, opacity: 1}], {duration: o.dur || 430, easing: 'cubic-bezier(.45,0,.55,1)'});
+  let iv = null;
+  if(o.trail){ iv = setInterval(() => { const r = d.getBoundingClientRect(), s = st.getBoundingClientRect(), p = faAdd('', r.left - s.left + r.width / 2, r.top - s.top + r.height / 2, 'fa-trail'); if(!p) return;
+    p.style.background = o.trail; p.style.boxShadow = `0 0 10px ${o.trail}`; faAnim(p, [{opacity: .85, transform: 'translate(-50%,-50%) scale(1)'}, {opacity: 0, transform: 'translate(-50%,-50%) scale(.15)'}], {duration: 380}).then(() => p.remove()); }, 28); }
+  await Promise.race([an.finished.catch(() => {}), faSleep((o.dur || 430) + 150)]); if(iv) clearInterval(iv); d.remove();
+}
+async function faEnter(){
+  const fe = faEl('foe'), me = faEl('me'), st = $('#faStage'); if(!st){ if(FB) FB.busy = false; return; }
+  sfx.vs(); const vs = document.createElement('b'); vs.className = 'fa-vs'; vs.textContent = 'VS'; st.appendChild(vs);
+  faAnim(vs, [{transform: 'translate(-50%,-50%) scale(3)', opacity: 0}, {transform: 'translate(-50%,-50%) scale(1)', opacity: 1, offset: .3}, {transform: 'translate(-50%,-50%) scale(1)', opacity: 1, offset: .75}, {transform: 'translate(-50%,-50%) scale(.6)', opacity: 0}], {duration: 1100}).then(() => vs.remove());
+  faAnim(me, [{transform: 'translateX(-160%)', opacity: 0}, {transform: 'translateX(8%)', opacity: 1, offset: .75}, {transform: 'none', opacity: 1}], {duration: 600, easing: 'ease-out'});
+  await faAnim(fe, [{transform: 'translateY(-170%) scale(.8)', opacity: 0}, {transform: 'translateY(6%) scale(1.06,.92)', opacity: 1, offset: .7}, {transform: 'none', opacity: 1}], {duration: 650, delay: 150, easing: 'cubic-bezier(.3,1.3,.5,1)'});
+  sfx.roar(); faShake('foe'); faBurst('foe', ['rgba(255,255,255,.9)', 'rgba(200,200,200,.8)'], 8, 46);
+  await faSleep(350); if(FB){ FB.busy = false; FB.turn = 'me'; faMenu(); }
+}
+async function faKO(w){
+  const el = faEl(w); if(!el) return;
+  if(w === 'foe'){ sfx.vanquish(); faBurst('foe', ['#ffffff', '#ffd000', '#ff7a00', '#aaaaaa'], 22, 90); await faAnim(el, [{transform: 'none', opacity: 1, filter: 'none'}, {transform: 'translateY(-14px) rotate(-12deg) scale(1.1)', filter: 'brightness(2.5)', opacity: 1, offset: .25}, {transform: 'translateY(30px) rotate(25deg) scale(.2)', opacity: 0, filter: 'brightness(3)'}], {duration: 750, easing: 'ease-in', fill: 'forwards'}); }
+  else { sfx.sad(); el.classList.add('ko'); await faAnim(el, [{transform: 'none'}, {transform: 'rotate(-8deg) translateY(-6px)', offset: .3}, {transform: 'rotate(80deg) translate(16px,14px)'}], {duration: 650, easing: 'ease-in', fill: 'forwards'}); }
+}
+async function faRevive(){ const el = faEl('me'); if(!el) return; el.getAnimations().forEach(a => a.cancel()); el.classList.remove('ko'); faRing('me', '#ffd000'); faRise('me', '✦', '#ffd000', 12);
+  await faAnim(el, [{transform: 'translateY(20px) scale(.8)', opacity: .4}, {transform: 'translateY(-14px) scale(1.12)', opacity: 1, offset: .6}, {transform: 'none', opacity: 1}], {duration: 650, easing: 'ease-out'}); }
+async function faEvent(e){                                 // rejoue un moment du combat
+  if(!$('#faStage')){ faSync(e); return; }
+  const tgt = w => w === 'me' ? 'foe' : 'me';
+  if(e.t === 'hit'){
+    const t = tgt(e.who), ranged = e.who === 'me' && FIC_RANGED.has(active().cl);
+    if(ranged){ sfx.bow(); await faProj('me', 'foe', '➶', {rot: true, arc: 18, dur: 320}); }
+    else { sfx.swing(); const ln = faLunge(e.who, e.who === 'foe'); await faSleep(e.who === 'foe' ? 330 : 250); if(e.who === 'foe') sfx.bite(); ln; }
+    faSync(e);
+    if(e.ok){ if(e.crit){ sfx.crit(); faFlash(); faShake('stage', true); } else sfx.hit();
+      faSlash(t, e.crit); faShake(t, e.crit); faPop(t, '−' + e.v, e.crit ? 'crit' : 'dmg'); faBurst(t, e.crit ? ['#ffd000', '#ffffff', '#ff7a00'] : ['#ff3d4d', '#ffffff', '#ff9aa4'], e.crit ? 18 : 10);
+      if(e.drain) faRise(e.who, '♥', '#ff4d6d', 5); if(e.poison) faRise(t, '☠', '#7ddc3a', 4); }
+    else { sfx.miss(); faPop(t, e.who === 'me' ? FL('Raté', 'Miss') : FL('Esquive', 'Dodge'), 'miss'); faAnim(faEl(t), [{transform: 'none'}, {transform: `translateX(${t === 'me' ? -26 : 26}px)`}, {transform: 'none'}], {duration: 360, easing: 'ease-out'}); }
+    await faSleep(e.crit ? 700 : 520); return;
+  }
+  if(e.t === 'ab'){
+    const a = FIC_AB[e.id], fx = FIC_FX[e.id] || [a.e, '#c08bff', ['#ffffff', '#c08bff'], 'zap'];
+    if(e.k === 'dmg' || e.k === 'deb' || e.k === 'stun'){
+      faRing('me', fx[1]); await faSleep(140);
+      if(fx[3] === 'fire') sfx.fire(); else if(fx[3] === 'mock') sfx.mock(); else if(fx[3] === 'sleep') sfx.sleep(); else sfx.zap();
+      if(fx[4] === 'tri'){ faProj('me', 'foe', fx[0], {trail: fx[1], arc: 70, dur: 420}); await faSleep(90); faProj('me', 'foe', fx[0], {trail: fx[1], arc: 10, dur: 420}); await faSleep(90); await faProj('me', 'foe', fx[0], {trail: fx[1], arc: -40, dur: 420}); }
+      else await faProj('me', 'foe', fx[0], {trail: fx[1], big: fx[4] === 'big', sky: fx[4] === 'sky', dur: fx[4] === 'big' ? 560 : 440});
+      faSync(e);
+      if(e.v) { faFlash(fx[4] === 'big' ? 'rgba(255,140,0,.55)' : null); faPop('foe', '−' + e.v, 'mag'); faShake(fx[4] === 'big' ? 'stage' : 'foe', fx[4] === 'big'); }
+      faBurst('foe', fx[2], fx[4] === 'big' ? 26 : 14, fx[4] === 'big' ? 110 : 70); faRing('foe', fx[1]);
+      if(e.k === 'stun' || e.stun) faRise('foe', 'z', '#b8c8ff', 5); if(e.k === 'deb') faRise('foe', '⬇', '#b07bff', 4);
+      await faSleep(650); return;
+    }
+    faSync(e);
+    if(e.k === 'heal'){ sfx.heal(); faRing('me', '#3fdc6a'); faRise('me', '✚', '#3fdc6a', 10); faPop('me', '+' + e.v, 'heal'); }
+    else if(e.k === 'ac'){ sfx.shield(); faRing('me', '#7fd0ff'); faRise('me', '⬢', '#7fd0ff', 6); }
+    else if(e.k === 'smite'){ sfx.charge(); faRing('me', '#ffe14d'); faRise('me', '⚡', '#ffe14d', 6); }
+    else if(e.k === 'buff'){ if(e.id === 'r_orque') sfx.rage(); else sfx.charge(); faRing('me', '#ff5a3d'); faRise('me', '▲', '#ff7a3d', 7); }
+    else if(e.k === 'adv' || e.k === 'multi'){ sfx.charge(); faRing('me', '#ffd000'); faRise('me', a.e, '#ffd000', 3); }
+    await faSleep(e.k === 'adv' || e.k === 'multi' ? 380 : 700); return;
+  }
+  if(e.t === 'potion'){ sfx.potion(); faSync(e); faRise('me', '○', e.k === 'mpot' ? '#5fa8ff' : '#3fdc6a', 9); faPop('me', '+' + e.v, e.k === 'mpot' ? 'mana' : 'heal'); await faSleep(650); return; }
+  if(e.t === 'regen'){ faSync(e); faRise(e.who, '✚', '#3fdc6a', 5); faPop(e.who, '+' + e.v, 'heal'); await faSleep(450); return; }
+  if(e.t === 'stunned'){ faSync(e); faRise('foe', 'z', '#b8c8ff', 6); faAnim(faEl('foe'), [{transform: 'rotate(0)'}, {transform: 'rotate(-6deg)'}, {transform: 'rotate(6deg)'}, {transform: 'none'}], {duration: 700}); await faSleep(700); return; }
+  if(e.t === 'flee'){ faSync(e); if(e.ok){ sfx.flee(); await faAnim(faEl('me'), [{transform: 'none', opacity: 1}, {transform: 'translateX(-220%)', opacity: 0}], {duration: 520, easing: 'ease-in', fill: 'forwards'}); }
+    else { sfx.miss(); await faAnim(faEl('me'), [{transform: 'none'}, {transform: 'translateX(-40px)'}, {transform: 'translateX(-30px) rotate(-10deg)'}, {transform: 'none'}], {duration: 520}); } return; }
+  if(e.t === 'eat'){                                       // le dragon avale le monstre… et parfois le recrache
+    const fe = faEl('foe'), me = faEl('me'), [x0, y0] = faCenter('foe'), [x1, y1] = faCenter('me');
+    sfx.swing(); faLunge('me', true); await faSleep(300); sfx.gulp();
+    await faAnim(fe, [{transform: 'none', opacity: 1}, {transform: `translate(${(x1 - x0) * .55}px,${(y1 - y0) * .55}px) scale(.55) rotate(200deg)`, opacity: 1, offset: .5}, {transform: `translate(${x1 - x0}px,${y1 - y0}px) scale(.08) rotate(540deg)`, opacity: 0}], {duration: 620, easing: 'cubic-bezier(.5,0,.75,.4)', fill: 'forwards'});
+    await faAnim(me, [{transform: 'none'}, {transform: 'scale(1.25,.82)'}, {transform: 'scale(.9,1.14)'}, {transform: 'none'}], {duration: 480});
+    if(e.ok){ await faSleep(250); faSync(e); sfx.hit(); faShake('me'); faPop('me', '−' + e.inner, 'dmg'); faBurst('me', ['#7ddc3a', '#c8ff6a', '#ffffff'], 10, 40); await faSleep(550); sfx.burp(); faPop('me', FL('Miam !', 'Yum!'), 'heal'); await faSleep(600); }
+    else { await faSleep(350); sfx.burp(); fe.getAnimations().forEach(a => a.cancel());
+      faBurst('me', ['#7ddc3a', '#a8e05a', '#5a8a1a', '#d4ff8a'], 22, 80);
+      await faAnim(fe, [{transform: `translate(${x1 - x0}px,${y1 - y0}px) scale(.2) rotate(-300deg)`, opacity: .6}, {transform: 'translate(0,-30px) scale(1.1) rotate(15deg)', opacity: 1, offset: .7}, {transform: 'none', opacity: 1}], {duration: 600, easing: 'ease-out'});
+      faSync(e); faPop('foe', '−' + e.small, 'dmg'); faPop('me', '−' + e.back, 'dmg'); faShake('me', true); faRise('foe', '💧', '#7ddc3a', 4); await faSleep(700); }
+    return;
+  }
+  faSync(e);
+}
+async function faPlay(){ while(FB && FB.q.length){ const e = FB.q.shift(); await faEvent(e); } if(FB) faSync(); }
+
+/* ----- les règles ----- */
+function ficFbAttack(me, f, o = {}){
+  const sp = FIC_R[S.fic.race].sp, n = (o.multi || 1) + ((me.lv || 1) >= 6 && FIC_MARTIAL.includes(me.cl) ? 1 : 0);
+  const t = S.fic.inv.wpn || 0, sm = fMod(me.st[ficCl(me).st]), atk = ficAtk(me) - (f.sp === 'vol' ? 2 : 0) + (sp === 'archer' && me.cl === 'rodeur' ? 1 : 0);
+  for(let i = 0; i < n && f.hp > 0; i++){
+    let nat = d20(); if(o.adv && i === 0) nat = Math.max(nat, d20()); if(sp === 'reroll1' && nat === 1) nat = d20();
+    const crit = nat >= ((me.lv || 1) >= 10 ? 19 : 20), sum = nat + atk;
+    if(nat !== 1 && (crit || sum >= f.ac)){
+      const k = crit ? 2 : 1;
+      let d = rollD(FIC_GEAR.wpn.die[t]) * k + sm + t + Math.floor((me.lv || 1) / 3) + FB.buff + (FB.buffD ? rollD(FB.buffD) : 0);
+      if(i === 0 && o.extra) d += rollD(o.extra) * k;
+      if(FB.smite){ d += rollD(FB.smite) * k; FB.smite = null; }
+      d = Math.max(1, d); f.hp -= d;
+      ficFbLog(FL(`${crit ? '💥 Critique ! ' : '⚔️ '}${me.first} touche (${nat}${fModT(atk)} = ${sum} contre CA ${f.ac}) : ${d} dégâts.`, `${crit ? '💥 Critical! ' : '⚔️ '}${me.first} hits (${nat}${fModT(atk)} = ${sum} vs AC ${f.ac}): ${d} damage.`));
+      fbPush({t: 'hit', who: 'me', ok: true, crit, v: d});
+    } else { ficFbLog(FL(`💨 ${me.first} rate son coup (${nat}${fModT(atk)} = ${sum} contre CA ${f.ac}).`, `💨 ${me.first} misses (${nat}${fModT(atk)} = ${sum} vs AC ${f.ac}).`)); fbPush({t: 'hit', who: 'me', ok: false}); }
+  }
+}
+function ficFbAbility(me, f, id){
+  const a = FIC_AB[id], nm0 = `${a.e} ${ficAbName(id)}`, up = ficAbUp(id, me), sm = a.s != null ? Math.max(0, fMod(me.st[a.s])) : 0;
+  if(a.k === 'dmg'){ let d = rollD(addDice(a.d, up)) + (a.add || 0) + sm; if(f.sp === 'magie') d = Math.ceil(d / 2); f.hp -= d;
+    ficFbLog(FL(`${nm0} : ${d} dégâts${f.sp === 'magie' ? ' (la créature résiste à la magie)' : ''}.`, `${nm0}: ${d} damage${f.sp === 'magie' ? ' (the creature resists magic)' : ''}.`)); fbPush({t: 'ab', id, k: 'dmg', v: d}); }
+  else if(a.k === 'heal'){ const mx = ficHpMax(me); let h = a.lvMul ? a.lvMul * me.lv : rollD(addDice(a.d, up)) + sm + (a.lvAdd ? me.lv : 0); h = Math.max(0, Math.min(h, mx - me.hp)); me.hp += h;
+    ficFbLog(FL(`${nm0} : +${h} PV.`, `${nm0}: +${h} HP.`)); fbPush({t: 'ab', id, k: 'heal', v: h}); }
+  else if(a.k === 'ac'){ if(a.turns) FB.shield = {v: a.v, t: a.turns}; else FB.ac += a.v; ficFbLog(FL(`${nm0} : +${a.v} CA.`, `${nm0}: +${a.v} AC.`)); fbPush({t: 'ab', id, k: 'ac'}); }
+  else if(a.k === 'stun'){ const up1 = id.startsWith('r_') && me.lv >= 5 ? 1 : 0; FB.stun = Math.max(FB.stun, a.v + up1);
+    ficFbLog(FL(`${nm0} : ${f.name} perd ses ${a.v + up1} prochains tours.`, `${nm0}: ${f.name} is stunned for ${a.v + up1} turns.`)); fbPush({t: 'ab', id, k: 'stun'}); }
+  else if(a.k === 'smite'){ FB.smite = a.d; ficFbLog(FL(`${nm0} : ta prochaine attaque infligera ${a.d} en plus.`, `${nm0}: your next hit deals ${a.d} more.`)); fbPush({t: 'ab', id, k: 'smite'}); }
+  else if(a.k === 'adv'){ ficFbLog(nm0 + ' !'); fbPush({t: 'ab', id, k: 'adv'}); ficFbAttack(me, f, {adv: true, extra: addDice(a.d, up)}); }
+  else if(a.k === 'multi'){ ficFbLog(nm0 + ' !'); fbPush({t: 'ab', id, k: 'multi'}); ficFbAttack(me, f, {multi: a.v}); }
+  else if(a.k === 'buff'){ if(a.v) FB.buff += a.v; if(a.d) FB.buffD = a.d; ficFbLog(FL(`${nm0} : +${a.v || a.d} dégâts à chaque coup.`, `${nm0}: +${a.v || a.d} damage on every hit.`)); fbPush({t: 'ab', id, k: 'buff'}); }
+  else if(a.k === 'deb'){ FB.deb = Math.min(6, FB.deb + a.v); let d = 0; if(a.d){ d = rollD(addDice(a.d, up)); f.hp -= d; } if(a.stun) FB.stun = Math.max(FB.stun, a.stun);
+    ficFbLog(FL(`${nm0} : ${f.name} a −${a.v} pour toucher${d ? ` et prend ${d} dégâts` : ''}${a.stun ? ', et perd son tour' : ''}.`, `${nm0}: ${f.name} gets −${a.v} to hit${d ? ` and takes ${d} damage` : ''}${a.stun ? ', and loses its turn' : ''}.`)); fbPush({t: 'ab', id, k: 'deb', v: d, stun: a.stun}); }
+  else if(a.k === 'eat'){                                  // le dragon avale tout cru un petit monstre plus faible
+    const nat = d20(), mod = fMod(me.st[0]) + ficProf(me), tot = nat + mod, dc = 10 + f.lv;
+    if(nat !== 1 && (nat === 20 || tot >= dc)){
+      const inner = Math.max(1, Math.min(me.hp - 1, Math.round((rollD(f.dmg) + f.dmgB) * 1.5))); me.hp -= inner; f.hp = 0;
+      ficFbLog(FL(`${nm0} (${nat}${fModT(mod)} = ${tot} contre ${dc}) : ${f.name} disparaît dans la gueule de ${me.first} ! Avant de fondre dans l’acide, il se débat : ${inner} dégâts de l’intérieur.`, `${nm0} (${nat}${fModT(mod)} = ${tot} vs ${dc}): ${f.name} vanishes down ${me.first}’s throat! Before melting in the acid, it thrashes about: ${inner} damage from the inside.`));
+      fbPush({t: 'eat', ok: true, inner});
+    } else {
+      const small = rollD('1d4'), back = Math.round((rollD(f.dmg) + f.dmgB) * 2); f.hp -= small; me.hp -= back;
+      ficFbLog(FL(`${nm0} (${nat}${fModT(mod)} = ${tot} contre ${dc}) : avalé… puis recraché ! ${f.name} s’en tire avec ${small} dégâts, mais ${me.first} en prend ${back}.`, `${nm0} (${nat}${fModT(mod)} = ${tot} vs ${dc}): swallowed… then spat back out! ${f.name} gets away with ${small} damage, but ${me.first} takes ${back}.`));
+      fbPush({t: 'eat', ok: false, small, back});
+    }
+  }
+}
+function ficFbFoeTurn(){                                   // le tour de l'adversaire (la logique seule)
+  if(!FB || FB.over) return; const me = active(), f = FB.foe, sp = FIC_R[S.fic.race].sp;
+  if(f.sp === 'regen' && f.hp < f.hpMax){ const h = Math.min(f.hpMax - f.hp, 1 + Math.floor(f.lv / 2)); f.hp += h; ficFbLog(FL(`💚 ${f.name} se régénère : +${h} PV.`, `💚 ${f.name} regenerates: +${h} HP.`)); fbPush({t: 'regen', who: 'foe', v: h}); }
+  if(FB.stun > 0){ FB.stun--; ficFbLog(FL(`💤 ${f.name} ne peut pas agir.`, `💤 ${f.name} cannot act.`)); fbPush({t: 'stunned'}); }
+  else {
+    const n = f.sp === 'frappe' ? 2 : 1, ac = ficAC(me) + FB.ac + (FB.shield ? FB.shield.v : 0), atk = f.atk - FB.deb;
+    for(let i = 0; i < n && me.hp > 0; i++){
+      const nat = d20(), crit = nat === 20;
+      if(nat !== 1 && (crit || nat + atk >= ac)){
+        let d = rollD(f.dmg) * (crit ? 2 : 1) + f.dmgB; if(n === 2) d = Math.ceil(d * .65);
+        if(f.sp === 'poison') d += rollD('1d4') + Math.floor(f.lv / 3);
+        if(sp === 'tough') d = Math.max(1, d - 1);
+        me.hp -= d; if(f.sp === 'drain') f.hp = Math.min(f.hpMax, f.hp + Math.ceil(d / 2));
+        ficFbLog(FL(`${crit ? '💥 ' : '🩸 '}${f.name} touche${crit ? ' (critique)' : ''} : ${d} dégâts${f.sp === 'poison' ? ' (poison)' : f.sp === 'drain' ? ' (et se soigne)' : ''}.`, `${crit ? '💥 ' : '🩸 '}${f.name} hits${crit ? ' (critical)' : ''}: ${d} damage${f.sp === 'poison' ? ' (poison)' : f.sp === 'drain' ? ' (and heals)' : ''}.`));
+        fbPush({t: 'hit', who: 'foe', ok: true, crit, v: d, poison: f.sp === 'poison', drain: f.sp === 'drain'});
+      } else { ficFbLog(FL(`🛡️ ${me.first} esquive l’attaque de ${f.name}.`, `🛡️ ${me.first} dodges ${f.name}’s attack.`)); fbPush({t: 'hit', who: 'foe', ok: false}); }
+    }
+  }
+  if(FB.shield && --FB.shield.t <= 0) FB.shield = null;
+  if(sp === 'regen' && me.hp > 0 && me.hp < ficHpMax(me)){ const h = Math.min(ficHpMax(me) - me.hp, 1 + Math.floor(me.lv / 4)); me.hp += h; fbPush({t: 'regen', who: 'me', v: h}); }
+}
+async function ficFba(v){                                  // le tour du héros, puis celui de l'adversaire
+  if(!FB || FB.busy || FB.over) return; const me = active(), f = FB.foe, inv = S.fic.inv;
+  if(v.startsWith('ab:')){ const id = v.slice(3), a = FIC_AB[id]; if(!a || !ficAbs(me).includes(id) || (a.once && FB.once[id]) || (a.mp && me.mp < a.mp)) return;
+    if(a.k === 'eat' && !(f.sz === 'p' && f.lv < me.lv)) return; }
+  if((v === 'pot' || v === 'gpot' || v === 'mpot') && !inv[v]) return;
+  FB.busy = true; FB.turn = 'me'; FB.q = []; faMenu();
+  if(v === 'atk') ficFbAttack(me, f);
+  else if(v.startsWith('ab:')){ const id = v.slice(3), a = FIC_AB[id]; if(a.mp) me.mp -= a.mp; if(a.once) FB.once[id] = 1; ficFbAbility(me, f, id); }
+  else if(v === 'pot' || v === 'gpot'){ inv[v]--; const mx = ficHpMax(me), h = Math.min(mx - me.hp, Math.round(mx * (v === 'gpot' ? 1 : .5) * (1 + .1 * (S.fic.dom.temple || 0))));
+    me.hp += h; ficFbLog(FL(`${FIC_POT[v].e} ${me.first} boit une potion : +${h} PV.`, `${FIC_POT[v].e} ${me.first} drinks a potion: +${h} HP.`)); fbPush({t: 'potion', k: v, v: h}); }
+  else if(v === 'mpot'){ inv.mpot--; const g = ficMpMax(me) - me.mp; me.mp += g; ficFbLog(FL(`💙 ${me.first} boit une potion de mana : +${g}.`, `💙 ${me.first} drinks a mana potion: +${g}.`)); fbPush({t: 'potion', k: 'mpot', v: g}); }
+  else if(v === 'flee'){ const nat = d20(), tot = nat + fMod(me.st[1]) + ficProf(me), dc = 10 + Math.floor(f.lv / 2) + (f.boss ? 3 : 0);
+    if(tot >= dc){ ficFbLog(FL(`🏃 ${me.first} s’échappe (${tot} contre ${dc}).`, `🏃 ${me.first} gets away (${tot} vs ${dc}).`)); fbPush({t: 'flee', ok: true}); FB.over = 'flee'; if(FB.o.duel) FB.res.push(FL('Fuir un duel : −10 de renommée.', 'Fleeing a duel: −10 fame.')); }
+    else { ficFbLog(FL(`🏃 ${me.first} tente de fuir… raté (${tot} contre ${dc}) !`, `🏃 ${me.first} tries to flee… and fails (${tot} vs ${dc})!`)); fbPush({t: 'flee', ok: false}); } }
+  else { FB.busy = false; faMenu(); return; }
+  await faPlay(); if(!FB) return;
+  if(FB.over === 'flee'){ FB.busy = false; faMenu(); save(); return; }
+  if(f.hp <= 0){ await faKO('foe'); ficFbWin(); return; }
+  if(me.hp <= 0){ await ficFbDown(); return; }
+  await faSleep(250); FB.turn = 'foe'; faMenu(); await faSleep(450); if(!FB) return;
+  ficFbFoeTurn(); await faPlay(); if(!FB) return;
+  if(f.hp <= 0){ await faKO('foe'); ficFbWin(); return; }
+  if(me.hp <= 0){ await ficFbDown(); return; }
+  FB.busy = false; FB.turn = 'me'; faSync(); faMenu(); dirty = true;
+}
+async function ficFbDown(){                                // le héros tombe
+  const me = active(); me.hp = 0; await faKO('me'); if(!FB) return;
+  FB.busy = false;
+  if(FB.o.lethal){ FB.over = 'ds'; FB.ds = {ok: 0, ko: 0, last: ''}; sfx.heart(); } else ficFbLose(false);
+  faSync(); faMenu();
+}
+function ficFbWin(){
+  const me = active(), f = FB.foe, o = FB.o, F = S.fic, out = FB.res; FB.over = 'win'; FB.busy = false;
+  let g = f.gold || 0; if(g && FIC_R[F.race].sp === 'lucky') g *= 2;
+  if(g){ if(o.bank === false && F.dj) F.dj.gold += g; else F.gold += g; out.push(FL(`🪙 +${g} pièces d’or${o.bank === false ? ' (dans le sac du donjon)' : ''}.`, `🪙 +${g} gold${o.bank === false ? ' (in the dungeon bag)' : ''}.`)); }
+  const lv0 = me.lv; ficXP(me, f.xp, out); if(o.bank === false && F.dj) F.dj.xp += f.xp;
+  if(f.fame){ ficFame(f.fame); out.push(FL(`⭐ +${f.fame} de renommée.`, `⭐ +${f.fame} fame.`)); }
+  if(f.id){ const b = FICALB.mob || (FICALB.mob = {}), m = FIC_MOB.find(x => x[0] === f.id); if(!b[f.id] && m) out.push(FL(`📖 Nouveau dans le bestiaire : ${m[1]} ${m[2]}.`, `📖 New in the bestiary: ${m[1]} ${m[3]}.`)); b[f.id] = (b[f.id] || 0) + 1; ficAlbDirty = true; ficAlbSave(); }
+  if(f.id && Math.random() < (f.boss ? .6 : .25)){ const k = Math.random() < .3 ? 'mpot' : 'pot'; if(F.inv[k] < 9){ F.inv[k]++; out.push(FL(`${FIC_POT[k].e} Butin : ${FIC_POT[k].n[0].toLowerCase()}.`, `${FIC_POT[k].e} Loot: ${FIC_POT[k].n[1].toLowerCase()}.`)); } }
+  ficFbLog(FL(`🏆 Victoire sur ${f.name} !`, `🏆 ${f.name} is defeated!`)); FB.shown = FB.log.length;
+  sfx.fame(); setTimeout(() => sfx.coin(), 700); if(me.lv > lv0) setTimeout(() => sfx.lvup(), 1200); burst(['#ffd000', '#ffffff', '#74e600', '#3fd0ff'], 40);
+  if(o.onWin) o.onWin(out);
+  faSync(); faMenu(); dirty = true; save();
+}
+function ficFbLose(stab){                                  // à terre : blessé et dépouillé (ou stabilisé après les jets contre la mort)
+  const me = active(), F = S.fic, out = FB.res, A = ageAt(me, S.t); FB.over = 'lose';
+  const loss = Math.round(Math.max(0, me.lifeEnd - A) * rnd(4, 10) / 100 * (FIC_R[F.race].sp === 'tough' ? .5 : 1));
+  if(loss > 0){ me.hurt = true; me.lifeEnd = Math.max(A + 1, me.lifeEnd - loss); out.push(FL(`🩹 Blessure : −${cynFmt(loss)} ans d’espérance de vie.`, `🩹 Wounded: −${cynFmt(loss)} years of life.`)); }
+  me.hp = Math.max(1, Math.round(ficHpMax(me) * .1));
+  if(FB.o.onLose) FB.o.onLose(out, stab);
+  dirty = true; save();
+}
+async function ficFbDs(){                                  // un jet contre la mort
+  if(!FB || FB.over !== 'ds' || FB.busy) return; const me = active(), F = S.fic, sp = FIC_R[F.race].sp, ds = FB.ds;
+  FB.busy = true; faMenu();
+  const last = $('#faDsLast'); for(let i = 0; i < 8; i++){ if(last) last.textContent = '🎲 ' + d20(); if(i % 3 === 0) sfx.heart(); await faSleep(85); } if(!FB) return;
+  const nat = d20(), b = (F.dom.temple || 0) + (sp === 'regen' ? 2 : 0), tot = nat + b;
+  FB.busy = false;
+  if(nat === 20){ me.hp = Math.max(1, Math.round(ficHpMax(me) * .25)); FB.over = null; FB.ds = null; FB.vmh = me.hp;
+    ficFbLog(FL(`✨ 20 naturel ! ${me.first} se relève avec ${me.hp} PV !`, `✨ Natural 20! ${me.first} gets back up with ${me.hp} HP!`)); FB.shown = FB.log.length;
+    sfx.fame(); burst(['#ffd000', '#fff'], 30); faSync(); faMenu(); await faRevive(); return; }
+  if(tot >= 8) ds.ok++; else ds.ko += nat === 1 && sp !== 'ancient' ? 2 : 1;
+  ds.last = FL(`d20 : ${nat}${b ? ' + ' + b : ''} = ${tot} → ${tot >= 8 ? 'tient bon' : 'faiblit'}`, `d20: ${nat}${b ? ' + ' + b : ''} = ${tot} → ${tot >= 8 ? 'holds on' : 'fading'}`);
+  if(tot >= 8) sfx.pop(); else sfx.refuse();
+  if(ds.ok >= 3){ ficFbLog(FL(`💓 ${me.first} survit de justesse.`, `💓 ${me.first} barely survives.`)); FB.shown = FB.log.length; ficFbLose(true); }
+  else if(ds.ko >= 3){ FB.over = 'dead'; FB.res.push(FL(`${me.first} ne se relèvera pas…`, `${me.first} will not rise again…`)); ficDie(me, Math.floor(S.t), FB.o.death ? FL(FB.o.death[0], FB.o.death[1]) : FL('tombé au combat', 'fallen in battle')); sfx.death(); if(F.dj) F.dj = null; }
+  faSync(); faMenu();
+}
+async function ficFbPhx(){
+  if(!FB || FB.over !== 'ds' || !S.fic.inv.phx || FB.busy) return; const me = active(); S.fic.inv.phx--;
+  me.hp = Math.round(ficHpMax(me) / 2); FB.over = null; FB.ds = null; FB.vmh = me.hp;
+  ficFbLog(FL(`🪶 La plume de phénix s’embrase : ${me.first} renaît avec ${me.hp} PV !`, `🪶 The phoenix feather bursts into flame: ${me.first} rises with ${me.hp} HP!`)); FB.shown = FB.log.length;
+  sfx.fire(); setTimeout(() => sfx.fame(), 350); faBurst('me', ['#ff7a00', '#ffd000', '#ff3b1f', '#ffffff'], 30, 100); burst(['#ff7a00', '#ffd000', '#ff3b1f', '#fff'], 50);
+  faSync(); faMenu(); save(); await faRevive();
+}
+function ficFbEnd(){
+  if(!FB || !FB.over || FB.over === 'ds') return; const o = FB.o, res = FB.over;
+  if(res === 'flee' && o.duel) ficFame(-10);
+  FB = null; $('#modal').classList.remove('fa-modal'); closeModal(true); dirty = true; render(); save();
+  ficChain(() => { if(o.onEnd) o.onEnd(res); dirty = true; render(); save(); });
+}
+
+/* ---------- les rencontres, la guerre ---------- */
+const FIC_ENC = [['{m} surgit des fourrés et fonce sur {n} !', '{m} bursts out of the bushes and charges at {n}!'], ['Sur la route, {n} tombe nez à nez avec {m}.', 'On the road, {n} comes face to face with {m}.'],
+  ['Une nuit sans lune, {m} rôde autour de la maison de {n}.', 'On a moonless night, {m} prowls around {n}’s house.'], ['Des villageois appellent {n} à l’aide : {m} terrorise la région.', 'Villagers call {n} for help: {m} is terrorising the area.']];
+function ficMobEvent(){
+  const F = S.fic, me = active(); if(!me || me.death != null || !me.cl){ F.ev = null; return; }
+  const foe = ficMob(F.ev.c || me.lv), x = pick(FIC_ENC);
+  ficFight(foe, {bg: 'wild', eyebrow: FL('Rencontre', 'Encounter') + ' · ' + ficDate(S.t), title: `${foe.e} ${foe.name}`, intro: FL(x[0], x[1]).replace('{m}', foe.name).replace('{n}', me.first),
+    onLose: out => { const l = Math.min(F.gold, Math.round(F.gold * rnd(5, 15) / 100)); if(l){ F.gold -= l; out.push(FL(`🪙 −${l} pièces d’or volées.`, `🪙 −${l} gold stolen.`)); } },
+    onEnd: () => { F.ev = null; }});
+}
+function ficWarBattle(){
+  const F = S.fic, me = active(), e = F.war ? F.war.e : pick(FIC_IDS.filter(x => x !== F.race)); if(!me || me.death != null){ F.ev = null; return; }
+  ficEnsure(me); const q = {st: ficStats(e), cl: pick(FIC_CLS), lv: Math.min(20, me.lv)}, foe = ficFoeP(q, FIC_R[e].e, FL(`Champion des ${ficRaceName(e)}`, `Champion of the ${ficRaceName(e)}`), e);
+  foe.gold = rnd(30, 90) + 10 * me.lv; foe.fame = 20;
+  ficFight(foe, {bg: 'war', eyebrow: FL('La guerre', 'War') + ' · ' + ficDate(S.t), title: FL(`Guerre contre les ${ficRaceName(e)}`, `War against the ${ficRaceName(e)}`), lethal: true, death: ['tombé au combat', 'fallen in battle'],
+    intro: FL(`La guerre éclate. ${me.first} part au front et affronte leur champion en combat singulier.`, `War breaks out. ${me.first} goes to the front and faces their champion in single combat.`),
+    onWin: out => { if(F.war){ const y = yearOf(S.t); F.war.to = Math.max(y + 1, F.war.to - Math.max(1, Math.round(ficK()))); out.push(FL('🕊 Ta victoire écourte la guerre.', '🕊 Your victory shortens the war.')); } ficMsg(FL(`⚔ ${me.first} terrasse le champion des ${ficRaceName(e)} !`, `⚔ ${me.first} slays the champion of the ${ficRaceName(e)}!`)); },
+    onEnd: () => { F.ev = null; }});
+}
+
+/* ---------- les expéditions et les donjons ---------- */
+function ficExpOpen(){
+  const F = ficEnsureF(), me = active(); if(!me || me.death != null || !me.cl) return; ficEnsure(me);
+  if(yearOf(S.t) < F.expCool){ sfx.refuse(); return; }
+  const n = me.lv >= 6 ? 4 : me.lv >= 3 ? 3 : 2, used = new Set();
+  FIC_EXP = [...Array(n).keys()].map(d => { let t; do t = rnd(0, FIC_DJ.length - 1); while(used.has(t)); used.add(t); return ficDjGen(d, t); });
+  openModal(`<div class="m-head"><div class="eyebrow">🗺️ ${FL('Expédition', 'Expedition')}</div><h2>${FL('Où partir à l’aventure ?', 'Where to adventure?')}</h2>
+      <p class="hint">${esc(FL('Le butin en or reste dans le sac tant que tu n’es pas rentré : si tu tombes, tu le perds. L’expérience, elle, est gagnée tout de suite. Dans un donjon, tomber peut être mortel.', 'Gold stays in your bag until you get home: if you fall, you lose it. Experience is earned right away. In a dungeon, falling can be deadly.'))}</p></div>
+    <div class="pastppl fic-exps">${FIC_EXP.map((dj, i) => { const T = FIC_DJ[dj.t], D = FIC_DIFF[dj.diff];
+      return `<button class="pickrow d${dj.diff}" data-act="ficexpgo" data-i="${i}"><span class="fe">${T[2]}</span><span><b>${esc(FL(T[0], T[1]))}</b><small>${esc(FL(D.n[0], D.n[1]))} · ${FL('niv.', 'lv')} ${dj.c} · ${dj.rooms.length} ${FL('salles', 'rooms')} · 🪙 ×${D.g} · ⭐ ${D.fame}</small></span><em>${'★'.repeat(dj.diff + 1)}</em></button>`; }).join('')}</div>
+    <div class="m-actions"><button class="gel ghost" data-act="close"><span>${FL('Plus tard', 'Later')}</span></button></div>`);
+}
+function ficDjGen(diff, t){
+  const me = active(), D = FIC_DIFF[diff], rooms = [];
+  for(let i = 0; i < D.rooms - 1; i++){ let r = pick(['mob', 'mob', 'mob', 'trap', 'chest', 'camp']); if(r === 'camp' && (i === 0 || rooms[i - 1] === 'camp')) r = 'mob'; rooms.push(r); }
+  rooms.push('boss'); return {t, diff, c: Math.max(1, (me.lv || 1) + D.dl), rooms, i: 0, gold: 0, xp: 0, msg: ''};
+}
+function ficExpGo(i){
+  const F = S.fic, dj = FIC_EXP && FIC_EXP[i]; if(!dj) return;
+  F.dj = dj; F.ev = {id: 'dj'}; F.expCool = yearOf(S.t) + ficExpGap(); FIC_EXP = null; sfx.start(); ficDjOpen();
+}
+function ficDjOpen(){
+  const F = S.fic, dj = F.dj, me = active();
+  if(!dj || !me || me.death != null){ F.dj = null; if(F.ev && F.ev.id === 'dj') F.ev = null; return; }
+  ficEnsure(me); const T = FIC_DJ[dj.t], D = FIC_DIFF[dj.diff], done = dj.i >= dj.rooms.length, inv = F.inv, hpM = ficHpMax(me), mpM = ficMpMax(me);
+  const path = dj.rooms.map((r, i) => `<li class="${i < dj.i ? 'done' : i === dj.i ? 'cur' : ''} ${r === 'boss' ? 'boss' : ''}">${i < dj.i ? '✔' : i === dj.i || r === 'boss' ? FIC_ROOM[r] : '❔'}</li>`).join('');
+  const nx = dj.rooms[dj.i], nxT = {mob: FL('Une salle gardée', 'A guarded room'), trap: FL('Un couloir étrange', 'A strange corridor'), chest: FL('Une salle au trésor ?', 'A treasure room?'), camp: FL('Un abri sûr', 'A safe shelter'), boss: FL('La salle du maître des lieux', 'The master’s chamber')}[nx];
+  openModal(`<div class="m-head"><div class="eyebrow">${T[2]} ${FL('Expédition', 'Expedition')} · ${esc(FL(D.n[0], D.n[1]))} · ${FL('niv.', 'lv')} ${dj.c}</div><h2>${esc(FL(T[0], T[1]))}</h2>
+      <p>${done ? esc(FL('Le maître des lieux est tombé : le donjon est à toi !', 'The master has fallen: the dungeon is yours!')) : esc(FL(`Salle ${dj.i + 1} sur ${dj.rooms.length} : ${nxT}.`, `Room ${dj.i + 1} of ${dj.rooms.length}: ${nxT}.`))}</p></div>
+    <ol class="dj-path">${path}</ol>
+    ${dj.msg ? `<p class="dj-msg">${esc(dj.msg)}</p>` : ''}
+    <div class="dj-me">${orb(me)}<div>${ficBar(me.hp, hpM, 'hp', '❤️')}${mpM ? ficBar(me.mp, mpM, 'mp', '💙') : ''}</div></div>
+    <p class="dj-loot">${FL('Dans le sac', 'In the bag')} : 🪙 <b>${cynFmt(dj.gold)}</b> · ✨ ${dj.xp} XP${done ? ` · ${FL('bonus de fin', 'clear bonus')} ⭐ ${D.fame}` : ''}</p>
+    <div class="m-actions dj-acts">${['pot', 'gpot', 'mpot'].filter(k => inv[k] && (k !== 'mpot' || mpM)).map(k => `<button class="gel ghost" data-act="ficpot" data-v="${k}" ${(k === 'mpot' ? me.mp >= mpM : me.hp >= hpM) ? 'disabled' : ''}><span>${FIC_POT[k].e} ×${inv[k]}</span></button>`).join('')}
+      <button class="gel ${done ? 'gold big' : 'ghost'}" data-act="ficdjout"><span>${done ? '🏆 ' + FL('Rentrer en héros', 'Return a hero') : '🏃 ' + FL('Rentrer avec le butin', 'Go home with the loot')}</span></button>
+      ${done ? '' : `<button class="gel ${nx === 'boss' ? 'danger' : 'lime'} big" data-act="ficdjgo"><span>${FIC_ROOM[nx]} ${FL('Entrer', 'Enter')}</span></button>`}</div>`, {locked: true});
+}
+function ficDjGo(){
+  const F = S.fic, dj = F.dj, me = active(); if(!dj || !me || dj.i >= dj.rooms.length) return;
+  const r = dj.rooms[dj.i], D = FIC_DIFF[dj.diff], T = FIC_DJ[dj.t]; dj.msg = '';
+  const fightEnd = res => { if(!F.dj) return; if(res === 'win'){ dj.i++; ficDjOpen(); } else if(res === 'flee'){ dj.msg = FL('Tu as battu en retraite vers l’entrée.', 'You retreated to the entrance.'); dj.i = Math.max(0, dj.i); ficDjOpen(); }
+    else ficDjLeave(res === 'dead' ? 'dead' : 'lost'); };
+  const lose = (out, stab) => { if(F.dj && F.dj.gold){ out.push(FL(`🎒 Le butin du donjon est perdu (${cynFmt(F.dj.gold)} pièces).`, `🎒 The dungeon loot is lost (${cynFmt(F.dj.gold)} gold).`)); F.dj.gold = 0; } };
+  if(r === 'mob' || r === 'boss'){
+    const foe = ficMob(dj.c, {boss: r === 'boss'}); foe.gold = Math.round(foe.gold * D.g);
+    ficFight(foe, {bg: 'dj', eyebrow: `${T[2]} ${FL(T[0], T[1])} · ${FL('salle', 'room')} ${dj.i + 1}/${dj.rooms.length}`, title: `${foe.e} ${foe.name}`, lethal: true, bank: false, death: ['tombé dans un donjon', 'fallen in a dungeon'],
+      intro: r === 'boss' ? FL(`Le maître des lieux se dresse : ${foe.name} !`, `The master of this place rises: ${foe.name}!`) : FL(`${foe.name} garde la salle.`, `${foe.name} guards the room.`), onLose: lose, onEnd: fightEnd});
+  } else if(r === 'trap'){
+    const TR = {1: [['Des fléchettes jaillissent des murs !', 'Darts shoot out of the walls!'], ['Le sol se dérobe sous les pieds !', 'The floor gives way!']], 4: [['Une rune s’illumine sur le sol… mieux vaut la repérer à temps.', 'A rune lights up on the floor… better spot it in time.']],
+      2: [['Un gaz verdâtre s’échappe des dalles !', 'A greenish gas seeps from the flagstones!']], 3: [['Une énigme est gravée sur la porte : une mauvaise réponse, et la salle se venge.', 'A riddle is carved on the door: one wrong answer, and the room strikes back.']]};
+    const st = pick([1, 1, 4, 2, 3]), dc = 10 + Math.floor(dj.c / 2) + dj.diff, tt = pick(TR[st]);
+    ficDiceModal({who: me, st, dc, eyebrow: `${T[2]} ${FL(T[0], T[1])}`, title: FL('Un piège !', 'A trap!'), text: FL(tt[0], tt[1]),
+      onResult: x => { if(x.ok){ const xp = 10 + 8 * dj.c; ficXP(me, xp, null); dj.xp += xp; return [FL(`Piège évité ! ✨ +${xp} XP`, `Trap avoided! ✨ +${xp} XP`)]; }
+        const d = rollD(`${1 + Math.floor(dj.c / 3)}d6`) + dj.c; me.hp = Math.max(1, me.hp - d); return [FL(`Aïe : −${d} PV.`, `Ouch: −${d} HP.`)]; },
+      onDone: () => { if(F.dj){ dj.i++; ficDjOpen(); } }});
+  } else if(r === 'chest'){
+    if(Math.random() < .2){ const foe = ficMob(dj.c, {id: 'mimique'}); foe.gold = Math.round(foe.gold * D.g * 1.5);
+      ficFight(foe, {bg: 'dj', eyebrow: `${T[2]} ${FL(T[0], T[1])}`, title: '📦 ' + FL('Le coffre a des dents !', 'The chest has teeth!'), lethal: true, bank: false, intro: FL('Le coffre s’ouvre… sur une rangée de crocs. Une mimique !', 'The chest opens… onto a row of fangs. A mimic!'), onLose: lose, onEnd: fightEnd}); return; }
+    const g = Math.round(rnd(10, 25) * dj.c * D.g); dj.gold += g; dj.i++; let m = FL(`💰 Un coffre : +${g} pièces d’or dans le sac.`, `💰 A chest: +${g} gold in the bag.`);
+    if(Math.random() < .35){ const k = pick(['pot', 'pot', 'mpot', 'gpot']); if(F.inv[k] < 9){ F.inv[k]++; m += ' ' + FL(`Et ${FIC_POT[k].e} ${FIC_POT[k].n[0].toLowerCase()} !`, `And ${FIC_POT[k].e} a ${FIC_POT[k].n[1].toLowerCase()}!`); } }
+    dj.msg = m; sfx.sparkle(); ficDjOpen(); save();
+  } else if(r === 'camp'){
+    const t = F.dom.temple || 0, h = Math.min(ficHpMax(me) - me.hp, Math.round(ficHpMax(me) * (.35 + .1 * t))), mp = Math.min(ficMpMax(me) - me.mp, Math.round(ficMpMax(me) * .5));
+    me.hp += h; me.mp += mp; dj.i++; dj.msg = FL(`🔥 Un feu de camp : +${h} PV, +${mp} mana.`, `🔥 A campfire: +${h} HP, +${mp} mana.`); sfx.cure(); ficDjOpen(); save();
+  }
+}
+function ficDjLeave(why){                                  // on rentre : avec le butin, ou après une chute
+  const F = S.fic, dj = F.dj, me = active(); F.dj = null; if(F.ev && F.ev.id === 'dj') F.ev = null; if(!dj) return;
+  if(why === 'out' && me && me.death == null){
+    const D = FIC_DIFF[dj.diff], done = dj.i >= dj.rooms.length, T = FIC_DJ[dj.t];
+    F.gold += dj.gold; if(done) ficFame(D.fame);
+    ficMsg(done ? FL(`🏆 ${me.first} vient à bout de « ${T[0]} » (${D.n[0].toLowerCase()}) et rapporte ${cynFmt(dj.gold)} pièces d’or.`, `🏆 ${me.first} clears “${T[1]}” (${D.n[1].toLowerCase()}) and brings back ${cynFmt(dj.gold)} gold.`)
+      : FL(`🎒 ${me.first} rentre de « ${T[0]} » avec ${cynFmt(dj.gold)} pièces d’or.`, `🎒 ${me.first} comes back from “${T[1]}” with ${cynFmt(dj.gold)} gold.`));
+    if(done){ sfx.fame(); burst(['#ffd000', '#ffffff', '#ffb300'], 50); } else sfx.pop();
+  }
+  closeModal(true); dirty = true; render(); save();
+}
+function ficPotion(k){                                     // boire une potion hors combat
+  const F = S.fic, me = active(); if(!me || !F.inv[k]) return; const hpM = ficHpMax(me), mpM = ficMpMax(me);
+  if(k === 'mpot'){ if(me.mp >= mpM) return; me.mp = mpM; } else { if(me.hp >= hpM) return; me.hp = Math.min(hpM, me.hp + Math.round(hpM * (k === 'gpot' ? 1 : .5) * (1 + .1 * (F.dom.temple || 0)))); }
+  F.inv[k]--; sfx.cure(); save(); if(F.dj) ficDjOpen(); else render();
+}
+
+/* ---------- le marché : équipement, potions, domaine, titres ---------- */
+function ficShop(tab){
+  const F = ficEnsureF(), me = active(); if(tab) FIC_SHOPT = tab; const T = FIC_SHOPT, inv = F.inv, d = F.dom;
+  const row = (e, name, desc, lvl, cost, act, v, ok, note) => `<div class="fs-it"><span class="fe">${e}</span><span><b>${esc(name)}</b>${lvl ? `<em>${lvl}</em>` : ''}<small>${esc(desc)}</small></span>
+    ${cost == null ? `<span class="fs-max">${esc(note || FL('Au maximum', 'Maxed out'))}</span>` : `<button class="gel ${ok ? 'gold' : 'ghost'}" data-act="${act}" data-v="${v}" ${ok ? '' : 'disabled'}><span>🪙 ${cynFmt(cost)}</span></button>`}</div>`;
+  let body = '';
+  if(T === 'eq'){
+    body = Object.entries(FIC_GEAR).map(([k, G]) => { const t = inv[k], nx = t + 1 < G.cost.length ? t + 1 : null, c = nx != null ? ficPrice(G.cost[nx]) : null;
+      return row(G.e, FL(G.n[nx ?? t][0], G.n[nx ?? t][1]), (nx != null ? FL('Prochain : ', 'Next: ') : '') + G.d(nx ?? t) + (k === 'wpn' ? ` · ${G.die[nx ?? t]}` : ''), FL(`Actuel : ${G.n[t][0]}`, `Now: ${G.n[t][1]}`), c, 'ficbuy', k, c != null && F.gold >= c); }).join('')
+      + Object.entries(FIC_POT).map(([k, P0]) => { const c = ficPrice(P0.cost), full = inv[k] >= P0.max;
+        return row(P0.e, FL(P0.n[0], P0.n[1]), FL(P0.d[0], P0.d[1]), `×${inv[k]}`, full ? null : c, 'ficbuy', k, !full && F.gold >= c, FL('Sac plein', 'Bag full')); }).join('');
+  } else if(T === 'dom'){
+    body = `<p class="hint">${esc(FL('Le domaine appartient à la famille : chaque génération en profite.', 'The estate belongs to the family: every generation benefits from it.'))}</p>` + Object.entries(FIC_DOM).map(([k, B]) => { const l = d[k] || 0, c = l < 3 ? ficPrice(Math.round(FIC_DOMC[l] * B.m)) : null;
+      return row(B.e, FL(B.n[0], B.n[1]), B.d(Math.min(3, l + 1)), `${FL('Niv.', 'Lv')} ${l}/3`, c, 'ficbuy', 'd:' + k, c != null && F.gold >= c); }).join('')
+      + `<p class="fs-inc">${esc(FL(`Revenus de la famille : ${ficIncTxt(ficIncome() * ficK())}.`, `Family income: ${ficIncTxt(ficIncome() * ficK())}.`))}</p>`;
+  } else {
+    body = `<p class="hint">${esc(FL('La renommée se gagne en combattant, en explorant et face à la famille rivale. Un titre coûte de l’or, et rapporte : revenus, prestige, et l’âme sœur se laisse plus facilement séduire.', 'Fame is earned by fighting, exploring and facing the rival family. A title costs gold, and pays back: income, prestige, and true love is easier to win.'))}</p>`
+      + FIC_TIT.map((x, r) => r === 0 ? '' : row(['🪖', '🛡️', '🏅', '🎖️', '👑', '👑'][r - 1], ficTitName(r, me), FL(`Renommée requise : ${x[0]} · +${ficIncTxt(2 * r)} · −${r} DD pour l’âme sœur`, `Fame needed: ${x[0]} · +${ficIncTxt(2 * r)} · −${r} DC for true love`),
+        r <= F.title ? '✔' : '', r <= F.title ? null : ficPrice(x[1]), 'ficbuy', 't:' + r, r === F.title + 1 && F.fame >= x[0] && F.gold >= ficPrice(x[1]), r <= F.title ? FL('Obtenu', 'Earned') : '')).join('');
+  }
+  openModal(`<div class="m-head"><div class="eyebrow">🏪 ${FL('Le marché', 'The market')}</div><h2>🪙 ${cynFmt(F.gold)} ${FL('pièces d’or', 'gold')}</h2>
+      <p class="hint">⭐ ${cynFmt(F.fame)} ${FL('renommée', 'fame')} · ${esc(ficTitName(F.title, me))}${(d.forge || 0) ? ` · ⚒️ −${d.forge * 10} %` : ''}</p></div>
+    <div class="fs-tabs">${[['eq', '🗡️', FL('Équipement', 'Gear')], ['dom', '🏰', FL('Domaine', 'Estate')], ['tit', '👑', FL('Titres', 'Titles')]].map(([k, e, n]) => `<button type="button" data-act="ficshop" data-v="${k}" aria-pressed="${k === T}">${e} ${esc(n)}</button>`).join('')}</div>
+    <div class="fs-list">${body}</div>`, {sound: !tab});
+  $('#modal').classList.add('wide');
+}
+function ficBuy(v){
+  const F = ficEnsureF(), me = active(); let c = null, ok = false, msg = '';
+  if(FIC_GEAR[v]){ const G = FIC_GEAR[v], t = F.inv[v]; if(t + 1 < G.cost.length){ c = ficPrice(G.cost[t + 1]); if(F.gold >= c){ F.inv[v]++; ok = true; msg = FL(`${G.e} ${me.first} s’équipe : ${G.n[t + 1][0].toLowerCase()}.`, `${G.e} ${me.first} gears up: ${G.n[t + 1][1].toLowerCase()}.`); } } }
+  else if(FIC_POT[v]){ const P0 = FIC_POT[v]; c = ficPrice(P0.cost); if(F.gold >= c && F.inv[v] < P0.max){ F.inv[v]++; ok = true; } }
+  else if(v.startsWith('d:')){ const k = v.slice(2), B = FIC_DOM[k], l = F.dom[k] || 0; if(B && l < 3){ c = ficPrice(Math.round(FIC_DOMC[l] * B.m)); if(F.gold >= c){ F.dom[k] = l + 1; ok = true; msg = FL(`${B.e} Le domaine s’agrandit : ${B.n[0].toLowerCase()} niveau ${l + 1}.`, `${B.e} The estate grows: ${B.n[1].toLowerCase()} level ${l + 1}.`); } } }
+  else if(v.startsWith('t:')){ const r = +v.slice(2), x = FIC_TIT[r]; if(x && r === F.title + 1 && F.fame >= x[0]){ c = ficPrice(x[1]); if(F.gold >= c){ F.title = r; ok = true; msg = FL(`👑 La famille ${S.fic.clan} est anoblie : ${me.first} devient ${ficTitName(r, me)} !`, `👑 The ${S.fic.clan} family is ennobled: ${me.first} becomes ${ficTitName(r, me)}!`); } } }
+  if(!ok){ sfx.refuse(); return; }
+  F.gold -= c; if(msg) ficMsg(msg); if(v.startsWith('t:')){ sfx.fame(); burst(['#ffd000', '#ffffff', '#b07bff'], 50); } else sfx.sparkle();
+  me.hp = Math.min(me.hp, ficHpMax(me)); dirty = true; save(); ficShop();
+}
+
+/* ---------- la famille rivale ---------- */
+function ficRvNew(){
+  const F = S.fic, me = active(), kr = ficKr(F.race), near = FIC_IDS.filter(x => x !== F.race && ficKr(x) / kr < 2 && kr / ficKr(x) < 2);   // une race qui vit à peu près au même rythme
+  const race = near.length && Math.random() < .4 ? pick(near) : F.race, R0 = FIC_R[race], k = ficKr(race), sex = pick(['M', 'F']), n = ficName(sex, race);
+  const last = R0.sur === 'clan' ? ficName(pick(['M', 'F']), race).first : n.last, house = R0.sur === 'epithet' ? cap(n.first) : last;
+  const age = Math.round(rnd(25, 45) * k), end = Math.max(age + Math.round(10 * k), ficLifeEnd(race));
+  F.rvGen = (F.rvGen || 0) + 1;
+  F.rv = {house, race, e: pick(FIC_BLASON), lead: {first: cap(n.first), last: R0.sur === 'epithet' ? n.last : last, sex, st: ficStats(race), cl: pick(FIC_CLS), lv: Math.max(1, Math.min(20, (me.lv || 1) + rnd(0, 1) + F.rvGen - 1)), age, end},
+    fame: Math.max(30, Math.round((F.fame || 0) * .8 + 20 + 15 * F.rvGen)), gold: rnd(80, 200) * F.rvGen, next: yearOf(S.t) + Math.max(1, Math.round(rnd(6, 12) * ficK())), truce: -1e9, gen: F.rvGen};
+}
+/* ---------- la barre du héros, au-dessus de l'arbre ---------- */
+function ficHud(){
+  const el = $('#ficHud'); if(!el) return; const me = S && S.fic && active(), box = el.closest('.treebox'); if(!me){ el.hidden = true; if(box) box.classList.remove('fichud'); return; }
+  el.hidden = false; const F = ficEnsureF(); if(me.death == null) ficEnsure(me); const A = ageAt(me, S.t), mat = ficMat(), y = yearOf(S.t), rv = F.rv;
+  let h;
+  if(me.death != null) h = `<div class="fh-wait">🕯️ ${esc(FL(`${me.first} n’est plus. Choisis qui reprend le flambeau.`, `${me.first} is gone. Choose who carries on.`))}</div>`;
+  else if(!me.cl) h = `<div class="fh-me">${orb(me, 'lg')}<span class="fh-id"><b>${esc(me.first)}</b><small>${esc(A < mat ? FL(`Héros en devenir : l’aventure commence à ${mat} ans.`, `Hero in the making: adventure starts at ${mat}.`) : FL('Prêt pour l’aventure !', 'Ready for adventure!'))}</small>${A < mat ? ficBar(A, mat, 'xp', '🌱') : ''}</span></div>
+    ${A >= mat ? `<div class="fh-acts"><button class="gel lime fh-btn pulse" data-act="ficclpick"><span class="ic">🧭</span><b>${FL('Choisir sa classe', 'Choose a class')}</b></button></div>` : ''}`;
+  else {
+    const cool = y < F.expCool;
+    h = `<button class="fh-me" data-act="fiche" data-id="${me.id}"><span class="fh-av">${orb(me, 'lg')}<span class="fh-cl">${ficCl(me).e}</span><span class="fh-lv">${me.lv}</span></span>
+        <span class="fh-id"><b>${esc(me.first)} <small>${esc(ficClName(me))} · ${esc(ficTitName(F.title, me))}</small></b>${ficBar(me.hp, ficHpMax(me), 'hp', '❤️')}${ficMpMax(me) ? ficBar(me.mp, ficMpMax(me), 'mp', '💙') : ''}${me.lv < 20 ? ficBar(me.xp, ficNeed(me.lv), 'xp', '✨') : ''}</span></button>
+      <div class="fh-res"><span title="${esc(FL('Trésor de la famille', 'Family treasure'))}">🪙 <b class="fhg"></b></span><span title="${esc(FL('Renommée', 'Fame'))}">⭐ <b class="fhf"></b></span></div>
+      <div class="fh-acts">${me.pts ? `<button class="gel lime fh-btn pulse" data-act="ficlvup"><span class="ic">⬆️</span><b>${FL('Niveau !', 'Level up!')}</b><small>${me.pts} ${FL('point', 'point')}${me.pts > 1 ? 's' : ''}</small></button>` : ''}
+        <button class="gel gold fh-btn ${cool ? '' : 'pulse'}" data-act="ficexp" ${cool ? 'disabled' : ''}><span class="ic">🗺️</span><b>${FL('Expédition', 'Expedition')}</b><small>${cool ? FL(`en l’an ${ficY(F.expCool)}`, `in year ${ficY(F.expCool)}`) : FL('Prête !', 'Ready!')}</small></button>
+        <button class="gel shopb fh-btn" data-act="ficshop"><span class="ic">🏪</span><b>${FL('Marché', 'Market')}</b><small>${FL('équipement, domaine', 'gear, estate')}</small></button>
+        ${rv ? `<button class="gel danger fh-btn fh-rv" data-act="ficrv"><span class="ic">${rv.e}</span><b>${esc(rv.house)}</b><small class="fh-rvm"><i class="fhrv"></i></small></button>` : ''}</div>`;
+  }
+  if(el._h !== h){ el._h = h; el.innerHTML = h; }
+  if(box){ box.classList.add('fichud'); box.style.setProperty('--fhh', el.offsetHeight + 8 + 'px'); }   // la pastille de Cyn passe sous la barre
+  const g = el.querySelector('.fhg'), fm = el.querySelector('.fhf'), r = el.querySelector('.fhrv');
+  if(g) g.textContent = cynFmt(F.gold); if(fm) fm.textContent = cynFmt(F.fame);
+  if(r && rv){ const a = Math.max(0, F.fame || 0), b = Math.max(0, Math.round(rv.fame)); r.style.width = (a + b ? a / (a + b) * 100 : 50) + '%'; r.parentNode.title = `⭐ ${a} — ${rv.e} ${b}`; }
+}
+const ficRvLead = () => { const L = S.fic.rv.lead; return `${L.first}${S.fic.rv.race === 'dragon' ? ', ' + L.last : ''}`; };
+const ficRvName = () => FL(`la maison ${S.fic.rv.house}`, `House ${S.fic.rv.house}`);
+function ficRvYear(y){                                     // la maison rivale vit sa vie : renommée, or, succession, et ses coups bas
+  const F = S.fic, rv = F.rv, me = active(), k = ficK();
+  if(!rv){ if(me && me.death == null && me.cl && !F.ev && ageAt(me, S.t) >= ficMat() && y >= (F.rvNext ?? 1e9)){ ficRvNew(); F.ev = {id: 'rvintro'}; } return; }
+  const L = rv.lead; L.age += 1;
+  rv.fame += (.5 + L.lv * .1) / k; rv.gold += (2 + L.lv) / k;
+  if(me && L.lv < Math.min(20, (me.lv || 1) + 2) && Math.random() < .15 / k) L.lv++;
+  if(L.age >= L.end){
+    const R0 = FIC_R[rv.race], sex = pick(['M', 'F']), n = ficName(sex, rv.race), old = ficRvLead();
+    rv.lead = {first: cap(n.first), last: R0.sur === 'epithet' ? n.last : L.last, sex, st: ficStats(rv.race), cl: pick(FIC_CLS), lv: Math.max(1, L.lv - 2), age: Math.round(rnd(20, 30) * ficKr(rv.race)), end: ficLifeEnd(rv.race)};
+    if(rv.lead.end <= rv.lead.age) rv.lead.end = rv.lead.age + Math.round(20 * ficKr(rv.race));
+    ficMsg(FL(`${rv.e} ${old} est mort. ${ficRvLead()} prend la tête de ${ficRvName()} et jure de venger son honneur.`, `${rv.e} ${old} has died. ${ficRvLead()} now leads ${ficRvName()} and swears to avenge its honour.`), 'crime');
+  }
+  if(!F.ev && me && me.death == null && me.cl && y >= rv.next && y >= rv.truce && ageAt(me, S.t) >= ficMat()){
+    const single = !householdUnion(me.id) && rv.race === F.race && ageAt(me, S.t) <= ficFertEnd();
+    F.ev = {id: 'rv', a: pick(['duel', 'duel', 'duel', 'vol', 'vol', 'complot', 'complot'].concat(single ? ['mariage', 'mariage'] : []))};
+    rv.next = y + Math.max(1, Math.round(rnd(8, 16) * k));
+  }
+}
+function ficRvIntro(){
+  const F = S.fic, rv = F.rv, me = active(); if(!rv || !me){ F.ev = null; return; } const L = rv.lead;
+  openModal(`<div class="m-head"><div class="eyebrow">${rv.e} ${FL('Une famille rivale', 'A rival family')}</div><h2>${esc(FL(`La maison ${rv.house}`, `House ${rv.house}`))}</h2>
+      <p>${esc(FL(`Une famille ${/^[AEIOUÉ]/.test(ficRaceName(rv.race)) ? 'd’' : 'de '}${ficRaceName(rv.race)} jalouse la renommée des ${S.fic.clan}. À sa tête, ${ficRvLead()}, ${lc(ficClName(L))} de niveau ${L.lv}, jure de les surpasser par tous les moyens : duels, vols, complots…`, `A family of ${ficRaceName(rv.race)} envies the ${S.fic.clan} family’s fame. Its head, ${ficRvLead()}, a level ${L.lv} ${lc(ficClName(L))}, swears to outdo them by any means: duels, theft, plots…`))}</p>
+      <p class="hint">${esc(FL('Fais tomber leur renommée à zéro pour les ruiner et récupérer leur fortune. Leur carte est dans le panneau de droite.', 'Bring their fame down to zero to ruin them and seize their fortune. Their card is in the right-hand panel.'))}</p></div>
+    <div class="rv-big">${rv.e}</div>
+    <div class="m-actions"><button class="gel danger big" data-act="ficrvok"><span>⚔️ ${FL('Qu’ils viennent !', 'Let them come!')}</span></button></div>`, {locked: true});
+  ficMsg(FL(`${rv.e} La maison ${rv.house} se déclare rivale de la famille.`, `${rv.e} House ${rv.house} declares itself the family’s rival.`), 'crime');
+}
+function ficRvDuel(byMe){
+  const F = S.fic, rv = F.rv, me = active(); if(!rv) return; const L = rv.lead;
+  const foe = ficFoeP(L, rv.e, ficRvLead(), rv.race);
+  ficFight(foe, {bg: 'duel', eyebrow: `${rv.e} ${FL('Duel d’honneur', 'Duel of honour')}`, title: FL(`${me.first} contre ${ficRvLead()}`, `${me.first} vs ${ficRvLead()}`), duel: true,
+    intro: byMe ? FL(`${me.first} jette son gant aux pieds de ${ficRvLead()}. Le duel commence !`, `${me.first} throws down the gauntlet before ${ficRvLead()}. The duel begins!`) : FL(`${ficRvLead()} défie ${me.first} devant tout le village. Le duel commence !`, `${ficRvLead()} challenges ${me.first} in front of the whole village. The duel begins!`),
+    onWin: out => { const g = Math.min(Math.round(rv.gold), 20 * me.lv + 20); rv.gold -= g; F.gold += g; rv.fame -= 25; ficFame(15);
+      out.push(FL(`${rv.e} −25 de renommée pour ${ficRvName()}, ⭐ +15 pour toi, 🪙 +${g} d’or.`, `${rv.e} −25 fame for ${ficRvName()}, ⭐ +15 for you, 🪙 +${g} gold.`)); ficRvCheck(out);
+      ficMsg(FL(`⚔ ${me.first} bat ${ficRvLead()} en duel.`, `⚔ ${me.first} beats ${ficRvLead()} in a duel.`)); },
+    onLose: out => { ficFame(-10); rv.fame += 10; out.push(FL(`⭐ −10 de renommée, ${rv.e} +10 pour ${ficRvName()}.`, `⭐ −10 fame, ${rv.e} +10 for ${ficRvName()}.`)); ficMsg(FL(`⚔ ${me.first} perd son duel contre ${ficRvLead()}.`, `⚔ ${me.first} loses the duel against ${ficRvLead()}.`), 'crime'); },
+    onEnd: res => { if(res === 'flee' && F.rv) F.rv.fame += 10; if(F.ev && F.ev.id === 'rv') F.ev = null; }});
+}
+function ficRvCheck(out){                                  // la maison rivale tombe quand sa renommée touche zéro
+  const F = S.fic, rv = F.rv; if(!rv || rv.fame > 0) return;
+  const g = Math.round(rv.gold), f = 50 + 10 * rv.gen; F.gold += g; ficFame(f);
+  out.push(FL(`🏆 La maison ${rv.house} est ruinée ! Sa fortune (${cynFmt(g)} pièces d’or) revient à ta famille, ⭐ +${f}.`, `🏆 House ${rv.house} is ruined! Its fortune (${cynFmt(g)} gold) goes to your family, ⭐ +${f}.`));
+  ficMsg(FL(`🏆 La maison ${rv.house} est tombée. Une nouvelle rivale finira bien par se lever…`, `🏆 House ${rv.house} has fallen. A new rival will rise sooner or later…`));
+  F.rv = null; F.rvNext = yearOf(S.t) + Math.max(2, Math.round(rnd(15, 30) * ficK())); burst(['#ffd000', '#ffffff', '#b07bff', '#ffb300'], 60);
+}
+function ficRvEvent(){                                     // un coup de la maison rivale
+  const F = S.fic, rv = F.rv, me = active(); if(!rv || !me || me.death != null){ F.ev = null; return; }
+  const a = F.ev.a, L = rv.lead, cs = F.dom.caserne || 0;
+  if(a === 'duel'){
+    openModal(`<div class="m-head"><div class="eyebrow">${rv.e} ${esc(FL(`La maison ${rv.house}`, `House ${rv.house}`))}</div><h2>${FL('Un défi !', 'A challenge!')}</h2>
+        <p>${esc(FL(`${ficRvLead()} (${lc(ficClName(L))} de niveau ${L.lv}) défie ${me.first} en duel devant tout le village. Refuser, c’est perdre la face.`, `${ficRvLead()} (level ${L.lv} ${lc(ficClName(L))}) challenges ${me.first} to a duel in front of the whole village. Refusing means losing face.`))}</p></div>
+      <div class="rv-big">${rv.e}</div>
+      <div class="m-actions"><button class="gel ghost" data-act="ficrvno"><span>${FL('Refuser (−10 renommée)', 'Refuse (−10 fame)')}</span></button><button class="gel danger big" data-act="ficrvyes"><span>⚔️ ${FL('Accepter', 'Accept')}</span></button></div>`, {locked: true});
+  } else if(a === 'mariage'){
+    const q = ficSpouseDraft(me); q.last = rv.race === F.race ? (FIC_R[rv.race].sur === 'epithet' ? q.last : L.last) : q.last; F.ev.q = q;
+    openModal(`<div class="m-head"><div class="eyebrow">${rv.e} ${esc(FL(`La maison ${rv.house}`, `House ${rv.house}`))}</div><h2>${FL('Une alliance ?', 'An alliance?')}</h2>
+        <p>${esc(FL(`${ficRvLead()} propose de sceller la paix : ${me.first} épouserait ${q.first} ${q.last}. Une dot de ${30 * me.lv} pièces d’or et une longue trêve en prime.`, `${ficRvLead()} offers to seal the peace: ${me.first} would marry ${q.first} ${q.last}. A dowry of ${30 * me.lv} gold and a long truce come with it.`))}</p></div>
+      <div class="pastppl"><div class="pickrow">${orb(q)}<span><b>${esc(q.first + ' ' + q.last)}</b><small>${esc(`${tA(Math.round((S.t - q.birth) / 365.25))} · ${ficJobName(q.work.j, q)}`)}</small></span></div></div>
+      <div class="m-actions"><button class="gel ghost" data-act="ficrvno"><span>${FL('Refuser', 'Refuse')}</span></button><button class="gel pink big" data-act="ficrvyes"><span>💍 ${FL('Accepter', 'Accept')}</span></button></div>`, {locked: true});
+  } else {
+    const vol = a === 'vol', st = vol ? 4 : 5, dc = (vol ? 11 : 12) + Math.floor(L.lv / 2) - (vol ? 2 * cs : 0);
+    ficDiceModal({who: me, st, dc, eyebrow: `${rv.e} ${FL(`La maison ${rv.house}`, `House ${rv.house}`)}`, title: vol ? FL('Un voleur dans la nuit', 'A thief in the night') : FL('Un complot', 'A plot'),
+      text: vol ? FL(`Des espions de ${ficRvName()} rôdent autour du trésor de la famille. ${me.first} a-t-${gx(me, 'il', 'elle')} l’œil ?`, `Spies from ${ficRvName()} are lurking around the family treasure. Will ${me.first} notice?`)
+        : FL(`${ficRvLead()} répand des rumeurs sur la famille dans tout le pays. ${me.first} doit rétablir la vérité.`, `${ficRvLead()} is spreading rumours about the family across the land. ${me.first} must set the record straight.`),
+      onResult: r => { const out = [];
+        if(r.ok){ ficFame(5); rv.fame -= vol ? 10 : 8; out.push(vol ? FL(`Le voleur est pris la main dans le sac ! ⭐ +5, ${rv.e} −10.`, `The thief is caught red-handed! ⭐ +5, ${rv.e} −10.`) : FL(`Personne ne croit leurs mensonges. ⭐ +5, ${rv.e} −8.`, `Nobody believes their lies. ⭐ +5, ${rv.e} −8.`)); ficXP(me, 10 + 5 * me.lv, out); ficRvCheck(out); }
+        else if(vol){ const l = Math.min(F.gold, Math.max(10, Math.round(F.gold * rnd(10, 20) / 100)), 60 * me.lv); F.gold -= l; rv.gold += l; out.push(FL(`🪙 −${l} pièces d’or volées.`, `🪙 −${l} gold stolen.`)); }
+        else { ficFame(-15); rv.fame += 10; out.push(FL('⭐ −15 de renommée : la rumeur fait son chemin.', '⭐ −15 fame: the rumour spreads.')); }
+        return out; },
+      onDone: () => { F.ev = null; }});
+  }
+}
+function ficRvAnswer(yes){
+  const F = S.fic, rv = F.rv, me = active(), a = F.ev && F.ev.a; if(!rv || !me) return;
+  if(a === 'duel'){ if(yes) return ficRvDuel(false); ficFame(-10); rv.fame += 10; ficMsg(FL(`${me.first} refuse le duel : la famille perd la face.`, `${me.first} turns down the duel: the family loses face.`), 'crime'); }
+  else if(a === 'mariage'){
+    if(yes && F.ev.q){ const s = ficMarry(me, F.ev.q, Math.floor(S.t)), g = 30 * me.lv; F.gold += g; rv.truce = yearOf(S.t) + Math.round(12 * ficK()); sfx.wedding();
+      ficMsg(FL(`💍 ${me.first} épouse ${s.first} : trêve avec la maison ${rv.house}, et 🪙 ${g} de dot.`, `💍 ${me.first} marries ${s.first}: truce with House ${rv.house}, and 🪙 ${g} dowry.`), 'love'); }
+    else ficMsg(FL(`${me.first} refuse l’alliance avec la maison ${rv.house}.`, `${me.first} turns down the alliance with House ${rv.house}.`), 'crime');
+  }
+  F.ev = null; closeModal(true); dirty = true; render(); save();
+}
+function ficRvMenu(){                                      // ce que le héros peut tenter contre la maison rivale
+  const F = ficEnsureF(), rv = F.rv, me = active(); if(!rv || !me || me.death != null) return; const L = rv.lead, y = yearOf(S.t), cool = y < F.rvCool, adult = me.cl && ageAt(me, S.t) >= ficMat();
+  const truce = y < rv.truce, cost = 50 * (me.lv || 1);
+  const b = (act, e, n, d, dis) => `<button class="pickrow" data-act="ficrvact" data-v="${act}" ${dis ? 'disabled' : ''}><span class="fe">${e}</span><span><b>${esc(n)}</b><small>${esc(d)}</small></span></button>`;
+  openModal(`<div class="m-head"><div class="eyebrow">${rv.e} ${FL('Famille rivale', 'Rival family')} · ${FL('génération', 'generation')} ${rv.gen}</div><h2>${esc(FL(`La maison ${rv.house}`, `House ${rv.house}`))}</h2>
+      <p>${esc(FL(`${ficRaceName(rv.race)} · menée par ${ficRvLead()}, ${lc(ficClName(L))} de niveau ${L.lv}.`, `${ficRaceName(rv.race)} · led by ${ficRvLead()}, a level ${L.lv} ${lc(ficClName(L))}.`))}</p>
+      ${ficRvMeter()}
+      ${FIC_RVMSG ? `<p class="dj-msg">${esc(FIC_RVMSG)}</p>` : ''}
+      ${truce ? `<p class="hint">🕊 ${esc(FL(`Trêve jusqu’en l’an ${ficY(rv.truce)} : ils ne t’attaqueront pas.`, `Truce until year ${ficY(rv.truce)}: they won’t strike.`))}</p>` : ''}
+      ${cool ? `<p class="hint">⏳ ${esc(FL(`Prochaine action possible en l’an ${ficY(F.rvCool)}.`, `Next move possible in year ${ficY(F.rvCool)}.`))}</p>` : !adult ? `<p class="hint">${esc(FL('Ton personnage doit être adulte et avoir une classe.', 'Your character must be an adult with a class.'))}</p>` : ''}</div>
+    <div class="pastppl">${b('duel', '⚔️', FL('Défier en duel', 'Challenge to a duel'), FL('Gagne : −25 renommée pour eux, +15 pour toi, et de l’or.', 'Win: −25 fame for them, +15 for you, and gold.'), cool || !adult)}
+      ${b('spy', '🕵️', FL('Espionner leur trésor', 'Spy on their treasury'), FL(`Jet de Dextérité (DD ${12 + Math.floor(L.lv / 2)}) : vole une part de leur or.`, `Dexterity check (DC ${12 + Math.floor(L.lv / 2)}): steal part of their gold.`), cool || !adult)}
+      ${b('sabo', '🔥', FL('Saboter leur réputation', 'Sabotage their reputation'), FL(`Jet d’Intelligence (DD ${13 + Math.floor(L.lv / 2)}) : −20 à −35 de renommée pour eux.`, `Intelligence check (DC ${13 + Math.floor(L.lv / 2)}): −20 to −35 fame for them.`), cool || !adult)}
+      ${b('truce', '🕊️', FL(`Acheter une trêve (🪙 ${cost})`, `Buy a truce (🪙 ${cost})`), FL('Ils te laissent tranquille un bon moment.', 'They leave you alone for a good while.'), cool || !adult || F.gold < cost || truce)}</div>
+    <div class="m-actions"><button class="gel ghost" data-act="close"><span>${FL('Fermer', 'Close')}</span></button></div>`, {sound: !FIC_RVMSG});
+  FIC_RVMSG = '';
+}
+function ficRvMeter(){ const F = S.fic, rv = F.rv, a = Math.max(0, F.fame || 0), b = Math.max(0, Math.round(rv.fame)), w = a + b ? a / (a + b) * 100 : 50;
+  return `<div class="rv-meter"><span>⭐ ${cynFmt(a)}</span><div class="rv-bar"><i style="width:${w}%"></i></div><span>${rv.e} ${cynFmt(b)}</span></div>`; }
+function ficRvAct(v){
+  const F = S.fic, rv = F.rv, me = active(); if(!rv || !me || yearOf(S.t) < F.rvCool) return; const L = rv.lead, k = ficK();
+  F.rvCool = yearOf(S.t) + Math.max(1, Math.round(1.5 * k));
+  if(v === 'duel') return ficRvDuel(true);
+  if(v === 'truce'){ const c = 50 * me.lv; if(F.gold < c) return; F.gold -= c; rv.truce = yearOf(S.t) + Math.round(10 * k); FIC_RVMSG = FL('🕊 La trêve est signée.', '🕊 The truce is signed.'); sfx.pop(); save(); return ficRvMenu(); }
+  const spy = v === 'spy', st = spy ? 1 : 3, dc = (spy ? 12 : 13) + Math.floor(L.lv / 2);
+  ficDiceModal({who: me, st, dc, eyebrow: `${rv.e} ${FL(`La maison ${rv.house}`, `House ${rv.house}`)}`, title: spy ? FL('Espionnage', 'Spying') : FL('Sabotage', 'Sabotage'),
+    text: spy ? FL(`De nuit, ${me.first} se glisse dans la demeure des ${rv.house}…`, `At night, ${me.first} slips into the ${rv.house} manor…`) : FL(`${me.first} prépare une machination pour ruiner la réputation des ${rv.house}.`, `${me.first} hatches a scheme to ruin the ${rv.house} family’s reputation.`),
+    onResult: r => { const out = [];
+      if(r.ok){ if(spy){ const g = Math.max(10, Math.round(rv.gold * rnd(10, 20) / 100)); rv.gold -= g; F.gold += g; rv.fame -= 5; out.push(FL(`🪙 +${g} pièces d’or subtilisées, ${rv.e} −5.`, `🪙 +${g} gold pilfered, ${rv.e} −5.`)); }
+        else { const f = rnd(20, 35); rv.fame -= f; ficFame(5); out.push(FL(`${rv.e} −${f} de renommée pour eux, ⭐ +5.`, `${rv.e} −${f} fame for them, ⭐ +5.`)); }
+        ficXP(me, 15 + 5 * me.lv, out); ficRvCheck(out); }
+      else { ficFame(spy ? -5 : -10); out.push(spy ? FL('Repéré ! ⭐ −5 de renommée.', 'Spotted! ⭐ −5 fame.') : FL('La machination se retourne contre toi : ⭐ −10.', 'The scheme backfires: ⭐ −10.')); }
+      return out; }});
+}
+
+/* ---------- les cartes du panneau de droite ---------- */
+function ficHeroCard(me){
+  if(!me || me.death != null) return ''; const F = ficEnsureF(); ficEnsure(me); const A = ageAt(me, S.t), mat = ficMat(), y = yearOf(S.t);
+  if(!me.cl) return `<section class="glass card fichero"><div class="eyebrow">${FL('Héros', 'Hero')}</div><p class="hint">${esc(A < mat ? FL(`La classe, les combats et les expéditions commencent à l’âge adulte (${mat} ans).`, `Class, fights and expeditions start at adulthood (${mat}).`) : FL('Choisis une classe pour partir à l’aventure.', 'Pick a class to go adventuring.'))}</p>${A >= mat ? `<button class="gel lime wide" data-act="ficclpick"><span>🧭 ${FL('Choisir sa classe', 'Choose a class')}</span></button>` : ''}</section>`;
+  const hpM = ficHpMax(me), mpM = ficMpMax(me), inv = F.inv, cool = y < F.expCool;
+  return `<section class="glass card fichero"><div class="eyebrow">${FL('Héros', 'Hero')} · ${esc(ficTitName(F.title, me))}</div>
+    <div class="fh-top"><span class="fh-cl">${ficCl(me).e}</span><div><b>${esc(ficClName(me))} · ${FL('niveau', 'level')} ${me.lv}</b><small>⭐ ${cynFmt(F.fame)} ${FL('renommée', 'fame')} · 🪙 ${cynFmt(F.gold)} ${FL('or', 'gold')}</small></div></div>
+    ${me.lv < 20 ? ficBar(me.xp, ficNeed(me.lv), 'xp', '✨') : ''}${ficBar(me.hp, hpM, 'hp', '❤️')}${mpM ? ficBar(me.mp, mpM, 'mp', '💙') : ''}
+    <p class="fh-eq">🗡️ ${fModT(ficAtk(me))} · ${ficDmgTxt(me)} · 🛡️ ${FL('CA', 'AC')} ${ficAC(me)}${['pot', 'gpot', 'mpot', 'phx'].filter(k => inv[k]).map(k => ' · ' + FIC_POT[k].e + '×' + inv[k]).join('')}</p>
+    ${me.pts ? `<button class="gel lime wide" data-act="ficlvup"><span>⬆️ ${FL('Points à placer', 'Points to spend')} (${me.pts})</span></button>` : ''}
+    <div class="fh-btns"><button class="gel gold" data-act="ficexp" ${cool ? 'disabled' : ''}><span>🗺️ ${FL('Expédition', 'Expedition')}</span></button><button class="gel shopb" data-act="ficshop"><span>🏪 ${FL('Marché', 'Market')}</span></button></div>
+    ${cool ? `<p class="hint">${esc(FL(`Prochaine expédition en l’an ${ficY(F.expCool)}.`, `Next expedition in year ${ficY(F.expCool)}.`))}</p>` : ''}</section>`;
+}
+function ficRvCard(){
+  const F = S.fic, rv = F.rv; if(!rv) return ''; const L = rv.lead, truce = yearOf(S.t) < rv.truce;
+  return `<section class="glass card ficrv"><div class="eyebrow">${FL('Famille rivale', 'Rival family')}</div>
+    <button class="pcard" data-act="ficrv"><span class="rv-bl">${rv.e}</span><span><b>${esc(FL(`Maison ${rv.house}`, `House ${rv.house}`))}</b><span>${esc(`${ficRvLead()} · ${FIC_R[rv.race].e} ${ficClName(L)} ${FL('niv.', 'lv')} ${L.lv}`)}</span></span></button>
+    ${ficRvMeter()}${truce ? `<p class="hint">🕊 ${esc(FL(`Trêve jusqu’en l’an ${ficY(rv.truce)}`, `Truce until year ${ficY(rv.truce)}`))}</p>` : ''}</section>`;
+}
+
 /* ---------- les textes du journal ---------- */
 Object.assign(TX.fr, {
+  log_fic_msg: s => s,
   log_fic_start: (id, r) => `${nm(id)} fonde une lignée de ${ficRaceName(r)} en l’an 0.`,
   log_fic_birth: (c, a, b) => `Naissance de ${per(c).first}, ${gx(per(c), 'fils', 'fille')} de ${per(a).first} et ${per(b).first}.`,
   log_fic_death: (id, cause) => `${nm(id)} ${gx(per(id), 'meurt', 'meurt')} ${cause}, à ${age(per(id))} ans.`,
@@ -15504,6 +16630,7 @@ Object.assign(TX.fr, {
   md_fic: 'Fictif', beta_tag: 'bêta', fic_hint: 'Mode en bêta : il évolue encore et peut garder quelques bugs. Une lignée de créatures fantastiques à partir de l’an 0 : elfes, nains, dragons… Les années passent au rythme de ta race, et les aventures se jouent aux dés (d20).',
 });
 Object.assign(TX.en, {
+  log_fic_msg: s => s,
   log_fic_start: (id, r) => `${nm(id)} founds a lineage of ${ficRaceName(r)} in year 0.`,
   log_fic_birth: (c, a, b) => `${per(c).first} is born, ${gx(per(c), 'son', 'daughter')} of ${per(a).first} and ${per(b).first}.`,
   log_fic_death: (id, cause) => `${nm(id)} dies ${cause}, aged ${age(per(id))}.`,
@@ -15739,6 +16866,13 @@ const ACT = {
   ficroll(){ ficRollGo(); },
   ficdone(){ ficDone(); },
   ficalbr(d){ FIC_ALBR = d.v; sfx.click(); ficAlbum(true); },
+  fba(d){ ficFba(d.v); }, fbds(){ ficFbDs(); }, fbphx(){ ficFbPhx(); }, fbend(){ ficFbEnd(); },   // 0.3.2a : le jeu de rôle du mode Fictif
+  ficcl(d){ ficSetClass(d.v); }, ficclpick(){ const me = S && S.fic && active(); if(me && !me.cl && ageAt(me, S.t) >= ficMat()) ficClassPick(); },
+  ficpt(d){ ficPt(+d.v); }, ficlvup(){ if(S && S.fic) ficChain(null); },
+  ficexp(){ if(S && S.fic) ficExpOpen(); }, ficexpgo(d){ if(S && S.fic) ficExpGo(+d.i); }, ficdjgo(){ if(S && S.fic) ficDjGo(); }, ficdjout(){ if(S && S.fic) ficDjLeave('out'); }, ficpot(d){ if(S && S.fic) ficPotion(d.v); },
+  ficshop(d){ if(S && S.fic) ficShop(d.v); }, ficbuy(d){ if(S && S.fic) ficBuy(d.v); },
+  ficrv(){ if(S && S.fic) ficRvMenu(); }, ficrvact(d){ if(S && S.fic) ficRvAct(d.v); }, ficrvyes(){ if(S && S.fic) ficRvAnswer(true); }, ficrvno(){ if(S && S.fic) ficRvAnswer(false); },
+  ficrvok(){ if(S && S.fic){ S.fic.ev = null; closeModal(true); dirty = true; render(); save(); } },
   vsq(d){ if(!VS_CFG) return; VS_CFG[d.k] = d.v; if(d.k === 'mode' && !VS_GOALS[d.v].includes(VS_CFG.goal)) VS_CFG.goal = VS_GOALS[d.v][0]; vsSetup(); sfx.click(); },
   vsset(d){ vsDraft[d.k] = d.v; if(d.k === 'mode' && !VS_GOALS[d.v].includes(vsDraft.goal)) vsDraft.goal = VS_GOALS[d.v][0]; openVsMenu(true); },
   vsok(){ VS_CFG = Object.assign({}, vsDraft); closeModal(true); vsSetup(); sfx.pop(); },
