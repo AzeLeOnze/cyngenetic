@@ -2,6 +2,17 @@
 
 Jouer : https://azeleonze.github.io/cyngenetic/
 
+## v0.3.2c — 25 novembre 2026
+
+- Mode Fictif : quand un dragon utilise « Le manger tout cru », l'écran plonge dans sa gueule, dessinée en gros plan : écailles, gencives, palais strié, glotte qui se balance, langue, deux rangées de crocs, filets de bave qui coulent et le feu qui rougeoie au fond de la gorge. La proie se débat pour ressortir : un QTE se lance, appuie au bon moment pour l'avaler. Le jet de Force décide d'où elle part ; si elle s'échappe, elle s'en tire presque indemne et le dragon souffre.
+- Mode Fictif : 3 nouveaux ennemis dans les combats et le bestiaire : le Lézard possédé, la Vache ensorcelée et la Momie des temps anciens.
+- Mode Fictif : la gueule du dragon est redessinée d'après le modèle : dents arrondies, langue bien dans la bouche, luette plus basse au fond de la gorge.
+- Mode Fictif : quand un personnage gagne de l'expérience, ses enfants déjà nés en reçoivent 10 %.
+- Mode Fictif : au niveau 20, l'expérience continue de donner des points de caractéristique (des points de légende), et chaque caractéristique peut monter jusqu'à 25.
+- Mode Fictif : des imprévus amusants pendant les combats (corbeau farceur, peau de banane, éclair, abeilles, barde, écureuil, petite fée, chorale de grenouilles…) et dans le monde (dragon dans le ciel, pluie d'étoiles filantes ou de grenouilles, cirque, licorne, feu d'artifice…), avec leurs animations.
+- Mode Fictif : 4 nouveaux monstres (Feu follet agressif, Poupée Voodoo, Discodancer corrompu, Infâme Hibou des bois), une nouvelle rareté brillante, le Calisse démoniaque, et 11 nouveaux noms de dragons (l'Imprévisible, Roi des Neiges, la Tempête, Langue de Vipère, l'Antimatière…).
+- Correction : après une chute, un héros qui se relève (jets contre la mort réussis, 20 naturel ou plume de phénix) ne reste plus couché dans la pose de mort.
+
 ## v0.3.2b — 25 novembre 2026
 
 - Dans tous les modes : une petite icône de crayon ✏️ sur la photo de la fiche d'une personne permet de lui choisir une image personnalisée (et la croix ✕ pour la retirer). Elle s'affiche dans sa bulle de l'arbre.
